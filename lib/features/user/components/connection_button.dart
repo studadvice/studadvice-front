@@ -1,11 +1,10 @@
-import 'package:flutter/cupertino.dart';
-import 'package:stud_advice/common/colors/app_colors.dart';
+import 'package:flutter/material.dart';
 
 class ConnectionButton extends StatelessWidget {
   final String text;
   final Color backgroundColor;
   final Color textColor;
-  final Color? borderColor;
+  final Color borderColor;
   final Function()? onTap;
 
   const ConnectionButton({
@@ -13,28 +12,36 @@ class ConnectionButton extends StatelessWidget {
     required this.text,
     required this.textColor,
     required this.backgroundColor,
-    this.borderColor,
+    required this.borderColor,
     this.onTap,
   });
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
+    return InkWell(
       onTap: onTap,
-      child: Container(
-        padding: const EdgeInsets.all(25),
-        margin: const EdgeInsets.symmetric(horizontal: 25),
+      customBorder: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(25),
+      ),
+      child: Ink(
         decoration: BoxDecoration(
-          color: backgroundColor,
-          borderRadius: BorderRadius.circular(18),
-          border: Border.all(color: AppColors.secondaryColor, width: 0.5),
+          border: Border.all(
+            color: borderColor,
+            width: 0.5,
+          ),
+          borderRadius: BorderRadius.circular(25),
         ),
-        child: Center(
-          child: Text(text,
-              style: TextStyle(
-                color: textColor,
-                fontSize: 16,
-              )),
+        child: Container(
+          padding: const EdgeInsets.all(30),
+          margin: const EdgeInsets.symmetric(horizontal: 25),
+          child: Center(
+            child: Text(text,
+                style: TextStyle(
+                  color: textColor,
+                  fontWeight: FontWeight.bold,
+                  fontSize: 16,
+                )),
+          ),
         ),
       ),
     );

@@ -12,53 +12,51 @@ class InitTimeScreen extends StatefulWidget {
   State<InitTimeScreen> createState() => _InitTimeScreenState();
 }
 
+void doNothing() {}
+
 class _InitTimeScreenState extends State<InitTimeScreen> {
   @override
   Widget build(BuildContext context) {
     return const Scaffold(
         backgroundColor: AppColors.backgroundColor,
         body: SafeArea(
-            child: SizedBox(
-          child: Stack(
-            // Used specifically to position to raven on top of the first connection button.
-            children: [
-              Positioned(
-                bottom: 360,
-                left: 10,
-                right: 10,
-                child: SizedBox(
-                  width: 350,
-                  child: ConnectionButton(
-                    text: 'S\'inscrire',
-                    textColor: Colors.black,
-                    backgroundColor: AppColors.backgroundColor,
+            child: Stack(
+          // Used specifically to position to raven on top of the first connection button.
+          children: [
+            Positioned(
+              bottom: 350,
+              left: 10,
+              right: 10,
+              child: ConnectionButton(
+                text: 'S\'inscrire',
+                textColor: Colors.black,
+                backgroundColor: AppColors.backgroundColor,
+                borderColor: AppColors.secondaryColor,
+                onTap:
+                    doNothing, // TODO: Add navigation to the registration page.
+              ),
+            ),
+            Positioned(
+              bottom: 400,
+              left: 60,
+              right: 80,
+              child: Image(
+                image: AssetImage('assets/images/common/raven_image.png'),
+              ),
+            ),
+            Positioned(
+              bottom: 250,
+              left: 10,
+              right: 10,
+              child: ConnectionButton(
+                  text: 'Se connecter',
+                  textColor: Colors.black,
+                  backgroundColor: AppColors.backgroundColor,
+                  borderColor: AppColors.secondaryColor,
+                  onTap: doNothing // TODO: Add navigation to the login page.
                   ),
-                ),
-              ),
-              Positioned(
-                bottom: 400,
-                left: 60,
-                right: 80,
-                child: Image(
-                  image: AssetImage('assets/images/common/raven_image.png'),
-                ),
-              ),
-              Positioned(
-                bottom: 250,
-                left: 10,
-                right: 10,
-                child: SizedBox(
-                  width: 350,
-                  child: ConnectionButton(
-                    text: 'Se connecter',
-                    textColor: Colors.black,
-                    backgroundColor: AppColors.backgroundColor,
-                    // onTap: ,
-                  ),
-                ),
-              ),
-            ],
-          ),
+            ),
+          ],
         )));
   }
 }
