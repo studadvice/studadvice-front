@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class InitTimeScreen extends StatefulWidget {
@@ -12,11 +11,9 @@ class InitTimeScreen extends StatefulWidget {
 class _InitTimeScreenState extends State<InitTimeScreen>  {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return const Scaffold(
       body: Center(
-        child: Container(
-          child: const Text('Welcome Screen'),
-        ),
+        child: Text('Welcome Screen'),
       ),
     );
   }

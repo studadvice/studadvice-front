@@ -24,3 +24,20 @@ dev_dependencies:
 # The following section is specific to Flutter packages.
 flutter:
   uses-material-design: true
+
+  assets:
+    - assets/images/common/
+    - assets/images/user/
+
+  fonts:
+    - family: Lato
+      fonts:
+        - asset: assets/common/fonts/Lato/Lato-Regular.ttf
+        - asset: assets/common/fonts/Lato/Lato-Thin.ttf
+        - asset: assets/common/fonts/Lato/Lato-Italic.ttf
+        - asset: assets/common/fonts/Lato/fonts/Lato-Bold.ttf
+          weight: 700
+        - asset: assets/common/fonts/Lato/fonts/Lato-Light.ttf
+          weight: 300
+
+
