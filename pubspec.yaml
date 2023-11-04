@@ -14,6 +14,8 @@ dependencies:
 
   cupertino_icons: ^1.0.2
   firebase_auth: ^4.10.1
+  google_fonts: ^6.1.0
+#  flutter_native_splash: ^2.3.5
 
 dev_dependencies:
   flutter_test:
@@ -29,15 +31,12 @@ flutter:
     - assets/images/common/
     - assets/images/user/
 
-  fonts:
-    - family: Lato
-      fonts:
-        - asset: assets/common/fonts/Lato/Lato-Regular.ttf
-        - asset: assets/common/fonts/Lato/Lato-Thin.ttf
-        - asset: assets/common/fonts/Lato/Lato-Italic.ttf
-        - asset: assets/common/fonts/Lato/fonts/Lato-Bold.ttf
-          weight: 700
-        - asset: assets/common/fonts/Lato/fonts/Lato-Light.ttf
-          weight: 300
 
 
+#flutter_native_splash:
+##  Ajouter une image avec le slogan de l'application, made easy for students
+#  image: assets/images/common/raven_image.png
+#  color: "#42a5f5"
+#  android: true
+#  ios: true
+#  dark: true
