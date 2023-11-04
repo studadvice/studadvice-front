@@ -5,7 +5,7 @@ class ConnectionButton extends StatelessWidget {
   final Color backgroundColor;
   final Color textColor;
   final Color borderColor;
-  final Function()? onTap;
+  final VoidCallback onTap;
 
   const ConnectionButton({
     super.key,
@@ -13,7 +13,7 @@ class ConnectionButton extends StatelessWidget {
     required this.textColor,
     required this.backgroundColor,
     required this.borderColor,
-    this.onTap,
+    required this.onTap,
   });
 
   @override

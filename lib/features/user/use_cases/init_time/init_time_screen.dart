@@ -1,62 +1,130 @@
 import 'package:flutter/material.dart';
-import 'package:stud_advice/common/colors/app_colors.dart';
 
+import '../../../../common/chore/app_colors.dart';
+import '../../../../common/conf/injection_container.dart';
 import '../../components/connection_button.dart';
+import 'init_time_service.dart';
 
-class InitTimeScreen extends StatefulWidget {
+class InitTimeScreen extends StatelessWidget {
   static const String navigatorId = 'init_time_screen';
 
   const InitTimeScreen({Key? key}) : super(key: key);
 
   @override
-  State<InitTimeScreen> createState() => _InitTimeScreenState();
-}
-
-void doNothing() {}
-
-class _InitTimeScreenState extends State<InitTimeScreen> {
-  @override
   Widget build(BuildContext context) {
-    return const Scaffold(
+    InitTimeService initTimeService = locator<InitTimeService>();
+
+    return Scaffold(
+      backgroundColor: AppColors.backgroundColor,
+      body: SafeArea(
+        child: OrientationBuilder(
+          builder: (context, orientation) {
+            if (orientation == Orientation.portrait) {
+              return buildPortraitLayout(initTimeService, context);
+            } else {
+              return buildLandscapeLayout(initTimeService, context);
+            }
+          },
+        ),
+      ),
+    );
+  }
+
+  Widget buildConnectionButton({
+    required String text,
+    required Color textColor,
+    required VoidCallback onTap,
+    required EdgeInsets margin,
+  }) {
+    return Positioned(
+      bottom: margin.bottom,
+      left: margin.left,
+      right: margin.right,
+      child: ConnectionButton(
+        text: text,
+        textColor: textColor,
         backgroundColor: AppColors.backgroundColor,
-        body: SafeArea(
-            child: Stack(
-          // Used specifically to position to raven on top of the first connection button.
-          children: [
-            Positioned(
-              bottom: 350,
-              left: 10,
-              right: 10,
-              child: ConnectionButton(
-                text: 'S\'inscrire',
-                textColor: Colors.black,
-                backgroundColor: AppColors.backgroundColor,
-                borderColor: AppColors.secondaryColor,
-                onTap:
-                    doNothing, // TODO: Add navigation to the registration page.
-              ),
-            ),
-            Positioned(
-              bottom: 400,
-              left: 60,
-              right: 80,
-              child: Image(
-                image: AssetImage('assets/images/common/raven_image.png'),
-              ),
-            ),
-            Positioned(
-              bottom: 250,
-              left: 10,
-              right: 10,
-              child: ConnectionButton(
-                  text: 'Se connecter',
-                  textColor: Colors.black,
-                  backgroundColor: AppColors.backgroundColor,
-                  borderColor: AppColors.secondaryColor,
-                  onTap: doNothing // TODO: Add navigation to the login page.
-                  ),
-            ),
-          ],
-        )));
+        borderColor: AppColors.secondaryColor,
+        onTap: onTap,
+      ),
+    );
+  }
+
+  Widget buildImage({
+    required String imagePath,
+    double? height,
+    double? width,
+    EdgeInsets? margin,
+  }) {
+    return Positioned(
+      bottom: margin?.bottom,
+      left: margin?.left,
+      right: margin?.right,
+      child: Image(
+        image: AssetImage(imagePath),
+        height: height,
+        width: width,
+      ),
+    );
+  }
+
+  Widget buildPortraitLayout(
+      InitTimeService initTimeService, BuildContext context) {
+    return Stack(
+      children: [
+        buildConnectionButton(
+          text: 'S\'inscrire',
+          textColor: Colors.black,
+          onTap: () {
+            initTimeService.navigateToRegisterPage(context);
+          },
+          margin: const EdgeInsets.only(bottom: 350, left: 10, right: 10),
+        ),
+        buildImage(
+          imagePath: 'assets/images/common/raven_image.png',
+          height: 235,
+          width: 235,
+          margin: const EdgeInsets.only(bottom: 400, left: 60, right: 80),
+        ),
+        buildConnectionButton(
+          text: 'Se connecter',
+          textColor: Colors.black,
+          onTap: () {
+            initTimeService.navigateToLoginPage(context);
+          },
+          margin: const EdgeInsets.only(bottom: 250, left: 10, right: 10),
+        ),
+      ],
+    );
+  }
+
+  Widget buildLandscapeLayout(
+      InitTimeService initTimeService, BuildContext context) {
+    return Stack(
+      children: [
+        buildConnectionButton(
+          text: 'S\'inscrire',
+          textColor: Colors.black,
+          onTap: () {
+            initTimeService.navigateToRegisterPage(context);
+          },
+          margin: const EdgeInsets.only(bottom: 110, left: 100, right: 100),
+        ),
+        buildImage(
+          imagePath: 'assets/images/common/raven_image.png',
+          height: 170,
+          width: 170,
+          margin: const EdgeInsets.only(bottom: 170, left: 60, right: 80),
+        ),
+        buildConnectionButton(
+          text: 'Se connecter',
+          textColor: Colors.black,
+          onTap: () {
+            initTimeService.navigateToLoginPage(context);
+          },
+          margin: const EdgeInsets.only(bottom: 20, left: 100, right: 100),
+        ),
+      ],
+    );
   }
 }
