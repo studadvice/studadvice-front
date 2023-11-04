@@ -1,4 +1,4 @@
-name: studadvice_front
+name: stud_advice
 description: Frontend for Stud'Advice application
 
 publish_to: 'none' # Remove this line if you wish to publish to pub.dev
