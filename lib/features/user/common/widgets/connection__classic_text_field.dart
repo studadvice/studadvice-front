@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../../../../common/chore/app_fonts_sizes.dart';
+
 class ConnectionClassicTextField extends StatefulWidget {
   final String hintText; // Placeholder text.
   final TextEditingController controller;
@@ -37,7 +39,8 @@ class _ConnectionClassicTextFieldState
       padding: const EdgeInsets.symmetric(horizontal: 25.0),
       child: TextField(
         controller: widget.controller,
-        style: const TextStyle(fontSize: 16, decoration: TextDecoration.none),
+        style: const TextStyle(
+            fontSize: AppFontSizes.large16, decoration: TextDecoration.none),
         decoration: InputDecoration(
           hintText: widget.hintText,
           enabledBorder: OutlineInputBorder(

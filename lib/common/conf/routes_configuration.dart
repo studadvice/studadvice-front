@@ -1,4 +1,5 @@
 import 'package:flutter/widgets.dart';
+import 'package:stud_advice/features/user/use_cases/legal_conditions/screens/legal_conditions_screen.dart';
 import 'package:stud_advice/features/user/use_cases/register/screens/register_with_email_screen.dart';
 
 import '../../features/user/use_cases/init_time/screens/init_time_screen.dart';
@@ -17,6 +18,7 @@ class RoutesConfiguration {
           const RegisterOptionsScreen(),
       RegisterWithEmailScreen.navigatorId: (context) =>
           const RegisterWithEmailScreen(),
+      LegalTermsScreen.navigatorId: (context) => LegalTermsScreen(),
     };
   }
 }

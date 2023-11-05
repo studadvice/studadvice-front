@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:stud_advice/common/chore/app_fonts_sizes.dart';
 
-class LoginConnectionButton extends StatefulWidget {
+class DefaultConnectionButton extends StatefulWidget {
   final String text;
   final Color backgroundColor;
   final Color textColor;
   final Color borderColor;
   final VoidCallback onPressed;
 
-  const LoginConnectionButton({
+  const DefaultConnectionButton({
     Key? key,
     required this.text,
     required this.textColor,
@@ -17,10 +18,11 @@ class LoginConnectionButton extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  State<LoginConnectionButton> createState() => _LoginConnectionButtonState();
+  State<DefaultConnectionButton> createState() =>
+      _DefaultConnectionButtonState();
 }
 
-class _LoginConnectionButtonState extends State<LoginConnectionButton> {
+class _DefaultConnectionButtonState extends State<DefaultConnectionButton> {
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(
@@ -37,7 +39,7 @@ class _LoginConnectionButtonState extends State<LoginConnectionButton> {
         style: TextStyle(
           color: widget.textColor,
           fontWeight: FontWeight.w400,
-          fontSize: 16,
+          fontSize: AppFontSizes.large16,
         ),
       ),
     );

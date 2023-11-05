@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import '../../../../../common/chore/app_colors.dart';
 import '../../../../../common/conf/injection_container.dart';
 import '../services/init_time_service.dart';
-import '../widgets/connection_button.dart';
+import '../widgets/init_time_connection_button.dart';
 
 class InitTimeScreen extends StatelessWidget {
   static const String navigatorId = 'init_time_screen';
@@ -18,7 +18,7 @@ class InitTimeScreen extends StatelessWidget {
     InitTimeService initTimeService = locator<InitTimeService>();
 
     return Scaffold(
-      backgroundColor: AppColors.backgroundColor,
+      backgroundColor: AppColors.white,
       body: SafeArea(
         child: OrientationBuilder(
           builder: (context, orientation) {
@@ -43,10 +43,10 @@ class InitTimeScreen extends StatelessWidget {
       bottom: margin.bottom,
       left: margin.left,
       right: margin.right,
-      child: ConnectionButton(
+      child: InitTimeConnectionButton(
         text: text,
         textColor: textColor,
-        backgroundColor: AppColors.backgroundColor,
+        backgroundColor: AppColors.white,
         borderColor: AppColors.secondaryColor,
         onTap: onTap,
       ),
@@ -77,7 +77,7 @@ class InitTimeScreen extends StatelessWidget {
       children: [
         buildConnectionButton(
           text: registerText,
-          textColor: Colors.black,
+          textColor: AppColors.black,
           onTap: () {
             initTimeService.navigateToRegisterPage(context);
           },
@@ -91,7 +91,7 @@ class InitTimeScreen extends StatelessWidget {
         ),
         buildConnectionButton(
           text: loginText,
-          textColor: Colors.black,
+          textColor: AppColors.black,
           onTap: () {
             initTimeService.navigateToLoginPage(context);
           },
@@ -107,7 +107,7 @@ class InitTimeScreen extends StatelessWidget {
       children: [
         buildConnectionButton(
           text: registerText,
-          textColor: Colors.black,
+          textColor: AppColors.black,
           onTap: () {
             initTimeService.navigateToRegisterPage(context);
           },
@@ -121,7 +121,7 @@ class InitTimeScreen extends StatelessWidget {
         ),
         buildConnectionButton(
           text: loginText,
-          textColor: Colors.black,
+          textColor: AppColors.black,
           onTap: () {
             initTimeService.navigateToLoginPage(context);
           },

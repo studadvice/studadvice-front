@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 
+import '../../../../../common/chore/app_colors.dart';
+import '../../../../../common/chore/app_fonts_sizes.dart';
+
 class RegisterWithEmailButton extends StatelessWidget {
   final VoidCallback onPressed;
   final Color backgroundColor;
@@ -8,9 +11,9 @@ class RegisterWithEmailButton extends StatelessWidget {
 
   RegisterWithEmailButton({
     required this.onPressed,
-    this.backgroundColor = Colors.white,
-    this.textColor = Colors.blue,
-    this.borderColor = Colors.blue,
+    this.backgroundColor = AppColors.white,
+    this.textColor = AppColors.blue,
+    this.borderColor = AppColors.blue,
   });
 
   @override
@@ -28,7 +31,7 @@ class RegisterWithEmailButton extends StatelessWidget {
         style: TextStyle(
           color: textColor,
           fontWeight: FontWeight.bold,
-          fontSize: 16,
+          fontSize: AppFontSizes.large16,
         ),
       ),
     );

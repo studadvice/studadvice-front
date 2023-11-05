@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:stud_advice/common/conf/routes_configuration.dart';
 
+import 'common/chore/app_colors.dart';
 import 'common/conf/injection_container.dart';
 
 void main() {
@@ -19,7 +20,7 @@ class StudAdviceApp extends StatelessWidget {
     return MaterialApp(
       title: "Stud'Advice",
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.white),
+        colorScheme: ColorScheme.fromSeed(seedColor: AppColors.white),
         useMaterial3: true,
         textTheme: GoogleFonts.latoTextTheme(
           // Use Lato as default text style according to the graphic charter.

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:stud_advice/common/chore/app_fonts_sizes.dart';
 
 class RegisterSocialButton extends StatelessWidget {
   final String imagePath;
@@ -47,7 +48,7 @@ class RegisterSocialButton extends StatelessWidget {
                 buttonText,
                 style: const TextStyle(
                   fontWeight: FontWeight.bold,
-                  fontSize: 16,
+                  fontSize: AppFontSizes.large16,
                 ),
               ),
             ],

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../../../../common/chore/app_fonts_sizes.dart';
+
 class ConnectionPasswordTextField extends StatefulWidget {
   final String hintText; // Placeholder text.
   final TextEditingController controller;
@@ -32,7 +34,8 @@ class _ConnectionPasswordTextFieldState
       child: TextField(
         controller: widget.controller,
         obscureText: _obscureText,
-        style: const TextStyle(fontSize: 16, decoration: TextDecoration.none),
+        style: const TextStyle(
+            fontSize: AppFontSizes.large16, decoration: TextDecoration.none),
         decoration: InputDecoration(
             hintText: widget.hintText,
             enabledBorder: OutlineInputBorder(

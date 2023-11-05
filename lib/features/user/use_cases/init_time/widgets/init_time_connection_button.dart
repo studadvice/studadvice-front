@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:stud_advice/common/chore/app_fonts_sizes.dart';
 
-class ConnectionButton extends StatelessWidget {
+class InitTimeConnectionButton extends StatelessWidget {
   final String text;
   final Color backgroundColor;
   final Color textColor;
   final Color borderColor;
   final VoidCallback onTap;
 
-  const ConnectionButton({
+  const InitTimeConnectionButton({
     super.key,
     required this.text,
     required this.textColor,
@@ -39,7 +40,7 @@ class ConnectionButton extends StatelessWidget {
                 style: TextStyle(
                   color: textColor,
                   fontWeight: FontWeight.bold,
-                  fontSize: 16,
+                  fontSize: AppFontSizes.large16,
                 )),
           ),
         ),
