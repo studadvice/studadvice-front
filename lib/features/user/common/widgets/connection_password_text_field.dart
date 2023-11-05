@@ -41,7 +41,7 @@ class _ConnectionPasswordTextFieldState
             ),
             focusedBorder: OutlineInputBorder(
               borderSide:
-                  BorderSide(color: widget.focusedBorderColor, width: 1),
+                  BorderSide(color: widget.focusedBorderColor, width: 1.1),
               borderRadius: BorderRadius.circular(15),
             ),
             suffixIcon: IconButton(

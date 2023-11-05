@@ -1,7 +1,7 @@
 import 'package:flutter/widgets.dart';
 
-import '../../features/user/use_cases/init_time/init_time_screen.dart';
-import '../../features/user/use_cases/login/login_screen.dart';
+import '../../features/user/use_cases/init_time/screens/init_time_screen.dart';
+import '../../features/user/use_cases/login/screens/login_screen.dart';
 import '../../features/user/use_cases/register/register_screen.dart';
 
 class RoutesConfiguration {

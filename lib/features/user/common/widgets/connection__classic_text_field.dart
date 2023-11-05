@@ -45,7 +45,8 @@ class _ConnectionClassicTextFieldState
             borderRadius: BorderRadius.circular(15),
           ),
           focusedBorder: OutlineInputBorder(
-            borderSide: BorderSide(color: widget.focusedBorderColor, width: 1),
+            borderSide:
+                BorderSide(color: widget.focusedBorderColor, width: 1.1),
             borderRadius: BorderRadius.circular(15),
           ),
           suffixIcon: _showClearButton

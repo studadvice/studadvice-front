@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
-import '../../../../common/chore/app_colors.dart';
-import '../../../../common/conf/injection_container.dart';
-import '../../components/connection/connection_button.dart';
-import 'init_time_service.dart';
+import '../../../../../common/chore/app_colors.dart';
+import '../../../../../common/conf/injection_container.dart';
+import '../services/init_time_service.dart';
+import '../widgets/connection_button.dart';
 
 class InitTimeScreen extends StatelessWidget {
   static const String navigatorId = 'init_time_screen';

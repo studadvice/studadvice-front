@@ -31,7 +31,7 @@ flutter:
 
   assets:
     - assets/images/common/
-    - assets/images/user/
+    - assets/images/login/
 
 
 
