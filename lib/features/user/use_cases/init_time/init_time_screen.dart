@@ -2,13 +2,16 @@ import 'package:flutter/material.dart';
 
 import '../../../../common/chore/app_colors.dart';
 import '../../../../common/conf/injection_container.dart';
-import '../../components/connection_button.dart';
+import '../../components/connection/connection_button.dart';
 import 'init_time_service.dart';
 
 class InitTimeScreen extends StatelessWidget {
   static const String navigatorId = 'init_time_screen';
 
   const InitTimeScreen({Key? key}) : super(key: key);
+
+  final String loginText = 'Se connecter';
+  final String registerText = 'S\'inscrire';
 
   @override
   Widget build(BuildContext context) {
@@ -73,7 +76,7 @@ class InitTimeScreen extends StatelessWidget {
     return Stack(
       children: [
         buildConnectionButton(
-          text: 'S\'inscrire',
+          text: registerText,
           textColor: Colors.black,
           onTap: () {
             initTimeService.navigateToRegisterPage(context);
@@ -87,7 +90,7 @@ class InitTimeScreen extends StatelessWidget {
           margin: const EdgeInsets.only(bottom: 400, left: 60, right: 80),
         ),
         buildConnectionButton(
-          text: 'Se connecter',
+          text: loginText,
           textColor: Colors.black,
           onTap: () {
             initTimeService.navigateToLoginPage(context);
@@ -103,7 +106,7 @@ class InitTimeScreen extends StatelessWidget {
     return Stack(
       children: [
         buildConnectionButton(
-          text: 'S\'inscrire',
+          text: registerText,
           textColor: Colors.black,
           onTap: () {
             initTimeService.navigateToRegisterPage(context);
@@ -117,7 +120,7 @@ class InitTimeScreen extends StatelessWidget {
           margin: const EdgeInsets.only(bottom: 170, left: 60, right: 80),
         ),
         buildConnectionButton(
-          text: 'Se connecter',
+          text: loginText,
           textColor: Colors.black,
           onTap: () {
             initTimeService.navigateToLoginPage(context);
