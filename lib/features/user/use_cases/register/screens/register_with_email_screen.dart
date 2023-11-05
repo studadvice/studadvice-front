@@ -48,32 +48,39 @@ class _RegisterWithEmailScreenState extends State<RegisterWithEmailScreen> {
 
   @override
   Widget build(BuildContext context) => Scaffold(
-      appBar: AppBar(
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back),
-          onPressed: () {
-            Navigator.of(context).pop();
-          },
+        appBar: AppBar(
+          leading: IconButton(
+            icon: const Icon(Icons.arrow_back),
+            onPressed: () {
+              Navigator.of(context).pop();
+            },
+          ),
         ),
-      ),
-      body: Center(
-          child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          const SizedBox(height: 10),
-          buildRegisterText(),
-          const SizedBox(height: 20),
-          buildEmailTextField(),
-          const SizedBox(height: 15),
-          buildPasswordTextField(),
-          const SizedBox(height: 15),
-          buildConfirmPasswordTextField(),
-          const SizedBox(height: 100),
-          buildTermsAndConditionsRow(),
-          const SizedBox(height: 5),
-          buildConnectionButton(),
-        ],
-      )));
+        body: ListView(
+          // Wrap in a ListView to avoid overflow when the keyboard is displayed.
+          children: [
+            SizedBox(height: MediaQuery.of(context).size.height * 0.1),
+            Center(
+                child: Column(
+              children: [
+                const SizedBox(height: 10),
+                buildRegisterText(),
+                const SizedBox(height: 50),
+                buildEmailTextField(),
+                const SizedBox(height: 15),
+                buildPasswordTextField(),
+                const SizedBox(height: 15),
+                buildConfirmPasswordTextField(),
+                const SizedBox(height: 100),
+                buildTermsAndConditionsButton(),
+                buildTermsAndConditionsRow(),
+                const SizedBox(height: 5),
+                buildConnectionButton(),
+              ],
+            )),
+          ],
+        ),
+      );
 
   Widget buildEmailTextField() {
     return ConnectionClassicTextField(
@@ -119,15 +126,14 @@ class _RegisterWithEmailScreenState extends State<RegisterWithEmailScreen> {
         text: connectionButtonText,
         textColor: AppColors.black,
         backgroundColor: AppColors.white,
-        borderColor: AppColors.primaryColorAccent,
         onPressed: () {
           // TODO add the logic to connect the user
         });
   }
 
   Widget buildTermsAndConditionsButton() {
-    return ElevatedButton(
-      onPressed: () {
+    return GestureDetector(
+      onTap: () {
         Navigator.of(context).push(
           MaterialPageRoute(
             builder: (context) {
@@ -136,13 +142,11 @@ class _RegisterWithEmailScreenState extends State<RegisterWithEmailScreen> {
           ),
         );
       },
-      style: ElevatedButton.styleFrom(
-        backgroundColor: AppColors.blue,
-      ),
       child: Text(
         legalConditionsButtonText,
         style: const TextStyle(
-          color: AppColors.white,
+          color: AppColors.primaryColor,
+          decoration: TextDecoration.underline,
           fontWeight: FontWeight.bold,
           fontSize: AppFontSizes.medium,
         ),
@@ -156,6 +160,10 @@ class _RegisterWithEmailScreenState extends State<RegisterWithEmailScreen> {
       children: [
         Checkbox(
           value: _agreeWithTermsAndConditions,
+          activeColor: AppColors.primaryColor,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(4),
+          ),
           onChanged: (bool? value) {
             // TODO add the logic to accept the terms and conditions
             setState(() {

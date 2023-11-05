@@ -58,53 +58,58 @@ class _RegisterOptionsScreenState extends State<RegisterOptionsScreen> {
             },
           ),
         ),
-        body: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              buildSocialButton(
-                  imagePath: 'assets/images/login/google.png',
-                  buttonText: continueWithGoogleText,
-                  onTap: () {
-                    // TODO Register with google
-                  }),
-              const SizedBox(height: 20),
-              buildSocialButton(
-                  imagePath: 'assets/images/login/facebook.png',
-                  buttonText: continueWithFacebookText,
-                  iconColor: Colors.blue,
-                  onTap: () {
-                    // TODO Register with facebook
-                  }),
-              const SizedBox(height: 20),
-              buildSocialButton(
-                  imagePath: 'assets/images/login/apple.png',
-                  buttonText: continueWithAppleText,
-                  onTap: () {
-                    // TODO Register with apple
-                  }),
-              const SizedBox(height: 20),
-              buildSocialButton(
-                  imagePath: 'assets/images/login/x.png',
-                  buttonText: continueWithXText,
-                  onTap: () {
-                    // TODO Register with x
-                  }),
-              buildDividerWithText(),
-              RegisterWithEmailButton(
-                onPressed: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) =>
-                              const RegisterWithEmailScreen()));
-                },
-                backgroundColor: Colors.white,
-                textColor: Colors.black,
-                borderColor: AppColors.primaryColorAccent,
+        body: ListView(
+          children: [
+            SizedBox(height: MediaQuery.of(context).size.height * 0.1),
+            Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  buildSocialButton(
+                      imagePath: 'assets/images/login/google.png',
+                      buttonText: continueWithGoogleText,
+                      onTap: () {
+                        // TODO Register with google
+                      }),
+                  const SizedBox(height: 20),
+                  buildSocialButton(
+                      imagePath: 'assets/images/login/facebook.png',
+                      buttonText: continueWithFacebookText,
+                      iconColor: Colors.blue,
+                      onTap: () {
+                        // TODO Register with facebook
+                      }),
+                  const SizedBox(height: 20),
+                  buildSocialButton(
+                      imagePath: 'assets/images/login/apple.png',
+                      buttonText: continueWithAppleText,
+                      onTap: () {
+                        // TODO Register with apple
+                      }),
+                  const SizedBox(height: 20),
+                  buildSocialButton(
+                      imagePath: 'assets/images/login/x.png',
+                      buttonText: continueWithXText,
+                      onTap: () {
+                        // TODO Register with x
+                      }),
+                  buildDividerWithText(),
+                  RegisterWithEmailButton(
+                    onPressed: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) =>
+                                  const RegisterWithEmailScreen()));
+                    },
+                    backgroundColor: Colors.white,
+                    textColor: Colors.black,
+                    borderColor: AppColors.primaryColorAccent,
+                  ),
+                ],
               ),
-            ],
-          ),
+            )
+          ],
         ),
       );
 }

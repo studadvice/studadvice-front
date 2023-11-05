@@ -5,7 +5,6 @@ class DefaultConnectionButton extends StatefulWidget {
   final String text;
   final Color backgroundColor;
   final Color textColor;
-  final Color borderColor;
   final VoidCallback onPressed;
 
   const DefaultConnectionButton({
@@ -13,7 +12,6 @@ class DefaultConnectionButton extends StatefulWidget {
     required this.text,
     required this.textColor,
     required this.backgroundColor,
-    required this.borderColor,
     required this.onPressed,
   }) : super(key: key);
 

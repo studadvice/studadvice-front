@@ -53,26 +53,31 @@ class _LoginScreenState extends State<LoginScreen> {
             },
           ),
         ),
-        body: Center(
-            child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+        body: ListView(
           children: [
-            const SizedBox(height: 10),
-            buildWelcomeBackText(),
-            const SizedBox(height: 20),
-            buildEmailTextField(),
-            const SizedBox(height: 15),
-            buildPasswordTextField(),
-            const SizedBox(height: 10),
-            buildRememberMeAndForgotPasswordRow(),
-            const SizedBox(height: 10),
-            buildLoginButton(),
-            const SizedBox(height: 10),
-            DividerWithText(text: orContinueWithText),
-            const SizedBox(height: 10),
-            buildSocialLoginButtons(),
+            SizedBox(height: MediaQuery.of(context).size.height * 0.1),
+            Center(
+                child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                const SizedBox(height: 10),
+                buildWelcomeBackText(),
+                const SizedBox(height: 40),
+                buildEmailTextField(),
+                const SizedBox(height: 15),
+                buildPasswordTextField(),
+                const SizedBox(height: 10),
+                buildRememberMeAndForgotPasswordRow(),
+                const SizedBox(height: 10),
+                buildLoginButton(),
+                const SizedBox(height: 10),
+                DividerWithText(text: orContinueWithText),
+                const SizedBox(height: 10),
+                buildSocialLoginButtons(),
+              ],
+            ))
           ],
-        )),
+        ),
       );
 
   Widget buildEmailTextField() {
@@ -131,8 +136,7 @@ class _LoginScreenState extends State<LoginScreen> {
           child: Text(
             forgotPasswordText,
             style: const TextStyle(
-              color: AppColors
-                  .primaryColorAccent, // Changer la couleur selon votre conception.
+              color: AppColors.primaryColor,
             ),
           ),
         ),
@@ -145,7 +149,6 @@ class _LoginScreenState extends State<LoginScreen> {
         text: loginText,
         textColor: AppColors.black,
         backgroundColor: AppColors.white,
-        borderColor: AppColors.primaryColorAccent,
         onPressed: () {
           // TODO add the logic to connect the user
         });
