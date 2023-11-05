@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:stud_advice/common/chore/app_colors.dart';
-import 'package:stud_advice/features/user/use_cases/login/widgets/login_connection_button.dart';
 
 import '../../../common/widgets/connection__classic_text_field.dart';
 import '../../../common/widgets/connection_password_text_field.dart';
-import '../widgets/social_login_button.dart';
+import '../../../common/widgets/divider_with_text.dart';
+import '../widgets/login_connection_button.dart';
+import '../widgets/login_social_button.dart';
 
 class LoginScreen extends StatefulWidget {
   static const String navigatorId = 'login_screen';
@@ -77,7 +78,7 @@ class _LoginScreenState extends State<LoginScreen> {
             const SizedBox(height: 10),
             buildLoginButton(),
             const SizedBox(height: 10),
-            buildOrContinueWithRow(),
+            DividerWithText(text: orContinueWithText),
             const SizedBox(height: 10),
             buildSocialLoginButtons(),
           ],
@@ -132,35 +133,6 @@ class _LoginScreenState extends State<LoginScreen> {
     );
   }
 
-  Widget buildOrContinueWithRow() {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 25.0),
-      child: Row(
-        children: [
-          Expanded(
-            child: Divider(
-              thickness: 0.5,
-              color: Colors.grey[400],
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 10.0),
-            child: Text(
-              orContinueWithText,
-              style: TextStyle(color: Colors.grey[700]),
-            ),
-          ),
-          Expanded(
-            child: Divider(
-              thickness: 0.5,
-              color: Colors.grey[400],
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-
   Widget buildLoginButton() {
     return LoginConnectionButton(
         text: loginText,
@@ -176,7 +148,7 @@ class _LoginScreenState extends State<LoginScreen> {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        SocialLoginButton(
+        LoginSocialButton(
           imagePath: 'assets/images/login/google.png',
           tileBackgroundColor: Colors.white,
           borderColor: Colors.black26,
@@ -185,7 +157,7 @@ class _LoginScreenState extends State<LoginScreen> {
           },
         ),
         const SizedBox(width: 10),
-        SocialLoginButton(
+        LoginSocialButton(
           imagePath: 'assets/images/login/facebook.png',
           tileBackgroundColor: Colors.white,
           borderColor: Colors.black26,
@@ -195,7 +167,7 @@ class _LoginScreenState extends State<LoginScreen> {
           },
         ),
         const SizedBox(width: 10),
-        SocialLoginButton(
+        LoginSocialButton(
           imagePath: 'assets/images/login/apple.png',
           tileBackgroundColor: Colors.white,
           borderColor: Colors.black26,
@@ -204,7 +176,7 @@ class _LoginScreenState extends State<LoginScreen> {
           },
         ),
         const SizedBox(width: 10),
-        SocialLoginButton(
+        LoginSocialButton(
           imagePath: 'assets/images/login/x.png',
           tileBackgroundColor: Colors.white,
           borderColor: Colors.black26,

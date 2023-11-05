@@ -30,6 +30,7 @@ class _LoginConnectionButtonState extends State<LoginConnectionButton> {
           borderRadius: BorderRadius.circular(15),
         ),
         backgroundColor: widget.backgroundColor,
+        padding: const EdgeInsets.symmetric(horizontal: 120),
       ),
       child: Text(
         widget.text,

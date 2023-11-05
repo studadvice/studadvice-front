@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 
-class SocialLoginButton extends StatelessWidget {
+class LoginSocialButton extends StatelessWidget {
   final String imagePath;
   final Color tileBackgroundColor;
   final Color borderColor;
   final Color? iconColor;
   final VoidCallback onTap;
 
-  SocialLoginButton({
+  LoginSocialButton({
     required this.imagePath,
     required this.tileBackgroundColor,
     required this.borderColor,
