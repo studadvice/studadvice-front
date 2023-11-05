@@ -8,7 +8,7 @@ import '../widgets/init_time_connection_button.dart';
 class InitTimeScreen extends StatelessWidget {
   static const String navigatorId = 'init_time_screen';
 
-  const InitTimeScreen({Key? key}) : super(key: key);
+  const InitTimeScreen({super.key});
 
   final String loginText = 'Se connecter';
   final String registerText = 'S\'inscrire';

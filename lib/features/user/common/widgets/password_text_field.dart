@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 
 import '../../../../common/chore/app_fonts_sizes.dart';
 
-class ConnectionPasswordTextField extends StatefulWidget {
+class PasswordTextField extends StatefulWidget {
   final String hintText; // Placeholder text.
   final TextEditingController controller;
   final Color backgroundColor;
   final Color borderColor;
   final Color focusedBorderColor;
 
-  const ConnectionPasswordTextField({
+  const PasswordTextField({
     super.key,
     required this.hintText,
     required this.controller,
@@ -19,12 +19,10 @@ class ConnectionPasswordTextField extends StatefulWidget {
   });
 
   @override
-  State<ConnectionPasswordTextField> createState() =>
-      _ConnectionPasswordTextFieldState();
+  State<PasswordTextField> createState() => _PasswordTextFieldState();
 }
 
-class _ConnectionPasswordTextFieldState
-    extends State<ConnectionPasswordTextField> {
+class _PasswordTextFieldState extends State<PasswordTextField> {
   bool _obscureText = true;
 
   @override

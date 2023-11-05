@@ -9,7 +9,7 @@ import '../widgets/register_with_email_button.dart';
 class RegisterOptionsScreen extends StatefulWidget {
   static const String navigatorId = 'register_screen_options';
 
-  const RegisterOptionsScreen({Key? key}) : super(key: key);
+  const RegisterOptionsScreen({super.key});
 
   @override
   State<RegisterOptionsScreen> createState() => _RegisterOptionsScreenState();
@@ -102,8 +102,8 @@ class _RegisterOptionsScreenState extends State<RegisterOptionsScreen> {
                               builder: (context) =>
                                   const RegisterWithEmailScreen()));
                     },
-                    backgroundColor: Colors.white,
-                    textColor: Colors.black,
+                    textColor: AppColors.white,
+                    backgroundColor: AppColors.blue,
                     borderColor: AppColors.primaryColorAccent,
                   ),
                 ],

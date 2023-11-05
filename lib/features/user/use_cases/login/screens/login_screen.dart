@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:stud_advice/common/chore/app_colors.dart';
 
 import '../../../../../common/chore/app_fonts_sizes.dart';
-import '../../../common/widgets/connection__classic_text_field.dart';
-import '../../../common/widgets/connection_password_text_field.dart';
+import '../../../common/widgets/classic_text_field.dart';
 import '../../../common/widgets/default_connection_button.dart';
 import '../../../common/widgets/divider_with_text.dart';
+import '../../../common/widgets/password_text_field.dart';
 import '../widgets/login_social_button.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -81,7 +81,7 @@ class _LoginScreenState extends State<LoginScreen> {
       );
 
   Widget buildEmailTextField() {
-    return ConnectionClassicTextField(
+    return ClassicTextField(
         // TODO add validator for the input fields
         hintText: emailOrPseudoHintText,
         controller: emailOrPseudoController,
@@ -91,7 +91,7 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 
   Widget buildPasswordTextField() {
-    return ConnectionPasswordTextField(
+    return PasswordTextField(
         hintText: passwordHintText,
         controller: passwordController,
         backgroundColor: AppColors.white,
@@ -147,8 +147,8 @@ class _LoginScreenState extends State<LoginScreen> {
   Widget buildLoginButton() {
     return DefaultConnectionButton(
         text: loginText,
-        textColor: AppColors.black,
-        backgroundColor: AppColors.white,
+        textColor: AppColors.white,
+        backgroundColor: AppColors.blue,
         onPressed: () {
           // TODO add the logic to connect the user
         });

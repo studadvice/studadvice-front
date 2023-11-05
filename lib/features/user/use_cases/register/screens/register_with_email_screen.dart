@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:stud_advice/common/chore/app_fonts_sizes.dart';
+import 'package:stud_advice/features/user/use_cases/register/screens/register_user_information_screen.dart';
 
 import '../../../../../common/chore/app_colors.dart';
-import '../../../common/widgets/connection__classic_text_field.dart';
-import '../../../common/widgets/connection_password_text_field.dart';
+import '../../../common/widgets/classic_text_field.dart';
 import '../../../common/widgets/default_connection_button.dart';
+import '../../../common/widgets/password_text_field.dart';
 import '../../legal_conditions/screens/legal_conditions_screen.dart';
 
 class RegisterWithEmailScreen extends StatefulWidget {
@@ -83,7 +84,7 @@ class _RegisterWithEmailScreenState extends State<RegisterWithEmailScreen> {
       );
 
   Widget buildEmailTextField() {
-    return ConnectionClassicTextField(
+    return ClassicTextField(
         // TODO add validator for the input fields
         hintText: emailOrPseudoHintText,
         controller: emailOrPseudoController,
@@ -104,7 +105,7 @@ class _RegisterWithEmailScreenState extends State<RegisterWithEmailScreen> {
   }
 
   Widget buildPasswordTextField() {
-    return ConnectionPasswordTextField(
+    return PasswordTextField(
         hintText: passwordHintText,
         controller: passwordController,
         backgroundColor: AppColors.white,
@@ -113,7 +114,7 @@ class _RegisterWithEmailScreenState extends State<RegisterWithEmailScreen> {
   }
 
   Widget buildConfirmPasswordTextField() {
-    return ConnectionPasswordTextField(
+    return PasswordTextField(
         hintText: confirmPasswordHintText,
         controller: confirmPasswordController,
         backgroundColor: AppColors.white,
@@ -124,10 +125,14 @@ class _RegisterWithEmailScreenState extends State<RegisterWithEmailScreen> {
   Widget buildConnectionButton() {
     return DefaultConnectionButton(
         text: connectionButtonText,
-        textColor: AppColors.black,
-        backgroundColor: AppColors.white,
+        textColor: AppColors.white,
+        backgroundColor: AppColors.blue,
         onPressed: () {
           // TODO add the logic to connect the user
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => const RegisterUserInformationScreen()));
         });
   }
 
@@ -182,11 +187,4 @@ class _RegisterWithEmailScreenState extends State<RegisterWithEmailScreen> {
       ],
     );
   }
-
-// column
-// email
-// password
-// confirm password
-// i agree to the terms and conditions
-// register button
 }

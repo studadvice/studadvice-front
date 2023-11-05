@@ -4,9 +4,9 @@ class DividerWithText extends StatefulWidget {
   final String text;
 
   const DividerWithText({
-    Key? key,
+    super.key,
     required this.text,
-  }) : super(key: key);
+  });
 
   @override
   State<DividerWithText> createState() => _DividerWithTextState();

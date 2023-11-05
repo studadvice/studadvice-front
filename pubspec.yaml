@@ -11,19 +11,23 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  flutter_localizations:
+    sdk: flutter
 
   cupertino_icons: ^1.0.2
   firebase_auth: ^4.10.1
   google_fonts: ^6.1.0
   logger: ^2.0.2+1
   get_it: ^7.6.4
+  english_words: ^4.0.0
+  intl: ^0.18.1
 #  flutter_native_splash: ^2.3.5
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
 
-  flutter_lints: ^2.0.0
+  flutter_lints: ^3.0.1
 
 # The following section is specific to Flutter packages.
 flutter:
@@ -32,7 +36,6 @@ flutter:
   assets:
     - assets/images/common/
     - assets/images/login/
-
 
 
 #flutter_native_splash:

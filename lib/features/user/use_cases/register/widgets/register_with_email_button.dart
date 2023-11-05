@@ -23,7 +23,7 @@ class RegisterWithEmailButton extends StatelessWidget {
     return ElevatedButton(
       onPressed: onPressed,
       style: ElevatedButton.styleFrom(
-        // backgroundColor: backgroundColor,
+        backgroundColor: backgroundColor,
         padding: const EdgeInsets.symmetric(horizontal: 100),
       ),
       child: Text(

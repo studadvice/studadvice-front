@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:stud_advice/common/conf/routes_configuration.dart';
+import 'package:stud_advice/common/chore/supported_locales.dart';
 
 import 'common/chore/app_colors.dart';
 import 'common/conf/injection_container.dart';
+import 'common/conf/routes_configuration.dart';
 
 void main() {
   setupDependenciesInjection();
@@ -12,6 +14,7 @@ void main() {
 
 class StudAdviceApp extends StatelessWidget {
   const StudAdviceApp({super.key});
+
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
@@ -30,6 +33,10 @@ class StudAdviceApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       initialRoute: RoutesConfiguration.initialRoute,
       routes: routesConfiguration.configureRoutes(),
+      localizationsDelegates: [
+        GlobalMaterialLocalizations.delegate,
+      ],
+      supportedLocales: [const Locale(english), const Locale(french)],
     );
   }
 }

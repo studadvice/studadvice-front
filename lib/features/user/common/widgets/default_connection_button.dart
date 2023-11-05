@@ -8,12 +8,12 @@ class DefaultConnectionButton extends StatefulWidget {
   final VoidCallback onPressed;
 
   const DefaultConnectionButton({
-    Key? key,
+    super.key,
     required this.text,
     required this.textColor,
     required this.backgroundColor,
     required this.onPressed,
-  }) : super(key: key);
+  });
 
   @override
   State<DefaultConnectionButton> createState() =>
