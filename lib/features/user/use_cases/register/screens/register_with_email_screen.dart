@@ -11,7 +11,7 @@ import '../../legal_conditions/screens/legal_conditions_screen.dart';
 class RegisterWithEmailScreen extends StatefulWidget {
   static const String navigatorId = 'register_with_email_screen';
 
-  const RegisterWithEmailScreen({Key? key}) : super(key: key);
+  const RegisterWithEmailScreen({super.key});
 
   @override
   State<RegisterWithEmailScreen> createState() =>

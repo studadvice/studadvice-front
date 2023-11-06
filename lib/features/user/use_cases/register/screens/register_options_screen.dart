@@ -30,7 +30,7 @@ class _RegisterOptionsScreenState extends State<RegisterOptionsScreen> {
       Color? iconColor}) {
     return RegisterSocialButton(
       imagePath: imagePath,
-      tileBackgroundColor: Colors.white,
+      tileBackgroundColor: AppColors.white,
       borderColor: Colors.grey,
       iconColor: iconColor,
       buttonText: buttonText,

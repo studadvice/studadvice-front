@@ -1,3 +1,4 @@
+import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
 import 'package:stud_advice/common/conf/routes_configuration.dart';
 import 'package:stud_advice/features/user/use_cases/login/services/login_service.dart';
@@ -10,6 +11,10 @@ final locator = GetIt.instance;
 // Used to setup the dependency injection.
 // This is called before the app is run.
 void setupDependenciesInjection() {
+  // Register the chore services.
+  locator.registerFactory(() => (Dio()));
+
+  // Register the use cases services.
   locator.registerSingleton<RoutesConfiguration>(RoutesConfiguration());
   locator.registerLazySingleton<InitTimeService>(() => InitTimeService());
   locator.registerLazySingleton<LoginService>(() => LoginService());

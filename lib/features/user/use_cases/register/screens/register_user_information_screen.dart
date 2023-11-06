@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:stud_advice/features/user/common/widgets/city_autocomplete.dart';
+import 'package:stud_advice/features/user/common/widgets/country_picker_field.dart';
 
 import '../../../../../common/chore/app_colors.dart';
 import '../../../../../common/chore/app_fonts_sizes.dart';
@@ -29,7 +31,7 @@ class _RegisterUserInformationScreenState
   final String birthDateHintText = 'Date de naissance';
   final String cityHintText = 'Ville';
   final String universityHintText = 'Université';
-  final String countryHintText = 'Nationalité';
+  final String countryHintText = 'Pays d\'origine';
   final String formationHintText = 'Formation';
   final String nextButtonText = 'Suivant';
 
@@ -94,7 +96,7 @@ class _RegisterUserInformationScreenState
               const SizedBox(height: 10),
               buildFormationTextField(),
               const SizedBox(height: 10),
-              buildcountryTextField(),
+              buildCountryTextField(),
               const SizedBox(height: 50),
               buildNextButton(),
             ],
@@ -114,8 +116,18 @@ class _RegisterUserInformationScreenState
     );
   }
 
+  // Widget buildCityTextField() {
+  //   return ClassicTextField(
+  //     hintText: cityHintText,
+  //     controller: cityController,
+  //     backgroundColor: AppColors.white,
+  //     focusedBorderColor: AppColors.secondaryColor,
+  //     borderColor: AppColors.secondaryColor,
+  //   );
+  // }
+
   Widget buildCityTextField() {
-    return ClassicTextField(
+    return CityAutocomplete(
       hintText: cityHintText,
       controller: cityController,
       backgroundColor: AppColors.white,
@@ -153,14 +165,12 @@ class _RegisterUserInformationScreenState
     );
   }
 
-  Widget buildcountryTextField() {
-    return ClassicTextField(
-      hintText: countryHintText,
-      controller: countryController,
-      backgroundColor: AppColors.white,
-      focusedBorderColor: AppColors.secondaryColor,
-      borderColor: AppColors.secondaryColor,
-    );
+  Widget buildCountryTextField() {
+    return CountryPickerField(
+        controller: countryController,
+        hintText: countryHintText,
+        focusedBorderColor: AppColors.secondaryColor,
+        borderColor: AppColors.secondaryColor);
   }
 
   Widget buildPostalCodeTextField() {

@@ -11,7 +11,7 @@ import '../widgets/login_social_button.dart';
 class LoginScreen extends StatefulWidget {
   static const String navigatorId = 'login_screen';
 
-  const LoginScreen({Key? key}) : super(key: key);
+  const LoginScreen({super.key});
 
   @override
   State<LoginScreen> createState() => _LoginScreenState();
@@ -171,7 +171,7 @@ class _LoginScreenState extends State<LoginScreen> {
           imagePath: 'assets/images/login/facebook.png',
           tileBackgroundColor: AppColors.white,
           borderColor: AppColors.black26,
-          iconColor: Colors.blueAccent,
+          iconColor: AppColors.blueAccent,
           onTap: () {
             // TODO add the logic to connect the user with facebook
           },
@@ -189,7 +189,7 @@ class _LoginScreenState extends State<LoginScreen> {
         LoginSocialButton(
           imagePath: 'assets/images/login/x.png',
           tileBackgroundColor: Colors.white,
-          borderColor: Colors.black26,
+          borderColor: AppColors.black26,
           onTap: () {
             // TODO add the logic to connect the user with twitter
           },

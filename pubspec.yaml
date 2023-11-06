@@ -21,6 +21,10 @@ dependencies:
   get_it: ^7.6.4
   english_words: ^4.0.0
   intl: ^0.18.1
+  country_picker: ^2.0.22
+  csc_picker: ^0.2.7
+  dio: ^5.3.3
+  flutter_typeahead: ^4.8.0
 #  flutter_native_splash: ^2.3.5
 
 dev_dependencies:
