@@ -29,7 +29,7 @@ class _RegisterUserInformationScreenState
   final String birthDateHintText = 'Date de naissance';
   final String cityHintText = 'Ville';
   final String universityHintText = 'Université';
-  final String nationalityHintText = 'Nationalité';
+  final String countryHintText = 'Nationalité';
   final String formationHintText = 'Formation';
   final String nextButtonText = 'Suivant';
 
@@ -42,7 +42,7 @@ class _RegisterUserInformationScreenState
   final TextEditingController cityController = TextEditingController();
   final TextEditingController universityController = TextEditingController();
   final TextEditingController formationController = TextEditingController();
-  final TextEditingController nationalityController = TextEditingController();
+  final TextEditingController countryController = TextEditingController();
 
   @override
   void dispose() {
@@ -94,7 +94,7 @@ class _RegisterUserInformationScreenState
               const SizedBox(height: 10),
               buildFormationTextField(),
               const SizedBox(height: 10),
-              buildNationalityTextField(),
+              buildcountryTextField(),
               const SizedBox(height: 50),
               buildNextButton(),
             ],
@@ -153,10 +153,10 @@ class _RegisterUserInformationScreenState
     );
   }
 
-  Widget buildNationalityTextField() {
+  Widget buildcountryTextField() {
     return ClassicTextField(
-      hintText: nationalityHintText,
-      controller: nationalityController,
+      hintText: countryHintText,
+      controller: countryController,
       backgroundColor: AppColors.white,
       focusedBorderColor: AppColors.secondaryColor,
       borderColor: AppColors.secondaryColor,

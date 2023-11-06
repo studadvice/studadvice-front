@@ -7,7 +7,7 @@ class UserData {
   DateTime dateOfBirth;
   String university;
   String formation;
-  String nationality;
+  String country;
 
   UserData({
     required this.email,
@@ -18,7 +18,7 @@ class UserData {
     required this.dateOfBirth,
     required this.university,
     required this.formation,
-    required this.nationality,
+    required this.country,
   });
 
   factory UserData.fromJson(Map<String, dynamic> json) {
@@ -32,7 +32,7 @@ class UserData {
             DateTime.tryParse(json['dateOfBirth'] ?? '') ?? DateTime.now(),
         university: json['university'] ?? '',
         formation: json['formation'] ?? '',
-        nationality: json['nationality'] ?? '');
+        country: json['country'] ?? '');
   }
 
   Map<String, dynamic> toJson() {
@@ -45,7 +45,7 @@ class UserData {
       'dateOfBirth': dateOfBirth.toIso8601String(),
       'university': university,
       'formation': formation,
-      'nationality': nationality,
+      'country': country,
     };
   }
 }
