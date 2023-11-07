@@ -15,6 +15,7 @@ class AutoCompleteTextField<T> extends StatelessWidget {
   final String errorText;
   final String notFoundText;
   final String noItemSelectedText;
+  final TextInputType? keyboardType;
   final Widget Function(T) itemBuilder;
 
   AutoCompleteTextField({
@@ -28,6 +29,7 @@ class AutoCompleteTextField<T> extends StatelessWidget {
     required this.notFoundText,
     required this.noItemSelectedText,
     required this.itemBuilder,
+    this.keyboardType,
   });
 
   @override
@@ -53,6 +55,7 @@ class AutoCompleteTextField<T> extends StatelessWidget {
               ),
               suffixIcon: const Icon(Icons.arrow_drop_down),
             ),
+            keyboardType: keyboardType ?? TextInputType.text,
           ),
           suggestionsCallback: suggestionsCallback,
           errorBuilder: (context, error) {

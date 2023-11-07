@@ -85,6 +85,7 @@ class _LoginScreenState extends State<LoginScreen> {
         // TODO add validator for the input fields
         hintText: emailOrPseudoHintText,
         controller: emailOrPseudoController,
+        keyboardType: TextInputType.emailAddress,
         backgroundColor: AppColors.white,
         focusedBorderColor: AppColors.secondaryColor,
         borderColor: AppColors.secondaryColor);

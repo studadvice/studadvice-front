@@ -90,6 +90,7 @@ class _RegisterWithEmailScreenState extends State<RegisterWithEmailScreen> {
         controller: emailOrPseudoController,
         backgroundColor: AppColors.white,
         focusedBorderColor: AppColors.secondaryColor,
+        keyboardType: TextInputType.emailAddress,
         borderColor: AppColors.secondaryColor);
   }
 

@@ -25,6 +25,7 @@ dependencies:
   csc_picker: ^0.2.7
   dio: ^5.3.3
   flutter_typeahead: ^4.8.0
+  dropdown_button2: ^2.3.9
 #  flutter_native_splash: ^2.3.5
 
 dev_dependencies:
