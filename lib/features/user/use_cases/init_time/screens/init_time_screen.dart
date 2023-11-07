@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-
-import '../../../../../common/chore/app_colors.dart';
-import '../../../../../common/conf/injection_container.dart';
-import '../services/init_time_service.dart';
-import '../widgets/init_time_connection_button.dart';
+import 'package:stud_advice/common/chore/app_colors.dart';
+import 'package:stud_advice/common/conf/injection_container.dart';
+import 'package:stud_advice/features/user/use_cases/init_time/services/init_time_service.dart';
+import 'package:stud_advice/features/user/use_cases/init_time/widgets/init_time_connection_button.dart';
 
 class InitTimeScreen extends StatelessWidget {
   static const String navigatorId = 'init_time_screen';
@@ -46,7 +45,7 @@ class InitTimeScreen extends StatelessWidget {
       child: InitTimeConnectionButton(
         text: text,
         textColor: textColor,
-        backgroundColor: AppColors.white,
+        backgroundColor: AppColors.blue,
         borderColor: AppColors.secondaryColor,
         onTap: onTap,
       ),
@@ -77,25 +76,25 @@ class InitTimeScreen extends StatelessWidget {
       children: [
         buildConnectionButton(
           text: registerText,
-          textColor: AppColors.black,
+          textColor: AppColors.white,
           onTap: () {
             initTimeService.navigateToRegisterPage(context);
           },
-          margin: const EdgeInsets.only(bottom: 350, left: 10, right: 10),
+          margin: const EdgeInsets.only(bottom: 342, left: 50, right: 50),
         ),
         buildImage(
           imagePath: 'assets/images/common/raven_image.png',
           height: 235,
           width: 235,
-          margin: const EdgeInsets.only(bottom: 400, left: 60, right: 80),
+          margin: const EdgeInsets.only(bottom: 370, left: 60, right: 80),
         ),
         buildConnectionButton(
           text: loginText,
-          textColor: AppColors.black,
+          textColor: AppColors.white,
           onTap: () {
             initTimeService.navigateToLoginPage(context);
           },
-          margin: const EdgeInsets.only(bottom: 250, left: 10, right: 10),
+          margin: const EdgeInsets.only(bottom: 250, left: 50, right: 50),
         ),
       ],
     );
@@ -107,25 +106,25 @@ class InitTimeScreen extends StatelessWidget {
       children: [
         buildConnectionButton(
           text: registerText,
-          textColor: AppColors.black,
+          textColor: AppColors.white,
           onTap: () {
             initTimeService.navigateToRegisterPage(context);
           },
-          margin: const EdgeInsets.only(bottom: 110, left: 100, right: 100),
+          margin: const EdgeInsets.only(bottom: 110, left: 250, right: 250),
         ),
         buildImage(
           imagePath: 'assets/images/common/raven_image.png',
           height: 170,
           width: 170,
-          margin: const EdgeInsets.only(bottom: 170, left: 60, right: 80),
+          margin: const EdgeInsets.only(bottom: 148, left: 60, right: 80),
         ),
         buildConnectionButton(
           text: loginText,
-          textColor: AppColors.black,
+          textColor: AppColors.white,
           onTap: () {
             initTimeService.navigateToLoginPage(context);
           },
-          margin: const EdgeInsets.only(bottom: 20, left: 100, right: 100),
+          margin: const EdgeInsets.only(bottom: 20, left: 250, right: 250),
         ),
       ],
     );

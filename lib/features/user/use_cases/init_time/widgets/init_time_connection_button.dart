@@ -21,20 +21,15 @@ class InitTimeConnectionButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: onTap,
-      customBorder: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(25),
-      ),
+      customBorder:
+          RoundedRectangleBorder(borderRadius: BorderRadius.circular(25)),
       child: Ink(
         decoration: BoxDecoration(
-          border: Border.all(
-            color: borderColor,
-            width: 0.5,
-          ),
+          color: backgroundColor,
           borderRadius: BorderRadius.circular(25),
         ),
         child: Container(
-          padding: const EdgeInsets.all(30),
-          margin: const EdgeInsets.symmetric(horizontal: 25),
+          padding: const EdgeInsets.all(20),
           child: Center(
             child: Text(text,
                 style: TextStyle(
