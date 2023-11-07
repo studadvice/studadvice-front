@@ -45,4 +45,9 @@ class CityData {
     data['_score'] = dScore;
     return data;
   }
+
+  @override
+  String toString() {
+    return nom ?? '';
+  }
 }

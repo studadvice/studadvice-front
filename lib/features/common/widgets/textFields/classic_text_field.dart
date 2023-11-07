@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-import '../../../../common/chore/app_fonts_sizes.dart';
+import '../../../../../common/chore/app_fonts_sizes.dart';
 
 class ClassicTextField extends StatefulWidget {
   final String hintText; // Placeholder text.

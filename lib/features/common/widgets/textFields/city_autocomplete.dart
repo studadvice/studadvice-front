@@ -3,8 +3,9 @@ import 'package:flutter_typeahead/flutter_typeahead.dart'; // Importez flutter_t
 import 'package:stud_advice/common/conf/injection_container.dart';
 import 'package:stud_advice/features/user/use_cases/register/services/register_user_information_service.dart';
 
-import '../../../../common/chore/app_fonts_sizes.dart';
-import '../../models/city_data.dart';
+import '../../../../../common/chore/app_colors.dart';
+import '../../../../../common/chore/app_fonts_sizes.dart';
+import '../../../user/models/city_data.dart';
 
 class CityAutocomplete extends StatefulWidget {
   final String hintText; // Placeholder text.
@@ -28,6 +29,9 @@ class CityAutocomplete extends StatefulWidget {
 class _CityAutocompleteState extends State<CityAutocomplete> {
   final RegisterUserInformationService _registerUserInformationService =
       locator<RegisterUserInformationService>();
+  final String notFoundText = 'Aucune suggestion trouvée.';
+  final String errorText = 'Une erreur est survenue.';
+  final String noCitySelectedText = 'Veuillez sélectionner une suggestion.';
 
   List<CityData> _cities = [];
 
@@ -35,7 +39,7 @@ class _CityAutocompleteState extends State<CityAutocomplete> {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 25.0),
-      child: TypeAheadField<CityData>(
+      child: TypeAheadFormField<CityData>(
         textFieldConfiguration: TextFieldConfiguration(
           controller: widget.controller,
           style: const TextStyle(
@@ -58,7 +62,24 @@ class _CityAutocompleteState extends State<CityAutocomplete> {
           return await _registerUserInformationService
               .fetchCitiesFromAPI(pattern);
         },
-        // TODO continuer, ajouter un validateur et faire en sorte que le message quand il n'y a pas de suggestion soit en français.
+        errorBuilder: (context, error) {
+          return Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Text(errorText,
+                style: const TextStyle(
+                    color: AppColors.dangerColor,
+                    decoration: TextDecoration.none)),
+          );
+        },
+        noItemsFoundBuilder: (context) {
+          return Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Text(notFoundText,
+                style: const TextStyle(
+                    color: AppColors.dangerColor,
+                    decoration: TextDecoration.none)),
+          );
+        },
         itemBuilder: (context, suggestion) {
           return ListTile(
             title: Text(suggestion.nom ?? ''),
@@ -69,6 +90,12 @@ class _CityAutocompleteState extends State<CityAutocomplete> {
             widget.controller.text = suggestion.nom ?? '';
             _cities.clear();
           });
+        },
+        validator: (value) {
+          if (_cities.isEmpty) {
+            return noCitySelectedText;
+          }
+          return null;
         },
       ),
     );

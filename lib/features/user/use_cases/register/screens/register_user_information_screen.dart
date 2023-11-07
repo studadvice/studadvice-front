@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:stud_advice/features/user/common/widgets/city_autocomplete.dart';
-import 'package:stud_advice/features/user/common/widgets/country_picker_field.dart';
 
 import '../../../../../common/chore/app_colors.dart';
 import '../../../../../common/chore/app_fonts_sizes.dart';
-import '../../../common/widgets/classic_text_field.dart';
-import '../../../common/widgets/date_text_field.dart';
-import '../../../common/widgets/default_connection_button.dart';
+import '../../../../../common/conf/injection_container.dart';
+import '../../../../common/widgets/buttons/default_connection_button.dart';
+import '../../../../common/widgets/pickers/country_picker_field.dart';
+import '../../../../common/widgets/pickers/date_picker_field.dart';
+import '../../../../common/widgets/textFields/auto_complete_text_field.dart';
+import '../../../../common/widgets/textFields/classic_text_field.dart';
+import '../../../models/city_data.dart';
 import '../services/register_user_information_service.dart';
 
 class RegisterUserInformationScreen extends StatefulWidget {
@@ -22,8 +24,6 @@ class RegisterUserInformationScreen extends StatefulWidget {
 
 class _RegisterUserInformationScreenState
     extends State<RegisterUserInformationScreen> {
-  // State variables.
-
   // Use constants to facilitate the implementation of the translation.
   final String screenTitle = 'Veuillez renseigner les informations suivantes';
   final String pseudoHintText = 'Pseudo';
@@ -34,6 +34,9 @@ class _RegisterUserInformationScreenState
   final String countryHintText = 'Pays d\'origine';
   final String formationHintText = 'Formation';
   final String nextButtonText = 'Suivant';
+  final String cityNotFoundText = 'Ville non trouvée';
+  final String cityNotSelectedText = 'Veuillez sélectionner une ville';
+  final String cityErrorText = 'Une erreur est survenue';
 
   // Controllers for the text fields.
   final TextEditingController pseudoController = TextEditingController(
@@ -46,6 +49,10 @@ class _RegisterUserInformationScreenState
   final TextEditingController formationController = TextEditingController();
   final TextEditingController countryController = TextEditingController();
 
+  // Services.
+  final RegisterUserInformationService _registerUserInformationService =
+      locator<RegisterUserInformationService>();
+
   @override
   void dispose() {
     // Dispose of the controllers when the widget is disposed.
@@ -53,6 +60,9 @@ class _RegisterUserInformationScreenState
     birthDateController.dispose();
     postalCodeController.dispose();
     cityController.dispose();
+    universityController.dispose();
+    formationController.dispose();
+    countryController.dispose();
     super.dispose();
   }
 
@@ -116,28 +126,28 @@ class _RegisterUserInformationScreenState
     );
   }
 
-  // Widget buildCityTextField() {
-  //   return ClassicTextField(
-  //     hintText: cityHintText,
-  //     controller: cityController,
-  //     backgroundColor: AppColors.white,
-  //     focusedBorderColor: AppColors.secondaryColor,
-  //     borderColor: AppColors.secondaryColor,
-  //   );
-  // }
-
   Widget buildCityTextField() {
-    return CityAutocomplete(
-      hintText: cityHintText,
+    return AutoCompleteTextField<CityData>(
       controller: cityController,
+      hintText: cityHintText,
       backgroundColor: AppColors.white,
-      focusedBorderColor: AppColors.secondaryColor,
       borderColor: AppColors.secondaryColor,
+      focusedBorderColor: AppColors.secondaryColor,
+      suggestionsCallback: (pattern) async {
+        return await _registerUserInformationService
+            .fetchCitiesFromAPI(pattern);
+      },
+      errorText: cityErrorText,
+      notFoundText: cityNotFoundText,
+      noItemSelectedText: cityNotSelectedText,
+      itemBuilder: (suggestion) {
+        return Text(suggestion.nom ?? '');
+      },
     );
   }
 
   Widget buildBirthDateTextField() {
-    return DateTextField(
+    return DatePickerField(
       hintText: birthDateHintText,
       controller: birthDateController,
       focusedBorderColor: AppColors.secondaryColor,

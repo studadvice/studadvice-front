@@ -2,13 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:stud_advice/common/chore/supported_locales.dart';
 
-class DateTextField extends StatefulWidget {
+class DatePickerField extends StatefulWidget {
   final TextEditingController controller;
   final String hintText;
   final Color borderColor;
   final Color focusedBorderColor;
 
-  const DateTextField({
+  const DatePickerField({
     super.key,
     required this.controller,
     required this.hintText,
@@ -17,10 +17,10 @@ class DateTextField extends StatefulWidget {
   });
 
   @override
-  State<DateTextField> createState() => _DateTextFieldState();
+  State<DatePickerField> createState() => _DatePickerFieldState();
 }
 
-class _DateTextFieldState extends State<DateTextField> {
+class _DatePickerFieldState extends State<DatePickerField> {
   DateTime? selectedDate;
   String headerText = 'Date de naissance';
 

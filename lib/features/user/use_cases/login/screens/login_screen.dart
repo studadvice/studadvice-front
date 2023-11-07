@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:stud_advice/common/chore/app_colors.dart';
 
 import '../../../../../common/chore/app_fonts_sizes.dart';
-import '../../../common/widgets/classic_text_field.dart';
-import '../../../common/widgets/default_connection_button.dart';
-import '../../../common/widgets/divider_with_text.dart';
-import '../../../common/widgets/password_text_field.dart';
+import '../../../../common/widgets/buttons/default_connection_button.dart';
+import '../../../../common/widgets/dividers/divider_with_text.dart';
+import '../../../../common/widgets/textFields/classic_text_field.dart';
+import '../../../../common/widgets/textFields/password_text_field.dart';
 import '../widgets/login_social_button.dart';
 
 class LoginScreen extends StatefulWidget {

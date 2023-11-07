@@ -3,9 +3,9 @@ import 'package:stud_advice/common/chore/app_fonts_sizes.dart';
 import 'package:stud_advice/features/user/use_cases/register/screens/register_user_information_screen.dart';
 
 import '../../../../../common/chore/app_colors.dart';
-import '../../../common/widgets/classic_text_field.dart';
-import '../../../common/widgets/default_connection_button.dart';
-import '../../../common/widgets/password_text_field.dart';
+import '../../../../common/widgets/buttons/default_connection_button.dart';
+import '../../../../common/widgets/textFields/classic_text_field.dart';
+import '../../../../common/widgets/textFields/password_text_field.dart';
 import '../../legal_conditions/screens/legal_conditions_screen.dart';
 
 class RegisterWithEmailScreen extends StatefulWidget {

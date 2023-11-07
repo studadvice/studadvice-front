@@ -27,9 +27,9 @@ class RegisterUserInformationService {
 
   Future<List<CityData>> fetchCitiesFromAPI(String cityName) async {
     try {
-      final apiUri = Uri.parse(
+      final cityApiUri = Uri.parse(
           'https://geo.api.gouv.fr/communes?nom=$cityName&boost=population');
-      final response = await _dio.get(apiUri.toString());
+      final response = await _dio.get(cityApiUri.toString());
 
       if (response.statusCode == HttpStatus.ok) {
         final List<dynamic> data = response.data;

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:stud_advice/common/chore/app_colors.dart';
-import 'package:stud_advice/features/user/common/widgets/divider_with_text.dart';
 import 'package:stud_advice/features/user/use_cases/register/screens/register_with_email_screen.dart';
 import 'package:stud_advice/features/user/use_cases/register/widgets/register_social_button.dart';
 
+import '../../../../common/widgets/dividers/divider_with_text.dart';
 import '../widgets/register_with_email_button.dart';
 
 class RegisterOptionsScreen extends StatefulWidget {

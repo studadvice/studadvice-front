@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../../common/chore/app_fonts_sizes.dart';
+import '../../../../../common/chore/app_fonts_sizes.dart';
 
 class PasswordTextField extends StatefulWidget {
   final String hintText; // Placeholder text.
