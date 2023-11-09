@@ -9,6 +9,7 @@ import 'package:stud_advice/features/common/widgets/pickers/date_picker_field.da
 import 'package:stud_advice/features/common/widgets/textFields/auto_complete_text_field.dart';
 import 'package:stud_advice/features/common/widgets/textFields/classic_text_field.dart';
 import 'package:stud_advice/features/user/models/city_data.dart';
+import 'package:stud_advice/features/user/models/user_data.dart';
 import 'package:stud_advice/features/user/use_cases/register/services/register_user_information_service.dart';
 
 class RegisterUserInformationScreen extends StatefulWidget {
@@ -27,17 +28,24 @@ class _RegisterUserInformationScreenState
   final String screenTitle = 'Veuillez renseigner les informations suivantes';
   final String pseudoHintText = 'Pseudo';
   final String postalCodeHintText = 'Code Postal';
+  final String postalCodeLabelText = 'Code Postal';
   final String birthDateHintText = 'Date de naissance';
+  final String birthDateLabelText = 'Date de naissance';
   final String cityHintText = 'Ville';
+  final String cityLabelText = 'Ville';
   final String universityHintText = 'Université';
+  final String universityLabelText = 'Université';
   final String countryHintText = 'Pays d\'origine';
+  final String countryLabelText = 'Pays d\'origine';
   final String formationHintText = 'Formation';
+  final String formationLabelText = 'Formation';
   final String nextButtonText = 'Suivant';
   final String cityNotFoundText = 'Ville non trouvée';
   final String cityNotSelectedText = 'Veuillez sélectionner une ville';
   final String cityErrorText = 'Une erreur est survenue';
   final String postalCodeErrorText = 'Une erreur est survenue';
-  final String postalCodeNotFoundText = 'Code postal non trouvé';
+  final String postalCodeNotFoundText =
+      'Code postal non trouvé, veuillez saisir une ville valide';
   final String postalCodeNotSelectedText =
       'Veuillez sélectionner un code postal';
 
@@ -45,7 +53,6 @@ class _RegisterUserInformationScreenState
   final TextEditingController pseudoController = TextEditingController(
     text: RegisterUserInformationService.generateRandomPseudo(),
   );
-  final TextEditingController postalCodeController = TextEditingController();
   final TextEditingController birthDateController = TextEditingController();
   final TextEditingController cityController = TextEditingController();
   final TextEditingController universityController = TextEditingController();
@@ -56,12 +63,14 @@ class _RegisterUserInformationScreenState
   final RegisterUserInformationService _registerUserInformationService =
       locator<RegisterUserInformationService>();
 
+  // Model data.
+  late UserData userData;
+
   @override
   void dispose() {
     // Dispose of the controllers when the widget is disposed.
     pseudoController.dispose();
     birthDateController.dispose();
-    postalCodeController.dispose();
     cityController.dispose();
     universityController.dispose();
     formationController.dispose();
@@ -121,6 +130,7 @@ class _RegisterUserInformationScreenState
   Widget buildPseudoTextField() {
     return ClassicTextField(
       hintText: pseudoHintText,
+      labelText: pseudoHintText,
       controller: pseudoController,
       backgroundColor: AppColors.white,
       focusedBorderColor: AppColors.secondaryColor,
@@ -151,36 +161,42 @@ class _RegisterUserInformationScreenState
   Widget buildPostalCodeDropdown() {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 25.0),
-      child: CustomDropdownButton(
-        hint: postalCodeHintText,
-        // value: '59000',
+      child: CustomDropdownSearch(
+        hintText: postalCodeHintText,
+        backgroundColor: AppColors.white,
+        borderColor: AppColors.secondaryColor,
+        focusedBorderColor: AppColors.secondaryColor,
+        asyncItems: (String filter) => _registerUserInformationService
+            .fetchPostalCodesFromApi(cityController.text),
         validator: (value) {
-          if (value == null) {
-            return 'Please select a postal code';
+          if (value == null || value.isEmpty) {
+            return postalCodeNotSelectedText;
           }
+          return value;
+        },
+        onChanged: (String? selectedItem) {
+          userData.postalCode = (selectedItem ?? '') as int;
           return null;
         },
-        // TODO utiliser la liste stocker pour le controller des villes
-        dropdownItems: ['59000', '59100', '59200', '59300', '59400', '59500'],
-        onChanged: (value) {
-          // postalCodeController.text = value!;
+        errorBuilder: (context, postalCodeErrorText, reload) {
+          return Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Text(postalCodeErrorText,
+                style: const TextStyle(
+                    color: AppColors.dangerColor,
+                    decoration: TextDecoration.none)),
+          );
         },
-        onSaved: (value) {
-          // postalCodeController.text = value!;
+        emptyBuilder: (context, reload) {
+          return Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 2.0, vertical: 8),
+            child: Text(postalCodeNotFoundText,
+                style: const TextStyle(
+                    fontSize: AppFontSizes.large16,
+                    color: AppColors.dangerColor,
+                    decoration: TextDecoration.none)),
+          );
         },
-        buttonDecoration: BoxDecoration(
-          color: AppColors.white,
-          borderRadius: BorderRadius.circular(14),
-          border: Border.all(
-            color: AppColors.secondaryColor,
-          ),
-        ),
-        icon: const Icon(Icons.arrow_drop_down),
-        iconEnabledColor: AppColors.secondaryColor,
-        buttonHeight: 57,
-        scrollbarRadius: const Radius.circular(14),
-        scrollbarThickness: 3,
-        scrollbarAlwaysShow: false,
       ),
     );
   }
@@ -197,6 +213,7 @@ class _RegisterUserInformationScreenState
   Widget buildUniversityTextField() {
     return ClassicTextField(
       hintText: universityHintText,
+      labelText: universityLabelText,
       controller: universityController,
       backgroundColor: AppColors.white,
       focusedBorderColor: AppColors.secondaryColor,
@@ -207,6 +224,7 @@ class _RegisterUserInformationScreenState
   Widget buildFormationTextField() {
     return ClassicTextField(
       hintText: formationHintText,
+      labelText: formationLabelText,
       controller: formationController,
       backgroundColor: AppColors.white,
       focusedBorderColor: AppColors.secondaryColor,
@@ -218,6 +236,7 @@ class _RegisterUserInformationScreenState
     return CountryPickerField(
         controller: countryController,
         hintText: countryHintText,
+        labelText: countryLabelText,
         focusedBorderColor: AppColors.secondaryColor,
         borderColor: AppColors.secondaryColor);
   }

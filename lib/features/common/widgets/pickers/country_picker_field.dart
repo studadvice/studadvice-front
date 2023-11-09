@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 class CountryPickerField extends StatefulWidget {
   final TextEditingController controller;
   final String hintText;
+  final String labelText;
   final Color borderColor;
   final Color focusedBorderColor;
 
@@ -11,6 +12,7 @@ class CountryPickerField extends StatefulWidget {
     super.key,
     required this.controller,
     required this.hintText,
+    required this.labelText,
     required this.borderColor,
     required this.focusedBorderColor,
   });
@@ -47,6 +49,7 @@ class _CountryPickerFieldState extends State<CountryPickerField> {
         controller: widget.controller,
         readOnly: true,
         decoration: InputDecoration(
+          labelText: widget.labelText,
           hintText: widget.hintText,
           enabledBorder: OutlineInputBorder(
             borderSide: BorderSide(color: widget.borderColor, width: 0.5),

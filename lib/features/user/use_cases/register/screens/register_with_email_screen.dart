@@ -23,9 +23,12 @@ class _RegisterWithEmailScreenState extends State<RegisterWithEmailScreen> {
   bool _agreeWithTermsAndConditions = false;
 
   // Use constants to facilitate the implementation of the translation.
-  final String emailOrPseudoHintText = 'Email';
+  final String emailHintText = 'Email';
+  final String emailLabelText = 'Email';
   final String passwordHintText = 'Mot de passe';
+  final String passwordLabelText = 'Mot de passe';
   final String confirmPasswordHintText = 'Confirmer le mot de passe';
+  final String confirmPasswordLabelText = 'Confirmer le mot de passe';
   final String registerMessageText = 'Créer un compte';
   final String connectionButtonText = 'S\'inscrire';
   final String legalConditionsButtonText = 'Voir les Termes et Conditions';
@@ -85,13 +88,15 @@ class _RegisterWithEmailScreenState extends State<RegisterWithEmailScreen> {
 
   Widget buildEmailTextField() {
     return ClassicTextField(
-        // TODO add validator for the input fields
-        hintText: emailOrPseudoHintText,
-        controller: emailOrPseudoController,
-        backgroundColor: AppColors.white,
-        focusedBorderColor: AppColors.secondaryColor,
-        keyboardType: TextInputType.emailAddress,
-        borderColor: AppColors.secondaryColor);
+      // TODO add validator for the input fields
+      hintText: emailHintText,
+      labelText: emailLabelText,
+      controller: emailOrPseudoController,
+      backgroundColor: AppColors.white,
+      focusedBorderColor: AppColors.secondaryColor,
+      keyboardType: TextInputType.emailAddress,
+      borderColor: AppColors.secondaryColor,
+    );
   }
 
   Widget buildRegisterText() {
@@ -108,6 +113,7 @@ class _RegisterWithEmailScreenState extends State<RegisterWithEmailScreen> {
   Widget buildPasswordTextField() {
     return PasswordTextField(
         hintText: passwordHintText,
+        labelText: passwordLabelText,
         controller: passwordController,
         backgroundColor: AppColors.white,
         focusedBorderColor: AppColors.secondaryColor,
@@ -117,6 +123,7 @@ class _RegisterWithEmailScreenState extends State<RegisterWithEmailScreen> {
   Widget buildConfirmPasswordTextField() {
     return PasswordTextField(
         hintText: confirmPasswordHintText,
+        labelText: confirmPasswordLabelText,
         controller: confirmPasswordController,
         backgroundColor: AppColors.white,
         focusedBorderColor: AppColors.secondaryColor,

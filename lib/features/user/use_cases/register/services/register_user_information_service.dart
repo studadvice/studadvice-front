@@ -46,7 +46,7 @@ class RegisterUserInformationService {
     }
   }
 
-  Future<List<String>> fetchPostalCodesFromApi(String cityName) async {
+  Future<List<String>> fetchPostalCodesFromApi(String? cityName) async {
     try {
       final cityApiUri = Uri.parse(
           'https://geo.api.gouv.fr/communes?nom=$cityName&boost=population');

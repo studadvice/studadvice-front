@@ -4,7 +4,8 @@ import 'package:flutter/services.dart';
 import '../../../../../common/chore/app_fonts_sizes.dart';
 
 class ClassicTextField extends StatefulWidget {
-  final String hintText; // Placeholder text.
+  final String hintText; // Placeholder text
+  final String? labelText;
   final TextEditingController controller;
   final Color backgroundColor;
   final Color borderColor;
@@ -19,6 +20,7 @@ class ClassicTextField extends StatefulWidget {
     required this.backgroundColor,
     required this.borderColor,
     required this.focusedBorderColor,
+    this.labelText,
     this.keyboardType,
     this.inputFormatters,
   });
@@ -66,14 +68,14 @@ class _ClassicTextFieldState extends State<ClassicTextField> {
         style: const TextStyle(
             fontSize: AppFontSizes.large16, decoration: TextDecoration.none),
         decoration: InputDecoration(
+          labelText: widget.labelText,
           hintText: widget.hintText,
           enabledBorder: OutlineInputBorder(
             borderSide: BorderSide(color: widget.borderColor, width: 0.5),
             borderRadius: BorderRadius.circular(15),
           ),
           focusedBorder: OutlineInputBorder(
-            borderSide:
-                BorderSide(color: widget.focusedBorderColor, width: 1.1),
+            borderSide: BorderSide(color: widget.focusedBorderColor, width: 1),
             borderRadius: BorderRadius.circular(15),
           ),
           suffixIcon: _showClearButton

@@ -22,7 +22,7 @@ class DatePickerField extends StatefulWidget {
 
 class _DatePickerFieldState extends State<DatePickerField> {
   DateTime? selectedDate;
-  String headerText = 'Date de naissance';
+  String labelText = 'Date de naissance';
 
   @override
   void setState(fn) {
@@ -38,7 +38,7 @@ class _DatePickerFieldState extends State<DatePickerField> {
         context: context,
         initialDate: selectedDate ?? DateTime.now(),
         firstDate: DateTime(1900),
-        helpText: headerText,
+        helpText: labelText,
         lastDate: DateTime.now(),
         locale: const Locale(currentLanguage, currentCountry));
 
@@ -59,6 +59,7 @@ class _DatePickerFieldState extends State<DatePickerField> {
         readOnly: true,
         decoration: InputDecoration(
           hintText: widget.hintText,
+          labelText: labelText,
           enabledBorder: OutlineInputBorder(
             borderSide: BorderSide(color: widget.borderColor, width: 0.5),
             borderRadius: BorderRadius.circular(15),

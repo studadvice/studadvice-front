@@ -20,7 +20,9 @@ class LoginScreen extends StatefulWidget {
 class _LoginScreenState extends State<LoginScreen> {
   // Use constants to facilitate the implementation of the translation.
   final String emailOrPseudoHintText = 'Email ou pseudo';
+  final String emailOrPseudoLabelText = 'Email ou pseudo';
   final String passwordHintText = 'Mot de passe';
+  final String passwordLabelText = 'Mot de passe';
   final String welcomeBackText = 'Bon retour parmi nous !';
   final String passwordText = 'Mot de passe';
   final String forgotPasswordText = 'Mot de passe oublié ?';
@@ -84,6 +86,7 @@ class _LoginScreenState extends State<LoginScreen> {
     return ClassicTextField(
         // TODO add validator for the input fields
         hintText: emailOrPseudoHintText,
+        labelText: emailOrPseudoLabelText,
         controller: emailOrPseudoController,
         keyboardType: TextInputType.emailAddress,
         backgroundColor: AppColors.white,
@@ -93,7 +96,9 @@ class _LoginScreenState extends State<LoginScreen> {
 
   Widget buildPasswordTextField() {
     return PasswordTextField(
+        // TODO add validator for the input fields
         hintText: passwordHintText,
+        labelText: passwordLabelText,
         controller: passwordController,
         backgroundColor: AppColors.white,
         focusedBorderColor: AppColors.secondaryColor,

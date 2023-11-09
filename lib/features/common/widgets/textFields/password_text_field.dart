@@ -4,6 +4,7 @@ import '../../../../../common/chore/app_fonts_sizes.dart';
 
 class PasswordTextField extends StatefulWidget {
   final String hintText; // Placeholder text.
+  final String labelText;
   final TextEditingController controller;
   final Color backgroundColor;
   final Color borderColor;
@@ -12,6 +13,7 @@ class PasswordTextField extends StatefulWidget {
   const PasswordTextField({
     super.key,
     required this.hintText,
+    required this.labelText,
     required this.controller,
     required this.backgroundColor,
     required this.borderColor,
@@ -36,6 +38,7 @@ class _PasswordTextFieldState extends State<PasswordTextField> {
             fontSize: AppFontSizes.large16, decoration: TextDecoration.none),
         decoration: InputDecoration(
             hintText: widget.hintText,
+            labelText: widget.labelText,
             enabledBorder: OutlineInputBorder(
               borderSide: BorderSide(color: widget.borderColor, width: 0.5),
               borderRadius: BorderRadius.circular(15),
