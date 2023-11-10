@@ -42,6 +42,10 @@ class _RegisterUserInformationScreenState
   final String nextButtonText = 'Suivant';
   final String cityNotFoundText = 'Ville non trouvée';
   final String cityNotSelectedText = 'Veuillez sélectionner une ville';
+  final String universityNotSelectedText =
+      'Veuillez sélectionner une université';
+  final String universityNotFound = 'Votre université n\'a pas été trouvée';
+  final String universityErrorText = 'Une erreur est survenue';
   final String cityErrorText = 'Une erreur est survenue';
   final String postalCodeErrorText = 'Une erreur est survenue';
   final String postalCodeNotFoundText =
@@ -141,6 +145,7 @@ class _RegisterUserInformationScreenState
   Widget buildCityTextField() {
     return AutoCompleteTextField<CityData>(
       controller: cityController,
+      labelText: cityLabelText,
       hintText: cityHintText,
       backgroundColor: AppColors.white,
       borderColor: AppColors.secondaryColor,
@@ -149,7 +154,7 @@ class _RegisterUserInformationScreenState
         return await _registerUserInformationService
             .fetchCitiesFromAPI(pattern);
       },
-      errorText: cityErrorText,
+      errorText: universityErrorText,
       notFoundText: cityNotFoundText,
       noItemSelectedText: cityNotSelectedText,
       itemBuilder: (suggestion) {
@@ -162,7 +167,7 @@ class _RegisterUserInformationScreenState
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 25.0),
       child: CustomDropdownSearch(
-        hintText: postalCodeHintText,
+        labelText: postalCodeLabelText,
         backgroundColor: AppColors.white,
         borderColor: AppColors.secondaryColor,
         focusedBorderColor: AppColors.secondaryColor,
@@ -189,10 +194,10 @@ class _RegisterUserInformationScreenState
         },
         emptyBuilder: (context, reload) {
           return Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 2.0, vertical: 8),
+            padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 8),
             child: Text(postalCodeNotFoundText,
                 style: const TextStyle(
-                    fontSize: AppFontSizes.large16,
+                    fontSize: AppFontSizes.medium,
                     color: AppColors.dangerColor,
                     decoration: TextDecoration.none)),
           );
@@ -211,13 +216,45 @@ class _RegisterUserInformationScreenState
   }
 
   Widget buildUniversityTextField() {
-    return ClassicTextField(
-      hintText: universityHintText,
-      labelText: universityLabelText,
-      controller: universityController,
-      backgroundColor: AppColors.white,
-      focusedBorderColor: AppColors.secondaryColor,
-      borderColor: AppColors.secondaryColor,
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 25.0),
+      child: CustomDropdownSearch(
+        labelText: universityLabelText,
+        backgroundColor: AppColors.white,
+        borderColor: AppColors.secondaryColor,
+        focusedBorderColor: AppColors.secondaryColor,
+        asyncItems: (String filter) =>
+            _registerUserInformationService.fetchUniversityData(filter),
+        validator: (value) {
+          if (value == null || value.isEmpty) {
+            return universityNotSelectedText;
+          }
+          return value;
+        },
+        onChanged: (String? selectedItem) {
+          userData.university = selectedItem ?? '';
+          return null;
+        },
+        errorBuilder: (context, universityErrorText, reload) {
+          return Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Text(universityErrorText,
+                style: const TextStyle(
+                    color: AppColors.dangerColor,
+                    decoration: TextDecoration.none)),
+          );
+        },
+        emptyBuilder: (context, reload) {
+          return Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 8),
+            child: Text(universityNotFound,
+                style: const TextStyle(
+                    fontSize: AppFontSizes.medium,
+                    color: AppColors.dangerColor,
+                    decoration: TextDecoration.none)),
+          );
+        },
+      ),
     );
   }
 

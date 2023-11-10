@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 
 class CustomDropdownSearch<T> extends StatelessWidget {
   final Future<List<String>> Function(String)? asyncItems;
-  final String hintText;
+  final String labelText;
   final Color backgroundColor;
   final Color borderColor;
   final Color? shadowColor;
@@ -15,7 +15,7 @@ class CustomDropdownSearch<T> extends StatelessWidget {
 
   const CustomDropdownSearch({
     super.key,
-    required this.hintText,
+    required this.labelText,
     required this.backgroundColor,
     required this.borderColor,
     required this.focusedBorderColor,
@@ -39,7 +39,7 @@ class CustomDropdownSearch<T> extends StatelessWidget {
       ),
       dropdownDecoratorProps: DropDownDecoratorProps(
         dropdownSearchDecoration: InputDecoration(
-          labelText: hintText,
+          labelText: labelText,
           border: OutlineInputBorder(
             borderRadius: const BorderRadius.all(Radius.circular(15)),
             borderSide: BorderSide(
@@ -71,7 +71,6 @@ class CustomDropdownSearch<T> extends StatelessWidget {
               color: borderColor,
             ),
           ),
-          hintText: hintText,
         ),
       ),
       popupProps: PopupPropsMultiSelection.menu(

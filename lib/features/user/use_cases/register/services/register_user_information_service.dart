@@ -3,10 +3,10 @@ import 'dart:math';
 
 import 'package:dio/dio.dart';
 import 'package:english_words/english_words.dart';
-import 'package:stud_advice/features/user/models/university_data.dart';
 
 import '../../../../../common/conf/injection_container.dart';
 import '../../../models/city_data.dart';
+import '../../../models/university_data.dart';
 
 class RegisterUserInformationService {
   final _dio = locator<Dio>();
@@ -69,15 +69,16 @@ class RegisterUserInformationService {
     }
   }
 
-  Future<List<UniversityData>> fetchUniversityData(String select) async {
+  Future<List<String>> fetchUniversityData(String filter) async {
     List<UniversityData> allResults = [];
     int totalCount = 0;
     int offset = 0;
     int limit = 100;
 
     do {
+      //where=champ_recherche%20like%20%22$filter%22&
       final universityApiUri = Uri.parse(
-          '/api/explore/v2.1/catalog/datasets/fr-esr-principaux-etablissements-enseignement-superieur/records?select=$select&where=champ_recherche%20like%22lyon%22&limit=$limit&offset=$offset');
+          'https://data.enseignementsup-recherche.gouv.fr/api/explore/v2.1/catalog/datasets/fr-esr-principaux-etablissements-enseignement-superieur/records?limit=$limit&offset=$offset');
       final response = await _dio.get(universityApiUri.toString());
 
       if (response.statusCode == HttpStatus.ok) {
@@ -92,6 +93,6 @@ class RegisterUserInformationService {
       offset += limit;
     } while (allResults.length < totalCount);
 
-    return allResults;
+    return allResults.map((university) => university.uoLib ?? '').toList();
   }
 }

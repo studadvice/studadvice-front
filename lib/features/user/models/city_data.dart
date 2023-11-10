@@ -48,6 +48,6 @@ class CityData {
 
   @override
   String toString() {
-    return nom ?? '';
+    return '$nom';
   }
 }

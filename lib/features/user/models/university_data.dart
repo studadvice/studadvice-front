@@ -55,4 +55,9 @@ class UniversityData {
     data['uucr_nom'] = uucrNom;
     return data;
   }
+
+  @override
+  String toString() {
+    return '$uoLib';
+  }
 }

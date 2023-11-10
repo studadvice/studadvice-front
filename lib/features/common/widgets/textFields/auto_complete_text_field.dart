@@ -8,6 +8,7 @@ class AutoCompleteTextField<T> extends StatelessWidget {
   // HINT Please be aware that the type T must have implemented the toString() method in order to be displayed correctly in the controller when selected.
   final TextEditingController controller;
   final String hintText;
+  final String labelText;
   final Color backgroundColor;
   final Color borderColor;
   final Color focusedBorderColor;
@@ -21,6 +22,7 @@ class AutoCompleteTextField<T> extends StatelessWidget {
   AutoCompleteTextField({
     required this.controller,
     required this.hintText,
+    required this.labelText,
     required this.backgroundColor,
     required this.borderColor,
     required this.focusedBorderColor,
@@ -38,6 +40,8 @@ class AutoCompleteTextField<T> extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 25.0),
       child: TypeAheadFormField<T>(
           textFieldConfiguration: TextFieldConfiguration(
+            scrollPadding: EdgeInsets.symmetric(
+                vertical: MediaQuery.of(context).viewInsets.bottom),
             controller: controller,
             style: const TextStyle(
               fontSize: AppFontSizes.large16,
@@ -45,6 +49,7 @@ class AutoCompleteTextField<T> extends StatelessWidget {
             ),
             decoration: InputDecoration(
               hintText: hintText,
+              labelText: labelText,
               enabledBorder: OutlineInputBorder(
                 borderSide: BorderSide(color: borderColor, width: 0.5),
                 borderRadius: BorderRadius.circular(15),
@@ -99,6 +104,11 @@ class AutoCompleteTextField<T> extends StatelessWidget {
           suggestionsBoxDecoration: SuggestionsBoxDecoration(
             borderRadius: BorderRadius.circular(15),
             color: backgroundColor,
+            scrollbarThumbAlwaysVisible: false,
+            scrollbarTrackAlwaysVisible: false,
+            constraints: const BoxConstraints(
+              minHeight: 200,
+            ),
           )),
     );
   }
