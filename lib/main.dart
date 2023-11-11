@@ -2,11 +2,10 @@ import 'package:country_picker/country_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:stud_advice/common/chore/supported_locales.dart';
-
-import 'common/chore/app_colors.dart';
-import 'common/conf/injection_container.dart';
-import 'common/conf/routes_configuration.dart';
+import 'package:stud_advice/src/common/chore/app_colors.dart';
+import 'package:stud_advice/src/common/chore/supported_locales.dart';
+import 'package:stud_advice/src/common/conf/injection_container.dart';
+import 'package:stud_advice/src/common/conf/routes_configuration.dart';
 
 void main() {
   setupDependenciesInjection();
