@@ -47,6 +47,8 @@ class RegisterUserInformationService {
 
   Future<List<String>> fetchPostalCodesFromApi(String? cityName) async {
     try {
+      if (cityName == '') return [];
+
       final cityApiUri = Uri.parse(
           'https://geo.api.gouv.fr/communes?nom=$cityName&boost=population');
       final response = await _dio.get(cityApiUri.toString());
@@ -68,30 +70,29 @@ class RegisterUserInformationService {
     }
   }
 
-  Future<List<String>> fetchUniversityData(String filter) async {
+  Future<List<String>> fetchUniversityData() async {
     List<UniversityData> allResults = [];
     int totalCount = 0;
     int offset = 0;
     int limit = 100;
+    try {
+      do {
+        //where=champ_recherche%20like%20%22$filter%22&
+        final universityApiUri = Uri.parse(
+            'https://data.enseignementsup-recherche.gouv.fr/api/explore/v2.1/catalog/datasets/fr-esr-principaux-etablissements-enseignement-superieur/records?limit=$limit&offset=$offset');
+        final response = await _dio.get(universityApiUri.toString());
 
-    do {
-      //where=champ_recherche%20like%20%22$filter%22&
-      final universityApiUri = Uri.parse(
-          'https://data.enseignementsup-recherche.gouv.fr/api/explore/v2.1/catalog/datasets/fr-esr-principaux-etablissements-enseignement-superieur/records?limit=$limit&offset=$offset');
-      final response = await _dio.get(universityApiUri.toString());
-
-      if (response.statusCode == HttpStatus.ok) {
-        final data = response.data;
-        final universityData = UniversityResults.fromJson(data);
-        allResults.addAll(universityData.results ?? []);
-        totalCount = universityData.totalCount ?? 0;
-      } else {
-        throw Exception('Failed to load university data');
-      }
-
-      offset += limit;
-    } while (allResults.length < totalCount);
-
-    return allResults.map((university) => university.uoLib ?? '').toList();
+        if (response.statusCode == HttpStatus.ok) {
+          final data = response.data;
+          final universityData = UniversityResults.fromJson(data);
+          allResults.addAll(universityData.results ?? []);
+          totalCount = universityData.totalCount ?? 0;
+          offset += limit;
+        }
+      } while (allResults.length < totalCount);
+      return allResults.map((university) => university.uoLib ?? '').toList();
+    } catch (e) {
+      throw Exception('Failed to load university data');
+    }
   }
 }

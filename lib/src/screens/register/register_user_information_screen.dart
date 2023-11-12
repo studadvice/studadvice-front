@@ -44,7 +44,7 @@ class _RegisterUserInformationScreenState
   final String cityNotSelectedText = 'Veuillez sélectionner une ville';
   final String universityNotSelectedText =
       'Veuillez sélectionner une université';
-  final String universityNotFound = 'Votre université n\'a pas été trouvée';
+  final String universityNotFound = 'Aucune université trouvée';
   final String universityErrorText = 'Une erreur est survenue';
   final String cityErrorText = 'Une erreur est survenue';
   final String postalCodeErrorText = 'Une erreur est survenue';
@@ -62,6 +62,7 @@ class _RegisterUserInformationScreenState
   final TextEditingController universityController = TextEditingController();
   final TextEditingController formationController = TextEditingController();
   final TextEditingController countryController = TextEditingController();
+  final TextEditingController postalCodeController = TextEditingController();
 
   // Services.
   final RegisterUserInformationService _registerUserInformationService =
@@ -69,6 +70,11 @@ class _RegisterUserInformationScreenState
 
   // Model data.
   late UserData userData;
+
+  @override
+  void initState() {
+    super.initState();
+  }
 
   @override
   void dispose() {
@@ -79,6 +85,7 @@ class _RegisterUserInformationScreenState
     universityController.dispose();
     formationController.dispose();
     countryController.dispose();
+    postalCodeController.dispose();
     super.dispose();
   }
 
@@ -106,26 +113,27 @@ class _RegisterUserInformationScreenState
         children: [
           SizedBox(height: MediaQuery.of(context).size.height * 0.1),
           Center(
-              child: Column(
-            children: [
-              const SizedBox(height: 10),
-              buildPseudoTextField(),
-              const SizedBox(height: 10),
-              buildCityTextField(),
-              const SizedBox(height: 10),
-              buildPostalCodeDropdown(),
-              const SizedBox(height: 10),
-              buildBirthDateTextField(),
-              const SizedBox(height: 10),
-              buildUniversityTextField(),
-              const SizedBox(height: 10),
-              buildFormationTextField(),
-              const SizedBox(height: 10),
-              buildCountryTextField(),
-              const SizedBox(height: 50),
-              buildNextButton(),
-            ],
-          )),
+            child: Column(
+              children: [
+                const SizedBox(height: 10),
+                buildPseudoTextField(),
+                const SizedBox(height: 10),
+                buildCityTextField(),
+                const SizedBox(height: 10),
+                buildPostalCodeDropdown(),
+                const SizedBox(height: 10),
+                buildBirthDateTextField(),
+                const SizedBox(height: 10),
+                buildUniversityTextField(),
+                const SizedBox(height: 10),
+                buildFormationTextField(),
+                const SizedBox(height: 10),
+                buildCountryTextField(),
+                const SizedBox(height: 50),
+                buildNextButton(),
+              ],
+            ),
+          )
         ],
       ),
     );
@@ -163,6 +171,55 @@ class _RegisterUserInformationScreenState
     );
   }
 
+  Widget buildUniversityTextField() {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 25.0),
+      child: CustomDropdownSearch(
+        labelText: universityLabelText,
+        backgroundColor: AppColors.white,
+        borderColor: AppColors.secondaryColor,
+        focusedBorderColor: AppColors.secondaryColor,
+        asyncItems: (String filter) => _registerUserInformationService
+            .fetchUniversityData()
+            .then((universityData) {
+          return universityData
+              .where((university) =>
+                  university.toLowerCase().contains(filter.toLowerCase()))
+              .toList();
+        }),
+        validator: (value) {
+          if (value == null || value.isEmpty) {
+            return universityNotSelectedText;
+          }
+          return value;
+        },
+        onChanged: (String? selectedItem) {
+          universityController.text = selectedItem ?? '';
+          return null;
+        },
+        errorBuilder: (context, universityErrorText, reload) {
+          return Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Text(universityErrorText,
+                style: const TextStyle(
+                    color: AppColors.dangerColor,
+                    decoration: TextDecoration.none)),
+          );
+        },
+        emptyBuilder: (context, reload) {
+          return Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 8),
+            child: Text(universityNotFound,
+                style: const TextStyle(
+                    fontSize: AppFontSizes.medium,
+                    color: AppColors.dangerColor,
+                    decoration: TextDecoration.none)),
+          );
+        },
+      ),
+    );
+  }
+
   Widget buildPostalCodeDropdown() {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 25.0),
@@ -180,7 +237,7 @@ class _RegisterUserInformationScreenState
           return value;
         },
         onChanged: (String? selectedItem) {
-          userData.postalCode = (selectedItem ?? '') as int;
+          postalCodeController.text = selectedItem ?? '';
           return null;
         },
         errorBuilder: (context, postalCodeErrorText, reload) {
@@ -215,49 +272,6 @@ class _RegisterUserInformationScreenState
     );
   }
 
-  Widget buildUniversityTextField() {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 25.0),
-      child: CustomDropdownSearch(
-        labelText: universityLabelText,
-        backgroundColor: AppColors.white,
-        borderColor: AppColors.secondaryColor,
-        focusedBorderColor: AppColors.secondaryColor,
-        asyncItems: (String filter) =>
-            _registerUserInformationService.fetchUniversityData(filter),
-        validator: (value) {
-          if (value == null || value.isEmpty) {
-            return universityNotSelectedText;
-          }
-          return value;
-        },
-        onChanged: (String? selectedItem) {
-          userData.university = selectedItem ?? '';
-          return null;
-        },
-        errorBuilder: (context, universityErrorText, reload) {
-          return Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Text(universityErrorText,
-                style: const TextStyle(
-                    color: AppColors.dangerColor,
-                    decoration: TextDecoration.none)),
-          );
-        },
-        emptyBuilder: (context, reload) {
-          return Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 8),
-            child: Text(universityNotFound,
-                style: const TextStyle(
-                    fontSize: AppFontSizes.medium,
-                    color: AppColors.dangerColor,
-                    decoration: TextDecoration.none)),
-          );
-        },
-      ),
-    );
-  }
-
   Widget buildFormationTextField() {
     return ClassicTextField(
       hintText: formationHintText,
@@ -284,7 +298,23 @@ class _RegisterUserInformationScreenState
         textColor: AppColors.white,
         backgroundColor: AppColors.blue,
         onPressed: () {
-          // TODO add the logic to connect the user
+          debugPrint("postal code : ${postalCodeController.text}");
+          userData = UserData(
+            email: "",
+            // TODO récupérer l'email de l'utilisateur
+            passwordHash: "",
+            // TODO récupérer le hash du mot de passe
+            pseudo: pseudoController.text,
+            birthDate: birthDateController.text,
+            city: cityController.text,
+            university: universityController.text,
+            formation: formationController.text,
+            country: countryController.text,
+            postalCode: int.parse(postalCodeController.text),
+          );
+          debugPrint(
+            userData.toJson().toString(),
+          );
         });
   }
 }

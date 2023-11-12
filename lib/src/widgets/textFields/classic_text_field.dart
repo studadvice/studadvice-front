@@ -11,6 +11,7 @@ class ClassicTextField extends StatefulWidget {
   final Color focusedBorderColor;
   final TextInputType? keyboardType;
   final List<TextInputFormatter>? inputFormatters;
+  final VoidCallback? onTap;
 
   const ClassicTextField({
     super.key,
@@ -22,6 +23,7 @@ class ClassicTextField extends StatefulWidget {
     this.labelText,
     this.keyboardType,
     this.inputFormatters,
+    this.onTap,
   });
 
   @override
@@ -87,6 +89,7 @@ class _ClassicTextFieldState extends State<ClassicTextField> {
                 )
               : null,
         ),
+        onTap: widget.onTap,
       ),
     );
   }

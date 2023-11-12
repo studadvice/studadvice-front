@@ -30,6 +30,7 @@ class CustomDropdownSearch<T> extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return DropdownSearch<String>(
+      compareFn: (item, selectedItem) => item == selectedItem,
       asyncItems: asyncItems,
       dropdownBuilder: (context, selectedItem) {
         return Text(selectedItem ?? '');

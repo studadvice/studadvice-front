@@ -27,10 +27,10 @@ class _DefaultConnectionButtonState extends State<DefaultConnectionButton> {
       onPressed: widget.onPressed,
       style: ElevatedButton.styleFrom(
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(15),
+          borderRadius: BorderRadius.circular(25),
         ),
         backgroundColor: widget.backgroundColor,
-        padding: const EdgeInsets.symmetric(horizontal: 120),
+        padding: const EdgeInsets.symmetric(horizontal: 120, vertical: 15),
       ),
       child: Text(
         widget.text,
