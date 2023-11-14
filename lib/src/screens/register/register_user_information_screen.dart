@@ -253,45 +253,72 @@ class _RegisterUserInformationScreenState
     );
   }
 
+  List<DropdownMenuItem<String>> buildUniversityDataItems(
+      List<String> universityData) {
+    if (!universityData.contains(defaultUniversityChoice)) {
+      universityData.insert(0, defaultUniversityChoice);
+    }
+    return universityData.map((element) {
+      return DropdownMenuItem<String>(
+        value: element,
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Text(
+            element,
+            style: const TextStyle(
+              fontSize: AppFontSizes.medium,
+            ),
+          ),
+        ),
+      );
+    }).toList();
+  }
+
   Widget buildUniversityTextField(List<String> universityData) {
     if (!universityData.contains(defaultUniversityChoice)) {
       universityData.insert(0, defaultUniversityChoice);
     }
-    // Add the default choice to the list of universities.
-    List<DropdownMenuItem<String>> universityDataItems = [];
-    for (final element in universityData) {
-      universityDataItems.add(DropdownMenuItem<String>(
-        value: element,
-        child: Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Text(
-              element,
-              style: const TextStyle(
-                fontSize: AppFontSizes.medium,
-              ),
-            )),
-      ));
-    }
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 15.0),
-      child: SearchChoicesField(
-        // HINT: A modal can also be used.
-        hintText: universityHintText,
-        searchHintText: universitySearchHintText,
-        labelText: universitySearchHintText,
-        inputDecorationBorderColor: AppColors.secondaryColor,
-        inputDecorationFocusedBorderColor: AppColors.secondaryColor,
-        menuBackgroundColor: AppColors.white,
-        itemList: universityDataItems,
-        textColor: AppColors.black,
-        onChanged: (String? selectedItem) {
-          universityController.text = selectedItem ?? '';
-        },
-        closeText: universityDialogCloseText,
-        fieldBackgroundColor: AppColors.white,
-      ),
+    return CustomSelectionModal(
+      labelText: universityHintText,
+      hintText: universityHintText,
+      itemsList: universityData,
+      height: MediaQuery.of(context).size.height * 0.8,
+      controller: universityController,
+      defaultChoice: defaultUniversityChoice,
+      onItemSelected: (String selectedItem) {
+        universityController.text = selectedItem;
+      },
+      searchHintText: universitySearchHintText,
     );
   }
+
+  // Widget buildUniversityTextField(List<String> universityData) {
+  //   // Add the default choice to the list of universities.
+  //   if (!universityData.contains(defaultUniversityChoice)) {
+  //     universityData.insert(0, defaultUniversityChoice);
+  //   }
+  //   List<DropdownMenuItem<String>> universityDataItems =
+  //       buildUniversityDataItems(universityData);
+  //   return Padding(
+  //     padding: const EdgeInsets.symmetric(horizontal: 15.0),
+  //     child: SearchChoicesField(
+  //       // HINT: A modal can also be used.
+  //       hintText: universityHintText,
+  //       searchHintText: universitySearchHintText,
+  //       labelText: universitySearchHintText,
+  //       inputDecorationBorderColor: AppColors.secondaryColor,
+  //       inputDecorationFocusedBorderColor: AppColors.secondaryColor,
+  //       menuBackgroundColor: AppColors.white,
+  //       itemList: universityDataItems,
+  //       textColor: AppColors.black,
+  //       onChanged: (String? selectedItem) {
+  //         universityController.text = selectedItem ?? '';
+  //       },
+  //       closeText: universityDialogCloseText,
+  //       fieldBackgroundColor: AppColors.white,
+  //     ),
+  //   );
+  // }
 
   Widget buildFormationTextField() {
     return ClassicTextField(

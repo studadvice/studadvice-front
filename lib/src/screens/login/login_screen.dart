@@ -87,6 +87,7 @@ class _LoginScreenState extends State<LoginScreen> {
         hintText: emailOrPseudoHintText,
         labelText: emailOrPseudoLabelText,
         controller: emailOrPseudoController,
+        autofillHints: [AutofillHints.email, AutofillHints.username],
         keyboardType: TextInputType.emailAddress,
         backgroundColor: AppColors.white,
         focusedBorderColor: AppColors.secondaryColor,

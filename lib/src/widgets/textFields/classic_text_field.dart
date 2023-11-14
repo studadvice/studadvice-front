@@ -12,6 +12,9 @@ class ClassicTextField extends StatefulWidget {
   final TextInputType? keyboardType;
   final List<TextInputFormatter>? inputFormatters;
   final VoidCallback? onTap;
+  final Function(dynamic)? onChanged;
+  final List<String>? autofillHints;
+  final Icon? suffixIcon;
 
   const ClassicTextField({
     super.key,
@@ -24,6 +27,9 @@ class ClassicTextField extends StatefulWidget {
     this.keyboardType,
     this.inputFormatters,
     this.onTap,
+    this.autofillHints,
+    this.suffixIcon,
+    this.onChanged,
   });
 
   @override
@@ -87,9 +93,16 @@ class _ClassicTextFieldState extends State<ClassicTextField> {
                     _showClearButton = false;
                   },
                 )
-              : null,
+              : widget.suffixIcon != null
+                  ? IconButton(
+                      icon: widget.suffixIcon!,
+                      onPressed: widget.onTap,
+                    )
+                  : null,
         ),
         onTap: widget.onTap,
+        autofillHints: widget.autofillHints,
+        readOnly: widget.onTap != null,
       ),
     );
   }
