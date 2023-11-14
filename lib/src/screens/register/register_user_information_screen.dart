@@ -235,6 +235,15 @@ class _RegisterUserInformationScreenState
     );
   }
 
+  Widget buildCountryTextField() {
+    return CountryPickerField(
+        controller: countryController,
+        hintText: countryHintText,
+        labelText: countryLabelText,
+        focusedBorderColor: AppColors.secondaryColor,
+        borderColor: AppColors.secondaryColor);
+  }
+
   Widget buildBirthDateTextField() {
     return DatePickerField(
       hintText: birthDateHintText,
@@ -266,6 +275,7 @@ class _RegisterUserInformationScreenState
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 15.0),
       child: SearchChoicesField(
+        // HINT: A modal can also be used.
         hintText: universityHintText,
         searchHintText: universitySearchHintText,
         labelText: universitySearchHintText,
@@ -292,15 +302,6 @@ class _RegisterUserInformationScreenState
       focusedBorderColor: AppColors.secondaryColor,
       borderColor: AppColors.secondaryColor,
     );
-  }
-
-  Widget buildCountryTextField() {
-    return CountryPickerField(
-        controller: countryController,
-        hintText: countryHintText,
-        labelText: countryLabelText,
-        focusedBorderColor: AppColors.secondaryColor,
-        borderColor: AppColors.secondaryColor);
   }
 
   Widget buildNextButton() {
