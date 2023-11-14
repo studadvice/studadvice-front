@@ -501,6 +501,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.2.7"
+  search_choices:
+    dependency: "direct main"
+    description:
+      name: search_choices
+      sha256: "8950c3bf8b61da3b78045ec79c72d9756d20c2a9ec2ed2c9a1fb81c6649eeb80"
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.2.7"
   select_dialog:
     dependency: "direct main"
     description:

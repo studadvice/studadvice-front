@@ -7,6 +7,7 @@ import 'package:stud_advice/src/models/user/user_data.dart';
 import 'package:stud_advice/src/services/register/register_user_information_service.dart';
 import 'package:stud_advice/src/widgets/buttons/default_connection_button.dart';
 import 'package:stud_advice/src/widgets/dropdowns/custom_dropdown_button.dart';
+import 'package:stud_advice/src/widgets/dropdowns/search_choices_field.dart';
 import 'package:stud_advice/src/widgets/pickers/country_picker_field.dart';
 import 'package:stud_advice/src/widgets/pickers/date_picker_field.dart';
 import 'package:stud_advice/src/widgets/textFields/auto_complete_text_field.dart';
@@ -34,7 +35,8 @@ class _RegisterUserInformationScreenState
   final String cityHintText = 'Ville';
   final String cityLabelText = 'Ville';
   final String universityHintText = 'Université';
-  final String universityLabelText = 'Université';
+  final String universityDialogCloseText = 'Fermer';
+  final String universitySearchHintText = 'Rechercher une université';
   final String countryHintText = 'Pays d\'origine';
   final String countryLabelText = 'Pays d\'origine';
   final String formationHintText = 'Formation';
@@ -45,11 +47,12 @@ class _RegisterUserInformationScreenState
   final String universityNotSelectedText =
       'Veuillez sélectionner une université';
   final String universityNotFound = 'Aucune université trouvée';
+  final String defaultUniversityChoice = 'Autre';
   final String universityErrorText = 'Une erreur est survenue';
   final String cityErrorText = 'Une erreur est survenue';
   final String postalCodeErrorText = 'Une erreur est survenue';
   final String postalCodeNotFoundText =
-      'Code postal non trouvé, veuillez saisir une ville valide';
+      'Code postal non trouvé, veuillez sélectionner une ville.';
   final String postalCodeNotSelectedText =
       'Veuillez sélectionner un code postal';
 
@@ -70,10 +73,12 @@ class _RegisterUserInformationScreenState
 
   // Model data.
   late UserData userData;
+  late Future<List<String>> universityData;
 
   @override
   void initState() {
     super.initState();
+    universityData = _registerUserInformationService.fetchUniversityData();
   }
 
   @override
@@ -112,28 +117,44 @@ class _RegisterUserInformationScreenState
         // Wrap in a ListView to avoid overflow when the keyboard is displayed.
         children: [
           SizedBox(height: MediaQuery.of(context).size.height * 0.1),
-          Center(
-            child: Column(
-              children: [
-                const SizedBox(height: 10),
-                buildPseudoTextField(),
-                const SizedBox(height: 10),
-                buildCityTextField(),
-                const SizedBox(height: 10),
-                buildPostalCodeDropdown(),
-                const SizedBox(height: 10),
-                buildBirthDateTextField(),
-                const SizedBox(height: 10),
-                buildUniversityTextField(),
-                const SizedBox(height: 10),
-                buildFormationTextField(),
-                const SizedBox(height: 10),
-                buildCountryTextField(),
-                const SizedBox(height: 50),
-                buildNextButton(),
-              ],
-            ),
-          )
+          FutureBuilder<List<String>>(
+              future: universityData,
+              builder: (context, snapshot) {
+                if (snapshot.hasData) {
+                  return buildRegisterUserInformationForm(snapshot.data!);
+                } else {
+                  return const Center(
+                      child: CircularProgressIndicator(
+                    color: AppColors.secondaryColor,
+                    strokeWidth: 5,
+                  ));
+                }
+              })
+        ],
+      ),
+    );
+  }
+
+  Widget buildRegisterUserInformationForm(List<String> universityData) {
+    return Center(
+      child: Column(
+        children: [
+          const SizedBox(height: 10),
+          buildPseudoTextField(),
+          const SizedBox(height: 10),
+          buildCityTextField(),
+          const SizedBox(height: 10),
+          buildPostalCodeDropdown(),
+          const SizedBox(height: 10),
+          buildCountryTextField(),
+          const SizedBox(height: 10),
+          buildBirthDateTextField(),
+          const SizedBox(height: 10),
+          buildUniversityTextField(universityData),
+          const SizedBox(height: 10),
+          buildFormationTextField(),
+          const SizedBox(height: 50),
+          buildNextButton(),
         ],
       ),
     );
@@ -168,55 +189,6 @@ class _RegisterUserInformationScreenState
       itemBuilder: (suggestion) {
         return Text(suggestion.nom ?? '');
       },
-    );
-  }
-
-  Widget buildUniversityTextField() {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 25.0),
-      child: CustomDropdownSearch(
-        labelText: universityLabelText,
-        backgroundColor: AppColors.white,
-        borderColor: AppColors.secondaryColor,
-        focusedBorderColor: AppColors.secondaryColor,
-        asyncItems: (String filter) => _registerUserInformationService
-            .fetchUniversityData()
-            .then((universityData) {
-          return universityData
-              .where((university) =>
-                  university.toLowerCase().contains(filter.toLowerCase()))
-              .toList();
-        }),
-        validator: (value) {
-          if (value == null || value.isEmpty) {
-            return universityNotSelectedText;
-          }
-          return value;
-        },
-        onChanged: (String? selectedItem) {
-          universityController.text = selectedItem ?? '';
-          return null;
-        },
-        errorBuilder: (context, universityErrorText, reload) {
-          return Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Text(universityErrorText,
-                style: const TextStyle(
-                    color: AppColors.dangerColor,
-                    decoration: TextDecoration.none)),
-          );
-        },
-        emptyBuilder: (context, reload) {
-          return Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 8),
-            child: Text(universityNotFound,
-                style: const TextStyle(
-                    fontSize: AppFontSizes.medium,
-                    color: AppColors.dangerColor,
-                    decoration: TextDecoration.none)),
-          );
-        },
-      ),
     );
   }
 
@@ -269,6 +241,45 @@ class _RegisterUserInformationScreenState
       controller: birthDateController,
       focusedBorderColor: AppColors.secondaryColor,
       borderColor: AppColors.secondaryColor,
+    );
+  }
+
+  Widget buildUniversityTextField(List<String> universityData) {
+    if (!universityData.contains(defaultUniversityChoice)) {
+      universityData.insert(0, defaultUniversityChoice);
+    }
+    // Add the default choice to the list of universities.
+    List<DropdownMenuItem<String>> universityDataItems = [];
+    for (final element in universityData) {
+      universityDataItems.add(DropdownMenuItem<String>(
+        value: element,
+        child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Text(
+              element,
+              style: const TextStyle(
+                fontSize: AppFontSizes.medium,
+              ),
+            )),
+      ));
+    }
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 15.0),
+      child: SearchChoicesField(
+        hintText: universityHintText,
+        searchHintText: universitySearchHintText,
+        labelText: universitySearchHintText,
+        inputDecorationBorderColor: AppColors.secondaryColor,
+        inputDecorationFocusedBorderColor: AppColors.secondaryColor,
+        menuBackgroundColor: AppColors.white,
+        itemList: universityDataItems,
+        textColor: AppColors.black,
+        onChanged: (String? selectedItem) {
+          universityController.text = selectedItem ?? '';
+        },
+        closeText: universityDialogCloseText,
+        fieldBackgroundColor: AppColors.white,
+      ),
     );
   }
 
