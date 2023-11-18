@@ -15,6 +15,7 @@ class ClassicTextField extends StatefulWidget {
   final Function(dynamic)? onChanged;
   final List<String>? autofillHints;
   final Icon? suffixIcon;
+  final String? Function(String?)? validator;
 
   const ClassicTextField({
     super.key,
@@ -30,6 +31,7 @@ class ClassicTextField extends StatefulWidget {
     this.autofillHints,
     this.suffixIcon,
     this.onChanged,
+    this.validator,
   });
 
   @override
@@ -68,8 +70,9 @@ class _ClassicTextFieldState extends State<ClassicTextField> {
 
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 25.0),
-      child: TextField(
+      child: TextFormField(
         controller: widget.controller,
+        validator: widget.validator,
         keyboardType: widget.keyboardType,
         inputFormatters: widget.inputFormatters ?? [],
         style: const TextStyle(
@@ -83,6 +86,14 @@ class _ClassicTextFieldState extends State<ClassicTextField> {
           ),
           focusedBorder: OutlineInputBorder(
             borderSide: BorderSide(color: widget.focusedBorderColor, width: 1),
+            borderRadius: BorderRadius.circular(15),
+          ),
+          focusedErrorBorder: OutlineInputBorder(
+            borderSide: const BorderSide(color: Colors.red, width: 1),
+            borderRadius: BorderRadius.circular(15),
+          ),
+          errorBorder: OutlineInputBorder(
+            borderSide: const BorderSide(color: Colors.red, width: 1),
             borderRadius: BorderRadius.circular(15),
           ),
           suffixIcon: _showClearButton

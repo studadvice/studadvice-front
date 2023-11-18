@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:stud_advice/src/common/chore/app_colors.dart';
 import 'package:stud_advice/src/common/chore/app_fonts_sizes.dart';
+import 'package:stud_advice/src/common/chore/form_validator.dart';
 import 'package:stud_advice/src/screens/legal_conditions/legal_conditions_screen.dart';
 import 'package:stud_advice/src/screens/register/register_user_information_screen.dart';
 import 'package:stud_advice/src/widgets/buttons/default_connection_button.dart';
@@ -33,12 +34,16 @@ class _RegisterWithEmailScreenState extends State<RegisterWithEmailScreen> {
   final String legalConditionsButtonText = 'Voir les Termes et Conditions';
   final String acceptTermsAndConditionsText =
       'J\'accepte les conditions générales d\'utilisation';
+  final String acceptTermsAndConditionsErrorText =
+      'Veuillez accepter les termes et conditions';
 
   // Controllers for the text fields.
   final TextEditingController emailOrPseudoController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
   final TextEditingController confirmPasswordController =
       TextEditingController();
+
+  final _formKey = GlobalKey<FormState>();
 
   @override
   void dispose() {
@@ -59,44 +64,29 @@ class _RegisterWithEmailScreenState extends State<RegisterWithEmailScreen> {
             },
           ),
         ),
-        body: ListView(
-          // Wrap in a ListView to avoid overflow when the keyboard is displayed.
-          children: [
-            SizedBox(height: MediaQuery.of(context).size.height * 0.1),
-            Center(
-                child: Column(
-              children: [
-                const SizedBox(height: 10),
-                buildRegisterText(),
-                const SizedBox(height: 50),
-                buildEmailTextField(),
-                const SizedBox(height: 15),
-                buildPasswordTextField(),
-                const SizedBox(height: 15),
-                buildConfirmPasswordTextField(),
-                const SizedBox(height: 100),
-                buildTermsAndConditionsButton(),
-                buildTermsAndConditionsRow(),
-                const SizedBox(height: 5),
-                buildConnectionButton(),
-              ],
-            )),
-          ],
-        ),
+        body: SingleChildScrollView(
+            child: Form(
+          key: _formKey,
+          child: Column(
+            children: [
+              SizedBox(height: MediaQuery.of(context).size.height * 0.1),
+              const SizedBox(height: 10),
+              buildRegisterText(),
+              const SizedBox(height: 50),
+              buildEmailTextField(),
+              const SizedBox(height: 15),
+              buildPasswordTextField(),
+              const SizedBox(height: 15),
+              buildConfirmPasswordTextField(),
+              const SizedBox(height: 100),
+              buildTermsAndConditionsButton(),
+              buildTermsAndConditionsRow(),
+              const SizedBox(height: 5),
+              buildConnectionButton(),
+            ],
+          ),
+        )),
       );
-
-  Widget buildEmailTextField() {
-    return ClassicTextField(
-      // TODO add validator for the input fields
-      hintText: emailHintText,
-      labelText: emailLabelText,
-      controller: emailOrPseudoController,
-      backgroundColor: AppColors.white,
-      focusedBorderColor: AppColors.secondaryColor,
-      keyboardType: TextInputType.emailAddress,
-      borderColor: AppColors.secondaryColor,
-    );
-  }
 
   Widget buildRegisterText() {
     return Text(
@@ -109,8 +99,23 @@ class _RegisterWithEmailScreenState extends State<RegisterWithEmailScreen> {
     );
   }
 
+  Widget buildEmailTextField() {
+    return ClassicTextField(
+      validator: (value) => FormValidator.validateEmail(value),
+      hintText: emailHintText,
+      labelText: emailLabelText,
+      controller: emailOrPseudoController,
+      backgroundColor: AppColors.white,
+      focusedBorderColor: AppColors.secondaryColor,
+      keyboardType: TextInputType.emailAddress,
+      borderColor: AppColors.secondaryColor,
+    );
+  }
+
   Widget buildPasswordTextField() {
     return PasswordTextField(
+        // Password should be at least 8 characters long and contain at least one uppercase letter, one number and one special character.
+        validator: (value) => FormValidator.validatePassword(value),
         hintText: passwordHintText,
         labelText: passwordLabelText,
         controller: passwordController,
@@ -121,6 +126,8 @@ class _RegisterWithEmailScreenState extends State<RegisterWithEmailScreen> {
 
   Widget buildConfirmPasswordTextField() {
     return PasswordTextField(
+        validator: (value) => FormValidator.validateConfirmPassword(
+            passwordController.text, value),
         hintText: confirmPasswordHintText,
         labelText: confirmPasswordLabelText,
         controller: confirmPasswordController,
@@ -135,7 +142,20 @@ class _RegisterWithEmailScreenState extends State<RegisterWithEmailScreen> {
         textColor: AppColors.white,
         backgroundColor: AppColors.blue,
         onPressed: () {
-          // TODO add the logic to connect the user
+          if (!_agreeWithTermsAndConditions) {
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(
+                content: Text(acceptTermsAndConditionsErrorText),
+                duration: const Duration(seconds: 2),
+                backgroundColor: AppColors.dangerColor,
+                behavior: SnackBarBehavior.floating,
+              ),
+            );
+            return;
+          }
+          if (!_formKey.currentState!.validate()) {
+            return;
+          }
           Navigator.push(
               context,
               MaterialPageRoute(

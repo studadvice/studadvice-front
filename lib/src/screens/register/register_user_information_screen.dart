@@ -350,6 +350,7 @@ class _RegisterUserInformationScreenState
             formation: formationController.text,
             country: countryController.text,
             postalCode: int.parse(postalCodeController.text),
+            hasAcceptedTermsAndConditions: true,
           );
           debugPrint(
             userData.toJson().toString(),

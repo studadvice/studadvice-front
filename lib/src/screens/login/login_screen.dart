@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:stud_advice/src/common/chore/app_colors.dart';
 import 'package:stud_advice/src/common/chore/app_fonts_sizes.dart';
+import 'package:stud_advice/src/common/conf/injection_container.dart';
+import 'package:stud_advice/src/services/login/login_service.dart';
 import 'package:stud_advice/src/widgets/buttons/default_connection_button.dart';
 import 'package:stud_advice/src/widgets/buttons/login_social_button.dart';
 import 'package:stud_advice/src/widgets/dividers/divider_with_text.dart';
@@ -28,19 +30,27 @@ class _LoginScreenState extends State<LoginScreen> {
   final String rememberMeText = 'Se souvenir de moi';
   final String loginText = 'Se connecter';
   final String orContinueWithText = 'Ou continuer avec';
+  final String emailOrPseudoErrorText = 'Veuillez entrer votre email ou pseudo';
+  final String passwordErrorText = 'Veuillez entrer votre mot de passe';
 
   // State variables.
   bool _rememberMe = true;
 
+  // Service.
+  final loginService = locator<LoginService>();
+
   // Controllers for the text fields.
-  final TextEditingController emailOrPseudoController = TextEditingController();
-  final TextEditingController passwordController = TextEditingController();
+  final TextEditingController _emailOrPseudoController =
+      TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
+
+  final _formKey = GlobalKey<FormState>();
 
   @override
   void dispose() {
     // Dispose of the controllers when the widget is disposed.
-    emailOrPseudoController.dispose();
-    passwordController.dispose();
+    _emailOrPseudoController.dispose();
+    _passwordController.dispose();
     super.dispose();
   }
 
@@ -54,17 +64,16 @@ class _LoginScreenState extends State<LoginScreen> {
             },
           ),
         ),
-        body: ListView(
-          children: [
-            SizedBox(height: MediaQuery.of(context).size.height * 0.1),
-            Center(
-                child: Column(
+        body: SingleChildScrollView(
+          child: Form(
+            key: _formKey,
+            child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                const SizedBox(height: 10),
+                SizedBox(height: MediaQuery.of(context).size.height * 0.1),
                 buildWelcomeBackText(),
                 const SizedBox(height: 40),
-                buildEmailTextField(),
+                buildEmailOrPseudoTextField(),
                 const SizedBox(height: 15),
                 buildPasswordTextField(),
                 const SizedBox(height: 10),
@@ -76,17 +85,42 @@ class _LoginScreenState extends State<LoginScreen> {
                 const SizedBox(height: 10),
                 buildSocialLoginButtons(),
               ],
-            ))
-          ],
+            ),
+          ),
         ),
       );
 
-  Widget buildEmailTextField() {
+  String? validateEmailOrPseudo(String? value) {
+    if (value == null || value.isEmpty) {
+      return emailOrPseudoErrorText;
+    }
+
+    final emailRegExp = RegExp(r'^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$');
+    if (emailRegExp.hasMatch(value)) {
+      return null;
+    }
+
+    final pseudoRegExp = RegExp(r'^[a-zA-Z0-9_]+$');
+    if (pseudoRegExp.hasMatch(value)) {
+      return null;
+    }
+
+    return emailOrPseudoErrorText;
+  }
+
+  String? validatePassword(String? value) {
+    if (value == null || value.isEmpty) {
+      return passwordErrorText;
+    }
+    return null;
+  }
+
+  Widget buildEmailOrPseudoTextField() {
     return ClassicTextField(
-        // TODO add validator for the input fields
+        validator: (value) => validateEmailOrPseudo(value),
         hintText: emailOrPseudoHintText,
         labelText: emailOrPseudoLabelText,
-        controller: emailOrPseudoController,
+        controller: _emailOrPseudoController,
         autofillHints: [AutofillHints.email, AutofillHints.username],
         keyboardType: TextInputType.emailAddress,
         backgroundColor: AppColors.white,
@@ -96,10 +130,16 @@ class _LoginScreenState extends State<LoginScreen> {
 
   Widget buildPasswordTextField() {
     return PasswordTextField(
-        // TODO add validator for the input fields
+        validator: (value) {
+          if (value == null || value.isEmpty) {
+            return passwordErrorText;
+          }
+          return null;
+        },
         hintText: passwordHintText,
         labelText: passwordLabelText,
-        controller: passwordController,
+        controller: _passwordController,
+        autofillHints: [AutofillHints.password],
         backgroundColor: AppColors.white,
         focusedBorderColor: AppColors.secondaryColor,
         borderColor: AppColors.secondaryColor);
@@ -156,7 +196,16 @@ class _LoginScreenState extends State<LoginScreen> {
         textColor: AppColors.white,
         backgroundColor: AppColors.blue,
         onPressed: () {
-          // TODO add the logic to connect the user
+          if (_formKey.currentState!.validate()) {
+            String emailOrPseudo = _emailOrPseudoController.text;
+            String password = _passwordController.text;
+
+            if (emailOrPseudo.contains('@')) {
+              loginService.loginWithEmailAndPassword(emailOrPseudo, password);
+            } else {
+              loginService.loginWithPseudoAndPassword(emailOrPseudo, password);
+            }
+          }
         });
   }
 
@@ -169,7 +218,7 @@ class _LoginScreenState extends State<LoginScreen> {
           tileBackgroundColor: Colors.white,
           borderColor: AppColors.black26,
           onTap: () {
-            // TODO add the logic to connect the user with google
+            loginService.loginWithGoogleAccount();
           },
         ),
         const SizedBox(width: 10),
@@ -179,7 +228,7 @@ class _LoginScreenState extends State<LoginScreen> {
           borderColor: AppColors.black26,
           iconColor: AppColors.blueAccent,
           onTap: () {
-            // TODO add the logic to connect the user with facebook
+            loginService.loginWithFacebookAccount();
           },
         ),
         const SizedBox(width: 10),
@@ -188,7 +237,7 @@ class _LoginScreenState extends State<LoginScreen> {
           tileBackgroundColor: AppColors.white,
           borderColor: AppColors.black26,
           onTap: () {
-            // TODO add the logic to connect the user with apple
+            loginService.loginWithAppleAccount();
           },
         ),
         const SizedBox(width: 10),
@@ -197,7 +246,7 @@ class _LoginScreenState extends State<LoginScreen> {
           tileBackgroundColor: Colors.white,
           borderColor: AppColors.black26,
           onTap: () {
-            // TODO add the logic to connect the user with twitter
+            loginService.loginWithXAccount();
           },
         ),
       ],

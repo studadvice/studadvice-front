@@ -30,6 +30,7 @@ dependencies:
   awesome_dialog: ^3.1.0
   jiffy: ^6.2.1
   search_choices: ^2.2.7
+  get: ^4.6.6
 #  flutter_native_splash: ^2.3.5
 
 dev_dependencies:

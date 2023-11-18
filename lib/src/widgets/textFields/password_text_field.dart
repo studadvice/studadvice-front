@@ -8,6 +8,8 @@ class PasswordTextField extends StatefulWidget {
   final Color backgroundColor;
   final Color borderColor;
   final Color focusedBorderColor;
+  final List<String>? autofillHints;
+  final String? Function(String?)? validator;
 
   const PasswordTextField({
     super.key,
@@ -17,6 +19,8 @@ class PasswordTextField extends StatefulWidget {
     required this.backgroundColor,
     required this.borderColor,
     required this.focusedBorderColor,
+    this.autofillHints,
+    this.validator,
   });
 
   @override
@@ -30,9 +34,11 @@ class _PasswordTextFieldState extends State<PasswordTextField> {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 25.0),
-      child: TextField(
+      child: TextFormField(
+        autofillHints: widget.autofillHints,
         controller: widget.controller,
         obscureText: _obscureText,
+        validator: widget.validator,
         style: const TextStyle(
             fontSize: AppFontSizes.large16, decoration: TextDecoration.none),
         decoration: InputDecoration(
@@ -45,6 +51,14 @@ class _PasswordTextFieldState extends State<PasswordTextField> {
             focusedBorder: OutlineInputBorder(
               borderSide:
                   BorderSide(color: widget.focusedBorderColor, width: 1.1),
+              borderRadius: BorderRadius.circular(15),
+            ),
+            errorBorder: OutlineInputBorder(
+              borderSide: const BorderSide(color: Colors.red, width: 1),
+              borderRadius: BorderRadius.circular(15),
+            ),
+            focusedErrorBorder: OutlineInputBorder(
+              borderSide: const BorderSide(color: Colors.red, width: 1),
               borderRadius: BorderRadius.circular(15),
             ),
             suffixIcon: IconButton(

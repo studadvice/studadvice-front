@@ -8,6 +8,7 @@ class UserData {
   String formation;
   String country;
   String? pseudo;
+  bool hasAcceptedTermsAndConditions;
 
   UserData({
     this.pseudo,
@@ -19,6 +20,7 @@ class UserData {
     required this.university,
     required this.formation,
     required this.country,
+    required this.hasAcceptedTermsAndConditions,
   });
 
   factory UserData.fromJson(Map<String, dynamic> json) {
@@ -31,6 +33,8 @@ class UserData {
         university: json['university'] ?? '',
         formation: json['formation'] ?? '',
         country: json['country'] ?? '',
+        hasAcceptedTermsAndConditions:
+            json['hasAcceptedTermsAndConditions'] ?? false,
         pseudo: json['pseudo'] ?? '');
   }
 
@@ -44,6 +48,7 @@ class UserData {
       'university': university,
       'formation': formation,
       'country': country,
+      'hasAcceptedTermsAndConditions': hasAcceptedTermsAndConditions,
     };
   }
 }
