@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:stud_advice/src/common/chore/app_colors.dart';
 import 'package:stud_advice/src/common/chore/app_fonts_sizes.dart';
+import 'package:stud_advice/src/common/chore/crypto_hash.dart';
 import 'package:stud_advice/src/common/chore/form_validator.dart';
 import 'package:stud_advice/src/screens/legal_conditions/legal_conditions_screen.dart';
 import 'package:stud_advice/src/screens/register/register_user_information_screen.dart';
@@ -60,7 +62,7 @@ class _RegisterWithEmailScreenState extends State<RegisterWithEmailScreen> {
           leading: IconButton(
             icon: const Icon(Icons.arrow_back),
             onPressed: () {
-              Navigator.of(context).pop();
+              Get.back();
             },
           ),
         ),
@@ -156,23 +158,28 @@ class _RegisterWithEmailScreenState extends State<RegisterWithEmailScreen> {
           if (!_formKey.currentState!.validate()) {
             return;
           }
-          Navigator.push(
-              context,
-              MaterialPageRoute(
-                  builder: (context) => const RegisterUserInformationScreen()));
+          dynamic formData = collectFormData();
+          Get.to(() => const RegisterUserInformationScreen(),
+              arguments: formData);
         });
+  }
+
+  dynamic collectFormData() {
+    String email = emailOrPseudoController.text.trim();
+    String password = passwordController.text.trim();
+    String passwordHash = CryptoHash.hashValue(password);
+    bool hasAcceptedTermsAndConditions = _agreeWithTermsAndConditions;
+    return {
+      'email': email,
+      'password': passwordHash,
+      'hasAcceptedTermsAndConditions': hasAcceptedTermsAndConditions,
+    };
   }
 
   Widget buildTermsAndConditionsButton() {
     return GestureDetector(
       onTap: () {
-        Navigator.of(context).push(
-          MaterialPageRoute(
-            builder: (context) {
-              return LegalTermsScreen();
-            },
-          ),
-        );
+        Get.to(() => LegalTermsScreen());
       },
       child: Text(
         legalConditionsButtonText,

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:stud_advice/src/common/chore/app_colors.dart';
 import 'package:stud_advice/src/screens/register/register_with_email_screen.dart';
 import 'package:stud_advice/src/screens/register/widgets/register_social_button.dart';
@@ -53,7 +54,7 @@ class _RegisterOptionsScreenState extends State<RegisterOptionsScreen> {
           leading: IconButton(
             icon: const Icon(Icons.arrow_back),
             onPressed: () {
-              Navigator.of(context).pop();
+              Get.back();
             },
           ),
         ),
@@ -95,11 +96,7 @@ class _RegisterOptionsScreenState extends State<RegisterOptionsScreen> {
                   buildDividerWithText(),
                   RegisterWithEmailButton(
                     onPressed: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) =>
-                                  const RegisterWithEmailScreen()));
+                      Get.to(() => const RegisterWithEmailScreen());
                     },
                     textColor: AppColors.white,
                     backgroundColor: AppColors.blue,

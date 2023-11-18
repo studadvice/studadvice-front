@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:stud_advice/src/common/chore/app_fonts_sizes.dart';
 
 class LegalTermsScreen extends StatelessWidget {
@@ -121,7 +122,7 @@ CGU réalisées sur http://legalplace.fr/
         leading: IconButton(
           icon: const Icon(Icons.arrow_back),
           onPressed: () {
-            Navigator.of(context).pop();
+            Get.back();
           },
         ),
       ),
