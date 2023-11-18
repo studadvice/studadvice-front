@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:stud_advice/src/common/chore/app_colors.dart';
-import 'package:stud_advice/src/common/conf/injection_container.dart';
 import 'package:stud_advice/src/screens/init_time/widgets/init_time_connection_button.dart';
 import 'package:stud_advice/src/services/init_time/init_time_service.dart';
 
 class InitTimeScreen extends StatelessWidget {
-  static const String navigatorId = 'init_time_screen';
+  static const String navigatorId = '/init_time_screen';
 
   const InitTimeScreen({super.key});
 
@@ -14,7 +14,7 @@ class InitTimeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    InitTimeService initTimeService = locator<InitTimeService>();
+    InitTimeService initTimeService = Get.find<InitTimeService>();
 
     return Scaffold(
       backgroundColor: AppColors.white,

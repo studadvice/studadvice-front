@@ -9,7 +9,7 @@ import 'package:stud_advice/src/widgets/textFields/classic_text_field.dart';
 import 'package:stud_advice/src/widgets/textFields/password_text_field.dart';
 
 class RegisterWithEmailScreen extends StatefulWidget {
-  static const String navigatorId = 'register_with_email_screen';
+  static const String navigatorId = '/register_with_email_screen';
 
   const RegisterWithEmailScreen({super.key});
 

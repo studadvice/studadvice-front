@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:stud_advice/src/common/chore/app_fonts_sizes.dart';
 
 class LegalTermsScreen extends StatelessWidget {
-  static const String navigatorId = 'legal_terms_screen';
+  static const String navigatorId = '/legal_terms_screen';
   static const String screenTitle = "Termes et Conditions";
   static const String termsAndConditionsText = '''
 CONDITIONS GÉNÉRALES D'UTILISATION

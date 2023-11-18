@@ -6,7 +6,7 @@ import 'package:stud_advice/src/screens/register/widgets/register_with_email_but
 import 'package:stud_advice/src/widgets/dividers/divider_with_text.dart';
 
 class RegisterOptionsScreen extends StatefulWidget {
-  static const String navigatorId = 'register_screen_options';
+  static const String navigatorId = '/register_screen_options';
 
   const RegisterOptionsScreen({super.key});
 

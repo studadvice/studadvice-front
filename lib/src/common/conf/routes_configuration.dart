@@ -1,4 +1,4 @@
-import 'package:flutter/widgets.dart';
+import 'package:get/get.dart';
 import 'package:stud_advice/src/screens/home/home_page.dart';
 import 'package:stud_advice/src/screens/init_time/init_time_screen.dart';
 import 'package:stud_advice/src/screens/legal_conditions/legal_conditions_screen.dart';
@@ -10,19 +10,24 @@ import 'package:stud_advice/src/screens/register/register_with_email_screen.dart
 class RoutesConfiguration {
   static const String initialRoute = InitTimeScreen.navigatorId;
 
-  // Configure the routes for the application.
-  Map<String, Widget Function(dynamic context)> configureRoutes() {
-    return {
-      InitTimeScreen.navigatorId: (context) => const InitTimeScreen(),
-      HomePageScreen.navigatorId: (context) => const HomePageScreen(),
-      LoginScreen.navigatorId: (context) => const LoginScreen(),
-      RegisterOptionsScreen.navigatorId: (context) =>
-          const RegisterOptionsScreen(),
-      RegisterWithEmailScreen.navigatorId: (context) =>
-          const RegisterWithEmailScreen(),
-      LegalTermsScreen.navigatorId: (context) => LegalTermsScreen(),
-      RegisterUserInformationScreen.navigatorId: (context) =>
-          const RegisterUserInformationScreen(),
-    };
+  List<GetPage> configureRoutes() {
+    return [
+      GetPage(
+          name: InitTimeScreen.navigatorId, page: () => const InitTimeScreen()),
+      GetPage(
+          name: HomePageScreen.navigatorId, page: () => const HomePageScreen()),
+      GetPage(name: LoginScreen.navigatorId, page: () => const LoginScreen()),
+      GetPage(
+          name: RegisterOptionsScreen.navigatorId,
+          page: () => const RegisterOptionsScreen()),
+      GetPage(
+          name: RegisterWithEmailScreen.navigatorId,
+          page: () => const RegisterWithEmailScreen()),
+      GetPage(
+          name: LegalTermsScreen.navigatorId, page: () => LegalTermsScreen()),
+      GetPage(
+          name: RegisterUserInformationScreen.navigatorId,
+          page: () => const RegisterUserInformationScreen()),
+    ];
   }
 }

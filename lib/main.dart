@@ -1,6 +1,7 @@
 import 'package:country_picker/country_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:stud_advice/src/common/chore/app_colors.dart';
 import 'package:stud_advice/src/common/chore/supported_locales.dart';
@@ -18,9 +19,9 @@ class StudAdviceApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    RoutesConfiguration routesConfiguration = locator<RoutesConfiguration>();
+    RoutesConfiguration routesConfiguration = Get.find<RoutesConfiguration>();
 
-    return MaterialApp(
+    return GetMaterialApp(
       title: "Stud'Advice",
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: AppColors.white),
@@ -32,7 +33,7 @@ class StudAdviceApp extends StatelessWidget {
       ),
       debugShowCheckedModeBanner: false,
       initialRoute: RoutesConfiguration.initialRoute,
-      routes: routesConfiguration.configureRoutes(),
+      getPages: routesConfiguration.configureRoutes(),
       localizationsDelegates: [
         GlobalMaterialLocalizations.delegate,
         CountryLocalizations.delegate,

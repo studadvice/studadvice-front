@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:stud_advice/src/common/chore/app_colors.dart';
 import 'package:stud_advice/src/common/chore/app_fonts_sizes.dart';
-import 'package:stud_advice/src/common/conf/injection_container.dart';
 import 'package:stud_advice/src/models/city/city_data.dart';
 import 'package:stud_advice/src/models/user/user_data.dart';
 import 'package:stud_advice/src/services/register/register_user_information_service.dart';
@@ -14,7 +14,7 @@ import 'package:stud_advice/src/widgets/textFields/auto_complete_text_field.dart
 import 'package:stud_advice/src/widgets/textFields/classic_text_field.dart';
 
 class RegisterUserInformationScreen extends StatefulWidget {
-  static const String navigatorId = 'register_user_information_screen';
+  static const String navigatorId = '/register_user_information_screen';
 
   const RegisterUserInformationScreen({super.key});
 
@@ -69,7 +69,7 @@ class _RegisterUserInformationScreenState
 
   // Services.
   final RegisterUserInformationService _registerUserInformationService =
-      locator<RegisterUserInformationService>();
+      Get.find<RegisterUserInformationService>();
 
   // Model data.
   late UserData userData;
@@ -291,34 +291,6 @@ class _RegisterUserInformationScreenState
       searchHintText: universitySearchHintText,
     );
   }
-
-  // Widget buildUniversityTextField(List<String> universityData) {
-  //   // Add the default choice to the list of universities.
-  //   if (!universityData.contains(defaultUniversityChoice)) {
-  //     universityData.insert(0, defaultUniversityChoice);
-  //   }
-  //   List<DropdownMenuItem<String>> universityDataItems =
-  //       buildUniversityDataItems(universityData);
-  //   return Padding(
-  //     padding: const EdgeInsets.symmetric(horizontal: 15.0),
-  //     child: SearchChoicesField(
-  //       // HINT: A modal can also be used.
-  //       hintText: universityHintText,
-  //       searchHintText: universitySearchHintText,
-  //       labelText: universitySearchHintText,
-  //       inputDecorationBorderColor: AppColors.secondaryColor,
-  //       inputDecorationFocusedBorderColor: AppColors.secondaryColor,
-  //       menuBackgroundColor: AppColors.white,
-  //       itemList: universityDataItems,
-  //       textColor: AppColors.black,
-  //       onChanged: (String? selectedItem) {
-  //         universityController.text = selectedItem ?? '';
-  //       },
-  //       closeText: universityDialogCloseText,
-  //       fieldBackgroundColor: AppColors.white,
-  //     ),
-  //   );
-  // }
 
   Widget buildFormationTextField() {
     return ClassicTextField(

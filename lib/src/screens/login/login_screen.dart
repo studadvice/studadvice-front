@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:stud_advice/src/common/chore/app_colors.dart';
 import 'package:stud_advice/src/common/chore/app_fonts_sizes.dart';
-import 'package:stud_advice/src/common/conf/injection_container.dart';
 import 'package:stud_advice/src/services/login/login_service.dart';
 import 'package:stud_advice/src/widgets/buttons/default_connection_button.dart';
 import 'package:stud_advice/src/widgets/buttons/login_social_button.dart';
@@ -10,7 +10,7 @@ import 'package:stud_advice/src/widgets/textFields/classic_text_field.dart';
 import 'package:stud_advice/src/widgets/textFields/password_text_field.dart';
 
 class LoginScreen extends StatefulWidget {
-  static const String navigatorId = 'login_screen';
+  static const String navigatorId = '/login_screen';
 
   const LoginScreen({super.key});
 
@@ -37,7 +37,7 @@ class _LoginScreenState extends State<LoginScreen> {
   bool _rememberMe = true;
 
   // Service.
-  final loginService = locator<LoginService>();
+  final loginService = Get.find<LoginService>();
 
   // Controllers for the text fields.
   final TextEditingController _emailOrPseudoController =

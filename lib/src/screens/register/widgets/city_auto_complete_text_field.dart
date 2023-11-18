@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_typeahead/flutter_typeahead.dart'; // Importez flutter_typeahead
+import 'package:flutter_typeahead/flutter_typeahead.dart';
+import 'package:get/get.dart';
 import 'package:stud_advice/src/common/chore/app_colors.dart';
 import 'package:stud_advice/src/common/chore/app_fonts_sizes.dart';
-import 'package:stud_advice/src/common/conf/injection_container.dart';
 import 'package:stud_advice/src/models/city/city_data.dart';
 import 'package:stud_advice/src/services/register/register_user_information_service.dart';
 
@@ -27,7 +27,7 @@ class CityAutocomplete extends StatefulWidget {
 
 class _CityAutocompleteState extends State<CityAutocomplete> {
   final RegisterUserInformationService _registerUserInformationService =
-      locator<RegisterUserInformationService>();
+      Get.find<RegisterUserInformationService>();
   final String notFoundText = 'Aucune suggestion trouvée.';
   final String errorText = 'Une erreur est survenue.';
   final String noCitySelectedText = 'Veuillez sélectionner une suggestion.';

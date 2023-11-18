@@ -33,24 +33,6 @@ class ConnectivityDialog extends StatelessWidget {
               style: const TextStyle(fontSize: AppFontSizes.medium),
             ),
           ),
-          // ElevatedButton(
-          //   style: ButtonStyle(
-          //     backgroundColor: MaterialStateProperty.all(AppColors.blue),
-          //   ),
-          //   onPressed: () async {
-          //     Navigator.pop(context); // Fermer la boîte de dialogue
-          //     ConnectivityResult result =
-          //         await Connectivity().checkConnectivity();
-          //     // Vous pouvez ajouter une logique de rafraîchissement ici si nécessaire
-          //   },
-          //   child: Text(
-          //     refreshText,
-          //     style: const TextStyle(
-          //       fontSize: AppFontSizes.medium,
-          //       color: AppColors.white,
-          //     ),
-          //   ),
-          // ),
         ],
       ),
     );

@@ -3,12 +3,12 @@ import 'dart:math';
 
 import 'package:dio/dio.dart';
 import 'package:english_words/english_words.dart';
-import 'package:stud_advice/src/common/conf/injection_container.dart';
+import 'package:get/get.dart';
 import 'package:stud_advice/src/models/city/city_data.dart';
 import 'package:stud_advice/src/models/university/university_data.dart';
 
 class RegisterUserInformationService {
-  final _dio = locator<Dio>();
+  final _dio = Get.find<Dio>();
 
   static String generateRandomPseudo() {
     final random = Random();
