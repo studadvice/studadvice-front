@@ -4,25 +4,18 @@ import 'package:stud_advice/src/common/chore/app_colors.dart';
 import 'package:stud_advice/src/common/chore/app_fonts_sizes.dart';
 import 'package:stud_advice/src/common/chore/crypto_hash.dart';
 import 'package:stud_advice/src/common/chore/form_validator.dart';
+import 'package:stud_advice/src/controller/register/register_with_email_controller.dart';
 import 'package:stud_advice/src/screens/legal_conditions/legal_conditions_screen.dart';
 import 'package:stud_advice/src/screens/register/register_user_information_screen.dart';
 import 'package:stud_advice/src/widgets/buttons/default_connection_button.dart';
 import 'package:stud_advice/src/widgets/textFields/classic_text_field.dart';
 import 'package:stud_advice/src/widgets/textFields/password_text_field.dart';
 
-class RegisterWithEmailScreen extends StatefulWidget {
+class RegisterWithEmailScreen extends StatelessWidget {
   static const String navigatorId = '/register_with_email_screen';
 
-  const RegisterWithEmailScreen({super.key});
-
-  @override
-  State<RegisterWithEmailScreen> createState() =>
-      _RegisterWithEmailScreenState();
-}
-
-class _RegisterWithEmailScreenState extends State<RegisterWithEmailScreen> {
-  // State variables.
-  bool _agreeWithTermsAndConditions = false;
+  final RegisterWithEmailController _registerWithEmailController =
+      Get.put(RegisterWithEmailController());
 
   // Use constants to facilitate the implementation of the translation.
   final String emailHintText = 'Email';
@@ -38,6 +31,7 @@ class _RegisterWithEmailScreenState extends State<RegisterWithEmailScreen> {
       'J\'accepte les conditions générales d\'utilisation';
   final String acceptTermsAndConditionsErrorText =
       'Veuillez accepter les termes et conditions';
+  final String termsAndConditionsText = 'Termes et Conditions';
 
   // Controllers for the text fields.
   final TextEditingController emailOrPseudoController = TextEditingController();
@@ -48,47 +42,41 @@ class _RegisterWithEmailScreenState extends State<RegisterWithEmailScreen> {
   final _formKey = GlobalKey<FormState>();
 
   @override
-  void dispose() {
-    // Dispose of the controllers when the widget is disposed.
-    emailOrPseudoController.dispose();
-    passwordController.dispose();
-    confirmPasswordController.dispose();
-    super.dispose();
-  }
-
-  @override
-  Widget build(BuildContext context) => Scaffold(
-        appBar: AppBar(
-          leading: IconButton(
-            icon: const Icon(Icons.arrow_back),
-            onPressed: () {
-              Get.back();
-            },
+  Widget build(BuildContext context) =>
+      GetBuilder<RegisterWithEmailController>(builder: (_) {
+        return Scaffold(
+          appBar: AppBar(
+            leading: IconButton(
+              icon: const Icon(Icons.arrow_back),
+              onPressed: () {
+                Get.back();
+              },
+            ),
           ),
-        ),
-        body: SingleChildScrollView(
-            child: Form(
-          key: _formKey,
-          child: Column(
-            children: [
-              SizedBox(height: MediaQuery.of(context).size.height * 0.1),
-              const SizedBox(height: 10),
-              buildRegisterText(),
-              const SizedBox(height: 50),
-              buildEmailTextField(),
-              const SizedBox(height: 15),
-              buildPasswordTextField(),
-              const SizedBox(height: 15),
-              buildConfirmPasswordTextField(),
-              const SizedBox(height: 100),
-              buildTermsAndConditionsButton(),
-              buildTermsAndConditionsRow(),
-              const SizedBox(height: 5),
-              buildConnectionButton(),
-            ],
-          ),
-        )),
-      );
+          body: SingleChildScrollView(
+              child: Form(
+            key: _formKey,
+            child: Column(
+              children: [
+                SizedBox(height: MediaQuery.of(context).size.height * 0.1),
+                const SizedBox(height: 10),
+                buildRegisterText(),
+                const SizedBox(height: 50),
+                buildEmailTextField(),
+                const SizedBox(height: 15),
+                buildPasswordTextField(),
+                const SizedBox(height: 15),
+                buildConfirmPasswordTextField(),
+                const SizedBox(height: 100),
+                buildTermsAndConditionsButton(),
+                buildTermsAndConditionsRow(),
+                const SizedBox(height: 5),
+                buildConnectionButton(),
+              ],
+            ),
+          )),
+        );
+      });
 
   Widget buildRegisterText() {
     return Text(
@@ -144,14 +132,28 @@ class _RegisterWithEmailScreenState extends State<RegisterWithEmailScreen> {
         textColor: AppColors.white,
         backgroundColor: AppColors.blue,
         onPressed: () {
-          if (!_agreeWithTermsAndConditions) {
-            ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(
-                content: Text(acceptTermsAndConditionsErrorText),
-                duration: const Duration(seconds: 2),
-                backgroundColor: AppColors.dangerColor,
-                behavior: SnackBarBehavior.floating,
+          if (!_registerWithEmailController.agreeWithTermsAndConditions.value) {
+            Get.snackbar(
+              termsAndConditionsText,
+              acceptTermsAndConditionsErrorText,
+              snackPosition: SnackPosition.BOTTOM,
+              duration: const Duration(seconds: 3),
+              titleText: Text(
+                termsAndConditionsText,
+                style: const TextStyle(
+                  color: AppColors.white,
+                  fontSize: AppFontSizes.medium,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
+              messageText: Text(
+                acceptTermsAndConditionsErrorText,
+                style: const TextStyle(
+                  color: AppColors.white,
+                  fontSize: AppFontSizes.medium,
+                ),
+              ),
+              backgroundColor: AppColors.dangerColor,
             );
             return;
           }
@@ -168,7 +170,8 @@ class _RegisterWithEmailScreenState extends State<RegisterWithEmailScreen> {
     String email = emailOrPseudoController.text.trim();
     String password = passwordController.text.trim();
     String passwordHash = CryptoHash.hashValue(password);
-    bool hasAcceptedTermsAndConditions = _agreeWithTermsAndConditions;
+    bool hasAcceptedTermsAndConditions =
+        _registerWithEmailController.agreeWithTermsAndConditions.value;
     return {
       'email': email,
       'password': passwordHash,
@@ -197,19 +200,18 @@ class _RegisterWithEmailScreenState extends State<RegisterWithEmailScreen> {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        Checkbox(
-          value: _agreeWithTermsAndConditions,
-          activeColor: AppColors.primaryColor,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(4),
-          ),
-          onChanged: (bool? value) {
-            // TODO add the logic to accept the terms and conditions
-            setState(() {
-              _agreeWithTermsAndConditions = value!;
-            });
-          },
-        ),
+        Obx(() => Checkbox(
+              value: _registerWithEmailController
+                  .agreeWithTermsAndConditions.value,
+              activeColor: AppColors.primaryColor,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(4),
+              ),
+              onChanged: (bool? value) {
+                _registerWithEmailController.agreeWithTermsAndConditions.value =
+                    value!;
+              },
+            )),
         Text(
           acceptTermsAndConditionsText,
           style: const TextStyle(

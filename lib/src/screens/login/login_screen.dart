@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:stud_advice/src/common/chore/app_colors.dart';
 import 'package:stud_advice/src/common/chore/app_fonts_sizes.dart';
 import 'package:stud_advice/src/common/chore/form_validator.dart';
+import 'package:stud_advice/src/controller/login/login_controller.dart';
 import 'package:stud_advice/src/services/login/login_service.dart';
 import 'package:stud_advice/src/widgets/buttons/default_connection_button.dart';
 import 'package:stud_advice/src/widgets/buttons/login_social_button.dart';
@@ -10,16 +11,14 @@ import 'package:stud_advice/src/widgets/dividers/divider_with_text.dart';
 import 'package:stud_advice/src/widgets/textFields/classic_text_field.dart';
 import 'package:stud_advice/src/widgets/textFields/password_text_field.dart';
 
-class LoginScreen extends StatefulWidget {
+class LoginScreen extends StatelessWidget {
   static const String navigatorId = '/login_screen';
 
-  const LoginScreen({super.key});
+  final LoginController _loginController = Get.put(LoginController());
 
-  @override
-  State<LoginScreen> createState() => _LoginScreenState();
-}
+  // Service.
+  final LoginService _loginService = Get.put(LoginService());
 
-class _LoginScreenState extends State<LoginScreen> {
   // Use constants to facilitate the implementation of the translation.
   final String emailOrPseudoHintText = 'Email ou pseudo';
   final String emailOrPseudoLabelText = 'Email ou pseudo';
@@ -33,12 +32,6 @@ class _LoginScreenState extends State<LoginScreen> {
   final String orContinueWithText = 'Ou continuer avec';
   final String passwordErrorText = 'Veuillez entrer votre mot de passe';
 
-  // State variables.
-  bool _rememberMe = true;
-
-  // Service.
-  final loginService = Get.find<LoginService>();
-
   // Controllers for the text fields.
   final TextEditingController _emailOrPseudoController =
       TextEditingController();
@@ -47,48 +40,43 @@ class _LoginScreenState extends State<LoginScreen> {
   final _formKey = GlobalKey<FormState>();
 
   @override
-  void dispose() {
-    // Dispose of the controllers when the widget is disposed.
-    _emailOrPseudoController.dispose();
-    _passwordController.dispose();
-    super.dispose();
-  }
-
-  @override
-  Widget build(BuildContext context) => Scaffold(
-        appBar: AppBar(
-          leading: IconButton(
-            icon: const Icon(Icons.arrow_back),
-            onPressed: () {
-              Get.back();
-            },
-          ),
-        ),
-        body: SingleChildScrollView(
-          child: Form(
-            key: _formKey,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                SizedBox(height: MediaQuery.of(context).size.height * 0.1),
-                buildWelcomeBackText(),
-                const SizedBox(height: 40),
-                buildEmailOrPseudoTextField(),
-                const SizedBox(height: 15),
-                buildPasswordTextField(),
-                const SizedBox(height: 10),
-                buildRememberMeAndForgotPasswordRow(),
-                const SizedBox(height: 10),
-                buildLoginButton(),
-                const SizedBox(height: 10),
-                DividerWithText(text: orContinueWithText),
-                const SizedBox(height: 10),
-                buildSocialLoginButtons(),
-              ],
+  Widget build(BuildContext context) =>
+      GetBuilder<LoginController>(builder: (_) {
+        return Scaffold(
+          appBar: AppBar(
+            leading: IconButton(
+              icon: const Icon(Icons.arrow_back),
+              onPressed: () {
+                Get.back();
+              },
             ),
           ),
-        ),
-      );
+          body: SingleChildScrollView(
+            child: Form(
+              key: _formKey,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  SizedBox(height: MediaQuery.of(context).size.height * 0.1),
+                  buildWelcomeBackText(),
+                  const SizedBox(height: 40),
+                  buildEmailOrPseudoTextField(),
+                  const SizedBox(height: 15),
+                  buildPasswordTextField(),
+                  const SizedBox(height: 10),
+                  buildRememberMeAndForgotPasswordRow(),
+                  const SizedBox(height: 10),
+                  buildLoginButton(),
+                  const SizedBox(height: 10),
+                  DividerWithText(text: orContinueWithText),
+                  const SizedBox(height: 10),
+                  buildSocialLoginButtons(),
+                ],
+              ),
+            ),
+          ),
+        );
+      });
 
   String? validatePassword(String? value) {
     if (value == null || value.isEmpty) {
@@ -143,16 +131,14 @@ class _LoginScreenState extends State<LoginScreen> {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Checkbox(
-          value: _rememberMe,
+          value: _loginController.rememberMe.value,
           activeColor: AppColors.primaryColor,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(4),
           ),
           onChanged: (bool? value) {
             // TODO add the logic to save the user connection state.
-            setState(() {
-              _rememberMe = value!;
-            });
+            _loginController.rememberMe.value = value!;
           },
         ),
         Text(rememberMeText),
@@ -183,9 +169,9 @@ class _LoginScreenState extends State<LoginScreen> {
             String password = _passwordController.text;
 
             if (emailOrPseudo.contains('@')) {
-              loginService.loginWithEmailAndPassword(emailOrPseudo, password);
+              _loginService.loginWithEmailAndPassword(emailOrPseudo, password);
             } else {
-              loginService.loginWithPseudoAndPassword(emailOrPseudo, password);
+              _loginService.loginWithPseudoAndPassword(emailOrPseudo, password);
             }
           }
         });
@@ -200,7 +186,7 @@ class _LoginScreenState extends State<LoginScreen> {
           tileBackgroundColor: Colors.white,
           borderColor: AppColors.black26,
           onTap: () {
-            loginService.loginWithGoogleAccount();
+            _loginService.loginWithGoogleAccount();
           },
         ),
         const SizedBox(width: 10),
@@ -210,7 +196,7 @@ class _LoginScreenState extends State<LoginScreen> {
           borderColor: AppColors.black26,
           iconColor: AppColors.blueAccent,
           onTap: () {
-            loginService.loginWithFacebookAccount();
+            _loginService.loginWithFacebookAccount();
           },
         ),
         const SizedBox(width: 10),
@@ -219,7 +205,7 @@ class _LoginScreenState extends State<LoginScreen> {
           tileBackgroundColor: AppColors.white,
           borderColor: AppColors.black26,
           onTap: () {
-            loginService.loginWithAppleAccount();
+            _loginService.loginWithAppleAccount();
           },
         ),
         const SizedBox(width: 10),
@@ -228,7 +214,7 @@ class _LoginScreenState extends State<LoginScreen> {
           tileBackgroundColor: Colors.white,
           borderColor: AppColors.black26,
           onTap: () {
-            loginService.loginWithXAccount();
+            _loginService.loginWithXAccount();
           },
         ),
       ],

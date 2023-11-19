@@ -5,8 +5,13 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:stud_advice/src/common/chore/app_colors.dart';
 import 'package:stud_advice/src/common/chore/supported_locales.dart';
+import 'package:stud_advice/src/common/conf/app_dependencies_binding.dart';
 
 import 'src/common/conf/routes_configuration.dart';
+
+void main() {
+  runApp(const StudAdviceApp());
+}
 
 class StudAdviceApp extends StatelessWidget {
   const StudAdviceApp({super.key});
@@ -14,7 +19,8 @@ class StudAdviceApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    RoutesConfiguration routesConfiguration = Get.find<RoutesConfiguration>();
+    final RoutesConfiguration routesConfiguration =
+        Get.put(RoutesConfiguration());
 
     return GetMaterialApp(
       title: "Stud'Advice",
@@ -28,6 +34,7 @@ class StudAdviceApp extends StatelessWidget {
       ),
       debugShowCheckedModeBanner: false,
       initialRoute: RoutesConfiguration.initialRoute,
+      initialBinding: AppDependenciesBinding(),
       getPages: routesConfiguration.configureRoutes(),
       localizationsDelegates: [
         GlobalMaterialLocalizations.delegate,

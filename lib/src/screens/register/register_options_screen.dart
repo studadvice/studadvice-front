@@ -96,7 +96,7 @@ class _RegisterOptionsScreenState extends State<RegisterOptionsScreen> {
                   buildDividerWithText(),
                   RegisterWithEmailButton(
                     onPressed: () {
-                      Get.to(() => const RegisterWithEmailScreen());
+                      Get.to(() => RegisterWithEmailScreen());
                     },
                     textColor: AppColors.white,
                     backgroundColor: AppColors.blue,

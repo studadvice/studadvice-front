@@ -10,6 +10,6 @@ class InitTimeService {
   }
 
   void navigateToLoginPage(BuildContext context) {
-    Get.to(() => const LoginScreen());
+    Get.to(() => LoginScreen());
   }
 }

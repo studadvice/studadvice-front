@@ -2,7 +2,7 @@ import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:get/get.dart';
 import 'package:stud_advice/src/common/chore/app_colors.dart';
 
-class ConnectivityService extends GetxController {
+class ConnectivityController extends GetxController {
   var isConnected = true.obs;
   final String noInternetText = "Pas de connexion internet";
   final String checkConnectionText =

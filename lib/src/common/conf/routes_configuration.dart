@@ -16,13 +16,13 @@ class RoutesConfiguration {
           name: InitTimeScreen.navigatorId, page: () => const InitTimeScreen()),
       GetPage(
           name: HomePageScreen.navigatorId, page: () => const HomePageScreen()),
-      GetPage(name: LoginScreen.navigatorId, page: () => const LoginScreen()),
+      GetPage(name: LoginScreen.navigatorId, page: () => LoginScreen()),
       GetPage(
           name: RegisterOptionsScreen.navigatorId,
           page: () => const RegisterOptionsScreen()),
       GetPage(
           name: RegisterWithEmailScreen.navigatorId,
-          page: () => const RegisterWithEmailScreen()),
+          page: () => RegisterWithEmailScreen()),
       GetPage(
           name: LegalTermsScreen.navigatorId, page: () => LegalTermsScreen()),
       GetPage(
