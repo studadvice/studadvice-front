@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:stud_advice/src/common/chore/app_colors.dart';
 import 'package:stud_advice/src/common/chore/app_fonts_sizes.dart';
+import 'package:stud_advice/src/common/chore/form_validator.dart';
 import 'package:stud_advice/src/services/login/login_service.dart';
 import 'package:stud_advice/src/widgets/buttons/default_connection_button.dart';
 import 'package:stud_advice/src/widgets/buttons/login_social_button.dart';
@@ -30,7 +31,6 @@ class _LoginScreenState extends State<LoginScreen> {
   final String rememberMeText = 'Se souvenir de moi';
   final String loginText = 'Se connecter';
   final String orContinueWithText = 'Ou continuer avec';
-  final String emailOrPseudoErrorText = 'Veuillez entrer votre email ou pseudo';
   final String passwordErrorText = 'Veuillez entrer votre mot de passe';
 
   // State variables.
@@ -90,24 +90,6 @@ class _LoginScreenState extends State<LoginScreen> {
         ),
       );
 
-  String? validateEmailOrPseudo(String? value) {
-    if (value == null || value.isEmpty) {
-      return emailOrPseudoErrorText;
-    }
-
-    final emailRegExp = RegExp(r'^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$');
-    if (emailRegExp.hasMatch(value)) {
-      return null;
-    }
-
-    final pseudoRegExp = RegExp(r'^[a-zA-Z0-9_]+$');
-    if (pseudoRegExp.hasMatch(value)) {
-      return null;
-    }
-
-    return emailOrPseudoErrorText;
-  }
-
   String? validatePassword(String? value) {
     if (value == null || value.isEmpty) {
       return passwordErrorText;
@@ -117,7 +99,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
   Widget buildEmailOrPseudoTextField() {
     return ClassicTextField(
-        validator: (value) => validateEmailOrPseudo(value),
+        validator: FormValidator.validateEmailOrPseudo,
         hintText: emailOrPseudoHintText,
         labelText: emailOrPseudoLabelText,
         controller: _emailOrPseudoController,

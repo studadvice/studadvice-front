@@ -5,13 +5,8 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:stud_advice/src/common/chore/app_colors.dart';
 import 'package:stud_advice/src/common/chore/supported_locales.dart';
-import 'package:stud_advice/src/common/conf/injection_container.dart';
-import 'package:stud_advice/src/common/conf/routes_configuration.dart';
 
-void main() {
-  setupDependenciesInjection();
-  runApp(const StudAdviceApp());
-}
+import 'src/common/conf/routes_configuration.dart';
 
 class StudAdviceApp extends StatelessWidget {
   const StudAdviceApp({super.key});

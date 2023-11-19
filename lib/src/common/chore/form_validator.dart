@@ -17,6 +17,9 @@ class FormValidator {
   static String passwordsNotMatchingErrorText =
       'Les mots de passe ne correspondent pas';
 
+  static String emailOrPseudoErrorText =
+      'Veuillez entrer votre email ou pseudo';
+
   static String? validateEmail(String? value) {
     if (value == null || value.isEmpty) {
       return emailValidationErrorText;
@@ -29,6 +32,24 @@ class FormValidator {
     }
 
     return null;
+  }
+
+  static String? validateEmailOrPseudo(String? value) {
+    if (value == null || value.isEmpty) {
+      return emailOrPseudoErrorText;
+    }
+
+    final emailRegExp = RegExp(r'^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$');
+    if (emailRegExp.hasMatch(value)) {
+      return null;
+    }
+
+    final pseudoRegExp = RegExp(r'^[a-zA-Z0-9_]+$');
+    if (pseudoRegExp.hasMatch(value)) {
+      return null;
+    }
+
+    return emailOrPseudoErrorText;
   }
 
   static String? validatePassword(String? value) {
