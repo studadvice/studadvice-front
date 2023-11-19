@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:stud_advice/src/common/chore/app_colors.dart';
 import 'package:stud_advice/src/common/chore/app_fonts_sizes.dart';
+import 'package:stud_advice/src/common/chore/crypto_hash.dart';
 import 'package:stud_advice/src/common/chore/form_validator.dart';
 import 'package:stud_advice/src/controller/login/login_controller.dart';
 import 'package:stud_advice/src/services/login/login_service.dart';
@@ -167,11 +168,14 @@ class LoginScreen extends StatelessWidget {
           if (_formKey.currentState!.validate()) {
             String emailOrPseudo = _emailOrPseudoController.text;
             String password = _passwordController.text;
+            String passwordHash = CryptoHash.hashValue(password);
 
             if (emailOrPseudo.contains('@')) {
-              _loginService.loginWithEmailAndPassword(emailOrPseudo, password);
+              _loginService.loginWithEmailAndPassword(
+                  emailOrPseudo, passwordHash);
             } else {
-              _loginService.loginWithPseudoAndPassword(emailOrPseudo, password);
+              _loginService.loginWithPseudoAndPassword(
+                  emailOrPseudo, passwordHash);
             }
           }
         });
