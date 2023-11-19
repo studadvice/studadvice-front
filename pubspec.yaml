@@ -19,7 +19,7 @@ dependencies:
   logger: ^2.0.2+1
   get_it: ^7.6.4
   english_words: ^4.0.0
-  intl: ^0.18.1
+  intl: any
   country_picker: ^2.0.22
   dio: ^5.3.3
   flutter_typeahead: ^4.8.0
@@ -48,9 +48,13 @@ flutter:
   uses-material-design: true
 
   assets:
+    - assets/images/
     - assets/images/common/
     - assets/images/login/
+    - assets/translations/settings_screen/
 
+  generate: true
+      
 
 #flutter_native_splash:
 ##  Ajouter une image avec le slogan de l'application, made easy for students

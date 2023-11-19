@@ -13,3 +13,4 @@ TODO (s'entendre sur les éléments à mettre dans ce fichier)
 * Les polices sont ajoutés dans le dossier assets/fonts et classés par catégorie. (Actuellement, il n'y a pas de polices, on utilise une police par défaut GoogleFonts.lato)
 * Un fichier routes_configuration.dart (dossier lib/src/common/conf) contient toutes les routes de l'application. Chaque route correspond à une page. (Toute nouvelle page doit être ajoutée dans ce fichier).
 * Le fichier app_dependencies_binding.dart (dossier lib/src/common/conf) contient toutes les injections de dépendances. (Toute nouvelle injection doit être ajoutée dans ce fichier). Il permet de gérer les injections de dépendances avec le package get_it.
+* Utiliser debugPrint pour debuger au lieu de print.

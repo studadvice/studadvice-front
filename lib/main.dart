@@ -5,6 +5,10 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:stud_advice/src/common/chore/app_colors.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:get_it/get_it.dart';
+import 'package:stud_advice/src/common/chore/styles.dart';
+
 import 'package:stud_advice/src/common/chore/supported_locales.dart';
 import 'package:stud_advice/src/common/conf/app_dependencies_binding.dart';
 
@@ -20,9 +24,11 @@ void main() async {
 }
 
 class StudAdviceApp extends StatelessWidget {
-  const StudAdviceApp({super.key});
+  final ThemeController themeController;
+  final LanguageController languageController;
 
-  // This widget is the root of your application.
+  StudAdviceApp({required this.themeController, required this.languageController});
+
   @override
   Widget build(BuildContext context) {
     final RoutesConfiguration routesConfiguration =
