@@ -7,14 +7,14 @@ import 'package:stud_advice/src/services/init_time/init_time_service.dart';
 class InitTimeScreen extends StatelessWidget {
   static const String navigatorId = '/init_time_screen';
 
-  const InitTimeScreen({super.key});
+  final InitTimeService _initTimeService = Get.put(InitTimeService());
 
   final String loginText = 'Se connecter';
   final String registerText = 'S\'inscrire';
 
   @override
   Widget build(BuildContext context) {
-    InitTimeService initTimeService = Get.find<InitTimeService>();
+    // Service.
 
     return Scaffold(
       backgroundColor: AppColors.white,
@@ -22,9 +22,9 @@ class InitTimeScreen extends StatelessWidget {
         child: OrientationBuilder(
           builder: (context, orientation) {
             if (orientation == Orientation.portrait) {
-              return buildPortraitLayout(initTimeService, context);
+              return buildPortraitLayout(_initTimeService, context);
             } else {
-              return buildLandscapeLayout(initTimeService, context);
+              return buildLandscapeLayout(_initTimeService, context);
             }
           },
         ),

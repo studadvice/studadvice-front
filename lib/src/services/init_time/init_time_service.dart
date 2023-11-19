@@ -6,7 +6,7 @@ import '../../screens/login/login_screen.dart';
 
 class InitTimeService {
   void navigateToRegisterPage(BuildContext context) {
-    Get.to(() => const RegisterOptionsScreen());
+    Get.to(() => RegisterOptionsScreen());
   }
 
   void navigateToLoginPage(BuildContext context) {

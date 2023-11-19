@@ -6,16 +6,9 @@ import 'package:stud_advice/src/screens/register/widgets/register_social_button.
 import 'package:stud_advice/src/screens/register/widgets/register_with_email_button.dart';
 import 'package:stud_advice/src/widgets/dividers/divider_with_text.dart';
 
-class RegisterOptionsScreen extends StatefulWidget {
+class RegisterOptionsScreen extends StatelessWidget {
   static const String navigatorId = '/register_screen_options';
 
-  const RegisterOptionsScreen({super.key});
-
-  @override
-  State<RegisterOptionsScreen> createState() => _RegisterOptionsScreenState();
-}
-
-class _RegisterOptionsScreenState extends State<RegisterOptionsScreen> {
   // Use constants to facilitate the implementation of the translation.
   final String dividerText = 'Ou';
   final String continueWithGoogleText = 'Continuer avec Google';

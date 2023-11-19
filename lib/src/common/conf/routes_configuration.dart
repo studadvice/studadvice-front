@@ -12,14 +12,13 @@ class RoutesConfiguration {
 
   List<GetPage> configureRoutes() {
     return [
-      GetPage(
-          name: InitTimeScreen.navigatorId, page: () => const InitTimeScreen()),
+      GetPage(name: InitTimeScreen.navigatorId, page: () => InitTimeScreen()),
       GetPage(
           name: HomePageScreen.navigatorId, page: () => const HomePageScreen()),
       GetPage(name: LoginScreen.navigatorId, page: () => LoginScreen()),
       GetPage(
           name: RegisterOptionsScreen.navigatorId,
-          page: () => const RegisterOptionsScreen()),
+          page: () => RegisterOptionsScreen()),
       GetPage(
           name: RegisterWithEmailScreen.navigatorId,
           page: () => RegisterWithEmailScreen()),
@@ -27,7 +26,7 @@ class RoutesConfiguration {
           name: LegalTermsScreen.navigatorId, page: () => LegalTermsScreen()),
       GetPage(
           name: RegisterUserInformationScreen.navigatorId,
-          page: () => const RegisterUserInformationScreen()),
+          page: () => RegisterUserInformationScreen()),
     ];
   }
 }

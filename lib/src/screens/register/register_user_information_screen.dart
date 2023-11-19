@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:stud_advice/src/common/chore/app_colors.dart';
 import 'package:stud_advice/src/common/chore/app_fonts_sizes.dart';
+import 'package:stud_advice/src/controller/register/register_user_information_controller.dart';
 import 'package:stud_advice/src/models/city/city_data.dart';
 import 'package:stud_advice/src/models/user/user_data.dart';
 import 'package:stud_advice/src/services/register/register_user_information_service.dart';
@@ -13,18 +14,15 @@ import 'package:stud_advice/src/widgets/pickers/date_picker_field.dart';
 import 'package:stud_advice/src/widgets/textFields/auto_complete_text_field.dart';
 import 'package:stud_advice/src/widgets/textFields/classic_text_field.dart';
 
-class RegisterUserInformationScreen extends StatefulWidget {
+class RegisterUserInformationScreen extends StatelessWidget {
   static const String navigatorId = '/register_user_information_screen';
 
-  const RegisterUserInformationScreen({super.key});
+  final RegisterUserInformationService _registerUserInformationService =
+      Get.put(RegisterUserInformationService());
 
-  @override
-  State<RegisterUserInformationScreen> createState() =>
-      _RegisterUserInformationScreenState();
-}
+  final RegisterUserInformationController _registerUserInformationController =
+      Get.put(RegisterUserInformationController());
 
-class _RegisterUserInformationScreenState
-    extends State<RegisterUserInformationScreen> {
   // Use constants to facilitate the implementation of the translation.
   final String screenTitle = 'Veuillez renseigner les informations suivantes';
   final String pseudoHintText = 'Pseudo';
@@ -67,75 +65,58 @@ class _RegisterUserInformationScreenState
   final TextEditingController countryController = TextEditingController();
   final TextEditingController postalCodeController = TextEditingController();
 
-  // Services.
-  final RegisterUserInformationService _registerUserInformationService =
-      Get.find<RegisterUserInformationService>();
-
   // Model data.
   late UserData userData;
   late Future<List<String>> universityData;
 
   @override
-  void initState() {
-    super.initState();
-    universityData = _registerUserInformationService.fetchUniversityData();
-  }
-
-  @override
-  void dispose() {
-    // Dispose of the controllers when the widget is disposed.
-    pseudoController.dispose();
-    birthDateController.dispose();
-    cityController.dispose();
-    universityController.dispose();
-    formationController.dispose();
-    countryController.dispose();
-    postalCodeController.dispose();
-    super.dispose();
-  }
-
-  @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        centerTitle: true,
-        title: Text(
-          screenTitle,
-          style: (const TextStyle(
-            fontSize: AppFontSizes.large16,
-            fontWeight: FontWeight.bold,
-          )),
-        ),
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back),
-          onPressed: () {
-            Get.back();
-          },
-        ),
-      ),
-      body: ListView(
-        // Wrap in a ListView to avoid overflow when the keyboard is displayed.
-        children: [
-          SizedBox(height: MediaQuery.of(context).size.height * 0.1),
-          FutureBuilder<List<String>>(
-              future: universityData,
-              builder: (context, snapshot) {
-                if (snapshot.hasData) {
-                  return buildRegisterUserInformationForm(snapshot.data!);
-                } else {
-                  return const Center(
-                      child: CircularProgressIndicator(
-                    color: AppColors.secondaryColor,
-                    strokeWidth: 5,
-                  ));
-                }
-              })
-        ],
-      ),
+    return GetBuilder<RegisterUserInformationController>(
+      builder: (_) {
+        return Scaffold(
+          appBar: AppBar(
+            centerTitle: true,
+            title: Text(
+              screenTitle,
+              style: (const TextStyle(
+                fontSize: AppFontSizes.large16,
+                fontWeight: FontWeight.bold,
+              )),
+            ),
+            leading: IconButton(
+              icon: const Icon(Icons.arrow_back),
+              onPressed: () {
+                Get.back();
+              },
+            ),
+          ),
+          body: ListView(
+            // Wrap in a ListView to avoid overflow when the keyboard is displayed.
+            children: [
+              SizedBox(height: MediaQuery.of(context).size.height * 0.1),
+              FutureBuilder<List<String>>(
+                  future: universityData,
+                  builder: (context, snapshot) {
+                    if (snapshot.hasData) {
+                      return buildRegisterUserInformationForm(
+                          context, snapshot.data!);
+                    } else {
+                      return const Center(
+                          child: CircularProgressIndicator(
+                        color: AppColors.secondaryColor,
+                        strokeWidth: 5,
+                      ));
+                    }
+                  })
+            ],
+          ),
+        );
+      },
     );
   }
 
-  Widget buildRegisterUserInformationForm(List<String> universityData) {
+  Widget buildRegisterUserInformationForm(
+      BuildContext context, List<String> universityData) {
     return Center(
       child: Column(
         children: [
@@ -150,7 +131,7 @@ class _RegisterUserInformationScreenState
           const SizedBox(height: 10),
           buildBirthDateTextField(),
           const SizedBox(height: 10),
-          buildUniversityTextField(universityData),
+          buildUniversityTextField(context, universityData),
           const SizedBox(height: 10),
           buildFormationTextField(),
           const SizedBox(height: 50),
@@ -274,7 +255,8 @@ class _RegisterUserInformationScreenState
     }).toList();
   }
 
-  Widget buildUniversityTextField(List<String> universityData) {
+  Widget buildUniversityTextField(
+      BuildContext context, List<String> universityData) {
     if (!universityData.contains(defaultUniversityChoice)) {
       universityData.insert(0, defaultUniversityChoice);
     }

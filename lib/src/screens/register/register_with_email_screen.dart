@@ -161,8 +161,7 @@ class RegisterWithEmailScreen extends StatelessWidget {
             return;
           }
           dynamic formData = collectFormData();
-          Get.to(() => const RegisterUserInformationScreen(),
-              arguments: formData);
+          Get.to(() => RegisterUserInformationScreen(), arguments: formData);
         });
   }
 
