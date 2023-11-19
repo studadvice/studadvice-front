@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class DividerWithText extends StatefulWidget {
+class DividerWithText extends StatelessWidget {
   final String text;
 
   const DividerWithText({
@@ -8,11 +8,6 @@ class DividerWithText extends StatefulWidget {
     required this.text,
   });
 
-  @override
-  State<DividerWithText> createState() => _DividerWithTextState();
-}
-
-class _DividerWithTextState extends State<DividerWithText> {
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -28,7 +23,7 @@ class _DividerWithTextState extends State<DividerWithText> {
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 10.0),
             child: Text(
-              widget.text,
+              text,
               style: TextStyle(color: Colors.grey[700]),
             ),
           ),
