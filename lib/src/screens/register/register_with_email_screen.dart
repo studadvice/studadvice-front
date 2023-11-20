@@ -4,6 +4,7 @@ import 'package:stud_advice/src/common/chore/app_colors.dart';
 import 'package:stud_advice/src/common/chore/app_fonts_sizes.dart';
 import 'package:stud_advice/src/common/chore/crypto_hash.dart';
 import 'package:stud_advice/src/common/chore/form_validator.dart';
+import 'package:stud_advice/src/controller/authentication/authentication_controller.dart';
 import 'package:stud_advice/src/controller/register/register_with_email_controller.dart';
 import 'package:stud_advice/src/screens/legal_conditions/legal_conditions_screen.dart';
 import 'package:stud_advice/src/screens/register/register_user_information_screen.dart';
@@ -14,6 +15,8 @@ import 'package:stud_advice/src/widgets/textFields/password_text_field.dart';
 class RegisterWithEmailScreen extends StatelessWidget {
   static const String navigatorId = '/register_with_email_screen';
 
+  final AuthenticationController _authenticationController =
+      Get.put(AuthenticationController());
   final RegisterWithEmailController _registerWithEmailController =
       Get.put(RegisterWithEmailController());
 
@@ -126,43 +129,70 @@ class RegisterWithEmailScreen extends StatelessWidget {
         borderColor: AppColors.secondaryColor);
   }
 
+  /*
+    if (_authenticationController.isLoadingConnection.isTrue) {
+                Get.dialog(const Center(
+                  child: CircularProgressIndicator(
+                    color: AppColors.secondaryColor,
+                    strokeWidth: 5,
+                  ),
+                ));
+              }
+   */
   Widget buildConnectionButton() {
     return DefaultConnectionButton(
         text: connectionButtonText,
         textColor: AppColors.white,
         backgroundColor: AppColors.blue,
-        onPressed: () {
+        onPressed: () async {
           if (!_registerWithEmailController.agreeWithTermsAndConditions.value) {
-            Get.snackbar(
-              termsAndConditionsText,
-              acceptTermsAndConditionsErrorText,
-              snackPosition: SnackPosition.BOTTOM,
-              duration: const Duration(seconds: 3),
-              titleText: Text(
-                termsAndConditionsText,
-                style: const TextStyle(
-                  color: AppColors.white,
-                  fontSize: AppFontSizes.medium,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-              messageText: Text(
-                acceptTermsAndConditionsErrorText,
-                style: const TextStyle(
-                  color: AppColors.white,
-                  fontSize: AppFontSizes.medium,
-                ),
-              ),
-              backgroundColor: AppColors.dangerColor,
-            );
+            getSnackbarController();
             return;
           }
+
           if (!_formKey.currentState!.validate()) {
             return;
           }
+
           dynamic formData = collectFormData();
-          Get.to(() => RegisterUserInformationScreen(), arguments: formData);
+
+          _authenticationController.isLoadingConnection.value = true;
+
+          await _authenticationController.signUp(
+            formData['email'],
+            formData['hashedPassword'],
+          );
+
+          Get.to(() => const RegisterUserInformationScreen(),
+              arguments: formData);
+
+          _authenticationController.isLoadingConnection.value = false;
         });
+  }
+
+  SnackbarController getSnackbarController() {
+    return Get.snackbar(
+      termsAndConditionsText,
+      acceptTermsAndConditionsErrorText,
+      snackPosition: SnackPosition.BOTTOM,
+      duration: const Duration(seconds: 3),
+      titleText: Text(
+        termsAndConditionsText,
+        style: const TextStyle(
+          color: AppColors.white,
+          fontSize: AppFontSizes.medium,
+          fontWeight: FontWeight.bold,
+        ),
+      ),
+      messageText: Text(
+        acceptTermsAndConditionsErrorText,
+        style: const TextStyle(
+          color: AppColors.white,
+          fontSize: AppFontSizes.medium,
+        ),
+      ),
+      backgroundColor: AppColors.dangerColor,
+    );
   }
 
   dynamic collectFormData() {

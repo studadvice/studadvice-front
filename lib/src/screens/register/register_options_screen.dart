@@ -63,6 +63,7 @@ class RegisterOptionsScreen extends StatelessWidget {
                       buttonText: continueWithGoogleText,
                       onTap: () {
                         // TODO Register with google
+                        // next move to register user information screen
                       }),
                   const SizedBox(height: 20),
                   buildSocialButton(
@@ -71,6 +72,7 @@ class RegisterOptionsScreen extends StatelessWidget {
                       iconColor: Colors.blue,
                       onTap: () {
                         // TODO Register with facebook
+                        // next move to register user information screen
                       }),
                   const SizedBox(height: 20),
                   buildSocialButton(
@@ -78,6 +80,7 @@ class RegisterOptionsScreen extends StatelessWidget {
                       buttonText: continueWithAppleText,
                       onTap: () {
                         // TODO Register with apple
+                        // next move to register user information screen
                       }),
                   const SizedBox(height: 20),
                   buildSocialButton(
@@ -85,6 +88,7 @@ class RegisterOptionsScreen extends StatelessWidget {
                       buttonText: continueWithXText,
                       onTap: () {
                         // TODO Register with x
+                        // next move to register user information screen
                       }),
                   buildDividerWithText(),
                   RegisterWithEmailButton(

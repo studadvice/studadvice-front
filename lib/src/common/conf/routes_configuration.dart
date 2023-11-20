@@ -26,7 +26,7 @@ class RoutesConfiguration {
           name: LegalTermsScreen.navigatorId, page: () => LegalTermsScreen()),
       GetPage(
           name: RegisterUserInformationScreen.navigatorId,
-          page: () => RegisterUserInformationScreen()),
+          page: () => const RegisterUserInformationScreen()),
     ];
   }
 }

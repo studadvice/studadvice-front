@@ -15,7 +15,6 @@ dependencies:
     sdk: flutter
 
   cupertino_icons: ^1.0.2
-  firebase_auth: ^4.13.0
   google_fonts: ^6.1.0
   logger: ^2.0.2+1
   get_it: ^7.6.4
@@ -32,6 +31,8 @@ dependencies:
   search_choices: ^2.2.7
   get: ^4.6.6
   crypto: ^3.0.3
+  firebase_auth: ^4.14.0
+  firebase_core: ^2.22.0
 #  flutter_native_splash: ^2.3.5
 
 dev_dependencies:
