@@ -1,7 +1,7 @@
 import 'package:country_picker/country_picker.dart';
 import 'package:flutter/material.dart';
 
-class CountryPickerField extends StatefulWidget {
+class CountryPickerField extends StatelessWidget {
   final TextEditingController controller;
   final String hintText;
   final String labelText;
@@ -17,47 +17,49 @@ class CountryPickerField extends StatefulWidget {
     required this.focusedBorderColor,
   });
 
-  @override
-  State<CountryPickerField> createState() => _CountryPickerFieldState();
-}
-
-class _CountryPickerFieldState extends State<CountryPickerField> {
-  @override
-  void setState(VoidCallback fn) {
-    if (mounted) {
-      super.setState(fn);
-    }
-  }
-
   Future<void> _selectCountry(BuildContext context) async {
     showCountryPicker(
       context: context,
       onSelect: (Country country) {
-        widget.controller.text = country.name;
+        controller.text = country.name;
       },
     );
   }
 
   @override
   Widget build(BuildContext context) {
+    var notSelectedCountry = 'Veuillez sélectionner un pays';
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 25.0),
       child: TextFormField(
         onTap: () {
           _selectCountry(context);
         },
-        controller: widget.controller,
+        validator: (value) {
+          if (value == null || value.isEmpty) {
+            return notSelectedCountry;
+          }
+          return null;
+        },
+        controller: controller,
         readOnly: true,
         decoration: InputDecoration(
-          labelText: widget.labelText,
-          hintText: widget.hintText,
+          labelText: labelText,
+          hintText: hintText,
           enabledBorder: OutlineInputBorder(
-            borderSide: BorderSide(color: widget.borderColor, width: 0.5),
+            borderSide: BorderSide(color: borderColor, width: 0.5),
             borderRadius: BorderRadius.circular(15),
           ),
           focusedBorder: OutlineInputBorder(
-            borderSide:
-                BorderSide(color: widget.focusedBorderColor, width: 1.1),
+            borderSide: BorderSide(color: focusedBorderColor, width: 1.1),
+            borderRadius: BorderRadius.circular(15),
+          ),
+          focusedErrorBorder: OutlineInputBorder(
+            borderSide: const BorderSide(color: Colors.red, width: 1),
+            borderRadius: BorderRadius.circular(15),
+          ),
+          errorBorder: OutlineInputBorder(
+            borderSide: const BorderSide(color: Colors.red, width: 1),
             borderRadius: BorderRadius.circular(15),
           ),
           suffixIcon: const Icon(Icons.arrow_drop_down),

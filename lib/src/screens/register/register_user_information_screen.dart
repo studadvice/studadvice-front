@@ -5,31 +5,39 @@ import 'package:stud_advice/src/common/chore/app_fonts_sizes.dart';
 import 'package:stud_advice/src/controller/register/register_user_information_controller.dart';
 import 'package:stud_advice/src/models/city/city_data.dart';
 import 'package:stud_advice/src/models/user/user_data.dart';
-import 'package:stud_advice/src/services/register/register_user_information_service.dart';
 import 'package:stud_advice/src/widgets/buttons/default_connection_button.dart';
 import 'package:stud_advice/src/widgets/dropdowns/custom_dropdown_button.dart';
-import 'package:stud_advice/src/widgets/dropdowns/search_choices_field.dart';
+import 'package:stud_advice/src/widgets/modals/custom_selection_modal.dart';
 import 'package:stud_advice/src/widgets/pickers/country_picker_field.dart';
 import 'package:stud_advice/src/widgets/pickers/date_picker_field.dart';
 import 'package:stud_advice/src/widgets/textFields/auto_complete_text_field.dart';
 import 'package:stud_advice/src/widgets/textFields/classic_text_field.dart';
 
-class RegisterUserInformationScreen extends StatelessWidget {
+class RegisterUserInformationScreen extends StatefulWidget {
   static const String navigatorId = '/register_user_information_screen';
 
-  final RegisterUserInformationService _registerUserInformationService =
-      Get.put(RegisterUserInformationService());
+  const RegisterUserInformationScreen({super.key});
 
+  @override
+  State<RegisterUserInformationScreen> createState() =>
+      _RegisterUserInformationScreenState();
+}
+
+class _RegisterUserInformationScreenState
+    extends State<RegisterUserInformationScreen> {
   final RegisterUserInformationController _registerUserInformationController =
       Get.put(RegisterUserInformationController());
 
   // Use constants to facilitate the implementation of the translation.
   final String screenTitle = 'Veuillez renseigner les informations suivantes';
   final String pseudoHintText = 'Pseudo';
+  final String pseudoErrorText = 'Veuillez renseigner votre pseudo';
   final String postalCodeHintText = 'Code Postal';
   final String postalCodeLabelText = 'Code Postal';
   final String birthDateHintText = 'Date de naissance';
   final String birthDateLabelText = 'Date de naissance';
+  final String birthDateErrorText =
+      'Veuillez renseigner votre date de naissance';
   final String cityHintText = 'Ville';
   final String cityLabelText = 'Ville';
   final String universityHintText = 'Université';
@@ -39,6 +47,7 @@ class RegisterUserInformationScreen extends StatelessWidget {
   final String countryLabelText = 'Pays d\'origine';
   final String formationHintText = 'Formation';
   final String formationLabelText = 'Formation';
+  final String formationErrorText = 'Veuillez renseigner votre formation';
   final String nextButtonText = 'Suivant';
   final String cityNotFoundText = 'Ville non trouvée';
   final String cityNotSelectedText = 'Veuillez sélectionner une ville';
@@ -56,7 +65,7 @@ class RegisterUserInformationScreen extends StatelessWidget {
 
   // Controllers for the text fields.
   final TextEditingController pseudoController = TextEditingController(
-    text: RegisterUserInformationService.generateRandomPseudo(),
+    text: RegisterUserInformationController.generateRandomPseudo(),
   );
   final TextEditingController birthDateController = TextEditingController();
   final TextEditingController cityController = TextEditingController();
@@ -70,73 +79,91 @@ class RegisterUserInformationScreen extends StatelessWidget {
   late Future<List<String>> universityData;
 
   @override
+  void initState() {
+    super.initState();
+    universityData = _registerUserInformationController.fetchUniversityData();
+  }
+
+  @override
+  void dispose() {
+    // Dispose of the controllers when the widget is disposed.
+    pseudoController.dispose();
+    birthDateController.dispose();
+    cityController.dispose();
+    universityController.dispose();
+    formationController.dispose();
+    countryController.dispose();
+    postalCodeController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return GetBuilder<RegisterUserInformationController>(
-      builder: (_) {
-        return Scaffold(
-          appBar: AppBar(
-            centerTitle: true,
-            title: Text(
-              screenTitle,
-              style: (const TextStyle(
-                fontSize: AppFontSizes.large16,
-                fontWeight: FontWeight.bold,
-              )),
-            ),
-            leading: IconButton(
-              icon: const Icon(Icons.arrow_back),
-              onPressed: () {
-                Get.back();
-              },
-            ),
-          ),
-          body: ListView(
-            // Wrap in a ListView to avoid overflow when the keyboard is displayed.
-            children: [
-              SizedBox(height: MediaQuery.of(context).size.height * 0.1),
-              FutureBuilder<List<String>>(
-                  future: universityData,
-                  builder: (context, snapshot) {
-                    if (snapshot.hasData) {
-                      return buildRegisterUserInformationForm(
-                          context, snapshot.data!);
-                    } else {
-                      return const Center(
-                          child: CircularProgressIndicator(
-                        color: AppColors.secondaryColor,
-                        strokeWidth: 5,
-                      ));
-                    }
-                  })
-            ],
-          ),
-        );
-      },
+    return Scaffold(
+      appBar: AppBar(
+        centerTitle: true,
+        title: Text(
+          screenTitle,
+          style: (const TextStyle(
+            fontSize: AppFontSizes.large16,
+            fontWeight: FontWeight.bold,
+          )),
+        ),
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back),
+          onPressed: () {
+            Get.back();
+          },
+        ),
+      ),
+      body: ListView(
+        // Wrap in a ListView to avoid overflow when the keyboard is displayed.
+        children: [
+          SizedBox(height: MediaQuery.of(context).size.height * 0.1),
+          FutureBuilder<List<String>>(
+              future: universityData,
+              builder: (context, snapshot) {
+                if (snapshot.hasData) {
+                  return buildRegisterUserInformationForm(snapshot.data!);
+                } else {
+                  return const Center(
+                      child: CircularProgressIndicator(
+                    color: AppColors.secondaryColor,
+                    strokeWidth: 5,
+                  ));
+                }
+              })
+        ],
+      ),
     );
   }
 
-  Widget buildRegisterUserInformationForm(
-      BuildContext context, List<String> universityData) {
+  final _formKey = GlobalKey<FormState>();
+
+  Widget buildRegisterUserInformationForm(List<String> universityData) {
     return Center(
-      child: Column(
-        children: [
-          const SizedBox(height: 10),
-          buildPseudoTextField(),
-          const SizedBox(height: 10),
-          buildCityTextField(),
-          const SizedBox(height: 10),
-          buildPostalCodeDropdown(),
-          const SizedBox(height: 10),
-          buildCountryTextField(),
-          const SizedBox(height: 10),
-          buildBirthDateTextField(),
-          const SizedBox(height: 10),
-          buildUniversityTextField(context, universityData),
-          const SizedBox(height: 10),
-          buildFormationTextField(),
-          const SizedBox(height: 50),
-          buildNextButton(),
-        ],
+      child: Form(
+        key: _formKey,
+        child: Column(
+          children: [
+            const SizedBox(height: 10),
+            buildPseudoTextField(),
+            const SizedBox(height: 10),
+            buildCityTextField(),
+            const SizedBox(height: 10),
+            buildPostalCodeDropdown(),
+            const SizedBox(height: 10),
+            buildCountryTextField(),
+            const SizedBox(height: 10),
+            buildBirthDateTextField(),
+            const SizedBox(height: 10),
+            buildUniversityTextField(universityData),
+            const SizedBox(height: 10),
+            buildFormationTextField(),
+            const SizedBox(height: 50),
+            buildNextButton(),
+          ],
+        ),
       ),
     );
   }
@@ -149,6 +176,12 @@ class RegisterUserInformationScreen extends StatelessWidget {
       backgroundColor: AppColors.white,
       focusedBorderColor: AppColors.secondaryColor,
       borderColor: AppColors.secondaryColor,
+      validator: (value) {
+        if (value == null || value.isEmpty) {
+          return pseudoErrorText;
+        }
+        return null;
+      },
     );
   }
 
@@ -161,7 +194,7 @@ class RegisterUserInformationScreen extends StatelessWidget {
       borderColor: AppColors.secondaryColor,
       focusedBorderColor: AppColors.secondaryColor,
       suggestionsCallback: (pattern) async {
-        return await _registerUserInformationService
+        return await _registerUserInformationController
             .fetchCitiesFromAPI(pattern);
       },
       errorText: universityErrorText,
@@ -181,13 +214,13 @@ class RegisterUserInformationScreen extends StatelessWidget {
         backgroundColor: AppColors.white,
         borderColor: AppColors.secondaryColor,
         focusedBorderColor: AppColors.secondaryColor,
-        asyncItems: (String filter) => _registerUserInformationService
+        asyncItems: (String filter) => _registerUserInformationController
             .fetchPostalCodesFromApi(cityController.text),
         validator: (value) {
           if (value == null || value.isEmpty) {
             return postalCodeNotSelectedText;
           }
-          return value;
+          return null;
         },
         onChanged: (String? selectedItem) {
           postalCodeController.text = selectedItem ?? '';
@@ -231,6 +264,12 @@ class RegisterUserInformationScreen extends StatelessWidget {
       controller: birthDateController,
       focusedBorderColor: AppColors.secondaryColor,
       borderColor: AppColors.secondaryColor,
+      validator: (value) {
+        if (value == null || value.isEmpty) {
+          return birthDateErrorText;
+        }
+        return null;
+      },
     );
   }
 
@@ -255,8 +294,7 @@ class RegisterUserInformationScreen extends StatelessWidget {
     }).toList();
   }
 
-  Widget buildUniversityTextField(
-      BuildContext context, List<String> universityData) {
+  Widget buildUniversityTextField(List<String> universityData) {
     if (!universityData.contains(defaultUniversityChoice)) {
       universityData.insert(0, defaultUniversityChoice);
     }
@@ -271,6 +309,12 @@ class RegisterUserInformationScreen extends StatelessWidget {
         universityController.text = selectedItem;
       },
       searchHintText: universitySearchHintText,
+      validator: (value) {
+        if (value == null || value.isEmpty) {
+          return universityNotSelectedText;
+        }
+        return null;
+      },
     );
   }
 
@@ -282,6 +326,12 @@ class RegisterUserInformationScreen extends StatelessWidget {
       backgroundColor: AppColors.white,
       focusedBorderColor: AppColors.secondaryColor,
       borderColor: AppColors.secondaryColor,
+      validator: (value) {
+        if (value == null || value.isEmpty) {
+          return formationErrorText;
+        }
+        return null;
+      },
     );
   }
 
@@ -291,24 +341,39 @@ class RegisterUserInformationScreen extends StatelessWidget {
         textColor: AppColors.white,
         backgroundColor: AppColors.blue,
         onPressed: () {
-          debugPrint("postal code : ${postalCodeController.text}");
-          userData = UserData(
-            email: "",
-            // TODO récupérer l'email de l'utilisateur
-            passwordHash: "",
-            // TODO récupérer le hash du mot de passe
-            pseudo: pseudoController.text,
-            birthDate: birthDateController.text,
-            city: cityController.text,
-            university: universityController.text,
-            formation: formationController.text,
-            country: countryController.text,
-            postalCode: int.parse(postalCodeController.text),
-            hasAcceptedTermsAndConditions: true,
-          );
-          debugPrint(
-            userData.toJson().toString(),
-          );
+          if (_formKey.currentState!.validate()) {
+            UserData userData = buildUserData();
+            debugPrint(
+              userData.toJson().toString(),
+            );
+          }
         });
+  }
+
+  UserData buildUserData() {
+    Map<String, dynamic> previousFormData = Get.arguments;
+
+    String pseudo = pseudoController.text.trim();
+    String birthDate = birthDateController.text.trim();
+    String city = cityController.text.trim();
+    String university = universityController.text.trim();
+    String formation = formationController.text.trim();
+    String country = countryController.text.trim();
+    int postalCode = int.parse(postalCodeController.text.trim());
+
+    return UserData(
+      email: previousFormData['email'] ?? '',
+      passwordHash: previousFormData['hashedPassword'] ?? '',
+      pseudo: pseudo,
+      birthDate: birthDate,
+      city: city,
+      university: university,
+      formation: formation,
+      country: country,
+      postalCode: postalCode,
+      hasAcceptedTermsAndConditions: previousFormData[
+              'hasAcceptedTermsAndConditions'] ??
+          false, // HINT If the user has not accepted the terms and conditions, the default value is false.
+    );
   }
 }

@@ -60,17 +60,13 @@ class CustomDropdownSearch<T> extends StatelessWidget {
               width: 0.5,
             ),
           ),
-          errorBorder: OutlineInputBorder(
-            borderRadius: const BorderRadius.all(Radius.circular(15)),
-            borderSide: BorderSide(
-              color: borderColor,
-            ),
-          ),
           focusedErrorBorder: OutlineInputBorder(
-            borderRadius: const BorderRadius.all(Radius.circular(15)),
-            borderSide: BorderSide(
-              color: borderColor,
-            ),
+            borderSide: const BorderSide(color: Colors.red, width: 1),
+            borderRadius: BorderRadius.circular(15),
+          ),
+          errorBorder: OutlineInputBorder(
+            borderSide: const BorderSide(color: Colors.red, width: 1),
+            borderRadius: BorderRadius.circular(15),
           ),
         ),
       ),

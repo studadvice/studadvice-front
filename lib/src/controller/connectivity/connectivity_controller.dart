@@ -14,6 +14,7 @@ class ConnectivityController extends GetxController {
   @override
   void onInit() {
     super.onInit();
+    // TODO improve the way and when to get the connectivity status
     Connectivity().onConnectivityChanged.listen((result) {
       isConnected.value = (result != ConnectivityResult.none);
       showConnectivitySnackbar();

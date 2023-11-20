@@ -7,6 +7,7 @@ class DatePickerField extends StatefulWidget {
   final String hintText;
   final Color borderColor;
   final Color focusedBorderColor;
+  final String? Function(String?)? validator;
 
   const DatePickerField({
     super.key,
@@ -14,6 +15,7 @@ class DatePickerField extends StatefulWidget {
     required this.hintText,
     required this.borderColor,
     required this.focusedBorderColor,
+    this.validator,
   });
 
   @override
@@ -57,6 +59,7 @@ class _DatePickerFieldState extends State<DatePickerField> {
       child: TextFormField(
         controller: widget.controller,
         readOnly: true,
+        validator: widget.validator,
         decoration: InputDecoration(
           hintText: widget.hintText,
           labelText: labelText,
@@ -67,6 +70,14 @@ class _DatePickerFieldState extends State<DatePickerField> {
           focusedBorder: OutlineInputBorder(
             borderSide:
                 BorderSide(color: widget.focusedBorderColor, width: 1.1),
+            borderRadius: BorderRadius.circular(15),
+          ),
+          focusedErrorBorder: OutlineInputBorder(
+            borderSide: const BorderSide(color: Colors.red, width: 1),
+            borderRadius: BorderRadius.circular(15),
+          ),
+          errorBorder: OutlineInputBorder(
+            borderSide: const BorderSide(color: Colors.red, width: 1),
             borderRadius: BorderRadius.circular(15),
           ),
           suffixIcon: const Icon(Icons.calendar_today),

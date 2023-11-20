@@ -168,12 +168,12 @@ class RegisterWithEmailScreen extends StatelessWidget {
   dynamic collectFormData() {
     String email = emailOrPseudoController.text.trim();
     String password = passwordController.text.trim();
-    String passwordHash = CryptoHash.hashValue(password);
+    String hashedPassword = CryptoHash.hashValue(password);
     bool hasAcceptedTermsAndConditions =
         _registerWithEmailController.agreeWithTermsAndConditions.value;
     return {
       'email': email,
-      'password': passwordHash,
+      'hashedPassword': hashedPassword,
       'hasAcceptedTermsAndConditions': hasAcceptedTermsAndConditions,
     };
   }

@@ -57,6 +57,14 @@ class AutoCompleteTextField<T> extends StatelessWidget {
                 borderSide: BorderSide(color: focusedBorderColor, width: 1.1),
                 borderRadius: BorderRadius.circular(15),
               ),
+              focusedErrorBorder: OutlineInputBorder(
+                borderSide: const BorderSide(color: Colors.red, width: 1),
+                borderRadius: BorderRadius.circular(15),
+              ),
+              errorBorder: OutlineInputBorder(
+                borderSide: const BorderSide(color: Colors.red, width: 1),
+                borderRadius: BorderRadius.circular(15),
+              ),
               suffixIcon: const Icon(Icons.arrow_drop_down),
             ),
             keyboardType: keyboardType ?? TextInputType.text,
