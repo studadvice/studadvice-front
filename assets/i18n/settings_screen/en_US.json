@@ -1,18 +1,13 @@
 {
-  "welcome": "Welcome",
-  "home" : "Home",
-  "settings": "Settings",
+  "title": "Settings",
   "account": "My account",
   "accountDescription" : "Tap to change your data",
   "darkmode": "Dark mode",
   "language": "Language",
   "logout": "Logout",
   "notifications": "Notifications",
-  "light": "Light",
-  "dark": "Dark",
   "support" : "Support",
-  "feedback" : "Feedback",
   "changePassword" : "Change Password",
-  "conditions": "Terms & conditions",
-  "accesibility" : "Accesibility"
+  "terms": "Terms & conditions",
+  "accessibility" : "Accessibility"
 }

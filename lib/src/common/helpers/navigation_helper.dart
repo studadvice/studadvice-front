@@ -1,7 +1,7 @@
-import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class NavigationHelper {
-  void navigateTo(BuildContext context, Widget screen) {
-    Navigator.push(context, MaterialPageRoute(builder: (context) => screen));
+  static Future<void> navigateTo(String route) async {
+    Get.rootDelegate.toNamed(route);
   }
 }

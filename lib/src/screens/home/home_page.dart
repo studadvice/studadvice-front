@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:stud_advice/src/common/chore/app_fonts_sizes.dart';
 
 class HomePageScreen extends StatefulWidget {
-  static const navigatorId = '/home_page';
+  static const navigatorId = '/home_page_screen';
 
   const HomePageScreen({super.key});
 

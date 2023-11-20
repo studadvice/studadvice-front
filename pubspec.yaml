@@ -51,7 +51,14 @@ flutter:
     - assets/images/
     - assets/images/common/
     - assets/images/login/
-    - assets/translations/settings_screen/
+    - assets/i18n/settings_screen/
+    - assets/i18n/init_time_screen/
+    - assets/i18n/legal_terms_screen/
+    - assets/i18n/login_screen/
+    - assets/i18n/register_options_screen/
+    - assets/i18n/register_user_information_screen/
+    - assets/i18n/register_with_email_screen/
+    - assets/i18n/home_page_screen/
 
   generate: true
       

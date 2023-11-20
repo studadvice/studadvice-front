@@ -1,9 +1,8 @@
-import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
-import 'package:stud_advice/src/common/middlewares/translations_middleware.dart';
+import 'package:stud_advice/src/common/middlewares/i18n_middleware.dart';
 import 'package:stud_advice/src/screens/home/home_page.dart';
 import 'package:stud_advice/src/screens/init_time/init_time_screen.dart';
-import 'package:stud_advice/src/screens/legal_conditions/legal_conditions_screen.dart';
+import 'package:stud_advice/src/screens/legal_terms/legal_terms_screen.dart';
 import 'package:stud_advice/src/screens/login/login_screen.dart';
 import 'package:stud_advice/src/screens/register/register_options_screen.dart';
 import 'package:stud_advice/src/screens/register/register_user_information_screen.dart';
@@ -11,8 +10,8 @@ import 'package:stud_advice/src/screens/register/register_with_email_screen.dart
 import 'package:stud_advice/src/screens/settings/settings_screen.dart';
 
 class RoutesConfiguration {
-  // static const String initialRoute = InitTimeScreen.navigatorId;
-  static const String initialRoute = SettingsScreen.navigatorId;
+  static const String initialRoute = InitTimeScreen.navigatorId;
+  // static const String initialRoute = SettingsScreen.navigatorId;
 
   List<GetPage> configureRoutes() {
     return [
@@ -44,39 +43,39 @@ class RoutesConfiguration {
         middlewares: [TranslationsMiddleware()],
       ),
       GetPage(
-        name: InitTimeScreen.navigatorId.startsWith('/') ? InitTimeScreen.navigatorId : '/${InitTimeScreen.navigatorId}',
+        name: InitTimeScreen.navigatorId,
         page: () => const InitTimeScreen(),
-        middlewares: [TranslationsMiddleware()],
+        middlewares: [I18nMiddleware()],
       ),
       GetPage(
-        name: HomePageScreen.navigatorId.startsWith('/') ? HomePageScreen.navigatorId : '/${HomePageScreen.navigatorId}',
+        name: HomePageScreen.navigatorId,
         page: () => const HomePageScreen(),
-        middlewares: [TranslationsMiddleware()],
+        middlewares: [I18nMiddleware()],
       ),
       GetPage(
-        name: LoginScreen.navigatorId.startsWith('/') ? LoginScreen.navigatorId : '/${LoginScreen.navigatorId}',
+        name: LoginScreen.navigatorId,
         page: () => const LoginScreen(),
-        middlewares: [TranslationsMiddleware()],
+        middlewares: [I18nMiddleware()],
       ),
       GetPage(
-        name: RegisterOptionsScreen.navigatorId.startsWith('/') ? RegisterOptionsScreen.navigatorId : '/${RegisterOptionsScreen.navigatorId}',
+        name: RegisterOptionsScreen.navigatorId,
         page: () => const RegisterOptionsScreen(),
-        middlewares: [TranslationsMiddleware()],
+        middlewares: [I18nMiddleware()],
       ),
       GetPage(
-        name: RegisterWithEmailScreen.navigatorId.startsWith('/') ? RegisterWithEmailScreen.navigatorId : '/${RegisterWithEmailScreen.navigatorId}',
+        name: RegisterWithEmailScreen.navigatorId,
         page: () => const RegisterWithEmailScreen(),
-        middlewares: [TranslationsMiddleware()],
+        middlewares: [I18nMiddleware()],
       ),
       GetPage(
-        name: LegalTermsScreen.navigatorId.startsWith('/') ? LegalTermsScreen.navigatorId : '/${LegalTermsScreen.navigatorId}',
-        page: () => LegalTermsScreen(),
-        middlewares: [TranslationsMiddleware()],
+        name: LegalTermsScreen.navigatorId,
+        page: () => const LegalTermsScreen(),
+        middlewares: [I18nMiddleware()],
       ),
       GetPage(
-        name: RegisterUserInformationScreen.navigatorId.startsWith('/') ? RegisterUserInformationScreen.navigatorId : '/${RegisterUserInformationScreen.navigatorId}',
+        name: RegisterUserInformationScreen.navigatorId,
         page: () => const RegisterUserInformationScreen(),
-        middlewares: [TranslationsMiddleware()],
+        middlewares: [I18nMiddleware()],
       ),
     ];
   }
