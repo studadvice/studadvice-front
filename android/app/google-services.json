@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "398344471697",
+    "project_id": "fir-platine-front",
+    "storage_bucket": "fir-platine-front.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:398344471697:android:22d8299ce9e679a75b2b30",
+        "android_client_info": {
+          "package_name": "com.stud.studadvice_front"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAnKm5Zqae8nVcPhAC6E4M8Qcfiqgln_mo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
