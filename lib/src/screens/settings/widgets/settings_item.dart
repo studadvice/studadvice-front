@@ -9,7 +9,7 @@ class SettingsScreenUtils {
 class SettingsItem extends StatelessWidget {
   final IconData icons;
   final IconStyle? iconStyle;
-  final Text title;
+  final String title;
   final TextStyle? titleStyle;
   final String? subtitle;
   final TextStyle? subtitleStyle;
@@ -60,13 +60,13 @@ class SettingsItem extends StatelessWidget {
                   size: SettingsScreenUtils.settingsGroupIconSize,
                 ),
               ),
-        title: title, 
-        // title: title Text(
-        //   title.data ?? "",
-        //   style: titleStyle ?? const TextStyle(fontWeight: FontWeight.bold),
-        //   maxLines: titleMaxLine,
-        //   overflow: titleMaxLine != null ? overflow : null,
-        // ),
+        // title: title, 
+        title: Text(
+          title,
+          style: titleStyle ?? const TextStyle(fontWeight: FontWeight.bold),
+          maxLines: titleMaxLine,
+          overflow: titleMaxLine != null ? overflow : null,
+        ),
         subtitle: (subtitle != null)
             ? Text(
                 subtitle!,
