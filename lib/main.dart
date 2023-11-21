@@ -3,18 +3,12 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:get/get.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:get_it/get_it.dart';
 import 'package:stud_advice/src/common/chore/styles.dart';
-
-import 'package:stud_advice/src/common/chore/supported_locales.dart';
-import 'package:stud_advice/src/common/conf/app_dependencies_binding.dart';
 
 import 'firebase_options.dart';
 import 'src/common/conf/routes_configuration.dart';
 
-import 'package:stud_advice/src/common/conf/injection_container.dart';
-import 'package:stud_advice/src/common/conf/routes_configuration.dart';
+// import 'package:stud_advice/src/common/conf/injection_container.dart';
 
 import 'package:stud_advice/src/common/controllers/i18n_controller.dart';
 import 'package:stud_advice/src/common/controllers/theme_controller.dart';
@@ -24,7 +18,7 @@ void main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-  setupDependenciesInjection();
+  // setupDependenciesInjection();
   final ThemeController themeController = Get.put(ThemeController());
   final I18n i18n = Get.put(I18n());
   final RoutesConfiguration routesConfiguration = Get.put(RoutesConfiguration());

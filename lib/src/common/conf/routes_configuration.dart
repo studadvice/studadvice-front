@@ -16,35 +16,18 @@ class RoutesConfiguration {
   List<GetPage> configureRoutes() {
     return [
       GetPage(
-          name: WelcomeScreen.navigatorId, page: () => const WelcomeScreen()),
-      GetPage(name: InitTimeScreen.navigatorId, page: () => InitTimeScreen()),
+        name: WelcomeScreen.navigatorId,
+        page: () => const WelcomeScreen(),
+        middlewares: [I18nMiddleware()],
+      ),
       GetPage(
-          name: HomePageScreen.navigatorId, page: () => const HomePageScreen()),
-      GetPage(name: LoginScreen.navigatorId, page: () => LoginScreen()),
-      GetPage(
-          name: RegisterOptionsScreen.navigatorId,
-          page: () => RegisterOptionsScreen()),
-      GetPage(
-          name: RegisterWithEmailScreen.navigatorId,
-          page: () => RegisterWithEmailScreen()),
-      GetPage(
-          name: LegalTermsScreen.navigatorId, page: () => LegalTermsScreen()),
-      GetPage(
-          name: RegisterUserInformationScreen.navigatorId,
-          page: () => const RegisterUserInformationScreen()),
-    ];
-  }
-
-  List<GetPage> configureRoutesGet() {
-    return [
-      GetPage(
-        name: SettingsScreen.navigatorId.startsWith('/') ? SettingsScreen.navigatorId : '/${SettingsScreen.navigatorId}',
-        page: () => SettingsScreen(),
-        middlewares: [TranslationsMiddleware()],
+        name: SettingsScreen.navigatorId,
+        page: () => const SettingsScreen(),
+        middlewares: [I18nMiddleware()],
       ),
       GetPage(
         name: InitTimeScreen.navigatorId,
-        page: () => const InitTimeScreen(),
+        page: () => InitTimeScreen(),
         middlewares: [I18nMiddleware()],
       ),
       GetPage(
@@ -54,17 +37,17 @@ class RoutesConfiguration {
       ),
       GetPage(
         name: LoginScreen.navigatorId,
-        page: () => const LoginScreen(),
+        page: () => LoginScreen(),
         middlewares: [I18nMiddleware()],
       ),
       GetPage(
         name: RegisterOptionsScreen.navigatorId,
-        page: () => const RegisterOptionsScreen(),
+        page: () => RegisterOptionsScreen(),
         middlewares: [I18nMiddleware()],
       ),
       GetPage(
         name: RegisterWithEmailScreen.navigatorId,
-        page: () => const RegisterWithEmailScreen(),
+        page: () => RegisterWithEmailScreen(),
         middlewares: [I18nMiddleware()],
       ),
       GetPage(
