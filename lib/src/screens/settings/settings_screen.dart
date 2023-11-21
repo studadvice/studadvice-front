@@ -5,7 +5,7 @@ import 'package:stud_advice/src/common/controllers/i18n_controller.dart';
 import 'package:stud_advice/src/common/controllers/theme_controller.dart';
 import 'package:stud_advice/src/common/helpers/navigation_helper.dart';
 import 'package:stud_advice/src/screens/legal_terms/legal_terms_screen.dart';
-import 'package:stud_advice/src/widgets/buttons/default_connection_button.dart';
+// import 'package:stud_advice/src/widgets/buttons/default_connection_button.dart';
 import 'package:stud_advice/src/widgets/dropdowns/custom_dropdown.dart';
 
 import 'package:stud_advice/src/screens/settings/widgets/settings_big_user_card.dart';
@@ -26,6 +26,23 @@ class SettingsScreen extends StatelessWidget {
   final borderColor = AppColors.secondaryColor;
   final focusedBorderColor = AppColors.secondaryColor;
   const SettingsScreen({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+        body: Padding(
+      padding: const EdgeInsets.all(10),
+      child: ListView(
+        children: [
+          // User card
+          buildUserCard(context),
+          buildOptionsGroup(context),
+          buildInfoGroup(),
+          buildLogoutGroup(),
+        ],
+      ),
+    ));
+  }
 
   void showLanguageSettings() {
     Get.bottomSheet(
@@ -72,23 +89,6 @@ class SettingsScreen extends StatelessWidget {
     );
   }
 
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-        body: Padding(
-      padding: const EdgeInsets.all(10),
-      child: ListView(
-        children: [
-          // User card
-          buildUserCard(context),
-          buildOptionsGroup(context),
-          buildInfoGroup(),
-          buildLogoutGroup(),
-        ],
-      ),
-    ));
-  }
-
   SettingsGroup buildLogoutGroup() {
     return SettingsGroup(
       items: [
@@ -97,7 +97,11 @@ class SettingsScreen extends StatelessWidget {
             // TODO : offAll to login screen
           },
           icons: Icons.logout,
-          iconStyle: IconStyle(),
+          iconStyle: IconStyle(
+            iconsColor: AppColors.white,
+            withBackground: true,
+            backgroundColor: AppColors.red,
+          ),
           title: i18n.text('logout'),
         ),
       ],

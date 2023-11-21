@@ -4,19 +4,22 @@ import 'package:stud_advice/src/common/chore/app_colors.dart';
 import 'package:stud_advice/src/common/chore/app_fonts_sizes.dart';
 import 'package:stud_advice/src/common/chore/crypto_hash.dart';
 import 'package:stud_advice/src/common/chore/form_validator.dart';
-import 'package:stud_advice/src/controllers/legal_terms/legal_terms_controller.dart';
-import 'package:stud_advice/src/controllers/register/register_with_email_controller.dart';
-import 'package:stud_advice/src/widgets/common/buttons/default_connection_button.dart';
-import 'package:stud_advice/src/widgets/common/textFields/classic_text_field.dart';
-import 'package:stud_advice/src/widgets/common/textFields/password_text_field.dart';
+import 'package:stud_advice/src/controller/register/register_with_email_controller.dart';
+import 'package:stud_advice/src/screens/legal_conditions/legal_conditions_screen.dart';
+import 'package:stud_advice/src/common/helpers/navigation_helper.dart';
+import 'package:stud_advice/src/controller/authentication/authentication_controller.dart';
+import 'package:stud_advice/src/controller/register/register_with_email_controller.dart';
+import 'package:stud_advice/src/screens/legal_terms/legal_terms_screen.dart';
+import 'package:stud_advice/src/screens/register/register_user_information_screen.dart';
+import 'package:stud_advice/src/widgets/buttons/default_connection_button.dart';
+import 'package:stud_advice/src/widgets/textFields/classic_text_field.dart';
+import 'package:stud_advice/src/widgets/textFields/password_text_field.dart';
 
 class RegisterWithEmailScreen extends StatelessWidget {
   static const String navigatorId = '/register_with_email_screen';
 
   final RegisterWithEmailController _registerWithEmailController =
       Get.put(RegisterWithEmailController());
-  final LegalTermsController _termsAndConditionsController =
-      Get.put(LegalTermsController());
 
   // Use constants to facilitate the implementation of the translation.
   final String emailHintText = 'Email';
@@ -27,6 +30,12 @@ class RegisterWithEmailScreen extends StatelessWidget {
   final String confirmPasswordLabelText = 'Confirmer le mot de passe';
   final String registerMessageText = 'Créer un compte';
   final String connectionButtonText = 'S\'inscrire';
+  final String legalConditionsButtonText = 'Voir les Termes et Conditions';
+  final String acceptTermsAndConditionsText =
+      'J\'accepte les conditions générales d\'utilisation';
+  final String acceptTermsAndConditionsErrorText =
+      'Veuillez accepter les termes et conditions';
+  final String termsAndConditionsText = 'Termes et Conditions';
 
   // Controllers for the text fields.
   final TextEditingController emailController = TextEditingController();
@@ -63,8 +72,8 @@ class RegisterWithEmailScreen extends StatelessWidget {
                 const SizedBox(height: 15),
                 buildConfirmPasswordTextField(),
                 const SizedBox(height: 100),
-                _termsAndConditionsController.buildTermsAndConditionsButton(),
-                _termsAndConditionsController.buildTermsAndConditionsRow(),
+                buildTermsAndConditionsButton(),
+                buildTermsAndConditionsRow(),
                 const SizedBox(height: 5),
                 buildConnectionButton(),
               ],
@@ -127,9 +136,8 @@ class RegisterWithEmailScreen extends StatelessWidget {
         textColor: AppColors.white,
         backgroundColor: AppColors.blue,
         onPressed: () async {
-          if (!_termsAndConditionsController
-              .agreeWithTermsAndConditions.value) {
-            _termsAndConditionsController.getSnackbarController();
+          if (!_registerWithEmailController.agreeWithTermsAndConditions.value) {
+            getSnackbarController();
             return;
           }
 
@@ -143,16 +151,86 @@ class RegisterWithEmailScreen extends StatelessWidget {
         });
   }
 
+  SnackbarController getSnackbarController() {
+    return Get.snackbar(
+      termsAndConditionsText,
+      acceptTermsAndConditionsErrorText,
+      snackPosition: SnackPosition.BOTTOM,
+      duration: const Duration(seconds: 3),
+      titleText: Text(
+        termsAndConditionsText,
+        style: const TextStyle(
+          color: AppColors.white,
+          fontSize: AppFontSizes.medium,
+          fontWeight: FontWeight.bold,
+        ),
+      ),
+      messageText: Text(
+        acceptTermsAndConditionsErrorText,
+        style: const TextStyle(
+          color: AppColors.white,
+          fontSize: AppFontSizes.medium,
+        ),
+      ),
+      backgroundColor: AppColors.dangerColor,
+    );
+  }
+
   dynamic collectFormData() {
     String email = emailController.text.trim();
     String password = passwordController.text.trim();
     String hashedPassword = CryptoHash.hashValue(password);
     bool hasAcceptedTermsAndConditions =
-        _termsAndConditionsController.agreeWithTermsAndConditions.value;
+        _registerWithEmailController.agreeWithTermsAndConditions.value;
     return {
       'email': email,
       'hashedPassword': hashedPassword,
       'hasAcceptedTermsAndConditions': hasAcceptedTermsAndConditions,
     };
+  }
+
+  Widget buildTermsAndConditionsButton() {
+    return GestureDetector(
+      onTap: () {
+        NavigationHelper.navigateTo(LegalTermsScreen.navigatorId);
+      },
+      child: Text(
+        legalConditionsButtonText,
+        style: const TextStyle(
+          color: AppColors.primaryColor,
+          decoration: TextDecoration.underline,
+          fontWeight: FontWeight.bold,
+          fontSize: AppFontSizes.medium,
+        ),
+      ),
+    );
+  }
+
+  Widget buildTermsAndConditionsRow() {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Obx(() => Checkbox(
+              value: _registerWithEmailController
+                  .agreeWithTermsAndConditions.value,
+              activeColor: AppColors.primaryColor,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(4),
+              ),
+              onChanged: (bool? value) {
+                _registerWithEmailController.agreeWithTermsAndConditions.value =
+                    value!;
+              },
+            )),
+        Text(
+          acceptTermsAndConditionsText,
+          style: const TextStyle(
+            fontSize: AppFontSizes.medium,
+            fontWeight: FontWeight.bold,
+            color: AppColors.secondaryColor,
+          ),
+        ),
+      ],
+    );
   }
 }
