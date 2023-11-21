@@ -5,12 +5,6 @@ import 'package:stud_advice/src/common/chore/app_colors.dart';
 //
 // );
 
-const Color lightBlue = Color(0xFF8ECAE6);
-const Color darkBlue = Color(0xFF219EBC);
-const Color darkerBlue = Color(0xFF023047);
-const Color yellow = Color(0xFFFFB703);
-const Color orange = Color(0xFFFB8500);
-
 class Styles {
   static ThemeData darkTheme = ThemeData(
     useMaterial3: true,
@@ -19,13 +13,10 @@ class Styles {
     brightness: Brightness.dark,
     primaryColor: AppColors.primaryColor,
     secondaryHeaderColor: AppColors.secondaryColor,
+    scaffoldBackgroundColor: const Color(0xFF303030),
     buttonTheme: const ButtonThemeData(
       buttonColor: Colors.amber,
       disabledColor: Colors.grey,
-    ),
-    appBarTheme: const AppBarTheme(
-      color: lightBlue,
-      iconTheme: IconThemeData(color: darkerBlue),
     ),
   );
 
@@ -35,13 +26,11 @@ class Styles {
     hintColor: Colors.pink,
     brightness: Brightness.light,
     primaryColor: AppColors.primaryColor,
+    // #F0F0F0
+    scaffoldBackgroundColor: const Color(0xFFF0F0F0),
     buttonTheme: const ButtonThemeData(
       buttonColor: Colors.blue,
       disabledColor: Colors.grey,
-    ),
-    appBarTheme: const AppBarTheme(
-      color: lightBlue,
-      iconTheme: IconThemeData(color: darkerBlue),
     ),
   );
 
