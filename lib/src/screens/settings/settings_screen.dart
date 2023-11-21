@@ -21,12 +21,65 @@ class SettingsScreen extends StatelessWidget {
   static final ThemeController themeController = Get.find();
   static final I18n i18n = Get.find();
 
+  final backgroundColor = AppColors.white;
+  final borderColor = AppColors.secondaryColor;
+  final focusedBorderColor= AppColors.secondaryColor;
   const SettingsScreen({super.key});
   void showLanguageSettings() {
     Get.bottomSheet(
       BottomSheetWidget(
         items: [
           DropdownSearch<CustomLocale>(
+            dropdownButtonProps: DropdownButtonProps(
+              focusColor: Theme.of(Get.context!).secondaryHeaderColor,
+            ),
+            dropdownDecoratorProps: DropDownDecoratorProps(
+              dropdownSearchDecoration: InputDecoration(
+                labelText: i18n.text('language'),
+                border: const OutlineInputBorder(
+                  borderRadius: BorderRadius.all(Radius.circular(15)),
+                  borderSide: BorderSide(
+                    color: AppColors.secondaryColor, 
+                  ),
+                ),
+                focusedBorder: OutlineInputBorder(
+                  borderRadius: const BorderRadius.all(Radius.circular(15)),
+                  borderSide: BorderSide(
+                    color: borderColor,
+                  ),
+                ),
+                enabledBorder: OutlineInputBorder(
+                  borderRadius: const BorderRadius.all(Radius.circular(15)),
+                  borderSide: BorderSide(
+                    color: borderColor,
+                    width: 0.5,
+                  ),
+                ),
+                errorBorder: OutlineInputBorder(
+                  borderRadius: const BorderRadius.all(Radius.circular(15)),
+                  borderSide: BorderSide(
+                    color: borderColor,
+                  ),
+                ),
+                focusedErrorBorder: OutlineInputBorder(
+                  borderRadius: const BorderRadius.all(Radius.circular(15)),
+                  borderSide: BorderSide(
+                    color: borderColor,
+                  ),
+                ),
+              ),
+            ),
+            popupProps: const PopupPropsMultiSelection.menu(
+              constraints: BoxConstraints(maxHeight: 280),
+              menuProps: MenuProps(
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.all(Radius.circular(15)),
+                ),
+                shadowColor: AppColors.black26, 
+              ),
+              // errorBuilder: () => (),
+              // emptyBuilder: emptyBuilder,
+            ),
             items: supportedLocales,
             onChanged: (CustomLocale? item) {
               i18n.changeLocale(item ?? i18n.getCurrentLocale, navigatorId);
@@ -34,10 +87,10 @@ class SettingsScreen extends StatelessWidget {
             selectedItem: i18n.getCurrentLocale,
           ),
           ElevatedButton(
-            style: ElevatedButton.styleFrom(
-              backgroundColor: Theme.of(Get.context!).primaryColor,
-              elevation: 1,
-            ),
+            // style: ElevatedButton.styleFrom(
+            //   backgroundColor: Theme.of(Get.context!).primaryColor,
+            //   elevation: 1,
+            // ),
             onPressed: () {
               Get.back();
             },
@@ -59,8 +112,8 @@ class SettingsScreen extends StatelessWidget {
           // User card
           BigUserCard(
             userName: "User",
-            userProfilePic:
-                const AssetImage("assets/images/common/raven_image.png"), // TODO : change this
+            userProfilePic: const AssetImage(
+                "assets/images/common/raven_image.png"), // TODO : change this
             cardActionWidget: SettingsItem(
               icons: Icons.edit,
               iconStyle: IconStyle(
@@ -129,8 +182,7 @@ class SettingsScreen extends StatelessWidget {
           SettingsGroup(
             items: [
               SettingsItem(
-                onTap: () {
-                },
+                onTap: () {},
                 icons: Icons.flag,
                 iconStyle: IconStyle(
                   iconsColor: AppColors.white,
@@ -157,7 +209,9 @@ class SettingsScreen extends StatelessWidget {
           SettingsGroup(
             items: [
               SettingsItem(
-                onTap: () {},
+                onTap: () {
+                  // TODO : offAll to login screen
+                },
                 icons: Icons.logout,
                 iconStyle: IconStyle(),
                 title: i18n.text('logout'),
