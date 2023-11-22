@@ -12,8 +12,9 @@ class LoginController extends GetxController {
   var rememberMe = true.obs;
 
   final String error = "Erreur de connexion";
-  final String registerWithEmailFailed =
+  final String loginWithEmailFailed =
       "Une erreur s'est produite lors de la connexion";
+  final String invalidCredentials = "Email ou mot de passe incorrects";
   final String wrongPassword = "Mot de passe incorrect";
   final String userDisabled = "Le compte a été désactivé";
   final String userNotFound = "Le compte n'existe pas";
@@ -58,18 +59,23 @@ class LoginController extends GetxController {
           snackPosition: SnackPosition.BOTTOM,
           colorText: AppColors.white,
         );
-      } else if (e.code == 'user-disabled') {
+      } else if (e.code == 'invalid-login-credentials') {
         Get.snackbar(
           error,
-          userDisabled,
-          backgroundColor: AppColors.dangerColor,
+          invalidCredentials,
+          backgroundGradient: const LinearGradient(
+            colors: [
+              AppColors.blue,
+              AppColors.dangerColor,
+            ],
+          ),
           snackPosition: SnackPosition.BOTTOM,
           colorText: AppColors.white,
         );
       } else {
         Get.snackbar(
           error,
-          registerWithEmailFailed,
+          loginWithEmailFailed,
           colorText: AppColors.white,
           backgroundColor: AppColors.dangerColor,
           snackPosition: SnackPosition.BOTTOM,
@@ -80,13 +86,6 @@ class LoginController extends GetxController {
         );
       }
     }
-  }
-
-  Future<bool> loginWithPseudoAndPassword(
-      String pseudo, String password) async {
-    debugPrint("pseudo: $pseudo, password: $password");
-    // TODO: implement loginWithPseudoAndPassword
-    return true;
   }
 
   Future<bool> loginWithFacebookAccount() async {

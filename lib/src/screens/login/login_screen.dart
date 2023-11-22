@@ -17,8 +17,8 @@ class LoginScreen extends StatelessWidget {
   final LoginController _loginController = Get.put(LoginController());
 
   // Use constants to facilitate the implementation of the translation.
-  final String emailOrPseudoHintText = 'Email ou pseudo';
-  final String emailOrPseudoLabelText = 'Email ou pseudo';
+  final String emailHintText = 'Email';
+  final String emailLabelText = 'Email';
   final String passwordHintText = 'Mot de passe';
   final String passwordLabelText = 'Mot de passe';
   final String welcomeBackText = 'Bon retour parmi nous !';
@@ -30,8 +30,7 @@ class LoginScreen extends StatelessWidget {
   final String passwordErrorText = 'Veuillez entrer votre mot de passe';
 
   // Controllers for the text fields.
-  final TextEditingController _emailOrPseudoController =
-      TextEditingController();
+  final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
 
   final _formKey = GlobalKey<FormState>();
@@ -57,7 +56,7 @@ class LoginScreen extends StatelessWidget {
                   SizedBox(height: MediaQuery.of(context).size.height * 0.1),
                   buildWelcomeBackText(),
                   const SizedBox(height: 40),
-                  buildEmailOrPseudoTextField(),
+                  buildEmailTextField(),
                   const SizedBox(height: 15),
                   buildPasswordTextField(),
                   const SizedBox(height: 10),
@@ -82,12 +81,12 @@ class LoginScreen extends StatelessWidget {
     return null;
   }
 
-  Widget buildEmailOrPseudoTextField() {
+  Widget buildEmailTextField() {
     return ClassicTextField(
-        validator: FormValidator.validateEmailOrPseudo,
-        hintText: emailOrPseudoHintText,
-        labelText: emailOrPseudoLabelText,
-        controller: _emailOrPseudoController,
+        validator: FormValidator.validateEmail,
+        hintText: emailHintText,
+        labelText: emailLabelText,
+        controller: _emailController,
         autofillHints: [AutofillHints.email, AutofillHints.username],
         keyboardType: TextInputType.emailAddress,
         backgroundColor: AppColors.white,
@@ -164,18 +163,13 @@ class LoginScreen extends StatelessWidget {
           if (!_formKey.currentState!.validate()) {
             return;
           }
-          String emailOrPseudo = _emailOrPseudoController.text;
+          String emailOrPseudo = _emailController.text;
           String password = _passwordController.text;
           String passwordHash = CryptoHash.hashValue(password);
 
           // TODO remember me logic.
-          if (emailOrPseudo.contains('@')) {
-            _loginController.loginWithEmailAndPassword(
-                emailOrPseudo, passwordHash);
-          } else {
-            _loginController.loginWithPseudoAndPassword(
-                emailOrPseudo, passwordHash);
-          }
+          _loginController.loginWithEmailAndPassword(
+              emailOrPseudo, passwordHash);
         });
   }
 
