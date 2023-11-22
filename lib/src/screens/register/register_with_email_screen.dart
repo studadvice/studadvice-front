@@ -36,7 +36,7 @@ class RegisterWithEmailScreen extends StatelessWidget {
   final String termsAndConditionsText = 'Termes et Conditions';
 
   // Controllers for the text fields.
-  final TextEditingController emailOrPseudoController = TextEditingController();
+  final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
   final TextEditingController confirmPasswordController =
       TextEditingController();
@@ -96,7 +96,7 @@ class RegisterWithEmailScreen extends StatelessWidget {
       validator: (value) => FormValidator.validateEmail(value),
       hintText: emailHintText,
       labelText: emailLabelText,
-      controller: emailOrPseudoController,
+      controller: emailController,
       backgroundColor: AppColors.white,
       focusedBorderColor: AppColors.secondaryColor,
       keyboardType: TextInputType.emailAddress,
@@ -176,7 +176,7 @@ class RegisterWithEmailScreen extends StatelessWidget {
   }
 
   dynamic collectFormData() {
-    String email = emailOrPseudoController.text.trim();
+    String email = emailController.text.trim();
     String password = passwordController.text.trim();
     String hashedPassword = CryptoHash.hashValue(password);
     bool hasAcceptedTermsAndConditions =
