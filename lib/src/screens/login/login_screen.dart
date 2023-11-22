@@ -5,7 +5,6 @@ import 'package:stud_advice/src/common/chore/app_fonts_sizes.dart';
 import 'package:stud_advice/src/common/chore/crypto_hash.dart';
 import 'package:stud_advice/src/common/chore/form_validator.dart';
 import 'package:stud_advice/src/controller/login/login_controller.dart';
-import 'package:stud_advice/src/services/login/login_service.dart';
 import 'package:stud_advice/src/widgets/buttons/default_connection_button.dart';
 import 'package:stud_advice/src/widgets/buttons/login_social_button.dart';
 import 'package:stud_advice/src/widgets/dividers/divider_with_text.dart';
@@ -16,9 +15,6 @@ class LoginScreen extends StatelessWidget {
   static const String navigatorId = '/login_screen';
 
   final LoginController _loginController = Get.put(LoginController());
-
-  // Service.
-  final LoginService _loginService = Get.put(LoginService());
 
   // Use constants to facilitate the implementation of the translation.
   final String emailOrPseudoHintText = 'Email ou pseudo';
@@ -171,10 +167,10 @@ class LoginScreen extends StatelessWidget {
             String passwordHash = CryptoHash.hashValue(password);
 
             if (emailOrPseudo.contains('@')) {
-              _loginService.loginWithEmailAndPassword(
+              _loginController.loginWithEmailAndPassword(
                   emailOrPseudo, passwordHash);
             } else {
-              _loginService.loginWithPseudoAndPassword(
+              _loginController.loginWithPseudoAndPassword(
                   emailOrPseudo, passwordHash);
             }
           }
@@ -190,7 +186,7 @@ class LoginScreen extends StatelessWidget {
           tileBackgroundColor: Colors.white,
           borderColor: AppColors.black26,
           onTap: () {
-            _loginService.loginWithGoogleAccount();
+            _loginController.loginWithGoogleAccount();
           },
         ),
         const SizedBox(width: 10),
@@ -200,7 +196,7 @@ class LoginScreen extends StatelessWidget {
           borderColor: AppColors.black26,
           iconColor: AppColors.blueAccent,
           onTap: () {
-            _loginService.loginWithFacebookAccount();
+            _loginController.loginWithFacebookAccount();
           },
         ),
         const SizedBox(width: 10),
@@ -209,7 +205,7 @@ class LoginScreen extends StatelessWidget {
           tileBackgroundColor: AppColors.white,
           borderColor: AppColors.black26,
           onTap: () {
-            _loginService.loginWithAppleAccount();
+            _loginController.loginWithAppleAccount();
           },
         ),
         const SizedBox(width: 10),
@@ -218,7 +214,7 @@ class LoginScreen extends StatelessWidget {
           tileBackgroundColor: Colors.white,
           borderColor: AppColors.black26,
           onTap: () {
-            _loginService.loginWithXAccount();
+            _loginController.loginWithXAccount();
           },
         ),
       ],
