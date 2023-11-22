@@ -2,12 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:stud_advice/src/common/chore/app_colors.dart';
 import 'package:stud_advice/src/screens/init_time/widgets/init_time_connection_button.dart';
-import 'package:stud_advice/src/services/init_time/init_time_service.dart';
+import 'package:stud_advice/src/screens/login/login_screen.dart';
+import 'package:stud_advice/src/screens/register/register_options_screen.dart';
 
 class InitTimeScreen extends StatelessWidget {
   static const String navigatorId = '/init_time_screen';
-
-  final InitTimeService _initTimeService = Get.put(InitTimeService());
 
   final String loginText = 'Se connecter';
   final String registerText = 'S\'inscrire';
@@ -22,9 +21,9 @@ class InitTimeScreen extends StatelessWidget {
         child: OrientationBuilder(
           builder: (context, orientation) {
             if (orientation == Orientation.portrait) {
-              return buildPortraitLayout(_initTimeService, context);
+              return buildPortraitLayout(context);
             } else {
-              return buildLandscapeLayout(_initTimeService, context);
+              return buildLandscapeLayout(context);
             }
           },
         ),
@@ -70,15 +69,14 @@ class InitTimeScreen extends StatelessWidget {
     );
   }
 
-  Widget buildPortraitLayout(
-      InitTimeService initTimeService, BuildContext context) {
+  Widget buildPortraitLayout(BuildContext context) {
     return Stack(
       children: [
         buildConnectionButton(
           text: registerText,
           textColor: AppColors.white,
           onTap: () {
-            initTimeService.navigateToRegisterPage(context);
+            Get.to(() => RegisterOptionsScreen());
           },
           margin: const EdgeInsets.only(bottom: 342, left: 50, right: 50),
         ),
@@ -92,7 +90,7 @@ class InitTimeScreen extends StatelessWidget {
           text: loginText,
           textColor: AppColors.white,
           onTap: () {
-            initTimeService.navigateToLoginPage(context);
+            Get.to(() => LoginScreen());
           },
           margin: const EdgeInsets.only(bottom: 250, left: 50, right: 50),
         ),
@@ -100,15 +98,14 @@ class InitTimeScreen extends StatelessWidget {
     );
   }
 
-  Widget buildLandscapeLayout(
-      InitTimeService initTimeService, BuildContext context) {
+  Widget buildLandscapeLayout(BuildContext context) {
     return Stack(
       children: [
         buildConnectionButton(
           text: registerText,
           textColor: AppColors.white,
           onTap: () {
-            initTimeService.navigateToRegisterPage(context);
+            Get.to(() => RegisterOptionsScreen());
           },
           margin: const EdgeInsets.only(bottom: 110, left: 250, right: 250),
         ),
@@ -122,7 +119,7 @@ class InitTimeScreen extends StatelessWidget {
           text: loginText,
           textColor: AppColors.white,
           onTap: () {
-            initTimeService.navigateToLoginPage(context);
+            Get.to(() => LoginScreen());
           },
           margin: const EdgeInsets.only(bottom: 20, left: 250, right: 250),
         ),
