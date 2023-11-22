@@ -7,7 +7,6 @@ import 'package:stud_advice/src/common/chore/form_validator.dart';
 import 'package:stud_advice/src/controller/authentication/authentication_controller.dart';
 import 'package:stud_advice/src/controller/register/register_with_email_controller.dart';
 import 'package:stud_advice/src/screens/legal_conditions/legal_conditions_screen.dart';
-import 'package:stud_advice/src/screens/register/register_user_information_screen.dart';
 import 'package:stud_advice/src/widgets/buttons/default_connection_button.dart';
 import 'package:stud_advice/src/widgets/textFields/classic_text_field.dart';
 import 'package:stud_advice/src/widgets/textFields/password_text_field.dart';
@@ -129,16 +128,6 @@ class RegisterWithEmailScreen extends StatelessWidget {
         borderColor: AppColors.secondaryColor);
   }
 
-  /*
-    if (_authenticationController.isLoadingConnection.isTrue) {
-                Get.dialog(const Center(
-                  child: CircularProgressIndicator(
-                    color: AppColors.secondaryColor,
-                    strokeWidth: 5,
-                  ),
-                ));
-              }
-   */
   Widget buildConnectionButton() {
     return DefaultConnectionButton(
         text: connectionButtonText,
@@ -156,17 +145,8 @@ class RegisterWithEmailScreen extends StatelessWidget {
 
           dynamic formData = collectFormData();
 
-          _authenticationController.isLoadingConnection.value = true;
-
-          await _authenticationController.signUp(
-            formData['email'],
-            formData['hashedPassword'],
-          );
-
-          Get.to(() => const RegisterUserInformationScreen(),
-              arguments: formData);
-
-          _authenticationController.isLoadingConnection.value = false;
+          _registerWithEmailController.handleRegisterWithEmail(
+              _authenticationController, formData);
         });
   }
 

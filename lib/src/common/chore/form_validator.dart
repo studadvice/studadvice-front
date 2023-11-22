@@ -1,7 +1,8 @@
 class FormValidator {
   static String emptyPasswordErrorText =
       'Le mot de passe ne peut pas être vide';
-  static String emailValidationErrorText = 'Veuillez entrer votre email';
+  static String emptyEmailValidationErrorText = 'Veuillez entrer votre email';
+  static String notValidEmailErrorText = 'Veuillez saisir un email valide';
   static String passwordTooShortErrorText =
       'Le mot de passe doit contenir au moins 8 caractères';
   static String passwordNotMatchingErrorText =
@@ -22,13 +23,13 @@ class FormValidator {
 
   static String? validateEmail(String? value) {
     if (value == null || value.isEmpty) {
-      return emailValidationErrorText;
+      return emptyEmailValidationErrorText;
     }
 
     final emailRegExp = RegExp(r'^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$');
 
-    if (emailRegExp.hasMatch(value)) {
-      return null;
+    if (!emailRegExp.hasMatch(value)) {
+      return notValidEmailErrorText;
     }
 
     return null;
