@@ -1,26 +1,45 @@
-// import 'package:flutter/material.dart';
-// import 'package:stud_advice/features/user/use_cases/init_time/screens/init_time_screen.dart';
-// TODO afficher cette page en premier
-// class AppStartupScreen extends StatelessWidget {
-//   const AppStartupScreen({super.key});
-//
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//       body: StreamBuilder<User?>(
-//         // stream: FirebaseAuth.instance.authStateChanges(),
-//         builder: (context, snapshot) {
-//           // The user is logged in.
-//           if (snapshot.hasData) {
-//             return HomePage();
-//           }
-//
-//           // The user is NOT logged in.
-//           else {
-//             return const InitTimeScreen();
-//           }
-//         },
-//       ),
-//     );
-//   }
-// }
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
+import 'package:stud_advice/src/common/chore/app_colors.dart';
+import 'package:stud_advice/src/controller/authentication/authentication_controller.dart';
+import 'package:stud_advice/src/screens/home/home_page.dart';
+import 'package:stud_advice/src/screens/init_time/init_time_screen.dart';
+
+class WelcomeScreen extends StatelessWidget {
+  static const String navigatorId = '/welcome_screen';
+
+  const WelcomeScreen({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: _buildBody(),
+    );
+  }
+
+  Widget _buildBody() {
+    return StreamBuilder<User?>(
+      stream: AuthenticationController.firebaseAuthInstance.authStateChanges(),
+      builder: (context, snapshot) {
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          return const Center(
+            child: CircularProgressIndicator(
+              color: AppColors.secondaryColor,
+              strokeWidth: 5,
+            ),
+          );
+        } else {
+          // The user is logged in.
+          if (snapshot.hasData) {
+            return const HomePageScreen();
+          }
+
+          // The user is NOT logged in.
+          else {
+            return InitTimeScreen();
+          }
+        }
+      },
+    );
+  }
+}

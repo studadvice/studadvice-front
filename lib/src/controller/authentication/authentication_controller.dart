@@ -6,7 +6,7 @@ import 'package:stud_advice/src/common/chore/app_colors.dart';
 class AuthenticationController extends GetxController {
   var isLoadingConnection = false.obs;
 
-  final FirebaseAuth _auth = FirebaseAuth.instance;
+  static final FirebaseAuth firebaseAuthInstance = FirebaseAuth.instance;
 
   // The user model used here is the firebase one.
   Rx<User?> user = Rx<User?>(null);
@@ -14,19 +14,37 @@ class AuthenticationController extends GetxController {
   @override
   void onInit() {
     super.onInit();
-    user.bindStream(_auth.authStateChanges());
+    user.bindStream(firebaseAuthInstance.authStateChanges());
   }
 
   Future<bool> signUp(String email, String password) async {
     isLoadingConnection.value = true;
 
-    await _auth.createUserWithEmailAndPassword(
+    await firebaseAuthInstance.createUserWithEmailAndPassword(
       email: email,
       password: password,
     );
 
     isLoadingConnection.value = false;
 
+    return true;
+  }
+
+  Future<bool> signIn(String email, String password) async {
+    isLoadingConnection.value = true;
+
+    await firebaseAuthInstance.signInWithEmailAndPassword(
+      email: email,
+      password: password,
+    );
+
+    isLoadingConnection.value = false;
+
+    return true;
+  }
+
+  Future<bool> signOut() async {
+    await firebaseAuthInstance.signOut();
     return true;
   }
 

@@ -15,8 +15,13 @@ class _HomePageScreenState extends State<HomePageScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Home Page'),
-      ),
+          centerTitle: true,
+          title: const SizedBox(
+            height: 40,
+            child: Image(
+              image: AssetImage('assets/images/common/raven_image.png'),
+            ),
+          )),
       body: const Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,

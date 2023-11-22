@@ -4,7 +4,6 @@ import 'package:stud_advice/src/common/chore/app_colors.dart';
 import 'package:stud_advice/src/common/chore/app_fonts_sizes.dart';
 import 'package:stud_advice/src/common/chore/crypto_hash.dart';
 import 'package:stud_advice/src/common/chore/form_validator.dart';
-import 'package:stud_advice/src/controller/authentication/authentication_controller.dart';
 import 'package:stud_advice/src/controller/register/register_with_email_controller.dart';
 import 'package:stud_advice/src/screens/legal_conditions/legal_conditions_screen.dart';
 import 'package:stud_advice/src/widgets/buttons/default_connection_button.dart';
@@ -14,8 +13,6 @@ import 'package:stud_advice/src/widgets/textFields/password_text_field.dart';
 class RegisterWithEmailScreen extends StatelessWidget {
   static const String navigatorId = '/register_with_email_screen';
 
-  final AuthenticationController _authenticationController =
-      Get.put(AuthenticationController());
   final RegisterWithEmailController _registerWithEmailController =
       Get.put(RegisterWithEmailController());
 
@@ -145,8 +142,7 @@ class RegisterWithEmailScreen extends StatelessWidget {
 
           dynamic formData = collectFormData();
 
-          _registerWithEmailController.handleRegisterWithEmail(
-              _authenticationController, formData);
+          _registerWithEmailController.handleRegisterWithEmail(formData);
         });
   }
 

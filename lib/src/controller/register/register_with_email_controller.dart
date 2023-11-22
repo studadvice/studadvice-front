@@ -2,9 +2,13 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:stud_advice/src/common/chore/app_colors.dart';
+import 'package:stud_advice/src/controller/authentication/authentication_controller.dart';
 import 'package:stud_advice/src/screens/register/register_user_information_screen.dart';
 
 class RegisterWithEmailController extends GetxController {
+  final AuthenticationController _authenticationController =
+      Get.put(AuthenticationController());
+
   var agreeWithTermsAndConditions = false.obs;
 
   final String error = "Erreur de connexion";
@@ -13,23 +17,23 @@ class RegisterWithEmailController extends GetxController {
   final String alreadyHaveAnAccount =
       "Un compte existe déjà avec cette adresse email";
 
-  void handleRegisterWithEmail(authenticationController, formData) async {
-    authenticationController.loadingSpinner();
+  void handleRegisterWithEmail(formData) async {
+    _authenticationController.loadingSpinner();
 
     try {
-      bool signUpSuccess = await authenticationController.signUp(
+      bool signUpSuccess = await _authenticationController.signUp(
         formData['email'],
         formData['hashedPassword'],
       );
 
       if (signUpSuccess) {
-        authenticationController.stopLoadingSpinner();
+        _authenticationController.stopLoadingSpinner();
 
         Get.to(() => const RegisterUserInformationScreen(),
             arguments: formData);
       }
     } on FirebaseAuthException catch (e) {
-      authenticationController.stopLoadingSpinner();
+      _authenticationController.stopLoadingSpinner();
 
       if (e.code == 'email-already-in-use') {
         Get.snackbar(

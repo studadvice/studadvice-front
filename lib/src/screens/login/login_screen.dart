@@ -161,18 +161,20 @@ class LoginScreen extends StatelessWidget {
         textColor: AppColors.white,
         backgroundColor: AppColors.blue,
         onPressed: () {
-          if (_formKey.currentState!.validate()) {
-            String emailOrPseudo = _emailOrPseudoController.text;
-            String password = _passwordController.text;
-            String passwordHash = CryptoHash.hashValue(password);
+          if (!_formKey.currentState!.validate()) {
+            return;
+          }
+          String emailOrPseudo = _emailOrPseudoController.text;
+          String password = _passwordController.text;
+          String passwordHash = CryptoHash.hashValue(password);
 
-            if (emailOrPseudo.contains('@')) {
-              _loginController.loginWithEmailAndPassword(
-                  emailOrPseudo, passwordHash);
-            } else {
-              _loginController.loginWithPseudoAndPassword(
-                  emailOrPseudo, passwordHash);
-            }
+          // TODO remember me logic.
+          if (emailOrPseudo.contains('@')) {
+            _loginController.loginWithEmailAndPassword(
+                emailOrPseudo, passwordHash);
+          } else {
+            _loginController.loginWithPseudoAndPassword(
+                emailOrPseudo, passwordHash);
           }
         });
   }
