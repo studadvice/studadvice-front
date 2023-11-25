@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:stud_advice/src/common/chore/app_colors.dart';
 import 'package:stud_advice/src/controller/authentication/authentication_controller.dart';
 import 'package:stud_advice/src/screens/home/home_page.dart';
+import 'package:stud_advice/src/widgets/loading/loading_spinner.dart';
 
 class LoginController extends GetxController {
   final AuthenticationController _authenticationController =
@@ -32,7 +33,7 @@ class LoginController extends GetxController {
 
   Future<void> loginWithEmailAndPassword(
       String email, String hashedPassword) async {
-    _authenticationController.loadingSpinner();
+    LoadingSpinner.start();
 
     try {
       bool signInSuccess = await _authenticationController.signIn(
@@ -41,7 +42,7 @@ class LoginController extends GetxController {
       );
 
       if (signInSuccess) {
-        _authenticationController.stopLoadingSpinner();
+        LoadingSpinner.stop();
 
         // After the user is connected, we redirect him to the home page.
         // Here we use the Get.offAll() method to remove all the previous screens
@@ -52,7 +53,7 @@ class LoginController extends GetxController {
             ));
       }
     } on FirebaseAuthException catch (e) {
-      _authenticationController.stopLoadingSpinner();
+      LoadingSpinner.stop();
       handleLoginWithEmailAndPasswordError(e.code);
     }
   }

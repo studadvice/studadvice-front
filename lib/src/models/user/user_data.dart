@@ -1,6 +1,4 @@
 class UserData {
-  String email;
-  String passwordHash;
   String city;
   int postalCode;
   String birthDate;
@@ -12,8 +10,6 @@ class UserData {
 
   UserData({
     this.pseudo,
-    required this.email,
-    required this.passwordHash,
     required this.city,
     required this.postalCode,
     required this.birthDate,
@@ -25,9 +21,7 @@ class UserData {
 
   factory UserData.fromJson(Map<String, dynamic> json) {
     return UserData(
-        email: json['email'] ?? '',
         city: json['city'] ?? '',
-        passwordHash: json['passwordHash'] ?? '',
         postalCode: json['postalCode'] ?? 99999,
         birthDate: json['dateOfBirth'] ?? '',
         university: json['university'] ?? '',
@@ -40,8 +34,6 @@ class UserData {
 
   Map<String, dynamic> toJson() {
     return {
-      'email': email,
-      'passwordHash': passwordHash,
       'city': city,
       'postalCode': postalCode,
       'dateOfBirth': birthDate,

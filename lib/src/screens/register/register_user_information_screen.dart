@@ -343,9 +343,12 @@ class _RegisterUserInformationScreenState
         onPressed: () {
           if (_formKey.currentState!.validate()) {
             UserData userData = buildUserData();
+
             debugPrint(
               userData.toJson().toString(),
             );
+
+            _registerUserInformationController.saveUserInformation(userData);
           }
         });
   }
@@ -362,8 +365,6 @@ class _RegisterUserInformationScreenState
     int postalCode = int.parse(postalCodeController.text.trim());
 
     return UserData(
-      email: previousFormData['email'] ?? '',
-      passwordHash: previousFormData['hashedPassword'] ?? '',
       pseudo: pseudo,
       birthDate: birthDate,
       city: city,

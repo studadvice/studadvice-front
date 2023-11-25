@@ -72,6 +72,7 @@ class _ClassicTextFieldState extends State<ClassicTextField> {
       padding: const EdgeInsets.symmetric(horizontal: 25.0),
       child: TextFormField(
         controller: widget.controller,
+        autofocus: true,
         validator: widget.validator,
         keyboardType: widget.keyboardType,
         inputFormatters: widget.inputFormatters ?? [],

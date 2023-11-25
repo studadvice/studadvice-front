@@ -3,12 +3,24 @@ import 'dart:math';
 
 import 'package:dio/dio.dart';
 import 'package:english_words/english_words.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:stud_advice/src/common/chore/app_colors.dart';
+import 'package:stud_advice/src/controller/storage/user_storage_controller.dart';
 import 'package:stud_advice/src/models/city/city_data.dart';
 import 'package:stud_advice/src/models/university/university_data.dart';
+import 'package:stud_advice/src/models/user/user_data.dart';
+import 'package:stud_advice/src/screens/home/home_page.dart';
+import 'package:stud_advice/src/widgets/loading/loading_spinner.dart';
 
 class RegisterUserInformationController extends GetxController {
   final _dio = Get.find<Dio>();
+  final UserStorageController _userStorageController =
+      Get.put(UserStorageController());
+
+  final String error = "Erreur de connexion";
+  final String registerWithEmailFailed =
+      "Une erreur s'est produite lors de l'inscription";
 
   static String generateRandomPseudo() {
     final random = Random();
@@ -93,6 +105,34 @@ class RegisterUserInformationController extends GetxController {
       return allResults.map((university) => university.uoLib ?? '').toList();
     } catch (e) {
       throw Exception('Failed to load university data');
+    }
+  }
+
+  Future<void> saveUserInformation(UserData userData) async {
+    LoadingSpinner.start();
+
+    try {
+      bool registerSuccess =
+          await _userStorageController.saveUserData(userData);
+
+      if (registerSuccess) {
+        LoadingSpinner.stop();
+        Get.offAll(() => const HomePageScreen(), arguments: userData);
+      }
+    } catch (e) {
+      debugPrint(e.toString());
+      LoadingSpinner.stop();
+      Get.snackbar(
+        error,
+        registerWithEmailFailed,
+        colorText: AppColors.white,
+        backgroundColor: AppColors.dangerColor,
+        snackPosition: SnackPosition.BOTTOM,
+        titleText: Text(
+          error,
+          style: const TextStyle(color: AppColors.white),
+        ),
+      );
     }
   }
 }

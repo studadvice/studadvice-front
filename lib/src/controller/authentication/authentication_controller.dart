@@ -1,12 +1,9 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:stud_advice/src/common/chore/app_colors.dart';
+import 'package:stud_advice/src/common/conf/app_dependencies_binding.dart';
 
 class AuthenticationController extends GetxController {
-  var isLoadingConnection = false.obs;
-
-  static final FirebaseAuth firebaseAuthInstance = FirebaseAuth.instance;
+  var firebaseAuthInstance = AppDependenciesBinding.firebaseAuthInstance;
 
   // The user model used here is the firebase one.
   Rx<User?> user = Rx<User?>(null);
@@ -18,27 +15,19 @@ class AuthenticationController extends GetxController {
   }
 
   Future<bool> signUp(String email, String password) async {
-    isLoadingConnection.value = true;
-
     await firebaseAuthInstance.createUserWithEmailAndPassword(
       email: email,
       password: password,
     );
 
-    isLoadingConnection.value = false;
-
     return true;
   }
 
   Future<bool> signIn(String email, String password) async {
-    isLoadingConnection.value = true;
-
     await firebaseAuthInstance.signInWithEmailAndPassword(
       email: email,
       password: password,
     );
-
-    isLoadingConnection.value = false;
 
     return true;
   }
@@ -46,20 +35,5 @@ class AuthenticationController extends GetxController {
   Future<bool> signOut() async {
     await firebaseAuthInstance.signOut();
     return true;
-  }
-
-  void loadingSpinner() {
-    Get.dialog(const Center(
-      child: CircularProgressIndicator(
-        color: AppColors.secondaryColor,
-        strokeWidth: 5,
-      ),
-    ));
-  }
-
-  void stopLoadingSpinner() {
-    if (Get.isDialogOpen!) {
-      Get.back();
-    }
   }
 }

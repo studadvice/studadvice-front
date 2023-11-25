@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:stud_advice/src/common/chore/app_colors.dart';
 import 'package:stud_advice/src/controller/authentication/authentication_controller.dart';
 import 'package:stud_advice/src/screens/register/register_user_information_screen.dart';
+import 'package:stud_advice/src/widgets/loading/loading_spinner.dart';
 
 class RegisterWithEmailController extends GetxController {
   final AuthenticationController _authenticationController =
@@ -19,7 +20,7 @@ class RegisterWithEmailController extends GetxController {
       "Un compte existe déjà avec cette adresse email \n Veuillez continuer votre inscription";
 
   void handleRegisterWithEmail(formData) async {
-    _authenticationController.loadingSpinner();
+    LoadingSpinner.start();
 
     try {
       bool signUpSuccess = await _authenticationController.signUp(
@@ -28,13 +29,15 @@ class RegisterWithEmailController extends GetxController {
       );
 
       if (signUpSuccess) {
-        _authenticationController.stopLoadingSpinner();
+        LoadingSpinner.stop();
 
-        Get.to(() => const RegisterUserInformationScreen(),
-            arguments: formData);
+        Get.to(() => const RegisterUserInformationScreen(), arguments: {
+          'hasAcceptedTermsAndConditions':
+              formData['hasAcceptedTermsAndConditions']
+        });
       }
     } on FirebaseAuthException catch (e) {
-      _authenticationController.stopLoadingSpinner();
+      LoadingSpinner.stop();
 
       if (e.code == 'email-already-in-use') {
         Get.snackbar(
@@ -44,8 +47,12 @@ class RegisterWithEmailController extends GetxController {
           snackPosition: SnackPosition.BOTTOM,
           colorText: AppColors.white,
         );
-        Get.to(() => const RegisterUserInformationScreen(),
-            arguments: formData);
+        // We do not need to save the email and the password because it is already saved by firebase during the sign up process.
+        // We just need to save the fact that the user has accepted the terms and conditions.
+        Get.to(() => const RegisterUserInformationScreen(), arguments: {
+          'hasAcceptedTermsAndConditions':
+              formData['hasAcceptedTermsAndConditions']
+        });
       } else {
         Get.snackbar(
           error,
