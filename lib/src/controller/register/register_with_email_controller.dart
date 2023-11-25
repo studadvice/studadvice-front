@@ -12,10 +12,11 @@ class RegisterWithEmailController extends GetxController {
   var agreeWithTermsAndConditions = false.obs;
 
   final String error = "Erreur de connexion";
+  final String alreadyHaveAnAccountError = "Vous avez déjà un compte";
   final String registerWithEmailFailed =
       "Une erreur s'est produite lors de l'inscription";
   final String alreadyHaveAnAccount =
-      "Un compte existe déjà avec cette adresse email";
+      "Un compte existe déjà avec cette adresse email \n Veuillez continuer votre inscription";
 
   void handleRegisterWithEmail(formData) async {
     _authenticationController.loadingSpinner();
@@ -37,12 +38,14 @@ class RegisterWithEmailController extends GetxController {
 
       if (e.code == 'email-already-in-use') {
         Get.snackbar(
-          error,
+          alreadyHaveAnAccountError,
           alreadyHaveAnAccount,
-          backgroundColor: AppColors.dangerColor,
+          backgroundColor: AppColors.blue,
           snackPosition: SnackPosition.BOTTOM,
           colorText: AppColors.white,
         );
+        Get.to(() => const RegisterUserInformationScreen(),
+            arguments: formData);
       } else {
         Get.snackbar(
           error,

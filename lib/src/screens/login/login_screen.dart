@@ -29,10 +29,6 @@ class LoginScreen extends StatelessWidget {
   final String orContinueWithText = 'Ou continuer avec';
   final String passwordErrorText = 'Veuillez entrer votre mot de passe';
 
-  // Controllers for the text fields.
-  final TextEditingController _emailController = TextEditingController();
-  final TextEditingController _passwordController = TextEditingController();
-
   final _formKey = GlobalKey<FormState>();
 
   @override
@@ -86,8 +82,8 @@ class LoginScreen extends StatelessWidget {
         validator: FormValidator.validateEmail,
         hintText: emailHintText,
         labelText: emailLabelText,
-        controller: _emailController,
-        autofillHints: [AutofillHints.email, AutofillHints.username],
+        controller: _loginController.emailController,
+        autofillHints: [AutofillHints.email],
         keyboardType: TextInputType.emailAddress,
         backgroundColor: AppColors.white,
         focusedBorderColor: AppColors.secondaryColor,
@@ -104,7 +100,7 @@ class LoginScreen extends StatelessWidget {
         },
         hintText: passwordHintText,
         labelText: passwordLabelText,
-        controller: _passwordController,
+        controller: _loginController.passwordController,
         autofillHints: [AutofillHints.password],
         backgroundColor: AppColors.white,
         focusedBorderColor: AppColors.secondaryColor,
@@ -163,13 +159,12 @@ class LoginScreen extends StatelessWidget {
           if (!_formKey.currentState!.validate()) {
             return;
           }
-          String emailOrPseudo = _emailController.text;
-          String password = _passwordController.text;
+          String email = _loginController.emailController.text;
+          String password = _loginController.passwordController.text;
           String passwordHash = CryptoHash.hashValue(password);
 
           // TODO remember me logic.
-          _loginController.loginWithEmailAndPassword(
-              emailOrPseudo, passwordHash);
+          _loginController.loginWithEmailAndPassword(email, passwordHash);
         });
   }
 

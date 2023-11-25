@@ -9,6 +9,17 @@ class LoginController extends GetxController {
   final AuthenticationController _authenticationController =
       Get.put(AuthenticationController());
 
+  // Controllers for the text fields.
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
+
+  @override
+  void onClose() {
+    emailController.dispose();
+    passwordController.dispose();
+    super.onClose();
+  }
+
   var rememberMe = true.obs;
 
   final String error = "Erreur de connexion";
@@ -42,50 +53,36 @@ class LoginController extends GetxController {
       }
     } on FirebaseAuthException catch (e) {
       _authenticationController.stopLoadingSpinner();
-
-      if (e.code == 'user-not-found') {
-        Get.snackbar(
-          error,
-          userNotFound,
-          backgroundColor: AppColors.dangerColor,
-          snackPosition: SnackPosition.BOTTOM,
-          colorText: AppColors.white,
-        );
-      } else if (e.code == 'wrong-password') {
-        Get.snackbar(
-          error,
-          wrongPassword,
-          backgroundColor: AppColors.dangerColor,
-          snackPosition: SnackPosition.BOTTOM,
-          colorText: AppColors.white,
-        );
-      } else if (e.code == 'invalid-login-credentials') {
-        Get.snackbar(
-          error,
-          invalidCredentials,
-          backgroundGradient: const LinearGradient(
-            colors: [
-              AppColors.blue,
-              AppColors.dangerColor,
-            ],
-          ),
-          snackPosition: SnackPosition.BOTTOM,
-          colorText: AppColors.white,
-        );
-      } else {
-        Get.snackbar(
-          error,
-          loginWithEmailFailed,
-          colorText: AppColors.white,
-          backgroundColor: AppColors.dangerColor,
-          snackPosition: SnackPosition.BOTTOM,
-          titleText: Text(
-            error,
-            style: const TextStyle(color: AppColors.white),
-          ),
-        );
-      }
+      handleLoginWithEmailAndPasswordError(e.code);
     }
+  }
+
+  void handleLoginWithEmailAndPasswordError(String errorCode) {
+    Color backgroundColor = AppColors.dangerColor;
+    Color textColor = AppColors.white;
+    SnackPosition snackPosition = SnackPosition.BOTTOM;
+    String snackbarMessage;
+
+    switch (errorCode) {
+      case 'user-not-found':
+        snackbarMessage = userNotFound;
+        break;
+      case 'wrong-password':
+        snackbarMessage = wrongPassword;
+        break;
+      case 'invalid-login-credentials':
+        snackbarMessage = invalidCredentials;
+        break;
+      default:
+        snackbarMessage = loginWithEmailFailed;
+        textColor = AppColors.white;
+        snackPosition = SnackPosition.BOTTOM;
+    }
+
+    Get.snackbar(error, snackbarMessage,
+        backgroundColor: backgroundColor,
+        snackPosition: snackPosition,
+        colorText: textColor);
   }
 
   Future<bool> loginWithFacebookAccount() async {
