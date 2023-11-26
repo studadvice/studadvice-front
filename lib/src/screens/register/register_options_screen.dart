@@ -101,16 +101,19 @@ class RegisterOptionsScreen extends StatelessWidget {
                           Get.to(() => (const RegisterUserInformationScreen()));
                         }
                       }),
-                  const SizedBox(height: 20),
-                  buildSocialButton(
-                      imagePath: 'assets/images/login/apple.png',
-                      buttonText: continueWithAppleText,
-                      onTap: () async {
-                        if (await _socialSignInController
-                            .loginWithAppleAccount()) {
-                          Get.to(() => (const RegisterUserInformationScreen()));
-                        }
-                      }),
+                  if (Theme.of(context).platform == TargetPlatform.iOS)
+                    const SizedBox(height: 20),
+                  if (Theme.of(context).platform == TargetPlatform.iOS)
+                    buildSocialButton(
+                        imagePath: 'assets/images/login/apple.png',
+                        buttonText: continueWithAppleText,
+                        onTap: () async {
+                          if (await _socialSignInController
+                              .loginWithAppleAccount()) {
+                            Get.to(
+                                () => (const RegisterUserInformationScreen()));
+                          }
+                        }),
                   const SizedBox(height: 20),
                   buildSocialButton(
                       imagePath: 'assets/images/login/x.png',
