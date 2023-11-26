@@ -7,12 +7,25 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:398344471697:android:22d8299ce9e679a75b2b30",
+        "mobilesdk_app_id": "1:398344471697:android:7fa58e05e1a36f525b2b30",
         "android_client_info": {
           "package_name": "com.stud.studadvice_front"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "398344471697-9n81s5svn4cd1377kvpjr1vngurh2mmu.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.stud.studadvice_front",
+            "certificate_hash": "0fe8a76d716bd4b7d798cb2bd9323812613979b4"
+          }
+        },
+        {
+          "client_id": "398344471697-thl4e97l8sskrd0vrghlkfp7ntvoo2ni.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyAnKm5Zqae8nVcPhAC6E4M8Qcfiqgln_mo"
@@ -20,7 +33,19 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "398344471697-thl4e97l8sskrd0vrghlkfp7ntvoo2ni.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "398344471697-a33qe8lg3d7cajs9shns430ec8g9ofq3.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.stud.studadviceFront"
+              }
+            }
+          ]
         }
       }
     }
