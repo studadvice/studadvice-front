@@ -117,7 +117,7 @@ class RegisterUserInformationController extends GetxController {
 
       if (registerSuccess) {
         LoadingSpinner.stop();
-        Get.offAll(() => const HomePageScreen(), arguments: userData);
+        Get.offAll(() => HomePageScreen(), arguments: userData);
       }
     } catch (e) {
       LoadingSpinner.stop();

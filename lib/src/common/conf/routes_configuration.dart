@@ -17,8 +17,7 @@ class RoutesConfiguration {
       GetPage(
           name: WelcomeScreen.navigatorId, page: () => const WelcomeScreen()),
       GetPage(name: InitTimeScreen.navigatorId, page: () => InitTimeScreen()),
-      GetPage(
-          name: HomePageScreen.navigatorId, page: () => const HomePageScreen()),
+      GetPage(name: HomePageScreen.navigatorId, page: () => HomePageScreen()),
       GetPage(name: LoginScreen.navigatorId, page: () => LoginScreen()),
       GetPage(
           name: RegisterOptionsScreen.navigatorId,
