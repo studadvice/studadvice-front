@@ -1,5 +1,6 @@
 import 'package:get/get.dart';
 import 'package:stud_advice/src/controller/authentication/authentication_controller.dart';
+import 'package:stud_advice/src/screens/common/welcome/welcome_screen.dart';
 
 class HomePageController extends GetxController {
   final AuthenticationController _authenticationController =
@@ -7,6 +8,6 @@ class HomePageController extends GetxController {
 
   void signOut() async {
     await _authenticationController.signOut();
-    Get.back();
+    Get.to(() => const WelcomeScreen());
   }
 }
