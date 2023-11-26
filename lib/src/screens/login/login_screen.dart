@@ -218,17 +218,17 @@ class LoginScreen extends StatelessWidget {
               }
             },
           ),
-        const SizedBox(width: 10),
-        LoginSocialButton(
-          imagePath: 'assets/images/login/x.png',
-          tileBackgroundColor: Colors.white,
-          borderColor: AppColors.black26,
-          onTap: () async {
-            if (await _socialSignInController.loginWithXAccount()) {
-              Get.offAll(() => const HomePageScreen());
-            }
-          },
-        ),
+        // const SizedBox(width: 10),
+        // LoginSocialButton(
+        //   imagePath: 'assets/images/login/x.png',
+        //   tileBackgroundColor: Colors.white,
+        //   borderColor: AppColors.black26,
+        //   onTap: () async {
+        //     if (await _socialSignInController.loginWithXAccount()) {
+        //       Get.offAll(() => const HomePageScreen());
+        //     }
+        //   },
+        // ),
       ],
     );
   }

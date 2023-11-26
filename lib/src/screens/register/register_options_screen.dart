@@ -73,7 +73,7 @@ class RegisterOptionsScreen extends StatelessWidget {
         ),
         body: ListView(
           children: [
-            SizedBox(height: MediaQuery.of(context).size.height * 0.1),
+            SizedBox(height: MediaQuery.of(context).size.height * 0.2),
             Center(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -98,7 +98,10 @@ class RegisterOptionsScreen extends StatelessWidget {
                       onTap: () async {
                         if (await _socialSignInController
                             .loginWithFacebookAccount()) {
-                          Get.to(() => (const RegisterUserInformationScreen()));
+                          Get.to(() => const RegisterUserInformationScreen(),
+                              arguments: {
+                                'hasAcceptedTermsAndConditions': true,
+                              });
                         }
                       }),
                   if (Theme.of(context).platform == TargetPlatform.iOS)
@@ -110,19 +113,24 @@ class RegisterOptionsScreen extends StatelessWidget {
                         onTap: () async {
                           if (await _socialSignInController
                               .loginWithAppleAccount()) {
-                            Get.to(
-                                () => (const RegisterUserInformationScreen()));
+                            Get.to(() => const RegisterUserInformationScreen(),
+                                arguments: {
+                                  'hasAcceptedTermsAndConditions': true,
+                                });
                           }
                         }),
-                  const SizedBox(height: 20),
-                  buildSocialButton(
-                      imagePath: 'assets/images/login/x.png',
-                      buttonText: continueWithXText,
-                      onTap: () async {
-                        if (await _socialSignInController.loginWithXAccount()) {
-                          Get.to(() => (const RegisterUserInformationScreen()));
-                        }
-                      }),
+                  // const SizedBox(height: 20),
+                  // buildSocialButton(
+                  //     imagePath: 'assets/images/login/x.png',
+                  //     buttonText: continueWithXText,
+                  //     onTap: () async {
+                  //       if (await _socialSignInController.loginWithXAccount()) {
+                  //       Get.to(() => const RegisterUserInformationScreen(),
+                  //                               arguments: {
+                  //                                 'hasAcceptedTermsAndConditions': true,
+                  //                               });
+                  //       }
+                  //     }),
                   const SizedBox(height: 10),
                   buildTermsAndConditionsSection(),
                   const SizedBox(height: 20),

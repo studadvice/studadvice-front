@@ -29,19 +29,29 @@ class SocialSignInController extends GetxController {
   }
 
   Future<bool> loginWithFacebookAccount() async {
-    // TODO: implement loginWithFacebook
-    return true;
+    try {
+      LoadingSpinner.start();
+
+      bool signInSuccess = await _authenticationController.signInWithFacebook();
+
+      return signInSuccess;
+    } on FirebaseAuthException catch (e) {
+      handleLoginError(e.code);
+      return false;
+    } finally {
+      LoadingSpinner.stop();
+    }
   }
 
   Future<bool> loginWithAppleAccount() async {
-    // TODO: implement loginWithGoogle
+    // TODO: implement loginWithAppleAccount
     return true;
   }
 
-  Future<bool> loginWithXAccount() async {
-    // TODO: implement loginWithGoogle
-    return true;
-  }
+  // Future<bool> loginWithXAccount() async {
+  //   // TODO: implement loginWithX
+  //   return true;
+  // }
 
   void handleLoginError(String errorCode) {
     Color backgroundColor = AppColors.dangerColor;
