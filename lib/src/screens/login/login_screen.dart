@@ -71,7 +71,7 @@ class LoginScreen extends StatelessWidget {
                   const SizedBox(height: 10),
                   DividerWithText(text: orContinueWithText),
                   const SizedBox(height: 10),
-                  buildSocialLoginButtons(),
+                  buildSocialLoginButtons(context),
                   const SizedBox(height: 50),
                   buildTermsAndConditionsSection(),
                 ],
@@ -179,7 +179,7 @@ class LoginScreen extends StatelessWidget {
         });
   }
 
-  Widget buildSocialLoginButtons() {
+  Widget buildSocialLoginButtons(BuildContext context) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
@@ -205,28 +205,30 @@ class LoginScreen extends StatelessWidget {
             }
           },
         ),
-        const SizedBox(width: 10),
-        LoginSocialButton(
-          imagePath: 'assets/images/login/apple.png',
-          tileBackgroundColor: AppColors.white,
-          borderColor: AppColors.black26,
-          onTap: () async {
-            if (await _socialSignInController.loginWithAppleAccount()) {
-              Get.offAll(() => const HomePageScreen());
-            }
-          },
-        ),
-        const SizedBox(width: 10),
-        LoginSocialButton(
-          imagePath: 'assets/images/login/x.png',
-          tileBackgroundColor: Colors.white,
-          borderColor: AppColors.black26,
-          onTap: () async {
-            if (await _socialSignInController.loginWithXAccount()) {
-              Get.offAll(() => const HomePageScreen());
-            }
-          },
-        ),
+        if (Theme.of(context).platform == TargetPlatform.iOS)
+          const SizedBox(width: 10),
+        if (Theme.of(context).platform == TargetPlatform.iOS)
+          LoginSocialButton(
+            imagePath: 'assets/images/login/apple.png',
+            tileBackgroundColor: AppColors.white,
+            borderColor: AppColors.black26,
+            onTap: () async {
+              if (await _socialSignInController.loginWithAppleAccount()) {
+                Get.offAll(() => const HomePageScreen());
+              }
+            },
+          ),
+        // const SizedBox(width: 10),
+        // LoginSocialButton(
+        //   imagePath: 'assets/images/login/x.png',
+        //   tileBackgroundColor: Colors.white,
+        //   borderColor: AppColors.black26,
+        //   onTap: () async {
+        //     if (await _socialSignInController.loginWithXAccount()) {
+        //       Get.offAll(() => const HomePageScreen());
+        //     }
+        //   },
+        // ),
       ],
     );
   }
