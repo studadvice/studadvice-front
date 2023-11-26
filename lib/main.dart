@@ -1,3 +1,4 @@
+import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:country_picker/country_picker.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -10,6 +11,7 @@ import 'package:stud_advice/src/common/conf/app_dependencies_binding.dart';
 
 import 'firebase_options.dart';
 import 'src/common/conf/routes_configuration.dart';
+import 'src/controller/connectivity/connectivity_controller.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -22,11 +24,17 @@ void main() async {
 class StudAdviceApp extends StatelessWidget {
   const StudAdviceApp({super.key});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     final RoutesConfiguration routesConfiguration =
         Get.put(RoutesConfiguration());
+
+    final ConnectivityController connectivityController =
+        Get.put(ConnectivityController());
+
+    Connectivity().onConnectivityChanged.listen((ConnectivityResult result) {
+      connectivityController.checkConnectivity(result);
+    });
 
     return GetMaterialApp(
       title: "Stud'Advice",

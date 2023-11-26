@@ -6,19 +6,14 @@ class ConnectivityController extends GetxController {
   var isConnected = true.obs;
   final String noInternetText = "Pas de connexion internet";
   final String checkConnectionText =
-      "Vérifiez votre connexion, puis rafraîchissez la page.";
+      "Veuillez vérifier votre connexion internet.";
   final String connectionRestoredText = "Connexion rétablie";
   final String connectionRestoredMessage =
       "Vous êtes à nouveau connecté à Internet.";
 
-  @override
-  void onInit() {
-    super.onInit();
-    // TODO improve the way and when to get the connectivity status
-    Connectivity().onConnectivityChanged.listen((result) {
-      isConnected.value = (result != ConnectivityResult.none);
-      showConnectivitySnackbar();
-    });
+  void checkConnectivity(ConnectivityResult result) {
+    isConnected.value = result != ConnectivityResult.none;
+    showConnectivitySnackbar();
   }
 
   void showConnectivitySnackbar() {
@@ -26,6 +21,7 @@ class ConnectivityController extends GetxController {
       Get.snackbar(
         noInternetText,
         checkConnectionText,
+        colorText: AppColors.white,
         snackPosition: SnackPosition.BOTTOM,
         backgroundColor: AppColors.dangerColor,
         duration: const Duration(seconds: 5),
@@ -34,6 +30,7 @@ class ConnectivityController extends GetxController {
       Get.snackbar(
         connectionRestoredText,
         connectionRestoredMessage,
+        colorText: AppColors.white,
         snackPosition: SnackPosition.BOTTOM,
         backgroundColor: AppColors.primaryColorAccent,
         duration: const Duration(seconds: 3),
