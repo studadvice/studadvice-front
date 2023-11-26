@@ -36,29 +36,27 @@ class LoginController extends GetxController {
     LoadingSpinner.start();
 
     try {
-      bool signInSuccess = await _authenticationController.signIn(
+      bool signInSuccess =
+          await _authenticationController.signInWithEmailAndPassword(
         email,
         hashedPassword,
       );
 
       if (signInSuccess) {
         LoadingSpinner.stop();
-
         // After the user is connected, we redirect him to the home page.
         // Here we use the Get.offAll() method to remove all the previous screens
         // from the stack.
         // So the user can't go back to the login screen.
-        Get.offAll(() => const HomePageScreen(
-            // TODO: Add user data
-            ));
+        Get.offAll(() => const HomePageScreen());
       }
     } on FirebaseAuthException catch (e) {
       LoadingSpinner.stop();
-      handleLoginWithEmailAndPasswordError(e.code);
+      handleLoginError(e.code);
     }
   }
 
-  void handleLoginWithEmailAndPasswordError(String errorCode) {
+  void handleLoginError(String errorCode) {
     Color backgroundColor = AppColors.dangerColor;
     Color textColor = AppColors.white;
     SnackPosition snackPosition = SnackPosition.BOTTOM;
@@ -72,6 +70,7 @@ class LoginController extends GetxController {
         snackbarMessage = wrongPassword;
         break;
       case 'invalid-login-credentials':
+      case 'invalid-credential':
         snackbarMessage = invalidCredentials;
         break;
       default:
@@ -84,25 +83,5 @@ class LoginController extends GetxController {
         backgroundColor: backgroundColor,
         snackPosition: snackPosition,
         colorText: textColor);
-  }
-
-  Future<bool> loginWithFacebookAccount() async {
-    // TODO: implement loginWithFacebook
-    return true;
-  }
-
-  Future<bool> loginWithGoogleAccount() async {
-    // TODO: implement loginWithGoogle
-    return true;
-  }
-
-  Future<bool> loginWithAppleAccount() async {
-    // TODO: implement loginWithGoogle
-    return true;
-  }
-
-  Future<bool> loginWithXAccount() async {
-    // TODO: implement loginWithGoogle
-    return true;
   }
 }

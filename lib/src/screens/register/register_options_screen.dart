@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:stud_advice/src/common/chore/app_colors.dart';
+import 'package:stud_advice/src/controller/authentication/social_sign_in_controller.dart';
 import 'package:stud_advice/src/screens/register/register_with_email_screen.dart';
 import 'package:stud_advice/src/screens/register/widgets/register_social_button.dart';
 import 'package:stud_advice/src/screens/register/widgets/register_with_email_button.dart';
@@ -15,6 +16,9 @@ class RegisterOptionsScreen extends StatelessWidget {
   final String continueWithFacebookText = 'Continuer avec Facebook';
   final String continueWithAppleText = 'Continuer avec Apple';
   final String continueWithXText = 'Continuer avec X';
+
+  final SocialSignInController _socialSignInController =
+      Get.put(SocialSignInController());
 
   Widget buildSocialButton(
       {required String imagePath,
@@ -61,34 +65,41 @@ class RegisterOptionsScreen extends StatelessWidget {
                   buildSocialButton(
                       imagePath: 'assets/images/login/google.png',
                       buttonText: continueWithGoogleText,
-                      onTap: () {
-                        // TODO Register with google
-                        // next move to register user information screen
+                      onTap: () async {
+                        if (await _socialSignInController
+                            .loginWithGoogleAccount()) {
+                          Get.to(() => RegisterWithEmailScreen());
+                        }
                       }),
                   const SizedBox(height: 20),
                   buildSocialButton(
                       imagePath: 'assets/images/login/facebook.png',
                       buttonText: continueWithFacebookText,
                       iconColor: Colors.blue,
-                      onTap: () {
-                        // TODO Register with facebook
-                        // next move to register user information screen
+                      onTap: () async {
+                        if (await _socialSignInController
+                            .loginWithFacebookAccount()) {
+                          Get.to(() => RegisterWithEmailScreen());
+                        }
                       }),
                   const SizedBox(height: 20),
                   buildSocialButton(
                       imagePath: 'assets/images/login/apple.png',
                       buttonText: continueWithAppleText,
-                      onTap: () {
-                        // TODO Register with apple
-                        // next move to register user information screen
+                      onTap: () async {
+                        if (await _socialSignInController
+                            .loginWithAppleAccount()) {
+                          Get.to(() => RegisterWithEmailScreen());
+                        }
                       }),
                   const SizedBox(height: 20),
                   buildSocialButton(
                       imagePath: 'assets/images/login/x.png',
                       buttonText: continueWithXText,
-                      onTap: () {
-                        // TODO Register with x
-                        // next move to register user information screen
+                      onTap: () async {
+                        if (await _socialSignInController.loginWithXAccount()) {
+                          Get.to(() => RegisterWithEmailScreen());
+                        }
                       }),
                   buildDividerWithText(),
                   RegisterWithEmailButton(

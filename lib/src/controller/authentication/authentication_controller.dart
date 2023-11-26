@@ -1,5 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:stud_advice/src/common/conf/app_dependencies_binding.dart';
 
 class AuthenticationController extends GetxController {
@@ -14,7 +16,7 @@ class AuthenticationController extends GetxController {
     user.bindStream(firebaseAuthInstance.authStateChanges());
   }
 
-  Future<bool> signUp(String email, String password) async {
+  Future<bool> signUpWithEmailAndPassword(String email, String password) async {
     await firebaseAuthInstance.createUserWithEmailAndPassword(
       email: email,
       password: password,
@@ -23,7 +25,7 @@ class AuthenticationController extends GetxController {
     return true;
   }
 
-  Future<bool> signIn(String email, String password) async {
+  Future<bool> signInWithEmailAndPassword(String email, String password) async {
     await firebaseAuthInstance.signInWithEmailAndPassword(
       email: email,
       password: password,
@@ -32,8 +34,36 @@ class AuthenticationController extends GetxController {
     return true;
   }
 
+  Future<bool> signInWithGoogle() async {
+    // Trigger the authentication flow.
+    final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
+
+    // Obtain the auth details from the request.
+    final GoogleSignInAuthentication? googleAuth =
+        await googleUser?.authentication;
+
+    // Create a new credential.
+    final credential = GoogleAuthProvider.credential(
+      accessToken: googleAuth?.accessToken,
+      idToken: googleAuth?.idToken,
+    );
+
+    // Once signed in, return the UserCredential.
+    final credentials =
+        await FirebaseAuth.instance.signInWithCredential(credential);
+
+    debugPrint("credentials : $credentials");
+    if (credentials.user != null) {
+      return true;
+    }
+    debugPrint('result : false');
+    return false;
+  }
+
   Future<bool> signOut() async {
     await firebaseAuthInstance.signOut();
+    await GoogleSignIn().signOut();
+
     return true;
   }
 }

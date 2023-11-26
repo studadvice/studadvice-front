@@ -4,7 +4,9 @@ import 'package:stud_advice/src/common/chore/app_colors.dart';
 import 'package:stud_advice/src/common/chore/app_fonts_sizes.dart';
 import 'package:stud_advice/src/common/chore/crypto_hash.dart';
 import 'package:stud_advice/src/common/chore/form_validator.dart';
+import 'package:stud_advice/src/controller/authentication/social_sign_in_controller.dart';
 import 'package:stud_advice/src/controller/login/login_controller.dart';
+import 'package:stud_advice/src/screens/home/home_page.dart';
 import 'package:stud_advice/src/widgets/buttons/default_connection_button.dart';
 import 'package:stud_advice/src/widgets/buttons/login_social_button.dart';
 import 'package:stud_advice/src/widgets/dividers/divider_with_text.dart';
@@ -15,6 +17,8 @@ class LoginScreen extends StatelessWidget {
   static const String navigatorId = '/login_screen';
 
   final LoginController _loginController = Get.put(LoginController());
+  final SocialSignInController _socialSignInController =
+      Get.put(SocialSignInController());
 
   // Use constants to facilitate the implementation of the translation.
   final String emailHintText = 'Email';
@@ -176,8 +180,10 @@ class LoginScreen extends StatelessWidget {
           imagePath: 'assets/images/login/google.png',
           tileBackgroundColor: Colors.white,
           borderColor: AppColors.black26,
-          onTap: () {
-            _loginController.loginWithGoogleAccount();
+          onTap: () async {
+            if (await _socialSignInController.loginWithGoogleAccount()) {
+              Get.offAll(() => const HomePageScreen());
+            }
           },
         ),
         const SizedBox(width: 10),
@@ -186,8 +192,10 @@ class LoginScreen extends StatelessWidget {
           tileBackgroundColor: AppColors.white,
           borderColor: AppColors.black26,
           iconColor: AppColors.blueAccent,
-          onTap: () {
-            _loginController.loginWithFacebookAccount();
+          onTap: () async {
+            if (await _socialSignInController.loginWithFacebookAccount()) {
+              Get.offAll(() => const HomePageScreen());
+            }
           },
         ),
         const SizedBox(width: 10),
@@ -195,8 +203,10 @@ class LoginScreen extends StatelessWidget {
           imagePath: 'assets/images/login/apple.png',
           tileBackgroundColor: AppColors.white,
           borderColor: AppColors.black26,
-          onTap: () {
-            _loginController.loginWithAppleAccount();
+          onTap: () async {
+            if (await _socialSignInController.loginWithAppleAccount()) {
+              Get.offAll(() => const HomePageScreen());
+            }
           },
         ),
         const SizedBox(width: 10),
@@ -204,8 +214,10 @@ class LoginScreen extends StatelessWidget {
           imagePath: 'assets/images/login/x.png',
           tileBackgroundColor: Colors.white,
           borderColor: AppColors.black26,
-          onTap: () {
-            _loginController.loginWithXAccount();
+          onTap: () async {
+            if (await _socialSignInController.loginWithXAccount()) {
+              Get.offAll(() => const HomePageScreen());
+            }
           },
         ),
       ],
