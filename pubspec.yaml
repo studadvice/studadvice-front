@@ -37,7 +37,7 @@ dependencies:
   google_sign_in: ^6.1.6
   flutter_facebook_auth: ^6.0.3
   shared_preferences: ^2.2.2
-#  flutter_native_splash: ^2.3.5
+  flutter_native_splash: ^2.3.6
 
 dev_dependencies:
   flutter_test:
@@ -53,12 +53,3 @@ flutter:
     - assets/images/common/
     - assets/images/login/
     - assets/images/forgot_password/
-
-
-#flutter_native_splash:
-##  Ajouter une image avec le slogan de l'application, made easy for students
-#  image: assets/images/common/raven_image.png
-#  color: "#42a5f5"
-#  android: true
-#  ios: true
-#  dark: true

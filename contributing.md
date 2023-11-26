@@ -47,9 +47,8 @@ https://stackoverflow.com/questions/54557479/flutter-and-google-sign-in-plugin-p
 Cette commande va vous afficher toutes les clés SHA1 de votre dossier android. Il faut ensuite ajouter la SHA1
 correspondant à votre clé de signature de debug dans la console firebase.
 
-
-
 ### Sur iOS pour utiliser firebase et google sign in il faut ajouter le fichier GoogleService-Info.plist dans le dossier
+
 ios/Runner.
 
 Ce fichier peut être téléchargé depuis la console firebase.
@@ -61,7 +60,8 @@ affiché sur android. Voir les fichiers register_options_screen.dart et login_op
 
 https://developers.facebook.com/
 
-https://www.youtube.com/watch?v=AG_hO03Vyto : Pour configurer le compte développeur et la connexion facebook sur l'espace
+https://www.youtube.com/watch?v=AG_hO03Vyto : Pour configurer le compte développeur et la connexion facebook sur
+l'espace
 de développement.
 
 https://stackoverflow.com/questions/54657148/facebook-login-problem-with-hash-key-flutter-how-to-generate-facebook-hashk
@@ -72,3 +72,17 @@ https://facebook.meedu.app/docs/6.x.x/android : Pour configurer la connexion fac
 https://facebook.meedu.app/docs/6.x.x/ios : Pour configurer la connexion facebook sur iOS.
 
 C'est top, car nous pourrions le configurer avec notre compte facebook studadvice.
+
+### Native Splash Screen
+
+Pour customiser le native splash screen, suivez les instructions de ce package :
+https://pub.dev/documentation/flutter_native_splash/latest/
+
+Une fois votre splash screen customisé, il faut lancer la commande suivante pour générer les fichiers natifs :
+```bash
+ dart run flutter_native_splash:create
+```
+puis 
+```bash
+ dart run flutter_native_splash:create --path:flutter_native_splash.yaml
+```
