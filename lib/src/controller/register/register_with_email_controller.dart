@@ -23,7 +23,8 @@ class RegisterWithEmailController extends GetxController {
     LoadingSpinner.start();
 
     try {
-      bool signUpSuccess = await _authenticationController.signUp(
+      bool signUpSuccess =
+          await _authenticationController.signUpWithEmailAndPassword(
         formData['email'],
         formData['hashedPassword'],
       );
