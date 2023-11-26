@@ -2,8 +2,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:stud_advice/src/common/chore/app_colors.dart';
-import 'package:stud_advice/src/controllers/authentication/authentication_controller.dart';
-import 'package:stud_advice/src/widgets/common/loading/loading_spinner.dart';
+import 'package:stud_advice/src/controller/authentication/authentication_controller.dart';
+import 'package:stud_advice/src/widgets/loading/loading_spinner.dart';
 
 class SocialSignInController extends GetxController {
   final AuthenticationController _authenticationController =
@@ -29,29 +29,19 @@ class SocialSignInController extends GetxController {
   }
 
   Future<bool> loginWithFacebookAccount() async {
-    try {
-      LoadingSpinner.start();
-
-      bool signInSuccess = await _authenticationController.signInWithFacebook();
-
-      return signInSuccess;
-    } on FirebaseAuthException catch (e) {
-      handleLoginError(e.code);
-      return false;
-    } finally {
-      LoadingSpinner.stop();
-    }
-  }
-
-  Future<bool> loginWithAppleAccount() async {
-    // TODO: implement loginWithAppleAccount
+    // TODO: implement loginWithFacebook
     return true;
   }
 
-  // Future<bool> loginWithXAccount() async {
-  //   // TODO: implement loginWithX
-  //   return true;
-  // }
+  Future<bool> loginWithAppleAccount() async {
+    // TODO: implement loginWithGoogle
+    return true;
+  }
+
+  Future<bool> loginWithXAccount() async {
+    // TODO: implement loginWithGoogle
+    return true;
+  }
 
   void handleLoginError(String errorCode) {
     Color backgroundColor = AppColors.dangerColor;

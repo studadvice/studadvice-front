@@ -4,16 +4,15 @@ import 'package:stud_advice/src/common/chore/app_colors.dart';
 import 'package:stud_advice/src/common/chore/app_fonts_sizes.dart';
 import 'package:stud_advice/src/common/chore/crypto_hash.dart';
 import 'package:stud_advice/src/common/chore/form_validator.dart';
-import 'package:stud_advice/src/controllers/authentication/social_sign_in_controller.dart';
-import 'package:stud_advice/src/controllers/legal_terms/legal_terms_controller.dart';
-import 'package:stud_advice/src/controllers/login/login_controller.dart';
-import 'package:stud_advice/src/screens/forgot_password/forgot_password_screen.dart';
-import 'package:stud_advice/src/screens/home/home_page_screen.dart';
-import 'package:stud_advice/src/widgets/common/buttons/default_connection_button.dart';
-import 'package:stud_advice/src/widgets/common/buttons/social_button.dart';
-import 'package:stud_advice/src/widgets/common/dividers/divider_with_text.dart';
-import 'package:stud_advice/src/widgets/common/textFields/classic_text_field.dart';
-import 'package:stud_advice/src/widgets/common/textFields/password_text_field.dart';
+import 'package:stud_advice/src/controller/authentication/social_sign_in_controller.dart';
+import 'package:stud_advice/src/controller/common/terms_and_conditions/terms_and_conditions_controller.dart';
+import 'package:stud_advice/src/controller/login/login_controller.dart';
+import 'package:stud_advice/src/screens/home/home_page.dart';
+import 'package:stud_advice/src/widgets/buttons/default_connection_button.dart';
+import 'package:stud_advice/src/widgets/buttons/login_social_button.dart';
+import 'package:stud_advice/src/widgets/dividers/divider_with_text.dart';
+import 'package:stud_advice/src/widgets/textFields/classic_text_field.dart';
+import 'package:stud_advice/src/widgets/textFields/password_text_field.dart';
 
 class LoginScreen extends StatelessWidget {
   static const String navigatorId = '/login_screen';
@@ -21,8 +20,8 @@ class LoginScreen extends StatelessWidget {
   final LoginController _loginController = Get.put(LoginController());
   final SocialSignInController _socialSignInController =
       Get.put(SocialSignInController());
-  final LegalTermsController _termsAndConditionsController =
-      Get.put(LegalTermsController());
+  final TermsAndConditionsController _termsAndConditionsController =
+      Get.put(TermsAndConditionsController());
 
   // Use constants to facilitate the implementation of the translation.
   final String emailHintText = 'Email';
@@ -72,7 +71,7 @@ class LoginScreen extends StatelessWidget {
                   const SizedBox(height: 10),
                   DividerWithText(text: orContinueWithText),
                   const SizedBox(height: 10),
-                  buildSocialLoginButtons(context),
+                  buildSocialLoginButtons(),
                   const SizedBox(height: 50),
                   buildTermsAndConditionsSection(),
                 ],
@@ -149,7 +148,7 @@ class LoginScreen extends StatelessWidget {
         const SizedBox(width: 10),
         TextButton(
           onPressed: () {
-            Get.to(() => ForgotPasswordScreen());
+            // TODO add navigation to the forgot password screen
           },
           child: Text(
             forgotPasswordText,
@@ -180,65 +179,54 @@ class LoginScreen extends StatelessWidget {
         });
   }
 
-  Widget buildSocialLoginButtons(BuildContext context) {
+  Widget buildSocialLoginButtons() {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        SocialButton(
+        LoginSocialButton(
           imagePath: 'assets/images/login/google.png',
           tileBackgroundColor: Colors.white,
           borderColor: AppColors.black26,
           onTap: () async {
             if (await _socialSignInController.loginWithGoogleAccount()) {
-              Get.offAll(() => HomePageScreen());
+              Get.offAll(() => const HomePageScreen());
             }
           },
-          borderRadius: 16,
-          imageSize: 25,
-          padding: 20,
         ),
         const SizedBox(width: 10),
-        SocialButton(
+        LoginSocialButton(
           imagePath: 'assets/images/login/facebook.png',
           tileBackgroundColor: AppColors.white,
           borderColor: AppColors.black26,
           iconColor: AppColors.blueAccent,
           onTap: () async {
             if (await _socialSignInController.loginWithFacebookAccount()) {
-              Get.offAll(() => HomePageScreen());
+              Get.offAll(() => const HomePageScreen());
             }
           },
-          borderRadius: 16,
-          imageSize: 25,
-          padding: 20,
         ),
-        if (Theme.of(context).platform == TargetPlatform.iOS)
-          const SizedBox(width: 10),
-        if (Theme.of(context).platform == TargetPlatform.iOS)
-          SocialButton(
-            imagePath: 'assets/images/login/apple.png',
-            tileBackgroundColor: AppColors.white,
-            borderColor: AppColors.black26,
-            onTap: () async {
-              if (await _socialSignInController.loginWithAppleAccount()) {
-                Get.offAll(() => HomePageScreen());
-              }
-            },
-            borderRadius: 16,
-            imageSize: 25,
-            padding: 20,
-          ),
-        // const SizedBox(width: 10),
-        // LoginSocialButton(
-        //   imagePath: 'assets/images/login/x.png',
-        //   tileBackgroundColor: Colors.white,
-        //   borderColor: AppColors.black26,
-        //   onTap: () async {
-        //     if (await _socialSignInController.loginWithXAccount()) {
-        //       Get.offAll(() => HomePageScreen());
-        //     }
-        //   },
-        // ),
+        const SizedBox(width: 10),
+        LoginSocialButton(
+          imagePath: 'assets/images/login/apple.png',
+          tileBackgroundColor: AppColors.white,
+          borderColor: AppColors.black26,
+          onTap: () async {
+            if (await _socialSignInController.loginWithAppleAccount()) {
+              Get.offAll(() => const HomePageScreen());
+            }
+          },
+        ),
+        const SizedBox(width: 10),
+        LoginSocialButton(
+          imagePath: 'assets/images/login/x.png',
+          tileBackgroundColor: Colors.white,
+          borderColor: AppColors.black26,
+          onTap: () async {
+            if (await _socialSignInController.loginWithXAccount()) {
+              Get.offAll(() => const HomePageScreen());
+            }
+          },
+        ),
       ],
     );
   }
