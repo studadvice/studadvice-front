@@ -10,8 +10,8 @@ import 'src/common/conf/routes_configuration.dart';
 
 // import 'package:stud_advice/src/common/conf/injection_container.dart';
 
-import 'package:stud_advice/src/common/controllers/i18n_controller.dart';
-import 'package:stud_advice/src/common/controllers/theme_controller.dart';
+import 'package:stud_advice/src/controller/common/i18n_controller.dart';
+import 'package:stud_advice/src/controller/common/theme_controller.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

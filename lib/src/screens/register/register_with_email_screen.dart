@@ -6,7 +6,7 @@ import 'package:stud_advice/src/common/chore/crypto_hash.dart';
 import 'package:stud_advice/src/common/chore/form_validator.dart';
 import 'package:stud_advice/src/controller/register/register_with_email_controller.dart';
 import 'package:stud_advice/src/screens/legal_conditions/legal_conditions_screen.dart';
-import 'package:stud_advice/src/common/helpers/navigation_helper.dart';
+import 'package:stud_advice/src/common/helper/navigation_helper.dart';
 import 'package:stud_advice/src/controller/authentication/authentication_controller.dart';
 import 'package:stud_advice/src/controller/register/register_with_email_controller.dart';
 import 'package:stud_advice/src/screens/legal_terms/legal_terms_screen.dart';

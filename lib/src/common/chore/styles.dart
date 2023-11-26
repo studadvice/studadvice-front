@@ -1,10 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:stud_advice/src/common/chore/app_colors.dart';
 
-// const TextTheme _textThemeDark = new TextTheme(
-//
-// );
-
 class Styles {
   static ThemeData darkTheme = ThemeData(
     useMaterial3: true,

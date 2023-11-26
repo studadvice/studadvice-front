@@ -1,5 +1,5 @@
 import 'package:get/get.dart';
-import 'package:stud_advice/src/common/middlewares/i18n_middleware.dart';
+import 'package:stud_advice/src/middleware/common/i18n_middleware.dart';
 import 'package:stud_advice/src/screens/home/home_page.dart';
 import 'package:stud_advice/src/screens/init_time/init_time_screen.dart';
 import 'package:stud_advice/src/screens/legal_terms/legal_terms_screen.dart';
