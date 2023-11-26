@@ -5,6 +5,7 @@ import 'package:stud_advice/src/common/chore/app_fonts_sizes.dart';
 import 'package:stud_advice/src/common/chore/crypto_hash.dart';
 import 'package:stud_advice/src/common/chore/form_validator.dart';
 import 'package:stud_advice/src/controller/authentication/social_sign_in_controller.dart';
+import 'package:stud_advice/src/controller/common/terms_and_conditions/terms_and_conditions_controller.dart';
 import 'package:stud_advice/src/controller/login/login_controller.dart';
 import 'package:stud_advice/src/screens/home/home_page.dart';
 import 'package:stud_advice/src/widgets/buttons/default_connection_button.dart';
@@ -19,6 +20,8 @@ class LoginScreen extends StatelessWidget {
   final LoginController _loginController = Get.put(LoginController());
   final SocialSignInController _socialSignInController =
       Get.put(SocialSignInController());
+  final TermsAndConditionsController _termsAndConditionsController =
+      Get.put(TermsAndConditionsController());
 
   // Use constants to facilitate the implementation of the translation.
   final String emailHintText = 'Email';
@@ -32,6 +35,8 @@ class LoginScreen extends StatelessWidget {
   final String loginText = 'Se connecter';
   final String orContinueWithText = 'Ou continuer avec';
   final String passwordErrorText = 'Veuillez entrer votre mot de passe';
+  final String acceptingTermsAndConditionsText =
+      "En continuant la connexion ou l'inscription avec l'une des méthodes ci-dessus, vous acceptez nos conditions générales d'utilisation et notre politique de confidentialité.";
 
   final _formKey = GlobalKey<FormState>();
 
@@ -67,6 +72,8 @@ class LoginScreen extends StatelessWidget {
                   DividerWithText(text: orContinueWithText),
                   const SizedBox(height: 10),
                   buildSocialLoginButtons(),
+                  const SizedBox(height: 50),
+                  buildTermsAndConditionsSection(),
                 ],
               ),
             ),
@@ -220,6 +227,26 @@ class LoginScreen extends StatelessWidget {
             }
           },
         ),
+      ],
+    );
+  }
+
+  Widget buildTermsAndConditionsSection() {
+    return Column(
+      children: [
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 20),
+          child: Text(
+            acceptingTermsAndConditionsText,
+            textAlign: TextAlign.justify,
+            style: const TextStyle(
+              fontSize: 12,
+              color: AppColors.black,
+            ),
+          ),
+        ),
+        const SizedBox(height: 10),
+        _termsAndConditionsController.buildTermsAndConditionsButton(),
       ],
     );
   }

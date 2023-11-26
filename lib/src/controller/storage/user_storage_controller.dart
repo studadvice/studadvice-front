@@ -32,7 +32,6 @@ class UserStorageController extends GetxController {
       // Save the user data to Firestore
       await users.doc(uid).set(userDataMap);
 
-      debugPrint('User data saved to Firestore for UID: $uid');
       return true;
     } else {
       Get.snackbar(
