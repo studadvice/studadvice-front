@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:stud_advice/src/common/chore/app_colors.dart';
 import 'package:stud_advice/src/controller/authentication/authentication_controller.dart';
 import 'package:stud_advice/src/screens/home/home_page.dart';
@@ -13,6 +14,13 @@ class LoginController extends GetxController {
   // Controllers for the text fields.
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
+  var rememberMe = true.obs;
+
+  @override
+  void onInit() async {
+    _loadRememberMeCredentials();
+    super.onInit();
+  }
 
   @override
   void onClose() {
@@ -20,8 +28,6 @@ class LoginController extends GetxController {
     passwordController.dispose();
     super.onClose();
   }
-
-  var rememberMe = true.obs;
 
   final String error = "Erreur de connexion";
   final String loginWithEmailFailed =
@@ -53,6 +59,24 @@ class LoginController extends GetxController {
     } on FirebaseAuthException catch (e) {
       LoadingSpinner.stop();
       handleLoginError(e.code);
+    }
+  }
+
+  void saveRememberMeCredentials(String email, String password) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.setString('rememberMeEmail', email);
+    prefs.setString('rememberMePassword', password);
+  }
+
+  void _loadRememberMeCredentials() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    String? email = prefs.getString('rememberMeEmail');
+    String? password = prefs.getString('rememberMePassword');
+
+    if (email != null && password != null) {
+      emailController.text = email;
+      passwordController.text = password;
+      rememberMe.value = true;
     }
   }
 

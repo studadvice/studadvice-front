@@ -7,6 +7,7 @@ import 'package:stud_advice/src/common/chore/form_validator.dart';
 import 'package:stud_advice/src/controller/authentication/social_sign_in_controller.dart';
 import 'package:stud_advice/src/controller/common/terms_and_conditions/terms_and_conditions_controller.dart';
 import 'package:stud_advice/src/controller/login/login_controller.dart';
+import 'package:stud_advice/src/screens/common/forgot_password/forgot_password_screen.dart';
 import 'package:stud_advice/src/screens/home/home_page.dart';
 import 'package:stud_advice/src/widgets/buttons/default_connection_button.dart';
 import 'package:stud_advice/src/widgets/buttons/login_social_button.dart';
@@ -148,7 +149,7 @@ class LoginScreen extends StatelessWidget {
         const SizedBox(width: 10),
         TextButton(
           onPressed: () {
-            // TODO add navigation to the forgot password screen
+            Get.to(() => ForgotPasswordScreen());
           },
           child: Text(
             forgotPasswordText,

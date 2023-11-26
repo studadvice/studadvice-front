@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:stud_advice/src/common/chore/app_colors.dart';
 import 'package:stud_advice/src/common/chore/app_fonts_sizes.dart';
-import 'package:stud_advice/src/screens/legal_conditions/legal_conditions_screen.dart';
+import 'package:stud_advice/src/screens/common/legal_conditions/legal_conditions_screen.dart';
 
 class TermsAndConditionsController extends GetxController {
   var agreeWithTermsAndConditions = false.obs;
