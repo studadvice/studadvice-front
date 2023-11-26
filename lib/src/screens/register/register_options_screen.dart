@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:stud_advice/src/common/chore/app_colors.dart';
 import 'package:stud_advice/src/controller/authentication/social_sign_in_controller.dart';
+import 'package:stud_advice/src/screens/register/register_user_information_screen.dart';
 import 'package:stud_advice/src/screens/register/register_with_email_screen.dart';
 import 'package:stud_advice/src/screens/register/widgets/register_social_button.dart';
 import 'package:stud_advice/src/screens/register/widgets/register_with_email_button.dart';
@@ -68,7 +69,7 @@ class RegisterOptionsScreen extends StatelessWidget {
                       onTap: () async {
                         if (await _socialSignInController
                             .loginWithGoogleAccount()) {
-                          Get.to(() => RegisterWithEmailScreen());
+                          Get.to(() => (const RegisterUserInformationScreen()));
                         }
                       }),
                   const SizedBox(height: 20),
@@ -79,7 +80,7 @@ class RegisterOptionsScreen extends StatelessWidget {
                       onTap: () async {
                         if (await _socialSignInController
                             .loginWithFacebookAccount()) {
-                          Get.to(() => RegisterWithEmailScreen());
+                          Get.to(() => (const RegisterUserInformationScreen()));
                         }
                       }),
                   const SizedBox(height: 20),
@@ -89,7 +90,7 @@ class RegisterOptionsScreen extends StatelessWidget {
                       onTap: () async {
                         if (await _socialSignInController
                             .loginWithAppleAccount()) {
-                          Get.to(() => RegisterWithEmailScreen());
+                          Get.to(() => (const RegisterUserInformationScreen()));
                         }
                       }),
                   const SizedBox(height: 20),
@@ -98,7 +99,7 @@ class RegisterOptionsScreen extends StatelessWidget {
                       buttonText: continueWithXText,
                       onTap: () async {
                         if (await _socialSignInController.loginWithXAccount()) {
-                          Get.to(() => RegisterWithEmailScreen());
+                          Get.to(() => (const RegisterUserInformationScreen()));
                         }
                       }),
                   buildDividerWithText(),
