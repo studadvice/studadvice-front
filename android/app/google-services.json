@@ -14,11 +14,11 @@
       },
       "oauth_client": [
         {
-          "client_id": "398344471697-9n81s5svn4cd1377kvpjr1vngurh2mmu.apps.googleusercontent.com",
+          "client_id": "398344471697-5cpfdgghema5qolglth01tbh08csr4vq.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.stud.studadvice_front",
-            "certificate_hash": "0fe8a76d716bd4b7d798cb2bd9323812613979b4"
+            "certificate_hash": "5d171fee9b9e6b31f9287b7962739db3c97b32c6"
           }
         },
         {
