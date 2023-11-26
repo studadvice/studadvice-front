@@ -29,12 +29,12 @@ class StudAdviceApp extends StatelessWidget {
     final RoutesConfiguration routesConfiguration =
         Get.put(RoutesConfiguration());
 
-    final ConnectivityController connectivityController =
-        Get.put(ConnectivityController());
-
-    Connectivity().onConnectivityChanged.listen((ConnectivityResult result) {
-      connectivityController.checkConnectivity(result);
-    });
+    // final ConnectivityController connectivityController =
+    //     Get.put(ConnectivityController());
+    //
+    // Connectivity().onConnectivityChanged.listen((ConnectivityResult result) {
+    //   connectivityController.checkConnectivity(result);
+    // });
 
     return GetMaterialApp(
       title: "Stud'Advice",

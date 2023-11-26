@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:stud_advice/src/common/chore/app_fonts_sizes.dart';
 
-class DefaultConnectionButton extends StatefulWidget {
+class DefaultConnectionButton extends StatelessWidget {
   final String text;
   final Color backgroundColor;
   final Color textColor;
@@ -16,26 +16,20 @@ class DefaultConnectionButton extends StatefulWidget {
   });
 
   @override
-  State<DefaultConnectionButton> createState() =>
-      _DefaultConnectionButtonState();
-}
-
-class _DefaultConnectionButtonState extends State<DefaultConnectionButton> {
-  @override
   Widget build(BuildContext context) {
     return ElevatedButton(
-      onPressed: widget.onPressed,
+      onPressed: onPressed,
       style: ElevatedButton.styleFrom(
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(25),
         ),
-        backgroundColor: widget.backgroundColor,
+        backgroundColor: backgroundColor,
         padding: const EdgeInsets.symmetric(horizontal: 120, vertical: 15),
       ),
       child: Text(
-        widget.text,
+        text,
         style: TextStyle(
-          color: widget.textColor,
+          color: textColor,
           fontWeight: FontWeight.w400,
           fontSize: AppFontSizes.large16,
         ),
