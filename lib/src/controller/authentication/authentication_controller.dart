@@ -34,6 +34,11 @@ class AuthenticationController extends GetxController {
     return true;
   }
 
+  Future<bool> resetPassword(String email) async {
+    await firebaseAuthInstance.sendPasswordResetEmail(email: email);
+    return true;
+  }
+
   Future<bool> signInWithGoogle() async {
     // Trigger the authentication flow.
     final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();

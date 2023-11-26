@@ -36,6 +36,7 @@ dependencies:
   cloud_firestore: ^4.13.2
   google_sign_in: ^6.1.6
   flutter_facebook_auth: ^6.0.3
+  shared_preferences: ^2.2.2
 #  flutter_native_splash: ^2.3.5
 
 dev_dependencies:
@@ -51,6 +52,7 @@ flutter:
   assets:
     - assets/images/common/
     - assets/images/login/
+    - assets/images/forgot_password/
 
 
 #flutter_native_splash:
