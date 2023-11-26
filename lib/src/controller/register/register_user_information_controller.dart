@@ -120,7 +120,6 @@ class RegisterUserInformationController extends GetxController {
         Get.offAll(() => const HomePageScreen(), arguments: userData);
       }
     } catch (e) {
-      debugPrint(e.toString());
       LoadingSpinner.stop();
       Get.snackbar(
         error,

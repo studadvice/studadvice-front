@@ -1,5 +1,4 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:stud_advice/src/common/conf/app_dependencies_binding.dart';
@@ -49,20 +48,17 @@ class AuthenticationController extends GetxController {
     );
 
     // Once signed in, return the UserCredential.
-    final credentials =
+    final userCredentials =
         await FirebaseAuth.instance.signInWithCredential(credential);
 
-    debugPrint("credentials : $credentials");
-    if (credentials.user != null) {
+    if (userCredentials.user != null) {
       return true;
     }
-    debugPrint('result : false');
     return false;
   }
 
   Future<bool> signOut() async {
     if (GoogleSignIn().currentUser != null) {
-      debugPrint('signOut from google');
       await GoogleSignIn().signOut();
     }
 

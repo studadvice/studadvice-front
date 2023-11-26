@@ -10,8 +10,6 @@ class RegisterWithEmailController extends GetxController {
   final AuthenticationController _authenticationController =
       Get.put(AuthenticationController());
 
-  var agreeWithTermsAndConditions = false.obs;
-
   final String error = "Erreur de connexion";
   final String alreadyHaveAnAccountError = "Vous avez déjà un compte";
   final String registerWithEmailFailed =

@@ -28,6 +28,21 @@ class SocialSignInController extends GetxController {
     }
   }
 
+  Future<bool> loginWithFacebookAccount() async {
+    // TODO: implement loginWithFacebook
+    return true;
+  }
+
+  Future<bool> loginWithAppleAccount() async {
+    // TODO: implement loginWithGoogle
+    return true;
+  }
+
+  Future<bool> loginWithXAccount() async {
+    // TODO: implement loginWithGoogle
+    return true;
+  }
+
   void handleLoginError(String errorCode) {
     Color backgroundColor = AppColors.dangerColor;
     Color textColor = AppColors.white;
@@ -49,20 +64,5 @@ class SocialSignInController extends GetxController {
         backgroundColor: backgroundColor,
         snackPosition: snackPosition,
         colorText: textColor);
-  }
-
-  Future<bool> loginWithFacebookAccount() async {
-    // TODO: implement loginWithFacebook
-    return true;
-  }
-
-  Future<bool> loginWithAppleAccount() async {
-    // TODO: implement loginWithGoogle
-    return true;
-  }
-
-  Future<bool> loginWithXAccount() async {
-    // TODO: implement loginWithGoogle
-    return true;
   }
 }

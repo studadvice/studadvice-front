@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:stud_advice/src/common/chore/app_colors.dart';
 import 'package:stud_advice/src/controller/authentication/social_sign_in_controller.dart';
+import 'package:stud_advice/src/controller/common/terms_and_conditions/terms_and_conditions_controller.dart';
 import 'package:stud_advice/src/screens/register/register_user_information_screen.dart';
 import 'package:stud_advice/src/screens/register/register_with_email_screen.dart';
 import 'package:stud_advice/src/screens/register/widgets/register_social_button.dart';
@@ -17,9 +18,13 @@ class RegisterOptionsScreen extends StatelessWidget {
   final String continueWithFacebookText = 'Continuer avec Facebook';
   final String continueWithAppleText = 'Continuer avec Apple';
   final String continueWithXText = 'Continuer avec X';
+  final String acceptingTermsAndConditionsText =
+      "En continuant l'inscription avec l'une des méthodes ci-dessus, vous acceptez nos conditions générales d'utilisation et notre politique de confidentialité.";
 
   final SocialSignInController _socialSignInController =
       Get.put(SocialSignInController());
+  final TermsAndConditionsController _termsAndConditionsController =
+      Get.put(TermsAndConditionsController());
 
   Widget buildSocialButton(
       {required String imagePath,
@@ -36,12 +41,22 @@ class RegisterOptionsScreen extends StatelessWidget {
     );
   }
 
-  Widget buildDividerWithText() {
+  Widget buildTermsAndConditionsSection() {
     return Column(
       children: [
-        const SizedBox(height: 20),
-        DividerWithText(text: dividerText),
-        const SizedBox(height: 30),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 40),
+          child: Text(
+            acceptingTermsAndConditionsText,
+            textAlign: TextAlign.justify,
+            style: const TextStyle(
+              fontSize: 12,
+              color: AppColors.black,
+            ),
+          ),
+        ),
+        const SizedBox(height: 10),
+        _termsAndConditionsController.buildTermsAndConditionsButton(),
       ],
     );
   }
@@ -69,7 +84,10 @@ class RegisterOptionsScreen extends StatelessWidget {
                       onTap: () async {
                         if (await _socialSignInController
                             .loginWithGoogleAccount()) {
-                          Get.to(() => (const RegisterUserInformationScreen()));
+                          Get.to(() => const RegisterUserInformationScreen(),
+                              arguments: {
+                                'hasAcceptedTermsAndConditions': true,
+                              });
                         }
                       }),
                   const SizedBox(height: 20),
@@ -102,7 +120,11 @@ class RegisterOptionsScreen extends StatelessWidget {
                           Get.to(() => (const RegisterUserInformationScreen()));
                         }
                       }),
-                  buildDividerWithText(),
+                  const SizedBox(height: 10),
+                  buildTermsAndConditionsSection(),
+                  const SizedBox(height: 20),
+                  DividerWithText(text: dividerText),
+                  const SizedBox(height: 20),
                   RegisterWithEmailButton(
                     onPressed: () {
                       Get.to(() => RegisterWithEmailScreen());
