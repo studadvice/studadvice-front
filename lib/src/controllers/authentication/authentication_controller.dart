@@ -88,6 +88,8 @@ class AuthenticationController extends GetxController {
       await GoogleSignIn().signOut();
     }
 
+    await FacebookAuth.instance.logOut();
+
     await firebaseAuthInstance.signOut();
     return true;
   }
