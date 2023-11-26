@@ -1,5 +1,5 @@
 import 'package:get/get.dart';
-import 'package:stud_advice/src/common/controllers/i18n_controller.dart';
+import 'package:stud_advice/src/controller/common/i18n_controller.dart';
 
 class I18nMiddleware extends GetMiddleware {
   @override

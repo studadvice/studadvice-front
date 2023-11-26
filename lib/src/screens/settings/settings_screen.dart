@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:stud_advice/src/common/chore/app_colors.dart';
 import 'package:stud_advice/src/common/chore/supported_locales.dart';
-import 'package:stud_advice/src/common/controllers/i18n_controller.dart';
-import 'package:stud_advice/src/common/controllers/theme_controller.dart';
-import 'package:stud_advice/src/common/helpers/navigation_helper.dart';
+import 'package:stud_advice/src/controller/common/i18n_controller.dart';
+import 'package:stud_advice/src/controller/common/theme_controller.dart';
+import 'package:stud_advice/src/common/helper/navigation_helper.dart';
 import 'package:stud_advice/src/screens/legal_terms/legal_terms_screen.dart';
 // import 'package:stud_advice/src/widgets/buttons/default_connection_button.dart';
 import 'package:stud_advice/src/widgets/dropdowns/custom_dropdown.dart';
@@ -22,9 +22,6 @@ class SettingsScreen extends StatelessWidget {
   static final ThemeController themeController = Get.find();
   static final I18n i18n = Get.find();
 
-  final backgroundColor = AppColors.white;
-  final borderColor = AppColors.secondaryColor;
-  final focusedBorderColor = AppColors.secondaryColor;
   const SettingsScreen({super.key});
 
   @override
@@ -51,20 +48,65 @@ class SettingsScreen extends StatelessWidget {
     );
   }
 
+  void showAccessibilitySettings() {
+    Get.bottomSheet(
+      buildAccessibilitySheet(),
+      isScrollControlled: true,
+    );
+  }
+
   BottomSheetWidget buildLanguageSheet() {
     return BottomSheetWidget(
       ratioPerItem: 200.0,
       items: [
         CustomDropdownSearch<CustomLocale>(
           labelText: i18n.text('language'),
-          backgroundColor: backgroundColor,
-          borderColor: borderColor,
-          focusedBorderColor: focusedBorderColor,
+          backgroundColor: AppColors.white,
+          borderColor: AppColors.secondaryColor,
+          focusedBorderColor: AppColors.secondaryColor,
           items: supportedLocales,
           selectedItem: i18n.getCurrentLocale,
           onChanged: (locale) {
             // TODO : checker l'async
             i18n.changeLocale(locale ?? i18n.getCurrentLocale, navigatorId);
+            return null;
+          },
+          validator: (locale) {
+            return null;
+          },
+          emptyBuilder: (context, searchEntry) {
+            return Text(i18n.text('noResult'));
+          },
+          errorBuilder: (context, searchEntry, exception) {
+            return Text(i18n.text('error'));
+          },
+        ),
+        // DefaultConnectionButton(
+        //     text: i18n.text('close'),
+        //     textColor: Theme.of(Get.context!).textTheme.bodyLarge!.color ??
+        //         AppColors.white,
+        //     backgroundColor: backgroundColor,
+        //     onPressed: () {
+        //       Get.back();
+        //     }),
+      ],
+    );
+  }
+
+  BottomSheetWidget buildAccessibilitySheet() {
+    return BottomSheetWidget(
+      ratioPerItem: 200.0,
+      items: [
+        CustomDropdownSearch<String>(
+          labelText: i18n.text('textSize'),
+          backgroundColor: AppColors.white,
+          borderColor: AppColors.secondaryColor,
+          focusedBorderColor: AppColors.secondaryColor,
+          items: [i18n.text('small'), i18n.text('medium'), i18n.text('large')],
+          //selectedItem: i18n.getCurrentLocale,
+          onChanged: (fontSize) {
+            // TODO : checker l'async
+            print('accessibility changed');
             return null;
           },
           validator: (locale) {
@@ -103,6 +145,7 @@ class SettingsScreen extends StatelessWidget {
             backgroundColor: AppColors.red,
           ),
           title: i18n.text('logout'),
+          titleStyle: const TextStyle(color: AppColors.red, fontWeight: FontWeight.bold),
         ),
       ],
     );
@@ -142,7 +185,9 @@ class SettingsScreen extends StatelessWidget {
     return SettingsGroup(
       items: [
         SettingsItem(
-          onTap: () {},
+          onTap: () {
+            showAccessibilitySettings();
+          },
           icons: Icons.accessible,
           iconStyle: IconStyle(
             iconsColor: AppColors.white,
