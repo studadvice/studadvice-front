@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:stud_advice/src/common/chore/app_colors.dart';
-import 'package:stud_advice/src/controller/authentication/social_sign_in_controller.dart';
-import 'package:stud_advice/src/controller/common/terms_and_conditions/terms_and_conditions_controller.dart';
+import 'package:stud_advice/src/controllers/authentication/social_sign_in_controller.dart';
+import 'package:stud_advice/src/controllers/legal_terms/legal_terms_controller.dart';
 import 'package:stud_advice/src/screens/register/register_user_information_screen.dart';
 import 'package:stud_advice/src/screens/register/register_with_email_screen.dart';
-import 'package:stud_advice/src/screens/register/widgets/register_social_button.dart';
-import 'package:stud_advice/src/screens/register/widgets/register_with_email_button.dart';
-import 'package:stud_advice/src/widgets/dividers/divider_with_text.dart';
+import 'package:stud_advice/src/widgets/common/dividers/divider_with_text.dart';
+import 'package:stud_advice/src/widgets/register/register_social_button.dart';
+import 'package:stud_advice/src/widgets/register/register_with_email_button.dart';
 
 class RegisterOptionsScreen extends StatelessWidget {
   static const String navigatorId = '/register_screen_options';
@@ -23,8 +23,8 @@ class RegisterOptionsScreen extends StatelessWidget {
 
   final SocialSignInController _socialSignInController =
       Get.put(SocialSignInController());
-  final TermsAndConditionsController _termsAndConditionsController =
-      Get.put(TermsAndConditionsController());
+  final LegalTermsController _termsAndConditionsController =
+      Get.put(LegalTermsController());
 
   Widget buildSocialButton(
       {required String imagePath,
