@@ -10,7 +10,7 @@ import 'package:stud_advice/src/controllers/login/login_controller.dart';
 import 'package:stud_advice/src/screens/forgot_password/forgot_password_screen.dart';
 import 'package:stud_advice/src/screens/home/home_page_screen.dart';
 import 'package:stud_advice/src/widgets/common/buttons/default_connection_button.dart';
-import 'package:stud_advice/src/widgets/common/buttons/login_social_button.dart';
+import 'package:stud_advice/src/widgets/common/buttons/social_button.dart';
 import 'package:stud_advice/src/widgets/common/dividers/divider_with_text.dart';
 import 'package:stud_advice/src/widgets/common/textFields/classic_text_field.dart';
 import 'package:stud_advice/src/widgets/common/textFields/password_text_field.dart';
@@ -184,7 +184,7 @@ class LoginScreen extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        LoginSocialButton(
+        SocialButton(
           imagePath: 'assets/images/login/google.png',
           tileBackgroundColor: Colors.white,
           borderColor: AppColors.black26,
@@ -193,9 +193,12 @@ class LoginScreen extends StatelessWidget {
               Get.offAll(() => HomePageScreen());
             }
           },
+          borderRadius: 16,
+          imageSize: 25,
+          padding: 20,
         ),
         const SizedBox(width: 10),
-        LoginSocialButton(
+        SocialButton(
           imagePath: 'assets/images/login/facebook.png',
           tileBackgroundColor: AppColors.white,
           borderColor: AppColors.black26,
@@ -205,11 +208,14 @@ class LoginScreen extends StatelessWidget {
               Get.offAll(() => HomePageScreen());
             }
           },
+          borderRadius: 16,
+          imageSize: 25,
+          padding: 20,
         ),
         if (Theme.of(context).platform == TargetPlatform.iOS)
           const SizedBox(width: 10),
         if (Theme.of(context).platform == TargetPlatform.iOS)
-          LoginSocialButton(
+          SocialButton(
             imagePath: 'assets/images/login/apple.png',
             tileBackgroundColor: AppColors.white,
             borderColor: AppColors.black26,
@@ -218,6 +224,9 @@ class LoginScreen extends StatelessWidget {
                 Get.offAll(() => HomePageScreen());
               }
             },
+            borderRadius: 16,
+            imageSize: 25,
+            padding: 20,
           ),
         // const SizedBox(width: 10),
         // LoginSocialButton(

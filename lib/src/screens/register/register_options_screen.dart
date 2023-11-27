@@ -5,8 +5,8 @@ import 'package:stud_advice/src/controllers/authentication/social_sign_in_contro
 import 'package:stud_advice/src/controllers/legal_terms/legal_terms_controller.dart';
 import 'package:stud_advice/src/screens/register/register_user_information_screen.dart';
 import 'package:stud_advice/src/screens/register/register_with_email_screen.dart';
+import 'package:stud_advice/src/widgets/common/buttons/social_button.dart';
 import 'package:stud_advice/src/widgets/common/dividers/divider_with_text.dart';
-import 'package:stud_advice/src/widgets/register/register_social_button.dart';
 import 'package:stud_advice/src/widgets/register/register_with_email_button.dart';
 
 class RegisterOptionsScreen extends StatelessWidget {
@@ -30,14 +30,19 @@ class RegisterOptionsScreen extends StatelessWidget {
       {required String imagePath,
       required String buttonText,
       required VoidCallback onTap,
+      required BuildContext context,
       Color? iconColor}) {
-    return RegisterSocialButton(
+    return SocialButton(
+      width: MediaQuery.of(context).size.width * 0.8,
       imagePath: imagePath,
       tileBackgroundColor: AppColors.white,
       borderColor: Colors.grey,
       iconColor: iconColor,
       buttonText: buttonText,
       onTap: onTap,
+      borderRadius: 25,
+      imageSize: 20,
+      padding: 30,
     );
   }
 
@@ -79,6 +84,7 @@ class RegisterOptionsScreen extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   buildSocialButton(
+                      context: context,
                       imagePath: 'assets/images/login/google.png',
                       buttonText: continueWithGoogleText,
                       onTap: () async {
@@ -92,6 +98,7 @@ class RegisterOptionsScreen extends StatelessWidget {
                       }),
                   const SizedBox(height: 20),
                   buildSocialButton(
+                      context: context,
                       imagePath: 'assets/images/login/facebook.png',
                       buttonText: continueWithFacebookText,
                       iconColor: Colors.blue,
@@ -108,6 +115,7 @@ class RegisterOptionsScreen extends StatelessWidget {
                     const SizedBox(height: 20),
                   if (Theme.of(context).platform == TargetPlatform.iOS)
                     buildSocialButton(
+                        context: context,
                         imagePath: 'assets/images/login/apple.png',
                         buttonText: continueWithAppleText,
                         onTap: () async {
