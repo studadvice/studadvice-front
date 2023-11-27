@@ -1,4 +1,4 @@
-import 'package:stud_advice/utils/custom_locale.dart';
+import 'package:stud_advice/src/utils/custom_locale.dart';
 
 const french = 'fr';
 const english = 'en';

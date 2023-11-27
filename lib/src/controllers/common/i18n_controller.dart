@@ -4,7 +4,7 @@ import 'dart:ui';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
-import 'package:stud_advice/utils/custom_locale.dart';
+import 'package:stud_advice/src/utils/custom_locale.dart';
 
 class I18n extends GetxController {
   CustomLocale _locale = CustomLocale('en', 'US');
