@@ -4,14 +4,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:get/get.dart';
 import 'package:stud_advice/src/common/chore/styles.dart';
+import 'package:stud_advice/src/controllers/common/i18n_controller.dart';
+import 'package:stud_advice/src/controllers/common/theme_controller.dart';
 
 import 'firebase_options.dart';
 import 'src/common/conf/routes_configuration.dart';
 
-// import 'package:stud_advice/src/common/conf/injection_container.dart';
-
-import 'package:stud_advice/src/controller/common/i18n_controller.dart';
-import 'package:stud_advice/src/controller/common/theme_controller.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:stud_advice/src/common/chore/app_colors.dart';
 import 'package:stud_advice/src/common/chore/supported_locales.dart';
-import 'package:stud_advice/src/controller/common/i18n_controller.dart';
-import 'package:stud_advice/src/controller/common/theme_controller.dart';
 import 'package:stud_advice/src/common/helper/navigation_helper.dart';
+import 'package:stud_advice/src/controllers/common/i18n_controller.dart';
+import 'package:stud_advice/src/controllers/common/theme_controller.dart';
 import 'package:stud_advice/src/screens/legal_terms/legal_terms_screen.dart';
 // import 'package:stud_advice/src/widgets/buttons/default_connection_button.dart';
-import 'package:stud_advice/src/widgets/dropdowns/custom_dropdown.dart';
 
 import 'package:stud_advice/src/screens/settings/widgets/settings_big_user_card.dart';
 import 'package:stud_advice/src/screens/settings/widgets/settings_group.dart';
+import 'package:stud_advice/src/utils/custom_locale.dart';
+import 'package:stud_advice/src/widgets/common/dropdowns/custom_dropdown.dart';
 import 'package:stud_advice/src/widgets/sheets/bottom_sheet_widget.dart';
-import 'package:stud_advice/utils/custom_locale.dart';
 
 import 'widgets/settings_icon_style.dart';
 import 'widgets/settings_item.dart';

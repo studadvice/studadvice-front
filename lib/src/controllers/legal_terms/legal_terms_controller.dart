@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:stud_advice/src/common/chore/app_colors.dart';
 import 'package:stud_advice/src/common/chore/app_fonts_sizes.dart';
-import 'package:stud_advice/src/screens/legal_terms/legal_conditions_screen.dart';
+import 'package:stud_advice/src/screens/legal_terms/legal_terms_screen.dart';
 
 class LegalTermsController extends GetxController {
   var agreeWithTermsAndConditions = false.obs;
@@ -41,7 +41,7 @@ class LegalTermsController extends GetxController {
   Widget buildTermsAndConditionsButton() {
     return GestureDetector(
       onTap: () {
-        Get.to(() => LegalTermsScreen());
+        Get.to(() => const LegalTermsScreen());
       },
       child: Text(
         legalConditionsButtonText,
