@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:stud_advice/src/common/chore/app_colors.dart';
 import 'package:stud_advice/src/common/chore/app_fonts_sizes.dart';
-import 'package:stud_advice/src/controller/home/home_page_controller.dart';
-import 'package:stud_advice/src/widgets/buttons/default_connection_button.dart';
+import 'package:stud_advice/src/controllers/home/home_page_controller.dart';
+import 'package:stud_advice/src/widgets/common/buttons/default_connection_button.dart';
 
 class HomePageScreen extends StatelessWidget {
-  static const navigatorId = '/home_page';
+  static const navigatorId = '/home_page_screen';
   final HomePageController _homePageController = Get.put(HomePageController());
 
   @override

@@ -4,16 +4,16 @@ import 'package:stud_advice/src/common/chore/app_colors.dart';
 import 'package:stud_advice/src/common/chore/app_fonts_sizes.dart';
 import 'package:stud_advice/src/common/chore/crypto_hash.dart';
 import 'package:stud_advice/src/common/chore/form_validator.dart';
-import 'package:stud_advice/src/controller/authentication/social_sign_in_controller.dart';
-import 'package:stud_advice/src/controller/common/terms_and_conditions/terms_and_conditions_controller.dart';
-import 'package:stud_advice/src/controller/login/login_controller.dart';
-import 'package:stud_advice/src/screens/common/forgot_password/forgot_password_screen.dart';
-import 'package:stud_advice/src/screens/home/home_page.dart';
-import 'package:stud_advice/src/widgets/buttons/default_connection_button.dart';
-import 'package:stud_advice/src/widgets/buttons/login_social_button.dart';
-import 'package:stud_advice/src/widgets/dividers/divider_with_text.dart';
-import 'package:stud_advice/src/widgets/textFields/classic_text_field.dart';
-import 'package:stud_advice/src/widgets/textFields/password_text_field.dart';
+import 'package:stud_advice/src/controllers/authentication/social_sign_in_controller.dart';
+import 'package:stud_advice/src/controllers/legal_terms/legal_terms_controller.dart';
+import 'package:stud_advice/src/controllers/login/login_controller.dart';
+import 'package:stud_advice/src/screens/forgot_password/forgot_password_screen.dart';
+import 'package:stud_advice/src/screens/home/home_page_screen.dart';
+import 'package:stud_advice/src/widgets/common/buttons/default_connection_button.dart';
+import 'package:stud_advice/src/widgets/common/buttons/login_social_button.dart';
+import 'package:stud_advice/src/widgets/common/dividers/divider_with_text.dart';
+import 'package:stud_advice/src/widgets/common/textFields/classic_text_field.dart';
+import 'package:stud_advice/src/widgets/common/textFields/password_text_field.dart';
 
 class LoginScreen extends StatelessWidget {
   static const String navigatorId = '/login_screen';
@@ -21,8 +21,8 @@ class LoginScreen extends StatelessWidget {
   final LoginController _loginController = Get.put(LoginController());
   final SocialSignInController _socialSignInController =
       Get.put(SocialSignInController());
-  final TermsAndConditionsController _termsAndConditionsController =
-      Get.put(TermsAndConditionsController());
+  final LegalTermsController _termsAndConditionsController =
+      Get.put(LegalTermsController());
 
   // Use constants to facilitate the implementation of the translation.
   final String emailHintText = 'Email';

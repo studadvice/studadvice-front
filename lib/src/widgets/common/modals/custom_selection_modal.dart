@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:stud_advice/src/common/chore/app_colors.dart';
-import 'package:stud_advice/src/controller/common/modal/custom_selection_controller.dart';
-import 'package:stud_advice/src/widgets/textFields/classic_text_field.dart';
+import 'package:stud_advice/src/controllers/common/modal/custom_selection_modal_controller.dart';
+import 'package:stud_advice/src/widgets/common/textFields/classic_text_field.dart';
 
 class CustomSelectionModal extends StatelessWidget {
   final List<String> itemsList;

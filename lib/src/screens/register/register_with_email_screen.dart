@@ -4,19 +4,19 @@ import 'package:stud_advice/src/common/chore/app_colors.dart';
 import 'package:stud_advice/src/common/chore/app_fonts_sizes.dart';
 import 'package:stud_advice/src/common/chore/crypto_hash.dart';
 import 'package:stud_advice/src/common/chore/form_validator.dart';
-import 'package:stud_advice/src/controller/common/terms_and_conditions/terms_and_conditions_controller.dart';
-import 'package:stud_advice/src/controller/register/register_with_email_controller.dart';
-import 'package:stud_advice/src/widgets/buttons/default_connection_button.dart';
-import 'package:stud_advice/src/widgets/textFields/classic_text_field.dart';
-import 'package:stud_advice/src/widgets/textFields/password_text_field.dart';
+import 'package:stud_advice/src/controllers/legal_terms/legal_terms_controller.dart';
+import 'package:stud_advice/src/controllers/register/register_with_email_controller.dart';
+import 'package:stud_advice/src/widgets/common/buttons/default_connection_button.dart';
+import 'package:stud_advice/src/widgets/common/textFields/classic_text_field.dart';
+import 'package:stud_advice/src/widgets/common/textFields/password_text_field.dart';
 
 class RegisterWithEmailScreen extends StatelessWidget {
   static const String navigatorId = '/register_with_email_screen';
 
   final RegisterWithEmailController _registerWithEmailController =
       Get.put(RegisterWithEmailController());
-  final TermsAndConditionsController _termsAndConditionsController =
-      Get.put(TermsAndConditionsController());
+  final LegalTermsController _termsAndConditionsController =
+      Get.put(LegalTermsController());
 
   // Use constants to facilitate the implementation of the translation.
   final String emailHintText = 'Email';

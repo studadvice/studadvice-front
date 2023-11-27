@@ -3,6 +3,8 @@ import 'package:get/get.dart';
 
 class CustomSelectionModalController extends GetxController {
   final List<String> itemsList;
+  TextEditingController searchController = TextEditingController();
+  final RxList<String> _filteredItems = <String>[].obs;
 
   CustomSelectionModalController(this.itemsList) {
     _filteredItems.assignAll(itemsList);
@@ -21,10 +23,6 @@ class CustomSelectionModalController extends GetxController {
     });
     super.onInit();
   }
-
-  final RxList<String> _filteredItems = <String>[].obs;
-
-  TextEditingController searchController = TextEditingController();
 
   List<String> get filteredItems => _filteredItems;
 
