@@ -3,9 +3,9 @@ import 'package:get/get.dart';
 import 'package:stud_advice/src/common/chore/app_colors.dart';
 import 'package:stud_advice/src/common/chore/app_fonts_sizes.dart';
 import 'package:stud_advice/src/common/chore/form_validator.dart';
-import 'package:stud_advice/src/controller/common/forgot_password/forgot_password_controller.dart';
-import 'package:stud_advice/src/widgets/buttons/default_connection_button.dart';
-import 'package:stud_advice/src/widgets/textFields/classic_text_field.dart';
+import 'package:stud_advice/src/controllers/forgot_password/forgot_password_controller.dart';
+import 'package:stud_advice/src/widgets/common/buttons/default_connection_button.dart';
+import 'package:stud_advice/src/widgets/common/textFields/classic_text_field.dart';
 
 class ForgotPasswordScreen extends StatelessWidget {
   static const String navigatorId = '/forgot_password_screen';

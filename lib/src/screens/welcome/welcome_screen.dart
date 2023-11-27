@@ -5,7 +5,7 @@ import 'package:stud_advice/src/common/conf/app_dependencies_binding.dart';
 import 'package:stud_advice/src/screens/init_time/init_time_screen.dart';
 
 class WelcomeScreen extends StatelessWidget {
-  static const String navigatorId = '/WelcomeScreen';
+  static const String navigatorId = '/welcome_screen';
 
   const WelcomeScreen({super.key});
 

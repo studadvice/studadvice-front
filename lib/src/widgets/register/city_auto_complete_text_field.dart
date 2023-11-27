@@ -3,7 +3,7 @@ import 'package:flutter_typeahead/flutter_typeahead.dart';
 import 'package:get/get.dart';
 import 'package:stud_advice/src/common/chore/app_colors.dart';
 import 'package:stud_advice/src/common/chore/app_fonts_sizes.dart';
-import 'package:stud_advice/src/controller/register/register_user_information_controller.dart';
+import 'package:stud_advice/src/controllers/register/register_user_information_controller.dart';
 import 'package:stud_advice/src/models/city/city_data.dart';
 
 class CityAutocomplete extends StatefulWidget {

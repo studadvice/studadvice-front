@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:stud_advice/src/common/chore/app_colors.dart';
-import 'package:stud_advice/src/controller/authentication/authentication_controller.dart';
-import 'package:stud_advice/src/widgets/loading/loading_spinner.dart';
+import 'package:stud_advice/src/controllers/authentication/authentication_controller.dart';
+import 'package:stud_advice/src/widgets/common/loading/loading_spinner.dart';
 
 class ForgotPasswordController extends GetxController {
   final AuthenticationController _authenticationController =

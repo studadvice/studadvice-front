@@ -2,16 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:stud_advice/src/common/chore/app_colors.dart';
 import 'package:stud_advice/src/common/chore/app_fonts_sizes.dart';
-import 'package:stud_advice/src/controller/register/register_user_information_controller.dart';
+import 'package:stud_advice/src/controllers/register/register_user_information_controller.dart';
 import 'package:stud_advice/src/models/city/city_data.dart';
 import 'package:stud_advice/src/models/user/user_data.dart';
-import 'package:stud_advice/src/widgets/buttons/default_connection_button.dart';
-import 'package:stud_advice/src/widgets/dropdowns/custom_dropdown_button.dart';
-import 'package:stud_advice/src/widgets/modals/custom_selection_modal.dart';
-import 'package:stud_advice/src/widgets/pickers/country_picker_field.dart';
-import 'package:stud_advice/src/widgets/pickers/date_picker_field.dart';
-import 'package:stud_advice/src/widgets/textFields/auto_complete_text_field.dart';
-import 'package:stud_advice/src/widgets/textFields/classic_text_field.dart';
+import 'package:stud_advice/src/widgets/common/buttons/default_connection_button.dart';
+import 'package:stud_advice/src/widgets/common/dropdowns/custom_dropdown_button.dart';
+import 'package:stud_advice/src/widgets/common/modals/custom_selection_modal.dart';
+import 'package:stud_advice/src/widgets/common/pickers/country_picker_field.dart';
+import 'package:stud_advice/src/widgets/common/pickers/date_picker_field.dart';
+import 'package:stud_advice/src/widgets/common/textFields/auto_complete_text_field.dart';
+import 'package:stud_advice/src/widgets/common/textFields/classic_text_field.dart';
 
 class RegisterUserInformationScreen extends StatefulWidget {
   static const String navigatorId = '/register_user_information_screen';
