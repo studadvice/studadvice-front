@@ -82,7 +82,7 @@ class AuthenticationController extends GetxController {
     return false;
   }
 
-  Future<bool> signOut() async {
+  Future<bool> logout() async {
     // if (GoogleSignIn().currentUser != null) {
     //   await GoogleSignIn().signOut();
     // }

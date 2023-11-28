@@ -31,7 +31,7 @@ class WelcomeScreen extends StatelessWidget {
         } else {
           // The user is logged in.
           if (snapshot.hasData) {
-            return const HomePageScreen();
+            return HomePageScreen();
           }
 
           // The user is NOT logged in.

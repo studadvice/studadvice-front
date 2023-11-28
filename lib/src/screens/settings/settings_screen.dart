@@ -5,24 +5,22 @@ import 'package:stud_advice/src/common/chore/supported_locales.dart';
 import 'package:stud_advice/src/common/helper/navigation_helper.dart';
 import 'package:stud_advice/src/controllers/common/i18n_controller.dart';
 import 'package:stud_advice/src/controllers/common/theme_controller.dart';
+import 'package:stud_advice/src/controllers/settings/settings_controller.dart';
 import 'package:stud_advice/src/screens/legal_terms/legal_terms_screen.dart';
-// import 'package:stud_advice/src/widgets/buttons/default_connection_button.dart';
-
-import 'package:stud_advice/src/screens/settings/widgets/settings_big_user_card.dart';
-import 'package:stud_advice/src/screens/settings/widgets/settings_group.dart';
 import 'package:stud_advice/src/utils/custom_locale.dart';
 import 'package:stud_advice/src/widgets/common/dropdowns/custom_dropdown.dart';
+import 'package:stud_advice/src/widgets/settings/settings_big_user_card.dart';
+import 'package:stud_advice/src/widgets/settings/settings_group.dart';
+import 'package:stud_advice/src/widgets/settings/settings_icon_style.dart';
+import 'package:stud_advice/src/widgets/settings/settings_item.dart';
 import 'package:stud_advice/src/widgets/sheets/bottom_sheet_widget.dart';
-
-import 'widgets/settings_icon_style.dart';
-import 'widgets/settings_item.dart';
 
 class SettingsScreen extends StatelessWidget {
   static const String navigatorId = '/settings_screen';
+  // TODO : remove from static
   static final ThemeController themeController = Get.find();
   static final I18n i18n = Get.find();
-
-  const SettingsScreen({super.key});
+  final SettingsController settingsController = Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -136,7 +134,7 @@ class SettingsScreen extends StatelessWidget {
       items: [
         SettingsItem(
           onTap: () {
-            // TODO : offAll to login screen
+            settingsController.logout();
           },
           icons: Icons.logout,
           iconStyle: IconStyle(

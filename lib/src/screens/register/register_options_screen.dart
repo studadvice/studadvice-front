@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:stud_advice/src/common/chore/app_colors.dart';
+import 'package:stud_advice/src/common/helper/navigation_helper.dart';
 import 'package:stud_advice/src/controllers/authentication/social_sign_in_controller.dart';
 import 'package:stud_advice/src/controllers/legal_terms/legal_terms_controller.dart';
 import 'package:stud_advice/src/screens/register/register_user_information_screen.dart';
@@ -84,10 +85,10 @@ class RegisterOptionsScreen extends StatelessWidget {
                       onTap: () async {
                         if (await _socialSignInController
                             .loginWithGoogleAccount()) {
-                          Get.to(() => const RegisterUserInformationScreen(),
-                              arguments: {
-                                'hasAcceptedTermsAndConditions': true,
-                              });
+                          NavigationHelper.navigateTo(
+                              RegisterUserInformationScreen.navigatorId, {
+                            'hasAcceptedTermsAndConditions': true,
+                          });
                         }
                       }),
                   const SizedBox(height: 20),
@@ -98,10 +99,10 @@ class RegisterOptionsScreen extends StatelessWidget {
                       onTap: () async {
                         if (await _socialSignInController
                             .loginWithFacebookAccount()) {
-                          Get.to(() => const RegisterUserInformationScreen(),
-                              arguments: {
-                                'hasAcceptedTermsAndConditions': true,
-                              });
+                          NavigationHelper.navigateTo(
+                              RegisterUserInformationScreen.navigatorId, {
+                            'hasAcceptedTermsAndConditions': true,
+                          });
                         }
                       }),
                   if (Theme.of(context).platform == TargetPlatform.iOS)
@@ -113,10 +114,10 @@ class RegisterOptionsScreen extends StatelessWidget {
                         onTap: () async {
                           if (await _socialSignInController
                               .loginWithAppleAccount()) {
-                            Get.to(() => const RegisterUserInformationScreen(),
-                                arguments: {
-                                  'hasAcceptedTermsAndConditions': true,
-                                });
+                            NavigationHelper.navigateTo(
+                                RegisterUserInformationScreen.navigatorId, {
+                              'hasAcceptedTermsAndConditions': true,
+                            });
                           }
                         }),
                   // const SizedBox(height: 20),
@@ -138,7 +139,8 @@ class RegisterOptionsScreen extends StatelessWidget {
                   const SizedBox(height: 20),
                   RegisterWithEmailButton(
                     onPressed: () {
-                      Get.to(() => RegisterWithEmailScreen());
+                      NavigationHelper.navigateTo(
+                          RegisterWithEmailScreen.navigatorId);
                     },
                     textColor: AppColors.white,
                     backgroundColor: AppColors.blue,

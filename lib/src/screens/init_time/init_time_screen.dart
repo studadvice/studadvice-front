@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:stud_advice/src/common/chore/app_colors.dart';
+import 'package:stud_advice/src/common/helper/navigation_helper.dart';
 import 'package:stud_advice/src/screens/login/login_screen.dart';
 import 'package:stud_advice/src/screens/register/register_options_screen.dart';
-import 'package:stud_advice/src/widgets/common/buttons/default_connection_button.dart';
+import 'package:stud_advice/src/widgets/common/buttons/custom_button.dart';
 
 class InitTimeScreen extends StatelessWidget {
   static const String navigatorId = '/init_time_screen';
@@ -29,14 +29,14 @@ class InitTimeScreen extends StatelessWidget {
               text: registerText,
               textColor: AppColors.white,
               onPressed: () {
-                Get.to(() => RegisterOptionsScreen());
+                NavigationHelper.navigateTo(RegisterOptionsScreen.navigatorId);
               },
             ),
             buildConnectionButton(
               text: loginText,
               textColor: AppColors.white,
               onPressed: () {
-                Get.to(() => LoginScreen());
+                NavigationHelper.navigateTo(LoginScreen.navigatorId);
               },
             ),
           ],
@@ -52,7 +52,7 @@ class InitTimeScreen extends StatelessWidget {
   }) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-      child: DefaultConnectionButton(
+      child: CustomButton(
           text: text,
           textColor: textColor,
           backgroundColor: AppColors.blue,

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:stud_advice/src/screens/settings/widgets/settings_icon_style.dart';
+import 'package:stud_advice/src/widgets/settings/settings_icon_style.dart';
 
 class SettingsScreenUtils {
   static double? settingsGroupIconSize;
@@ -60,7 +60,7 @@ class SettingsItem extends StatelessWidget {
                   size: SettingsScreenUtils.settingsGroupIconSize,
                 ),
               ),
-        // title: title, 
+        // title: title,
         title: Text(
           title,
           style: titleStyle ?? const TextStyle(fontWeight: FontWeight.bold),
@@ -76,7 +76,8 @@ class SettingsItem extends StatelessWidget {
                     subtitleMaxLine != null ? TextOverflow.ellipsis : null,
               )
             : null,
-        trailing: (trailing != null) ? trailing : const Icon(Icons.navigate_next),
+        trailing:
+            (trailing != null) ? trailing : const Icon(Icons.navigate_next),
       ),
     );
   }

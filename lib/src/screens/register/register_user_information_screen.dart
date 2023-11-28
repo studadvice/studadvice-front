@@ -5,7 +5,7 @@ import 'package:stud_advice/src/common/chore/app_fonts_sizes.dart';
 import 'package:stud_advice/src/controllers/register/register_user_information_controller.dart';
 import 'package:stud_advice/src/models/city/city_data.dart';
 import 'package:stud_advice/src/models/user/user_data.dart';
-import 'package:stud_advice/src/widgets/common/buttons/default_connection_button.dart';
+import 'package:stud_advice/src/widgets/common/buttons/custom_button.dart';
 import 'package:stud_advice/src/widgets/common/dropdowns/custom_dropdown_button.dart';
 import 'package:stud_advice/src/widgets/common/modals/custom_selection_modal.dart';
 import 'package:stud_advice/src/widgets/common/pickers/country_picker_field.dart';
@@ -336,7 +336,7 @@ class _RegisterUserInformationScreenState
   }
 
   Widget buildNextButton() {
-    return DefaultConnectionButton(
+    return CustomButton(
         text: nextButtonText,
         textColor: AppColors.white,
         backgroundColor: AppColors.blue,

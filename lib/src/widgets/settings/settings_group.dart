@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:stud_advice/src/screens/settings/widgets/settings_item.dart';
+import 'package:stud_advice/src/widgets/settings/settings_item.dart';
 
 class SettingsGroup extends StatelessWidget {
   final String? settingsGroupTitle;
@@ -32,7 +32,8 @@ class SettingsGroup extends StatelessWidget {
                   child: Text(
                     settingsGroupTitle!,
                     style: (settingsGroupTitleStyle == null)
-                        ? const TextStyle(fontSize: 25, fontWeight: FontWeight.bold)
+                        ? const TextStyle(
+                            fontSize: 25, fontWeight: FontWeight.bold)
                         : settingsGroupTitleStyle,
                   ),
                 )

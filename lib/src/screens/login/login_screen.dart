@@ -4,12 +4,13 @@ import 'package:stud_advice/src/common/chore/app_colors.dart';
 import 'package:stud_advice/src/common/chore/app_fonts_sizes.dart';
 import 'package:stud_advice/src/common/chore/crypto_hash.dart';
 import 'package:stud_advice/src/common/chore/form_validator.dart';
+import 'package:stud_advice/src/common/helper/navigation_helper.dart';
 import 'package:stud_advice/src/controllers/authentication/social_sign_in_controller.dart';
 import 'package:stud_advice/src/controllers/legal_terms/legal_terms_controller.dart';
 import 'package:stud_advice/src/controllers/login/login_controller.dart';
 import 'package:stud_advice/src/screens/forgot_password/forgot_password_screen.dart';
 import 'package:stud_advice/src/screens/home/home_page_screen.dart';
-import 'package:stud_advice/src/widgets/common/buttons/default_connection_button.dart';
+import 'package:stud_advice/src/widgets/common/buttons/custom_button.dart';
 import 'package:stud_advice/src/widgets/common/buttons/login_social_button.dart';
 import 'package:stud_advice/src/widgets/common/dividers/divider_with_text.dart';
 import 'package:stud_advice/src/widgets/common/textFields/classic_text_field.dart';
@@ -18,11 +19,11 @@ import 'package:stud_advice/src/widgets/common/textFields/password_text_field.da
 class LoginScreen extends StatelessWidget {
   static const String navigatorId = '/login_screen';
 
-  final LoginController _loginController = Get.put(LoginController());
+  final LoginController _loginController = Get.find<LoginController>();
   final SocialSignInController _socialSignInController =
-      Get.put(SocialSignInController());
+      Get.find<SocialSignInController>();
   final LegalTermsController _termsAndConditionsController =
-      Get.put(LegalTermsController());
+      Get.find<LegalTermsController>();
 
   // Use constants to facilitate the implementation of the translation.
   final String emailHintText = 'Email';
@@ -149,7 +150,7 @@ class LoginScreen extends StatelessWidget {
         const SizedBox(width: 10),
         TextButton(
           onPressed: () {
-            Get.to(() => ForgotPasswordScreen());
+            NavigationHelper.navigateTo(ForgotPasswordScreen.navigatorId);
           },
           child: Text(
             forgotPasswordText,
@@ -163,7 +164,7 @@ class LoginScreen extends StatelessWidget {
   }
 
   Widget buildLoginButton() {
-    return DefaultConnectionButton(
+    return CustomButton(
         text: loginText,
         textColor: AppColors.white,
         backgroundColor: AppColors.blue,
@@ -190,7 +191,7 @@ class LoginScreen extends StatelessWidget {
           borderColor: AppColors.black26,
           onTap: () async {
             if (await _socialSignInController.loginWithGoogleAccount()) {
-              Get.offAll(() => HomePageScreen());
+              Get.offAll(() => const HomePageScreen());
             }
           },
         ),
@@ -202,7 +203,7 @@ class LoginScreen extends StatelessWidget {
           iconColor: AppColors.blueAccent,
           onTap: () async {
             if (await _socialSignInController.loginWithFacebookAccount()) {
-              Get.offAll(() => HomePageScreen());
+              Get.offAll(() => const HomePageScreen());
             }
           },
         ),
@@ -215,7 +216,7 @@ class LoginScreen extends StatelessWidget {
             borderColor: AppColors.black26,
             onTap: () async {
               if (await _socialSignInController.loginWithAppleAccount()) {
-                Get.offAll(() => HomePageScreen());
+                Get.offAll(() => const HomePageScreen());
               }
             },
           ),

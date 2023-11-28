@@ -10,6 +10,10 @@ class Styles {
     primaryColor: AppColors.primaryColor,
     secondaryHeaderColor: AppColors.secondaryColor,
     scaffoldBackgroundColor: const Color(0xFF303030),
+    inputDecorationTheme: const InputDecorationTheme(
+      hintStyle: TextStyle(color: Colors.white),
+      labelStyle: TextStyle(color: Colors.white),
+    ),
     buttonTheme: const ButtonThemeData(
       buttonColor: Colors.amber,
       disabledColor: Colors.grey,
@@ -21,7 +25,12 @@ class Styles {
     fontFamily: 'Lato',
     hintColor: Colors.pink,
     brightness: Brightness.light,
+    inputDecorationTheme: const InputDecorationTheme(
+      hintStyle: TextStyle(color: Colors.black),
+      labelStyle: TextStyle(color: Colors.black),
+    ),
     primaryColor: AppColors.primaryColor,
+    secondaryHeaderColor: AppColors.secondaryColor,
     // #F0F0F0
     scaffoldBackgroundColor: const Color(0xFFF0F0F0),
     buttonTheme: const ButtonThemeData(
@@ -29,5 +38,4 @@ class Styles {
       disabledColor: Colors.grey,
     ),
   );
-
 }
