@@ -355,7 +355,7 @@ class _RegisterUserInformationScreenState
 
   UserData buildUserData() {
     Map<String, dynamic> previousFormData = Get.arguments;
-
+    debugPrint('previousFormData : $previousFormData');
     String pseudo = pseudoController.text.trim();
     String birthDate = birthDateController.text.trim();
     String city = cityController.text.trim();

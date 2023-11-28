@@ -191,7 +191,7 @@ class LoginScreen extends StatelessWidget {
           borderColor: AppColors.black26,
           onTap: () async {
             if (await _socialSignInController.loginWithGoogleAccount()) {
-              Get.offAll(() => const HomePageScreen());
+              Get.offAll(() => HomePageScreen());
             }
           },
         ),
@@ -203,7 +203,7 @@ class LoginScreen extends StatelessWidget {
           iconColor: AppColors.blueAccent,
           onTap: () async {
             if (await _socialSignInController.loginWithFacebookAccount()) {
-              Get.offAll(() => const HomePageScreen());
+              Get.offAll(() => HomePageScreen());
             }
           },
         ),
@@ -216,7 +216,7 @@ class LoginScreen extends StatelessWidget {
             borderColor: AppColors.black26,
             onTap: () async {
               if (await _socialSignInController.loginWithAppleAccount()) {
-                Get.offAll(() => const HomePageScreen());
+                Get.offAll(() => HomePageScreen());
               }
             },
           ),

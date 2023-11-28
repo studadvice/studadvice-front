@@ -28,6 +28,7 @@ class Styles {
     inputDecorationTheme: const InputDecorationTheme(
       hintStyle: TextStyle(color: Colors.black),
       labelStyle: TextStyle(color: Colors.black),
+      // TODO add the color of the input cursor
     ),
     primaryColor: AppColors.primaryColor,
     secondaryHeaderColor: AppColors.secondaryColor,

@@ -4,7 +4,7 @@ import 'package:stud_advice/src/controllers/legal_terms/legal_terms_controller.d
 import 'package:stud_advice/src/controllers/login/login_controller.dart';
 import 'package:stud_advice/src/controllers/settings/settings_controller.dart';
 import 'package:stud_advice/src/middleware/common/i18n_middleware.dart';
-import 'package:stud_advice/src/screens/home/home_page.dart';
+import 'package:stud_advice/src/screens/home/home_page_screen.dart';
 import 'package:stud_advice/src/screens/init_time/init_time_screen.dart';
 import 'package:stud_advice/src/screens/legal_terms/legal_terms_screen.dart';
 import 'package:stud_advice/src/screens/login/login_screen.dart';
@@ -26,12 +26,6 @@ class RoutesConfiguration {
         name: WelcomeScreen.navigatorId,
         page: () => const WelcomeScreen(),
         middlewares: [I18nMiddleware()],
-      ),
-      GetPage(
-        name: SettingsScreen.navigatorId,
-        page: () => SettingsScreen(),
-        middlewares: [I18nMiddleware()],
-        binding: BindingsBuilder.put(() => SettingsController()),
       ),
       GetPage(
         name: HomePageScreen.navigatorId,
@@ -68,6 +62,14 @@ class RoutesConfiguration {
         name: RegisterUserInformationScreen.navigatorId,
         page: () => const RegisterUserInformationScreen(),
         middlewares: [I18nMiddleware()],
+      ),
+      GetPage(
+        name: SettingsScreen.navigatorId,
+        page: () => SettingsScreen(),
+        middlewares: [I18nMiddleware()],
+        bindings: [
+          BindingsBuilder.put(() => SettingsController()),
+        ],
       ),
     ];
   }

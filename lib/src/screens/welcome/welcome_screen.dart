@@ -2,7 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:stud_advice/src/common/chore/app_colors.dart';
 import 'package:stud_advice/src/common/conf/app_dependencies_binding.dart';
-import 'package:stud_advice/src/screens/home/home_page.dart';
+import 'package:stud_advice/src/screens/home/home_page_screen.dart';
 import 'package:stud_advice/src/screens/init_time/init_time_screen.dart';
 
 class WelcomeScreen extends StatelessWidget {

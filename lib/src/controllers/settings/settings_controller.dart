@@ -4,7 +4,7 @@ import 'package:stud_advice/src/controllers/authentication/authentication_contro
 import 'package:stud_advice/src/screens/welcome/welcome_screen.dart';
 
 class SettingsController extends GetxController {
-  final _authenticationController = Get.find<AuthenticationController>();
+  final AuthenticationController _authenticationController = Get.find();
 
   Future<void> logout() async {
     await _authenticationController.logout();
