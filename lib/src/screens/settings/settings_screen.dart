@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:stud_advice/src/common/chore/app_colors.dart';
 import 'package:stud_advice/src/common/chore/supported_locales.dart';
 import 'package:stud_advice/src/common/helper/navigation_helper.dart';
@@ -15,7 +16,6 @@ import 'package:stud_advice/src/widgets/sheets/bottom_sheet_widget.dart';
 
 import 'widgets/settings_icon_style.dart';
 import 'widgets/settings_item.dart';
-import 'package:get/get.dart';
 
 class SettingsScreen extends StatelessWidget {
   static const String navigatorId = '/settings_screen';
@@ -106,7 +106,7 @@ class SettingsScreen extends StatelessWidget {
           //selectedItem: i18n.getCurrentLocale,
           onChanged: (fontSize) {
             // TODO : checker l'async
-            print('accessibility changed');
+            debugPrint('accessibility changed');
             return null;
           },
           validator: (locale) {
@@ -145,7 +145,8 @@ class SettingsScreen extends StatelessWidget {
             backgroundColor: AppColors.red,
           ),
           title: i18n.text('logout'),
-          titleStyle: const TextStyle(color: AppColors.red, fontWeight: FontWeight.bold),
+          titleStyle: const TextStyle(
+              color: AppColors.red, fontWeight: FontWeight.bold),
         ),
       ],
     );

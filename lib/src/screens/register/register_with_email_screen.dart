@@ -4,22 +4,21 @@ import 'package:stud_advice/src/common/chore/app_colors.dart';
 import 'package:stud_advice/src/common/chore/app_fonts_sizes.dart';
 import 'package:stud_advice/src/common/chore/crypto_hash.dart';
 import 'package:stud_advice/src/common/chore/form_validator.dart';
-import 'package:stud_advice/src/controller/register/register_with_email_controller.dart';
-import 'package:stud_advice/src/screens/legal_conditions/legal_conditions_screen.dart';
 import 'package:stud_advice/src/common/helper/navigation_helper.dart';
-import 'package:stud_advice/src/controller/authentication/authentication_controller.dart';
-import 'package:stud_advice/src/controller/register/register_with_email_controller.dart';
+import 'package:stud_advice/src/controllers/legal_terms/legal_terms_controller.dart';
+import 'package:stud_advice/src/controllers/register/register_with_email_controller.dart';
 import 'package:stud_advice/src/screens/legal_terms/legal_terms_screen.dart';
-import 'package:stud_advice/src/screens/register/register_user_information_screen.dart';
-import 'package:stud_advice/src/widgets/buttons/default_connection_button.dart';
-import 'package:stud_advice/src/widgets/textFields/classic_text_field.dart';
-import 'package:stud_advice/src/widgets/textFields/password_text_field.dart';
+import 'package:stud_advice/src/widgets/common/buttons/default_connection_button.dart';
+import 'package:stud_advice/src/widgets/common/textFields/classic_text_field.dart';
+import 'package:stud_advice/src/widgets/common/textFields/password_text_field.dart';
 
 class RegisterWithEmailScreen extends StatelessWidget {
   static const String navigatorId = '/register_with_email_screen';
 
   final RegisterWithEmailController _registerWithEmailController =
       Get.put(RegisterWithEmailController());
+  final LegalTermsController _legalTermsController =
+      Get.put(LegalTermsController());
 
   // Use constants to facilitate the implementation of the translation.
   final String emailHintText = 'Email';
@@ -136,7 +135,7 @@ class RegisterWithEmailScreen extends StatelessWidget {
         textColor: AppColors.white,
         backgroundColor: AppColors.blue,
         onPressed: () async {
-          if (!_registerWithEmailController.agreeWithTermsAndConditions.value) {
+          if (!_legalTermsController.agreeWithTermsAndConditions.value) {
             getSnackbarController();
             return;
           }
@@ -181,7 +180,7 @@ class RegisterWithEmailScreen extends StatelessWidget {
     String password = passwordController.text.trim();
     String hashedPassword = CryptoHash.hashValue(password);
     bool hasAcceptedTermsAndConditions =
-        _registerWithEmailController.agreeWithTermsAndConditions.value;
+        _legalTermsController.agreeWithTermsAndConditions.value;
     return {
       'email': email,
       'hashedPassword': hashedPassword,
@@ -211,14 +210,13 @@ class RegisterWithEmailScreen extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Obx(() => Checkbox(
-              value: _registerWithEmailController
-                  .agreeWithTermsAndConditions.value,
+              value: _legalTermsController.agreeWithTermsAndConditions.value,
               activeColor: AppColors.primaryColor,
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(4),
               ),
               onChanged: (bool? value) {
-                _registerWithEmailController.agreeWithTermsAndConditions.value =
+                _legalTermsController.agreeWithTermsAndConditions.value =
                     value!;
               },
             )),

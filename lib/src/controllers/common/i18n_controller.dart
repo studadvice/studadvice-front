@@ -1,17 +1,18 @@
 import 'dart:convert';
-import 'dart:ui';
 
+import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:stud_advice/src/utils/custom_locale.dart';
 
 class I18n extends GetxController {
-  CustomLocale _locale = CustomLocale('en', 'US');
+  CustomLocale _locale = CustomLocale('en', 'US'); // TODO update default locale
   Map<String, dynamic> _keys = {};
   final box = GetStorage();
 
-  void changeLocale(Locale locale, [String? route]) async { // TODO :  refacto this
+  void changeLocale(Locale locale, [String? route]) async {
+    // TODO :  refacto this
     _locale = CustomLocale(locale.languageCode, locale.countryCode);
     if (route != null) {
       await loadTranslations(route);
@@ -24,10 +25,12 @@ class I18n extends GetxController {
 
   CustomLocale get getCurrentLocale => _locale;
 
-  Future<Map<String,dynamic>> _loadScreenTranslations(
+  Future<Map<String, dynamic>> _loadScreenTranslations(
       String screen, String locale) async {
     if (screen == 'default') return {};
     final path = 'assets/i18n$screen/$locale.json';
+    debugPrint('Loading translations from $path');
+    debugPrint('Loading translations from $path');
     return json.decode(await rootBundle.loadString(path));
   }
 
@@ -40,7 +43,7 @@ class I18n extends GetxController {
         await box.write(cacheEntry, value);
         update();
       });
-    }else{
+    } else {
       _keys = box.read(cacheEntry);
       update();
     }
