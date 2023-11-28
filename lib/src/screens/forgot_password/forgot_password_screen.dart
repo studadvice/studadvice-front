@@ -27,7 +27,10 @@ class ForgotPasswordScreen extends StatelessWidget {
       GetBuilder<ForgotPasswordController>(builder: (_) {
         return Scaffold(
           appBar: AppBar(
-            title: Center(child: Text(forgotPasswordTitle)),
+            title: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 10),
+              child: Center(child: Text(forgotPasswordTitle)),
+            ),
             leading: IconButton(
               icon: const Icon(Icons.arrow_back),
               onPressed: () {

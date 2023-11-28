@@ -15,7 +15,7 @@ class RegisterWithEmailScreen extends StatelessWidget {
 
   final RegisterWithEmailController _registerWithEmailController =
       Get.put(RegisterWithEmailController());
-  final LegalTermsController _termsAndConditionsController =
+  final LegalTermsController _legalTermsController =
       Get.put(LegalTermsController());
 
   // Use constants to facilitate the implementation of the translation.
@@ -63,8 +63,8 @@ class RegisterWithEmailScreen extends StatelessWidget {
                 const SizedBox(height: 15),
                 buildConfirmPasswordTextField(),
                 const SizedBox(height: 100),
-                _termsAndConditionsController.buildTermsAndConditionsButton(),
-                _termsAndConditionsController.buildTermsAndConditionsRow(),
+                _legalTermsController.buildTermsAndConditionsButton(),
+                _legalTermsController.buildTermsAndConditionsRow(),
                 const SizedBox(height: 5),
                 buildConnectionButton(),
               ],
@@ -127,9 +127,8 @@ class RegisterWithEmailScreen extends StatelessWidget {
         textColor: AppColors.white,
         backgroundColor: AppColors.blue,
         onPressed: () async {
-          if (!_termsAndConditionsController
-              .agreeWithTermsAndConditions.value) {
-            _termsAndConditionsController.getSnackbarController();
+          if (!_legalTermsController.agreeWithTermsAndConditions.value) {
+            _legalTermsController.getSnackbarController();
             return;
           }
 
@@ -148,7 +147,7 @@ class RegisterWithEmailScreen extends StatelessWidget {
     String password = passwordController.text.trim();
     String hashedPassword = CryptoHash.hashValue(password);
     bool hasAcceptedTermsAndConditions =
-        _termsAndConditionsController.agreeWithTermsAndConditions.value;
+        _legalTermsController.agreeWithTermsAndConditions.value;
     return {
       'email': email,
       'hashedPassword': hashedPassword,
