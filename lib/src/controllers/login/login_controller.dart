@@ -3,13 +3,14 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:stud_advice/src/common/chore/app_colors.dart';
+import 'package:stud_advice/src/common/helper/navigation_helper.dart';
 import 'package:stud_advice/src/controllers/authentication/authentication_controller.dart';
 import 'package:stud_advice/src/screens/home/home_page_screen.dart';
 import 'package:stud_advice/src/widgets/common/loading/loading_spinner.dart';
 
 class LoginController extends GetxController {
   final AuthenticationController _authenticationController =
-      Get.put(AuthenticationController());
+      Get.find();
 
   // Controllers for the text fields.
   final TextEditingController emailController = TextEditingController();
@@ -54,7 +55,7 @@ class LoginController extends GetxController {
         // Here we use the Get.offAll() method to remove all the previous screens
         // from the stack.
         // So the user can't go back to the login screen.
-        Get.offAll(() => HomePageScreen());
+        Get.offAll(HomePageScreen());
       }
     } on FirebaseAuthException catch (e) {
       LoadingSpinner.stop();

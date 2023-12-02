@@ -29,6 +29,7 @@ class RegisterWithEmailController extends GetxController {
       );
 
       if (signUpSuccess) {
+        debugPrint(formData.toString());
         LoadingSpinner.stop();
 
         NavigationHelper.navigateTo(RegisterUserInformationScreen.navigatorId, {

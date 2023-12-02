@@ -7,7 +7,7 @@ import 'package:get_storage/get_storage.dart';
 import 'package:stud_advice/src/utils/custom_locale.dart';
 
 class I18n extends GetxController {
-  CustomLocale _locale = CustomLocale('en', 'US'); // TODO update default locale
+  CustomLocale _locale = CustomLocale('en', 'US'); // TODO : update default locale
   Map<String, dynamic> _keysAndValues = {};
   final box = GetStorage();
 
@@ -25,6 +25,7 @@ class I18n extends GetxController {
 
   CustomLocale get getCurrentLocale => _locale;
 
+  // Deprecated
   Future<Map<String, dynamic>> _loadScreenTranslations(
       String screen, String locale) async {
     if (screen == 'default') return {};
@@ -39,6 +40,7 @@ class I18n extends GetxController {
     });
   }
 
+  // Deprecated
   Future<void> loadTranslations(String route) async {
     String locale = '${_locale.languageCode}_${_locale.countryCode}';
     String cacheEntry = '${route}_$locale';
@@ -53,6 +55,21 @@ class I18n extends GetxController {
       update();
     }
   }
+
+  // Future<void> loadAllTranslations() async {
+  //   String locale = '${_locale.languageCode}_${_locale.countryCode}';
+  //   String cacheEntry = 'all_$locale';
+  //   if (box.read(cacheEntry) == null) {
+  //     await _loadScreenTranslations('default', locale).then((value) async {
+  //       _keysAndValues = value;
+  //       await box.write(cacheEntry, value);
+  //       update();
+  //     });
+  //   } else {
+  //     _keysAndValues = box.read(cacheEntry);
+  //     update();
+  //   }
+  // }
 
   String text(String key, [Map<String, dynamic>? params]) {
     var keys = key.split('.');

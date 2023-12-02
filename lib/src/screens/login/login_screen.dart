@@ -6,6 +6,7 @@ import 'package:stud_advice/src/common/chore/crypto_hash.dart';
 import 'package:stud_advice/src/common/chore/form_validator.dart';
 import 'package:stud_advice/src/common/helper/navigation_helper.dart';
 import 'package:stud_advice/src/controllers/authentication/social_sign_in_controller.dart';
+import 'package:stud_advice/src/controllers/common/i18n_controller.dart';
 import 'package:stud_advice/src/controllers/legal_terms/legal_terms_controller.dart';
 import 'package:stud_advice/src/controllers/login/login_controller.dart';
 import 'package:stud_advice/src/screens/forgot_password/forgot_password_screen.dart';
@@ -24,21 +25,9 @@ class LoginScreen extends StatelessWidget {
       Get.find<SocialSignInController>();
   final LegalTermsController _termsAndConditionsController =
       Get.find<LegalTermsController>();
+  final I18n i18n = Get.find();
 
   // Use constants to facilitate the implementation of the translation.
-  final String emailHintText = 'Email';
-  final String emailLabelText = 'Email';
-  final String passwordHintText = 'Mot de passe';
-  final String passwordLabelText = 'Mot de passe';
-  final String welcomeBackText = 'Bon retour parmi nous !';
-  final String passwordText = 'Mot de passe';
-  final String forgotPasswordText = 'Mot de passe oublié ?';
-  final String rememberMeText = 'Se souvenir de moi';
-  final String loginText = 'Se connecter';
-  final String orContinueWithText = 'Ou continuer avec';
-  final String passwordErrorText = 'Veuillez entrer votre mot de passe';
-  final String acceptingTermsAndConditionsText =
-      "En continuant la connexion ou l'inscription avec l'une des méthodes ci-dessus, vous acceptez nos conditions générales d'utilisation et notre politique de confidentialité.";
 
   final _formKey = GlobalKey<FormState>();
 
@@ -71,7 +60,7 @@ class LoginScreen extends StatelessWidget {
                   const SizedBox(height: 10),
                   buildLoginButton(),
                   const SizedBox(height: 10),
-                  DividerWithText(text: orContinueWithText),
+                  DividerWithText(text: i18n.text('orContinueWith')),
                   const SizedBox(height: 10),
                   buildSocialLoginButtons(context),
                   const SizedBox(height: 50),
@@ -85,7 +74,7 @@ class LoginScreen extends StatelessWidget {
 
   String? validatePassword(String? value) {
     if (value == null || value.isEmpty) {
-      return passwordErrorText;
+      return i18n.text('passwordError');
     }
     return null;
   }
@@ -93,8 +82,8 @@ class LoginScreen extends StatelessWidget {
   Widget buildEmailTextField() {
     return ClassicTextField(
         validator: FormValidator.validateEmail,
-        hintText: emailHintText,
-        labelText: emailLabelText,
+        hintText: i18n.text('emailHint'),
+        labelText: i18n.text('emailLabel'),
         controller: _loginController.emailController,
         autofillHints: [AutofillHints.email],
         keyboardType: TextInputType.emailAddress,
@@ -107,12 +96,12 @@ class LoginScreen extends StatelessWidget {
     return PasswordTextField(
         validator: (value) {
           if (value == null || value.isEmpty) {
-            return passwordErrorText;
+            return i18n.text('passwordError');
           }
           return null;
         },
-        hintText: passwordHintText,
-        labelText: passwordLabelText,
+        hintText: i18n.text('passwordHint'),
+        labelText: i18n.text('passwordLabel'),
         controller: _loginController.passwordController,
         autofillHints: [AutofillHints.password],
         backgroundColor: AppColors.white,
@@ -122,7 +111,7 @@ class LoginScreen extends StatelessWidget {
 
   Widget buildWelcomeBackText() {
     return Text(
-      welcomeBackText,
+      i18n.text('welcomeBack'),
       style: const TextStyle(
         fontSize: AppFontSizes.large25,
         fontWeight: FontWeight.bold,
@@ -146,14 +135,14 @@ class LoginScreen extends StatelessWidget {
             _loginController.rememberMe.value = value!;
           },
         ),
-        Text(rememberMeText),
+        Text(i18n.text('rememberMe')),
         const SizedBox(width: 10),
         TextButton(
           onPressed: () {
             NavigationHelper.navigateTo(ForgotPasswordScreen.navigatorId);
           },
           child: Text(
-            forgotPasswordText,
+            i18n.text('forgotPassword'),
             style: const TextStyle(
               color: AppColors.primaryColor,
             ),
@@ -165,7 +154,7 @@ class LoginScreen extends StatelessWidget {
 
   Widget buildLoginButton() {
     return CustomButton(
-        text: loginText,
+        text: i18n.text('login'),
         textColor: AppColors.white,
         backgroundColor: AppColors.blue,
         onPressed: () {
@@ -215,9 +204,10 @@ class LoginScreen extends StatelessWidget {
             tileBackgroundColor: AppColors.white,
             borderColor: AppColors.black26,
             onTap: () async {
-              if (await _socialSignInController.loginWithAppleAccount()) {
-                Get.offAll(() => HomePageScreen());
-              }
+              debugPrint('Login with apple account');
+              // if (await _socialSignInController.loginWithAppleAccount()) {
+              //   Get.offAll(() => HomePageScreen());
+              // }
             },
           ),
         // const SizedBox(width: 10),
@@ -241,7 +231,7 @@ class LoginScreen extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20),
           child: Text(
-            acceptingTermsAndConditionsText,
+            i18n.text('acceptingTermsAndConditions'),
             textAlign: TextAlign.justify,
             style: const TextStyle(
               fontSize: 12,

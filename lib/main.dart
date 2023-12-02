@@ -9,10 +9,10 @@ import 'package:stud_advice/src/common/conf/app_dependencies_binding.dart';
 import 'package:stud_advice/src/common/conf/routes_configuration.dart';
 import 'package:stud_advice/src/utils/custom_locale.dart';
 
-class StudAdviceApp extends StatelessWidget {
-  final RoutesConfiguration routesConfiguration;
 
-  StudAdviceApp({required this.routesConfiguration});
+class StudAdviceApp extends StatelessWidget {
+
+  const StudAdviceApp({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -26,14 +26,16 @@ class StudAdviceApp extends StatelessWidget {
     final RoutesConfiguration routesConfiguration =
         Get.put(RoutesConfiguration());
 
-    return GetMaterialApp.router(
+    // return GetMaterialApp.router(
+    return GetMaterialApp(
       title: "Stud'Advice",
       theme: Styles.lightTheme,
       darkTheme: Styles.darkTheme,
       themeMode: ThemeMode.light,
       debugShowCheckedModeBanner: false,
-      getPages: routesConfiguration.configureRoutes(),
+      initialRoute: RoutesConfiguration.initialRoute,
       initialBinding: AppDependenciesBinding(),
+      getPages: routesConfiguration.configureRoutes(),
       localizationsDelegates: [
         GlobalMaterialLocalizations.delegate,
         CountryLocalizations.delegate,
@@ -51,8 +53,6 @@ void main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-  final RoutesConfiguration routesConfiguration =
-      Get.put(RoutesConfiguration());
 
-  runApp(StudAdviceApp(routesConfiguration: routesConfiguration));
+  runApp(const StudAdviceApp());
 }

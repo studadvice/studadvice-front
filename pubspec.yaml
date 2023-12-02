@@ -22,7 +22,7 @@ dependencies:
   intl: ^0.18.1
   country_picker: ^2.0.22
   dio: ^5.3.3
-  flutter_typeahead: ^4.8.0
+  flutter_typeahead: 4.8.0
   dropdown_search: ^5.0.6
   select_dialog: ^2.0.1
   connectivity_plus: ^5.0.1

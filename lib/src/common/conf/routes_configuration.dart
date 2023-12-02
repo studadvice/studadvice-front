@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import 'package:stud_advice/src/bindigs/login_binding.dart';
 import 'package:stud_advice/src/controllers/authentication/social_sign_in_controller.dart';
 import 'package:stud_advice/src/controllers/legal_terms/legal_terms_controller.dart';
 import 'package:stud_advice/src/controllers/login/login_controller.dart';
@@ -15,6 +16,7 @@ import 'package:stud_advice/src/screens/settings/settings_screen.dart';
 import 'package:stud_advice/src/screens/welcome/welcome_screen.dart';
 
 class RoutesConfiguration {
+  static const String initialRoute = InitTimeScreen.navigatorId;
   List<GetPage> configureRoutes() {
     return [
       GetPage(
@@ -33,16 +35,11 @@ class RoutesConfiguration {
         middlewares: [I18nMiddleware()],
       ),
       GetPage(
-          name: LoginScreen.navigatorId,
-          page: () => LoginScreen(),
-          middlewares: [
-            I18nMiddleware()
-          ],
-          bindings: [
-            BindingsBuilder.put(() => LoginController()),
-            BindingsBuilder.put(() => SocialSignInController()),
-            BindingsBuilder.put(() => LegalTermsController()),
-          ]),
+        name: LoginScreen.navigatorId,
+        page: () => LoginScreen(),
+        middlewares: [I18nMiddleware()],
+        binding: LoginBinding(),
+      ),
       GetPage(
         name: RegisterOptionsScreen.navigatorId,
         page: () => RegisterOptionsScreen(),

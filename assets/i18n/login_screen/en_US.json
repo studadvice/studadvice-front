@@ -1,0 +1,15 @@
+{
+  "emailHint": "Email",
+  "emailLabel": "Email",
+  "passwordHint": "Password",
+  "passwordLabel": "Password",
+  "welcomeBack": "Welcome back!",
+  "password": "Password",
+  "forgotPassword": "Forgot Password?",
+  "rememberMe": "Remember Me",
+  "login": "Login",
+  "orContinueWith": "Or continue with",
+  "passwordError": "Please enter your password",
+  "acceptingTermsAndConditions": "By continuing to log in or sign up using the methods above, you agree to our terms of use and privacy policy."
+}
+
