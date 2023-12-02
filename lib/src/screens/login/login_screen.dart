@@ -149,7 +149,6 @@ class LoginScreen extends StatelessWidget {
           String password = _loginController.passwordController.text;
           String passwordHash = CryptoHash.hashValue(password);
 
-          // TODO remember me logic.
           _loginController.loginWithEmailAndPassword(email, passwordHash);
         });
   }
@@ -195,7 +194,7 @@ class LoginScreen extends StatelessWidget {
             borderColor: AppColors.black26,
             onTap: () async {
               if (await _socialSignInController.loginWithAppleAccount()) {
-              Get.offAllNamed(HomePageScreen.navigatorId);
+                Get.offAllNamed(HomePageScreen.navigatorId);
               }
             },
             borderRadius: 16,
