@@ -113,7 +113,6 @@ class LoginScreen extends StatelessWidget {
         hintText: passwordHintText,
         labelText: passwordLabelText,
         controller: _loginController.passwordController,
-        autofillHints: [AutofillHints.password],
         backgroundColor: AppColors.white,
         focusedBorderColor: AppColors.secondaryColor,
         borderColor: AppColors.secondaryColor);
