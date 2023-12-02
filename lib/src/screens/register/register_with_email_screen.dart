@@ -4,11 +4,8 @@ import 'package:stud_advice/src/common/chore/app_colors.dart';
 import 'package:stud_advice/src/common/chore/app_fonts_sizes.dart';
 import 'package:stud_advice/src/common/chore/crypto_hash.dart';
 import 'package:stud_advice/src/common/chore/form_validator.dart';
-import 'package:stud_advice/src/controllers/legal_terms/legal_terms_controller.dart';
-import 'package:stud_advice/src/controllers/register/register_with_email_controller.dart';
-import 'package:stud_advice/src/widgets/common/buttons/custom_button.dart';
-import 'package:stud_advice/src/widgets/common/textFields/classic_text_field.dart';
-import 'package:stud_advice/src/widgets/common/textFields/password_text_field.dart';
+import 'package:stud_advice/src/controllers/controllers.dart';
+import 'package:stud_advice/src/widgets/widgets.dart';
 
 class RegisterWithEmailScreen extends StatelessWidget {
   static const String navigatorId = '/register_with_email_screen';

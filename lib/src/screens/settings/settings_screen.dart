@@ -1,25 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:stud_advice/src/common/chore/app_colors.dart';
-import 'package:stud_advice/src/common/chore/supported_locales.dart';
+import 'package:stud_advice/src/common/chore.dart';
 import 'package:stud_advice/src/common/helper/navigation_helper.dart';
-import 'package:stud_advice/src/controllers/common/i18n_controller.dart';
-import 'package:stud_advice/src/controllers/common/theme_controller.dart';
-import 'package:stud_advice/src/controllers/settings/settings_controller.dart';
-import 'package:stud_advice/src/screens/legal_terms/legal_terms_screen.dart';
 import 'package:stud_advice/src/utils/custom_locale.dart';
-import 'package:stud_advice/src/widgets/common/dropdowns/custom_dropdown.dart';
-import 'package:stud_advice/src/widgets/settings/settings_big_user_card.dart';
-import 'package:stud_advice/src/widgets/settings/settings_group.dart';
-import 'package:stud_advice/src/widgets/settings/settings_icon_style.dart';
-import 'package:stud_advice/src/widgets/settings/settings_item.dart';
-import 'package:stud_advice/src/widgets/sheets/bottom_sheet_widget.dart';
+import 'package:stud_advice/src/screens/screens.dart';
+import 'package:stud_advice/src/controllers/controllers.dart';
+import 'package:stud_advice/src/widgets/widgets.dart';
 
 class SettingsScreen extends StatelessWidget {
   static const String navigatorId = '/settings_screen';
-  // TODO : remove from static
-  static final ThemeController themeController = Get.find();
-  static final I18n i18n = Get.find();
+  final ThemeController themeController = Get.find();
+  final I18n i18n = Get.find();
   final SettingsController settingsController = Get.find();
 
   @override
@@ -29,7 +20,6 @@ class SettingsScreen extends StatelessWidget {
       padding: const EdgeInsets.all(10),
       child: ListView(
         children: [
-          // User card
           buildUserCard(context),
           buildOptionsGroup(context),
           buildInfoGroup(),

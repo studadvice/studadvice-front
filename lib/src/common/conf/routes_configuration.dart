@@ -1,19 +1,8 @@
 import 'package:get/get.dart';
-import 'package:stud_advice/src/bindigs/login_binding.dart';
-import 'package:stud_advice/src/controllers/authentication/social_sign_in_controller.dart';
-import 'package:stud_advice/src/controllers/legal_terms/legal_terms_controller.dart';
-import 'package:stud_advice/src/controllers/login/login_controller.dart';
-import 'package:stud_advice/src/controllers/settings/settings_controller.dart';
-import 'package:stud_advice/src/middleware/common/i18n_middleware.dart';
-import 'package:stud_advice/src/screens/home/home_page_screen.dart';
-import 'package:stud_advice/src/screens/init_time/init_time_screen.dart';
-import 'package:stud_advice/src/screens/legal_terms/legal_terms_screen.dart';
-import 'package:stud_advice/src/screens/login/login_screen.dart';
-import 'package:stud_advice/src/screens/register/register_options_screen.dart';
-import 'package:stud_advice/src/screens/register/register_user_information_screen.dart';
-import 'package:stud_advice/src/screens/register/register_with_email_screen.dart';
-import 'package:stud_advice/src/screens/settings/settings_screen.dart';
-import 'package:stud_advice/src/screens/welcome/welcome_screen.dart';
+import 'package:stud_advice/src/bindigs/bindings.dart';
+import 'package:stud_advice/src/middleware/middlewares.dart';
+import 'package:stud_advice/src/screens/screens.dart';
+
 
 class RoutesConfiguration {
   static const String initialRoute = InitTimeScreen.navigatorId;
@@ -64,9 +53,7 @@ class RoutesConfiguration {
         name: SettingsScreen.navigatorId,
         page: () => SettingsScreen(),
         middlewares: [I18nMiddleware()],
-        bindings: [
-          BindingsBuilder.put(() => SettingsController()),
-        ],
+        binding: SettingsBinding(),
       ),
     ];
   }
