@@ -32,7 +32,11 @@ class SocialSignInController extends GetxController {
 
       bool signInSuccess = await _authenticationController.signInWithFacebook();
 
-      return signInSuccess;
+      if (signInSuccess) {
+        LoadingSpinner.stop();
+        return true;
+      }
+      return false;
     } on FirebaseAuthException catch (e) {
       handleLoginError(e.code);
       return false;
