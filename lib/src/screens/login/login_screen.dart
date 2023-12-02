@@ -134,17 +134,16 @@ class LoginScreen extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        Checkbox(
-          value: _loginController.rememberMe.value,
-          activeColor: AppColors.primaryColor,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(4),
-          ),
-          onChanged: (bool? value) {
-            // TODO add the logic to save the user connection state.
-            _loginController.rememberMe.value = value!;
-          },
-        ),
+        Obx(() => Checkbox(
+              value: _loginController.rememberMe.value,
+              activeColor: AppColors.primaryColor,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(4),
+              ),
+              onChanged: (bool? value) {
+                _loginController.rememberMe.value = value!;
+              },
+            )),
         Text(rememberMeText),
         const SizedBox(width: 10),
         TextButton(
@@ -175,7 +174,6 @@ class LoginScreen extends StatelessWidget {
           String password = _loginController.passwordController.text;
           String passwordHash = CryptoHash.hashValue(password);
 
-          // TODO remember me logic.
           _loginController.loginWithEmailAndPassword(email, passwordHash);
         });
   }
