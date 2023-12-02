@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:stud_advice/src/common/chore/app_fonts_sizes.dart';
 
 class ClassicTextField extends StatefulWidget {
@@ -10,7 +9,6 @@ class ClassicTextField extends StatefulWidget {
   final Color borderColor;
   final Color focusedBorderColor;
   final TextInputType? keyboardType;
-  final List<TextInputFormatter>? inputFormatters;
   final VoidCallback? onTap;
   final Function(dynamic)? onChanged;
   final List<String>? autofillHints;
@@ -26,7 +24,6 @@ class ClassicTextField extends StatefulWidget {
     required this.focusedBorderColor,
     this.labelText,
     this.keyboardType,
-    this.inputFormatters,
     this.onTap,
     this.autofillHints,
     this.suffixIcon,
@@ -75,7 +72,6 @@ class _ClassicTextFieldState extends State<ClassicTextField> {
         autofocus: true,
         validator: widget.validator,
         keyboardType: widget.keyboardType,
-        inputFormatters: widget.inputFormatters ?? [],
         style: const TextStyle(
             fontSize: AppFontSizes.large16, decoration: TextDecoration.none),
         decoration: InputDecoration(
