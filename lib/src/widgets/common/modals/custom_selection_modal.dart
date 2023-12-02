@@ -74,8 +74,12 @@ class CustomSelectionModal extends StatelessWidget {
                             customSelectionModalController.filteredItems.length,
                         itemBuilder: (BuildContext context, int index) {
                           return ListTile(
-                            title: Text(customSelectionModalController
-                                .filteredItems[index]),
+                            title: Padding(
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: 18.0, vertical: 2.0),
+                              child: Text(customSelectionModalController
+                                  .filteredItems[index]),
+                            ),
                             onTap: () {
                               onItemSelected(customSelectionModalController
                                   .filteredItems[index]);
