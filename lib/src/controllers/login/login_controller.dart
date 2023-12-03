@@ -2,11 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:stud_advice/src/common/chore/app_colors.dart';
-import 'package:stud_advice/src/common/helper/navigation_helper.dart';
-import 'package:stud_advice/src/controllers/authentication/authentication_controller.dart';
-import 'package:stud_advice/src/screens/home/home_page_screen.dart';
-import 'package:stud_advice/src/widgets/common/loading/loading_spinner.dart';
+import 'package:stud_advice/stud_advice.dart';
 
 class LoginController extends GetxController {
   final AuthenticationController _authenticationController =
@@ -55,7 +51,7 @@ class LoginController extends GetxController {
         // Here we use the Get.offAll() method to remove all the previous screens
         // from the stack.
         // So the user can't go back to the login screen.
-        Get.offAll(HomePageScreen());
+        Get.offAllNamed(HomePageScreen.navigatorId);
       }
     } on FirebaseAuthException catch (e) {
       LoadingSpinner.stop();

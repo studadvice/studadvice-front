@@ -1,5 +1,6 @@
 library screens;
 
+export 'forgot_password/forgot_password_screen.dart';
 export 'welcome/welcome_screen.dart';
 export 'home/home_page_screen.dart';
 export 'init_time/init_time_screen.dart';

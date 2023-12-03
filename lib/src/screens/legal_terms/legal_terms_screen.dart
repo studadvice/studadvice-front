@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:stud_advice/src/common/chore/app_fonts_sizes.dart';
-import 'package:stud_advice/src/controllers/common/i18n_controller.dart';
+import 'package:stud_advice/stud_advice.dart';
 
 class LegalTermsScreen extends StatelessWidget {
   static const String navigatorId = '/legal_terms_screen';

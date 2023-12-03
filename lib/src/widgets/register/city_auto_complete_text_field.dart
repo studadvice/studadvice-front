@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_typeahead/flutter_typeahead.dart';
 import 'package:get/get.dart';
-import 'package:stud_advice/src/common/chore/app_colors.dart';
-import 'package:stud_advice/src/common/chore/app_fonts_sizes.dart';
-import 'package:stud_advice/src/controllers/register/register_user_information_controller.dart';
-import 'package:stud_advice/src/models/city/city_data.dart';
+import 'package:stud_advice/stud_advice.dart';
 
 class CityAutocomplete extends StatefulWidget {
   final String hintText; // Placeholder text.

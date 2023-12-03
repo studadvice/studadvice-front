@@ -4,10 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:get/get.dart';
 import 'package:stud_advice/firebase_options.dart';
-import 'package:stud_advice/src/common/chore/styles.dart';
-import 'package:stud_advice/src/common/conf/app_dependencies_binding.dart';
-import 'package:stud_advice/src/common/conf/routes_configuration.dart';
-import 'package:stud_advice/src/utils/custom_locale.dart';
+import 'package:stud_advice/stud_advice.dart';
 
 
 class StudAdviceApp extends StatelessWidget {

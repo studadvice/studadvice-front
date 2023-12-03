@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:stud_advice/src/common/chore/app_fonts_sizes.dart';
+import 'package:stud_advice/stud_advice.dart';
 
 class ClassicTextField extends StatefulWidget {
   final String hintText; // Placeholder text

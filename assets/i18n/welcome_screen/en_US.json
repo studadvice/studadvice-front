@@ -1,13 +1,3 @@
 {
-  "title": "Settings",
-  "account": "My account",
-  "accountDescription" : "Tap to change your data",
-  "darkmode": "Dark mode",
-  "language": "Language",
-  "logout": "Logout",
-  "notifications": "Notifications",
-  "support" : "Support",
-  "changePassword" : "Change Password",
-  "terms": "Terms & conditions",
-  "accessibility" : "Accessibility"
+  "test": "test"
 }

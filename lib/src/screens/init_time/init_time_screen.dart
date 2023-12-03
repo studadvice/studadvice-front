@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:stud_advice/src/common/chore/app_colors.dart';
-import 'package:stud_advice/src/common/helper/navigation_helper.dart';
-import 'package:stud_advice/src/screens/login/login_screen.dart';
-import 'package:stud_advice/src/screens/register/register_options_screen.dart';
-import 'package:stud_advice/src/widgets/common/buttons/custom_button.dart';
+import 'package:get/get.dart';
+import 'package:stud_advice/stud_advice.dart';
 
 class InitTimeScreen extends StatelessWidget {
   static const String navigatorId = '/init_time_screen';
@@ -29,14 +26,14 @@ class InitTimeScreen extends StatelessWidget {
               text: registerText,
               textColor: AppColors.white,
               onPressed: () {
-                NavigationHelper.navigateTo(RegisterOptionsScreen.navigatorId);
+                Get.toNamed(RegisterOptionsScreen.navigatorId);
               },
             ),
             buildConnectionButton(
               text: loginText,
               textColor: AppColors.white,
               onPressed: () {
-                NavigationHelper.navigateTo(LoginScreen.navigatorId);
+                Get.toNamed(LoginScreen.navigatorId);
               },
             ),
           ],

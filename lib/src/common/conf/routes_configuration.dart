@@ -1,8 +1,5 @@
 import 'package:get/get.dart';
-import 'package:stud_advice/src/bindigs/bindings.dart';
-import 'package:stud_advice/src/middleware/middlewares.dart';
-import 'package:stud_advice/src/screens/screens.dart';
-
+import 'package:stud_advice/stud_advice.dart';
 
 class RoutesConfiguration {
   static const String initialRoute = InitTimeScreen.navigatorId;

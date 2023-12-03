@@ -1,11 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:stud_advice/src/common/chore.dart';
-import 'package:stud_advice/src/common/helper/navigation_helper.dart';
-import 'package:stud_advice/src/utils/custom_locale.dart';
-import 'package:stud_advice/src/screens/screens.dart';
-import 'package:stud_advice/src/controllers/controllers.dart';
-import 'package:stud_advice/src/widgets/widgets.dart';
+import 'package:stud_advice/stud_advice.dart';
 
 class SettingsScreen extends StatelessWidget {
   static const String navigatorId = '/settings_screen';
@@ -155,7 +150,7 @@ class SettingsScreen extends StatelessWidget {
         ),
         SettingsItem(
           onTap: () {
-            NavigationHelper.navigateTo(LegalTermsScreen.navigatorId);
+            Get.to(const LegalTermsScreen());
           },
           // icon for terms and conditions
           icons: Icons.description,

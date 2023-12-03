@@ -1,10 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:stud_advice/src/common/chore.dart';
-import 'package:stud_advice/src/common/helper/navigation_helper.dart';
-import 'package:stud_advice/src/controllers/controllers.dart';
-import 'package:stud_advice/src/screens/screens.dart';
-import 'package:stud_advice/src/widgets/widgets.dart';
+import 'package:stud_advice/stud_advice.dart';
 
 class RegisterOptionsScreen extends StatelessWidget {
   static const String navigatorId = '/register_screen_options';
@@ -27,14 +23,19 @@ class RegisterOptionsScreen extends StatelessWidget {
       {required String imagePath,
       required String buttonText,
       required VoidCallback onTap,
+      required BuildContext context,
       Color? iconColor}) {
-    return RegisterSocialButton(
+    return SocialButton(
+      width: MediaQuery.of(context).size.width * 0.8,
       imagePath: imagePath,
       tileBackgroundColor: AppColors.white,
       borderColor: Colors.grey,
       iconColor: iconColor,
       buttonText: buttonText,
       onTap: onTap,
+      borderRadius: 25,
+      imageSize: 20,
+      padding: 30,
     );
   }
 
@@ -76,44 +77,48 @@ class RegisterOptionsScreen extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   buildSocialButton(
+                      context: context,
                       imagePath: 'assets/images/login/google.png',
                       buttonText: continueWithGoogleText,
                       onTap: () async {
                         if (await _socialSignInController
                             .loginWithGoogleAccount()) {
-                          NavigationHelper.navigateTo(
-                              RegisterUserInformationScreen.navigatorId, {
-                            'hasAcceptedTermsAndConditions': true,
-                          });
+                          Get.toNamed(RegisterUserInformationScreen.navigatorId,
+                              arguments: {
+                                'hasAcceptedTermsAndConditions': true,
+                              });
                         }
                       }),
                   const SizedBox(height: 20),
                   buildSocialButton(
+                      context: context,
                       imagePath: 'assets/images/login/facebook.png',
                       buttonText: continueWithFacebookText,
                       iconColor: Colors.blue,
                       onTap: () async {
                         if (await _socialSignInController
                             .loginWithFacebookAccount()) {
-                          NavigationHelper.navigateTo(
-                              RegisterUserInformationScreen.navigatorId, {
-                            'hasAcceptedTermsAndConditions': true,
-                          });
+                          Get.toNamed(RegisterUserInformationScreen.navigatorId,
+                              arguments: {
+                                'hasAcceptedTermsAndConditions': true,
+                              });
                         }
                       }),
                   if (Theme.of(context).platform == TargetPlatform.iOS)
                     const SizedBox(height: 20),
                   if (Theme.of(context).platform == TargetPlatform.iOS)
                     buildSocialButton(
+                        context: context,
                         imagePath: 'assets/images/login/apple.png',
                         buttonText: continueWithAppleText,
                         onTap: () async {
                           if (await _socialSignInController
                               .loginWithAppleAccount()) {
-                            NavigationHelper.navigateTo(
-                                RegisterUserInformationScreen.navigatorId, {
-                              'hasAcceptedTermsAndConditions': true,
-                            });
+                            Get.toNamed(
+                                RegisterUserInformationScreen.navigatorId,
+                                arguments: {
+                                  'hasAcceptedTermsAndConditions': true,
+                                });
                           }
                         }),
                   // const SizedBox(height: 20),
@@ -135,8 +140,7 @@ class RegisterOptionsScreen extends StatelessWidget {
                   const SizedBox(height: 20),
                   RegisterWithEmailButton(
                     onPressed: () {
-                      NavigationHelper.navigateTo(
-                          RegisterWithEmailScreen.navigatorId);
+                      Get.toNamed(RegisterWithEmailScreen.navigatorId);
                     },
                     textColor: AppColors.white,
                     backgroundColor: AppColors.blue,

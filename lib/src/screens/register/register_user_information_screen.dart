@@ -1,11 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:stud_advice/src/common/chore/app_colors.dart';
-import 'package:stud_advice/src/common/chore/app_fonts_sizes.dart';
-import 'package:stud_advice/src/models/city/city_data.dart';
-import 'package:stud_advice/src/models/user/user_data.dart';
-import 'package:stud_advice/src/controllers/controllers.dart';
-import 'package:stud_advice/src/widgets/widgets.dart';
+import 'package:stud_advice/stud_advice.dart';
 
 class RegisterUserInformationScreen extends StatefulWidget {
   static const String navigatorId = '/register_user_information_screen';
@@ -203,7 +198,7 @@ class _RegisterUserInformationScreenState
   Widget buildPostalCodeDropdown() {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 25.0),
-      child: CustomDropdownSearch(
+      child: CustomAsyncDropdownSearch(
         labelText: postalCodeLabelText,
         backgroundColor: AppColors.white,
         borderColor: AppColors.secondaryColor,
@@ -349,7 +344,7 @@ class _RegisterUserInformationScreenState
 
   UserData buildUserData() {
     Map<String, dynamic> previousFormData = Get.arguments;
-    debugPrint('previousFormData : $previousFormData');
+
     String pseudo = pseudoController.text.trim();
     String birthDate = birthDateController.text.trim();
     String city = cityController.text.trim();

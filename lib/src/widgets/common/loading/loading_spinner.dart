@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:stud_advice/src/common/chore/app_colors.dart';
+import 'package:stud_advice/src/common/chore.dart';
 
 class LoadingSpinner {
   static void start() {

@@ -1,7 +1,7 @@
 import 'package:dropdown_search/dropdown_search.dart';
 import 'package:flutter/material.dart';
 
-class CustomDropdownSearch<T> extends StatelessWidget {
+class CustomAsyncDropdownSearchearch<T> extends StatelessWidget {
   final Future<List<String>> Function(String)? asyncItems;
   final String labelText;
   final Color backgroundColor;
@@ -13,7 +13,7 @@ class CustomDropdownSearch<T> extends StatelessWidget {
   final String? Function(String?)? onChanged;
   final String? Function(String?)? validator;
 
-  const CustomDropdownSearch({
+  const CustomAsyncDropdownSearchearch({
     super.key,
     required this.labelText,
     required this.backgroundColor,

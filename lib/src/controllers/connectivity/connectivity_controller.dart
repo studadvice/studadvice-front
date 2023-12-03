@@ -1,6 +1,6 @@
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:get/get.dart';
-import 'package:stud_advice/src/common/chore/app_colors.dart';
+import 'package:stud_advice/src/common/chore.dart';
 
 class ConnectivityController extends GetxController {
   var isConnected = true.obs;

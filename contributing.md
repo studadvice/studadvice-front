@@ -18,6 +18,9 @@ TODO (s'entendre sur les éléments à mettre dans ce fichier)
   polices, on utilise une police par défaut GoogleFonts.lato)
 * Un fichier routes_configuration.dart (dossier lib/src/common/conf) contient toutes les routes de l'application. Chaque
   route correspond à une page. (Toute nouvelle page doit être ajoutée dans ce fichier).
+* Le fichier app_dependencies_binding.dart (dossier lib/src/common/conf) contient toutes les injections de
+  dépendances. (Toute nouvelle injection doit être ajoutée dans ce fichier). Il permet de gérer les injections de
+  dépendances avec le package get_it.
 * Les traductions se trouvent dans le dossier `assets/i18n`. Chaque dossier doit être nommé en fonction de l'`navigatorId` de l'écran concerné. 
   Par exemple, pour `settings_screen.dart`, le path sera `assets/i18n/settings_screen/`. Il ne faut pas oublier d'ajouter ce path dans le fichier `pubspec.yaml`.
 ### Sur android pour utiliser firebase et google sign in il faut ajouter la clé SHA-1 dans la console firebase.

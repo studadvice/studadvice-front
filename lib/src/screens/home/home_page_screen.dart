@@ -1,10 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:stud_advice/src/common/chore/app_colors.dart';
-import 'package:stud_advice/src/common/chore/app_fonts_sizes.dart';
-import 'package:stud_advice/src/common/helper/navigation_helper.dart';
-import 'package:stud_advice/src/screens/settings/settings_screen.dart';
-import 'package:stud_advice/src/widgets/common/buttons/custom_button.dart';
+import 'package:stud_advice/stud_advice.dart';
 
 class HomePageScreen extends StatelessWidget {
   static const navigatorId = '/home_page_screen';
@@ -43,7 +39,7 @@ class HomePageScreen extends StatelessWidget {
                     textColor: AppColors.white,
                     backgroundColor: AppColors.dangerColor,
                     onPressed: () {
-                      NavigationHelper.navigateTo(SettingsScreen.navigatorId);
+                      Get.toNamed(SettingsScreen.navigatorId);
                     },
                   ),
                 ),

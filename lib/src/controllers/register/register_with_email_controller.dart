@@ -1,11 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:stud_advice/src/common/chore/app_colors.dart';
-import 'package:stud_advice/src/common/helper/navigation_helper.dart';
-import 'package:stud_advice/src/controllers/authentication/authentication_controller.dart';
-import 'package:stud_advice/src/screens/register/register_user_information_screen.dart';
-import 'package:stud_advice/src/widgets/common/loading/loading_spinner.dart';
+import 'package:stud_advice/stud_advice.dart';
 
 class RegisterWithEmailController extends GetxController {
   final AuthenticationController _authenticationController =
@@ -29,10 +25,9 @@ class RegisterWithEmailController extends GetxController {
       );
 
       if (signUpSuccess) {
-        debugPrint(formData.toString());
         LoadingSpinner.stop();
 
-        NavigationHelper.navigateTo(RegisterUserInformationScreen.navigatorId, {
+        Get.to(() => const RegisterUserInformationScreen(), arguments: {
           'hasAcceptedTermsAndConditions':
               formData['hasAcceptedTermsAndConditions']
         });
@@ -50,8 +45,9 @@ class RegisterWithEmailController extends GetxController {
         );
         // We do not need to save the email and the password because it is already saved by firebase during the sign up process.
         // We just need to save the fact that the user has accepted the terms and conditions.
-        NavigationHelper.navigateTo(RegisterUserInformationScreen.navigatorId, {
-          'hasAcceptedTermsAndConditions': true,
+        Get.to(() => const RegisterUserInformationScreen(), arguments: {
+          'hasAcceptedTermsAndConditions':
+              formData['hasAcceptedTermsAndConditions']
         });
       } else {
         Get.snackbar(

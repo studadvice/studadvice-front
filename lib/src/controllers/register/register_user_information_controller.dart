@@ -5,13 +5,7 @@ import 'package:dio/dio.dart';
 import 'package:english_words/english_words.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:stud_advice/src/common/chore/app_colors.dart';
-import 'package:stud_advice/src/controllers/storage/user_storage_controller.dart';
-import 'package:stud_advice/src/models/city/city_data.dart';
-import 'package:stud_advice/src/models/university/university_data.dart';
-import 'package:stud_advice/src/models/user/user_data.dart';
-import 'package:stud_advice/src/screens/home/home_page_screen.dart';
-import 'package:stud_advice/src/widgets/common/loading/loading_spinner.dart';
+import 'package:stud_advice/stud_advice.dart';
 
 class RegisterUserInformationController extends GetxController {
   final _dio = Get.find<Dio>();
@@ -117,7 +111,7 @@ class RegisterUserInformationController extends GetxController {
 
       if (registerSuccess) {
         LoadingSpinner.stop();
-        Get.offAll(() => HomePageScreen(), arguments: userData);
+        Get.offAllNamed(HomePageScreen.navigatorId, arguments: userData);
       }
     } catch (e) {
       LoadingSpinner.stop();

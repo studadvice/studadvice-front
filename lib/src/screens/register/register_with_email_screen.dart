@@ -1,11 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:stud_advice/src/common/chore/app_colors.dart';
-import 'package:stud_advice/src/common/chore/app_fonts_sizes.dart';
-import 'package:stud_advice/src/common/chore/crypto_hash.dart';
-import 'package:stud_advice/src/common/chore/form_validator.dart';
-import 'package:stud_advice/src/controllers/controllers.dart';
-import 'package:stud_advice/src/widgets/widgets.dart';
+import 'package:stud_advice/stud_advice.dart';
 
 class RegisterWithEmailScreen extends StatelessWidget {
   static const String navigatorId = '/register_with_email_screen';

@@ -1,6 +1,5 @@
-
 import 'package:flutter/material.dart';
-import 'package:stud_advice/src/common/chore/supported_locales.dart';
+import 'package:stud_advice/stud_advice.dart';
 
 class CustomLocale extends Locale {
 

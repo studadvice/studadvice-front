@@ -2,7 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
-import 'package:stud_advice/src/common/conf/app_dependencies_binding.dart';
+import 'package:stud_advice/stud_advice.dart';
 
 class AuthenticationController extends GetxController {
   var firebaseAuthInstance = AppDependenciesBinding.firebaseAuthInstance;

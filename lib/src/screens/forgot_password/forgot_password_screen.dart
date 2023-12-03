@@ -1,11 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:stud_advice/src/common/chore/app_colors.dart';
-import 'package:stud_advice/src/common/chore/app_fonts_sizes.dart';
-import 'package:stud_advice/src/common/chore/form_validator.dart';
-import 'package:stud_advice/src/controllers/forgot_password/forgot_password_controller.dart';
-import 'package:stud_advice/src/widgets/common/buttons/custom_button.dart';
-import 'package:stud_advice/src/widgets/common/textFields/classic_text_field.dart';
+import 'package:stud_advice/stud_advice.dart';
 
 class ForgotPasswordScreen extends StatelessWidget {
   static const String navigatorId = '/forgot_password_screen';
@@ -27,7 +22,10 @@ class ForgotPasswordScreen extends StatelessWidget {
       GetBuilder<ForgotPasswordController>(builder: (_) {
         return Scaffold(
           appBar: AppBar(
-            title: Center(child: Text(forgotPasswordTitle)),
+            title: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 10),
+              child: Center(child: Text(forgotPasswordTitle)),
+            ),
             leading: IconButton(
               icon: const Icon(Icons.arrow_back),
               onPressed: () {

@@ -17,7 +17,7 @@ class AppDependenciesBinding extends Bindings {
     Get.put(Dio());
 
     // Language and theme controllers.
-    Get.put(I18n());
+    Get.put(I18n(), permanent: true);
     Get.put(ThemeController());
 
     // Register the firebase services.

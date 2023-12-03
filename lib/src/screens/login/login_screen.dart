@@ -1,31 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:stud_advice/src/common/chore/app_colors.dart';
-import 'package:stud_advice/src/common/chore/app_fonts_sizes.dart';
-import 'package:stud_advice/src/common/chore/crypto_hash.dart';
-import 'package:stud_advice/src/common/chore/form_validator.dart';
-import 'package:stud_advice/src/common/helper/navigation_helper.dart';
-import 'package:stud_advice/src/controllers/authentication/social_sign_in_controller.dart';
-import 'package:stud_advice/src/controllers/common/i18n_controller.dart';
-import 'package:stud_advice/src/controllers/legal_terms/legal_terms_controller.dart';
-import 'package:stud_advice/src/controllers/login/login_controller.dart';
-import 'package:stud_advice/src/screens/forgot_password/forgot_password_screen.dart';
-import 'package:stud_advice/src/screens/home/home_page_screen.dart';
-import 'package:stud_advice/src/widgets/common/buttons/custom_button.dart';
-import 'package:stud_advice/src/widgets/common/buttons/login_social_button.dart';
-import 'package:stud_advice/src/widgets/common/dividers/divider_with_text.dart';
-import 'package:stud_advice/src/widgets/common/textFields/classic_text_field.dart';
-import 'package:stud_advice/src/widgets/common/textFields/password_text_field.dart';
+import 'package:stud_advice/stud_advice.dart';
 
 class LoginScreen extends StatelessWidget {
   static const String navigatorId = '/login_screen';
 
-  final LoginController _loginController = Get.find<LoginController>();
-  final SocialSignInController _socialSignInController =
-      Get.find<SocialSignInController>();
-  final LegalTermsController _termsAndConditionsController =
-      Get.find<LegalTermsController>();
-  final I18n i18n = Get.find();
+  final LoginController _loginController = Get.find();
+  final SocialSignInController _socialSignInController = Get.find();
+  final LegalTermsController _termsAndConditionsController = Get.find();
+  final I18n _i18n = Get.find();
+
+  // initState function
 
   // Use constants to facilitate the implementation of the translation.
 
@@ -60,7 +45,7 @@ class LoginScreen extends StatelessWidget {
                   const SizedBox(height: 10),
                   buildLoginButton(),
                   const SizedBox(height: 10),
-                  DividerWithText(text: i18n.text('orContinueWith')),
+                  DividerWithText(text: _i18n.text('orContinueWith')),
                   const SizedBox(height: 10),
                   buildSocialLoginButtons(context),
                   const SizedBox(height: 50),
@@ -74,7 +59,7 @@ class LoginScreen extends StatelessWidget {
 
   String? validatePassword(String? value) {
     if (value == null || value.isEmpty) {
-      return i18n.text('passwordError');
+      return _i18n.text('passwordError');
     }
     return null;
   }
@@ -82,8 +67,8 @@ class LoginScreen extends StatelessWidget {
   Widget buildEmailTextField() {
     return ClassicTextField(
         validator: FormValidator.validateEmail,
-        hintText: i18n.text('emailHint'),
-        labelText: i18n.text('emailLabel'),
+        hintText: _i18n.text('emailHint'),
+        labelText: _i18n.text('emailLabel'),
         controller: _loginController.emailController,
         autofillHints: [AutofillHints.email],
         keyboardType: TextInputType.emailAddress,
@@ -96,12 +81,12 @@ class LoginScreen extends StatelessWidget {
     return PasswordTextField(
         validator: (value) {
           if (value == null || value.isEmpty) {
-            return i18n.text('passwordError');
+            return _i18n.text('passwordError');
           }
           return null;
         },
-        hintText: i18n.text('passwordHint'),
-        labelText: i18n.text('passwordLabel'),
+        hintText: _i18n.text('passwordHint'),
+        labelText: _i18n.text('passwordLabel'),
         controller: _loginController.passwordController,
         autofillHints: [AutofillHints.password],
         backgroundColor: AppColors.white,
@@ -111,7 +96,7 @@ class LoginScreen extends StatelessWidget {
 
   Widget buildWelcomeBackText() {
     return Text(
-      i18n.text('welcomeBack'),
+      _i18n.text('welcomeBack'),
       style: const TextStyle(
         fontSize: AppFontSizes.large25,
         fontWeight: FontWeight.bold,
@@ -124,25 +109,24 @@ class LoginScreen extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        Checkbox(
-          value: _loginController.rememberMe.value,
-          activeColor: AppColors.primaryColor,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(4),
-          ),
-          onChanged: (bool? value) {
-            // TODO add the logic to save the user connection state.
-            _loginController.rememberMe.value = value!;
-          },
-        ),
-        Text(i18n.text('rememberMe')),
+        Obx(() => Checkbox(
+              value: _loginController.rememberMe.value,
+              activeColor: AppColors.primaryColor,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(4),
+              ),
+              onChanged: (bool? value) {
+                _loginController.rememberMe.value = value!;
+              },
+            )),
+        Text(_i18n.text('rememberMe')),
         const SizedBox(width: 10),
         TextButton(
           onPressed: () {
-            NavigationHelper.navigateTo(ForgotPasswordScreen.navigatorId);
+            Get.to(() => ForgotPasswordScreen());
           },
           child: Text(
-            i18n.text('forgotPassword'),
+            _i18n.text('forgotPassword'),
             style: const TextStyle(
               color: AppColors.primaryColor,
             ),
@@ -154,7 +138,7 @@ class LoginScreen extends StatelessWidget {
 
   Widget buildLoginButton() {
     return CustomButton(
-        text: i18n.text('login'),
+        text: _i18n.text('login'),
         textColor: AppColors.white,
         backgroundColor: AppColors.blue,
         onPressed: () {
@@ -174,41 +158,49 @@ class LoginScreen extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        LoginSocialButton(
+        SocialButton(
           imagePath: 'assets/images/login/google.png',
           tileBackgroundColor: Colors.white,
           borderColor: AppColors.black26,
           onTap: () async {
             if (await _socialSignInController.loginWithGoogleAccount()) {
-              Get.offAll(() => HomePageScreen());
+              Get.offAllNamed(HomePageScreen.navigatorId);
             }
           },
+          borderRadius: 16,
+          imageSize: 25,
+          padding: 20,
         ),
         const SizedBox(width: 10),
-        LoginSocialButton(
+        SocialButton(
           imagePath: 'assets/images/login/facebook.png',
           tileBackgroundColor: AppColors.white,
           borderColor: AppColors.black26,
           iconColor: AppColors.blueAccent,
           onTap: () async {
             if (await _socialSignInController.loginWithFacebookAccount()) {
-              Get.offAll(() => HomePageScreen());
+              Get.offAllNamed(HomePageScreen.navigatorId);
             }
           },
+          borderRadius: 16,
+          imageSize: 25,
+          padding: 20,
         ),
         if (Theme.of(context).platform == TargetPlatform.iOS)
           const SizedBox(width: 10),
         if (Theme.of(context).platform == TargetPlatform.iOS)
-          LoginSocialButton(
+          SocialButton(
             imagePath: 'assets/images/login/apple.png',
             tileBackgroundColor: AppColors.white,
             borderColor: AppColors.black26,
             onTap: () async {
-              debugPrint('Login with apple account');
-              // if (await _socialSignInController.loginWithAppleAccount()) {
-              //   Get.offAll(() => HomePageScreen());
-              // }
+              if (await _socialSignInController.loginWithAppleAccount()) {
+              Get.offAllNamed(HomePageScreen.navigatorId);
+              }
             },
+            borderRadius: 16,
+            imageSize: 25,
+            padding: 20,
           ),
         // const SizedBox(width: 10),
         // LoginSocialButton(
@@ -231,7 +223,7 @@ class LoginScreen extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20),
           child: Text(
-            i18n.text('acceptingTermsAndConditions'),
+            _i18n.text('acceptingTermsAndConditions'),
             textAlign: TextAlign.justify,
             style: const TextStyle(
               fontSize: 12,

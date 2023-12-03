@@ -1,6 +1,6 @@
 import 'package:dropdown_search/dropdown_search.dart';
 import 'package:flutter/material.dart';
-import 'package:stud_advice/src/widgets/common/dropdowns/custom_dropdown.dart';
+import 'package:stud_advice/src/widgets/widgets.dart';
 
 class CustomAsyncDropdownSearch<T> extends CustomDropdownSearch<T> {
   final Future<List<T>> Function(String)? asyncItems;

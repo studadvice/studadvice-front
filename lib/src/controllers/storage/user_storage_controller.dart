@@ -2,9 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:stud_advice/src/common/chore/app_colors.dart';
-import 'package:stud_advice/src/common/conf/app_dependencies_binding.dart';
-import 'package:stud_advice/src/models/user/user_data.dart';
+import 'package:stud_advice/stud_advice.dart';
 
 class UserStorageController extends GetxController {
   final String error = "Erreur de connexion";

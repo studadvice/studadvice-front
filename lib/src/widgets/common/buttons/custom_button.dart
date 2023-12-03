@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:stud_advice/src/common/chore/app_fonts_sizes.dart';
+import 'package:stud_advice/stud_advice.dart';
 
 class CustomButton extends StatelessWidget {
   final String text;
