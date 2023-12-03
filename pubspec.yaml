@@ -65,7 +65,7 @@ flutter:
         - asset: assets/fonts/Lato-BlackItalic.ttf
         - asset: assets/fonts/Lato-Thin.ttf
         - asset: assets/fonts/Lato-ThinItalic.ttf
-        - weight: 700
+          weight: 700
 
 
   assets:
