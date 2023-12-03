@@ -33,7 +33,7 @@ class LegalTermsController extends GetxController {
   Widget buildTermsAndConditionsButton() {
     return GestureDetector(
       onTap: () {
-        Get.to(() => LegalTermsScreen());
+        Get.toNamed(LegalTermsScreen.navigatorId);
       },
       child: Text(
         i18n.text('legalConditionsButtonText'),

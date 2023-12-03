@@ -122,7 +122,7 @@ class LoginScreen extends StatelessWidget {
         const SizedBox(width: 10),
         TextButton(
           onPressed: () {
-            Get.to(() => ForgotPasswordScreen());
+            Get.toNamed(ForgotPasswordScreen.navigatorId);
           },
           child: Text(
             _i18n.text('forgotPassword'),

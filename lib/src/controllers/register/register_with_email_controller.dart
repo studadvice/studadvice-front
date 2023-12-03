@@ -27,7 +27,7 @@ class RegisterWithEmailController extends GetxController {
       if (signUpSuccess) {
         LoadingSpinner.stop();
 
-        Get.to(() => const RegisterUserInformationScreen(), arguments: {
+        Get.toNamed(RegisterUserInformationScreen.navigatorId, arguments: {
           'hasAcceptedTermsAndConditions':
               formData['hasAcceptedTermsAndConditions']
         });
@@ -45,7 +45,7 @@ class RegisterWithEmailController extends GetxController {
         );
         // We do not need to save the email and the password because it is already saved by firebase during the sign up process.
         // We just need to save the fact that the user has accepted the terms and conditions.
-        Get.to(() => const RegisterUserInformationScreen(), arguments: {
+        Get.toNamed(RegisterUserInformationScreen.navigatorId, arguments: {
           'hasAcceptedTermsAndConditions':
               formData['hasAcceptedTermsAndConditions']
         });
