@@ -1,5 +1,4 @@
 import 'package:get/get.dart';
-import 'package:stud_advice/src/screens/roadmap/roadmap_screen.dart';
 import 'package:stud_advice/stud_advice.dart';
 
 class RoutesConfiguration {
@@ -39,7 +38,7 @@ class RoutesConfiguration {
       ),
       GetPage(
         name: LegalTermsScreen.navigatorId,
-        page: () => const LegalTermsScreen(),
+        page: () => LegalTermsScreen(),
         middlewares: [I18nMiddleware()],
       ),
       GetPage(
