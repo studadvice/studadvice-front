@@ -4,13 +4,7 @@ import 'package:stud_advice/stud_advice.dart';
 
 class LegalTermsController extends GetxController {
   var agreeWithTermsAndConditions = false.obs;
-
-  final String legalConditionsButtonText = 'Voir les Termes et Conditions';
-  final String acceptTermsAndConditionsText =
-      'J\'accepte les conditions générales d\'utilisation';
-  final String acceptTermsAndConditionsErrorText =
-      'Veuillez accepter les termes et conditions';
-  final String termsAndConditionsText = 'Termes et Conditions';
+  I18n i18n = Get.find();
 
   void showTermsAndConditionsDialog(BuildContext context) {
     if (!agreeWithTermsAndConditions.value) {
@@ -39,10 +33,10 @@ class LegalTermsController extends GetxController {
   Widget buildTermsAndConditionsButton() {
     return GestureDetector(
       onTap: () {
-        Get.to(() => const LegalTermsScreen());
+        Get.to(() => LegalTermsScreen());
       },
       child: Text(
-        legalConditionsButtonText,
+        i18n.text('legalConditionsButtonText'),
         style: const TextStyle(
           color: AppColors.primaryColor,
           decoration: TextDecoration.underline,
@@ -68,7 +62,7 @@ class LegalTermsController extends GetxController {
               },
             )),
         Text(
-          acceptTermsAndConditionsText,
+          i18n.text('acceptTermsAndConditionsText'),
           style: const TextStyle(
             fontSize: AppFontSizes.medium,
             fontWeight: FontWeight.bold,
@@ -80,26 +74,22 @@ class LegalTermsController extends GetxController {
   }
 
   SnackbarController getSnackbarController() {
-    const String acceptTermsAndConditionsErrorText =
-        'Veuillez accepter les termes et conditions';
-    const String termsAndConditionsText = 'Termes et Conditions';
-
     return Get.snackbar(
-      termsAndConditionsText,
-      acceptTermsAndConditionsErrorText,
+      i18n.text('termsAndConditionsText'),
+      i18n.text('acceptTermsAndConditionsErrorText'),
       snackPosition: SnackPosition.BOTTOM,
       duration: const Duration(seconds: 3),
-      titleText: const Text(
-        termsAndConditionsText,
-        style: TextStyle(
+      titleText: Text(
+        i18n.text('termsAndConditionsText'),
+        style: const TextStyle(
           color: AppColors.white,
           fontSize: AppFontSizes.medium,
           fontWeight: FontWeight.bold,
         ),
       ),
-      messageText: const Text(
-        acceptTermsAndConditionsErrorText,
-        style: TextStyle(
+      messageText: Text(
+        i18n.text('acceptTermsAndConditionsErrorText'),
+        style: const TextStyle(
           color: AppColors.white,
           fontSize: AppFontSizes.medium,
         ),

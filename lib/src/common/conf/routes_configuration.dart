@@ -3,6 +3,7 @@ import 'package:stud_advice/stud_advice.dart';
 
 class RoutesConfiguration {
   static const String initialRoute = InitTimeScreen.navigatorId;
+
   List<GetPage> configureRoutes() {
     return [
       GetPage(
@@ -38,7 +39,7 @@ class RoutesConfiguration {
       ),
       GetPage(
         name: LegalTermsScreen.navigatorId,
-        page: () => const LegalTermsScreen(),
+        page: () => LegalTermsScreen(),
         middlewares: [I18nMiddleware()],
       ),
       GetPage(

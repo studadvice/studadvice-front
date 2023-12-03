@@ -150,7 +150,7 @@ class SettingsScreen extends StatelessWidget {
         ),
         SettingsItem(
           onTap: () {
-            Get.to(const LegalTermsScreen());
+            Get.to(LegalTermsScreen());
           },
           // icon for terms and conditions
           icons: Icons.description,
