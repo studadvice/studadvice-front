@@ -7,7 +7,8 @@ import 'package:get_storage/get_storage.dart';
 import 'package:stud_advice/src/utils/utils.dart';
 
 class I18n extends GetxController {
-  CustomLocale _locale = CustomLocale('en', 'US'); // TODO : update default locale
+  CustomLocale _locale =
+      CustomLocale('fr', 'FR'); // TODO : update default locale
   Map<String, dynamic> _keysAndValues = {};
   final box = GetStorage();
 
