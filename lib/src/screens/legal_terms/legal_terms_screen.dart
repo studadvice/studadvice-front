@@ -4,17 +4,15 @@ import 'package:stud_advice/stud_advice.dart';
 
 class LegalTermsScreen extends StatelessWidget {
   static const String navigatorId = '/legal_terms_screen';
-  static final I18n i18n = Get.find();
+  final I18n i18n = Get.find();
 
-  const LegalTermsScreen({super.key});
-
-
-  String getTerms() { // TODO: Refacto this method
+  String getTerms() {
+    // TODO: Refacto this method
     String terms = i18n.text('header');
     for (int i = 1; i <= 8; i++) {
       terms += i18n.text('article$i');
     }
-    return terms+i18n.text('footer');
+    return terms + i18n.text('footer');
   }
 
   @override

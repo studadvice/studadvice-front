@@ -69,9 +69,9 @@ flutter:
 
 
   assets:
-    - assets/
     - assets/i18n/
     - assets/i18n/login_screen/
+    - assets/i18n/welcome_screen/
     - assets/i18n/settings_screen/
     - assets/i18n/home_page_screen/
     - assets/i18n/init_time_screen/
