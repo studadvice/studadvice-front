@@ -127,7 +127,7 @@ class RegisterOptionsScreen extends StatelessWidget {
                   //     buttonText: continueWithXText,
                   //     onTap: () async {
                   //       if (await _socialSignInController.loginWithXAccount()) {
-                  //       Get.to(() => const RegisterUserInformationScreen(),
+                  //       Get.toNamed(RegisterUserInformationScreen.navigatorId,
                   //                               arguments: {
                   //                                 'hasAcceptedTermsAndConditions': true,
                   //                               });
