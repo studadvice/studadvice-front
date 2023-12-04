@@ -5,12 +5,6 @@ import 'package:stud_advice/stud_advice.dart';
 class ForgotPasswordController extends GetxController {
   final AuthenticationController _authenticationController =
       Get.put(AuthenticationController());
-  final String successMessage =
-      'Un email de réinitialisation du mot de passe a été envoyé à votre adresse email.';
-  final String successTitle = 'Réinitialisation du mot de passe';
-  final String errorTitle = 'Erreur';
-  final String errorMessage =
-      'Une erreur s\'est produite lors de la réinitialisation du mot de passe.';
 
   final TextEditingController emailController = TextEditingController();
 
@@ -20,7 +14,8 @@ class ForgotPasswordController extends GetxController {
     super.onClose();
   }
 
-  Future<void> resetPassword() async {
+  Future<void> resetPassword(String successTitle, String successMessage,
+      String errorTitle, String errorMessage) async {
     LoadingSpinner.start();
     try {
       bool tryResetSuccess = await _authenticationController

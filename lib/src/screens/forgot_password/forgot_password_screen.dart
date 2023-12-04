@@ -8,13 +8,7 @@ class ForgotPasswordScreen extends StatelessWidget {
   final ForgotPasswordController _forgotPasswordController =
       Get.put(ForgotPasswordController());
 
-  final String forgotPasswordTitle = 'Mot de passe oublié';
-  final String emailHintText = 'Email';
-  final String emailLabelText = 'Email';
-  final String sendText = 'Envoyer';
-  final String emailErrorText = 'Veuillez entrer votre adresse e-mail';
-  final String forgotPasswordMessageText =
-      'Veuillez entrer votre adresse e-mail pour recevoir un lien de réinitialisation du mot de passe.';
+  final I18n _i18n = Get.find();
   final _formKey = GlobalKey<FormState>();
 
   @override
@@ -24,7 +18,7 @@ class ForgotPasswordScreen extends StatelessWidget {
           appBar: AppBar(
             title: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 10),
-              child: Center(child: Text(forgotPasswordTitle)),
+              child: Center(child: Text(_i18n.text('forgotPasswordTitle'))),
             ),
             leading: IconButton(
               icon: const Icon(Icons.arrow_back),
@@ -50,7 +44,7 @@ class ForgotPasswordScreen extends StatelessWidget {
                   Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: Text(
-                      forgotPasswordMessageText,
+                      _i18n.text('forgotPasswordMessage'),
                       textAlign: TextAlign.center,
                       style: const TextStyle(
                         fontSize: AppFontSizes.large18,
@@ -61,8 +55,8 @@ class ForgotPasswordScreen extends StatelessWidget {
                   const SizedBox(height: 20),
                   ClassicTextField(
                     controller: _forgotPasswordController.emailController,
-                    hintText: emailHintText,
-                    labelText: emailLabelText,
+                    hintText: _i18n.text('emailHint'),
+                    labelText: _i18n.text('emailLabel'),
                     validator: (value) => FormValidator.validateEmail(value),
                     autofillHints: [AutofillHints.email],
                     backgroundColor: AppColors.white,
@@ -73,10 +67,14 @@ class ForgotPasswordScreen extends StatelessWidget {
                   Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: CustomButton(
-                        text: sendText,
+                        text: _i18n.text('send'),
                         onPressed: () {
                           if (_formKey.currentState!.validate()) {
-                            _forgotPasswordController.resetPassword();
+                            _forgotPasswordController.resetPassword(
+                                _i18n.text('successTitle'),
+                                _i18n.text('successMessage'),
+                                _i18n.text('errorTitle'),
+                                _i18n.text('errorMessage'));
                           }
                         },
                         textColor: AppColors.white,
