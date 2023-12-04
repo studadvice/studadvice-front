@@ -10,6 +10,7 @@
   "login": "Login",
   "orContinueWith": "Or continue with",
   "passwordError": "Please enter your password",
+  "legalConditionsButton": "View Terms and Conditions",
   "acceptingTermsAndConditions": "By continuing to log in or sign up using the methods above, you agree to our terms of use and privacy policy."
 }
 

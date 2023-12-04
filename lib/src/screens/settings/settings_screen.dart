@@ -5,7 +5,7 @@ import 'package:stud_advice/stud_advice.dart';
 class SettingsScreen extends StatelessWidget {
   static const String navigatorId = '/settings_screen';
   final ThemeController themeController = Get.find();
-  final I18n i18n = Get.find();
+  final I18n _i18n = Get.find();
   final SettingsController settingsController = Get.find();
 
   @override
@@ -43,25 +43,25 @@ class SettingsScreen extends StatelessWidget {
       ratioPerItem: 200.0,
       items: [
         CustomDropdownSearch<CustomLocale>(
-          labelText: i18n.text('language'),
+          labelText: _i18n.text('language'),
           backgroundColor: AppColors.white,
           borderColor: AppColors.secondaryColor,
           focusedBorderColor: AppColors.secondaryColor,
           items: supportedLocales,
-          selectedItem: i18n.getCurrentLocale,
+          selectedItem: _i18n.getCurrentLocale,
           onChanged: (locale) {
             // TODO : checker l'async
-            i18n.changeLocale(locale ?? i18n.getCurrentLocale, navigatorId);
+            _i18n.changeLocale(locale ?? _i18n.getCurrentLocale, navigatorId);
             return null;
           },
           validator: (locale) {
             return null;
           },
           emptyBuilder: (context, searchEntry) {
-            return Text(i18n.text('noResult'));
+            return Text(_i18n.text('noResult'));
           },
           errorBuilder: (context, searchEntry, exception) {
-            return Text(i18n.text('error'));
+            return Text(_i18n.text('error'));
           },
         ),
         // DefaultConnectionButton(
@@ -81,11 +81,15 @@ class SettingsScreen extends StatelessWidget {
       ratioPerItem: 200.0,
       items: [
         CustomDropdownSearch<String>(
-          labelText: i18n.text('textSize'),
+          labelText: _i18n.text('textSize'),
           backgroundColor: AppColors.white,
           borderColor: AppColors.secondaryColor,
           focusedBorderColor: AppColors.secondaryColor,
-          items: [i18n.text('small'), i18n.text('medium'), i18n.text('large')],
+          items: [
+            _i18n.text('small'),
+            _i18n.text('medium'),
+            _i18n.text('large')
+          ],
           //selectedItem: i18n.getCurrentLocale,
           onChanged: (fontSize) {
             // TODO : checker l'async
@@ -96,10 +100,10 @@ class SettingsScreen extends StatelessWidget {
             return null;
           },
           emptyBuilder: (context, searchEntry) {
-            return Text(i18n.text('noResult'));
+            return Text(_i18n.text('noResult'));
           },
           errorBuilder: (context, searchEntry, exception) {
-            return Text(i18n.text('error'));
+            return Text(_i18n.text('error'));
           },
         ),
         // DefaultConnectionButton(
@@ -127,7 +131,7 @@ class SettingsScreen extends StatelessWidget {
             withBackground: true,
             backgroundColor: AppColors.red,
           ),
-          title: i18n.text('logout'),
+          title: _i18n.text('logout'),
           titleStyle: const TextStyle(
               color: AppColors.red, fontWeight: FontWeight.bold),
         ),
@@ -146,7 +150,7 @@ class SettingsScreen extends StatelessWidget {
             withBackground: true,
             backgroundColor: AppColors.red,
           ),
-          title: i18n.text('support'),
+          title: _i18n.text('support'),
         ),
         SettingsItem(
           onTap: () {
@@ -159,7 +163,7 @@ class SettingsScreen extends StatelessWidget {
             withBackground: true,
             backgroundColor: AppColors.blue,
           ),
-          title: i18n.text('terms'),
+          title: _i18n.text('terms'),
         ),
       ],
     );
@@ -178,7 +182,7 @@ class SettingsScreen extends StatelessWidget {
             withBackground: true,
             backgroundColor: Theme.of(context).primaryColor,
           ),
-          title: i18n.text('accessibility'),
+          title: _i18n.text('accessibility'),
           // subtitle: "Ma",
         ),
         SettingsItem(
@@ -191,14 +195,14 @@ class SettingsScreen extends StatelessWidget {
             withBackground: true,
             backgroundColor: AppColors.green,
           ),
-          title: i18n.text('language'),
+          title: _i18n.text('language'),
           // subtitle: "Ma",
         ),
         SettingsItem(
           onTap: () {},
           icons: Icons.password,
           iconStyle: IconStyle(),
-          title: i18n.text('changePassword'),
+          title: _i18n.text('changePassword'),
         ),
         SettingsItem(
           onTap: () {},
@@ -208,7 +212,7 @@ class SettingsScreen extends StatelessWidget {
             withBackground: true,
             backgroundColor: AppColors.black,
           ),
-          title: i18n.text('darkmode'),
+          title: _i18n.text('darkmode'),
           // subtitle: "Automatic",
           trailing: Obx(() => Switch.adaptive(
                 value: themeController.isDarkTheme.value,
@@ -233,7 +237,7 @@ class SettingsScreen extends StatelessWidget {
           borderRadius: 50,
           backgroundColor: Theme.of(context).primaryColor,
         ),
-        title: i18n.text('account'),
+        title: _i18n.text('account'),
         subtitle: "Tap to change your data",
         onTap: () {
           debugPrint("Account :OK");

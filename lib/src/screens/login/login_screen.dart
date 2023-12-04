@@ -230,7 +230,8 @@ class LoginScreen extends StatelessWidget {
           ),
         ),
         const SizedBox(height: 10),
-        _termsAndConditionsController.buildTermsAndConditionsButton(),
+        _termsAndConditionsController
+            .buildTermsAndConditionsButton(_i18n.text('legalConditionsButton')),
       ],
     );
   }
