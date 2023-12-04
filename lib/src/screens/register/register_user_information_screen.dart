@@ -153,9 +153,9 @@ class _RegisterUserInformationScreenState
         return await _registerUserInformationController
             .fetchCitiesFromAPI(pattern);
       },
-      errorText: i18n.text('cityErrorText'),
-      notFoundText: i18n.text('cityNotFoundText'),
-      noItemSelectedText: i18n.text('cityNotSelectedText'),
+      errorText: i18n.text('cityError'),
+      notFoundText: i18n.text('cityNotFound'),
+      noItemSelectedText: i18n.text('cityNotSelected'),
       itemBuilder: (suggestion) {
         return Text(suggestion.nom ?? '');
       },
@@ -166,7 +166,7 @@ class _RegisterUserInformationScreenState
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 25.0),
       child: CustomAsyncDropdownSearch(
-        labelText: i18n.text('postalCodeLabelText'),
+        labelText: i18n.text('postalCodeLabel'),
         backgroundColor: AppColors.white,
         borderColor: AppColors.secondaryColor,
         focusedBorderColor: AppColors.secondaryColor,
@@ -174,7 +174,7 @@ class _RegisterUserInformationScreenState
             .fetchPostalCodesFromApi(cityController.text),
         validator: (value) {
           if (value == null || value.isEmpty) {
-            return i18n.text('postalCodeNotSelectedText');
+            return i18n.text('postalCodeNotSelected');
           }
           return null;
         },
@@ -194,7 +194,7 @@ class _RegisterUserInformationScreenState
         emptyBuilder: (context, reload) {
           return Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 8),
-            child: Text(i18n.text('postalCodeNotFoundText'),
+            child: Text(i18n.text('postalCodeNotFound'),
                 style: const TextStyle(
                     fontSize: AppFontSizes.medium,
                     color: AppColors.dangerColor,
@@ -208,8 +208,8 @@ class _RegisterUserInformationScreenState
   Widget buildCountryTextField() {
     return CountryPickerField(
         controller: countryController,
-        hintText: i18n.text('countryHintText'),
-        labelText: i18n.text('countryLabelText'),
+        hintText: i18n.text('countryHint'),
+        labelText: i18n.text('countryLabel'),
         focusedBorderColor: AppColors.secondaryColor,
         borderColor: AppColors.secondaryColor);
   }
@@ -293,7 +293,7 @@ class _RegisterUserInformationScreenState
 
   Widget buildNextButton() {
     return CustomButton(
-        text: i18n.text('nextButtonText'),
+        text: i18n.text('nextButton'),
         textColor: AppColors.white,
         backgroundColor: AppColors.blue,
         onPressed: () {
