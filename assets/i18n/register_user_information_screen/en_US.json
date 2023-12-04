@@ -1,4 +1,31 @@
 {
-  "test": "test"
+  "screenTitle": "Please provide the following information",
+  "pseudoHintText": "Username",
+  "pseudoErrorText": "Please enter your username",
+  "postalCodeHintText": "Postal Code",
+  "postalCodeLabelText": "Postal Code",
+  "birthDateHintText": "Date of Birth",
+  "birthDateLabelText": "Date of Birth",
+  "birthDateErrorText": "Please enter your date of birth",
+  "cityHintText": "City",
+  "cityLabelText": "City",
+  "universityHintText": "University",
+  "universityDialogCloseText": "Close",
+  "universitySearchHintText": "Search for a university",
+  "countryHintText": "Country of Origin",
+  "countryLabelText": "Country of Origin",
+  "formationHintText": "Field of Study",
+  "formationLabelText": "Field of Study",
+  "formationErrorText": "Please enter your field of study",
+  "nextButtonText": "Next",
+  "cityNotFoundText": "City not found",
+  "cityNotSelectedText": "Please select a city",
+  "universityNotSelectedText": "Please select a university",
+  "universityNotFound": "No university found",
+  "defaultUniversityChoice": "Another university",
+  "universityErrorText": "An error occurred",
+  "cityErrorText": "An error occurred",
+  "postalCodeErrorText": "An error occurred",
+  "postalCodeNotFoundText": "Postal code not found, please select a city.",
+  "postalCodeNotSelectedText": "Please select a postal code"
 }
-

@@ -1,4 +1,8 @@
 {
-  "test": "test"
+  "dividerText": "Or",
+  "continueWithGoogle": "Continue with Google",
+  "continueWithFacebook": "Continue with Facebook",
+  "continueWithApple": "Continue with Apple",
+  "continueWithX": "Continue with X",
+  "acceptingTermsAndConditions": "By continuing the sign-up with any of the methods above, you agree to our terms of service and privacy policy."
 }
-

@@ -1,4 +1,31 @@
 {
-  "test": "test"
+  "screenTitle": "Veuillez renseigner les informations suivantes",
+  "pseudoHintText": "Pseudo",
+  "pseudoErrorText": "Veuillez renseigner votre pseudo",
+  "postalCodeHintText": "Code Postal",
+  "postalCodeLabelText": "Code Postal",
+  "birthDateHintText": "Date de naissance",
+  "birthDateLabelText": "Date de naissance",
+  "birthDateErrorText": "Veuillez renseigner votre date de naissance",
+  "cityHintText": "Ville",
+  "cityLabelText": "Ville",
+  "universityHintText": "Université",
+  "universityDialogCloseText": "Fermer",
+  "universitySearchHintText": "Rechercher une université",
+  "countryHintText": "Pays d'origine",
+  "countryLabelText": "Pays d'origine",
+  "formationHintText": "Formation",
+  "formationLabelText": "Formation",
+  "formationErrorText": "Veuillez renseigner votre formation",
+  "nextButtonText": "Suivant",
+  "cityNotFoundText": "Ville non trouvée",
+  "cityNotSelectedText": "Veuillez sélectionner une ville",
+  "universityNotSelectedText": "Veuillez sélectionner une université",
+  "universityNotFound": "Aucune université trouvée",
+  "defaultUniversityChoice": "Autre",
+  "universityErrorText": "Une erreur est survenue",
+  "cityErrorText": "Une erreur est survenue",
+  "postalCodeErrorText": "Une erreur est survenue",
+  "postalCodeNotFoundText": "Code postal non trouvé, veuillez sélectionner une ville.",
+  "postalCodeNotSelectedText": "Veuillez sélectionner un code postal"
 }
-
