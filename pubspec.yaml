@@ -78,7 +78,6 @@ flutter:
     - assets/i18n/init_time_screen/
     - assets/i18n/legal_terms_screen/
     - assets/i18n/forgot_password_screen/
-    - assets/i18n/legal_terms_controller/
     - assets/i18n/register_options_screen/
     - assets/i18n/register_user_information_screen/
     - assets/i18n/register_with_email_screen/
