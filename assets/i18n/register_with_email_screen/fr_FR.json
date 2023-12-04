@@ -1,4 +1,10 @@
 {
-  "test": "test"
+  "emailHint": "Email",
+  "emailLabel": "Email",
+  "passwordHint": "Mot de passe",
+  "passwordLabel": "Mot de passe",
+  "confirmPasswordHint": "Confirmer le mot de passe",
+  "confirmPasswordLabel": "Confirmer le mot de passe",
+  "registerMessage": "Créer un compte",
+  "connectionButton": "S'inscrire"
 }
-
