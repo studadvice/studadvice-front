@@ -299,11 +299,6 @@ class _RegisterUserInformationScreenState
         onPressed: () {
           if (_formKey.currentState!.validate()) {
             UserData userData = buildUserData();
-
-            // debugPrint(
-            //   userData.toJson().toString(),
-            // );
-
             _registerUserInformationController.saveUserInformation(userData);
           }
         });
