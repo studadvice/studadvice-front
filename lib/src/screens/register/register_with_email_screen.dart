@@ -10,15 +10,7 @@ class RegisterWithEmailScreen extends StatelessWidget {
   final LegalTermsController _legalTermsController =
       Get.put(LegalTermsController());
 
-  // Use constants to facilitate the implementation of the translation.
-  final String emailHintText = 'Email';
-  final String emailLabelText = 'Email';
-  final String passwordHintText = 'Mot de passe';
-  final String passwordLabelText = 'Mot de passe';
-  final String confirmPasswordHintText = 'Confirmer le mot de passe';
-  final String confirmPasswordLabelText = 'Confirmer le mot de passe';
-  final String registerMessageText = 'Créer un compte';
-  final String connectionButtonText = 'S\'inscrire';
+  final I18n i18n = Get.find();
 
   // Controllers for the text fields.
   final TextEditingController emailController = TextEditingController();
@@ -67,7 +59,7 @@ class RegisterWithEmailScreen extends StatelessWidget {
 
   Widget buildRegisterText() {
     return Text(
-      registerMessageText,
+      i18n.text('registerMessage'),
       style: const TextStyle(
         fontSize: AppFontSizes.extraLarge,
         fontWeight: FontWeight.bold,
@@ -79,8 +71,8 @@ class RegisterWithEmailScreen extends StatelessWidget {
   Widget buildEmailTextField() {
     return ClassicTextField(
       validator: (value) => FormValidator.validateEmail(value),
-      hintText: emailHintText,
-      labelText: emailLabelText,
+      hintText: i18n.text('emailHint'),
+      labelText: i18n.text('emailLabel'),
       controller: emailController,
       backgroundColor: AppColors.white,
       focusedBorderColor: AppColors.secondaryColor,
@@ -93,8 +85,8 @@ class RegisterWithEmailScreen extends StatelessWidget {
     return PasswordTextField(
         // Password should be at least 8 characters long and contain at least one uppercase letter, one number and one special character.
         validator: (value) => FormValidator.validatePassword(value),
-        hintText: passwordHintText,
-        labelText: passwordLabelText,
+        hintText: i18n.text('passwordHint'),
+        labelText: i18n.text('passwordLabel'),
         controller: passwordController,
         backgroundColor: AppColors.white,
         focusedBorderColor: AppColors.secondaryColor,
@@ -105,8 +97,8 @@ class RegisterWithEmailScreen extends StatelessWidget {
     return PasswordTextField(
         validator: (value) => FormValidator.validateConfirmPassword(
             passwordController.text, value),
-        hintText: confirmPasswordHintText,
-        labelText: confirmPasswordLabelText,
+        hintText: i18n.text('confirmPasswordHint'),
+        labelText: i18n.text('confirmPasswordLabel'),
         controller: confirmPasswordController,
         backgroundColor: AppColors.white,
         focusedBorderColor: AppColors.secondaryColor,
@@ -115,7 +107,7 @@ class RegisterWithEmailScreen extends StatelessWidget {
 
   Widget buildConnectionButton() {
     return CustomButton(
-        text: connectionButtonText,
+        text: i18n.text('connectionButton'),
         textColor: AppColors.white,
         backgroundColor: AppColors.blue,
         onPressed: () async {
