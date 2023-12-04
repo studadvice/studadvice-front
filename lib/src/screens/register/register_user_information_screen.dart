@@ -17,40 +17,7 @@ class _RegisterUserInformationScreenState
   final RegisterUserInformationController _registerUserInformationController =
       Get.put(RegisterUserInformationController());
 
-  // Use constants to facilitate the implementation of the translation.
-  final String screenTitle = 'Veuillez renseigner les informations suivantes';
-  final String pseudoHintText = 'Pseudo';
-  final String pseudoErrorText = 'Veuillez renseigner votre pseudo';
-  final String postalCodeHintText = 'Code Postal';
-  final String postalCodeLabelText = 'Code Postal';
-  final String birthDateHintText = 'Date de naissance';
-  final String birthDateLabelText = 'Date de naissance';
-  final String birthDateErrorText =
-      'Veuillez renseigner votre date de naissance';
-  final String cityHintText = 'Ville';
-  final String cityLabelText = 'Ville';
-  final String universityHintText = 'Université';
-  final String universityDialogCloseText = 'Fermer';
-  final String universitySearchHintText = 'Rechercher une université';
-  final String countryHintText = 'Pays d\'origine';
-  final String countryLabelText = 'Pays d\'origine';
-  final String formationHintText = 'Formation';
-  final String formationLabelText = 'Formation';
-  final String formationErrorText = 'Veuillez renseigner votre formation';
-  final String nextButtonText = 'Suivant';
-  final String cityNotFoundText = 'Ville non trouvée';
-  final String cityNotSelectedText = 'Veuillez sélectionner une ville';
-  final String universityNotSelectedText =
-      'Veuillez sélectionner une université';
-  final String universityNotFound = 'Aucune université trouvée';
-  final String defaultUniversityChoice = 'Autre';
-  final String universityErrorText = 'Une erreur est survenue';
-  final String cityErrorText = 'Une erreur est survenue';
-  final String postalCodeErrorText = 'Une erreur est survenue';
-  final String postalCodeNotFoundText =
-      'Code postal non trouvé, veuillez sélectionner une ville.';
-  final String postalCodeNotSelectedText =
-      'Veuillez sélectionner un code postal';
+  I18n i18n = Get.find<I18n>();
 
   // Controllers for the text fields.
   final TextEditingController pseudoController = TextEditingController(
@@ -92,7 +59,7 @@ class _RegisterUserInformationScreenState
       appBar: AppBar(
         centerTitle: true,
         title: Text(
-          screenTitle,
+          i18n.text('screenTitle'),
           style: (const TextStyle(
             fontSize: AppFontSizes.large16,
             fontWeight: FontWeight.bold,
@@ -159,15 +126,15 @@ class _RegisterUserInformationScreenState
 
   Widget buildPseudoTextField() {
     return ClassicTextField(
-      hintText: pseudoHintText,
-      labelText: pseudoHintText,
+      hintText: i18n.text('pseudoHint'),
+      labelText: i18n.text('pseudoLabel'),
       controller: pseudoController,
       backgroundColor: AppColors.white,
       focusedBorderColor: AppColors.secondaryColor,
       borderColor: AppColors.secondaryColor,
       validator: (value) {
         if (value == null || value.isEmpty) {
-          return pseudoErrorText;
+          return i18n.text('pseudoError');
         }
         return null;
       },
@@ -177,8 +144,8 @@ class _RegisterUserInformationScreenState
   Widget buildCityTextField() {
     return AutoCompleteTextField<CityData>(
       controller: cityController,
-      labelText: cityLabelText,
-      hintText: cityHintText,
+      labelText: i18n.text('cityLabel'),
+      hintText: i18n.text('cityHint'),
       backgroundColor: AppColors.white,
       borderColor: AppColors.secondaryColor,
       focusedBorderColor: AppColors.secondaryColor,
@@ -186,9 +153,9 @@ class _RegisterUserInformationScreenState
         return await _registerUserInformationController
             .fetchCitiesFromAPI(pattern);
       },
-      errorText: universityErrorText,
-      notFoundText: cityNotFoundText,
-      noItemSelectedText: cityNotSelectedText,
+      errorText: i18n.text('cityErrorText'),
+      notFoundText: i18n.text('cityNotFoundText'),
+      noItemSelectedText: i18n.text('cityNotSelectedText'),
       itemBuilder: (suggestion) {
         return Text(suggestion.nom ?? '');
       },
@@ -199,7 +166,7 @@ class _RegisterUserInformationScreenState
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 25.0),
       child: CustomAsyncDropdownSearch(
-        labelText: postalCodeLabelText,
+        labelText: i18n.text('postalCodeLabelText'),
         backgroundColor: AppColors.white,
         borderColor: AppColors.secondaryColor,
         focusedBorderColor: AppColors.secondaryColor,
@@ -207,7 +174,7 @@ class _RegisterUserInformationScreenState
             .fetchPostalCodesFromApi(cityController.text),
         validator: (value) {
           if (value == null || value.isEmpty) {
-            return postalCodeNotSelectedText;
+            return i18n.text('postalCodeNotSelectedText');
           }
           return null;
         },
@@ -227,7 +194,7 @@ class _RegisterUserInformationScreenState
         emptyBuilder: (context, reload) {
           return Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 8),
-            child: Text(postalCodeNotFoundText,
+            child: Text(i18n.text('postalCodeNotFoundText'),
                 style: const TextStyle(
                     fontSize: AppFontSizes.medium,
                     color: AppColors.dangerColor,
@@ -241,21 +208,21 @@ class _RegisterUserInformationScreenState
   Widget buildCountryTextField() {
     return CountryPickerField(
         controller: countryController,
-        hintText: countryHintText,
-        labelText: countryLabelText,
+        hintText: i18n.text('countryHintText'),
+        labelText: i18n.text('countryLabelText'),
         focusedBorderColor: AppColors.secondaryColor,
         borderColor: AppColors.secondaryColor);
   }
 
   Widget buildBirthDateTextField() {
     return DatePickerField(
-      hintText: birthDateHintText,
+      hintText: i18n.text('birthDateHint'),
       controller: birthDateController,
       focusedBorderColor: AppColors.secondaryColor,
       borderColor: AppColors.secondaryColor,
       validator: (value) {
         if (value == null || value.isEmpty) {
-          return birthDateErrorText;
+          return i18n.text('birthDateError');
         }
         return null;
       },
@@ -264,8 +231,8 @@ class _RegisterUserInformationScreenState
 
   List<DropdownMenuItem<String>> buildUniversityDataItems(
       List<String> universityData) {
-    if (!universityData.contains(defaultUniversityChoice)) {
-      universityData.insert(0, defaultUniversityChoice);
+    if (!universityData.contains(i18n.text('defaultUniversityChoice'))) {
+      universityData.insert(0, i18n.text('defaultUniversityChoice'));
     }
     return universityData.map((element) {
       return DropdownMenuItem<String>(
@@ -284,23 +251,23 @@ class _RegisterUserInformationScreenState
   }
 
   Widget buildUniversityTextField(List<String> universityData) {
-    if (!universityData.contains(defaultUniversityChoice)) {
-      universityData.insert(0, defaultUniversityChoice);
+    if (!universityData.contains(i18n.text('defaultUniversityChoice'))) {
+      universityData.insert(0, i18n.text('defaultUniversityChoice'));
     }
     return CustomSelectionModal(
-      labelText: universityHintText,
-      hintText: universityHintText,
+      labelText: i18n.text('universityLabel'),
+      hintText: i18n.text('universityHint'),
       itemsList: universityData,
       height: MediaQuery.of(context).size.height * 0.8,
       controller: universityController,
-      defaultChoice: defaultUniversityChoice,
+      defaultChoice: i18n.text('defaultUniversityChoice'),
       onItemSelected: (String selectedItem) {
         universityController.text = selectedItem;
       },
-      searchHintText: universitySearchHintText,
+      searchHintText: i18n.text('universitySearchHint'),
       validator: (value) {
         if (value == null || value.isEmpty) {
-          return universityNotSelectedText;
+          return i18n.text('universityError');
         }
         return null;
       },
@@ -309,15 +276,15 @@ class _RegisterUserInformationScreenState
 
   Widget buildFormationTextField() {
     return ClassicTextField(
-      hintText: formationHintText,
-      labelText: formationLabelText,
+      hintText: i18n.text('formationHint'),
+      labelText: i18n.text('formationLabel'),
       controller: formationController,
       backgroundColor: AppColors.white,
       focusedBorderColor: AppColors.secondaryColor,
       borderColor: AppColors.secondaryColor,
       validator: (value) {
         if (value == null || value.isEmpty) {
-          return formationErrorText;
+          return i18n.text('formationError');
         }
         return null;
       },
@@ -326,7 +293,7 @@ class _RegisterUserInformationScreenState
 
   Widget buildNextButton() {
     return CustomButton(
-        text: nextButtonText,
+        text: i18n.text('nextButtonText'),
         textColor: AppColors.white,
         backgroundColor: AppColors.blue,
         onPressed: () {
