@@ -10,5 +10,6 @@
   "login": "Se connecter",
   "orContinueWith": "Ou continuer avec",
   "passwordError": "Veuillez entrer votre mot de passe",
+  "legalConditionsButton": "Voir les Termes et Conditions",
   "acceptingTermsAndConditions": "En continuant la connexion ou l'inscription avec l'une des méthodes ci-dessus, vous acceptez nos conditions générales d'utilisation et notre politique de confidentialité."
 }

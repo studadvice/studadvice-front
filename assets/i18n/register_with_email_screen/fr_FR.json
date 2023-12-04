@@ -6,5 +6,10 @@
   "confirmPasswordHint": "Confirmer le mot de passe",
   "confirmPasswordLabel": "Confirmer le mot de passe",
   "registerMessage": "Créer un compte",
-  "connectionButton": "S'inscrire"
+  "connectionButton": "S'inscrire",
+  "legalConditionsButton": "Voir les Termes et Conditions",
+  "acceptTermsAndConditions": "J'accepte les conditions générales d'utilisation",
+  "acceptTermsAndConditionsError": "Veuillez accepter les termes et conditions",
+  "termsAndConditions": "Termes et Conditions",
+  "acceptingTermsAndConditions": "J'accepte les termes et conditions"
 }
