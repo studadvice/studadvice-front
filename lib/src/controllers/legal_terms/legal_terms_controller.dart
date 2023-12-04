@@ -36,7 +36,7 @@ class LegalTermsController extends GetxController {
         Get.to(() => LegalTermsScreen());
       },
       child: Text(
-        i18n.text('legalConditionsButtonText'),
+        i18n.text('legalConditionsButton'),
         style: const TextStyle(
           color: AppColors.primaryColor,
           decoration: TextDecoration.underline,
@@ -62,7 +62,7 @@ class LegalTermsController extends GetxController {
               },
             )),
         Text(
-          i18n.text('acceptTermsAndConditionsText'),
+          i18n.text('acceptTermsAndConditions'),
           style: const TextStyle(
             fontSize: AppFontSizes.medium,
             fontWeight: FontWeight.bold,
@@ -75,12 +75,12 @@ class LegalTermsController extends GetxController {
 
   SnackbarController getSnackbarController() {
     return Get.snackbar(
-      i18n.text('termsAndConditionsText'),
-      i18n.text('acceptTermsAndConditionsErrorText'),
+      i18n.text('termsAndConditions'),
+      i18n.text('acceptTermsAndConditionsError'),
       snackPosition: SnackPosition.BOTTOM,
       duration: const Duration(seconds: 3),
       titleText: Text(
-        i18n.text('termsAndConditionsText'),
+        i18n.text('termsAndConditions'),
         style: const TextStyle(
           color: AppColors.white,
           fontSize: AppFontSizes.medium,
@@ -88,7 +88,7 @@ class LegalTermsController extends GetxController {
         ),
       ),
       messageText: Text(
-        i18n.text('acceptTermsAndConditionsErrorText'),
+        i18n.text('acceptTermsAndConditionsError'),
         style: const TextStyle(
           color: AppColors.white,
           fontSize: AppFontSizes.medium,
