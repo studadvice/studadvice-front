@@ -8,27 +8,17 @@ class CustomAsyncDropdownSearch<T> extends CustomDropdownSearch<T> {
   const CustomAsyncDropdownSearch({
     super.key,
     required this.asyncItems,
-    required labelText,
-    required backgroundColor,
-    required borderColor,
-    shadowColor,
-    required focusedBorderColor,
-    required emptyBuilder,
-    required errorBuilder,
-    required onChanged,
-    required validator,
-  }) : super(
-          labelText: labelText,
-          backgroundColor: backgroundColor,
-          borderColor: borderColor,
-          shadowColor: shadowColor,
-          items: const [],
-          focusedBorderColor: focusedBorderColor,
-          emptyBuilder: emptyBuilder,
-          errorBuilder: errorBuilder,
-          onChanged: onChanged,
-          validator: validator,
-        );
+    required super.labelText,
+    required super.backgroundColor,
+    required super.borderColor,
+    super.shadowColor,
+    required super.focusedBorderColor,
+    required super.emptyBuilder,
+    required super.errorBuilder,
+    required super.onChanged,
+    required super.validator,
+    super.items = const [],
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -36,7 +26,7 @@ class CustomAsyncDropdownSearch<T> extends CustomDropdownSearch<T> {
       compareFn: (item, selectedItem) => item == selectedItem,
       asyncItems: asyncItems,
       dropdownBuilder: (context, selectedItem) {
-        return Text(selectedItem.toString());
+        return Text(selectedItem != null ? selectedItem.toString() : '');
       },
       dropdownButtonProps: DropdownButtonProps(
         focusColor: borderColor,
