@@ -1,3 +1,8 @@
 {
-  "test": "test"
+  "forgotPasswordTitle": "Forgot Password",
+  "emailHintText": "Email",
+  "emailLabelText": "Email",
+  "sendText": "Send",
+  "emailErrorText": "Please enter your email address",
+  "forgotPasswordMessageText": "Please enter your email address to receive a password reset link."
 }

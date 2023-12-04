@@ -1,3 +1,8 @@
 {
-  "test": "test"
+  "forgotPasswordTitle": "Mot de passe oublié",
+  "emailHintText": "Email",
+  "emailLabelText": "Email",
+  "sendText": "Envoyer",
+  "emailErrorText": "Veuillez entrer votre adresse e-mail",
+  "forgotPasswordMessageText": "Veuillez entrer votre adresse e-mail pour recevoir un lien de réinitialisation du mot de passe."
 }
