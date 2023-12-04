@@ -4,9 +4,9 @@ import 'package:stud_advice/stud_advice.dart';
 
 class LegalTermsController extends GetxController {
   var agreeWithTermsAndConditions = false.obs;
-  I18n i18n = Get.find();
 
-  void showTermsAndConditionsDialog(BuildContext context) {
+  void showTermsAndConditionsDialog(BuildContext context,
+      String legalConditionsButtonText, String acceptTermsAndConditionsText) {
     if (!agreeWithTermsAndConditions.value) {
       showDialog(
         context: context,
@@ -19,8 +19,10 @@ class LegalTermsController extends GetxController {
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  buildTermsAndConditionsButton(),
-                  buildTermsAndConditionsRow(),
+                  buildTermsAndConditionsButton(
+                    legalConditionsButtonText,
+                  ),
+                  buildTermsAndConditionsRow(acceptTermsAndConditionsText),
                 ],
               ),
             ),
@@ -30,13 +32,13 @@ class LegalTermsController extends GetxController {
     }
   }
 
-  Widget buildTermsAndConditionsButton() {
+  Widget buildTermsAndConditionsButton(String legalConditionsButtonText) {
     return GestureDetector(
       onTap: () {
         Get.toNamed(LegalTermsScreen.navigatorId);
       },
       child: Text(
-        i18n.text('legalConditionsButton'),
+        legalConditionsButtonText,
         style: const TextStyle(
           color: AppColors.primaryColor,
           decoration: TextDecoration.underline,
@@ -47,7 +49,7 @@ class LegalTermsController extends GetxController {
     );
   }
 
-  Widget buildTermsAndConditionsRow() {
+  Widget buildTermsAndConditionsRow(String acceptTermsAndConditionsText) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
@@ -62,7 +64,7 @@ class LegalTermsController extends GetxController {
               },
             )),
         Text(
-          i18n.text('acceptTermsAndConditions'),
+          acceptTermsAndConditionsText,
           style: const TextStyle(
             fontSize: AppFontSizes.medium,
             fontWeight: FontWeight.bold,
@@ -73,14 +75,15 @@ class LegalTermsController extends GetxController {
     );
   }
 
-  SnackbarController getSnackbarController() {
+  SnackbarController getSnackbarController(
+      String acceptTermsAndConditionsErrorText, String termsAndConditionsText) {
     return Get.snackbar(
-      i18n.text('termsAndConditions'),
-      i18n.text('acceptTermsAndConditionsError'),
+      termsAndConditionsText,
+      acceptTermsAndConditionsErrorText,
       snackPosition: SnackPosition.BOTTOM,
       duration: const Duration(seconds: 3),
       titleText: Text(
-        i18n.text('termsAndConditions'),
+        termsAndConditionsText,
         style: const TextStyle(
           color: AppColors.white,
           fontSize: AppFontSizes.medium,
@@ -88,7 +91,7 @@ class LegalTermsController extends GetxController {
         ),
       ),
       messageText: Text(
-        i18n.text('acceptTermsAndConditionsError'),
+        acceptTermsAndConditionsErrorText,
         style: const TextStyle(
           color: AppColors.white,
           fontSize: AppFontSizes.medium,

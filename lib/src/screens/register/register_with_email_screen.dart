@@ -10,7 +10,7 @@ class RegisterWithEmailScreen extends StatelessWidget {
   final LegalTermsController _legalTermsController =
       Get.put(LegalTermsController());
 
-  final I18n i18n = Get.find();
+  final I18n _i18n = Get.find();
 
   // Controllers for the text fields.
   final TextEditingController emailController = TextEditingController();
@@ -47,8 +47,10 @@ class RegisterWithEmailScreen extends StatelessWidget {
                 const SizedBox(height: 15),
                 buildConfirmPasswordTextField(),
                 const SizedBox(height: 100),
-                _legalTermsController.buildTermsAndConditionsButton(),
-                _legalTermsController.buildTermsAndConditionsRow(),
+                _legalTermsController.buildTermsAndConditionsButton(
+                    _i18n.text('legalConditionsButton')),
+                _legalTermsController.buildTermsAndConditionsRow(
+                    _i18n.text('acceptingTermsAndConditions')),
                 const SizedBox(height: 5),
                 buildConnectionButton(),
               ],
@@ -59,7 +61,7 @@ class RegisterWithEmailScreen extends StatelessWidget {
 
   Widget buildRegisterText() {
     return Text(
-      i18n.text('registerMessage'),
+      _i18n.text('registerMessage'),
       style: const TextStyle(
         fontSize: AppFontSizes.extraLarge,
         fontWeight: FontWeight.bold,
@@ -71,8 +73,8 @@ class RegisterWithEmailScreen extends StatelessWidget {
   Widget buildEmailTextField() {
     return ClassicTextField(
       validator: (value) => FormValidator.validateEmail(value),
-      hintText: i18n.text('emailHint'),
-      labelText: i18n.text('emailLabel'),
+      hintText: _i18n.text('emailHint'),
+      labelText: _i18n.text('emailLabel'),
       controller: emailController,
       backgroundColor: AppColors.white,
       focusedBorderColor: AppColors.secondaryColor,
@@ -85,8 +87,8 @@ class RegisterWithEmailScreen extends StatelessWidget {
     return PasswordTextField(
         // Password should be at least 8 characters long and contain at least one uppercase letter, one number and one special character.
         validator: (value) => FormValidator.validatePassword(value),
-        hintText: i18n.text('passwordHint'),
-        labelText: i18n.text('passwordLabel'),
+        hintText: _i18n.text('passwordHint'),
+        labelText: _i18n.text('passwordLabel'),
         controller: passwordController,
         backgroundColor: AppColors.white,
         focusedBorderColor: AppColors.secondaryColor,
@@ -97,8 +99,8 @@ class RegisterWithEmailScreen extends StatelessWidget {
     return PasswordTextField(
         validator: (value) => FormValidator.validateConfirmPassword(
             passwordController.text, value),
-        hintText: i18n.text('confirmPasswordHint'),
-        labelText: i18n.text('confirmPasswordLabel'),
+        hintText: _i18n.text('confirmPasswordHint'),
+        labelText: _i18n.text('confirmPasswordLabel'),
         controller: confirmPasswordController,
         backgroundColor: AppColors.white,
         focusedBorderColor: AppColors.secondaryColor,
@@ -107,12 +109,14 @@ class RegisterWithEmailScreen extends StatelessWidget {
 
   Widget buildConnectionButton() {
     return CustomButton(
-        text: i18n.text('connectionButton'),
+        text: _i18n.text('connectionButton'),
         textColor: AppColors.white,
         backgroundColor: AppColors.blue,
         onPressed: () async {
           if (!_legalTermsController.agreeWithTermsAndConditions.value) {
-            _legalTermsController.getSnackbarController();
+            _legalTermsController.getSnackbarController(
+                _i18n.text('acceptTermsAndConditionsError'),
+                _i18n.text('termsAndConditions'));
             return;
           }
 
