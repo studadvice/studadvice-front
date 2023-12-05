@@ -33,7 +33,7 @@ dependencies:
   crypto: ^3.0.3
   firebase_auth: ^4.14.0
   firebase_core: ^2.22.0
-  cloud_firestore: ^4.13.2
+  cloud_firestore: ^4.13.3
   google_sign_in: ^6.1.6
   flutter_facebook_auth: ^6.0.3
   shared_preferences: ^2.2.2
@@ -69,15 +69,20 @@ flutter:
 
 
   assets:
-    - assets/images/common/
-    - assets/images/login/
-    - assets/images/forgot_password/
+    - assets/
+    - assets/i18n/
+    - assets/i18n/login_screen/
+    - assets/i18n/settings_screen/
     - assets/i18n/home_page_screen/
     - assets/i18n/init_time_screen/
     - assets/i18n/legal_terms_screen/
-    - assets/i18n/login_screen/
+    - assets/i18n/forgot_password_screen/
     - assets/i18n/register_options_screen/
-    - assets/i18n/register_user_information_screen/
+    - assets/i18n/social_sign_in_controller/
     - assets/i18n/register_with_email_screen/
-    - assets/i18n/settings_screen/
-    - assets/i18n/welcome_screen/
+    - assets/i18n/register_user_information_screen/
+    - assets/fonts/
+    - assets/images/
+    - assets/images/login/
+    - assets/images/common/
+    - assets/images/forgot_password/
