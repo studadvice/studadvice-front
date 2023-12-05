@@ -7,7 +7,6 @@ class LegalTermsScreen extends StatelessWidget {
   final I18n _i18n = Get.find();
 
   String getTerms() {
-    // TODO: Refacto this method
     String terms = _i18n.text('header');
     for (int i = 1; i <= 8; i++) {
       terms += _i18n.text('article$i');
