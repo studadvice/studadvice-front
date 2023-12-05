@@ -10,10 +10,6 @@ class LoginScreen extends StatelessWidget {
   final LegalTermsController _termsAndConditionsController = Get.find();
   final I18n _i18n = Get.find();
 
-  // initState function
-
-  // Use constants to facilitate the implementation of the translation.
-
   final _formKey = GlobalKey<FormState>();
 
   @override
