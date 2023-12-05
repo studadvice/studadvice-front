@@ -1,3 +1,4 @@
 {
-  "test": "Test"
+  "login": "Se connecter",
+  "register": "S'inscrire"
 }
