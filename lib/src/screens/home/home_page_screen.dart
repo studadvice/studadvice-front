@@ -8,6 +8,7 @@ class HomePageScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
@@ -38,9 +39,8 @@ class HomePageScreen extends StatelessWidget {
                 backgroundColor: AppColors.dangerColor,
                 onPressed: () {
                   Get.toNamed(SettingsScreen.navigatorId);},
-                  ),
                 ),
-            Padding(
+              ),Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
               child: CustomButton(
                 text: _i18n.text('roadmap'),
@@ -48,12 +48,12 @@ class HomePageScreen extends StatelessWidget {
                 backgroundColor: AppColors.primaryColorAccent,
                 onPressed: () {
                   Get.toNamed(RoadMapScreen.navigatorId);
-                },
-              ),
-            ),
-          ],
+            },
+          ),
         ),
-      ),
+      ],
+    ),
+    ),
     );
   }
 }
