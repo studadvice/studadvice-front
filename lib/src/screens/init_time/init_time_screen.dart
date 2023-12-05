@@ -4,9 +4,7 @@ import 'package:stud_advice/stud_advice.dart';
 
 class InitTimeScreen extends StatelessWidget {
   static const String navigatorId = '/init_time_screen';
-
-  final String loginText = 'Se connecter';
-  final String registerText = 'S\'inscrire';
+  final I18n _i18n = Get.find<I18n>();
 
   @override
   Widget build(BuildContext context) {
@@ -23,14 +21,14 @@ class InitTimeScreen extends StatelessWidget {
               margin: const EdgeInsets.only(top: 20),
             ),
             buildConnectionButton(
-              text: registerText,
+              text: _i18n.text('registerText'),
               textColor: AppColors.white,
               onPressed: () {
                 Get.toNamed(RegisterOptionsScreen.navigatorId);
               },
             ),
             buildConnectionButton(
-              text: loginText,
+              text: _i18n.text('loginText'),
               textColor: AppColors.white,
               onPressed: () {
                 Get.toNamed(LoginScreen.navigatorId);
