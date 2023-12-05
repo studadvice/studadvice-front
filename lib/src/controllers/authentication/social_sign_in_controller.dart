@@ -1,17 +1,11 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:stud_advice/src/common/chore/app_colors.dart';
-import 'package:stud_advice/src/controllers/authentication/authentication_controller.dart';
-import 'package:stud_advice/src/widgets/common/loading/loading_spinner.dart';
+import 'package:stud_advice/stud_advice.dart';
 
 class SocialSignInController extends GetxController {
-  final AuthenticationController _authenticationController =
-      Get.put(AuthenticationController());
-  final String error = "Erreur de connexion";
-  final String invalidCredentials = "Email ou mot de passe incorrects";
-  final String signInWithSocialAccountFailed =
-      "Une erreur s'est produite lors de la connexion";
+  final AuthenticationController _authenticationController = Get.find();
+  final I18n _i18n = Get.find();
 
   Future<bool> loginWithGoogleAccount() async {
     try {
@@ -66,15 +60,15 @@ class SocialSignInController extends GetxController {
     switch (errorCode) {
       case 'invalid-login-credentials':
       case 'invalid-credential':
-        snackbarMessage = invalidCredentials;
+        snackbarMessage = _i18n.text('invalidLoginCredentials');
         break;
       default:
-        snackbarMessage = signInWithSocialAccountFailed;
+        snackbarMessage = _i18n.text('signInWithSocialAccountFailed');
         textColor = AppColors.white;
         snackPosition = SnackPosition.BOTTOM;
     }
 
-    Get.snackbar(error, snackbarMessage,
+    Get.snackbar(_i18n.text('error'), snackbarMessage,
         backgroundColor: backgroundColor,
         snackPosition: snackPosition,
         colorText: textColor);

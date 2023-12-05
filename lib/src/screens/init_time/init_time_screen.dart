@@ -1,15 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:stud_advice/src/common/chore/app_colors.dart';
-import 'package:stud_advice/src/screens/login/login_screen.dart';
-import 'package:stud_advice/src/screens/register/register_options_screen.dart';
-import 'package:stud_advice/src/widgets/common/buttons/default_connection_button.dart';
+import 'package:stud_advice/stud_advice.dart';
 
 class InitTimeScreen extends StatelessWidget {
   static const String navigatorId = '/init_time_screen';
-
-  final String loginText = 'Se connecter';
-  final String registerText = 'S\'inscrire';
+  final I18n _i18n = Get.find<I18n>();
 
   @override
   Widget build(BuildContext context) {
@@ -26,17 +21,17 @@ class InitTimeScreen extends StatelessWidget {
               margin: const EdgeInsets.only(top: 20),
             ),
             buildConnectionButton(
-              text: registerText,
+              text: _i18n.text('register'),
               textColor: AppColors.white,
               onPressed: () {
-                Get.to(() => RegisterOptionsScreen());
+                Get.toNamed(RegisterOptionsScreen.navigatorId);
               },
             ),
             buildConnectionButton(
-              text: loginText,
+              text: _i18n.text('login'),
               textColor: AppColors.white,
               onPressed: () {
-                Get.to(() => LoginScreen());
+                Get.toNamed(LoginScreen.navigatorId);
               },
             ),
           ],
@@ -52,7 +47,7 @@ class InitTimeScreen extends StatelessWidget {
   }) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-      child: DefaultConnectionButton(
+      child: CustomButton(
           text: text,
           textColor: textColor,
           backgroundColor: AppColors.blue,

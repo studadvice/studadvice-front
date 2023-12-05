@@ -1,8 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:stud_advice/src/common/chore/app_colors.dart';
-import 'package:stud_advice/src/common/conf/app_dependencies_binding.dart';
-import 'package:stud_advice/src/screens/init_time/init_time_screen.dart';
+import 'package:stud_advice/stud_advice.dart';
+
 
 class WelcomeScreen extends StatelessWidget {
   static const String navigatorId = '/welcome_screen';
@@ -30,8 +29,7 @@ class WelcomeScreen extends StatelessWidget {
         } else {
           // The user is logged in.
           if (snapshot.hasData) {
-            // TODO : remove it when the home page is ready
-            return InitTimeScreen();
+            return HomePageScreen();
           }
 
           // The user is NOT logged in.

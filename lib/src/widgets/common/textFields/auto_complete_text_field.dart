@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_typeahead/flutter_typeahead.dart';
-import 'package:stud_advice/src/common/chore/app_colors.dart';
-import 'package:stud_advice/src/common/chore/app_fonts_sizes.dart';
+import 'package:stud_advice/stud_advice.dart';
 
 class AutoCompleteTextField<T> extends StatelessWidget {
   // HINT Please be aware that the type T must have implemented the toString() method in order to be displayed correctly in the controller when selected.

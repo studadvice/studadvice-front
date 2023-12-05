@@ -1,18 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:stud_advice/src/common/chore/app_colors.dart';
-import 'package:stud_advice/src/controllers/authentication/authentication_controller.dart';
-import 'package:stud_advice/src/widgets/common/loading/loading_spinner.dart';
+import 'package:stud_advice/stud_advice.dart';
 
 class ForgotPasswordController extends GetxController {
-  final AuthenticationController _authenticationController =
-      Get.put(AuthenticationController());
-  final String successMessage =
-      'Un email de réinitialisation du mot de passe a été envoyé à votre adresse email.';
-  final String successTitle = 'Réinitialisation du mot de passe';
-  final String errorTitle = 'Erreur';
-  final String errorMessage =
-      'Une erreur s\'est produite lors de la réinitialisation du mot de passe.';
+  final AuthenticationController _authenticationController = Get.find();
 
   final TextEditingController emailController = TextEditingController();
 
@@ -22,7 +13,8 @@ class ForgotPasswordController extends GetxController {
     super.onClose();
   }
 
-  Future<void> resetPassword() async {
+  Future<void> resetPassword(String successTitle, String successMessage,
+      String errorTitle, String errorMessage) async {
     LoadingSpinner.start();
     try {
       bool tryResetSuccess = await _authenticationController

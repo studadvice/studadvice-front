@@ -1,20 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:stud_advice/src/common/chore/app_colors.dart';
-import 'package:stud_advice/src/common/chore/app_fonts_sizes.dart';
-import 'package:stud_advice/src/screens/legal_terms/legal_conditions_screen.dart';
+import 'package:stud_advice/stud_advice.dart';
 
 class LegalTermsController extends GetxController {
   var agreeWithTermsAndConditions = false.obs;
 
-  final String legalConditionsButtonText = 'Voir les Termes et Conditions';
-  final String acceptTermsAndConditionsText =
-      'J\'accepte les conditions générales d\'utilisation';
-  final String acceptTermsAndConditionsErrorText =
-      'Veuillez accepter les termes et conditions';
-  final String termsAndConditionsText = 'Termes et Conditions';
-
-  void showTermsAndConditionsDialog(BuildContext context) {
+  void showTermsAndConditionsDialog(BuildContext context,
+      String legalConditionsButtonText, String acceptTermsAndConditionsText) {
     if (!agreeWithTermsAndConditions.value) {
       showDialog(
         context: context,
@@ -27,8 +19,10 @@ class LegalTermsController extends GetxController {
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  buildTermsAndConditionsButton(),
-                  buildTermsAndConditionsRow(),
+                  buildTermsAndConditionsButton(
+                    legalConditionsButtonText,
+                  ),
+                  buildTermsAndConditionsRow(acceptTermsAndConditionsText),
                 ],
               ),
             ),
@@ -38,10 +32,10 @@ class LegalTermsController extends GetxController {
     }
   }
 
-  Widget buildTermsAndConditionsButton() {
+  Widget buildTermsAndConditionsButton(String legalConditionsButtonText) {
     return GestureDetector(
       onTap: () {
-        Get.to(() => LegalTermsScreen());
+        Get.toNamed(LegalTermsScreen.navigatorId);
       },
       child: Text(
         legalConditionsButtonText,
@@ -55,7 +49,7 @@ class LegalTermsController extends GetxController {
     );
   }
 
-  Widget buildTermsAndConditionsRow() {
+  Widget buildTermsAndConditionsRow(String acceptTermsAndConditionsText) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
@@ -81,27 +75,24 @@ class LegalTermsController extends GetxController {
     );
   }
 
-  SnackbarController getSnackbarController() {
-    const String acceptTermsAndConditionsErrorText =
-        'Veuillez accepter les termes et conditions';
-    const String termsAndConditionsText = 'Termes et Conditions';
-
+  SnackbarController getSnackbarController(
+      String acceptTermsAndConditionsErrorText, String termsAndConditionsText) {
     return Get.snackbar(
       termsAndConditionsText,
       acceptTermsAndConditionsErrorText,
       snackPosition: SnackPosition.BOTTOM,
       duration: const Duration(seconds: 3),
-      titleText: const Text(
+      titleText: Text(
         termsAndConditionsText,
-        style: TextStyle(
+        style: const TextStyle(
           color: AppColors.white,
           fontSize: AppFontSizes.medium,
           fontWeight: FontWeight.bold,
         ),
       ),
-      messageText: const Text(
+      messageText: Text(
         acceptTermsAndConditionsErrorText,
-        style: TextStyle(
+        style: const TextStyle(
           color: AppColors.white,
           fontSize: AppFontSizes.medium,
         ),

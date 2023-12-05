@@ -1,90 +1,58 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:stud_advice/src/common/chore/app_colors.dart';
-import 'package:stud_advice/src/common/chore/app_fonts_sizes.dart';
-import 'package:stud_advice/src/common/chore/crypto_hash.dart';
-import 'package:stud_advice/src/common/chore/form_validator.dart';
-import 'package:stud_advice/src/controllers/authentication/social_sign_in_controller.dart';
-import 'package:stud_advice/src/controllers/legal_terms/legal_terms_controller.dart';
-import 'package:stud_advice/src/controllers/login/login_controller.dart';
-import 'package:stud_advice/src/screens/forgot_password/forgot_password_screen.dart';
-import 'package:stud_advice/src/screens/home/home_page_screen.dart';
-import 'package:stud_advice/src/widgets/common/buttons/default_connection_button.dart';
-import 'package:stud_advice/src/widgets/common/buttons/social_button.dart';
-import 'package:stud_advice/src/widgets/common/dividers/divider_with_text.dart';
-import 'package:stud_advice/src/widgets/common/textFields/classic_text_field.dart';
-import 'package:stud_advice/src/widgets/common/textFields/password_text_field.dart';
+import 'package:stud_advice/stud_advice.dart';
 
 class LoginScreen extends StatelessWidget {
   static const String navigatorId = '/login_screen';
 
-  final LoginController _loginController = Get.put(LoginController());
-  final SocialSignInController _socialSignInController =
-      Get.put(SocialSignInController());
-  final LegalTermsController _termsAndConditionsController =
-      Get.put(LegalTermsController());
-
-  // Use constants to facilitate the implementation of the translation.
-  final String emailHintText = 'Email';
-  final String emailLabelText = 'Email';
-  final String passwordHintText = 'Mot de passe';
-  final String passwordLabelText = 'Mot de passe';
-  final String welcomeBackText = 'Bon retour parmi nous !';
-  final String passwordText = 'Mot de passe';
-  final String forgotPasswordText = 'Mot de passe oublié ?';
-  final String rememberMeText = 'Se souvenir de moi';
-  final String loginText = 'Se connecter';
-  final String orContinueWithText = 'Ou continuer avec';
-  final String passwordErrorText = 'Veuillez entrer votre mot de passe';
-  final String acceptingTermsAndConditionsText =
-      "En continuant la connexion ou l'inscription avec l'une des méthodes ci-dessus, vous acceptez nos conditions générales d'utilisation et notre politique de confidentialité.";
+  final LoginController _loginController = Get.find();
+  final SocialSignInController _socialSignInController = Get.find();
+  final LegalTermsController _termsAndConditionsController = Get.find();
+  final I18n _i18n = Get.find();
 
   final _formKey = GlobalKey<FormState>();
 
   @override
-  Widget build(BuildContext context) =>
-      GetBuilder<LoginController>(builder: (_) {
-        return Scaffold(
-          appBar: AppBar(
-            leading: IconButton(
-              icon: const Icon(Icons.arrow_back),
-              onPressed: () {
-                Get.back();
-              },
+  Widget build(BuildContext context) => Scaffold(
+        appBar: AppBar(
+          leading: IconButton(
+            icon: const Icon(Icons.arrow_back),
+            onPressed: () {
+              Get.back();
+            },
+          ),
+        ),
+        body: SingleChildScrollView(
+          child: Form(
+            key: _formKey,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                SizedBox(height: MediaQuery.of(context).size.height * 0.1),
+                buildWelcomeBackText(),
+                const SizedBox(height: 40),
+                buildEmailTextField(),
+                const SizedBox(height: 15),
+                buildPasswordTextField(),
+                const SizedBox(height: 10),
+                buildRememberMeAndForgotPasswordRow(),
+                const SizedBox(height: 10),
+                buildLoginButton(),
+                const SizedBox(height: 10),
+                DividerWithText(text: _i18n.text('orContinueWith')),
+                const SizedBox(height: 10),
+                buildSocialLoginButtons(context),
+                const SizedBox(height: 50),
+                buildTermsAndConditionsSection(),
+              ],
             ),
           ),
-          body: SingleChildScrollView(
-            child: Form(
-              key: _formKey,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  SizedBox(height: MediaQuery.of(context).size.height * 0.1),
-                  buildWelcomeBackText(),
-                  const SizedBox(height: 40),
-                  buildEmailTextField(),
-                  const SizedBox(height: 15),
-                  buildPasswordTextField(),
-                  const SizedBox(height: 10),
-                  buildRememberMeAndForgotPasswordRow(),
-                  const SizedBox(height: 10),
-                  buildLoginButton(),
-                  const SizedBox(height: 10),
-                  DividerWithText(text: orContinueWithText),
-                  const SizedBox(height: 10),
-                  buildSocialLoginButtons(context),
-                  const SizedBox(height: 50),
-                  buildTermsAndConditionsSection(),
-                ],
-              ),
-            ),
-          ),
-        );
-      });
+        ),
+      );
 
   String? validatePassword(String? value) {
     if (value == null || value.isEmpty) {
-      return passwordErrorText;
+      return _i18n.text('passwordError');
     }
     return null;
   }
@@ -92,8 +60,8 @@ class LoginScreen extends StatelessWidget {
   Widget buildEmailTextField() {
     return ClassicTextField(
         validator: FormValidator.validateEmail,
-        hintText: emailHintText,
-        labelText: emailLabelText,
+        hintText: _i18n.text('emailHint'),
+        labelText: _i18n.text('emailLabel'),
         controller: _loginController.emailController,
         autofillHints: [AutofillHints.email],
         keyboardType: TextInputType.emailAddress,
@@ -106,12 +74,12 @@ class LoginScreen extends StatelessWidget {
     return PasswordTextField(
         validator: (value) {
           if (value == null || value.isEmpty) {
-            return passwordErrorText;
+            return _i18n.text('passwordError');
           }
           return null;
         },
-        hintText: passwordHintText,
-        labelText: passwordLabelText,
+        hintText: _i18n.text('passwordHint'),
+        labelText: _i18n.text('passwordLabel'),
         controller: _loginController.passwordController,
         backgroundColor: AppColors.white,
         focusedBorderColor: AppColors.secondaryColor,
@@ -120,7 +88,7 @@ class LoginScreen extends StatelessWidget {
 
   Widget buildWelcomeBackText() {
     return Text(
-      welcomeBackText,
+      _i18n.text('welcomeBack'),
       style: const TextStyle(
         fontSize: AppFontSizes.large25,
         fontWeight: FontWeight.bold,
@@ -143,14 +111,14 @@ class LoginScreen extends StatelessWidget {
                 _loginController.rememberMe.value = value!;
               },
             )),
-        Text(rememberMeText),
+        Text(_i18n.text('rememberMe')),
         const SizedBox(width: 10),
         TextButton(
           onPressed: () {
-            Get.to(() => ForgotPasswordScreen());
+            Get.toNamed(ForgotPasswordScreen.navigatorId);
           },
           child: Text(
-            forgotPasswordText,
+            _i18n.text('forgotPassword'),
             style: const TextStyle(
               color: AppColors.primaryColor,
             ),
@@ -161,8 +129,8 @@ class LoginScreen extends StatelessWidget {
   }
 
   Widget buildLoginButton() {
-    return DefaultConnectionButton(
-        text: loginText,
+    return CustomButton(
+        text: _i18n.text('login'),
         textColor: AppColors.white,
         backgroundColor: AppColors.blue,
         onPressed: () {
@@ -187,7 +155,7 @@ class LoginScreen extends StatelessWidget {
           borderColor: AppColors.black26,
           onTap: () async {
             if (await _socialSignInController.loginWithGoogleAccount()) {
-              Get.offAll(() => HomePageScreen());
+              Get.offAllNamed(HomePageScreen.navigatorId);
             }
           },
           borderRadius: 16,
@@ -202,7 +170,7 @@ class LoginScreen extends StatelessWidget {
           iconColor: AppColors.blueAccent,
           onTap: () async {
             if (await _socialSignInController.loginWithFacebookAccount()) {
-              Get.offAll(() => HomePageScreen());
+              Get.offAllNamed(HomePageScreen.navigatorId);
             }
           },
           borderRadius: 16,
@@ -218,7 +186,7 @@ class LoginScreen extends StatelessWidget {
             borderColor: AppColors.black26,
             onTap: () async {
               if (await _socialSignInController.loginWithAppleAccount()) {
-                Get.offAll(() => HomePageScreen());
+                Get.offAllNamed(HomePageScreen.navigatorId);
               }
             },
             borderRadius: 16,
@@ -246,7 +214,7 @@ class LoginScreen extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20),
           child: Text(
-            acceptingTermsAndConditionsText,
+            _i18n.text('acceptingTermsAndConditions'),
             textAlign: TextAlign.justify,
             style: const TextStyle(
               fontSize: 12,
@@ -255,7 +223,8 @@ class LoginScreen extends StatelessWidget {
           ),
         ),
         const SizedBox(height: 10),
-        _termsAndConditionsController.buildTermsAndConditionsButton(),
+        _termsAndConditionsController
+            .buildTermsAndConditionsButton(_i18n.text('legalConditionsButton')),
       ],
     );
   }

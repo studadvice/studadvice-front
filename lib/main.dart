@@ -3,30 +3,16 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:get/get.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:stud_advice/src/common/chore/app_colors.dart';
-import 'package:stud_advice/src/common/chore/supported_locales.dart';
-import 'package:stud_advice/src/common/conf/app_dependencies_binding.dart';
+import 'package:stud_advice/firebase_options.dart';
+import 'package:stud_advice/stud_advice.dart';
 
-import 'firebase_options.dart';
-import 'src/common/conf/routes_configuration.dart';
-
-void main() async {
-  WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp(
-    options: DefaultFirebaseOptions.currentPlatform,
-  );
-  runApp(const StudAdviceApp());
-}
 
 class StudAdviceApp extends StatelessWidget {
+
   const StudAdviceApp({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final RoutesConfiguration routesConfiguration =
-        Get.put(RoutesConfiguration());
-
     // final ConnectivityController connectivityController =
     //     Get.put(ConnectivityController());
     //
@@ -34,16 +20,15 @@ class StudAdviceApp extends StatelessWidget {
     //   connectivityController.checkConnectivity(result);
     // });
 
+    final RoutesConfiguration routesConfiguration =
+        Get.put(RoutesConfiguration());
+
+    // return GetMaterialApp.router(
     return GetMaterialApp(
       title: "Stud'Advice",
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: AppColors.white),
-        useMaterial3: true,
-        textTheme: GoogleFonts.latoTextTheme(
-          // Use Lato as default text style according to the graphic charter.
-          Theme.of(context).textTheme,
-        ),
-      ),
+      theme: Styles.lightTheme,
+      darkTheme: Styles.darkTheme,
+      themeMode: ThemeMode.light,
       debugShowCheckedModeBanner: false,
       initialRoute: RoutesConfiguration.initialRoute,
       initialBinding: AppDependenciesBinding(),
@@ -54,7 +39,17 @@ class StudAdviceApp extends StatelessWidget {
         GlobalCupertinoLocalizations.delegate,
         GlobalWidgetsLocalizations.delegate,
       ],
-      supportedLocales: [const Locale(english), const Locale(french)],
+      locale: CustomLocale('fr', 'FR'),
+      supportedLocales: [const Locale('en', 'US'), const Locale('fr', 'FR')],
     );
   }
+}
+
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+
+  runApp(const StudAdviceApp());
 }

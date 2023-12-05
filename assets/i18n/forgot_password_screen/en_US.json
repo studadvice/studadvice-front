@@ -1,0 +1,12 @@
+{
+  "forgotPasswordTitle": "Forgot Password",
+  "emailHint": "Email",
+  "emailLabel": "Email",
+  "send": "Send",
+  "emailError": "Please enter your email address",
+  "forgotPasswordMessage": "Please enter your email address to receive a password reset link.",
+  "successMessage": "A password reset email has been sent to your email address.",
+  "successTitle": "Password Reset",
+  "errorTitle": "Error",
+  "errorMessage": "An error occurred during the password reset."
+}

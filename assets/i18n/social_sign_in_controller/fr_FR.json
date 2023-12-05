@@ -1,0 +1,5 @@
+{
+  "error": "Erreur de connexion",
+  "invalidCredentials": "Email ou mot de passe incorrects",
+  "signInWithSocialAccountFailed": "Une erreur s'est produite lors de la connexion"
+}
