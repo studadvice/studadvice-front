@@ -7,6 +7,7 @@ class ClassicTextField extends StatefulWidget {
   final TextEditingController controller;
   final Color backgroundColor;
   final Color borderColor;
+  final bool autoFocus;
   final Color focusedBorderColor;
   final TextInputType? keyboardType;
   final VoidCallback? onTap;
@@ -22,6 +23,7 @@ class ClassicTextField extends StatefulWidget {
     required this.backgroundColor,
     required this.borderColor,
     required this.focusedBorderColor,
+    this.autoFocus = false,
     this.labelText,
     this.keyboardType,
     this.onTap,
@@ -69,7 +71,7 @@ class _ClassicTextFieldState extends State<ClassicTextField> {
       padding: const EdgeInsets.symmetric(horizontal: 25.0),
       child: TextFormField(
         controller: widget.controller,
-        autofocus: true,
+        autofocus: widget.autoFocus,
         validator: widget.validator,
         keyboardType: widget.keyboardType,
         style: const TextStyle(
