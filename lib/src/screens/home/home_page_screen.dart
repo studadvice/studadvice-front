@@ -4,9 +4,12 @@ import 'package:stud_advice/stud_advice.dart';
 
 class HomePageScreen extends StatelessWidget {
   static const navigatorId = '/home_page_screen';
+  final I18n _i18n = Get.find<I18n>();
 
   @override
   Widget build(BuildContext context) {
+    // return GetBuilder(
+    // builder: (controller) {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
@@ -21,7 +24,10 @@ class HomePageScreen extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            const Text(
+            // RoadMapScreen(
+                //   currentStep: 1,
+                //   stepCount: 5,
+                // ),const Text(
               'Welcome to the Home Page!',
               style: TextStyle(
                 fontSize: AppFontSizes.extraLarge,
@@ -32,11 +38,22 @@ class HomePageScreen extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
               child: CustomButton(
-                text: 'home.settings'.tr,
+                text: _i18n.text('settings'),
                 textColor: AppColors.white,
                 backgroundColor: AppColors.dangerColor,
                 onPressed: () {
-                  Get.toNamed(SettingsScreen.navigatorId);
+                  Get.toNamed(SettingsScreen.navigatorId);},
+                  ),
+                ),
+                Padding(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                  child: CustomButton(
+                    text: "Roadmap",
+                    textColor: AppColors.white,
+                    backgroundColor: AppColors.primaryColorAccent,
+                    onPressed: () {
+                      Get.toNamed(RoadMapScreen.navigatorId);
                 },
               ),
             ),
