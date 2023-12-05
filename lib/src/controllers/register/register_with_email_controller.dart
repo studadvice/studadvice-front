@@ -4,8 +4,7 @@ import 'package:get/get.dart';
 import 'package:stud_advice/stud_advice.dart';
 
 class RegisterWithEmailController extends GetxController {
-  final AuthenticationController _authenticationController =
-      Get.put(AuthenticationController());
+  final AuthenticationController _authenticationController = Get.find();
 
   final String error = "Erreur de connexion";
   final String alreadyHaveAnAccountError = "Vous avez déjà un compte";

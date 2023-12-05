@@ -8,9 +8,8 @@ import 'package:get/get.dart';
 import 'package:stud_advice/stud_advice.dart';
 
 class RegisterUserInformationController extends GetxController {
-  final _dio = Get.find<Dio>();
-  final UserStorageController _userStorageController =
-      Get.put(UserStorageController());
+  final Dio _dio = Get.find();
+  final UserStorageController _userStorageController = Get.find();
 
   final String error = "Erreur de connexion";
   final String registerWithEmailFailed =

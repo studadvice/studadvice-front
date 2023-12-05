@@ -1,6 +1,7 @@
 {
   "screenTitle": "Veuillez renseigner les informations suivantes",
   "pseudoHint": "Pseudo",
+  "pseudoLabel": "Pseudo",
   "pseudoError": "Veuillez renseigner votre pseudo",
   "postalCodeHint": "Code Postal",
   "postalCodeLabel": "Code Postal",
