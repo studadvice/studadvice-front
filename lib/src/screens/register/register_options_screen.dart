@@ -7,10 +7,8 @@ class RegisterOptionsScreen extends StatelessWidget {
 
   final I18n _i18n = Get.find<I18n>();
 
-  final SocialSignInController _socialSignInController =
-      Get.put(SocialSignInController());
-  final LegalTermsController _termsAndConditionsController =
-      Get.put(LegalTermsController());
+  final SocialSignInController _socialSignInController = Get.find();
+  final LegalTermsController _termsAndConditionsController = Get.find();
 
   Widget buildSocialButton(
       {required String imagePath,
@@ -133,6 +131,7 @@ class RegisterOptionsScreen extends StatelessWidget {
                   DividerWithText(text: _i18n.text('dividerText')),
                   const SizedBox(height: 20),
                   RegisterWithEmailButton(
+                    text: _i18n.text('registerWithEmail'),
                     onPressed: () {
                       Get.toNamed(RegisterWithEmailScreen.navigatorId);
                     },

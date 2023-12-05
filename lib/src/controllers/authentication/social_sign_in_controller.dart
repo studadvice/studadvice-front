@@ -4,8 +4,7 @@ import 'package:get/get.dart';
 import 'package:stud_advice/stud_advice.dart';
 
 class SocialSignInController extends GetxController {
-  final AuthenticationController _authenticationController =
-      Get.put(AuthenticationController());
+  final AuthenticationController _authenticationController = Get.find();
   final I18n _i18n = Get.find();
 
   Future<bool> loginWithGoogleAccount() async {

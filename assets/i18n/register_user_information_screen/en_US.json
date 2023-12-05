@@ -1,7 +1,8 @@
 {
   "screenTitle": "Please provide the following information",
-  "pseudoHint": "Username",
-  "pseudoError": "Please enter your username",
+  "pseudoHint": "Pseudo",
+  "pseudoLabel": "Pseudo",
+  "pseudoError": "Please enter your pseudo",
   "postalCodeHint": "Postal Code",
   "postalCodeLabel": "Postal Code",
   "birthDateHint": "Date of Birth",

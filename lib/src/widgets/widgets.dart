@@ -13,7 +13,6 @@ export 'common/pickers/date_picker_field.dart';
 export 'common/textFields/auto_complete_text_field.dart';
 export 'common/textFields/classic_text_field.dart';
 export 'common/textFields/password_text_field.dart';
-export 'register/city_auto_complete_text_field.dart';
 export 'register/register_social_button.dart';
 export 'register/register_with_email_button.dart';
 export 'settings/settings_big_user_card.dart';

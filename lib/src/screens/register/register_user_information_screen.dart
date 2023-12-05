@@ -15,20 +15,19 @@ class RegisterUserInformationScreen extends StatefulWidget {
 class _RegisterUserInformationScreenState
     extends State<RegisterUserInformationScreen> {
   final RegisterUserInformationController _registerUserInformationController =
-      Get.put(RegisterUserInformationController());
-
+      Get.find();
   I18n i18n = Get.find<I18n>();
 
   // Controllers for the text fields.
   final TextEditingController pseudoController = TextEditingController(
     text: RegisterUserInformationController.generateRandomPseudo(),
   );
-  final TextEditingController birthDateController = TextEditingController();
-  final TextEditingController cityController = TextEditingController();
-  final TextEditingController universityController = TextEditingController();
-  final TextEditingController formationController = TextEditingController();
-  final TextEditingController countryController = TextEditingController();
-  final TextEditingController postalCodeController = TextEditingController();
+  final TextEditingController _birthDateController = TextEditingController();
+  final TextEditingController _cityController = TextEditingController();
+  final TextEditingController _universityController = TextEditingController();
+  final TextEditingController _formationController = TextEditingController();
+  final TextEditingController _countryController = TextEditingController();
+  final TextEditingController _postalCodeController = TextEditingController();
 
   // Model data.
   late UserData userData;
@@ -44,12 +43,12 @@ class _RegisterUserInformationScreenState
   void dispose() {
     // Dispose of the controllers when the widget is disposed.
     pseudoController.dispose();
-    birthDateController.dispose();
-    cityController.dispose();
-    universityController.dispose();
-    formationController.dispose();
-    countryController.dispose();
-    postalCodeController.dispose();
+    _birthDateController.dispose();
+    _cityController.dispose();
+    _universityController.dispose();
+    _formationController.dispose();
+    _countryController.dispose();
+    _postalCodeController.dispose();
     super.dispose();
   }
 
@@ -143,7 +142,7 @@ class _RegisterUserInformationScreenState
 
   Widget buildCityTextField() {
     return AutoCompleteTextField<CityData>(
-      controller: cityController,
+      controller: _cityController,
       labelText: i18n.text('cityLabel'),
       hintText: i18n.text('cityHint'),
       backgroundColor: AppColors.white,
@@ -171,7 +170,7 @@ class _RegisterUserInformationScreenState
         borderColor: AppColors.secondaryColor,
         focusedBorderColor: AppColors.secondaryColor,
         asyncItems: (String filter) => _registerUserInformationController
-            .fetchPostalCodesFromApi(cityController.text),
+            .fetchPostalCodesFromApi(_cityController.text),
         validator: (value) {
           if (value == null || value.isEmpty) {
             return i18n.text('postalCodeNotSelected');
@@ -179,7 +178,7 @@ class _RegisterUserInformationScreenState
           return null;
         },
         onChanged: (String? selectedItem) {
-          postalCodeController.text = selectedItem ?? '';
+          _postalCodeController.text = selectedItem ?? '';
           return null;
         },
         errorBuilder: (context, postalCodeErrorText, reload) {
@@ -207,7 +206,7 @@ class _RegisterUserInformationScreenState
 
   Widget buildCountryTextField() {
     return CountryPickerField(
-        controller: countryController,
+        controller: _countryController,
         hintText: i18n.text('countryHint'),
         labelText: i18n.text('countryLabel'),
         focusedBorderColor: AppColors.secondaryColor,
@@ -217,7 +216,7 @@ class _RegisterUserInformationScreenState
   Widget buildBirthDateTextField() {
     return DatePickerField(
       hintText: i18n.text('birthDateHint'),
-      controller: birthDateController,
+      controller: _birthDateController,
       focusedBorderColor: AppColors.secondaryColor,
       borderColor: AppColors.secondaryColor,
       validator: (value) {
@@ -259,10 +258,10 @@ class _RegisterUserInformationScreenState
       hintText: i18n.text('universityHint'),
       itemsList: universityData,
       height: MediaQuery.of(context).size.height * 0.8,
-      controller: universityController,
+      controller: _universityController,
       defaultChoice: i18n.text('defaultUniversityChoice'),
       onItemSelected: (String selectedItem) {
-        universityController.text = selectedItem;
+        _universityController.text = selectedItem;
       },
       searchHintText: i18n.text('universitySearchHint'),
       validator: (value) {
@@ -278,7 +277,7 @@ class _RegisterUserInformationScreenState
     return ClassicTextField(
       hintText: i18n.text('formationHint'),
       labelText: i18n.text('formationLabel'),
-      controller: formationController,
+      controller: _formationController,
       backgroundColor: AppColors.white,
       focusedBorderColor: AppColors.secondaryColor,
       borderColor: AppColors.secondaryColor,
@@ -308,12 +307,12 @@ class _RegisterUserInformationScreenState
     Map<String, dynamic> previousFormData = Get.arguments;
 
     String pseudo = pseudoController.text.trim();
-    String birthDate = birthDateController.text.trim();
-    String city = cityController.text.trim();
-    String university = universityController.text.trim();
-    String formation = formationController.text.trim();
-    String country = countryController.text.trim();
-    int postalCode = int.parse(postalCodeController.text.trim());
+    String birthDate = _birthDateController.text.trim();
+    String city = _cityController.text.trim();
+    String university = _universityController.text.trim();
+    String formation = _formationController.text.trim();
+    String country = _countryController.text.trim();
+    int postalCode = int.parse(_postalCodeController.text.trim());
 
     return UserData(
       pseudo: pseudo,

@@ -30,21 +30,24 @@ class RoutesConfiguration {
       GetPage(
         name: RegisterOptionsScreen.navigatorId,
         page: () => RegisterOptionsScreen(),
+        binding: RegisterOptionsBinding(),
         middlewares: [I18nMiddleware()],
       ),
       GetPage(
         name: RegisterWithEmailScreen.navigatorId,
         page: () => RegisterWithEmailScreen(),
-        middlewares: [I18nMiddleware()],
-      ),
-      GetPage(
-        name: LegalTermsScreen.navigatorId,
-        page: () => LegalTermsScreen(),
+        binding: RegisterWithEmailBinding(),
         middlewares: [I18nMiddleware()],
       ),
       GetPage(
         name: RegisterUserInformationScreen.navigatorId,
         page: () => const RegisterUserInformationScreen(),
+        binding: RegisterUserInformationBinding(),
+        middlewares: [I18nMiddleware()],
+      ),
+      GetPage(
+        name: LegalTermsScreen.navigatorId,
+        page: () => LegalTermsScreen(),
         middlewares: [I18nMiddleware()],
       ),
       GetPage(
@@ -56,6 +59,7 @@ class RoutesConfiguration {
       GetPage(
           name: ForgotPasswordScreen.navigatorId,
           page: () => ForgotPasswordScreen(),
+          binding: ForgotPasswordBinding(),
           middlewares: [I18nMiddleware()]),
     ];
   }
