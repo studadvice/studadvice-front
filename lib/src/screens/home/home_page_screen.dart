@@ -8,8 +8,6 @@ class HomePageScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // return GetBuilder(
-    // builder: (controller) {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,

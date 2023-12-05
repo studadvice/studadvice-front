@@ -21,14 +21,14 @@ class InitTimeScreen extends StatelessWidget {
               margin: const EdgeInsets.only(top: 20),
             ),
             buildConnectionButton(
-              text: _i18n.text('registerText'),
+              text: _i18n.text('register'),
               textColor: AppColors.white,
               onPressed: () {
                 Get.toNamed(RegisterOptionsScreen.navigatorId);
               },
             ),
             buildConnectionButton(
-              text: _i18n.text('loginText'),
+              text: _i18n.text('login'),
               textColor: AppColors.white,
               onPressed: () {
                 Get.toNamed(LoginScreen.navigatorId);

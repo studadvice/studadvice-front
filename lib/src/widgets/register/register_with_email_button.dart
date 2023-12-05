@@ -6,18 +6,17 @@ class RegisterWithEmailButton extends StatelessWidget {
   final Color backgroundColor;
   final Color textColor;
   final Color borderColor;
+  final String text;
 
-  RegisterWithEmailButton({
-    required this.onPressed,
-    this.backgroundColor = AppColors.white,
-    this.textColor = AppColors.blue,
-    this.borderColor = AppColors.blue,
-  });
+  RegisterWithEmailButton(
+      {required this.onPressed,
+      this.backgroundColor = AppColors.white,
+      this.textColor = AppColors.blue,
+      this.borderColor = AppColors.blue,
+      required this.text});
 
   @override
   Widget build(BuildContext context) {
-    const String continueWithEmailText = "Continuer avec un E-Mail";
-
     return ElevatedButton(
       onPressed: onPressed,
       style: ElevatedButton.styleFrom(
@@ -25,7 +24,7 @@ class RegisterWithEmailButton extends StatelessWidget {
         padding: const EdgeInsets.symmetric(horizontal: 100, vertical: 15),
       ),
       child: Text(
-        continueWithEmailText,
+        text,
         style: TextStyle(
           color: textColor,
           fontWeight: FontWeight.bold,

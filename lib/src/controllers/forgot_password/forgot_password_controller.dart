@@ -3,8 +3,7 @@ import 'package:get/get.dart';
 import 'package:stud_advice/stud_advice.dart';
 
 class ForgotPasswordController extends GetxController {
-  final AuthenticationController _authenticationController =
-      Get.put(AuthenticationController());
+  final AuthenticationController _authenticationController = Get.find();
 
   final TextEditingController emailController = TextEditingController();
 

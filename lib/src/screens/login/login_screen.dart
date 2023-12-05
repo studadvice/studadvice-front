@@ -13,45 +13,42 @@ class LoginScreen extends StatelessWidget {
   final _formKey = GlobalKey<FormState>();
 
   @override
-  Widget build(BuildContext context) =>
-      GetBuilder<LoginController>(builder: (_) {
-        return Scaffold(
-          appBar: AppBar(
-            leading: IconButton(
-              icon: const Icon(Icons.arrow_back),
-              onPressed: () {
-                Get.back();
-              },
+  Widget build(BuildContext context) => Scaffold(
+        appBar: AppBar(
+          leading: IconButton(
+            icon: const Icon(Icons.arrow_back),
+            onPressed: () {
+              Get.back();
+            },
+          ),
+        ),
+        body: SingleChildScrollView(
+          child: Form(
+            key: _formKey,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                SizedBox(height: MediaQuery.of(context).size.height * 0.1),
+                buildWelcomeBackText(),
+                const SizedBox(height: 40),
+                buildEmailTextField(),
+                const SizedBox(height: 15),
+                buildPasswordTextField(),
+                const SizedBox(height: 10),
+                buildRememberMeAndForgotPasswordRow(),
+                const SizedBox(height: 10),
+                buildLoginButton(),
+                const SizedBox(height: 10),
+                DividerWithText(text: _i18n.text('orContinueWith')),
+                const SizedBox(height: 10),
+                buildSocialLoginButtons(context),
+                const SizedBox(height: 50),
+                buildTermsAndConditionsSection(),
+              ],
             ),
           ),
-          body: SingleChildScrollView(
-            child: Form(
-              key: _formKey,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  SizedBox(height: MediaQuery.of(context).size.height * 0.1),
-                  buildWelcomeBackText(),
-                  const SizedBox(height: 40),
-                  buildEmailTextField(),
-                  const SizedBox(height: 15),
-                  buildPasswordTextField(),
-                  const SizedBox(height: 10),
-                  buildRememberMeAndForgotPasswordRow(),
-                  const SizedBox(height: 10),
-                  buildLoginButton(),
-                  const SizedBox(height: 10),
-                  DividerWithText(text: _i18n.text('orContinueWith')),
-                  const SizedBox(height: 10),
-                  buildSocialLoginButtons(context),
-                  const SizedBox(height: 50),
-                  buildTermsAndConditionsSection(),
-                ],
-              ),
-            ),
-          ),
-        );
-      });
+        ),
+      );
 
   String? validatePassword(String? value) {
     if (value == null || value.isEmpty) {
