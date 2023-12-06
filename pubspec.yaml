@@ -85,3 +85,5 @@ flutter:
     - assets/images/login/
     - assets/images/common/
     - assets/images/forgot_password/
+    - assets/i18n/administratives_processes_screen/
+    - assets/i18n/welcome_screen/
