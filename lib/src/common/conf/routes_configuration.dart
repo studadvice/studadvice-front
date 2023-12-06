@@ -2,18 +2,19 @@ import 'package:get/get.dart';
 import 'package:stud_advice/stud_advice.dart';
 
 class RoutesConfiguration {
-  static const String initialRoute = InitTimeScreen.navigatorId;
+  // TODO: update initialRoute to welcome screen
+  static const String initialRoute = AdministrativesProcessesScreen.navigatorId;
 
   List<GetPage> configureRoutes() {
     return [
       GetPage(
-        name: InitTimeScreen.navigatorId,
-        page: () => InitTimeScreen(),
+        name: WelcomeScreen.navigatorId,
+        page: () => const WelcomeScreen(),
         middlewares: [I18nMiddleware()],
       ),
       GetPage(
-        name: WelcomeScreen.navigatorId,
-        page: () => const WelcomeScreen(),
+        name: InitTimeScreen.navigatorId,
+        page: () => InitTimeScreen(),
         middlewares: [I18nMiddleware()],
       ),
       GetPage(
@@ -73,6 +74,11 @@ class RoutesConfiguration {
         page: () => RoadMapScreen(currentStep: 0,),
         middlewares: [I18nMiddleware()],
       ),
+      GetPage(
+        name: AdministrativesProcessesScreen.navigatorId,
+        page: () => const AdministrativesProcessesScreen(),
+        middlewares: [I18nMiddleware()],
+      )
     ];
   }
 }
