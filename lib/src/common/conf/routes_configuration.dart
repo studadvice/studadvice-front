@@ -1,8 +1,9 @@
 import 'package:get/get.dart';
+import 'package:stud_advice/src/screens/roadmap/roadmap_screen.dart';
 import 'package:stud_advice/stud_advice.dart';
 
 class RoutesConfiguration {
-  static const String initialRoute = InitTimeScreen.navigatorId;
+  static const String initialRoute = RoadMapScreen.navigatorId;
   List<GetPage> configureRoutes() {
     return [
       GetPage(
@@ -52,6 +53,11 @@ class RoutesConfiguration {
         middlewares: [I18nMiddleware()],
         binding: SettingsBinding(),
       ),
+      GetPage(
+        name: RoadMapScreen.navigatorId,
+        page: () => RoadMapScreen(),
+        middlewares: [I18nMiddleware()],
+      )
     ];
   }
 }

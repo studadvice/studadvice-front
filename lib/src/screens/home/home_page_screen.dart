@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:stud_advice/src/screens/roadmap/roadmap_screen.dart';
 import 'package:stud_advice/stud_advice.dart';
 
 class HomePageScreen extends StatelessWidget {
@@ -23,26 +24,27 @@ class HomePageScreen extends StatelessWidget {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                const Text(
-                  'Welcome to the Home Page!',
-                  style: TextStyle(
-                    fontSize: AppFontSizes.extraLarge,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
+                RoadMapScreen(),
+                // const Text(
+                //   'Welcome to the Home Page!',
+                //   style: TextStyle(
+                //     fontSize: AppFontSizes.extraLarge,
+                //     fontWeight: FontWeight.bold,
+                //   ),
+                // ),
                 const SizedBox(height: 20),
-                Padding(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                  child: CustomButton(
-                    text: "Settings",
-                    textColor: AppColors.white,
-                    backgroundColor: AppColors.dangerColor,
-                    onPressed: () {
-                      Get.toNamed(SettingsScreen.navigatorId);
-                    },
-                  ),
-                ),
+                // Padding(
+                //   padding:
+                //       const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                //   child: CustomButton(
+                //     text: "Settings",
+                //     textColor: AppColors.white,
+                //     backgroundColor: AppColors.dangerColor,
+                //     onPressed: () {
+                //       Get.toNamed(SettingsScreen.navigatorId);
+                //     },
+                //   ),
+                // ),
               ],
             ),
           ),
