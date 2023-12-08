@@ -4,72 +4,51 @@ class StepNumberPainter extends CustomPainter {
   final int stepNumber;
   final Color color;
   final double diameter;
-  final bool isActivated;
-  final double borderWidth;
-  final Color textBorderColor;
-  final bool isEnabled;
 
   StepNumberPainter({
     required this.stepNumber,
     required this.color,
     required this.diameter,
-    this.isActivated = false,
-    this.borderWidth = 3.0,
-    this.textBorderColor = Colors.black,
-    this.isEnabled = true,
   });
 
   @override
   void paint(Canvas canvas, Size size) {
-    Color fillColor = isActivated ? color : Colors.transparent;
-    Color borderColor = isActivated ? Colors.blueGrey : color;
-
-    if (!isEnabled) {
-      fillColor = Colors.grey;
-      borderColor = Colors.grey;
-    }
-
-    final borderPaint = Paint()
-      ..color = borderColor
-      ..strokeWidth = borderWidth;
-
-    final fillPaint = Paint()
-      ..color = fillColor
-      ..style = PaintingStyle.fill;
-
-    final textStyle = TextStyle(
-      fontSize: diameter * 0.7,
-      fontWeight: FontWeight.bold,
-      foreground: Paint()
-        ..style = PaintingStyle.stroke
-        ..strokeWidth = 2
-        ..color = textBorderColor,
+    final textSpan = TextSpan(
+      text: stepNumber.toString(),
+      style: TextStyle(
+        color: Colors.white,
+        fontSize: diameter * 0.5,
+        fontWeight: FontWeight.bold,
+      ),
     );
 
-    final textSpan = TextSpan(text: stepNumber.toString(), style: textStyle);
+    // define textPainter
     final textPainter = TextPainter(
       text: textSpan,
       textDirection: TextDirection.ltr,
       textAlign: TextAlign.center,
     );
-    textPainter.layout();
 
-    final textOffset = Offset(
-      (diameter - textPainter.width) / 2,
-      (diameter - textPainter.height) / 2,
+    // define offset
+    final offset = Offset(
+      diameter * 0.5, // center of the canvas
+      diameter * 0.5, // center of the canvas
     );
-
-    if (isActivated) {
-      canvas.drawCircle(Offset(diameter / 2, diameter / 2), diameter / 2, fillPaint);
-    }
-
-    canvas.drawCircle(Offset(diameter / 2, diameter / 2), diameter / 2 - borderWidth / 2, borderPaint);
-
-    textPainter.paint(canvas, textOffset);
+    
+    final circlePaint = Paint()
+      ..color = color
+      ..style = PaintingStyle.fill;
+    
+    canvas.drawCircle(offset, diameter * 0.5, circlePaint);
+    
+    textPainter.layout(minWidth: 0, maxWidth: diameter);
+    textPainter.paint(canvas, offset - Offset(textPainter.width * 0.5, textPainter.height * 0.5));
+    
   }
 
   @override
   bool shouldRepaint(covariant CustomPainter oldDelegate) {
-    return oldDelegate != this;
+    return false;
   }
+    
 }

@@ -1,5 +1,5 @@
 import 'dart:core';
-import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:path_drawing/path_drawing.dart';
 
@@ -7,7 +7,6 @@ class CurvedDottedLinePainter extends CustomPainter {
   final bool isLeft;
   final Color color;
   final double strokeWidth;
-
 
   CurvedDottedLinePainter({
     required this.isLeft,
@@ -23,43 +22,43 @@ class CurvedDottedLinePainter extends CustomPainter {
       ..strokeWidth = strokeWidth;
 
     Path path = Path();
-    path = _buildCurvePathIfIsRight(path, size);
 
     if (isLeft) {
-      path = _buildMirrorCurvePath(path, size);
+      path = _buildCurvePathIfIsLeft(path, size);
+    } else {
+      path = _buildCurvePathIfIsRight(path, size);
     }
 
     canvas.drawPath(
         dashPath(path, dashArray: CircularIntervalList([10, 9.5])), paint);
   }
 
-  Path _buildMirrorCurvePath(Path originalPath, Size size) {
-    PathMetric pathMetric = originalPath.computeMetrics().last;
-    Tangent? tangent = pathMetric.getTangentForOffset(pathMetric.length);
-    Offset endPoint = tangent!.position;
+  _buildCurvePathIfIsLeft(Path path, Size size) {
+    // Commencez à partir du côté droit au lieu du côté gauche
+    path.moveTo(size.width, size.height / 50);
 
-    Path mirrorPath = Path.from(originalPath);
+    // Ajoutez la courbe de Bézier cubique en inversant les coordonnées X
+    path.cubicTo(
+        size.height + (size.height * (1 / 3)), size.width - (size.width * (0.7 / 2)),
+      size.width - (size.width * (2 / 3)), size.height - (size.height * (1.497 / 2.044)),
+      0, size.height,
+    );
 
-    final Matrix4 matrix = Matrix4.identity()
-      ..translate(0.0, -endPoint.dy)
-      ..scale(1.0, -1.0)
-      ..translate(0.0, endPoint.dy);
-
-    mirrorPath = mirrorPath.transform(matrix.storage);
-
-    mirrorPath = mirrorPath.shift(Offset(0, 3 * endPoint.dy));
-
-    return mirrorPath;
+    return path;
   }
 
+
   _buildCurvePathIfIsRight(Path path, Size size) {
-      path.moveTo(-size.width/20, size.height/20);
+      path.moveTo(20, size.height/50);
+
+      // Add the cubic bezier curve
       path.cubicTo(
-        - size.width/20 + 50, 120 + size.height/20,
-        size.width -50, size.height - 120,
+        size.width * (0.7 / 2), size.height + (size.height * (1 / 3)),
+        size.width * (2 / 3), size.height - (size.height * (1.497 / 2.044)),
         size.width, size.height,
       );
-      return path;
+
+    return path;
   }
 
   @override

@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:stud_advice/stud_advice.dart';
+import 'package:stud_advice/src/widgets/common/paints/curved_dottedline/curved_dottedline_paint.dart';
+
+
+import 'package:flutter/material.dart';
 
 class CurvedDottedLineWidget extends StatelessWidget {
   final double width;
@@ -10,8 +13,8 @@ class CurvedDottedLineWidget extends StatelessWidget {
 
   const CurvedDottedLineWidget({
     super.key,
-    required this.width,
-    required this.height,
+    this.width = 500.0,
+    this.height = 250.0,
     required this.color,
     this.strokeWidth = 2.0,
     required this.isLeft,
