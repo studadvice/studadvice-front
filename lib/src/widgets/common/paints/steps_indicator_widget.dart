@@ -1,35 +1,24 @@
 import 'package:flutter/material.dart';
-import 'package:stud_advice/stud_advice.dart';
-import 'package:get/get.dart';
+import 'package:stud_advice/src/widgets/common/paints/curved_dottedline/curved_dottedline_paint.dart';
+import 'package:stud_advice/src/widgets/common/paints/step_number/step_number_widget.dart';
 
 class StepsIndicator extends StatelessWidget {
-  final int currentStep;
-  final List<StepItem> steps;
-  static double DIAMETER = 75.0;
-
-
-  StepsIndicator({
-        super.key,
-        required this.currentStep,
-        required this.steps,
-  });
+  final int stepCount;
+  const StepsIndicator({super.key, required this.stepCount});
 
   @override
   Widget build(BuildContext context) {
-    final StepController controller = Get.find<StepController>();
-
     return Scaffold(
       body: ListView.builder(
-        itemCount: steps.length,
+        itemCount: stepCount,
         itemBuilder: (context, index) {
           int stepNumber = index + 1;
           bool isLeftAligned = stepNumber % 2 != 0;
-          StepItem step = steps[index];
 
           return LayoutBuilder(
             builder: (BuildContext context, BoxConstraints constraints) {
               double screenWidth = constraints.maxWidth;
-              double stepWidgetDiameter = DIAMETER;
+              double stepWidgetDiameter = 100;
               double curveWidth = screenWidth - stepWidgetDiameter;
 
               return Column(
@@ -37,29 +26,16 @@ class StepsIndicator extends StatelessWidget {
                   Row(
                     mainAxisAlignment: isLeftAligned ? MainAxisAlignment.start : MainAxisAlignment.end,
                     children: [
-                      StepNumberWidget(
-                        stepNumber: stepNumber,
-                        diameter: stepWidgetDiameter,
-                        color: step.color,
-                        onPressed: () {
-                          showDialog(
-                            context: context,
-                            builder: (BuildContext context) {
-                              return const InformationModal(
-                                accountInfo: 'Votre compte ants.gouv.fr',
-                                domicileInfo: 'Votre justificatif de domicile',
-                                photoIdInfo: 'Votre photo ID',
-                              );
-                            },
-                          );
-                        },
-                        isActivated: step.isCompleted,
-                      ),
+                      // StepNumberWidget(
+                      //   stepNumber: stepNumber,
+                      //   diameter: stepWidgetDiameter,
+                      //   color: Colors.blueGrey,
+                      // ),
                     ],
                   ),
-                  if (index < steps.length - 1)
+                  if (index < stepCount - 1)
                     CustomPaint(
-                      size: Size(curveWidth, curveWidth/2.6),
+                      size: Size(curveWidth, curveWidth/2),
                       painter: CurvedDottedLinePainter(
                         color: Colors.grey,
                         strokeWidth: 2.0,
