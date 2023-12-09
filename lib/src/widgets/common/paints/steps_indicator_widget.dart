@@ -7,6 +7,7 @@ class StepsIndicator extends StatelessWidget {
   final int stepCount;
   final int currentStep;
   final List<StepItem> steps;
+  static double DIAMETER = 100.0;
 
 
   const StepsIndicator({
@@ -29,7 +30,7 @@ class StepsIndicator extends StatelessWidget {
           return LayoutBuilder(
             builder: (BuildContext context, BoxConstraints constraints) {
               double screenWidth = constraints.maxWidth;
-              double stepWidgetDiameter = 100;
+              double stepWidgetDiameter = DIAMETER;
               double curveWidth = screenWidth - stepWidgetDiameter;
 
               return Column(
@@ -37,16 +38,20 @@ class StepsIndicator extends StatelessWidget {
                   Row(
                     mainAxisAlignment: isLeftAligned ? MainAxisAlignment.start : MainAxisAlignment.end,
                     children: [
-                      StepNumberWidget(
-                        stepNumber: stepNumber,
-                        diameter: stepWidgetDiameter,
-                        color: step.backgroundColor,
-                      ),
+                      // StepNumberWidget(
+                      //   stepNumber: stepNumber,
+                      //   diameter: stepWidgetDiameter,
+                      //   color: step.color,
+                      //   isEnabled: step.isCompleted,
+                      //   onPressed: () {
+                      //     print('Step $stepNumber pressed');
+                      //   },
+                      // ),
                     ],
                   ),
-                  if (index < stepCount - 1)
+                  if (index < steps.length - 1)
                     CustomPaint(
-                      size: Size(curveWidth, curveWidth/2),
+                      size: Size(curveWidth, curveWidth/2.6),
                       painter: CurvedDottedLinePainter(
                         color: Colors.grey,
                         strokeWidth: 2.0,

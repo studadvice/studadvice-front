@@ -9,6 +9,7 @@ class StepNumberPainter extends CustomPainter {
   final bool isActivated;
   final double borderWidth;
   final Color textBorderColor;
+  final bool isEnabled;
 
   StepNumberPainter({
     required this.stepNumber,
@@ -17,25 +18,27 @@ class StepNumberPainter extends CustomPainter {
     this.isActivated = false,
     this.borderWidth = 3.0,
     this.textBorderColor = Colors.black,
+    this.isEnabled = true,
   });
 
   @override
   void paint(Canvas canvas, Size size) {
-    // Determine the fill color based on activation
     Color fillColor = isActivated ? color : Colors.transparent;
     Color borderColor = isActivated ? Colors.blueGrey : color;
 
-    // Paint properties for the circle border
+    if (!isEnabled) {
+      fillColor = Colors.grey;
+      borderColor = Colors.grey;
+    }
+
     final borderPaint = Paint()
       ..color = borderColor
       ..strokeWidth = borderWidth;
 
-    // Paint properties for circle fill
     final fillPaint = Paint()
       ..color = fillColor
       ..style = PaintingStyle.fill;
 
-    // Text style remains the same
     final textStyle = TextStyle(
       fontSize: diameter * 0.7,
       fontWeight: FontWeight.bold,
@@ -45,7 +48,6 @@ class StepNumberPainter extends CustomPainter {
         ..color = textBorderColor,
     );
 
-    // TextSpan, TextPainter, and textOffset
     final textSpan = TextSpan(text: stepNumber.toString(), style: textStyle);
     final textPainter = TextPainter(
       text: textSpan,
@@ -59,15 +61,12 @@ class StepNumberPainter extends CustomPainter {
       (diameter - textPainter.height) / 2,
     );
 
-    // Drawing the filled circle
     if (isActivated) {
       canvas.drawCircle(Offset(diameter / 2, diameter / 2), diameter / 2, fillPaint);
     }
 
-    // Drawing the circle border
     canvas.drawCircle(Offset(diameter / 2, diameter / 2), diameter / 2 - borderWidth / 2, borderPaint);
 
-    // Painting the text
     textPainter.paint(canvas, textOffset);
   }
 

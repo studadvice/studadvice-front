@@ -13,8 +13,8 @@ class CurvedDottedLineWidget extends StatelessWidget {
 
   const CurvedDottedLineWidget({
     super.key,
-    this.width = 500.0,
-    this.height = 250.0,
+    required this.width,
+    required this.height,
     required this.color,
     this.strokeWidth = 2.0,
     required this.isLeft,

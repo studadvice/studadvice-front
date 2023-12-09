@@ -5,22 +5,13 @@ class StepItem {
   final String title;
   final bool isCompleted;
   final bool isCurrent;
+  final Color color;
 
   StepItem({
     required this.number,
     required this.title,
     this.isCompleted = false,
     this.isCurrent = false,
+    required this.color,
   });
-
-  // Method to get the background color of the step based on its state
-  Color get backgroundColor {
-    if (isCurrent) {
-      return Colors.orange; // Color for the current step
-    } else if (isCompleted) {
-      return Colors.blue; // Color for the completed step
-    } else {
-      return Colors.grey; // Color for the upcoming step
-    }
-  }
 }
