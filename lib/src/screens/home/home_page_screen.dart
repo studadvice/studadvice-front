@@ -24,7 +24,10 @@ class HomePageScreen extends StatelessWidget {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                RoadMapScreen(),
+                RoadMapScreen(
+                  currentStep: 1,
+                  stepCount: 5,
+                ),
                 // const Text(
                 //   'Welcome to the Home Page!',
                 //   style: TextStyle(

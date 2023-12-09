@@ -55,7 +55,10 @@ class RoutesConfiguration {
       ),
       GetPage(
         name: RoadMapScreen.navigatorId,
-        page: () => RoadMapScreen(),
+        page: () => RoadMapScreen(
+          currentStep: 1,
+          stepCount: 5,
+        ),
         middlewares: [I18nMiddleware()],
       )
     ];

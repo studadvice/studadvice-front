@@ -1,19 +1,30 @@
 import 'package:flutter/material.dart';
+import 'package:stud_advice/src/models/step/step_item_data.dart';
 import 'package:stud_advice/src/widgets/common/paints/curved_dottedline/curved_dottedline_paint.dart';
 import 'package:stud_advice/src/widgets/common/paints/step_number/step_number_widget.dart';
 
 class StepsIndicator extends StatelessWidget {
   final int stepCount;
-  const StepsIndicator({super.key, required this.stepCount});
+  final int currentStep;
+  final List<StepItem> steps;
+
+
+  const StepsIndicator({
+        super.key,
+        required this.stepCount,
+        required this.currentStep,
+        required this.steps,
+  });
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: ListView.builder(
-        itemCount: stepCount,
+        itemCount: steps.length,
         itemBuilder: (context, index) {
           int stepNumber = index + 1;
           bool isLeftAligned = stepNumber % 2 != 0;
+          StepItem step = steps[index];
 
           return LayoutBuilder(
             builder: (BuildContext context, BoxConstraints constraints) {
@@ -29,7 +40,7 @@ class StepsIndicator extends StatelessWidget {
                       StepNumberWidget(
                         stepNumber: stepNumber,
                         diameter: stepWidgetDiameter,
-                        color: Colors.blueGrey,
+                        color: step.backgroundColor,
                       ),
                     ],
                   ),
