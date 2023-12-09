@@ -26,11 +26,11 @@ class StepsIndicator extends StatelessWidget {
                   Row(
                     mainAxisAlignment: isLeftAligned ? MainAxisAlignment.start : MainAxisAlignment.end,
                     children: [
-                      // StepNumberWidget(
-                      //   stepNumber: stepNumber,
-                      //   diameter: stepWidgetDiameter,
-                      //   color: Colors.blueGrey,
-                      // ),
+                      StepNumberWidget(
+                        stepNumber: stepNumber,
+                        diameter: stepWidgetDiameter,
+                        color: Colors.blueGrey,
+                      ),
                     ],
                   ),
                   if (index < stepCount - 1)

@@ -40,21 +40,18 @@ class CurvedDottedLinePainter extends CustomPainter {
     Tangent? tangent = pathMetric.getTangentForOffset(pathMetric.length);
     Offset endPoint = tangent!.position;
 
-    // Print x and y coordinates of the end point
-    print('endPoint.dx: ${endPoint.dx} endPoint.dy: ${endPoint.dy}');
-
     // Create a mirrored path by applying a matrix transformation
     Path mirrorPath = Path.from(originalPath);
 
     final Matrix4 matrix = Matrix4.identity()
-      ..translate(0.0, endPoint.dy) // Translate the path down to the x-axis
+      ..translate(0.0, -endPoint.dy) // Translate the path down to the x-axis
       ..scale(1.0, -1.0) // Mirror scale on the y-axis
-      ..translate(0.0, -endPoint.dy); // Translate the path back up by the same amount
+      ..translate(0.0, endPoint.dy); // Translate the path back up by the same amount
 
     mirrorPath = mirrorPath.transform(matrix.storage);
 
     // Translate the entire path down by the y-coordinate of the endpoint to start from the same y-position
-    mirrorPath = mirrorPath.shift(const Offset(1, 1));
+    mirrorPath = mirrorPath.shift(Offset(0, 3 * endPoint.dy));
 
     return mirrorPath;
   }
@@ -68,6 +65,7 @@ class CurvedDottedLinePainter extends CustomPainter {
         size.width * (2 / 3), size.height - (size.height * (1.497 / 2.044)),
         size.width, size.height,
       );
+
       return path;
   }
 

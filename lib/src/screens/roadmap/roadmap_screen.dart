@@ -10,7 +10,7 @@ class RoadMapScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const Scaffold(
-      body: StepsIndicator(stepCount: 3),
+      body: StepsIndicator(stepCount: 30),
     );
   }
 }
