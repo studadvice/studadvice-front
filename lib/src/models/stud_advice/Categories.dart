@@ -69,6 +69,7 @@ class CategoryContent {
   late String name;
   late String description;
   late String imageId;
+  late String color;
   List<AdministrativeProcesses>? administrativeProcesses;
 
   CategoryContent(
@@ -77,13 +78,16 @@ class CategoryContent {
         required this.name,
         required this.description,
         required this.imageId,
-        this.administrativeProcesses});
+        required this.color,
+        this.administrativeProcesses
+      });
 
   CategoryContent.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     name = json['name'];
     description = json['description'];
     imageId = json['imageId'];
+    color = json["color"];
     if (json['administrativeProcesses'] != null) {
       administrativeProcesses = <AdministrativeProcesses>[];
       json['administrativeProcesses'].forEach((v) {
