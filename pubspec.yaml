@@ -43,6 +43,7 @@ dependencies:
   flutter_adaptive_buttons:
   sliding_up_panel:
   infinite_scroll_pagination: ^4.0.0
+  percent_indicator: ^4.2.3
 
 dev_dependencies:
   flutter_test:
