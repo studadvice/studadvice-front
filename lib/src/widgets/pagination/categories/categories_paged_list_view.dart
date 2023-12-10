@@ -1,29 +1,25 @@
 import 'package:flutter/material.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
-import 'package:stud_advice/src/models/stud_advice/AdministrativeProcessCategory.dart';
+import 'package:stud_advice/src/models/stud_advice/Categories.dart';
 import '../../../repositories/stud_advice/stud_advice.dart';
 import '../exception_indicators/empty_list_indicator.dart';
 import '../exception_indicators/error_indicator.dart';
-import '../preferences/list_preferences.dart';
-import 'administrative-category-item.dart';
+import 'category.dart';
 
-class AdministrativeCategoryPagedListView extends StatefulWidget {
-  const AdministrativeCategoryPagedListView({
+class CategoriesPagedListView extends StatefulWidget {
+  const CategoriesPagedListView({
     required this.repository,
-    this.listPreferences,
     super.key,
   });
 
   final StudAdviceRepository repository;
-  final ListPreferences? listPreferences;
 
   @override
-  _AdministrativeCategoryPagedListViewState createState() => _AdministrativeCategoryPagedListViewState();
+  _CategoriesPagedListViewState createState() => _CategoriesPagedListViewState();
 }
 
-class _AdministrativeCategoryPagedListViewState extends State<AdministrativeCategoryPagedListView> {
+class _CategoriesPagedListViewState extends State<CategoriesPagedListView> {
 
-  ListPreferences? get _listPreferences => widget.listPreferences;
 
   final _pagingController = PagingController<int, CategoryContent>(
     firstPageKey: 0,
@@ -58,7 +54,6 @@ class _AdministrativeCategoryPagedListViewState extends State<AdministrativeCate
         _pagingController.appendLastPage([]);
       }
     } catch (error) {
-      print(error);
       _pagingController.error = error;
     }
   }
@@ -70,10 +65,7 @@ class _AdministrativeCategoryPagedListViewState extends State<AdministrativeCate
   }
 
   @override
-  void didUpdateWidget(AdministrativeCategoryPagedListView oldWidget) {
-    if (oldWidget.listPreferences != widget.listPreferences) {
-      _pagingController.refresh();
-    }
+  void didUpdateWidget(CategoriesPagedListView oldWidget) {
     super.didUpdateWidget(oldWidget);
   }
 
@@ -85,7 +77,7 @@ class _AdministrativeCategoryPagedListViewState extends State<AdministrativeCate
     child: PagedListView.separated(
       pagingController: _pagingController,
       builderDelegate: PagedChildBuilderDelegate<CategoryContent>(
-        itemBuilder: (context, categoryItem, index) => AdministrativeCategoryItem(
+        itemBuilder: (context, categoryItem, index) => Category(
           category: categoryItem,
         ),
         firstPageErrorIndicatorBuilder: (context) => ErrorIndicator(

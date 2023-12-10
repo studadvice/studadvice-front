@@ -1,17 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
-import '../../../models/stud_advice/AdministrativeProcessCategory.dart';
+import '../../../models/stud_advice/Categories.dart';
 
-class AdministrativeCategoryItem extends StatelessWidget {
+class Category extends StatelessWidget {
 
-  const AdministrativeCategoryItem({required this.category, super.key});
+  const Category({required this.category, super.key});
 
   final CategoryContent category;
 
   @override
   Widget build(BuildContext context) {
+
+    Color cardColor = Color(int.parse(category.color, radix: 16) + 0xFF000000);
+
     return Card(
-      color: Colors.orange,
+      color: cardColor,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(16),
       ),
@@ -26,12 +29,18 @@ class AdministrativeCategoryItem extends StatelessWidget {
               children: [
                 Text(
                   category.name,
-                  style: const TextStyle(color: Colors.white),
+                  style: const TextStyle(
+                    color: Colors.white,
+                    fontSize: 20,
+                  ),
                 ),
                 const SizedBox(height: 4),
-                const Text(
+                Text(
                   "35",
-                  style: TextStyle(color: Colors.white),
+                  style: const TextStyle(
+                    color: Colors.white,
+                    fontSize: 16,
+                  ),
                 ),
                 const SizedBox(height: 4),
                 CircularPercentIndicator(
