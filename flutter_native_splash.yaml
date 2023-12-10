@@ -6,3 +6,5 @@ flutter_native_splash:
 
   android_12:
     image: assets/images/common/raven_image.png
+
+  web: false
