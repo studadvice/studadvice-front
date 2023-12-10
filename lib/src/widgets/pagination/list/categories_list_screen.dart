@@ -1,13 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
-
 import 'package:stud_advice/src/widgets/pagination/list/paged_list_view.dart';
-
 import '../../../repositories/stud_advice/stud_advice.dart';
 import '../preferences/list_preferences.dart';
-import '../preferences/list_preferences_screen.dart';
-import 'package:provider/provider.dart';
 
 class CategoriesListScreen extends StatefulWidget {
   @override
@@ -20,9 +15,6 @@ class _CategoriesListScreenState extends State<CategoriesListScreen> {
   @override
   Widget build(BuildContext context) => Scaffold(
         appBar: AppBar(
-          title: const Text(
-            'Categories',
-          ),
         //   actions: [
         //     IconButton(
         //       icon: const Icon(Icons.tune),

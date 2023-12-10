@@ -16,12 +16,6 @@ class HomePageScreen extends StatelessWidget {
         return Scaffold(
           appBar: AppBar(
             centerTitle: true,
-            title: const SizedBox(
-              height: 40,
-              child: Image(
-                image: AssetImage('assets/images/common/raven_image.png'),
-              ),
-            ),
           ),
           body: Center(
             child: CategoriesListScreen(),

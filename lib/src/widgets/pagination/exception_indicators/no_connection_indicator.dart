@@ -14,7 +14,7 @@ class NoConnectionIndicator extends StatelessWidget {
   Widget build(BuildContext context) => ExceptionIndicator(
         title: 'No connection',
         message: 'Please check internet connection and try again.',
-        assetName: 'assets/frustrated-face.png',
+        assetName: 'assets/images/common/raven_image.png',
         onTryAgain: onTryAgain,
       );
 }

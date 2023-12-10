@@ -6,6 +6,6 @@ class EmptyListIndicator extends StatelessWidget {
   Widget build(BuildContext context) => const ExceptionIndicator(
         title: 'Too much filtering',
         message: 'We couldn\'t find any results matching your applied filters.',
-        assetName: 'assets/empty-box.png',
+        assetName: 'assets/images/common/raven_image.png',
       );
 }

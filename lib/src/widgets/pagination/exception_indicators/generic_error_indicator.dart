@@ -15,7 +15,7 @@ class GenericErrorIndicator extends StatelessWidget {
         title: 'Something went wrong',
         message: 'The application has encountered an unknown error.\n'
             'Please try again later.',
-        assetName: 'assets/confused-face.png',
+        assetName: 'assets/images/common/raven_image.png',
         onTryAgain: onTryAgain,
       );
 }

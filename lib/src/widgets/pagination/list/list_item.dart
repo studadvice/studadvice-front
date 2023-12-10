@@ -1,16 +1,16 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:get/get.dart';
 import 'package:stud_advice/src/repositories/stud_advice/stud_advice.dart';
+
+import '../../../models/stud_advice/AdministrativeProcessCategory.dart';
 
 class CategoryListItem extends StatelessWidget {
   const CategoryListItem({
     required this.category,
     super.key
   });
-  final String category;
+  final CategoryContent category;
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +20,6 @@ class CategoryListItem extends StatelessWidget {
         borderRadius: BorderRadius.circular(6),
       ),
       child: InkWell(
-        onTap: () async => fetchCategories(context),
         child: Padding(
           padding: const EdgeInsets.all(16),
           child: Column(
@@ -38,14 +37,6 @@ class CategoryListItem extends StatelessWidget {
                   const SizedBox(
                     width: 16,
                   ),
-                  ClipRRect(
-                    borderRadius: BorderRadius.circular(8),
-                    child: CachedNetworkImage(
-                      width: 50,
-                      height: 50,
-                      imageUrl: "test",
-                    ),
-                  ),
                 ],
               ),
               const SizedBox(
@@ -61,9 +52,4 @@ class CategoryListItem extends StatelessWidget {
       ),
     );
   }
-
-  Future<List<String>> fetchCategories(BuildContext context) async {
-    final studAdviceRepository = Get.find<StudAdviceRepository>();
-    return studAdviceRepository.getCategories(number: 0, size: 0);
-    }
 }
