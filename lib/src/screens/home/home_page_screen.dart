@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:stud_advice/stud_advice.dart';
 
-import '../../widgets/pagination/list/categories_list_screen.dart';
+import '../../widgets/pagination/list/administrative-category-list-screen.dart';
 
 class HomePageScreen extends StatelessWidget {
   static const navigatorId = '/home_page_screen';
@@ -12,7 +12,7 @@ class HomePageScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
-        child: CategoriesListScreen(),
+        child: AdministrativeCategoryListScreen(),
       ),
     );
     // },

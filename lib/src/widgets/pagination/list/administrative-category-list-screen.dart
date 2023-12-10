@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:stud_advice/src/widgets/pagination/list/paged_list_view.dart';
+import 'package:stud_advice/src/widgets/pagination/list/administrative-category-paged-list-view.dart';
 import '../../../repositories/stud_advice/stud_advice.dart';
 import '../preferences/list_preferences.dart';
 
-class CategoriesListScreen extends StatefulWidget {
+class AdministrativeCategoryListScreen extends StatefulWidget {
   @override
-  _CategoriesListScreenState createState() => _CategoriesListScreenState();
+  _AdministrativeCategoryListScreenState createState() => _AdministrativeCategoryListScreenState();
 }
 
-class _CategoriesListScreenState extends State<CategoriesListScreen> {
+class _AdministrativeCategoryListScreenState extends State<AdministrativeCategoryListScreen> {
   ListPreferences? _listPreferences;
 
   @override
@@ -25,7 +25,7 @@ class _CategoriesListScreenState extends State<CategoriesListScreen> {
         //   ],
         // ),
         ),
-        body: PagedArticleListView(
+        body: AdministrativeCategoryPagedListView(
           repository: Get.find<StudAdviceRepository>(),
           listPreferences: _listPreferences,
         ),

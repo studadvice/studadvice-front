@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import '../../../models/stud_advice/AdministrativeProcessCategory.dart';
 
-class CategoryListItem extends StatelessWidget {
-  const CategoryListItem({
+class AdministrativeCategoryItem extends StatelessWidget {
+  const AdministrativeCategoryItem({
     required this.category,
     super.key
   });
@@ -13,11 +13,11 @@ class CategoryListItem extends StatelessWidget {
     final textTheme = Theme.of(context).textTheme;
     return Card(
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(6),
+        borderRadius: BorderRadius.circular(30),
       ),
       child: InkWell(
         child: Padding(
-          padding: const EdgeInsets.all(16),
+          padding: const EdgeInsets.all(50),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -36,7 +36,7 @@ class CategoryListItem extends StatelessWidget {
                 ],
               ),
               const SizedBox(
-                height: 16,
+                height: 80,
               ),
               Text(
                 "test",

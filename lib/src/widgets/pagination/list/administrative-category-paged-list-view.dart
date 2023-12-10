@@ -5,10 +5,10 @@ import '../../../repositories/stud_advice/stud_advice.dart';
 import '../exception_indicators/empty_list_indicator.dart';
 import '../exception_indicators/error_indicator.dart';
 import '../preferences/list_preferences.dart';
-import 'list_item.dart';
+import 'administrative-category-item.dart';
 
-class PagedArticleListView extends StatefulWidget {
-  const PagedArticleListView({
+class AdministrativeCategoryPagedListView extends StatefulWidget {
+  const AdministrativeCategoryPagedListView({
     required this.repository,
     this.listPreferences,
     super.key,
@@ -18,10 +18,10 @@ class PagedArticleListView extends StatefulWidget {
   final ListPreferences? listPreferences;
 
   @override
-  _PagedArticleListViewState createState() => _PagedArticleListViewState();
+  _AdministrativeCategoryPagedListViewState createState() => _AdministrativeCategoryPagedListViewState();
 }
 
-class _PagedArticleListViewState extends State<PagedArticleListView> {
+class _AdministrativeCategoryPagedListViewState extends State<AdministrativeCategoryPagedListView> {
 
   ListPreferences? get _listPreferences => widget.listPreferences;
 
@@ -70,7 +70,7 @@ class _PagedArticleListViewState extends State<PagedArticleListView> {
   }
 
   @override
-  void didUpdateWidget(PagedArticleListView oldWidget) {
+  void didUpdateWidget(AdministrativeCategoryPagedListView oldWidget) {
     if (oldWidget.listPreferences != widget.listPreferences) {
       _pagingController.refresh();
     }
@@ -85,7 +85,7 @@ class _PagedArticleListViewState extends State<PagedArticleListView> {
     child: PagedListView.separated(
       pagingController: _pagingController,
       builderDelegate: PagedChildBuilderDelegate<CategoryContent>(
-        itemBuilder: (context, categoryItem, index) => CategoryListItem(
+        itemBuilder: (context, categoryItem, index) => AdministrativeCategoryItem(
           category: categoryItem,
         ),
         firstPageErrorIndicatorBuilder: (context) => ErrorIndicator(
