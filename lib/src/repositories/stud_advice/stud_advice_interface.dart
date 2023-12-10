@@ -1,3 +1,5 @@
+import '../../models/stud_advice/AdministrativeProcessCategory.dart';
+
 abstract class IStudAdviceRepository {
-  Future<List<String>> getCategories({required int number, required int size});
+  Future<AdministrativeProcessCategory> getCategories({required int number, required int size});
 }
