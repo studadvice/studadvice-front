@@ -149,7 +149,7 @@ class StudAdviceRepository implements IStudAdviceRepository {
   },
   "totalElements": 10,
   "totalPages": 2,
-  "last": false,
+  "last": true,
   "size": 5,
   "number": 0,
   "sort": {
@@ -158,7 +158,7 @@ class StudAdviceRepository implements IStudAdviceRepository {
     "unsorted": true
   },
   "numberOfElements": 5,
-  "first": true,
+  "first": false,
   "empty": false
 }
 ''';
