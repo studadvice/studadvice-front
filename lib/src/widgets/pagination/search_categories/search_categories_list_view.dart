@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 import 'package:stud_advice/src/models/stud_advice/category.dart';
 import '../../../repositories/stud_advice/stud_advice.dart';
-import '../exception_indicators/empty_list_indicator.dart';
-import '../exception_indicators/error_indicator.dart';
+import '../../../exceptions/empty_list_indicator.dart';
+import '../../../exceptions/error_indicator.dart';
 import '../../../screens/categories/category_screen.dart';
 
 class SearchCategoriesListView extends StatefulWidget {
