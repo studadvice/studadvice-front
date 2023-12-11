@@ -1,38 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 import 'package:get/get.dart';
-import 'package:stud_advice/src/controllers/categories/category_controller.dart';
-import '../../../models/stud_advice/category.dart';
-import '../../../exceptions/empty_list_indicator.dart';
-import '../../../exceptions/error_indicator.dart';
-import '../../../screens/categories/category_screen.dart';
+import '../../controllers/categories/category_controller.dart';
+import '../../models/stud_advice/category.dart';
+import '../../exceptions/empty_list_indicator.dart';
+import '../../exceptions/error_indicator.dart';
+import 'category_item.dart';
 
-class SearchCategoriesListView extends StatelessWidget {
-  const SearchCategoriesListView({
-    super.key,
-    required this.query,
-  });
-
-  final String query;
+class CategoriesListView extends StatefulWidget {
+  const CategoriesListView({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    return _SearchCategoriesListView(query: query);
-  }
+  _CategoriesListViewState createState() => _CategoriesListViewState();
 }
 
-class _SearchCategoriesListView extends StatefulWidget {
-  const _SearchCategoriesListView({
-    required this.query,
-  });
-
-  final String query;
-
-  @override
-  __SearchCategoriesListViewState createState() => __SearchCategoriesListViewState();
-}
-
-class __SearchCategoriesListViewState extends State<_SearchCategoriesListView> {
+class _CategoriesListViewState extends State<CategoriesListView> {
   final _pagingController = PagingController<int, CategoryContent>(
     firstPageKey: 0,
   );
@@ -50,10 +32,9 @@ class __SearchCategoriesListViewState extends State<_SearchCategoriesListView> {
 
   Future<void> _fetchPage(int pageKey) async {
     try {
-      final newPage = await _controller.getCategoriesBySearch(
+      final newPage = await _controller.getCategories(
         number: pageKey,
         size: 5,
-        query: widget.query,
       );
 
       final isLastPage = newPage.last;
@@ -69,6 +50,7 @@ class __SearchCategoriesListViewState extends State<_SearchCategoriesListView> {
         _pagingController.appendLastPage([]);
       }
     } catch (error) {
+      print(error);
       _pagingController.error = error;
     }
   }
@@ -87,7 +69,7 @@ class __SearchCategoriesListViewState extends State<_SearchCategoriesListView> {
     child: PagedListView.separated(
       pagingController: _pagingController,
       builderDelegate: PagedChildBuilderDelegate<CategoryContent>(
-        itemBuilder: (context, categoryItem, index) => CategoryScreen(
+        itemBuilder: (context, categoryItem, index) => CategoryItem(
           category: categoryItem,
         ),
         firstPageErrorIndicatorBuilder: (context) => ErrorIndicator(
