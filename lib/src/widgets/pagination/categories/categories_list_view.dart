@@ -1,41 +1,38 @@
 import 'package:flutter/material.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
+import 'package:get/get.dart';
+import '../../../controllers/categories/category_controller.dart';
 import '../../../models/stud_advice/category.dart';
-import '../../../repositories/stud_advice/stud_advice.dart';
 import '../../../screens/categories/category_screen.dart';
 import '../../../exceptions/empty_list_indicator.dart';
 import '../../../exceptions/error_indicator.dart';
 
 class CategoriesListView extends StatefulWidget {
-  const CategoriesListView({
-    required this.repository,
-    super.key,
-  });
-
-  final StudAdviceRepository repository;
+  const CategoriesListView({super.key});
 
   @override
   _CategoriesListViewState createState() => _CategoriesListViewState();
 }
 
 class _CategoriesListViewState extends State<CategoriesListView> {
-
-
   final _pagingController = PagingController<int, CategoryContent>(
     firstPageKey: 0,
   );
 
+  late CategoryController _controller;
+
   @override
   void initState() {
+    super.initState();
+    _controller = Get.find<CategoryController>();
     _pagingController.addPageRequestListener((pageKey) {
       _fetchPage(pageKey);
     });
-    super.initState();
   }
 
   Future<void> _fetchPage(int pageKey) async {
     try {
-      final newPage = await widget.repository.getCategories(
+      final newPage = await _controller.getCategories(
         number: pageKey,
         size: 5,
       );
@@ -49,8 +46,7 @@ class _CategoriesListViewState extends State<CategoriesListView> {
           final nextPageKey = pageKey + 1;
           _pagingController.appendPage(newItems, nextPageKey);
         }
-      }
-      else{
+      } else {
         _pagingController.appendLastPage([]);
       }
     } catch (error) {
@@ -63,11 +59,6 @@ class _CategoriesListViewState extends State<CategoriesListView> {
   void dispose() {
     _pagingController.dispose();
     super.dispose();
-  }
-
-  @override
-  void didUpdateWidget(CategoriesListView oldWidget) {
-    super.didUpdateWidget(oldWidget);
   }
 
   @override

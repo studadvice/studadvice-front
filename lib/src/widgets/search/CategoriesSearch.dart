@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:stud_advice/src/widgets/pagination/search_categories/search_categories_list.dart';
+import 'package:stud_advice/src/widgets/pagination/search_categories/search_categories_list_view.dart';
 
 class CategoriesSearch extends SearchDelegate<String> {
   @override
@@ -28,7 +28,7 @@ class CategoriesSearch extends SearchDelegate<String> {
   Widget buildResults(BuildContext context) {
     return Scaffold(
         body: Center(
-          child: SearchCategoriesList(searchQuery: query),
+          child: SearchCategoriesListView(query: query),
         )
     );
   }
