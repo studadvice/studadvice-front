@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:stud_advice/src/widgets/pagination/search_categories/search_categories_list_view.dart';
+
+import '../search_categories/search_categories_list_view.dart';
 
 class CategoriesSearch extends SearchDelegate<String> {
   @override
