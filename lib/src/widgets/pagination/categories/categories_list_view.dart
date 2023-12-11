@@ -3,8 +3,8 @@ import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 import '../../../models/stud_advice/category.dart';
 import '../../../repositories/stud_advice/stud_advice.dart';
 import '../../../screens/categories/category_screen.dart';
-import '../exception_indicators/empty_list_indicator.dart';
-import '../exception_indicators/error_indicator.dart';
+import '../../../exceptions/empty_list_indicator.dart';
+import '../../../exceptions/error_indicator.dart';
 
 class CategoriesListView extends StatefulWidget {
   const CategoriesListView({
