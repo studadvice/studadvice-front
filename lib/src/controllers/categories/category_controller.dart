@@ -21,14 +21,6 @@ class CategoryController extends GetxController {
     );
   }
 
-  void _handleError(dynamic error) {
-    print('Error: $error');
-    if (error is DioError) {
-      print('DioError: ${error.response?.data}');
-    }
-    throw Exception('Failed to connect to the server');
-  }
-
   Future<Category> _getCategories(String path, Map<String, dynamic> queryParameters) async {
     try {
       final response = await _dio.get(
@@ -43,7 +35,6 @@ class CategoryController extends GetxController {
         throw Exception('Failed to load categories');
       }
     } catch (error) {
-      _handleError(error);
       rethrow;
     }
   }
@@ -62,7 +53,6 @@ class CategoryController extends GetxController {
         throw Exception('Failed to load categories');
       }
     } catch (error) {
-      _handleError(error);
       rethrow;
     }
   }

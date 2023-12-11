@@ -39,15 +39,11 @@ class _CategoriesListViewState extends State<CategoriesListView> {
 
       final isLastPage = newPage.last;
       final newItems = newPage.content;
-      if (newItems != null) {
-        if (isLastPage) {
-          _pagingController.appendLastPage(newItems);
-        } else {
-          final nextPageKey = pageKey + 1;
-          _pagingController.appendPage(newItems, nextPageKey);
-        }
+      if (isLastPage) {
+        _pagingController.appendLastPage(newItems);
       } else {
-        _pagingController.appendLastPage([]);
+        final nextPageKey = pageKey + 1;
+        _pagingController.appendPage(newItems, nextPageKey);
       }
     } catch (error) {
       _pagingController.error = error;
