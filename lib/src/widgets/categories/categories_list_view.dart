@@ -50,7 +50,6 @@ class _CategoriesListViewState extends State<CategoriesListView> {
         _pagingController.appendLastPage([]);
       }
     } catch (error) {
-      print(error);
       _pagingController.error = error;
     }
   }

@@ -49,9 +49,8 @@ class CategoryItem extends StatelessWidget {
                         ),
                       ),
                       const SizedBox(height: 4),
-                      const Text(
-                        "35",
-                        style: TextStyle(
+                      Text(
+                        '${category.administrativeProcesses!.length} démarches ',                      style: const TextStyle(
                           color: Colors.white,
                           fontSize: 16,
                         ),
