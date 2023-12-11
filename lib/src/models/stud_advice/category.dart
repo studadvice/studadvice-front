@@ -70,7 +70,7 @@ class CategoryContent {
   late String description;
   late String imageId;
   late String color;
-  List<AdministrativeProcesses>? administrativeProcesses;
+  List<AdministrativeProcess>? administrativeProcesses;
 
   CategoryContent(
       {
@@ -89,9 +89,9 @@ class CategoryContent {
     imageId = json['imageId'];
     color = json["color"];
     if (json['administrativeProcesses'] != null) {
-      administrativeProcesses = <AdministrativeProcesses>[];
+      administrativeProcesses = <AdministrativeProcess>[];
       json['administrativeProcesses'].forEach((v) {
-        administrativeProcesses!.add(AdministrativeProcesses.fromJson(v));
+        administrativeProcesses!.add(AdministrativeProcess.fromJson(v));
       });
     }
   }
@@ -110,7 +110,7 @@ class CategoryContent {
   }
 }
 
-class AdministrativeProcesses {
+class AdministrativeProcess {
   late String id;
   late String name;
   late String description;
@@ -122,7 +122,7 @@ class AdministrativeProcesses {
   List<String>? universities;
   List<Steps>? steps;
 
-  AdministrativeProcesses(
+  AdministrativeProcess(
       {
         required this.id,
         required this.name,
@@ -135,7 +135,7 @@ class AdministrativeProcesses {
         this.universities,
         this.steps});
 
-  AdministrativeProcesses.fromJson(Map<String, dynamic> json) {
+  AdministrativeProcess.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     name = json['name'];
     description = json['description'];

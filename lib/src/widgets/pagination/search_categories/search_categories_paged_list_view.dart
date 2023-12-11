@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
-import 'package:stud_advice/src/models/stud_advice/Categories.dart';
+import 'package:stud_advice/src/models/stud_advice/category.dart';
 import '../../../repositories/stud_advice/stud_advice.dart';
 import '../exception_indicators/empty_list_indicator.dart';
 import '../exception_indicators/error_indicator.dart';
@@ -57,6 +57,7 @@ class _SearchCategoriesPagedListViewState extends State<SearchCategoriesPagedLis
         _pagingController.appendLastPage([]);
       }
     } catch (error) {
+      print(error);
       _pagingController.error = error;
     }
   }
