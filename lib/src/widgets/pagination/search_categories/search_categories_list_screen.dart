@@ -4,18 +4,21 @@ import '../../../repositories/stud_advice/stud_advice.dart';
 import 'search_categories_paged_list_view.dart';
 
 class SearchCategoriesListScreen extends StatefulWidget {
+  final String searchQuery;
+
+  SearchCategoriesListScreen({required this.searchQuery, super.key});
+
   @override
-  _AdministrativeCategoryListScreenState createState() => _AdministrativeCategoryListScreenState();
+  SearchCategoriesListScreenState createState() => SearchCategoriesListScreenState();
 }
 
-class _AdministrativeCategoryListScreenState extends State<SearchCategoriesListScreen> {
-  String query = "";
+class SearchCategoriesListScreenState extends State<SearchCategoriesListScreen> {
 
   @override
   Widget build(BuildContext context) => Scaffold(
     body: SearchCategoriesPagedListView(
       repository: Get.find<StudAdviceRepository>(),
-      query: query,
+      query: widget.searchQuery,
     ),
   );
 }
