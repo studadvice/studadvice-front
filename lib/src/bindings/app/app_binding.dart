@@ -4,7 +4,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
 import 'package:stud_advice/src/controllers/categories/category_controller.dart';
 import 'package:stud_advice/src/controllers/controllers.dart';
-import 'package:stud_advice/src/repositories/stud_advice/stud_advice.dart';
 
 class AppDependenciesBinding extends Bindings {
   static final FirebaseAuth firebaseAuthInstance = FirebaseAuth.instance;
@@ -23,7 +22,6 @@ class AppDependenciesBinding extends Bindings {
 
     // Register the firebase services.
     Get.put(AuthenticationController(), permanent: true);
-    Get.put(StudAdviceRepository(), permanent: true);
 
     Get.put(CategoryController(), permanent: true);
   }
