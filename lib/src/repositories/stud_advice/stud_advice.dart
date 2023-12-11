@@ -31,7 +31,7 @@ class StudAdviceRepository implements IStudAdviceRepository {
     }
   }
 
-  Future<AdministrativeProcess> _getCategoriesBySearch(
+  Future<AdministrativeProcessCategory> _getCategoriesBySearch(
       String path, Map<String, dynamic> queryParameters) async {
     try {
       final response = await _dio.get(
@@ -41,7 +41,7 @@ class StudAdviceRepository implements IStudAdviceRepository {
       );
 
       if (response.statusCode == 200) {
-        return AdministrativeProcess.fromJson(response.data);
+        return AdministrativeProcessCategory.fromJson(response.data);
       } else {
         throw Exception('Failed to load categories');
       }
@@ -79,7 +79,7 @@ class StudAdviceRepository implements IStudAdviceRepository {
   }
 
   @override
-  Future<AdministrativeProcess> getCategoriesBySearch({
+  Future<AdministrativeProcessCategory> getCategoriesBySearch({
     required int number,
     required int size,
     required String query,
