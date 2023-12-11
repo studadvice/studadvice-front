@@ -1,4 +1,4 @@
-class AdministrativeProcessCategory {
+class Category {
   late List<CategoryContent> content;
   late Pageable pageable;
   late int totalElements;
@@ -11,7 +11,7 @@ class AdministrativeProcessCategory {
   late bool first;
   late bool empty;
 
-  AdministrativeProcessCategory(
+  Category(
       {
         required this.content,
         required this.pageable,
@@ -26,7 +26,7 @@ class AdministrativeProcessCategory {
         required this.empty
       });
 
-  AdministrativeProcessCategory.fromJson(Map<String, dynamic> json) {
+  Category.fromJson(Map<String, dynamic> json) {
     if (json['content'] != null) {
       content = <CategoryContent>[];
       json['content'].forEach((v) {

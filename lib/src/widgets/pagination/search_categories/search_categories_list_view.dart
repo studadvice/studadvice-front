@@ -4,10 +4,10 @@ import 'package:stud_advice/src/models/stud_advice/category.dart';
 import '../../../repositories/stud_advice/stud_advice.dart';
 import '../exception_indicators/empty_list_indicator.dart';
 import '../exception_indicators/error_indicator.dart';
-import '../categories/category.dart';
+import '../../../screens/categories/category_screen.dart';
 
-class SearchCategoriesPagedListView extends StatefulWidget {
-  const SearchCategoriesPagedListView({
+class SearchCategoriesListView extends StatefulWidget {
+  const SearchCategoriesListView({
     required this.repository,
     required this.query,
     super.key,
@@ -17,10 +17,10 @@ class SearchCategoriesPagedListView extends StatefulWidget {
   final String query;
 
   @override
-  _SearchCategoriesPagedListViewState createState() => _SearchCategoriesPagedListViewState();
+  _SearchCategoriesListViewState createState() => _SearchCategoriesListViewState();
 }
 
-class _SearchCategoriesPagedListViewState extends State<SearchCategoriesPagedListView> {
+class _SearchCategoriesListViewState extends State<SearchCategoriesListView> {
 
 
   final _pagingController = PagingController<int, CategoryContent>(
@@ -57,7 +57,6 @@ class _SearchCategoriesPagedListViewState extends State<SearchCategoriesPagedLis
         _pagingController.appendLastPage([]);
       }
     } catch (error) {
-      print(error);
       _pagingController.error = error;
     }
   }
@@ -69,7 +68,7 @@ class _SearchCategoriesPagedListViewState extends State<SearchCategoriesPagedLis
   }
 
   @override
-  void didUpdateWidget(SearchCategoriesPagedListView oldWidget) {
+  void didUpdateWidget(SearchCategoriesListView oldWidget) {
     super.didUpdateWidget(oldWidget);
   }
 
@@ -81,7 +80,7 @@ class _SearchCategoriesPagedListViewState extends State<SearchCategoriesPagedLis
     child: PagedListView.separated(
       pagingController: _pagingController,
       builderDelegate: PagedChildBuilderDelegate<CategoryContent>(
-        itemBuilder: (context, categoryItem, index) => Category(
+        itemBuilder: (context, categoryItem, index) => CategoryScreen(
           category: categoryItem,
         ),
         firstPageErrorIndicatorBuilder: (context) => ErrorIndicator(
