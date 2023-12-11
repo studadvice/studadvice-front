@@ -1,29 +1,27 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
-import 'package:stud_advice/src/controllers/categories/category_controller.dart';
-
 import '../../models/stud_advice/category.dart';
 
 class CategoryItem extends StatelessWidget {
-  CategoryItem(
-      {
-        required this.category, super.key
-      }
-      );
+  CategoryItem({
+    required this.category,
+    super.key,
+  });
 
   final CategoryContent category;
-  final CategoryController _controller = Get.find<CategoryController>();
+  final RxBool _isLongPress = false.obs;
 
   @override
   Widget build(BuildContext context) {
     Color cardColor = Color(int.parse(category.color, radix: 16) + 0xFF000000);
+
     return GestureDetector(
       onLongPress: () {
-        _controller.setLongPress(true);
+        _isLongPress.value = true;
       },
       onTap: () {
-        _controller.setLongPress(false);
+        _isLongPress.value = false;
       },
       child: Card(
         color: cardColor,
@@ -50,7 +48,8 @@ class CategoryItem extends StatelessWidget {
                       ),
                       const SizedBox(height: 4),
                       Text(
-                        '${category.administrativeProcesses!.length} démarches ',                      style: const TextStyle(
+                        '${category.administrativeProcesses!.length} démarches ',
+                        style: const TextStyle(
                           color: Colors.white,
                           fontSize: 16,
                         ),
@@ -90,7 +89,7 @@ class CategoryItem extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
                       Obx(() => Visibility(
-                        visible: _controller.isLongPress.value,
+                        visible: _isLongPress.value,
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
