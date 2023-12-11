@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:stud_advice/src/widgets/pagination/categories/categories_list_screen.dart';
+import 'package:stud_advice/src/widgets/pagination/categories/categories_list.dart';
 import 'package:stud_advice/src/widgets/search/CategoriesSearch.dart';
 import 'package:stud_advice/stud_advice.dart';
 
@@ -39,7 +39,7 @@ class HomePageScreen extends StatelessWidget {
         ],
       ),
       body: Center(
-        child: CategoriesListScreen(),
+        child: CategoriesList(),
       ),
     );
     // },

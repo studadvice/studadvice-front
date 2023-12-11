@@ -1,34 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
+import 'package:stud_advice/src/models/stud_advice/category.dart';
 
-import '../../../models/stud_advice/category.dart';
-
-class Category extends StatefulWidget {
-  const Category({required this.category, super.key});
+class CategoryScreen extends StatelessWidget {
+  const CategoryScreen({required this.category, super.key});
 
   final CategoryContent category;
 
   @override
-  _CategoryState createState() => _CategoryState();
-}
-
-class _CategoryState extends State<Category> {
-  bool isLongPress = false;
-
-  @override
   Widget build(BuildContext context) {
-    Color cardColor = Color(int.parse(widget.category.color, radix: 16) + 0xFF000000);
+    bool isLongPress = false;
+    Color cardColor = Color(int.parse(category.color, radix: 16) + 0xFF000000);
 
     return GestureDetector(
       onLongPress: () {
-        setState(() {
-          isLongPress = true;
-        });
+        // Handle long press
       },
       onTap: () {
-        setState(() {
-          isLongPress = false;
-        });
+        // Handle tap
       },
       child: Card(
         color: cardColor,
@@ -47,7 +36,7 @@ class _CategoryState extends State<Category> {
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
                       Text(
-                        widget.category.name,
+                        category.name,
                         style: const TextStyle(
                           color: Colors.white,
                           fontSize: 20,
@@ -106,7 +95,7 @@ class _CategoryState extends State<Category> {
                                 maxWidth: 330,
                               ),
                               child: Text(
-                                widget.category.description ?? '',
+                                category.description ?? '',
                                 style: const TextStyle(
                                   color: Colors.white,
                                   fontSize: 16,
@@ -126,7 +115,6 @@ class _CategoryState extends State<Category> {
                 ],
               ),
             ],
-
           ),
         ),
       ),

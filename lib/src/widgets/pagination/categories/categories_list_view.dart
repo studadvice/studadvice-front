@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
-import 'package:stud_advice/src/models/stud_advice/category.dart';
+import '../../../models/stud_advice/category.dart';
 import '../../../repositories/stud_advice/stud_advice.dart';
+import '../../../screens/categories/category_screen.dart';
 import '../exception_indicators/empty_list_indicator.dart';
 import '../exception_indicators/error_indicator.dart';
-import 'category.dart';
 
-class CategoriesPagedListView extends StatefulWidget {
-  const CategoriesPagedListView({
+class CategoriesListView extends StatefulWidget {
+  const CategoriesListView({
     required this.repository,
     super.key,
   });
@@ -15,10 +15,10 @@ class CategoriesPagedListView extends StatefulWidget {
   final StudAdviceRepository repository;
 
   @override
-  _CategoriesPagedListViewState createState() => _CategoriesPagedListViewState();
+  _CategoriesListViewState createState() => _CategoriesListViewState();
 }
 
-class _CategoriesPagedListViewState extends State<CategoriesPagedListView> {
+class _CategoriesListViewState extends State<CategoriesListView> {
 
 
   final _pagingController = PagingController<int, CategoryContent>(
@@ -66,7 +66,7 @@ class _CategoriesPagedListViewState extends State<CategoriesPagedListView> {
   }
 
   @override
-  void didUpdateWidget(CategoriesPagedListView oldWidget) {
+  void didUpdateWidget(CategoriesListView oldWidget) {
     super.didUpdateWidget(oldWidget);
   }
 
@@ -78,7 +78,7 @@ class _CategoriesPagedListViewState extends State<CategoriesPagedListView> {
     child: PagedListView.separated(
       pagingController: _pagingController,
       builderDelegate: PagedChildBuilderDelegate<CategoryContent>(
-        itemBuilder: (context, categoryItem, index) => Category(
+        itemBuilder: (context, categoryItem, index) => CategoryScreen(
           category: categoryItem,
         ),
         firstPageErrorIndicatorBuilder: (context) => ErrorIndicator(
