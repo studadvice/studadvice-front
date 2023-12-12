@@ -3,6 +3,10 @@ import 'package:flutter/material.dart';
 import '../search_categories/search_categories_list_view.dart';
 
 class CategoriesSearch extends SearchDelegate<String> {
+
+  @override
+  String get searchFieldLabel => "Rechercher des démarches";
+
   @override
   List<Widget> buildActions(BuildContext context) {
     return [
