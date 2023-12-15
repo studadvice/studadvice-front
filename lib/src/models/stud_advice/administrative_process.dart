@@ -19,6 +19,7 @@ class AdministrativeProcess {
       required this.name,
       required this.description,
       required this.imageId,
+      this.isFavorite,
       this.educations,
       this.minAge,
       this.maxAge,

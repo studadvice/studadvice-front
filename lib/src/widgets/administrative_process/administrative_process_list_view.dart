@@ -72,13 +72,15 @@ class _AdministrativeProcessListViewState
         child: PagedListView.separated(
           pagingController: _pagingController,
           builderDelegate: PagedChildBuilderDelegate<AdministrativeProcess>(
-            itemBuilder: (context, categoryItem, index) =>
+            itemBuilder: (context, process, index) =>
                 AdministrativeProcessListTile(
-              name: categoryItem.name,
-              imageFileSrc: categoryItem.imageId,
-              description: categoryItem.description,
-              showProgressBar:
-                  false, // TODO set this to true when the user when the progress bar is needed.
+              name: process.name,
+              imageFileSrc: process.imageId,
+              description: process.description,
+              administrativeProcessId: process.id,
+              showProgressBar: false,
+              isFavorite: process
+                  .isFavorite!, // TODO set this to true when the user when the progress bar is needed.
             ),
             firstPageErrorIndicatorBuilder: (context) => ErrorIndicator(
               error: _pagingController.error,

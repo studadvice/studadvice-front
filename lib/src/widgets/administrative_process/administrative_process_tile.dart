@@ -5,19 +5,22 @@ import 'package:stud_advice/stud_advice.dart';
 class AdministrativeProcessListTile extends StatelessWidget {
   final String name;
   final String? imageFileSrc;
+  final String administrativeProcessId;
   final String description;
   final bool showProgressBar;
+  final bool isFavorite;
 
   final AdministrativeProcessController _controller =
       Get.find<AdministrativeProcessController>();
-  // TODO add favorite functionality
 
   AdministrativeProcessListTile(
       {Key? key,
-      required this.name,
       this.imageFileSrc,
+      required this.name,
       required this.description,
-      required this.showProgressBar});
+      required this.showProgressBar,
+      required this.administrativeProcessId,
+      required this.isFavorite});
 
   @override
   Widget build(BuildContext context) {
@@ -56,7 +59,6 @@ class AdministrativeProcessListTile extends StatelessWidget {
                   ),
                   BoxShadow(
                     color: AppColors.white,
-
                     offset: Offset(-2, 2), // Bottom-left shadow
                     blurRadius: 4.0,
                   ),
@@ -77,6 +79,7 @@ class AdministrativeProcessListTile extends StatelessWidget {
                 color: AppColors.blue,
                 size: 50.0,
               ),
+              // TODO
               // imageFileSrc != null
               //     ? Image.asset(
               //   imageFileSrc!,
@@ -119,18 +122,30 @@ class AdministrativeProcessListTile extends StatelessWidget {
                   ),
                 )
               : null,
-          trailing: Container(
-            padding: const EdgeInsets.all(5.0),
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(10.0),
-              border: Border.all(color: AppColors.grey),
-            ),
-            child: const Icon(
-              Icons.favorite,
-              color: AppColors.black,
-              size: 20.0,
-            ),
-          ),
+          trailing: Obx(() {
+            return GestureDetector(
+              onTap: () {
+                _controller.toggleFavoriteState(administrativeProcessId);
+                debugPrint('Favorite button tapped');
+                debugPrint(
+                    "isFavorite: ${_controller.isFavorite(administrativeProcessId)}");
+              },
+              child: Container(
+                padding: const EdgeInsets.all(5.0),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(10.0),
+                  border: Border.all(color: AppColors.grey),
+                ),
+                child: Icon(
+                  Icons.favorite,
+                  color: _controller.isFavorite(administrativeProcessId)
+                      ? AppColors.red
+                      : AppColors.black,
+                  size: 20.0,
+                ),
+              ),
+            );
+          }),
         ),
       ),
     );
