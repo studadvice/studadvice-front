@@ -15,6 +15,8 @@ class AppDependenciesBinding extends Bindings {
     // Register the chore services.
     Get.put(Dio(), permanent: true);
     Get.put(UserStorageController(), permanent: true);
+    Get.put(CategoryController(), permanent: true);
+    Get.put(FileController(), permanent: true);
 
     // Language and theme controllers.
     Get.put(I18n(), permanent: true);
@@ -22,7 +24,5 @@ class AppDependenciesBinding extends Bindings {
 
     // Register the firebase services.
     Get.put(AuthenticationController(), permanent: true);
-
-    Get.put(CategoryController(), permanent: true);
   }
 }
