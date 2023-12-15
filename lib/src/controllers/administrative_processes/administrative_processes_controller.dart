@@ -5,6 +5,7 @@ import 'package:stud_advice/stud_advice.dart';
 class AdministrativeProcessController extends GetxController {
   final RxList<AdministrativeProcess> administrativeProcesses =
       <AdministrativeProcess>[].obs;
+
   final FileController _fileController = Get.find<FileController>();
   final Dio _dio = Get.find<Dio>();
   final String baseUrl = 'http://localhost:8080';
@@ -23,60 +24,76 @@ class AdministrativeProcessController extends GetxController {
     );
   }
 
-  // TODO add the data retrieval logic from the caching system
   Future<dynamic> fetchAdministrativeProcesses(
       String categoryId, int number, int size) async {
-    // Mocked list of administrative processes
     List<AdministrativeProcess> processes = [
       AdministrativeProcess(
           id: '1',
           name: 'Process 1',
           imageId: 'image_id_1',
+          isFavorite: false,
           description: 'Description 1'),
       AdministrativeProcess(
           id: '2',
           name: 'Process 2',
           imageId: 'image_id_2',
+          isFavorite: true,
           description:
               'lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum '
               'lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum '),
       AdministrativeProcess(
-          id: '1',
+          id: '3',
           name: 'Process 1',
+          isFavorite: true,
           imageId: 'image_id_1',
           description: 'Description 1'),
       AdministrativeProcess(
-          id: '2',
+          id: '4',
           name: 'Process 2',
+          isFavorite: true,
           imageId: 'image_id_2',
           description:
               'lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum'
               ' lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum '),
       AdministrativeProcess(
-          id: '1',
+          id: '5',
           name: 'Process 1',
           imageId: 'image_id_1',
+          isFavorite: true,
           description: 'Description 1'),
       AdministrativeProcess(
-          id: '2',
+          id: '6',
           name: 'Process 2',
           imageId: 'image_id_2',
+          isFavorite: true,
           description:
               'lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum '
               'lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum '),
     ];
 
+    administrativeProcesses.addAll(processes);
+
     return {
       'content': processes,
       'last': true,
     };
+  }
 
-    // For each administrative process, download the image and set the imageFileSrc property
-    // for (var process in administrativeProcesses) {
-    //   String? imagePath = await _fileController.downloadFile(process.imageId!);
-    //   if (imagePath != null) {
-    //     process.imageFileSrc = imagePath;
-    //   }
-    // }
+  void toggleFavoriteState(String administrativeProcessId) {
+    final tileIndex = administrativeProcesses
+        .indexWhere((process) => process.id == administrativeProcessId);
+
+    if (tileIndex != -1) {
+      administrativeProcesses[tileIndex].isFavorite =
+          !administrativeProcesses[tileIndex].isFavorite!;
+      update();
+    }
+  }
+
+  bool isFavorite(String administrativeProcessId) {
+    final tileIndex = administrativeProcesses
+        .indexWhere((process) => process.id == administrativeProcessId);
+
+    return tileIndex != -1 && administrativeProcesses[tileIndex].isFavorite!;
   }
 }
