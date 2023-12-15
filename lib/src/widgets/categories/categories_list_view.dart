@@ -1,17 +1,18 @@
 import 'package:flutter/material.dart';
-import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 import 'package:get/get.dart';
+import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
+
 import '../../controllers/categories/category_controller.dart';
-import '../../models/stud_advice/category.dart';
 import '../../exceptions/empty_list_indicator.dart';
 import '../../exceptions/error_indicator.dart';
+import '../../models/stud_advice/category.dart';
 import 'category_item.dart';
 
 class CategoriesListView extends StatefulWidget {
   const CategoriesListView({super.key});
 
   @override
-  _CategoriesListViewState createState() => _CategoriesListViewState();
+  State<CategoriesListView> createState() => _CategoriesListViewState();
 }
 
 class _CategoriesListViewState extends State<CategoriesListView> {
@@ -58,25 +59,25 @@ class _CategoriesListViewState extends State<CategoriesListView> {
 
   @override
   Widget build(BuildContext context) => RefreshIndicator(
-    onRefresh: () => Future.sync(
+        onRefresh: () => Future.sync(
           () => _pagingController.refresh(),
-    ),
-    child: PagedListView.separated(
-      pagingController: _pagingController,
-      builderDelegate: PagedChildBuilderDelegate<CategoryContent>(
-        itemBuilder: (context, categoryItem, index) => CategoryItem(
-          category: categoryItem,
         ),
-        firstPageErrorIndicatorBuilder: (context) => ErrorIndicator(
-          error: _pagingController.error,
-          onTryAgain: () => _pagingController.refresh(),
+        child: PagedListView.separated(
+          pagingController: _pagingController,
+          builderDelegate: PagedChildBuilderDelegate<CategoryContent>(
+            itemBuilder: (context, categoryItem, index) => CategoryItem(
+              category: categoryItem,
+            ),
+            firstPageErrorIndicatorBuilder: (context) => ErrorIndicator(
+              error: _pagingController.error,
+              onTryAgain: () => _pagingController.refresh(),
+            ),
+            noItemsFoundIndicatorBuilder: (context) => EmptyListIndicator(),
+          ),
+          padding: const EdgeInsets.all(16),
+          separatorBuilder: (context, index) => const SizedBox(
+            height: 16,
+          ),
         ),
-        noItemsFoundIndicatorBuilder: (context) => EmptyListIndicator(),
-      ),
-      padding: const EdgeInsets.all(16),
-      separatorBuilder: (context, index) => const SizedBox(
-        height: 16,
-      ),
-    ),
-  );
+      );
 }

@@ -64,7 +64,8 @@ class RoutesConfiguration {
           middlewares: [I18nMiddleware()]),
       GetPage(
         name: AdministrativesProcessesScreen.navigatorId,
-        page: () => const AdministrativesProcessesScreen(),
+        page: () => AdministrativesProcessesScreen(),
+        binding: AdministrativeProcessBinding(),
         middlewares: [I18nMiddleware()],
       )
     ];
