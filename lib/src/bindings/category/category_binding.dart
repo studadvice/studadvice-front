@@ -1,7 +1,7 @@
 import 'package:get/get.dart';
-import 'package:stud_advice/src/controllers/categories/category_controller.dart';
+import 'package:stud_advice/src/controllers/controllers.dart';
 
-class Category implements Bindings {
+class CategoryBinding implements Bindings {
   @override
   void dependencies() {
     Get.put<CategoryController>(CategoryController());

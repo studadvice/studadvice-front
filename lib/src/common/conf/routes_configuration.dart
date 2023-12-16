@@ -20,6 +20,7 @@ class RoutesConfiguration {
       GetPage(
         name: HomePageScreen.navigatorId,
         page: () => HomePageScreen(),
+        binding: CategoryBinding(),
         middlewares: [I18nMiddleware()],
       ),
       GetPage(

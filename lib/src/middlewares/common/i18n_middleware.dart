@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-// import 'package:stud_advice/src/controllers/controllers.dart' show I18n;
 import 'package:stud_advice/src/controllers/controllers.dart';
 
 class I18nMiddleware extends GetMiddleware {
