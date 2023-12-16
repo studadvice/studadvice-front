@@ -1,5 +1,6 @@
 library controllers;
 
+export 'categories/category_controller.dart';
 export 'administrative_processes/administrative_processes_controller.dart';
 export 'authentication/authentication_controller.dart';
 export 'authentication/social_sign_in_controller.dart';

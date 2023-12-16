@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
-import '../search_categories/search_categories_list_view.dart';
+import 'search_categories_list_view.dart';
 
-class CategoriesSearch extends SearchDelegate<String> {
+class SearchCategories extends SearchDelegate<String> {
 
   @override
   String get searchFieldLabel => "Rechercher des démarches";

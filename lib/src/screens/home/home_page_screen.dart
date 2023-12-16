@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:stud_advice/src/widgets/categories/categories_list_view.dart';
-import 'package:stud_advice/src/widgets/search/categories_search.dart';
 import 'package:stud_advice/stud_advice.dart';
 
 class HomePageScreen extends StatelessWidget {
@@ -18,7 +16,7 @@ class HomePageScreen extends StatelessWidget {
         actions: [
           IconButton(
             onPressed: () {
-              showSearch(context: context, delegate: CategoriesSearch());
+              showSearch(context: context, delegate: SearchCategories());
             },
             icon: const Icon(
               Icons.search,

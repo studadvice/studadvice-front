@@ -1,5 +1,6 @@
 library widgets;
 
+
 export 'common/buttons/custom_button.dart';
 export 'common/buttons/login_social_button.dart';
 export 'common/buttons/social_button.dart';
@@ -31,3 +32,7 @@ export 'common/paints/step_detail/step_detail_card_widget.dart';
 export 'common/appbar/custom_app_bar.dart';
 export 'common/paints/step_number/step_number_painter.dart';
 export 'common/modals/information_modal.dart';
+export 'categories/search_categories.dart';
+export 'categories/search_categories_list_view.dart';
+export 'categories/categories_list_view.dart';
+export 'categories/category_item.dart';
