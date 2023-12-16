@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
-import '../../models/stud_advice/category.dart';
+import 'package:stud_advice/stud_advice.dart';
 
 class CategoryItem extends StatelessWidget {
   CategoryItem({

@@ -1,11 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 import 'package:get/get.dart';
-import '../../controllers/categories/category_controller.dart';
-import '../../models/stud_advice/category.dart';
-import '../../exceptions/empty_list_indicator.dart';
-import '../../exceptions/error_indicator.dart';
-import 'category_item.dart';
+import 'package:stud_advice/stud_advice.dart';
 
 class CategoriesListView extends StatefulWidget {
   const CategoriesListView({super.key});
