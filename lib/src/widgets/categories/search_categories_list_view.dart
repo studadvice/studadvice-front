@@ -5,7 +5,7 @@ import 'package:stud_advice/src/controllers/categories/category_controller.dart'
 import '../../exceptions/empty_list_indicator.dart';
 import '../../exceptions/error_indicator.dart';
 import '../../models/stud_advice/category.dart';
-import '../categories/category_item.dart';
+import 'category_item.dart';
 
 class SearchCategoriesListView extends StatelessWidget {
   const SearchCategoriesListView({

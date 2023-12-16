@@ -1,5 +1,6 @@
 library widgets;
 
+
 export 'common/buttons/custom_button.dart';
 export 'common/buttons/login_social_button.dart';
 export 'common/buttons/social_button.dart';
@@ -21,3 +22,7 @@ export 'settings/settings_icon_style.dart';
 export 'settings/settings_item.dart';
 export 'settings/settings_user_card.dart';
 export 'sheets/bottom_sheet_widget.dart';
+export 'categories/search_categories.dart';
+export 'categories/search_categories_list_view.dart';
+export 'categories/categories_list_view.dart';
+export 'categories/category_item.dart';
