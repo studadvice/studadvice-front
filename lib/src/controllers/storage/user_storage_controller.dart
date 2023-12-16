@@ -39,7 +39,7 @@ class UserStorageController extends GetxController {
         backgroundColor: AppColors.dangerColor,
         snackPosition: SnackPosition.BOTTOM,
         titleText: Text(
-          error,
+          'register.error'.tr,
           style: const TextStyle(color: AppColors.white),
         ),
       );

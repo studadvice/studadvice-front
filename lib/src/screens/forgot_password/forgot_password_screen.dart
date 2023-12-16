@@ -7,7 +7,6 @@ class ForgotPasswordScreen extends StatelessWidget {
 
   final ForgotPasswordController _forgotPasswordController = Get.find();
 
-  final I18n _i18n = Get.find();
   final _formKey = GlobalKey<FormState>();
 
   @override
@@ -15,7 +14,7 @@ class ForgotPasswordScreen extends StatelessWidget {
         appBar: AppBar(
           title: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 10),
-            child: Center(child: Text(_i18n.text('forgotPasswordTitle'))),
+            child: Center(child: Text('forgot_password.forgotPasswordTitle'.tr)),
           ),
           leading: IconButton(
             icon: const Icon(Icons.arrow_back),
@@ -41,7 +40,7 @@ class ForgotPasswordScreen extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Text(
-                    _i18n.text('forgotPasswordMessage'),
+                    'forgot_password.forgotPasswordMessage'.tr,
                     textAlign: TextAlign.center,
                     style: const TextStyle(
                       fontSize: AppFontSizes.large18,
@@ -52,8 +51,8 @@ class ForgotPasswordScreen extends StatelessWidget {
                 const SizedBox(height: 20),
                 ClassicTextField(
                   controller: _forgotPasswordController.emailController,
-                  hintText: _i18n.text('emailHint'),
-                  labelText: _i18n.text('emailLabel'),
+                  hintText: 'forgot_password.emailHint'.tr,
+                  labelText: 'forgot_password.emailLabel'.tr,
                   validator: (value) => FormValidator.validateEmail(value),
                   autofillHints: [AutofillHints.email],
                   backgroundColor: AppColors.white,
@@ -64,14 +63,14 @@ class ForgotPasswordScreen extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: CustomButton(
-                      text: _i18n.text('send'),
+                      text: 'forgot_password.send'.tr,
                       onPressed: () {
                         if (_formKey.currentState!.validate()) {
                           _forgotPasswordController.resetPassword(
-                              _i18n.text('successTitle'),
-                              _i18n.text('successMessage'),
-                              _i18n.text('errorTitle'),
-                              _i18n.text('errorMessage'));
+                              'forgot_password.successTitle'.tr,
+                              'forgot_password.successMessage'.tr,
+                              'forgot_password.errorTitle'.tr,
+                              'forgot_password.errorMessage'.tr);
                         }
                       },
                       textColor: AppColors.white,
