@@ -5,6 +5,8 @@ import 'package:get/get.dart';
 import 'package:stud_advice/src/controllers/categories/category_controller.dart';
 import 'package:stud_advice/src/controllers/controllers.dart';
 
+import '../../controllers/file/file_controller.dart';
+
 class AppDependenciesBinding extends Bindings {
   static final FirebaseAuth firebaseAuthInstance = FirebaseAuth.instance;
   static final FirebaseFirestore firebaseFirestoreInstance =
