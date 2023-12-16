@@ -4,7 +4,6 @@ import 'package:stud_advice/stud_advice.dart';
 
 class HomePageScreen extends StatelessWidget {
   static const navigatorId = '/home_page_screen';
-  final I18n _i18n = Get.find<I18n>();
 
   @override
   Widget build(BuildContext context) {
@@ -33,7 +32,7 @@ class HomePageScreen extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
               child: CustomButton(
-                text: _i18n.text('settings'),
+                text: 'settings.settings.title'.tr,
                 textColor: AppColors.white,
                 backgroundColor: AppColors.dangerColor,
                 onPressed: () {
