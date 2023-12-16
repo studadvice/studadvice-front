@@ -5,6 +5,8 @@ import 'package:get/get.dart';
 import 'package:stud_advice/src/controllers/categories/category_controller.dart';
 import 'package:stud_advice/src/controllers/controllers.dart';
 
+import '../../controllers/file/file_controller.dart';
+
 class AppDependenciesBinding extends Bindings {
   static final FirebaseAuth firebaseAuthInstance = FirebaseAuth.instance;
   static final FirebaseFirestore firebaseFirestoreInstance =
@@ -15,6 +17,8 @@ class AppDependenciesBinding extends Bindings {
     // Register the chore services.
     Get.put(Dio(), permanent: true);
     Get.put(UserStorageController(), permanent: true);
+    Get.put(CategoryController(), permanent: true);
+    Get.put(FileController(), permanent: true);
 
     // Language and theme controllers.
     Get.put(I18n(), permanent: true);
