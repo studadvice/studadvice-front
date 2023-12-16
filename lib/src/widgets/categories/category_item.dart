@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:percent_indicator/circular_percent_indicator.dart';
 import '../../models/stud_advice/category.dart';
 import '../../screens/administrative_processes/AdministrativeProcessesScreen.dart';
 
@@ -12,6 +11,7 @@ class CategoryItem extends StatelessWidget {
 
   final CategoryContent category;
   final RxBool _isLongPress = false.obs;
+
 
   @override
   Widget build(BuildContext context) {
@@ -36,19 +36,20 @@ class CategoryItem extends StatelessWidget {
           );
         }
       },
-      child: Card(
-        color: cardColor,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(16),
-        ),
-        child: Padding(
-          padding: const EdgeInsets.all(25),
-          child: Column(
-            children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      child:
+        Card(
+            color: cardColor,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(16),
+            ),
+            child: Padding(
+              padding: const EdgeInsets.all(15),
+              child: Column(
                 children: [
-                  Column(
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                    Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
@@ -66,85 +67,24 @@ class CategoryItem extends StatelessWidget {
                           color: Colors.white,
                           fontSize: 16,
                         ),
-                      ),
-                      const SizedBox(height: 4),
-                      CircularPercentIndicator(
-                        radius: 30,
-                        lineWidth: 8,
-                        animation: true,
-                        animationDuration: 1500,
-                        circularStrokeCap: CircularStrokeCap.round,
-                        percent: 0.7,
-                        progressColor: Colors.white,
-                        center: const Text(
-                          "${70}%",
-                          style: TextStyle(color: Colors.white),
-                        ),
                       )
+                      ]
+                    )
                     ],
                   ),
-                  const Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
+                  const Row(
+                    mainAxisAlignment: MainAxisAlignment.end, // Align to the right
                     children: [
                       Image(
                         image: AssetImage('assets/images/common/raven_image.png'),
-                        height: 110,
+                        height: 100,
                       ),
                     ],
                   ),
                 ],
               ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      Obx(() => Visibility(
-                        visible: _isLongPress.value,
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            const SizedBox(height: 8),
-                            Container(
-                              constraints: const BoxConstraints(
-                                maxWidth: 330,
-                              ),
-                              child: Text(
-                                category.description ?? '',
-                                style: const TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 16,
-                                ),
-                              ),
-                            ),
-                            const SizedBox(height: 8),
-                            ElevatedButton(
-                                onPressed: () {
-                                  Get.toNamed(
-                                    AdministrativesProcessesScreen.navigatorId,
-                                    arguments: {
-                                      'categoryId':
-                                      category.id,
-                                      'categoryColor':
-                                      category.color
-                                    },
-                                  );
-                                },
-                              child: const Text('Go'),
-                            ),
-                          ],
-                        ),
-                      )),
-                    ],
-                  )
-                ],
-              ),
-            ],
+            ),
           ),
-        ),
-      ),
     );
   }
 }
