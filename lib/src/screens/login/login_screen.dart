@@ -8,7 +8,6 @@ class LoginScreen extends StatelessWidget {
   final LoginController _loginController = Get.find();
   final SocialSignInController _socialSignInController = Get.find();
   final LegalTermsController _termsAndConditionsController = Get.find();
-  final I18n _i18n = Get.find();
 
   final _formKey = GlobalKey<FormState>();
 
@@ -39,7 +38,7 @@ class LoginScreen extends StatelessWidget {
                 const SizedBox(height: 10),
                 buildLoginButton(),
                 const SizedBox(height: 10),
-                DividerWithText(text: _i18n.text('orContinueWith')),
+                DividerWithText(text: 'login.orContinueWith'.tr),
                 const SizedBox(height: 10),
                 buildSocialLoginButtons(context),
                 const SizedBox(height: 50),
@@ -52,7 +51,7 @@ class LoginScreen extends StatelessWidget {
 
   String? validatePassword(String? value) {
     if (value == null || value.isEmpty) {
-      return _i18n.text('passwordError');
+      return 'login.passwordError'.tr;
     }
     return null;
   }
@@ -60,8 +59,8 @@ class LoginScreen extends StatelessWidget {
   Widget buildEmailTextField() {
     return ClassicTextField(
         validator: FormValidator.validateEmail,
-        hintText: _i18n.text('emailHint'),
-        labelText: _i18n.text('emailLabel'),
+        hintText: 'global.email'.tr,
+        labelText: 'global.email'.tr,
         controller: _loginController.emailController,
         autofillHints: [AutofillHints.email],
         keyboardType: TextInputType.emailAddress,
@@ -74,12 +73,12 @@ class LoginScreen extends StatelessWidget {
     return PasswordTextField(
         validator: (value) {
           if (value == null || value.isEmpty) {
-            return _i18n.text('passwordError');
+            return 'login.passwordError'.tr;
           }
           return null;
         },
-        hintText: _i18n.text('passwordHint'),
-        labelText: _i18n.text('passwordLabel'),
+        hintText: 'global.password'.tr,
+        labelText: 'global.password'.tr,
         controller: _loginController.passwordController,
         backgroundColor: AppColors.white,
         focusedBorderColor: AppColors.secondaryColor,
@@ -88,7 +87,7 @@ class LoginScreen extends StatelessWidget {
 
   Widget buildWelcomeBackText() {
     return Text(
-      _i18n.text('welcomeBack'),
+      'login.welcomeBack'.tr,
       style: const TextStyle(
         fontSize: AppFontSizes.large25,
         fontWeight: FontWeight.bold,
@@ -111,14 +110,14 @@ class LoginScreen extends StatelessWidget {
                 _loginController.rememberMe.value = value!;
               },
             )),
-        Text(_i18n.text('rememberMe')),
+        Text('login.rememberMe'.tr),
         const SizedBox(width: 10),
         TextButton(
           onPressed: () {
             Get.toNamed(ForgotPasswordScreen.navigatorId);
           },
           child: Text(
-            _i18n.text('forgotPassword'),
+            'login.forgotPassword'.tr,
             style: const TextStyle(
               color: AppColors.primaryColor,
             ),
@@ -130,7 +129,7 @@ class LoginScreen extends StatelessWidget {
 
   Widget buildLoginButton() {
     return CustomButton(
-        text: _i18n.text('login'),
+        text: 'global.login'.tr,
         textColor: AppColors.white,
         backgroundColor: AppColors.blue,
         onPressed: () {
@@ -214,7 +213,7 @@ class LoginScreen extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20),
           child: Text(
-            _i18n.text('acceptingTermsAndConditions'),
+            'login.acceptingTermsAndConditions'.tr,
             textAlign: TextAlign.justify,
             style: const TextStyle(
               fontSize: 12,
@@ -224,7 +223,7 @@ class LoginScreen extends StatelessWidget {
         ),
         const SizedBox(height: 10),
         _termsAndConditionsController
-            .buildTermsAndConditionsButton(_i18n.text('legalConditionsButton')),
+            .buildTermsAndConditionsButton('login.legalConditionsButton'.tr),
       ],
     );
   }
