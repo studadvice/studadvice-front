@@ -1,6 +1,8 @@
 import 'package:get/get.dart';
 import 'package:stud_advice/stud_advice.dart';
 
+import '../../screens/administrative_processes/AdministrativeProcessesScreen.dart';
+
 class RoutesConfiguration {
   static const String initialRoute = InitTimeScreen.navigatorId;
 
@@ -62,6 +64,11 @@ class RoutesConfiguration {
           page: () => ForgotPasswordScreen(),
           binding: ForgotPasswordBinding(),
           middlewares: [I18nMiddleware()]),
+      GetPage(
+        name: AdministrativesProcessesScreen.navigatorId,
+        page: () => AdministrativesProcessesScreen(),
+        middlewares: [I18nMiddleware()],
+      )
     ];
   }
 }

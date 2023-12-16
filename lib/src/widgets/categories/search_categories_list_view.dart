@@ -3,6 +3,8 @@ import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 import 'package:get/get.dart';
 import 'package:stud_advice/stud_advice.dart';
 
+import '../../models/stud_advice/category.dart';
+
 class SearchCategoriesListView extends StatelessWidget {
   const SearchCategoriesListView({
     super.key,
