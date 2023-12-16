@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
-import 'package:stud_advice/stud_advice.dart';
+import '../../models/stud_advice/category.dart';
+import '../../screens/administrative_processes/AdministrativeProcessesScreen.dart';
 
 class CategoryItem extends StatelessWidget {
   CategoryItem({
@@ -21,7 +22,19 @@ class CategoryItem extends StatelessWidget {
         _isLongPress.value = true;
       },
       onTap: () {
-        _isLongPress.value = false;
+        if (_isLongPress.value) {
+          _isLongPress.value = false;
+        } else {
+          Get.toNamed(
+            AdministrativesProcessesScreen.navigatorId,
+            arguments: {
+                'categoryId':
+                category.id,
+                'categoryColor':
+                category.color
+            },
+          );
+        }
       },
       child: Card(
         color: cardColor,
@@ -108,7 +121,17 @@ class CategoryItem extends StatelessWidget {
                             ),
                             const SizedBox(height: 8),
                             ElevatedButton(
-                              onPressed: () {},
+                                onPressed: () {
+                                  Get.toNamed(
+                                    AdministrativesProcessesScreen.navigatorId,
+                                    arguments: {
+                                      'categoryId':
+                                      category.id,
+                                      'categoryColor':
+                                      category.color
+                                    },
+                                  );
+                                },
                               child: const Text('Go'),
                             ),
                           ],

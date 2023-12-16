@@ -18,7 +18,6 @@ class CategoryController extends GetxController {
         throw Exception('Failed to load categories');
       }
     } catch (error) {
-      print(error);
       rethrow;
     }
   }
