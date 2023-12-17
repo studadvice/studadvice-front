@@ -57,7 +57,6 @@ class RoutesConfiguration {
         name: RoadMapScreen.navigatorId,
         page: () => RoadMapScreen(
           currentStep: 1,
-          stepCount: 5,
         ),
         middlewares: [I18nMiddleware()],
       )

@@ -1,22 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:stud_advice/stud_advice.dart';
+import 'package:get/get.dart';
 
 class StepsIndicator extends StatelessWidget {
-  final int stepCount;
   final int currentStep;
   final List<StepItem> steps;
   static double DIAMETER = 100.0;
 
 
-  const StepsIndicator({
+  StepsIndicator({
         super.key,
-        required this.stepCount,
         required this.currentStep,
         required this.steps,
   });
 
   @override
   Widget build(BuildContext context) {
+    final StepController controller = Get.find<StepController>();
+
     return Scaffold(
       body: ListView.builder(
         itemCount: steps.length,
@@ -41,9 +42,7 @@ class StepsIndicator extends StatelessWidget {
                         diameter: stepWidgetDiameter,
                         color: step.color,
                         isEnabled: step.isCompleted,
-                        onPressed: () {
-                          print('Step $stepNumber pressed');
-                        },
+                        onPressed: () => controller.changeStep(index),
                       ),
                     ],
                   ),

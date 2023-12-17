@@ -6,6 +6,7 @@ class StepItem {
   final bool isCompleted;
   final bool isCurrent;
   final Color color;
+  final String description;
 
   StepItem({
     required this.number,
@@ -13,5 +14,6 @@ class StepItem {
     this.isCompleted = false,
     this.isCurrent = false,
     required this.color,
+    required this.description,
   });
 }
