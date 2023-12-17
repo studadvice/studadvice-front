@@ -24,30 +24,30 @@ class HomePageScreen extends StatelessWidget {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                RoadMapScreen(
-                  currentStep: 1,
-                  stepCount: 5,
+                // RoadMapScreen(
+                //   currentStep: 1,
+                //   stepCount: 5,
+                // ),
+                const Text(
+                  'Welcome to the Home Page!',
+                  style: TextStyle(
+                    fontSize: AppFontSizes.extraLarge,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
-                // const Text(
-                //   'Welcome to the Home Page!',
-                //   style: TextStyle(
-                //     fontSize: AppFontSizes.extraLarge,
-                //     fontWeight: FontWeight.bold,
-                //   ),
-                // ),
                 const SizedBox(height: 20),
-                // Padding(
-                //   padding:
-                //       const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                //   child: CustomButton(
-                //     text: "Settings",
-                //     textColor: AppColors.white,
-                //     backgroundColor: AppColors.dangerColor,
-                //     onPressed: () {
-                //       Get.toNamed(SettingsScreen.navigatorId);
-                //     },
-                //   ),
-                // ),
+                Padding(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                  child: CustomButton(
+                    text: "Settings",
+                    textColor: AppColors.white,
+                    backgroundColor: AppColors.dangerColor,
+                    onPressed: () {
+                      Get.toNamed(SettingsScreen.navigatorId);
+                    },
+                  ),
+                ),
               ],
             ),
           ),
