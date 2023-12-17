@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:stud_advice/src/widgets/common/paints/step_detail/step_detail_card_widget.dart';
 import 'package:stud_advice/stud_advice.dart';
 
 class RoadMapScreen extends StatelessWidget {
@@ -83,55 +84,25 @@ class RoadMapScreen extends StatelessWidget {
             ),
           const Divider(
             thickness: 0.3,
-            indent: 5,
-            endIndent: 5,
+            indent: 1,
+            endIndent: 1,
           ),
           Expanded(
             flex: 1,
             child: Obx(() {
               StepItem currentStepItem = steps[stepController.currentStep.value];
-              print(currentStepItem.description);
-              return Container(
-                padding: const EdgeInsets.all(5),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      currentStepItem.title,
-                      style: const TextStyle(
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.blue,
-                      ),
-                    ),
-                    const SizedBox(height: 7),
-                    Text(
-                      currentStepItem.description,
-                      style: const TextStyle(
-                        fontSize: 16,
-                        color: Colors.black54,
-                      ),
-                    ),
-                    const SizedBox(height: 80),
-                    Center(
-                      child: Align(
-                        alignment: Alignment.center,
-                        child: CustomButton(
-                          text: "Next",
-                          textColor: AppColors.white,
-                          backgroundColor: AppColors.primaryColorAccent,
-                          onPressed: () {
-                            if (stepController.currentStep.value == steps.length - 1) {
-                              Get.offAllNamed(HomePageScreen.navigatorId);
-                              return;
-                            }
-                            stepController.changeStep(stepController.currentStep.value + 1);
-                          },
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
+              return StepDetailCardWidget(
+                title: currentStepItem.title,
+                description: currentStepItem.description,
+                onActionPressed: () {
+                  if (stepController.currentStep.value == steps.length - 1) {
+                    Get.offAllNamed(HomePageScreen.navigatorId);
+                  } else {
+                    stepController
+                        .changeStep(stepController.currentStep.value + 1);
+                  }
+                },
+                actionText: "Next",
               );
             }),
           ),

@@ -25,6 +25,7 @@ class StepsIndicator extends StatelessWidget {
           int stepNumber = index + 1;
           bool isLeftAligned = stepNumber % 2 != 0;
           StepItem step = steps[index];
+          double scale = currentStep == index ? 1.1 : 1.0;
 
           return LayoutBuilder(
             builder: (BuildContext context, BoxConstraints constraints) {
@@ -36,13 +37,18 @@ class StepsIndicator extends StatelessWidget {
                 children: [
                   Row(
                     mainAxisAlignment: isLeftAligned ? MainAxisAlignment.start : MainAxisAlignment.end,
+
                     children: [
-                      StepNumberWidget(
-                        stepNumber: stepNumber,
-                        diameter: stepWidgetDiameter,
-                        color: step.color,
-                        isEnabled: step.isCompleted,
-                        onPressed: () => controller.changeStep(index),
+                      AnimatedScale(
+                        scale: scale,
+                        duration: const Duration(milliseconds: 300),
+                      child: StepNumberWidget(
+                          stepNumber: stepNumber,
+                          diameter: stepWidgetDiameter,
+                          color: step.color,
+                          isEnabled: step.isCompleted,
+                          onPressed: () => controller.changeStep(index),
+                        ),
                       ),
                     ],
                   ),
