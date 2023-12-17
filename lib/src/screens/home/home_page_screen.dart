@@ -48,6 +48,18 @@ class HomePageScreen extends StatelessWidget {
                     },
                   ),
                 ),
+                Padding(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                  child: CustomButton(
+                    text: "Roadmap",
+                    textColor: AppColors.white,
+                    backgroundColor: AppColors.primaryColorAccent,
+                    onPressed: () {
+                      Get.toNamed(RoadMapScreen.navigatorId);
+                    },
+                  ),
+                ),
               ],
             ),
           ),
