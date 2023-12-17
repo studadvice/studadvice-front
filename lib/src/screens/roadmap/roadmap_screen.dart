@@ -90,6 +90,7 @@ class RoadMapScreen extends StatelessWidget {
             flex: 1,
             child: Obx(() {
               StepItem currentStepItem = steps[stepController.currentStep.value];
+              print(currentStepItem.description);
               return Container(
                 padding: const EdgeInsets.all(5),
                 child: Column(
@@ -105,7 +106,7 @@ class RoadMapScreen extends StatelessWidget {
                     ),
                     const SizedBox(height: 7),
                     Text(
-                      currentStepItem.description!,
+                      currentStepItem.description,
                       style: const TextStyle(
                         fontSize: 16,
                         color: Colors.black54,
@@ -120,7 +121,11 @@ class RoadMapScreen extends StatelessWidget {
                           textColor: AppColors.white,
                           backgroundColor: AppColors.primaryColorAccent,
                           onPressed: () {
-                            // stepController.changeStep(stepController.currentStep.value + 1);
+                            if (stepController.currentStep.value == steps.length - 1) {
+                              Get.offAllNamed(HomePageScreen.navigatorId);
+                              return;
+                            }
+                            stepController.changeStep(stepController.currentStep.value + 1);
                           },
                         ),
                       ),
