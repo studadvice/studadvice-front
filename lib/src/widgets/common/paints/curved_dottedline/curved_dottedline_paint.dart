@@ -57,7 +57,7 @@ class CurvedDottedLinePainter extends CustomPainter {
       path.moveTo(-200/100, size.height/20);
       path.cubicTo(
         size.width * (.9 / 2), size.height + (size.height * (1 / 3)),
-        size.width * (2 / 2.8), size.height - (size.height * (2.6 / 2)),
+        size.width * (2 / 2.7), size.height - (size.height * (2.6 / 2)),
         size.width, size.height,
       );
       return path;

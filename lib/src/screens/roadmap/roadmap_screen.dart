@@ -10,9 +10,12 @@ class RoadMapScreen extends StatelessWidget {
   final int currentStep;
   List<StepItem> steps = [
     StepItem(number: 1, title: 'Step 1', isCompleted: true, color: Colors.green),
-    StepItem(number: 2, title: 'Step 2', isCompleted: false, color: Colors.lightBlue),
-    StepItem(number: 3, title: 'Step 3', isCompleted: false, color: Colors.blue),
-    StepItem(number: 4, title: 'Step 4', isCompleted: false, color: Colors.orange),
+    StepItem(number: 2, title: 'Step 2', isCompleted: true, color: Colors.lightBlue),
+    StepItem(number: 3, title: 'Step 3', isCompleted: true, color: Colors.blue),
+    StepItem(number: 4, title: 'Step 4', isCompleted: true, color: Colors.orange),
+    StepItem(number: 5, title: 'Step 4', isCompleted: true, color: Colors.green),
+    StepItem(number: 6, title: 'Step 4', isCompleted: true, color: Colors.lightBlue),
+    StepItem(number: 7, title: 'Step 4', isCompleted: true, color: Colors.orange),
   ];
 
   RoadMapScreen({

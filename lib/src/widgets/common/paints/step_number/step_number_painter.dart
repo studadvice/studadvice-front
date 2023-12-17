@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 
-import 'package:flutter/material.dart';
-
 class StepNumberPainter extends CustomPainter {
   final int stepNumber;
   final Color color;

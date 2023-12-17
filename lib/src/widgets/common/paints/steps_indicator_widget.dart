@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:stud_advice/src/models/step/step_item_data.dart';
-import 'package:stud_advice/src/widgets/common/paints/curved_dottedline/curved_dottedline_paint.dart';
-import 'package:stud_advice/src/widgets/common/paints/step_number/step_number_widget.dart';
+import 'package:stud_advice/stud_advice.dart';
 
 class StepsIndicator extends StatelessWidget {
   final int stepCount;
@@ -38,15 +36,15 @@ class StepsIndicator extends StatelessWidget {
                   Row(
                     mainAxisAlignment: isLeftAligned ? MainAxisAlignment.start : MainAxisAlignment.end,
                     children: [
-                      // StepNumberWidget(
-                      //   stepNumber: stepNumber,
-                      //   diameter: stepWidgetDiameter,
-                      //   color: step.color,
-                      //   isEnabled: step.isCompleted,
-                      //   onPressed: () {
-                      //     print('Step $stepNumber pressed');
-                      //   },
-                      // ),
+                      StepNumberWidget(
+                        stepNumber: stepNumber,
+                        diameter: stepWidgetDiameter,
+                        color: step.color,
+                        isEnabled: step.isCompleted,
+                        onPressed: () {
+                          print('Step $stepNumber pressed');
+                        },
+                      ),
                     ],
                   ),
                   if (index < steps.length - 1)
