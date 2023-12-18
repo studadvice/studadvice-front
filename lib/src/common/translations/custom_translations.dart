@@ -143,6 +143,17 @@ class AppTranslations extends Translations {
           "connectivity.connectionRestoredText": "Connexion rétablie",
           "connectivity.connectionRestoredMessage":
               "Vous êtes à nouveau connecté à Internet.",
+          // ----------------
+
+          // Login controller
+          "login_controller.error": "Erreur de connexion",
+          "login_controller.loginWithEmailFailed":
+              "Une erreur s'est produite lors de la connexion",
+          "login_controller.invalidCredentials":
+              "E-mail ou mot de passe incorrect",
+          "login_controller.wrongPassword": "Mot de passe incorrect",
+          "login_controller.userDisabled": "Le compte a été désactivé",
+          "login_controller.userNotFound": "Le compte n'existe pas",
         },
         'en_US': {
           // Global
@@ -282,6 +293,16 @@ class AppTranslations extends Translations {
           "connectivity.connectionRestoredText": "Connection restored",
           "connectivity.connectionRestoredMessage":
               "You are now connected to the Internet.",
+          // ----------------
+
+          // Login controller
+          "login_controller.error": "Connection error",
+          "login_controller.loginWithEmailFailed":
+              "An error occurred during login",
+          "login_controller.invalidCredentials": "Incorrect email or password",
+          "login_controller.wrongPassword": "Incorrect password",
+          "login_controller.userDisabled": "The account has been disabled",
+          "login_controller.userNotFound": "The account does not exist",
         }
       };
 }

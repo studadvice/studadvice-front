@@ -5,8 +5,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:stud_advice/stud_advice.dart';
 
 class LoginController extends GetxController {
-  final AuthenticationController _authenticationController =
-      Get.find();
+  final AuthenticationController _authenticationController = Get.find();
 
   // Controllers for the text fields.
   final TextEditingController emailController = TextEditingController();
@@ -25,14 +24,6 @@ class LoginController extends GetxController {
     passwordController.dispose();
     super.onClose();
   }
-
-  final String error = "Erreur de connexion";
-  final String loginWithEmailFailed =
-      "Une erreur s'est produite lors de la connexion";
-  final String invalidCredentials = "Email ou mot de passe incorrects";
-  final String wrongPassword = "Mot de passe incorrect";
-  final String userDisabled = "Le compte a été désactivé";
-  final String userNotFound = "Le compte n'existe pas";
 
   Future<void> loginWithEmailAndPassword(
       String email, String hashedPassword) async {
@@ -85,22 +76,22 @@ class LoginController extends GetxController {
 
     switch (errorCode) {
       case 'user-not-found':
-        snackbarMessage = userNotFound;
+        snackbarMessage = "login_controller.userNotFound".tr;
         break;
       case 'wrong-password':
-        snackbarMessage = wrongPassword;
+        snackbarMessage = "login_controller.wrongPassword".tr;
         break;
       case 'invalid-login-credentials':
       case 'invalid-credential':
-        snackbarMessage = invalidCredentials;
+        snackbarMessage = "login_controller.invalidCredentials".tr;
         break;
       default:
-        snackbarMessage = loginWithEmailFailed;
+        snackbarMessage = "login_controller.loginWithEmailFailed".tr;
         textColor = AppColors.white;
         snackPosition = SnackPosition.BOTTOM;
     }
 
-    Get.snackbar(error, snackbarMessage,
+    Get.snackbar("login_controller.error".tr, snackbarMessage,
         backgroundColor: backgroundColor,
         snackPosition: snackPosition,
         colorText: textColor);
