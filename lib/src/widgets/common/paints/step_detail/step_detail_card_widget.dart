@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:stud_advice/src/common/chore/app_colors.dart';
-import 'package:stud_advice/src/widgets/common/buttons/custom_button.dart';
+import 'package:stud_advice/stud_advice.dart';
 
 class StepDetailCardWidget extends StatelessWidget {
   final String title;

@@ -20,6 +20,7 @@ class StepsIndicator extends StatelessWidget {
 
     return Scaffold(
       body: ListView.builder(
+        controller: controller.scrollController,
         itemCount: steps.length,
         itemBuilder: (context, index) {
           int stepNumber = index + 1;
