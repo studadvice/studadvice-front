@@ -5,13 +5,6 @@ import 'package:get/get.dart';
 import 'package:stud_advice/stud_advice.dart';
 
 class UserStorageController extends GetxController {
-  final String error = "Erreur de connexion";
-  final String registerWithEmailFailed =
-      "Une erreur s'est produite lors de l'inscription";
-  final String userNotConnected = "Vous n'êtes pas connecté";
-  final String userNotConnectedMessage =
-      "Vous devez être connecté pour vous inscrire";
-
   Future<bool> saveUserData(UserData userData) async {
     var firebaseAuthInstance = AppDependenciesBinding.firebaseAuthInstance;
     var firebaseFirestoreInstance =
@@ -33,13 +26,13 @@ class UserStorageController extends GetxController {
       return true;
     } else {
       Get.snackbar(
-        userNotConnected,
-        userNotConnectedMessage,
+        "user_storage_controller.userNotConnected".tr,
+        "user_storage_controller.userNotConnectedMessage",
         colorText: AppColors.white,
         backgroundColor: AppColors.dangerColor,
         snackPosition: SnackPosition.BOTTOM,
         titleText: Text(
-          'register.error'.tr,
+          "user_storage_controller.error".tr,
           style: const TextStyle(color: AppColors.white),
         ),
       );
