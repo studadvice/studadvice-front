@@ -154,6 +154,12 @@ class AppTranslations extends Translations {
           "login_controller.wrongPassword": "Mot de passe incorrect",
           "login_controller.userDisabled": "Le compte a été désactivé",
           "login_controller.userNotFound": "Le compte n'existe pas",
+          // ----------------
+
+          // Register user information controller
+          "register_user_information_controller.error": "Erreur de connexion",
+          "register_user_information_controller.registerWithEmailFailed":
+              "Une erreur s'est produite lors de l'inscription",
         },
         'en_US': {
           // Global
