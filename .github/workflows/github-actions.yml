@@ -11,7 +11,7 @@ jobs:
       - name: Setup Flutter
         uses: subosito/flutter-action@v2
         with:
-          flutter-version: '3.16.X'
+          flutter-version: '3.16.0'
 
       - name: Install Dependencies
         run: flutter pub get
@@ -22,7 +22,7 @@ jobs:
       - name: Build for iOS
         run: flutter build ios
 
-  lint:
+  analyze:
     runs-on: ubuntu-latest
 
     needs: build
