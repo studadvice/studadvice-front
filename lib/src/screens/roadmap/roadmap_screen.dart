@@ -74,7 +74,7 @@ class RoadMapScreen extends StatelessWidget {
               child:  Container(
                 margin: const EdgeInsets.symmetric(horizontal: 1.0),
                 child: Padding(
-                  padding: const EdgeInsets.all(18.0),
+                  padding: const EdgeInsets.all(0.0),
                   child: StepsIndicator(
                     currentStep: stepController.currentStep.value,
                     steps: steps,
@@ -82,11 +82,6 @@ class RoadMapScreen extends StatelessWidget {
                 ),
               )
             ),
-          const Divider(
-            thickness: 0.3,
-            indent: 1,
-            endIndent: 1,
-          ),
           Expanded(
             flex: 1,
             child: Obx(() {

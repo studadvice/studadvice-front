@@ -21,29 +21,36 @@ class StepNumberWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    double borderWidth = isEnabled ? 2.0 : 1.0;
+    double borderWidth = isEnabled ? 3.0 : 1.0;
+    double elevation = isEnabled ? 3.0 : 0.0;
 
     return IgnorePointer(
       ignoring: !isEnabled,
-      child: GestureDetector(
-        onTap: onPressed,
-        child: IntrinsicWidth(
-          child: Row(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              CustomPaint(
-                painter: StepNumberPainter(
-                  stepNumber: stepNumber,
-                  color: color,
-                  diameter: diameter,
-                  borderWidth: borderWidth,
-                  isEnabled: isEnabled,
+      child: Material(
+        elevation: elevation,
+        color: Colors.transparent,
+        shape: const CircleBorder(),
+        child: InkWell(
+          onTap: onPressed,
+          customBorder: const CircleBorder(),
+          child: IntrinsicWidth(
+            child: Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                CustomPaint(
+                  painter: StepNumberPainter(
+                    stepNumber: stepNumber,
+                    color: color,
+                    diameter: diameter,
+                    borderWidth: borderWidth,
+                    isEnabled: isEnabled,
+                  ),
+                  size: Size(diameter, diameter),
                 ),
-                size: Size(diameter, diameter),
-              ),
-              if (child != null)
-                Padding(padding: const EdgeInsets.only(left: 0.5), child: child!),
-            ],
+                if (child != null)
+                  Padding(padding: const EdgeInsets.only(left: 0.5), child: child!),
+              ],
+            ),
           ),
         ),
       ),

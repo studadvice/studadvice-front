@@ -7,6 +7,8 @@ class StepDetailCardWidget extends StatelessWidget {
   final String description;
   final VoidCallback? onActionPressed;
   final String actionText;
+  final Color? cardColor;
+  final double? cardRadius;
 
   StepDetailCardWidget({
     super.key,
@@ -14,17 +16,22 @@ class StepDetailCardWidget extends StatelessWidget {
     required this.description,
     this.onActionPressed,
     this.actionText = 'Action',
+    this.cardColor,
+    this.cardRadius,
   });
 
   @override
   Widget build(BuildContext context) {
     return Card(
-      elevation: 4.0,
       margin: const EdgeInsets.all(4.0),
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.all(Radius.circular(cardRadius ?? 40.0)),
+      ),
+      color: cardColor ?? AppColors.white,
       child: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Text(
               title,
@@ -34,12 +41,12 @@ class StepDetailCardWidget extends StatelessWidget {
                 color: AppColors.primaryColorAccent,
               ),
             ),
-            const SizedBox(height: 10.0),
+            const SizedBox(height: 18.0),
             Text(
               description,
               style: const TextStyle(
                 fontSize: 16.0,
-                color: AppColors.black26,
+                color: AppColors.black,
               ),
             ),
             const Spacer(),
