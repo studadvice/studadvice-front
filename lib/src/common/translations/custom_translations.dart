@@ -133,8 +133,16 @@ class AppTranslations extends Translations {
               "J'accepte les conditions générales d'utilisation",
           "legal_terms.acceptTermsAndConditionsError":
               "Veuillez accepter les termes et conditions",
-          "legal_terms.termsAndConditions": "Termes et Conditions"
+          "legal_terms.termsAndConditions": "Termes et Conditions",
           // ----------------
+
+          // Connectivity
+          "connectivity.noInternetText": "Pas de connexion internet",
+          "connectivity.checkConnectionText":
+              "Veuillez vérifier votre connexion internet.",
+          "connectivity.connectionRestoredText": "Connexion rétablie",
+          "connectivity.connectionRestoredMessage":
+              "Vous êtes à nouveau connecté à Internet.",
         },
         'en_US': {
           // Global
@@ -264,8 +272,16 @@ class AppTranslations extends Translations {
               "I accept the terms and conditions",
           "legal_terms.acceptTermsAndConditionsError":
               "Please accept the terms and conditions",
-          "legal_terms.termsAndConditions": "Terms and Conditions"
+          "legal_terms.termsAndConditions": "Terms and Conditions",
           // ----------------
+
+          // Connectivity
+          "connectivity.noInternetText": "No internet connection",
+          "connectivity.checkConnectionText":
+              "Please check your internet connection.",
+          "connectivity.connectionRestoredText": "Connection restored",
+          "connectivity.connectionRestoredMessage":
+              "You are now connected to the Internet.",
         }
       };
 }
