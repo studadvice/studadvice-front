@@ -4,6 +4,7 @@ library widgets;
 export 'common/buttons/custom_button.dart';
 export 'common/buttons/login_social_button.dart';
 export 'common/buttons/social_button.dart';
+export 'common/buttons/custom_adaptative_button.dart';
 export 'common/dividers/divider_with_text.dart';
 export 'common/dropdowns/custom_async_dropdown.dart';
 export 'common/dropdowns/custom_dropdown.dart';

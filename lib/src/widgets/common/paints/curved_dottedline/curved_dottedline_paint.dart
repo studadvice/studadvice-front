@@ -1,6 +1,5 @@
 import 'dart:core';
 import 'dart:ui';
-
 import 'package:flutter/material.dart';
 import 'package:path_drawing/path_drawing.dart';
 
@@ -56,8 +55,8 @@ class CurvedDottedLinePainter extends CustomPainter {
   _buildCurvePathIfIsRight(Path path, Size size) {
       path.moveTo(-200/100, size.height/20);
       path.cubicTo(
-        size.width * (.9 / 2), size.height + (size.height * (1 / 3)),
-        size.width * (2 / 2.7), size.height - (size.height * (2.6 / 2)),
+        size.width * (.9 / 2), size.height + (size.height * (.9 / 3)),
+        size.width * (2 / 2.9), size.height - (size.height * (1.9 / 2)),
         size.width, size.height,
       );
       return path;
