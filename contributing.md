@@ -1,89 +1,116 @@
-TODO (s'entendre sur les éléments à mettre dans ce fichier)
+Sure, here's a corrected version:
 
-# PROPOSITIONS (peut-être améliorer, vu qu'on débute)
+```markdown
+# TODO (agree on the elements to include in this file)
 
-* on utilise getX pour la gestion des états
-* les controllers sont dans le dossier lib/src/controller et servent à gérer les états des vues
-* les services sont dans le dossier lib/src/service et servent à gérer les appels API ou traiter d'une logique métier
-  spécifique
-* Tout ce qui texte à afficher dans un widget est mis dans une variable finale et idéalement ajouté dans le fichier de
-  traduction. Cela permet de modifier facilement le texte et de le traduire.
-* Les couleurs sont ajoutés dans le fichier app_colors.dart et sont utilisés dans le code.
-* Les tailles de polices sont ajoutés dans le fichier app_font_sizes.dart et sont utilisés dans le code.
-* Une classe est créée pour chaque widget qui est utilisé plusieurs fois dans le code. Cela permet de modifier
-  facilement le widget et de le traduire.
-* Les images sont ajoutés dans le dossier assets/images et classés par catégorie.
-* Les icônes sont ajoutés dans le dossier assets/icons et classés par catégorie.
-* Les polices sont ajoutés dans le dossier assets/fonts et classés par catégorie. (Actuellement, il n'y a pas de
-  polices, on utilise une police par défaut GoogleFonts.lato)
-* Un fichier routes_configuration.dart (dossier lib/src/common/conf) contient toutes les routes de l'application. Chaque
-  route correspond à une page. (Toute nouvelle page doit être ajoutée dans ce fichier).
-* Le fichier app_dependencies_binding.dart (dossier lib/src/common/conf) contient toutes les injections de
-  dépendances. (Toute nouvelle injection doit être ajoutée dans ce fichier). Il permet de gérer les injections de
-  dépendances avec le package get_it.
-* Les traductions se trouvent dans le dossier `assets/i18n`. Chaque dossier doit être nommé en fonction de l'`navigatorId` de l'écran concerné. 
-  Par exemple, pour `settings_screen.dart`, le path sera `assets/i18n/settings_screen/`. Il ne faut pas oublier d'ajouter ce path dans le fichier `pubspec.yaml`.
-### Sur android pour utiliser firebase et google sign in il faut ajouter la clé SHA-1 dans la console firebase.
+## PROPOSALS (possibly improve, since we're starting)
 
-Cette clé peut être obtenue en utilisant la commande suivante dans le terminal à la racine du projet :
+* Use getX for state management.
+* Prefer using stateless widgets for screens to avoid unnecessary rebuilds. (This saves memory and CPU usage and makes the application more fluid.)
+* Place controllers in the `lib/src/controllers` folder to manage view states.
+* Place screens in the `lib/src/screens` folder to handle the display.
+* Place widgets in the `lib/src/widgets` folder to handle the display.
+* Place models in the `lib/src/models` folder to handle data.
+* The bindings directory contains all the bindings for the screens. You can use the `app_binding.dart`
+  file (`lib/src/common/conf`) to contain all common bindings.
+* Every screen must have a controller (if state management is used) and a binding defined in the `bindings` folder.
+* Store all text to be displayed into the translation files in the `common\translations` folder.
+
+Here is an example of how the text to be translated should be stored, in the `en.json` file (as example for english):
+
+```dart
+class En {
+  Map<String, String> get messages => {
+        // Global
+        "global.cancel": "Cancel",
+        "global.ok": "Ok",
+        "global.yes": "Yes",
+        "global.no": "No",
+        "global.save": "Save",
+        "global.delete": "Delete",
+        "global.edit": "Edit",
+        "global.search": "Search",
+        "global.back": "Back",
+        "global.email": "Email",
+        "global.password": "Password",
+        "global.login": "Login",
+        "global.register": "Register",
+         // ----------------
+    }
+}
+```
+
+* Add colors to the `app_colors.dart` file and use them in the code.
+* Add font sizes to the `app_font_sizes.dart` file and use them in the code.
+* Create a class for each widget used multiple times in the code. This allows easy widget modification and translation.
+* Place images in the `assets/images` folder, categorized by type.
+* Place icons in the `assets/icons` folder, categorized by type.
+* Place fonts in the `assets/fonts` folder, categorized by type. (Currently, there are no custom fonts; the default is GoogleFonts.lato)
+* Use a `routes_configuration.dart` file (`lib/src/common/conf`) to contain all application routes. Each route corresponds to a page. (Every new page must be added to this file).
+
+
+### FOR IMPORT STATEMENTS
+
+For each directory, create an `index.dart` file-like that contains all the imports of the files in the directory.
+This allows you to import the entire directory with a single import statement in the file "stud_advices.dart" (`lib/stud_advices.dart`) that 
+contains all the imports of the application.
+
+Then to import your class in the code, you can use the following statement:
+
+```dart
+import 'package:stud_advice/stud_advice.dart';
+```
+
+### Android: To use Firebase and Google Sign-In, add the SHA-1 key in the Firebase console.
+
+Obtain this key using the following command in the terminal at the project root:
 
 ```bash
 keytool -list -v -alias androiddebugkey -keystore ~/.android/debug.keystore
 ```
 
-(Le mot de passe par défaut est : android)
-Il faut ensuite télécharger le fichier google-services.json depuis la console firebase et le placer dans le dossier
-android/app.
+(Default password: android) Then, download the `google-services.json` file from the Firebase console and place it in the `android/app` folder.
 
-Si vous rencontrez des problèmes avec l'authentification google, essayer de récupérer votre clé SHA1 depuis votre
-dossier android
-en lançant la commande suivante dans le terminal à la racine du projet :
+If you encounter issues with Google authentication, try obtaining your SHA-1 key from your android folder by running the following command in the terminal at the project root:
 
 ```bash
 ./gradlew signingReport
 ```
 
-https://stackoverflow.com/questions/54557479/flutter-and-google-sign-in-plugin-platformexceptionsign-in-failed-com-google
+This command displays all SHA-1 keys in your android folder. Add the SHA-1 corresponding to your debug signing key in the Firebase console.
 
-Cette commande va vous afficher toutes les clés SHA1 de votre dossier android. Il faut ensuite ajouter la SHA1
-correspondant à votre clé de signature de debug dans la console firebase.
+### iOS: To use Firebase and Google Sign-In, add the `GoogleService-Info.plist` file in the `ios/Runner` folder.
 
-### Sur iOS pour utiliser firebase et google sign in il faut ajouter le fichier GoogleService-Info.plist dans le dossier
+Download this file from the Firebase console.
 
-ios/Runner.
+Apple authentication requires development on a Mac, and by default, the Apple authentication button is not displayed on Android. See the `register_options_screen.dart` and `login_options_screen.dart` files for more details.
 
-Ce fichier peut être téléchargé depuis la console firebase.
+### Facebook: Create a developer account and add the application in the Facebook console.
 
-L'authentification apple nécessite de développer sur un mac et par défaut le bouton d'authentification apple n'est pas
-affiché sur android. Voir les fichiers register_options_screen.dart et login_options_screen.dart pour plus de détails.
+- [Facebook Developer](https://developers.facebook.com/)
+- [Setup Developer Account Video](https://www.youtube.com/watch?v=AG_hO03Vyto)
+- [Generate Facebook Hash Key](https://stackoverflow.com/questions/54657148/facebook-login-problem-with-hash-key-flutter-how-to-generate-facebook-hashk)
+- [Configure Facebook Connect on Android](https://facebook.meedu.app/docs/6.x.x/android)
+- [Configure Facebook Connect on iOS](https://facebook.meedu.app/docs/6.x.x/ios)
 
-### Sur facebook, il faut créer un compte développeur et ajouter l'application dans la console facebook.
-
-https://developers.facebook.com/
-
-https://www.youtube.com/watch?v=AG_hO03Vyto : Pour configurer le compte développeur et la connexion facebook sur
-l'espace
-de développement.
-
-https://stackoverflow.com/questions/54657148/facebook-login-problem-with-hash-key-flutter-how-to-generate-facebook-hashk
-: Pour générer la clé de hachage si vous rencontrez des problèmes avec la connexion facebook.
-
-https://facebook.meedu.app/docs/6.x.x/android : Pour configurer la connexion facebook sur android.
-
-https://facebook.meedu.app/docs/6.x.x/ios : Pour configurer la connexion facebook sur iOS.
-
-C'est top, car nous pourrions le configurer avec notre compte facebook studadvice.
+This is useful as we can configure it with our StudAdvice Facebook account.
 
 ### Native Splash Screen
 
-Pour customiser le native splash screen, suivez les instructions de ce package :
-https://pub.dev/documentation/flutter_native_splash/latest/
+To customize the native splash screen, follow the instructions of this package:
+[flutter_native_splash](https://pub.dev/documentation/flutter_native_splash/latest/)
 
-Une fois votre splash screen customisé, il faut lancer la commande suivante pour générer les fichiers natifs :
+Once your splash screen is customized, run the following command to generate native files:
+
 ```bash
- dart run flutter_native_splash:create
+dart run flutter_native_splash:create
 ```
-puis 
+
+Then
+
 ```bash
- dart run flutter_native_splash:create --path:flutter_native_splash.yaml
+dart run flutter_native_splash:create --path:flutter_native_splash.yaml
 ```
+```
+
+I corrected grammar, punctuation, and formatting. If you have specific sentences or parts you want to further discuss or modify, feel free to let me know!
