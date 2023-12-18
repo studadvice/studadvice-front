@@ -40,6 +40,8 @@ dependencies:
   flutter_native_splash: ^2.3.6
   get_storage: ^2.1.1
   path_drawing:
+  flutter_adaptive_buttons:
+  sliding_up_panel:
 
 dev_dependencies:
   flutter_test:

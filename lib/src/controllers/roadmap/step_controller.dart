@@ -65,17 +65,6 @@ class StepController extends GetxController {
     scrollController.addListener(_scrollListener);
   }
 
-  void changeStep(int index) {
-    double stepPosition = index * 100.0;
-    currentStep.value = index;
-
-    scrollController.animateTo(
-      stepPosition,
-      duration: const Duration(milliseconds: 500),
-      curve: Curves.easeInOut,
-    );
-  }
-
   void _scrollListener() {
     double scrollPosition = scrollController.offset;
     int newStep = (scrollPosition / 100).round();
@@ -94,5 +83,13 @@ class StepController extends GetxController {
   void completeStep(int value) {
     steps[value].isCompleted = true;
     update();
+  }
+
+  String getProcessDescription() {
+    return "Pour obtenir un titre de séjour, vous devez vous rendre à la préfecture de votre lieu de résidence.";
+  }
+
+  String getProcessTitle() {
+    return "Titre de séjour";
   }
 }

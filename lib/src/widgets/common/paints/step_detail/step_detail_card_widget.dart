@@ -23,13 +23,7 @@ class StepDetailCardWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      margin: const EdgeInsets.all(4.0),
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.all(Radius.circular(cardRadius ?? 40.0)),
-      ),
-      color: cardColor ?? AppColors.white,
-      child: Padding(
+    return Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -71,12 +65,11 @@ class StepDetailCardWidget extends StatelessWidget {
                     onPressed: onNextPressed!,
                     horizontalPadding: 20,
                     verticalPadding: 0,
-                    borderRadius: 20.0
+                    borderRadius: 200.0
                 ),
               ],
             ),
           ],
-        ),
       ),
     );
   }
