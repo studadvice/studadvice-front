@@ -3,6 +3,7 @@ import 'package:dio/dio.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
 import 'package:stud_advice/src/controllers/controllers.dart';
+import 'package:stud_advice/src/controllers/search/CustomSearchController.dart';
 import 'package:stud_advice/src/middlewares/common/auth_interceptor.dart';
 
 class AppDependenciesBinding extends Bindings {
@@ -23,6 +24,7 @@ class AppDependenciesBinding extends Bindings {
     Get.put(dio, permanent: true);
 
     Get.put(AuthenticationController(), permanent: true);
+    Get.put(CustomSearchController(), permanent: true);
 
     Get.put(UserStorageController(), permanent: true);
     Get.put(FileController(), permanent: true);
