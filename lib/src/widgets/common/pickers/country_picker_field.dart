@@ -28,7 +28,6 @@ class CountryPickerField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var notSelectedCountry = 'Veuillez sélectionner un pays';
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 25.0),
       child: TextFormField(
@@ -37,7 +36,7 @@ class CountryPickerField extends StatelessWidget {
         },
         validator: (value) {
           if (value == null || value.isEmpty) {
-            return notSelectedCountry;
+            return "country_picker.title";
           }
           return null;
         },

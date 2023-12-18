@@ -32,7 +32,7 @@ class HomePageScreen extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
               child: CustomButton(
-                text: 'settings.settings.title'.tr,
+                text: 'home.settings'.tr,
                 textColor: AppColors.white,
                 backgroundColor: AppColors.dangerColor,
                 onPressed: () {

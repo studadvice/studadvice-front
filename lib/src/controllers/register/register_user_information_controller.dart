@@ -11,10 +11,6 @@ class RegisterUserInformationController extends GetxController {
   final Dio _dio = Get.find();
   final UserStorageController _userStorageController = Get.find();
 
-  final String error = "Erreur de connexion";
-  final String registerWithEmailFailed =
-      "Une erreur s'est produite lors de l'inscription";
-
   static String generateRandomPseudo() {
     final random = Random();
     final words = all.take(10000).toList();
@@ -115,13 +111,13 @@ class RegisterUserInformationController extends GetxController {
     } catch (e) {
       LoadingSpinner.stop();
       Get.snackbar(
-        error,
-        registerWithEmailFailed,
+        "register_user_information_controller.error".tr,
+        "register_user_information_controller.registerWithEmailFailed".tr,
         colorText: AppColors.white,
         backgroundColor: AppColors.dangerColor,
         snackPosition: SnackPosition.BOTTOM,
         titleText: Text(
-          error,
+          "register_user_information_controller.error".tr,
           style: const TextStyle(color: AppColors.white),
         ),
       );

@@ -14,7 +14,7 @@ class ForgotPasswordScreen extends StatelessWidget {
         appBar: AppBar(
           title: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 10),
-            child: Center(child: Text('forgot_password.forgotPasswordTitle'.tr)),
+            child: Center(child: Text('forgot_password.title'.tr)),
           ),
           leading: IconButton(
             icon: const Icon(Icons.arrow_back),

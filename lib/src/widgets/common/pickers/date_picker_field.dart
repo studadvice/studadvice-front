@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:stud_advice/src/common/chore/app_colors.dart';
 
@@ -21,14 +22,13 @@ class DatePickerField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     DateTime? selectedDate;
-    String labelText = 'Date de naissance';
 
     Future<void> selectDate() async {
       final pickedDate = await showDatePicker(
         context: context,
         initialDate: selectedDate ?? DateTime.now(),
         firstDate: DateTime(1900),
-        helpText: labelText,
+        helpText: "date_picker_field.label".tr,
         lastDate: DateTime.now(),
         initialEntryMode: DatePickerEntryMode
             .calendarOnly, // Have an issue with the input mode.
@@ -60,7 +60,7 @@ class DatePickerField extends StatelessWidget {
         validator: validator,
         decoration: InputDecoration(
           hintText: hintText,
-          labelText: labelText,
+          labelText: "date_picker_field.label".tr,
           enabledBorder: OutlineInputBorder(
             borderSide: BorderSide(color: borderColor, width: 0.5),
             borderRadius: BorderRadius.circular(15),
