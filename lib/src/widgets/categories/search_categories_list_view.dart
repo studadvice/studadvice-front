@@ -82,7 +82,7 @@ class __SearchCategoriesListViewState extends State<_SearchCategoriesListView> {
     onRefresh: () => Future.sync(
           () => _pagingController.refresh(),
     ),
-    child: PagedListView.separated(
+    child: PagedGridView(
       pagingController: _pagingController,
       builderDelegate: PagedChildBuilderDelegate<CategoryContent>(
         itemBuilder: (context, categoryItem, index) => CategoryItem(
@@ -94,9 +94,10 @@ class __SearchCategoriesListViewState extends State<_SearchCategoriesListView> {
         ),
         noItemsFoundIndicatorBuilder: (context) => EmptyListIndicator(),
       ),
-      padding: const EdgeInsets.all(16),
-      separatorBuilder: (context, index) => const SizedBox(
-        height: 16,
+      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+        crossAxisCount: 2,
+        crossAxisSpacing: 16,
+        mainAxisSpacing: 16,
       ),
     ),
   );
