@@ -38,13 +38,16 @@ class RoadMapScreen extends StatelessWidget {
               return StepDetailCardWidget(
                 title: currentStepItem.title,
                 description: currentStepItem.description,
-                onActionPressed: () {
+                onNextPressed: () {
                   if (stepController.currentStep.value == stepController.steps.length - 1) {
                     Get.offAllNamed(HomePageScreen.navigatorId);
                   } else {
                     stepController
                         .changeStep(stepController.currentStep.value + 1);
                   }
+                },
+                onCompletePressed: () {
+                  stepController.completeStep(stepController.currentStep.value);
                 },
                 actionText: "Next",
               );

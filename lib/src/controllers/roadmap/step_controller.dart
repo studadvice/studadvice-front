@@ -90,4 +90,9 @@ class StepController extends GetxController {
     scrollController.removeListener(_scrollListener);
     super.onClose();
   }
+
+  void completeStep(int value) {
+    steps[value].isCompleted = true;
+    update();
+  }
 }

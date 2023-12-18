@@ -4,7 +4,8 @@ import 'package:stud_advice/stud_advice.dart';
 class StepDetailCardWidget extends StatelessWidget {
   final String title;
   final String description;
-  final VoidCallback? onActionPressed;
+  final VoidCallback? onCompletePressed;
+  final VoidCallback? onNextPressed;
   final String actionText;
   final Color? cardColor;
   final double? cardRadius;
@@ -13,10 +14,11 @@ class StepDetailCardWidget extends StatelessWidget {
     super.key,
     required this.title,
     required this.description,
-    this.onActionPressed,
     this.actionText = 'Action',
     this.cardColor,
     this.cardRadius,
+    this.onCompletePressed,
+    this.onNextPressed,
   });
 
   @override
@@ -49,15 +51,30 @@ class StepDetailCardWidget extends StatelessWidget {
               ),
             ),
             const Spacer(),
-            if (onActionPressed != null)
-              Center(
-                  child: CustomButton(
-                      text: actionText,
-                      textColor: AppColors.white,
-                      backgroundColor: AppColors.primaryColorAccent,
-                      onPressed: onActionPressed!
-                  )
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              mainAxisSize: MainAxisSize.max,
+              children: [
+                CustomButton(
+                    text: 'Completer',
+                    textColor: AppColors.white,
+                    backgroundColor: AppColors.primaryColorAccent,
+                    onPressed: onCompletePressed!,
+                    horizontalPadding: 20,
+                    verticalPadding: 0,
+                    borderRadius: 20.0
                 ),
+                CustomButton(
+                    text: actionText,
+                    textColor: AppColors.white,
+                    backgroundColor: AppColors.primaryColorAccent,
+                    onPressed: onNextPressed!,
+                    horizontalPadding: 20,
+                    verticalPadding: 0,
+                    borderRadius: 20.0
+                ),
+              ],
+            ),
           ],
         ),
       ),
