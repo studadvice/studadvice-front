@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 import 'package:get/get.dart';
 import 'package:stud_advice/stud_advice.dart';
+import '../../exceptions/empty_list_indicator.dart';
+import '../../exceptions/error_indicator.dart';
 import '../../models/stud_advice/category.dart';
 
 class CategoriesListView extends StatelessWidget {
