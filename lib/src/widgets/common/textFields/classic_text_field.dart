@@ -79,7 +79,7 @@ class _ClassicTextFieldState extends State<ClassicTextField> {
         keyboardType: widget.keyboardType,
         style: const TextStyle(
             fontSize: AppFontSizes.large16, decoration: TextDecoration.none),
-        decoration: InputDecoration(
+        decoration: widget.inputDecoration ?? InputDecoration(
           labelText: widget.labelText,
           hintText: widget.hintText,
           enabledBorder: OutlineInputBorder(
