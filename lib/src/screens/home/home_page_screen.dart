@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:stud_advice/src/controllers/categories/category_list_controller.dart';
 import 'package:stud_advice/stud_advice.dart';
-import '../../controllers/search/CustomSearchController.dart';
 import '../../widgets/common/search/custom_search_bar.dart';
 
 class HomePageScreen extends StatelessWidget {
   static const navigatorId = '/home_page_screen';
+  final CategoriesListController categoriesListController = Get.find<CategoriesListController>();
 
   @override
   Widget build(BuildContext context) {
@@ -39,40 +40,17 @@ class HomePageScreen extends StatelessWidget {
               const SizedBox(
                 height: 50,
               ),
-              CustomSearchBar(),
+              CustomSearchBar(textEditingController: categoriesListController.textEditingController),
             ],
           ),
         ),
       ),
-      body: Center(
+      body: const Center(
         child: Padding(
-          padding: const EdgeInsets.all(10),
-          child: GetBuilder<CustomSearchController>(
-            builder: (controller) => SearchContent(
-              showSearchCategories: controller.showSearchCategories.value,
-              searchQuery: controller.searchController.text,
-            ),
-          ),
+          padding: EdgeInsets.all(10),
+          child:  CategoriesListView(),
         ),
       ),
     );
-  }
-}
-
-
-class SearchContent extends StatelessWidget {
-  final bool showSearchCategories;
-  final String searchQuery;
-
-  const SearchContent({
-    required this.showSearchCategories,
-    required this.searchQuery,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return showSearchCategories
-        ? SearchCategoriesListView(query: searchQuery)
-        : const CategoriesListView();
   }
 }

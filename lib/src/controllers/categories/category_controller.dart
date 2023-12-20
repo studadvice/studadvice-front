@@ -47,7 +47,7 @@ class CategoryController extends GetxController {
   Future<Category> getCategoriesBySearch({
     required int number,
     required int size,
-    required String query,
+    String? query,
   }) async {
     final queryParameters = {'page': number, 'size': size, 'searchText': query};
     return _getCategoriesBySearch('/administrative-process/search', queryParameters);
