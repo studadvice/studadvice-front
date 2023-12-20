@@ -1,27 +1,43 @@
-import 'package:dio/dio.dart';
 import 'package:get/get.dart';
+import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 import 'package:stud_advice/stud_advice.dart';
 
 class AdministrativeProcessController extends GetxController {
   final RxList<AdministrativeProcess> administrativeProcesses =
       <AdministrativeProcess>[].obs;
 
-  final FileController _fileController = Get.find<FileController>();
-  final Dio _dio = Get.find<Dio>();
-  final String baseUrl = 'http://localhost:8080';
+  final pagingController = PagingController<int, AdministrativeProcess>(
+    firstPageKey: 0,
+  );
 
-  String _generateToken() {
-    return ".eyJjdXN0b21fY2xhaW1zIjpbIkFETUlOIl0sImlzcyI6Imh0dHBzOi8vc2VjdXJldG9rZW4uZ29vZ2xlLmNvbS9zdHVkYWR2aWNlLWF1dGgiLCJhdWQiOiJzdHVkYWR2aWNlLWF1dGgiLCJhdXRoX3RpbWUiOjE3MDIzMzI1NjYsInVzZXJfaWQiOiJIUmdScml1ZWY5V3V0cGxsYU0xSGZydlNBcUUyIiwic3ViIjoiSFJnUnJpdWVmOVd1dHBsbGFNMUhmcnZTQXFFMiIsImlhdCI6MTcwMjMzMjU2NiwiZXhwIjoxNzAyMzM2MTY2LCJlbWFpbCI6Im5hZGluZS56aW5lLjdAZ21haWwuY29tIiwiZW1haWxfdmVyaWZpZWQiOmZhbHNlLCJmaXJlYmFzZSI6eyJpZGVudGl0aWVzIjp7ImVtYWlsIjpbIm5hZGluZS56aW5lLjdAZ21haWwuY29tIl19LCJzaWduX2luX3Byb3ZpZGVyIjoicGFzc3dvcmQifX0.EYq3VqqyVHAY5gZ1IQpldXKah3EOweaZSRiw3TslHF9cM8OagSHA_C7iwZLMDL3CcMOIx9ZaeB4dpFbVEup6Yef-csY5jCYfWM0M4-z8e4-NPekp499UKEofGeCASvYZ2hucxU0K4igIMAk1e7ZloNHbXG3P-FpfjLD65R-NmJE0CxR9xGGS3QwyIBDb3PxMknw6hs-pvYiopaN9QSfQ1xhx-hHwimXVK94we6G6a6P1uEFoftLFXxULhw3pzZz9IuDBJIknhnFhybrD3n0DPfJQs0cfSQRLSirZjpTWaBasH0ldma6xZhYudLh38440oWxBey4oLv11NcNTcvdJOg";
+  @override
+  void onInit() {
+    super.onInit();
+    pagingController.addPageRequestListener((pageKey) {
+      _fetchPage(pageKey);
+    });
   }
 
-  Options _getOptions() {
-    return Options(
-      headers: {
-        'content-Type': 'application/json',
-        'accept': 'application/json',
-        'Authorization': 'Bearer ${_generateToken()}',
-      },
-    );
+  Future<void> _fetchPage(int pageKey) async {
+    int size = 5;
+    try {
+      final newPage = await fetchAdministrativeProcesses(
+        '1',
+        pageKey,
+        size,
+      );
+
+      final isLastPage = newPage['last'] as bool;
+      final newItems = newPage['content'] as List<AdministrativeProcess>;
+      if (isLastPage) {
+        pagingController.appendLastPage(newItems);
+      } else {
+        final nextPageKey = pageKey + 1;
+        pagingController.appendPage(newItems, nextPageKey);
+      }
+    } catch (error) {
+      pagingController.error = error;
+    }
   }
 
   Future<dynamic> fetchAdministrativeProcesses(
@@ -95,5 +111,16 @@ class AdministrativeProcessController extends GetxController {
         .indexWhere((process) => process.id == administrativeProcessId);
 
     return tileIndex != -1 && administrativeProcesses[tileIndex].isFavorite!;
+  }
+
+  @override
+  void onClose() {
+    pagingController.dispose();
+    super.onClose();
+  }
+
+  @override
+  void refresh() {
+    pagingController.refresh();
   }
 }
