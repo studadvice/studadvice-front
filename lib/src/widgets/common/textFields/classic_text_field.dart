@@ -15,6 +15,7 @@ class ClassicTextField extends StatefulWidget {
   final List<String>? autofillHints;
   final Icon? suffixIcon;
   final String? Function(String?)? validator;
+  final InputDecoration? inputDecoration;
 
   const ClassicTextField({
     super.key,
@@ -31,6 +32,7 @@ class ClassicTextField extends StatefulWidget {
     this.suffixIcon,
     this.onChanged,
     this.validator,
+    this.inputDecoration
   });
 
   @override
@@ -73,6 +75,7 @@ class _ClassicTextFieldState extends State<ClassicTextField> {
         controller: widget.controller,
         autofocus: widget.autoFocus,
         validator: widget.validator,
+        onChanged: widget.onChanged,
         keyboardType: widget.keyboardType,
         style: const TextStyle(
             fontSize: AppFontSizes.large16, decoration: TextDecoration.none),

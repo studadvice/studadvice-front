@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:stud_advice/src/common/chore.dart';
 
 class ExceptionIndicator extends StatelessWidget {
   const ExceptionIndicator({
@@ -57,8 +58,12 @@ class ExceptionIndicator extends StatelessWidget {
                         color: Colors.white,
                       ),
                     ),
+                    style: ButtonStyle(
+                      backgroundColor: MaterialStateProperty.all<Color>(AppColors.primaryColor),
+                    ),
                   ),
-                ),
+                )
+,
             ],
           ),
         ),
