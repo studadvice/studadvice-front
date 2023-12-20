@@ -4,12 +4,6 @@ import 'package:stud_advice/src/common/chore.dart';
 
 class ConnectivityController extends GetxController {
   var isConnected = true.obs;
-  final String noInternetText = "Pas de connexion internet";
-  final String checkConnectionText =
-      "Veuillez vérifier votre connexion internet.";
-  final String connectionRestoredText = "Connexion rétablie";
-  final String connectionRestoredMessage =
-      "Vous êtes à nouveau connecté à Internet.";
 
   void checkConnectivity(ConnectivityResult result) {
     isConnected.value = result != ConnectivityResult.none;
@@ -19,8 +13,8 @@ class ConnectivityController extends GetxController {
   void showConnectivitySnackbar() {
     if (!isConnected.value) {
       Get.snackbar(
-        noInternetText,
-        checkConnectionText,
+        "connectivity.noInternetText".tr,
+        "connectivity.checkConnectionText".tr,
         colorText: AppColors.white,
         snackPosition: SnackPosition.BOTTOM,
         backgroundColor: AppColors.dangerColor,
@@ -28,8 +22,8 @@ class ConnectivityController extends GetxController {
       );
     } else {
       Get.snackbar(
-        connectionRestoredText,
-        connectionRestoredMessage,
+        "connectivity.connectionRestoredText".tr,
+        "connectivity.connectionRestoredMessage".tr,
         colorText: AppColors.white,
         snackPosition: SnackPosition.BOTTOM,
         backgroundColor: AppColors.primaryColorAccent,

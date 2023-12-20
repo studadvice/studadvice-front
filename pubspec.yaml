@@ -24,11 +24,7 @@ dependencies:
   dio: ^5.3.3
   flutter_typeahead: 4.8.0
   dropdown_search: ^5.0.6
-  select_dialog: ^2.0.1
   connectivity_plus: ^5.0.1
-  awesome_dialog: ^3.1.0
-  jiffy: ^6.2.1
-  search_choices: ^2.2.7
   get: ^4.6.6
   crypto: ^3.0.3
   firebase_auth: ^4.14.0
@@ -70,19 +66,11 @@ flutter:
 
   assets:
     - assets/
-    - assets/i18n/
-    - assets/i18n/login_screen/
-    - assets/i18n/settings_screen/
-    - assets/i18n/home_page_screen/
-    - assets/i18n/init_time_screen/
-    - assets/i18n/legal_terms_screen/
-    - assets/i18n/forgot_password_screen/
-    - assets/i18n/register_options_screen/
-    - assets/i18n/social_sign_in_controller/
-    - assets/i18n/register_with_email_screen/
-    - assets/i18n/register_user_information_screen/
     - assets/fonts/
     - assets/images/
     - assets/images/login/
     - assets/images/common/
     - assets/images/forgot_password/
+    - assets/legal_terms/
+    - assets/legal_terms/en_US.txt
+    - assets/legal_terms/fr_FR.txt

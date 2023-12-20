@@ -1,17 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:stud_advice/stud_advice.dart';
 
 class LegalTermsScreen extends StatelessWidget {
   static const String navigatorId = '/legal_terms_screen';
-  final I18n _i18n = Get.find();
 
   String getTerms() {
-    String terms = _i18n.text('header');
-    for (int i = 1; i <= 8; i++) {
-      terms += _i18n.text('article$i');
-    }
-    return terms + _i18n.text('footer');
+    var box = GetStorage();
+    var locale = Get.locale;
+    return box.read('legal_terms_${locale?.languageCode}_${locale?.countryCode}') ?? 'Error loading legal terms';
   }
 
   @override
@@ -19,7 +17,7 @@ class LegalTermsScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          _i18n.text('title'),
+          'legal_terms.title'.tr,
           style: const TextStyle(
             fontSize: AppFontSizes.large18,
             fontWeight: FontWeight.bold,

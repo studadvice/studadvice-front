@@ -16,7 +16,6 @@ class _RegisterUserInformationScreenState
     extends State<RegisterUserInformationScreen> {
   final RegisterUserInformationController _registerUserInformationController =
       Get.find();
-  I18n i18n = Get.find<I18n>();
 
   // Controllers for the text fields.
   final TextEditingController pseudoController = TextEditingController(
@@ -58,7 +57,7 @@ class _RegisterUserInformationScreenState
       appBar: AppBar(
         centerTitle: true,
         title: Text(
-          i18n.text('screenTitle'),
+          'register.screenTitle'.tr,
           style: (const TextStyle(
             fontSize: AppFontSizes.large16,
             fontWeight: FontWeight.bold,
@@ -125,15 +124,15 @@ class _RegisterUserInformationScreenState
 
   Widget buildPseudoTextField() {
     return ClassicTextField(
-      hintText: i18n.text('pseudoHint'),
-      labelText: i18n.text('pseudoLabel'),
+      hintText: 'register.pseudoHint'.tr,
+      labelText: 'register.pseudoLabel'.tr,
       controller: pseudoController,
       backgroundColor: AppColors.white,
       focusedBorderColor: AppColors.secondaryColor,
       borderColor: AppColors.secondaryColor,
       validator: (value) {
         if (value == null || value.isEmpty) {
-          return i18n.text('pseudoError');
+          return 'register.pseudoError'.tr;
         }
         return null;
       },
@@ -143,8 +142,8 @@ class _RegisterUserInformationScreenState
   Widget buildCityTextField() {
     return AutoCompleteTextField<CityData>(
       controller: _cityController,
-      labelText: i18n.text('cityLabel'),
-      hintText: i18n.text('cityHint'),
+      labelText: 'register.cityLabel'.tr,
+      hintText: 'register.cityHint'.tr,
       backgroundColor: AppColors.white,
       borderColor: AppColors.secondaryColor,
       focusedBorderColor: AppColors.secondaryColor,
@@ -152,9 +151,9 @@ class _RegisterUserInformationScreenState
         return await _registerUserInformationController
             .fetchCitiesFromAPI(pattern);
       },
-      errorText: i18n.text('cityError'),
-      notFoundText: i18n.text('cityNotFound'),
-      noItemSelectedText: i18n.text('cityNotSelected'),
+      errorText: 'register.cityError'.tr,
+      notFoundText: 'register.cityNotFound'.tr,
+      noItemSelectedText: 'register.cityNotSelected'.tr,
       itemBuilder: (suggestion) {
         return Text(suggestion.nom ?? '');
       },
@@ -165,7 +164,7 @@ class _RegisterUserInformationScreenState
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 25.0),
       child: CustomAsyncDropdownSearch(
-        labelText: i18n.text('postalCodeLabel'),
+        labelText: 'register.postalCodeLabel'.tr,
         backgroundColor: AppColors.white,
         borderColor: AppColors.secondaryColor,
         focusedBorderColor: AppColors.secondaryColor,
@@ -173,7 +172,7 @@ class _RegisterUserInformationScreenState
             .fetchPostalCodesFromApi(_cityController.text),
         validator: (value) {
           if (value == null || value.isEmpty) {
-            return i18n.text('postalCodeNotSelected');
+            return 'register.postalCodeNotSelected'.tr;
           }
           return null;
         },
@@ -193,7 +192,7 @@ class _RegisterUserInformationScreenState
         emptyBuilder: (context, reload) {
           return Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 8),
-            child: Text(i18n.text('postalCodeNotFound'),
+            child: Text('register.postalCodeNotFound'.tr,
                 style: const TextStyle(
                     fontSize: AppFontSizes.medium,
                     color: AppColors.dangerColor,
@@ -207,21 +206,21 @@ class _RegisterUserInformationScreenState
   Widget buildCountryTextField() {
     return CountryPickerField(
         controller: _countryController,
-        hintText: i18n.text('countryHint'),
-        labelText: i18n.text('countryLabel'),
+        hintText: 'register.countryHint'.tr,
+        labelText: 'register.countryLabel'.tr,
         focusedBorderColor: AppColors.secondaryColor,
         borderColor: AppColors.secondaryColor);
   }
 
   Widget buildBirthDateTextField() {
     return DatePickerField(
-      hintText: i18n.text('birthDateHint'),
+      hintText: 'register.birthDateHint'.tr,
       controller: _birthDateController,
       focusedBorderColor: AppColors.secondaryColor,
       borderColor: AppColors.secondaryColor,
       validator: (value) {
         if (value == null || value.isEmpty) {
-          return i18n.text('birthDateError');
+          return 'register.birthDateError'.tr;
         }
         return null;
       },
@@ -230,8 +229,8 @@ class _RegisterUserInformationScreenState
 
   List<DropdownMenuItem<String>> buildUniversityDataItems(
       List<String> universityData) {
-    if (!universityData.contains(i18n.text('defaultUniversityChoice'))) {
-      universityData.insert(0, i18n.text('defaultUniversityChoice'));
+    if (!universityData.contains('register.defaultUniversityChoice'.tr)) {
+      universityData.insert(0, 'register.defaultUniversityChoice'.tr);
     }
     return universityData.map((element) {
       return DropdownMenuItem<String>(
@@ -250,23 +249,23 @@ class _RegisterUserInformationScreenState
   }
 
   Widget buildUniversityTextField(List<String> universityData) {
-    if (!universityData.contains(i18n.text('defaultUniversityChoice'))) {
-      universityData.insert(0, i18n.text('defaultUniversityChoice'));
+    if (!universityData.contains('register.defaultUniversityChoice'.tr)) {
+      universityData.insert(0, 'register.defaultUniversityChoice'.tr);
     }
     return CustomSelectionModal(
-      labelText: i18n.text('universityLabel'),
-      hintText: i18n.text('universityHint'),
+      labelText: 'register.universityLabel'.tr,
+      hintText: 'register.universityHint'.tr,
       itemsList: universityData,
       height: MediaQuery.of(context).size.height * 0.8,
       controller: _universityController,
-      defaultChoice: i18n.text('defaultUniversityChoice'),
+      defaultChoice: 'register.defaultUniversityChoice'.tr,
       onItemSelected: (String selectedItem) {
         _universityController.text = selectedItem;
       },
-      searchHintText: i18n.text('universitySearchHint'),
+      searchHintText: 'register.universitySearchHint'.tr,
       validator: (value) {
         if (value == null || value.isEmpty) {
-          return i18n.text('universityError');
+          return 'register.universityError'.tr;
         }
         return null;
       },
@@ -275,15 +274,15 @@ class _RegisterUserInformationScreenState
 
   Widget buildFormationTextField() {
     return ClassicTextField(
-      hintText: i18n.text('formationHint'),
-      labelText: i18n.text('formationLabel'),
+      hintText: 'register.formationHint'.tr,
+      labelText: 'register.formationLabel'.tr,
       controller: _formationController,
       backgroundColor: AppColors.white,
       focusedBorderColor: AppColors.secondaryColor,
       borderColor: AppColors.secondaryColor,
       validator: (value) {
         if (value == null || value.isEmpty) {
-          return i18n.text('formationError');
+          return 'register.formationError'.tr;
         }
         return null;
       },
@@ -292,7 +291,7 @@ class _RegisterUserInformationScreenState
 
   Widget buildNextButton() {
     return CustomButton(
-        text: i18n.text('nextButton'),
+        text: 'register.nextButton'.tr,
         textColor: AppColors.white,
         backgroundColor: AppColors.blue,
         onPressed: () {
