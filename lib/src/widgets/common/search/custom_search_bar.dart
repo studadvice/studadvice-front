@@ -14,6 +14,9 @@ class CustomSearchBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ClassicTextField(
+      onChanged: (value) {
+        categoryController.update();
+      },
       controller: categoryController.textEditingController,
       hintText: 'Search an administrative process',
       backgroundColor: Colors.transparent,
