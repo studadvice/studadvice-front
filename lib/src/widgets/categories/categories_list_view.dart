@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 import 'package:get/get.dart';
 import 'package:stud_advice/stud_advice.dart';
-
-import '../../controllers/categories/category_list_controller.dart';
 import '../../models/stud_advice/category.dart';
 
 class CategoriesListView extends StatelessWidget {
@@ -14,8 +12,8 @@ class CategoriesListView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GetBuilder<CategoriesListController>(
-      init: CategoriesListController(),
+    return GetBuilder<CategoryController>(
+      init: CategoryController(),
       builder: (controller) {
         return RefreshIndicator(
           onRefresh: () => Future.sync(
