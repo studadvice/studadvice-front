@@ -3,13 +3,12 @@ import 'package:get/get.dart';
 import '../../../../stud_advice.dart';
 
 class CustomSearchBar extends StatelessWidget {
+  final CategoryController categoryController;
 
   CustomSearchBar({
     super.key,
+    required this.categoryController,
   });
-
-  final CategoryController categoryController = Get.find<CategoryController>();
-
 
   @override
   Widget build(BuildContext context) {

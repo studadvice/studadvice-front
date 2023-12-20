@@ -101,6 +101,6 @@ class CategoryController extends GetxController {
     String? query,
   }) async {
     final queryParameters = {'page': number, 'size': size, 'searchText': query};
-    return _getCategoriesBySearch('/administrative-process/search', queryParameters);
+    return _getCategoriesBySearch('/categories/search', queryParameters);
   }
 }

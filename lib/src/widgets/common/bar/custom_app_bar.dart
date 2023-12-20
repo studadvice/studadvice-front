@@ -1,7 +1,14 @@
 import 'package:flutter/material.dart';
+import '../../../../stud_advice.dart';
 import '../search/custom_search_bar.dart';
 
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
+  final CategoryController categoryController;
+
+  CustomAppBar({
+    super.key,
+    required this.categoryController,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -36,7 +43,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
             ),
             Align(
               alignment: Alignment.center,
-              child: CustomSearchBar(),
+              child: CustomSearchBar(categoryController: categoryController),
             ),
           ],
         ),
