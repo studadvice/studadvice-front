@@ -1,19 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import '../../../../stud_advice.dart';
 
 class CustomSearchBar extends StatelessWidget {
 
   CustomSearchBar({
-    required this.textEditingController,
     super.key,
   });
 
-  final TextEditingController textEditingController;
+  final CategoryController categoryController = Get.find<CategoryController>();
+
 
   @override
   Widget build(BuildContext context) {
     return ClassicTextField(
-      controller: textEditingController,
+      controller: categoryController.textEditingController,
       hintText: 'Search an administrative process',
       backgroundColor: Colors.transparent,
       borderColor: Colors.black,

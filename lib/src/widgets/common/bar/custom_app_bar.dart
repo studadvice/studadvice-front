@@ -2,9 +2,6 @@ import 'package:flutter/material.dart';
 import '../search/custom_search_bar.dart';
 
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
-  final TextEditingController textEditingController;
-
-  const CustomAppBar({required this.textEditingController});
 
   @override
   Widget build(BuildContext context) {
@@ -39,7 +36,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
             ),
             Align(
               alignment: Alignment.center,
-              child: CustomSearchBar(textEditingController: textEditingController),
+              child: CustomSearchBar(),
             ),
           ],
         ),
