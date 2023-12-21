@@ -38,7 +38,7 @@ dependencies:
   infinite_scroll_pagination: ^4.0.0
   percent_indicator: ^4.2.3
   flutter_dotenv: ^5.1.0
-
+  speech_to_text: ^6.5.1
 dev_dependencies:
   flutter_test:
     sdk: flutter

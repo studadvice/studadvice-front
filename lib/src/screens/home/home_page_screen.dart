@@ -11,7 +11,7 @@ class HomePageScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomAppBar(categoryController: categoryController),
+      appBar: CustomAppBar<CategoryController>(controller: categoryController),
       body: const Center(
         child: Padding(
           padding: EdgeInsets.all(10),
