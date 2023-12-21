@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:speech_to_text/speech_to_text.dart' as stt;
-import '../../../../stud_advice.dart';
+import 'package:stud_advice/src/controllers/categories/controller.dart';
+import 'package:stud_advice/stud_advice.dart';
 
-class CustomSearchBar<T> extends StatelessWidget {
-  final T controller;
+class CustomSearchBar extends StatelessWidget {
+  final CustomSearchController controller;
   final stt.SpeechToText _speech = stt.SpeechToText();
 
   CustomSearchBar({
@@ -13,23 +14,25 @@ class CustomSearchBar<T> extends StatelessWidget {
 
   void _startListening() async {
     bool available = await _speech.initialize(
-      onStatus: (val) => print('onStatus: $val'),
-      onError: (val) => print('onError: $val'),
+      onStatus: (val) => debugPrint('onStatus: $val'),
+      onError: (val) => debugPrint('onError: $val'),
     );
 
     if (available) {
       _speech.listen(
         onResult: (val) {
-          if (controller is CategoryController) {
-            (controller as CategoryController).textEditingController.text =
-                val.recognizedWords;
-            (controller as CategoryController).update();
+          if (controller is SearchCategoryController) {
+            //   controller?.textEditingController ?
+            //       controller?.textEditingController
+            // .text =
+            //       val.recognizedWords : '';
+            //   (controller as CategoryController).update();
           }
           _speech.stop();
         },
       );
     } else {
-      print("The user has denied the use of speech recognition.");
+      debugPrint("The user has denied the use of speech recognition.");
     }
   }
 
@@ -37,11 +40,10 @@ class CustomSearchBar<T> extends StatelessWidget {
   Widget build(BuildContext context) {
     return ClassicTextField(
       onChanged: (value) {
-        if (controller is CategoryController) {
-          (controller as CategoryController).update();
-        }
+        controller.update();
       },
-      controller: (controller as CategoryController).textEditingController,
+      controller:
+          (controller as SearchCategoryController).textEditingController,
       hintText: 'Search an administrative process',
       backgroundColor: Colors.transparent,
       borderColor: Colors.black,

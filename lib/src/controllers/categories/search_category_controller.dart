@@ -1,26 +1,23 @@
+import 'dart:io';
+
 import 'package:dio/dio.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
-import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
+import 'package:stud_advice/src/controllers/categories/controller.dart';
 import 'package:stud_advice/src/models/stud_advice/category.dart';
 
-class CategoryController extends GetxController {
-  final PagingController<int, CategoryContent> pagingController =
-  PagingController(firstPageKey: 0);
-
-  final TextEditingController textEditingController = TextEditingController();
-
+class SearchCategoryController extends CustomSearchController {
   final Dio _dio = Get.find();
 
   @override
   void onInit() {
     super.onInit();
     pagingController.addPageRequestListener((pageKey) {
-      _fetchPage(pageKey);
+      fetchPage(pageKey);
     });
   }
 
-  Future<void> _fetchPage(int pageKey) async {
+  @override
+  Future<void> fetchPage(int pageKey) async {
     try {
       final newPage = await getCategoriesBySearch(
         number: pageKey,
@@ -30,7 +27,7 @@ class CategoryController extends GetxController {
 
       final isLastPage = newPage.last;
       final newItems = newPage.content;
-      if (newItems != null) {
+      if (newItems.isNotEmpty) {
         if (isLastPage) {
           pagingController.appendLastPage(newItems);
         } else {
@@ -56,7 +53,8 @@ class CategoryController extends GetxController {
     pagingController.refresh();
   }
 
-  Future<Category> _getCategories(String path, Map<String, dynamic> queryParameters) async {
+  Future<Category> _getCategories(
+      String path, Map<String, dynamic> queryParameters) async {
     try {
       final response = await _dio.get(
         path,
@@ -73,14 +71,15 @@ class CategoryController extends GetxController {
     }
   }
 
-  Future<Category> _getCategoriesBySearch(String path, Map<String, dynamic> queryParameters) async {
+  Future<Category> _getCategoriesBySearch(
+      String path, Map<String, dynamic> queryParameters) async {
     try {
       final response = await _dio.get(
         path,
         queryParameters: queryParameters,
       );
 
-      if (response.statusCode == 200) {
+      if (response.statusCode == HttpStatus.ok) {
         return Category.fromJson(response.data);
       } else {
         throw Exception('Failed to load categories');
@@ -90,7 +89,8 @@ class CategoryController extends GetxController {
     }
   }
 
-  Future<Category> getCategories({required int number, required int size}) async {
+  Future<Category> getCategories(
+      {required int number, required int size}) async {
     final queryParameters = {'page': number, 'size': size};
     return _getCategories('/categories', queryParameters);
   }
