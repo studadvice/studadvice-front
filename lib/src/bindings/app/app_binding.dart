@@ -32,6 +32,6 @@ class AppDependenciesBinding extends Bindings {
     // Register the firebase services.
     Get.put(AuthenticationController(), permanent: true);
 
-    Get.put(CategoryController(), permanent: true);
+    Get.put(SearchCategoryController(), permanent: true);
   }
 }

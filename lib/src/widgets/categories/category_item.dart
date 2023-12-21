@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import '../../../stud_advice.dart';
 import '../../models/stud_advice/category.dart';
-import '../../screens/administrative_processes/AdministrativeProcessesScreen.dart';
 
 class CategoryItem extends StatelessWidget {
   CategoryItem({

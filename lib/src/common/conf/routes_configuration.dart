@@ -1,7 +1,6 @@
 import 'package:get/get.dart';
 import 'package:stud_advice/stud_advice.dart';
-
-import '../../screens/administrative_processes/AdministrativeProcessesScreen.dart';
+import '../../bindings/administrative_process/administrative_process_binding.dart';
 
 class RoutesConfiguration {
   static const String initialRoute = InitTimeScreen.navigatorId;
