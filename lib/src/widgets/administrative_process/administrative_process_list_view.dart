@@ -4,6 +4,8 @@ import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 import 'package:stud_advice/src/widgets/administrative_process/administrative_process_tile.dart';
 import 'package:stud_advice/stud_advice.dart';
 
+import '../../models/stud_advice/administrative_process.dart';
+
 class AdministrativeProcessListView extends StatelessWidget {
   final String categoryId;
   final String categoryColor;
@@ -16,8 +18,8 @@ class AdministrativeProcessListView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GetBuilder<AdministrativeProcessController>(
-      init: AdministrativeProcessController(),
+    return GetBuilder<SearchAdministrativeProcessController>(
+      init: SearchAdministrativeProcessController(),
       builder: (controller) {
         return RefreshIndicator(
           onRefresh: () =>
@@ -26,7 +28,7 @@ class AdministrativeProcessListView extends StatelessWidget {
               ),
           child: PagedListView.separated(
             pagingController: controller.pagingController,
-            builderDelegate: PagedChildBuilderDelegate<AdministrativeProcess>(
+            builderDelegate: PagedChildBuilderDelegate<AdministrativeProcessContent>(
               itemBuilder: (context, process, index) =>
                   AdministrativeProcessListTile(
                     name: process.name,
@@ -34,8 +36,7 @@ class AdministrativeProcessListView extends StatelessWidget {
                     description: process.description,
                     administrativeProcessId: process.id,
                     showProgressBar: false,
-                    isFavorite: process
-                        .isFavorite!, // TODO set this to true when the user when the progress bar is needed.
+                    isFavorite: false, // TODO set this to true when the user when the progress bar is needed. //fixed this to false temporally because not handled now
                   ),
               firstPageErrorIndicatorBuilder: (context) =>
                   ErrorIndicator(

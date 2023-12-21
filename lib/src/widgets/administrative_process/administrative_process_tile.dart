@@ -10,8 +10,8 @@ class AdministrativeProcessListTile extends StatelessWidget {
   final bool showProgressBar;
   final bool isFavorite;
 
-  final AdministrativeProcessController _controller =
-      Get.find<AdministrativeProcessController>();
+  final SearchAdministrativeProcessController _controller =
+      Get.find<SearchAdministrativeProcessController>();
 
   AdministrativeProcessListTile(
       {Key? key,
