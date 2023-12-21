@@ -21,6 +21,7 @@ class CustomSlidingUpPanel extends StatelessWidget {
   Widget build(BuildContext context) {
     return SlidingUpPanel(
       minHeight: 0.0,
+      maxHeight: MediaQuery.of(context).size.height * 0.5,
       controller: panelController,
       renderPanelSheet: false,
       panel: _floatingPanel(),
