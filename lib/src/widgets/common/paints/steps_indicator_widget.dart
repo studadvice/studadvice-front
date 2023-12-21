@@ -5,7 +5,7 @@ import 'package:get/get.dart';
 class StepsIndicator extends StatelessWidget {
   final int currentStep;
   final List<StepItem> steps;
-  static double DIAMETER = 40;
+  static double DIAMETER = 80;
 
 
   StepsIndicator({
