@@ -1,6 +1,8 @@
 import 'package:get/get.dart';
 import 'package:stud_advice/stud_advice.dart';
 
+import '../../screens/administrative_processes/AdministrativeProcessesScreen.dart';
+
 class RoutesConfiguration {
   static const String initialRoute = InitTimeScreen.navigatorId;
 
@@ -17,6 +19,7 @@ class RoutesConfiguration {
       GetPage(
         name: HomePageScreen.navigatorId,
         page: () => HomePageScreen(),
+        binding: CategoryBinding(),
       ),
       GetPage(
         name: LoginScreen.navigatorId,
@@ -48,10 +51,14 @@ class RoutesConfiguration {
         binding: SettingsBinding(),
       ),
       GetPage(
-        name: ForgotPasswordScreen.navigatorId,
-        page: () => ForgotPasswordScreen(),
-        binding: ForgotPasswordBinding(),
+          name: ForgotPasswordScreen.navigatorId,
+          page: () => ForgotPasswordScreen(),
+          binding: ForgotPasswordBinding(),
       ),
+      GetPage(
+        name: AdministrativesProcessesScreen.navigatorId,
+        page: () => AdministrativesProcessesScreen(),
+      )
     ];
   }
 }

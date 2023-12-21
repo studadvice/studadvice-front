@@ -5,7 +5,7 @@ PODS:
   - AppAuth/Core (1.6.2)
   - AppAuth/ExternalUserAgent (1.6.2):
     - AppAuth/Core
-  - cloud_firestore (4.13.3):
+  - cloud_firestore (4.13.6):
     - Firebase/Firestore (= 10.18.0)
     - firebase_core
     - Flutter
@@ -29,11 +29,11 @@ PODS:
   - Firebase/Firestore (10.18.0):
     - Firebase/CoreOnly
     - FirebaseFirestore (~> 10.18.0)
-  - firebase_auth (4.15.0):
+  - firebase_auth (4.15.3):
     - Firebase/Auth (= 10.18.0)
     - firebase_core
     - Flutter
-  - firebase_core (2.24.0):
+  - firebase_core (2.24.2):
     - Firebase/CoreOnly (= 10.18.0)
     - Flutter
   - FirebaseAppCheckInterop (10.18.0)
@@ -105,13 +105,13 @@ PODS:
   - PromisesObjC (2.3.1)
   - ReachabilitySwift (5.0.0)
   - RecaptchaInterop (100.0.0)
-  - rive_common (0.0.1):
-    - Flutter
-  - search_choices (0.0.1):
-    - Flutter
   - shared_preferences_foundation (0.0.1):
     - Flutter
     - FlutterMacOS
+  - speech_to_text (0.0.1):
+    - Flutter
+    - Try
+  - Try (2.1.1)
 
 DEPENDENCIES:
   - cloud_firestore (from `.symlinks/plugins/cloud_firestore/ios`)
@@ -126,9 +126,8 @@ DEPENDENCIES:
   - flutter_secure_storage (from `.symlinks/plugins/flutter_secure_storage/ios`)
   - google_sign_in_ios (from `.symlinks/plugins/google_sign_in_ios/ios`)
   - path_provider_foundation (from `.symlinks/plugins/path_provider_foundation/darwin`)
-  - rive_common (from `.symlinks/plugins/rive_common/ios`)
-  - search_choices (from `.symlinks/plugins/search_choices/ios`)
   - shared_preferences_foundation (from `.symlinks/plugins/shared_preferences_foundation/darwin`)
+  - speech_to_text (from `.symlinks/plugins/speech_to_text/ios`)
 
 SPEC REPOS:
   trunk:
@@ -150,6 +149,7 @@ SPEC REPOS:
     - PromisesObjC
     - ReachabilitySwift
     - RecaptchaInterop
+    - Try
 
 EXTERNAL SOURCES:
   cloud_firestore:
@@ -177,12 +177,10 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/google_sign_in_ios/ios"
   path_provider_foundation:
     :path: ".symlinks/plugins/path_provider_foundation/darwin"
-  rive_common:
-    :path: ".symlinks/plugins/rive_common/ios"
-  search_choices:
-    :path: ".symlinks/plugins/search_choices/ios"
   shared_preferences_foundation:
     :path: ".symlinks/plugins/shared_preferences_foundation/darwin"
+  speech_to_text:
+    :path: ".symlinks/plugins/speech_to_text/ios"
 
 CHECKOUT OPTIONS:
   FirebaseFirestore:
@@ -191,20 +189,20 @@ CHECKOUT OPTIONS:
 
 SPEC CHECKSUMS:
   AppAuth: 3bb1d1cd9340bd09f5ed189fb00b1cc28e1e8570
-  cloud_firestore: 9b25b77371a845d07a48e5146799f6d4552f5940
+  cloud_firestore: c29d4c2e96fe31374d9dab458a99d7a488d3a735
   connectivity_plus: bf0076dd84a130856aa636df1c71ccaff908fa1d
   FBAEMKit: 4763aa27b8f69eb9d2c274189e91388de1dbd88a
   FBSDKCoreKit: 40ae989ca1da1bbeba56acd4671dde64ad415506
   FBSDKCoreKit_Basics: 1257d71d2d692661290bf2af4bea5f9a101387af
   FBSDKLoginKit: bf4f96d0ce475de2da4b1800ce150bd8a6f120f3
   Firebase: 414ad272f8d02dfbf12662a9d43f4bba9bec2a06
-  firebase_auth: 02d1a6340f81020cc302fb8fea8518908c546cec
-  firebase_core: f802c5c1f6caff9b8d38b591a36e7b25f8878936
+  firebase_auth: df44e14f8a93e8a9869d91695bd3f8e53d2c9f5a
+  firebase_core: 0af4a2b24f62071f9bf283691c0ee41556dcb3f5
   FirebaseAppCheckInterop: 3cd914842ba46f4304050874cd284de82f154ffd
   FirebaseAuth: 12314b438fa76048540c8fb86d6cfc9e08595176
   FirebaseCore: 2322423314d92f946219c8791674d2f3345b598f
   FirebaseCoreInternal: 8eb002e564b533bdcf1ba011f33f2b5c10e2ed4a
-  FirebaseFirestore: 4e32f3bf7ed59f574416e46ddfdfac418f42eab6
+  FirebaseFirestore: 584e3f563142f63d20e9ec9c505370d674d44eba
   Flutter: f04841e97a9d0b0a8025694d0796dd46242b2854
   flutter_facebook_auth: 24f9040e28e60ef2a8a93fdd1848e18a9cacb148
   flutter_keyboard_visibility: 0339d06371254c3eb25eeb90ba8d17dca8f9c069
@@ -220,10 +218,10 @@ SPEC CHECKSUMS:
   PromisesObjC: c50d2056b5253dadbd6c2bea79b0674bd5a52fa4
   ReachabilitySwift: 985039c6f7b23a1da463388634119492ff86c825
   RecaptchaInterop: 7d1a4a01a6b2cb1610a47ef3f85f0c411434cb21
-  rive_common: 8a159d68033a8b073e5853acc50f03aa486a2888
-  search_choices: b50731e8c425078048f681f39c34375c58d6ce8d
   shared_preferences_foundation: 5b919d13b803cadd15ed2dc053125c68730e5126
+  speech_to_text: b43a7d99aef037bd758ed8e45d79bbac035d2dfe
+  Try: 5ef669ae832617b3cee58cb2c6f99fb767a4ff96
 
 PODFILE CHECKSUM: 7e96b986021c6e5de5f4062d6cdfa94c503d39e5
 
-COCOAPODS: 1.14.3
+COCOAPODS: 1.13.0
