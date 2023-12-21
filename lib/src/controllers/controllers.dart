@@ -1,11 +1,11 @@
 library controllers;
 
-export 'categories/category_controller.dart';
 export 'authentication/authentication_controller.dart';
 export 'authentication/social_sign_in_controller.dart';
+export 'categories/search_category_controller.dart';
 export 'common/i18n_controller.dart';
-export 'common/theme_controller.dart';
 export 'common/modal/custom_selection_modal_controller.dart';
+export 'common/theme_controller.dart';
 export 'connectivity/connectivity_controller.dart';
 export 'file/file_controller.dart';
 export 'forgot_password/forgot_password_controller.dart';

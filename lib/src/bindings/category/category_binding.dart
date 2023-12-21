@@ -4,6 +4,6 @@ import 'package:stud_advice/src/controllers/controllers.dart';
 class CategoryBinding implements Bindings {
   @override
   void dependencies() {
-    Get.put<CategoryController>(CategoryController());
+    Get.put<SearchCategoryController>(SearchCategoryController());
   }
 }

@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
-import '../../../../stud_advice.dart';
+import 'package:stud_advice/src/controllers/categories/controller.dart';
+
 import '../search/custom_search_bar.dart';
 
-class CustomAppBar<T> extends StatelessWidget implements PreferredSizeWidget {
-  final T controller;
+class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
+  final CustomSearchController controller;
 
   CustomAppBar({
     super.key,
