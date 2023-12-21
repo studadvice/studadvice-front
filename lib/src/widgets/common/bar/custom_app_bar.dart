@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 import '../../../../stud_advice.dart';
 import '../search/custom_search_bar.dart';
 
-class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
-  final CategoryController categoryController;
+class CustomAppBar<T> extends StatelessWidget implements PreferredSizeWidget {
+  final T controller;
 
   CustomAppBar({
     super.key,
-    required this.categoryController,
+    required this.controller,
   });
 
   @override
@@ -43,7 +43,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
             ),
             Align(
               alignment: Alignment.center,
-              child: CustomSearchBar(categoryController: categoryController),
+              child: CustomSearchBar(controller: controller),
             ),
           ],
         ),
