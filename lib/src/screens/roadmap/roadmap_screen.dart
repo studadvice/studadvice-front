@@ -18,43 +18,26 @@ class RoadMapScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        centerTitle: true,
-        title: const Text(
-          "Roadmap",
-          style: TextStyle(
-            fontSize: 20.0,
-            fontWeight: FontWeight.bold,
-          ),
-        ),
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back),
-          onPressed: () {
-            Get.back();
-          },
-        ),
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.info_outline),
-            onPressed: () => togglePanel,
-          ),
-        ],
-      ),
-    body: GestureDetector(
-      onTap: () {
-      if (panelController.isPanelOpen) {
-          panelController.close();
-      }
-    },
-      child: Stack(
+      appBar: CustomAppBar(
+      title: "Roadmap",
+      onBackPress: () => Get.back(),
+      onInfoPress: togglePanel,
+    ),
+    body: Stack(
         children: [
           // Your main content goes here
           CustomSlidingUpPanel(
             panelController: panelController,
-            bodyContent: StepsIndicator(
-              currentStep: stepController.currentStep.value,
-              steps: stepController.steps,
+            bodyContent: GestureDetector(
+              onTap: () {
+                panelController.close();
+              },
+              child: StepsIndicator(
+                currentStep: stepController.currentStep.value,
+                steps: stepController.steps,
+              ),
             ),
+            title: stepController.getProcessTitle(),
             slidingWidget: StepDetailCardWidget(
               title: stepController.getProcessTitle(),
               description: stepController.getProcessDescription(),
@@ -62,11 +45,9 @@ class RoadMapScreen extends StatelessWidget {
               onCompletePressed: () {},
               actionText: "Next",
             ),
-            title: stepController.getProcessTitle(),
           ),
         ],
       ),
-    ),
     );
   }
 
