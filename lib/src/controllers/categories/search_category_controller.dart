@@ -9,14 +9,6 @@ class SearchCategoryController extends CustomSearchController {
   final Dio _dio = Get.find();
 
   @override
-  void onInit() {
-    super.onInit();
-    pagingController.addPageRequestListener((pageKey) {
-      fetchPage(pageKey);
-    });
-  }
-
-  @override
   Future<void> fetchPage(int pageKey) async {
     try {
       final newPage = await getCategoriesBySearch(
@@ -53,24 +45,6 @@ class SearchCategoryController extends CustomSearchController {
     pagingController.refresh();
   }
 
-  Future<Category> _getCategories(
-      String path, Map<String, dynamic> queryParameters) async {
-    try {
-      final response = await _dio.get(
-        path,
-        queryParameters: queryParameters,
-      );
-
-      if (response.statusCode == 200) {
-        return Category.fromJson(response.data);
-      } else {
-        throw Exception('Failed to load categories');
-      }
-    } catch (error) {
-      rethrow;
-    }
-  }
-
   Future<Category> _getCategoriesBySearch(
       String path, Map<String, dynamic> queryParameters) async {
     try {
@@ -87,12 +61,6 @@ class SearchCategoryController extends CustomSearchController {
     } catch (error) {
       rethrow;
     }
-  }
-
-  Future<Category> getCategories(
-      {required int number, required int size}) async {
-    final queryParameters = {'page': number, 'size': size};
-    return _getCategories('/categories', queryParameters);
   }
 
   Future<Category> getCategoriesBySearch({
