@@ -5,8 +5,6 @@ import 'package:stud_advice/stud_advice.dart';
 class RegisterOptionsScreen extends StatelessWidget {
   static const String navigatorId = '/register_options_screen';
 
-  final I18n _i18n = Get.find<I18n>();
-
   final SocialSignInController _socialSignInController = Get.find();
   final LegalTermsController _termsAndConditionsController = Get.find();
 
@@ -36,7 +34,7 @@ class RegisterOptionsScreen extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 40),
           child: Text(
-            _i18n.text('acceptingTermsAndConditions'),
+            'register.acceptingTermsAndConditions'.tr,
             textAlign: TextAlign.justify,
             style: const TextStyle(
               fontSize: 12,
@@ -46,7 +44,7 @@ class RegisterOptionsScreen extends StatelessWidget {
         ),
         const SizedBox(height: 10),
         _termsAndConditionsController
-            .buildTermsAndConditionsButton(_i18n.text('legalConditionsButton')),
+            .buildTermsAndConditionsButton('register.legalConditionsButton'.tr),
       ],
     );
   }
@@ -71,7 +69,7 @@ class RegisterOptionsScreen extends StatelessWidget {
                   buildSocialButton(
                       context: context,
                       imagePath: 'assets/images/login/google.png',
-                      buttonText: _i18n.text('continueWithGoogle'),
+                      buttonText: 'register.continueWithGoogle'.tr,
                       onTap: () async {
                         if (await _socialSignInController
                             .loginWithGoogleAccount()) {
@@ -85,7 +83,7 @@ class RegisterOptionsScreen extends StatelessWidget {
                   buildSocialButton(
                       context: context,
                       imagePath: 'assets/images/login/facebook.png',
-                      buttonText: _i18n.text('continueWithFacebook'),
+                      buttonText: 'register.continueWithFacebook'.tr,
                       iconColor: Colors.blue,
                       onTap: () async {
                         if (await _socialSignInController
@@ -102,7 +100,7 @@ class RegisterOptionsScreen extends StatelessWidget {
                     buildSocialButton(
                         context: context,
                         imagePath: 'assets/images/login/apple.png',
-                        buttonText: _i18n.text('continueWithApple'),
+                        buttonText: 'register.continueWithApple'.tr,
                         onTap: () async {
                           if (await _socialSignInController
                               .loginWithAppleAccount()) {
@@ -128,10 +126,10 @@ class RegisterOptionsScreen extends StatelessWidget {
                   const SizedBox(height: 10),
                   buildTermsAndConditionsSection(),
                   const SizedBox(height: 20),
-                  DividerWithText(text: _i18n.text('dividerText')),
+                  DividerWithText(text: 'register.dividerText'.tr),
                   const SizedBox(height: 20),
                   RegisterWithEmailButton(
-                    text: _i18n.text('registerWithEmail'),
+                    text: 'register.continueWithEmail'.tr,
                     onPressed: () {
                       Get.toNamed(RegisterWithEmailScreen.navigatorId);
                     },

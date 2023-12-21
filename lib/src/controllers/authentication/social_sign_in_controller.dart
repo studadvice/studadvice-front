@@ -5,7 +5,6 @@ import 'package:stud_advice/stud_advice.dart';
 
 class SocialSignInController extends GetxController {
   final AuthenticationController _authenticationController = Get.find();
-  final I18n _i18n = Get.find();
 
   Future<bool> loginWithGoogleAccount() async {
     try {
@@ -60,15 +59,15 @@ class SocialSignInController extends GetxController {
     switch (errorCode) {
       case 'invalid-login-credentials':
       case 'invalid-credential':
-        snackbarMessage = _i18n.text('invalidLoginCredentials');
+        snackbarMessage = 'register.invalidLoginCredentials'.tr;
         break;
       default:
-        snackbarMessage = _i18n.text('signInWithSocialAccountFailed');
+        snackbarMessage = 'register.signInWithSocialAccountFailed'.tr;
         textColor = AppColors.white;
         snackPosition = SnackPosition.BOTTOM;
     }
 
-    Get.snackbar(_i18n.text('error'), snackbarMessage,
+    Get.snackbar('register.error'.tr, snackbarMessage,
         backgroundColor: backgroundColor,
         snackPosition: snackPosition,
         colorText: textColor);

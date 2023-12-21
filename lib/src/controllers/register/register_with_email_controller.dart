@@ -6,13 +6,6 @@ import 'package:stud_advice/stud_advice.dart';
 class RegisterWithEmailController extends GetxController {
   final AuthenticationController _authenticationController = Get.find();
 
-  final String error = "Erreur de connexion";
-  final String alreadyHaveAnAccountError = "Vous avez déjà un compte";
-  final String registerWithEmailFailed =
-      "Une erreur s'est produite lors de l'inscription";
-  final String alreadyHaveAnAccount =
-      "Un compte existe déjà avec cette adresse email \n Veuillez continuer votre inscription";
-
   void handleRegisterWithEmail(formData) async {
     LoadingSpinner.start();
 
@@ -36,8 +29,8 @@ class RegisterWithEmailController extends GetxController {
 
       if (e.code == 'email-already-in-use') {
         Get.snackbar(
-          alreadyHaveAnAccountError,
-          alreadyHaveAnAccount,
+          "register_with_email_controller.alreadyHaveAnAccountError".tr,
+          "register_with_email_controller.alreadyHaveAnAccount".tr,
           backgroundColor: AppColors.blue,
           snackPosition: SnackPosition.BOTTOM,
           colorText: AppColors.white,
@@ -50,13 +43,13 @@ class RegisterWithEmailController extends GetxController {
         });
       } else {
         Get.snackbar(
-          error,
-          registerWithEmailFailed,
+          "register_with_email_controller.error".tr,
+          "register_with_email_controller.registerWithEmailFailed".tr,
           colorText: AppColors.white,
           backgroundColor: AppColors.dangerColor,
           snackPosition: SnackPosition.BOTTOM,
           titleText: Text(
-            error,
+            "register_with_email_controller.error".tr,
             style: const TextStyle(color: AppColors.white),
           ),
         );

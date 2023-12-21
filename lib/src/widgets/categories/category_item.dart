@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:percent_indicator/circular_percent_indicator.dart';
 import '../../models/stud_advice/category.dart';
+import '../../screens/administrative_processes/AdministrativeProcessesScreen.dart';
 
 class CategoryItem extends StatelessWidget {
   CategoryItem({
@@ -18,108 +18,55 @@ class CategoryItem extends StatelessWidget {
 
     return GestureDetector(
       onLongPress: () {
-        _isLongPress.value = true;
-      },
+          _isLongPress.value = true;
+        },
       onTap: () {
-        _isLongPress.value = false;
-      },
-      child: Card(
-        color: cardColor,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(16),
+          if (_isLongPress.value) {
+            _isLongPress.value = false;
+          } else {
+            Get.toNamed(
+              AdministrativesProcessesScreen.navigatorId,
+              arguments: {
+                  'categoryId':
+                  category.id,
+                  'categoryColor':
+                  category.color
+              },
+            );
+          }
+        },
+      child: Container(
+        padding: const EdgeInsets.all(10),
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(20),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black.withOpacity(.1),
+              blurRadius: 4.0,
+              spreadRadius: .05,
+            ), //BoxShadow
+          ],
         ),
-        child: Padding(
-          padding: const EdgeInsets.all(25),
-          child: Column(
-            children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      Text(
-                        category.name,
-                        style: const TextStyle(
-                          color: Colors.white,
-                          fontSize: 20,
-                        ),
-                      ),
-                      const SizedBox(height: 4),
-                      Text(
-                        '${category.administrativeProcesses!.length} démarches ',
-                        style: const TextStyle(
-                          color: Colors.white,
-                          fontSize: 16,
-                        ),
-                      ),
-                      const SizedBox(height: 4),
-                      CircularPercentIndicator(
-                        radius: 30,
-                        lineWidth: 8,
-                        animation: true,
-                        animationDuration: 1500,
-                        circularStrokeCap: CircularStrokeCap.round,
-                        percent: 0.7,
-                        progressColor: Colors.white,
-                        center: const Text(
-                          "${70}%",
-                          style: TextStyle(color: Colors.white),
-                        ),
-                      )
-                    ],
-                  ),
-                  const Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Image(
-                        image: AssetImage('assets/images/common/raven_image.png'),
-                        height: 110,
-                      ),
-                    ],
-                  ),
-                ],
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Align(
+              alignment: Alignment.center,
+              child: Image.asset(
+                'assets/images/common/raven_image.png',
+                height: 120,
               ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      Obx(() => Visibility(
-                        visible: _isLongPress.value,
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            const SizedBox(height: 8),
-                            Container(
-                              constraints: const BoxConstraints(
-                                maxWidth: 330,
-                              ),
-                              child: Text(
-                                category.description ?? '',
-                                style: const TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 16,
-                                ),
-                              ),
-                            ),
-                            const SizedBox(height: 8),
-                            ElevatedButton(
-                              onPressed: () {},
-                              child: const Text('Go'),
-                            ),
-                          ],
-                        ),
-                      )),
-                    ],
-                  )
-                ],
-              ),
-            ],
-          ),
+            ),
+            const SizedBox(
+              height: 10,
+            ),
+            Text(category.name),
+            Text(
+              "${category.administrativeProcesses!.length} démarches",
+              style: Theme.of(context).textTheme.bodySmall,
+            ),
+          ],
         ),
       ),
     );

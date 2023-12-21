@@ -2,8 +2,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dio/dio.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
-import 'package:stud_advice/src/controllers/categories/category_controller.dart';
 import 'package:stud_advice/src/controllers/controllers.dart';
+import 'package:stud_advice/src/middlewares/common/auth_interceptor.dart';
 
 class AppDependenciesBinding extends Bindings {
   static final FirebaseAuth firebaseAuthInstance = FirebaseAuth.instance;
@@ -12,10 +12,17 @@ class AppDependenciesBinding extends Bindings {
 
   @override
   void dependencies() {
-    // Register the chore services.
-    Get.put(Dio(), permanent: true);
+    Dio dio = Dio(
+        BaseOptions(
+          baseUrl: "http://localhost:8080",
+          connectTimeout: const Duration(seconds: 5),
+          receiveTimeout: const Duration(seconds: 5),
+        ));
+    dio.interceptors.add(AuthInterceptor());
+
+    Get.put(dio, permanent: true);
+    Get.put(AuthenticationController(), permanent: true);
     Get.put(UserStorageController(), permanent: true);
-    Get.put(CategoryController(), permanent: true);
     Get.put(FileController(), permanent: true);
 
     // Language and theme controllers.
@@ -24,5 +31,7 @@ class AppDependenciesBinding extends Bindings {
 
     // Register the firebase services.
     Get.put(AuthenticationController(), permanent: true);
+
+    Get.put(CategoryController(), permanent: true);
   }
 }
