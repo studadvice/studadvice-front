@@ -2,11 +2,23 @@ import 'dart:io';
 
 import 'package:dio/dio.dart';
 import 'package:get/get.dart';
-import 'package:stud_advice/src/controllers/categories/controller.dart';
+import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
+import 'package:stud_advice/src/controllers/search/custom_search_controller.dart';
 import 'package:stud_advice/src/models/stud_advice/category.dart';
 
 class SearchCategoryController extends CustomSearchController {
   final Dio _dio = Get.find();
+
+  final PagingController<int, CategoryContent> pagingController =
+  PagingController(firstPageKey: 0);
+
+  @override
+  void onInit() {
+    super.onInit();
+    pagingController.addPageRequestListener((pageKey) {
+      fetchPage(pageKey);
+    });
+  }
 
   @override
   Future<void> fetchPage(int pageKey) async {

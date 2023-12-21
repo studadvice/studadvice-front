@@ -71,7 +71,7 @@ class CategoryContent {
   late String description;
   late String imageId;
   late String color;
-  List<AdministrativeProcess>? administrativeProcesses;
+  List<AdministrativeProcessContent>? administrativeProcesses;
 
   CategoryContent(
       {required this.id,
@@ -88,9 +88,9 @@ class CategoryContent {
     imageId = json['imageId'];
     color = json["color"];
     if (json['administrativeProcesses'] != null) {
-      administrativeProcesses = <AdministrativeProcess>[];
+      administrativeProcesses = <AdministrativeProcessContent>[];
       json['administrativeProcesses'].forEach((v) {
-        administrativeProcesses!.add(AdministrativeProcess.fromJson(v));
+        administrativeProcesses!.add(AdministrativeProcessContent.fromJson(v));
       });
     }
   }
