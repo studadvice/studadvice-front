@@ -1,7 +1,7 @@
 import 'package:stud_advice/src/models/stud_advice/pageable.dart';
 import 'package:stud_advice/stud_advice.dart';
 
-class AdministrativeProcess {
+class AdministrativeProcesses {
   late List<AdministrativeProcessContent> content;
   late Pageable pageable;
   late int totalElements;
@@ -14,20 +14,20 @@ class AdministrativeProcess {
   late bool first;
   late bool empty;
 
-  AdministrativeProcess(
+  AdministrativeProcesses(
       {required this.content,
-        required this.pageable,
-        required this.totalElements,
-        required this.totalPages,
-        required this.last,
-        required this.size,
-        required this.number,
-        required this.sort,
-        required this.numberOfElements,
-        required this.first,
-        required this.empty});
+      required this.pageable,
+      required this.totalElements,
+      required this.totalPages,
+      required this.last,
+      required this.size,
+      required this.number,
+      required this.sort,
+      required this.numberOfElements,
+      required this.first,
+      required this.empty});
 
-  AdministrativeProcess.fromJson(Map<String, dynamic> json) {
+  AdministrativeProcesses.fromJson(Map<String, dynamic> json) {
     if (json['content'] != null) {
       content = <AdministrativeProcessContent>[];
       json['content'].forEach((v) {
@@ -80,19 +80,17 @@ class AdministrativeProcessContent {
   bool? isFavorite;
 
   AdministrativeProcessContent(
-      {
-        required this.id,
-        required this.name,
-        required this.description,
-        required this.imageId,
-        this.isFavorite,
-        this.educations,
-        this.minAge,
-        this.maxAge,
-        this.nationalities,
-        this.universities,
-        this.steps
-      });
+      {required this.id,
+      required this.name,
+      required this.description,
+      required this.imageId,
+      this.isFavorite,
+      this.educations,
+      this.minAge,
+      this.maxAge,
+      this.nationalities,
+      this.universities,
+      this.steps});
 
   AdministrativeProcessContent.fromJson(Map<String, dynamic> json) {
     id = json['id'];

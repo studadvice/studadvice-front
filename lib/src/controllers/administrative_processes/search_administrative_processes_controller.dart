@@ -1,9 +1,11 @@
 import 'dart:io';
+
 import 'package:dio/dio.dart';
 import 'package:get/get.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 import 'package:stud_advice/src/controllers/search/custom_search_controller.dart';
-import '../../models/stud_advice/administrative_process.dart';
+
+import '../../models/stud_advice/administrative_processes.dart';
 
 class SearchAdministrativeProcessController extends CustomSearchController {
   final RxList<AdministrativeProcessContent> administrativeProcesses =
@@ -45,16 +47,21 @@ class SearchAdministrativeProcessController extends CustomSearchController {
     }
   }
 
-  Future<AdministrativeProcess> getAdministrativeProcesses({
+  Future<AdministrativeProcesses> getAdministrativeProcesses({
     required int number,
     required int size,
     String? query,
   }) async {
-    final queryParameters = {'page': number, 'size': size, 'searchText': query};
-    return _getAdministrativeProcesses('/administrative-process/search', queryParameters);
+    final queryParameters = {
+      'page': number,
+      'size': size,
+      'searchText': query
+    }; // TODO: add the category id
+    return _getAdministrativeProcesses(
+        '/administrative-process/search', queryParameters);
   }
 
-  Future<AdministrativeProcess> _getAdministrativeProcesses(
+  Future<AdministrativeProcesses> _getAdministrativeProcesses(
       String path, Map<String, dynamic> queryParameters) async {
     try {
       final response = await _dio.get(
@@ -63,7 +70,7 @@ class SearchAdministrativeProcessController extends CustomSearchController {
       );
 
       if (response.statusCode == HttpStatus.ok) {
-        return AdministrativeProcess.fromJson(response.data);
+        return AdministrativeProcesses.fromJson(response.data);
       } else {
         throw Exception('Failed to load categories');
       }
@@ -100,5 +107,4 @@ class SearchAdministrativeProcessController extends CustomSearchController {
   void refresh() {
     pagingController.refresh();
   }
-
 }
