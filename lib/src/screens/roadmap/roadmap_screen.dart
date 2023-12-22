@@ -25,7 +25,6 @@ class RoadMapScreen extends StatelessWidget {
     ),
     body: Stack(
         children: [
-          // Your main content goes here
           CustomSlidingUpPanel(
             panelController: panelController,
             bodyContent: GestureDetector(
