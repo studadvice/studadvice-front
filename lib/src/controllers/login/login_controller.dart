@@ -4,6 +4,8 @@ import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:stud_advice/stud_advice.dart';
 
+import '../../screens/dashboard/dashboard_screen.dart';
+
 class LoginController extends GetxController {
   final AuthenticationController _authenticationController = Get.find();
 
@@ -42,7 +44,7 @@ class LoginController extends GetxController {
         // Here we use the Get.offAll() method to remove all the previous screens
         // from the stack.
         // So the user can't go back to the login screen.
-        Get.offAllNamed(HomePageScreen.navigatorId);
+        Get.offAllNamed(DashboardScreen.navigatorId);
       }
     } on FirebaseAuthException catch (e) {
       LoadingSpinner.stop();

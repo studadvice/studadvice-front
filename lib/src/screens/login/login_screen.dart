@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:stud_advice/stud_advice.dart';
 
+import '../dashboard/dashboard_screen.dart';
+
 class LoginScreen extends StatelessWidget {
   static const String navigatorId = '/login_screen';
 
@@ -154,7 +156,7 @@ class LoginScreen extends StatelessWidget {
           borderColor: AppColors.black26,
           onTap: () async {
             if (await _socialSignInController.loginWithGoogleAccount()) {
-              Get.offAllNamed(HomePageScreen.navigatorId);
+              Get.offAllNamed(DashboardScreen.navigatorId);
             }
           },
           borderRadius: 16,
@@ -169,7 +171,7 @@ class LoginScreen extends StatelessWidget {
           iconColor: AppColors.blueAccent,
           onTap: () async {
             if (await _socialSignInController.loginWithFacebookAccount()) {
-              Get.offAllNamed(HomePageScreen.navigatorId);
+              Get.offAllNamed(DashboardScreen.navigatorId);
             }
           },
           borderRadius: 16,
@@ -185,7 +187,7 @@ class LoginScreen extends StatelessWidget {
             borderColor: AppColors.black26,
             onTap: () async {
               if (await _socialSignInController.loginWithAppleAccount()) {
-                Get.offAllNamed(HomePageScreen.navigatorId);
+                Get.offAllNamed(DashboardScreen.navigatorId);
               }
             },
             borderRadius: 16,
