@@ -2,6 +2,7 @@ import 'package:country_picker/country_picker.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:get/get.dart';
 import 'package:get_it/get_it.dart';
@@ -66,6 +67,7 @@ void main() async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
   await GetStorage.init(); // Important to initialize GetStorage
+  await dotenv.load();
   await loadTerms().then((_) {
     runApp(const StudAdviceApp());
   });
