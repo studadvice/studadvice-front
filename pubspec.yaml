@@ -74,3 +74,4 @@ flutter:
     - assets/legal_terms/
     - assets/legal_terms/en_US.txt
     - assets/legal_terms/fr_FR.txt
+    - .env
