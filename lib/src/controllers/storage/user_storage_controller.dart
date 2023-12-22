@@ -27,7 +27,7 @@ class UserStorageController extends GetxController {
     } else {
       Get.snackbar(
         "user_storage_controller.userNotConnected".tr,
-        "user_storage_controller.userNotConnectedMessage",
+        "user_storage_controller.userNotConnectedMessage".tr,
         colorText: AppColors.white,
         backgroundColor: AppColors.dangerColor,
         snackPosition: SnackPosition.BOTTOM,

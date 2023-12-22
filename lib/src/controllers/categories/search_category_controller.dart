@@ -2,11 +2,23 @@ import 'dart:io';
 
 import 'package:dio/dio.dart';
 import 'package:get/get.dart';
-import 'package:stud_advice/src/controllers/categories/controller.dart';
-import 'package:stud_advice/src/models/stud_advice/category.dart';
+import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
+import 'package:stud_advice/src/controllers/search/custom_search_controller.dart';
+import 'package:stud_advice/src/models/stud_advice/categories.dart';
 
 class SearchCategoryController extends CustomSearchController {
   final Dio _dio = Get.find();
+
+  final PagingController<int, CategoryContent> pagingController =
+      PagingController(firstPageKey: 0);
+
+  @override
+  void onInit() {
+    super.onInit();
+    pagingController.addPageRequestListener((pageKey) {
+      fetchPage(pageKey);
+    });
+  }
 
   @override
   Future<void> fetchPage(int pageKey) async {
@@ -45,7 +57,7 @@ class SearchCategoryController extends CustomSearchController {
     pagingController.refresh();
   }
 
-  Future<Category> _getCategoriesBySearch(
+  Future<Categories> _getCategoriesBySearch(
       String path, Map<String, dynamic> queryParameters) async {
     try {
       final response = await _dio.get(
@@ -54,7 +66,7 @@ class SearchCategoryController extends CustomSearchController {
       );
 
       if (response.statusCode == HttpStatus.ok) {
-        return Category.fromJson(response.data);
+        return Categories.fromJson(response.data);
       } else {
         throw Exception('Failed to load categories');
       }
@@ -63,7 +75,7 @@ class SearchCategoryController extends CustomSearchController {
     }
   }
 
-  Future<Category> getCategoriesBySearch({
+  Future<Categories> getCategoriesBySearch({
     required int number,
     required int size,
     String? query,

@@ -14,7 +14,7 @@ class AppDependenciesBinding extends Bindings {
   void dependencies() {
     Dio dio = Dio(
         BaseOptions(
-          baseUrl: "http://localhost:8080",
+          baseUrl: "http://10.0.2.2:8080",
           connectTimeout: const Duration(seconds: 5),
           receiveTimeout: const Duration(seconds: 5),
         ));
@@ -28,5 +28,10 @@ class AppDependenciesBinding extends Bindings {
     // Language and theme controllers.
     Get.put(I18n(), permanent: true);
     Get.put(ThemeController(), permanent: true);
+
+    // Register the firebase services.
+    Get.put(AuthenticationController(), permanent: true);
+
+    Get.put(SearchCategoryController(), permanent: true);
   }
 }

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:stud_advice/src/controllers/categories/controller.dart';
+import 'package:stud_advice/src/controllers/search/custom_search_controller.dart';
 
 import '../search/custom_search_bar.dart';
 

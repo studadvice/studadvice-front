@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../../models/stud_advice/category.dart';
-import '../../screens/administrative_processes/AdministrativeProcessesScreen.dart';
+
+import '../../../stud_advice.dart';
+import '../../models/stud_advice/categories.dart';
 
 class CategoryItem extends StatelessWidget {
   CategoryItem({
@@ -18,23 +19,21 @@ class CategoryItem extends StatelessWidget {
 
     return GestureDetector(
       onLongPress: () {
-          _isLongPress.value = true;
-        },
+        _isLongPress.value = true;
+      },
       onTap: () {
-          if (_isLongPress.value) {
-            _isLongPress.value = false;
-          } else {
-            Get.toNamed(
-              AdministrativesProcessesScreen.navigatorId,
-              arguments: {
-                  'categoryId':
-                  category.id,
-                  'categoryColor':
-                  category.color
-              },
-            );
-          }
-        },
+        if (_isLongPress.value) {
+          _isLongPress.value = false;
+        } else {
+          Get.toNamed(
+            AdministrativesProcessesScreen.navigatorId,
+            arguments: {
+              'categoryId': category.id,
+              'categoryColor': category.color
+            },
+          );
+        }
+      },
       child: Container(
         padding: const EdgeInsets.all(10),
         decoration: BoxDecoration(

@@ -1,9 +1,8 @@
 import 'package:stud_advice/src/models/stud_advice/pageable.dart';
+import 'package:stud_advice/stud_advice.dart';
 
-import 'administrative_process.dart';
-
-class Category {
-  late List<CategoryContent> content;
+class AdministrativeProcesses {
+  late List<AdministrativeProcessContent> content;
   late Pageable pageable;
   late int totalElements;
   late int totalPages;
@@ -15,24 +14,24 @@ class Category {
   late bool first;
   late bool empty;
 
-  Category(
+  AdministrativeProcesses(
       {required this.content,
-        required this.pageable,
-        required this.totalElements,
-        required this.totalPages,
-        required this.last,
-        required this.size,
-        required this.number,
-        required this.sort,
-        required this.numberOfElements,
-        required this.first,
-        required this.empty});
+      required this.pageable,
+      required this.totalElements,
+      required this.totalPages,
+      required this.last,
+      required this.size,
+      required this.number,
+      required this.sort,
+      required this.numberOfElements,
+      required this.first,
+      required this.empty});
 
-  Category.fromJson(Map<String, dynamic> json) {
+  AdministrativeProcesses.fromJson(Map<String, dynamic> json) {
     if (json['content'] != null) {
-      content = <CategoryContent>[];
+      content = <AdministrativeProcessContent>[];
       json['content'].forEach((v) {
-        content.add(CategoryContent.fromJson(v));
+        content.add(AdministrativeProcessContent.fromJson(v));
       });
     }
     pageable = (json['pageable'] != null
@@ -66,32 +65,47 @@ class Category {
   }
 }
 
-class CategoryContent {
+class AdministrativeProcessContent {
   late String id;
   late String name;
   late String description;
   late String imageId;
-  late String color;
-  List<AdministrativeProcess>? administrativeProcesses;
+  List<String>? educations;
+  int? minAge;
+  int? maxAge;
+  List<String>? nationalities;
+  List<String>? universities;
+  List<Step>? steps;
+  String? imageFileSrc;
+  bool? isFavorite;
 
-  CategoryContent(
+  AdministrativeProcessContent(
       {required this.id,
-        required this.name,
-        required this.description,
-        required this.imageId,
-        required this.color,
-        this.administrativeProcesses});
+      required this.name,
+      required this.description,
+      required this.imageId,
+      this.isFavorite,
+      this.educations,
+      this.minAge,
+      this.maxAge,
+      this.nationalities,
+      this.universities,
+      this.steps});
 
-  CategoryContent.fromJson(Map<String, dynamic> json) {
+  AdministrativeProcessContent.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     name = json['name'];
     description = json['description'];
     imageId = json['imageId'];
-    color = json["color"];
-    if (json['administrativeProcesses'] != null) {
-      administrativeProcesses = <AdministrativeProcess>[];
-      json['administrativeProcesses'].forEach((v) {
-        administrativeProcesses!.add(AdministrativeProcess.fromJson(v));
+    educations = json['educations'].cast<String>();
+    minAge = json['minAge'];
+    maxAge = json['maxAge'];
+    nationalities = json['nationalities'].cast<String>();
+    universities = json['universities'].cast<String>();
+    if (json['steps'] != null) {
+      steps = <Step>[];
+      json['steps'].forEach((v) {
+        steps!.add(Step.fromJson(v));
       });
     }
   }
@@ -102,9 +116,13 @@ class CategoryContent {
     data['name'] = name;
     data['description'] = description;
     data['imageId'] = imageId;
-    if (administrativeProcesses != null) {
-      data['administrativeProcesses'] =
-          administrativeProcesses!.map((v) => v.toJson()).toList();
+    data['educations'] = educations;
+    data['minAge'] = minAge;
+    data['maxAge'] = maxAge;
+    data['nationalities'] = nationalities;
+    data['universities'] = universities;
+    if (steps != null) {
+      data['steps'] = steps!.map((v) => v.toJson()).toList();
     }
     return data;
   }
