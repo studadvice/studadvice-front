@@ -1,8 +1,8 @@
 import 'package:stud_advice/src/models/stud_advice/pageable.dart';
 
-import 'administrative_process.dart';
+import 'administrative_processes.dart';
 
-class Category {
+class Categories {
   late List<CategoryContent> content;
   late Pageable pageable;
   late int totalElements;
@@ -15,20 +15,20 @@ class Category {
   late bool first;
   late bool empty;
 
-  Category(
+  Categories(
       {required this.content,
-        required this.pageable,
-        required this.totalElements,
-        required this.totalPages,
-        required this.last,
-        required this.size,
-        required this.number,
-        required this.sort,
-        required this.numberOfElements,
-        required this.first,
-        required this.empty});
+      required this.pageable,
+      required this.totalElements,
+      required this.totalPages,
+      required this.last,
+      required this.size,
+      required this.number,
+      required this.sort,
+      required this.numberOfElements,
+      required this.first,
+      required this.empty});
 
-  Category.fromJson(Map<String, dynamic> json) {
+  Categories.fromJson(Map<String, dynamic> json) {
     if (json['content'] != null) {
       content = <CategoryContent>[];
       json['content'].forEach((v) {
@@ -76,11 +76,11 @@ class CategoryContent {
 
   CategoryContent(
       {required this.id,
-        required this.name,
-        required this.description,
-        required this.imageId,
-        required this.color,
-        this.administrativeProcesses});
+      required this.name,
+      required this.description,
+      required this.imageId,
+      required this.color,
+      this.administrativeProcesses});
 
   CategoryContent.fromJson(Map<String, dynamic> json) {
     id = json['id'];
