@@ -7,6 +7,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:stud_advice/stud_advice.dart';
 
+import '../../screens/dashboard/dashboard_screen.dart';
+
 class RegisterUserInformationController extends GetxController {
   final Dio _dio = Get.find();
   final UserStorageController _userStorageController = Get.find();
@@ -106,7 +108,7 @@ class RegisterUserInformationController extends GetxController {
 
       if (registerSuccess) {
         LoadingSpinner.stop();
-        Get.offAllNamed(HomePageScreen.navigatorId, arguments: userData);
+        Get.offAllNamed(DashboardScreen.navigatorId, arguments: userData);
       }
     } catch (e) {
       LoadingSpinner.stop();

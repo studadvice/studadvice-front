@@ -1,6 +1,8 @@
 import 'package:get/get.dart';
 import 'package:stud_advice/stud_advice.dart';
 import '../../bindings/administrative_process/administrative_process_binding.dart';
+import '../../bindings/settings/settings_binding.dart';
+import '../../screens/dashboard/dashboard_screen.dart';
 
 class RoutesConfiguration {
   static const String initialRoute = InitTimeScreen.navigatorId;
@@ -58,6 +60,10 @@ class RoutesConfiguration {
         name: AdministrativesProcessesScreen.navigatorId,
         page: () => AdministrativesProcessesScreen(),
         binding: AdministrativeProcessBinding(),
+      ),
+      GetPage(
+        name: DashboardScreen.navigatorId,
+        page: () => DashboardScreen(),
       )
     ];
   }

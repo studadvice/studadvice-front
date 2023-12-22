@@ -7,5 +7,4 @@ export 'login/login_binding.dart';
 export 'register/register_options_binding.dart';
 export 'register/register_user_information_binding.dart';
 export 'register/register_with_email_binding.dart';
-export 'settings/settings_binding.dart';
 export 'category/category_binding.dart';
