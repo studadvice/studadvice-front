@@ -5,6 +5,7 @@ import 'package:dio/dio.dart';
 import 'package:english_words/english_words.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:stud_advice/stud_advice.dart';
 
 import '../../screens/dashboard/dashboard_screen.dart';
@@ -12,6 +13,7 @@ import '../../screens/dashboard/dashboard_screen.dart';
 class RegisterUserInformationController extends GetxController {
   final Dio _dio = Get.find();
   final UserStorageController _userStorageController = Get.find();
+  final getLocalStorage = GetStorage();
 
   static String generateRandomPseudo() {
     final random = Random();
@@ -70,32 +72,6 @@ class RegisterUserInformationController extends GetxController {
       return [];
     } catch (e) {
       throw Exception('Failed to load city postal codes');
-    }
-  }
-
-  Future<List<String>> fetchUniversityData() async {
-    List<UniversityData> allResults = [];
-    int totalCount = 0;
-    int offset = 0;
-    int limit = 100;
-    try {
-      do {
-        //where=champ_recherche%20like%20%22$filter%22&
-        final universityApiUri = Uri.parse(
-            'https://data.enseignementsup-recherche.gouv.fr/api/explore/v2.1/catalog/datasets/fr-esr-principaux-etablissements-enseignement-superieur/records?limit=$limit&offset=$offset');
-        final response = await _dio.get(universityApiUri.toString());
-
-        if (response.statusCode == HttpStatus.ok) {
-          final data = response.data;
-          final universityData = UniversityResults.fromJson(data);
-          allResults.addAll(universityData.results ?? []);
-          totalCount = universityData.totalCount ?? 0;
-          offset += limit;
-        }
-      } while (allResults.length < totalCount);
-      return allResults.map((university) => university.uoLib ?? '').toList();
-    } catch (e) {
-      throw Exception('Failed to load university data');
     }
   }
 

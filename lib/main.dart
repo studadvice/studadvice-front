@@ -48,16 +48,51 @@ class StudAdviceApp extends StatelessWidget {
   }
 }
 
+Future<void> loadUniversities() async {
+  final getLocalStorage = GetStorage();
+  for (var locale in supportedLocales) {
+    final fileLocale = '${locale.languageCode}_${locale.countryCode}';
+
+    final path = 'assets/universities/$fileLocale.txt';
+
+    debugPrint('Loading universities for $path');
+    if (getLocalStorage.read('universities_$fileLocale') != null) {
+      debugPrint('Universities for $fileLocale already loaded. Skipping.');
+      continue;
+    }
+
+    try {
+      var content = await rootBundle.loadString(path);
+      throwIf(content == '', 'Could not load $path or it is empty');
+
+      // Process each line and add it to the university list
+      List<String> universityList = content.split('\n');
+      debugPrint('Loaded $universityList universities for $fileLocale');
+
+      universityList.removeWhere((element) => element == '');
+
+      getLocalStorage.write('universities_$fileLocale', universityList);
+
+      debugPrint('Universities for $fileLocale loaded successfully');
+    } catch (e) {
+      debugPrint('Error loading universities for $fileLocale: $e');
+    }
+  }
+}
+
 Future<void> loadTerms() async {
-  final box = GetStorage();
+  final getLocalStorage = GetStorage();
   for (var locale in supportedLocales) {
     final fileName = '${locale.languageCode}_${locale.countryCode}';
     debugPrint('Loading legal terms for $fileName');
+
     final path = 'assets/legal_terms/$fileName.txt';
     var content = await rootBundle.loadString(path);
+
     throwIf(content == '', 'Could not load $path or it is empty');
-    if (box.read('legal_terms_$fileName') != null) continue;
-    await box.write('legal_terms_$fileName', content);
+
+    if (getLocalStorage.read('legal_terms_$fileName') != null) continue;
+    await getLocalStorage.write('legal_terms_$fileName', content);
   }
 }
 
@@ -68,7 +103,8 @@ void main() async {
   );
   await GetStorage.init(); // Important to initialize GetStorage
   await dotenv.load();
-  await loadTerms().then((_) {
+  await loadTerms();
+  await loadUniversities().then((_) {
     runApp(const StudAdviceApp());
   });
 }
