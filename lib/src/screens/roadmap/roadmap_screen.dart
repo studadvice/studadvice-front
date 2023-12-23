@@ -6,6 +6,7 @@ import 'package:stud_advice/stud_advice.dart';
 
 class RoadMapScreen extends StatelessWidget {
   static const navigatorId = '/roadmap';
+  final I18n _i18n = Get.find();
   final int currentStep;
   final StepController stepController = Get.put(StepController());
   final PanelController panelController = PanelController();
@@ -19,13 +20,12 @@ class RoadMapScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: CustomAppBar(
-      title: "Roadmap",
+      title: _i18n.text('roadmap'),
       onBackPress: () => Get.back(),
       onInfoPress: togglePanel,
     ),
     body: Stack(
         children: [
-          // Your main content goes here
           CustomSlidingUpPanel(
             panelController: panelController,
             bodyContent: GestureDetector(
@@ -43,7 +43,7 @@ class RoadMapScreen extends StatelessWidget {
               description: stepController.getProcessDescription(),
               onNextPressed: () {},
               onCompletePressed: () {},
-              actionText: "Next",
+              actionText: "Suivant",
             ),
           ),
         ],

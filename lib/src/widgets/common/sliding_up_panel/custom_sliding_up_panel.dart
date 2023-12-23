@@ -21,10 +21,12 @@ class CustomSlidingUpPanel extends StatelessWidget {
   Widget build(BuildContext context) {
     return SlidingUpPanel(
       minHeight: 0.0,
-      maxHeight: MediaQuery.of(context).size.height * 0.5,
+      maxHeight: MediaQuery.of(context).size.height * 0.3,
       controller: panelController,
+      parallaxEnabled: true,
+      parallaxOffset: .2,
       renderPanelSheet: false,
-      panel: _floatingPanel(),
+      panel: _floatingPanel(context),
       collapsed: _floatingCollapsed(),
       body: bodyContent,
     );
@@ -34,32 +36,31 @@ class CustomSlidingUpPanel extends StatelessWidget {
   Widget _floatingCollapsed(){
     return Container(
       decoration: const BoxDecoration(
-        color: AppColors.primaryColorAccent,
+        color: AppColors.black26,
         borderRadius: BorderRadius.only(topLeft: Radius.circular(24.0), topRight: Radius.circular(24.0)),
       ),
       margin: const EdgeInsets.fromLTRB(24.0, 24.0, 24.0, 0.0),
       child: Center(
         child: Text(
           title,
-          style: const TextStyle(color: Colors.white),
+          style: const TextStyle(color: AppColors.black26),
         ),
       ),
     );
   }
 
-  Widget _floatingPanel(){
+  Widget _floatingPanel(BuildContext context) {
     return Container(
-      decoration: const BoxDecoration(
-          color: AppColors.white,
-          borderRadius: BorderRadius.all(Radius.circular(24.0)),
+      decoration: BoxDecoration(
+          color: Theme.of(context).scaffoldBackgroundColor,
+          borderRadius: const BorderRadius.all(Radius.circular(24.0)),
           boxShadow: [
-            BoxShadow(
-              blurRadius: 20.0,
+            const BoxShadow(
+              blurRadius: 2.0,
               color: Colors.grey,
             ),
           ]
       ),
-      margin: const EdgeInsets.all(24.0),
       child: Center(
         child: Center(child: slidingWidget),
       ),

@@ -67,6 +67,11 @@ class RoutesConfiguration {
           page: () => ForgotPasswordScreen(),
           binding: ForgotPasswordBinding(),
           middlewares: [I18nMiddleware()]),
+      GetPage(
+        name: RoadMapScreen.navigatorId,
+        page: () => RoadMapScreen(currentStep: 0,),
+        middlewares: [I18nMiddleware()],
+      ),
     ];
   }
 }
