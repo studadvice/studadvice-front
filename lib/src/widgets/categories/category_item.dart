@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
 import '../../../stud_advice.dart';
 import '../../models/stud_advice/categories.dart';
+import 'dart:io';
 
 class CategoryItem extends StatelessWidget {
   CategoryItem({
@@ -12,6 +12,7 @@ class CategoryItem extends StatelessWidget {
 
   final CategoryContent category;
   final RxBool _isLongPress = false.obs;
+  final FileController fileController = Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -44,18 +45,30 @@ class CategoryItem extends StatelessWidget {
               color: Colors.black.withOpacity(.1),
               blurRadius: 4.0,
               spreadRadius: .05,
-            ), //BoxShadow
+            ),
           ],
         ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Align(
-              alignment: Alignment.center,
-              child: Image.asset(
-                'assets/images/common/raven_image.png',
-                height: 120,
-              ),
+            FutureBuilder<String?>(
+              future: fileController.downloadFile(category.imageId),
+              builder: (context, snapshot) {
+                if (snapshot.connectionState == ConnectionState.done &&
+                    snapshot.data != null) {
+                  return Align(
+                    alignment: Alignment.center,
+                    child: Image.file(
+                      File(snapshot.data!),
+                      height: 120,
+                    ),
+                  );
+                } else if (snapshot.hasError) {
+                  return const Text('Erreur de chargement de l\'image');
+                } else {
+                  return const CircularProgressIndicator();
+                }
+              },
             ),
             const SizedBox(
               height: 10,

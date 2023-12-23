@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:stud_advice/stud_advice.dart';
+import 'dart:io';
 
 class AdministrativeProcessListTile extends StatelessWidget {
   final String name;
-  final String? imageFileSrc;
+  final String imageId;
   final String administrativeProcessId;
   final String description;
   final bool showProgressBar;
@@ -12,10 +13,11 @@ class AdministrativeProcessListTile extends StatelessWidget {
 
   final SearchAdministrativeProcessController _controller =
       Get.find<SearchAdministrativeProcessController>();
+  final FileController fileController = Get.find();
 
   AdministrativeProcessListTile(
       {Key? key,
-      this.imageFileSrc,
+      required this.imageId,
       required this.name,
       required this.description,
       required this.showProgressBar,
@@ -74,18 +76,23 @@ class AdministrativeProcessListTile extends StatelessWidget {
                   ),
                 ],
               ),
-              child: const Icon(
-                Icons.notes,
-                color: AppColors.blue,
-                size: 50.0,
-              ),
-              // TODO
-              // imageFileSrc != null
-              //     ? Image.asset(
-              //   imageFileSrc!,
-              //   width: 50.0,
-              //   height: 50.0,
-              // )
+              child:  FutureBuilder<String?>(
+                future: fileController.downloadFile(imageId),
+                builder: (context, snapshot) {
+                  if (snapshot.connectionState == ConnectionState.done &&
+                      snapshot.data != null) {
+                    return Image.file(
+                        File(snapshot.data!),
+                        width: 50,
+                        height: 50,
+                    );
+                  } else if (snapshot.hasError) {
+                    return const Text('Erreur de chargement de l\'image');
+                  } else {
+                    return const CircularProgressIndicator();
+                  }
+                },
+              )
             ),
           ),
           title: Column(

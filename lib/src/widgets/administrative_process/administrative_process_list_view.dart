@@ -32,7 +32,7 @@ class AdministrativeProcessListView extends StatelessWidget {
               itemBuilder: (context, process, index) =>
                   AdministrativeProcessListTile(
                 name: process.name,
-                imageFileSrc: process.imageId,
+                imageId: process.imageId,
                 description: process.description,
                 administrativeProcessId: process.id,
                 showProgressBar: false,
