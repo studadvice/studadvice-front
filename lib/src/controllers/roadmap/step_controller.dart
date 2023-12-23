@@ -39,21 +39,21 @@ class StepController extends GetxController {
     StepItem(
         number: 5,
         title: 'Assurance logement',
-        isCompleted: true,
+        isCompleted: false,
         color: Colors.green,
         description: "Pour obtenir une assurance logement, vous devez vous rendre à l’assurance de votre choix."
     ),
     StepItem(
         number: 6,
         title: 'Inscription à la fac',
-        isCompleted: true,
+        isCompleted: false,
         color: Colors.lightBlue,
         description: "Pour vous inscrire à la fac, vous devez vous rendre à la fac de votre choix."
     ),
     StepItem(
         number: 7,
         title: 'Inscription à la bibliothèque',
-        isCompleted: true,
+        isCompleted: false,
         color: Colors.orange,
         description: "Pour vous inscrire à la bibliothèque, vous devez vous rendre à la bibliothèque de votre choix."
     ),

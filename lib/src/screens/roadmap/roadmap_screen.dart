@@ -46,7 +46,6 @@ class RoadMapScreen extends StatelessWidget {
               description: stepController.getProcessDescription(),
               onNextPressed: () {},
               onCompletePressed: () {},
-              actionText: "Suivant",
             ),
           ),
         ],
