@@ -10,6 +10,7 @@ import '../../models/stud_advice/administrative_processes.dart';
 class SearchAdministrativeProcessController extends CustomSearchController {
   final RxList<AdministrativeProcessContent> administrativeProcesses =
       <AdministrativeProcessContent>[].obs;
+  late String categoryId;
 
   final pagingController = PagingController<int, AdministrativeProcessContent>(
     firstPageKey: 0,
@@ -32,6 +33,7 @@ class SearchAdministrativeProcessController extends CustomSearchController {
         number: pageKey,
         size: 5,
         query: textEditingController.text,
+        categoryId: categoryId
       );
 
       final isLastPage = newPage.last;
@@ -51,11 +53,13 @@ class SearchAdministrativeProcessController extends CustomSearchController {
     required int number,
     required int size,
     String? query,
+    String? categoryId
   }) async {
     final queryParameters = {
       'page': number,
       'size': size,
-      'searchText': query
+      'searchText': query,
+      'categoryId':categoryId
     }; // TODO: add the category id
     return _getAdministrativeProcesses(
         '/administrative-process/search', queryParameters);
