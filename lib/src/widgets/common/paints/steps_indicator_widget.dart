@@ -42,7 +42,18 @@ class StepsIndicator extends StatelessWidget {
                         diameter: stepWidgetDiameter,
                         color: step.color,
                         onPressed: () {
+                          showDialog(
+                            context: context,
+                            builder: (BuildContext context) {
+                              return const InformationModal(
+                                accountInfo: 'Votre compte ants.gouv.fr',
+                                domicileInfo: 'Votre justificatif de domicile',
+                                photoIdInfo: 'Votre photo ID',
+                              );
+                            },
+                          );
                         },
+                        isActivated: step.isCompleted,
                       ),
                     ],
                   ),

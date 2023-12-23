@@ -37,3 +37,4 @@ export 'common/paints/curved_dottedline/curved_dottedline_widget.dart';
 export 'common/paints/curved_dottedline/curved_dottedline_paint.dart';
 export 'categories/categories_list_view.dart';
 export 'categories/category_item.dart';
+export 'common/modals/information_modal.dart';

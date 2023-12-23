@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:stud_advice/src/common/chore.dart';
 
 class StepNumberPainter extends CustomPainter {
   final int stepNumber;
@@ -13,37 +14,33 @@ class StepNumberPainter extends CustomPainter {
     required this.color,
     required this.diameter,
     this.isActivated = false,
-    this.borderWidth = 3.0,
+    this.borderWidth = 5.0,
     this.textBorderColor = Colors.black,
   });
 
   @override
   void paint(Canvas canvas, Size size) {
-    // Determine the fill color based on activation
-    Color fillColor = isActivated ? color : Colors.transparent;
-    Color borderColor = isActivated ? Colors.blueGrey : color;
+    Color fillColor = isActivated ? color : AppColors.grey.withOpacity(0.5);
+    Color borderColor = AppColors.grey;
 
-    // Paint properties for the circle border
     final borderPaint = Paint()
       ..color = borderColor
-      ..strokeWidth = borderWidth;
+      ..strokeWidth = borderWidth
+      ..style = PaintingStyle.stroke;
 
-    // Paint properties for circle fill
     final fillPaint = Paint()
       ..color = fillColor
       ..style = PaintingStyle.fill;
 
-    // Text style remains the same
     final textStyle = TextStyle(
-      fontSize: diameter * 0.7,
+      fontSize: diameter * 0.5,
       fontWeight: FontWeight.bold,
       foreground: Paint()
         ..style = PaintingStyle.stroke
         ..strokeWidth = 2
-        ..color = textBorderColor,
+        ..color = isActivated ? textBorderColor : AppColors.white,
     );
 
-    // TextSpan, TextPainter, and textOffset
     final textSpan = TextSpan(text: stepNumber.toString(), style: textStyle);
     final textPainter = TextPainter(
       text: textSpan,
@@ -57,20 +54,21 @@ class StepNumberPainter extends CustomPainter {
       (diameter - textPainter.height) / 2,
     );
 
-    // Drawing the filled circle
-    if (isActivated) {
-      canvas.drawCircle(Offset(diameter / 2, diameter / 2), diameter / 2, fillPaint);
-    }
+    canvas.drawCircle(Offset(diameter / 2, diameter / 2), diameter / 2, fillPaint);
 
-    // Drawing the circle border
     canvas.drawCircle(Offset(diameter / 2, diameter / 2), diameter / 2 - borderWidth / 2, borderPaint);
 
-    // Painting the text
     textPainter.paint(canvas, textOffset);
   }
 
   @override
   bool shouldRepaint(covariant CustomPainter oldDelegate) {
-    return oldDelegate != this;
+    final oldPainter = oldDelegate as StepNumberPainter;
+    return stepNumber != oldPainter.stepNumber ||
+        color != oldPainter.color ||
+        diameter != oldPainter.diameter ||
+        isActivated != oldPainter.isActivated ||
+        borderWidth != oldPainter.borderWidth ||
+        textBorderColor != oldPainter.textBorderColor;
   }
 }

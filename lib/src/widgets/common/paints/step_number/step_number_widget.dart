@@ -22,25 +22,26 @@ class StepNumberWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     double borderWidth = isActivated ? 2.0 : 1.0;
+    Color displayColor = isActivated ? color : Colors.grey.withOpacity(0.5); // Use semi-transparency for non-activated steps
 
     return GestureDetector(
       onTap: onPressed,
       child: IntrinsicWidth(
-        child: Row(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            CustomPaint(
+        child: SizedBox(
+          width: diameter,
+          height: diameter,
+          child: Center(
+            child: CustomPaint(
               painter: StepNumberPainter(
                 stepNumber: stepNumber,
-                color: color,
+                color: displayColor,
                 diameter: diameter,
                 borderWidth: borderWidth,
+                isActivated: isActivated,
               ),
               size: Size(diameter, diameter),
             ),
-            if (child != null)
-              Padding(padding: const EdgeInsets.only(left: 0.5), child: child!),
-          ],
+          ),
         ),
       ),
     );
