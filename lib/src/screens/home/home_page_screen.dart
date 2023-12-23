@@ -22,10 +22,7 @@ class HomePageScreen extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            // RoadMapScreen(
-                //   currentStep: 1,
-                //   stepCount: 5,
-                // ),const Text(
+            const Text(
               'Welcome to the Home Page!',
               style: TextStyle(
                 fontSize: AppFontSizes.extraLarge,
@@ -43,24 +40,12 @@ class HomePageScreen extends StatelessWidget {
                   Get.toNamed(SettingsScreen.navigatorId);},
                   ),
                 ),
-                Padding(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                  child: CustomButton(
-                    text: "Roadmap",
-                    textColor: AppColors.white,
-                    backgroundColor: AppColors.primaryColorAccent,
-                    onPressed: () {
-                      Get.toNamed(RoadMapScreen.navigatorId);
-                },
-              ),
-            ),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
               child: CustomButton(
                 text: _i18n.text('roadmap'),
                 textColor: AppColors.white,
-                backgroundColor: AppColors.primaryColor,
+                backgroundColor: AppColors.primaryColorAccent,
                 onPressed: () {
                   Get.toNamed(RoadMapScreen.navigatorId);
                 },
@@ -70,7 +55,5 @@ class HomePageScreen extends StatelessWidget {
         ),
       ),
     );
-    // },
-    // );
   }
 }
