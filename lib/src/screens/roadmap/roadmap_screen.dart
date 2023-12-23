@@ -32,9 +32,12 @@ class RoadMapScreen extends StatelessWidget {
               onTap: () {
                 panelController.close();
               },
-              child: StepsIndicator(
-                currentStep: stepController.currentStep.value,
-                steps: stepController.steps,
+              child: Container(
+                margin: const EdgeInsets.all(10),
+                child: StepsIndicator(
+                  currentStep: stepController.currentStep.value,
+                  steps: stepController.steps,
+                ),
               ),
             ),
             title: stepController.getProcessTitle(),

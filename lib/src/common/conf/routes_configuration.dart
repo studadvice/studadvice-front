@@ -62,7 +62,8 @@ class RoutesConfiguration {
           currentStep: 1,
         ),
         middlewares: [I18nMiddleware()],
-      )
+      ),
+      GetPage(
           name: ForgotPasswordScreen.navigatorId,
           page: () => ForgotPasswordScreen(),
           binding: ForgotPasswordBinding(),
