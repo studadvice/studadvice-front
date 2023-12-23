@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:stud_advice/src/widgets/common/paints/step_number/step_number_painter.dart';
+import 'package:stud_advice/stud_advice.dart';
 
 class StepNumberWidget extends StatelessWidget {
   final int stepNumber;

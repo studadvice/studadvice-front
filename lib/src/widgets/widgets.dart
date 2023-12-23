@@ -30,3 +30,8 @@ export 'sheets/bottom_sheet_widget.dart';
 export 'common/sliding_up_panel/custom_sliding_up_panel.dart';
 export 'common/paints/step_detail/step_detail_card_widget.dart';
 export 'common/appbar/custom_app_bar.dart';
+export 'common/paints/steps_indicator_widget.dart';
+export 'common/paints/step_number/step_number_painter.dart';
+export 'common/paints/step_number/step_number_widget.dart';
+export 'common/paints/curved_dottedline/curved_dottedline_widget.dart';
+export 'common/paints/curved_dottedline/curved_dottedline_paint.dart';
