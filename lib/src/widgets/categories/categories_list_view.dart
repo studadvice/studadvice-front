@@ -7,8 +7,8 @@ import '../../models/stud_advice/categories.dart';
 
 class CategoriesListView extends StatelessWidget {
   const CategoriesListView({
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {

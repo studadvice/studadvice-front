@@ -57,15 +57,31 @@ class SearchDealsController extends CustomSearchController {
     pagingController.refresh();
   }
 
-  Future<Deals> _getDealsBySearch(
-      String path, Map<String, dynamic> queryParameters) async {
+  Future<Deals> _getDealsBySearch(String path,
+      Map<String, dynamic> queryParameters) async {
     try {
       final response = await _dio.get(
         path,
         queryParameters: queryParameters,
       );
       if (response.statusCode == HttpStatus.ok) {
-        print(response.data);
+        return Deals.fromJson(response.data);
+      } else {
+        throw Exception('Failed to load categories');
+      }
+    } catch (error) {
+      rethrow;
+    }
+  }
+
+  Future<Deals> _getRecommendedDeals(String path,
+      Map<String, dynamic> queryParameters) async {
+    try {
+      final response = await _dio.get(
+        path,
+        queryParameters: queryParameters,
+      );
+      if (response.statusCode == HttpStatus.ok) {
         return Deals.fromJson(response.data);
       } else {
         throw Exception('Failed to load categories');
@@ -82,5 +98,13 @@ class SearchDealsController extends CustomSearchController {
   }) async {
     final queryParameters = {'page': number, 'size': size, 'searchText': query};
     return _getDealsBySearch('/deals/search', queryParameters);
+  }
+
+  Future<Deals> getRecommendedDeals({
+    required int number,
+    required int size,
+  }) async {
+    final queryParameters = {'page': number, 'size': size};
+    return _getRecommendedDeals('/deals/recommendations', queryParameters);
   }
 }

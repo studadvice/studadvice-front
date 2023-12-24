@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
-import 'package:stud_advice/src/common/chore.dart';
-import 'package:stud_advice/src/widgets/deals/deal_item.dart';
 import 'package:get/get.dart';
-
+import 'package:stud_advice/src/screens/deals/total_deals_screen.dart';
+import 'package:stud_advice/src/widgets/deals/deal_item.dart';
+import '../../../stud_advice.dart';
 import '../../controllers/deals/search_deals_controller.dart';
 import '../../models/stud_advice/deals.dart';
 import '../../widgets/common/app_bar/custom_app_bar.dart';
+import '../../widgets/deals/deal_item_slide.dart';
 
 class DealsScreen extends StatelessWidget {
   static const navigatorId = '/deals_screen';
@@ -15,7 +16,6 @@ class DealsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print(MediaQuery.of(context).size.height / 4);
     return Scaffold(
       appBar: CustomAppBar(controller: searchDealsController),
       body: FutureBuilder<Deals>(
@@ -34,7 +34,7 @@ class DealsScreen extends StatelessWidget {
                         controller: _controller,
                         itemCount: deals.numberOfElements,
                         itemBuilder: (context, index) {
-                          return DealItem(deal: deals.content[index]);
+                          return DealItemSlide(deal: deals.content[index]);
                         },
                       ),
                     ),
@@ -52,30 +52,71 @@ class DealsScreen extends StatelessWidget {
                         spacing: 10,
                       ),
                     ),
-                    const Row(
+                    Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Text(
-                            "Recommended",
-                            style: TextStyle(
-                              fontSize: 18.0,
-                              fontWeight: FontWeight.bold,
-                            )
-
+                        const Text(
+                          "Recommended",
+                          style: TextStyle(
+                            fontSize: 18.0,
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
-                        Icon(
-                          Icons.more_horiz,
-                          color: AppColors.black,
-                          size: 35,
-                        )
+                        GestureDetector(
+                          onTap: () {
+                            Get.to(() => TotalDealsScreen());
+                          },
+                          child: const Icon(
+                            Icons.more_horiz,
+                            color: AppColors.black,
+                            size: 35,
+                          ),
+                        ),
                       ],
-                    )
+                    ),
+                    // Second FutureBuilder for Recommended Deals
+                    FutureBuilder<Deals>(
+                      future: searchDealsController.getRecommendedDeals(size: 5, number: 0),
+                      builder: (context, recommendedSnapshot) {
+                        if (recommendedSnapshot.connectionState ==
+                            ConnectionState.done) {
+                          if (recommendedSnapshot.hasData) {
+                            final recommendedDeals =
+                            recommendedSnapshot.data!;
+                            return GridView.builder(
+                              shrinkWrap: true,
+                              physics: const NeverScrollableScrollPhysics(),
+                              gridDelegate:
+                              const SliverGridDelegateWithFixedCrossAxisCount(
+                                crossAxisCount: 2,
+                                crossAxisSpacing: 10,
+                                mainAxisSpacing: 10,
+                              ),
+                              itemCount: recommendedDeals.numberOfElements,
+                              itemBuilder: (context, index) {
+                                return DealItem(
+                                  deal: recommendedDeals.content[index],
+                                );
+                              },
+                            );
+                          } else {
+                            return const Center(
+                              child: Text('No recommended deals found.'),
+                            );
+                          }
+                        } else {
+                          return const Center(
+                            child: CircularProgressIndicator(),
+                          );
+                        }
+                      },
+                    ),
                   ],
                 ),
               );
             } else {
               return const Center(
-                child: Text('Aucun deal trouvé.'),
+                child: Text('No deals found.'),
               );
             }
           } else {
