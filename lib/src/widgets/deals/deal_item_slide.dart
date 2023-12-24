@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../../stud_advice.dart';
 import '../../models/stud_advice/deals.dart';
+import 'dart:io';
 
 class DealItemSlide extends StatelessWidget {
   final DealContent deal;
@@ -18,9 +19,21 @@ class DealItemSlide extends StatelessWidget {
       borderRadius: BorderRadius.circular(10.0),
       child: Stack(
         children: [
-          Image.asset(
-            "assets/images/common/adidas.png",
-            fit: BoxFit.fill,
+          FutureBuilder<String?>(
+            future: fileController.downloadFile(deal.imageId),
+            builder: (context, snapshot) {
+              if (snapshot.connectionState == ConnectionState.done &&
+                  snapshot.data != null) {
+                return Image.file(
+                  File(snapshot.data!),
+                  fit: BoxFit.fill,
+                );
+              } else if (snapshot.hasError) {
+                return const Text('Erreur de chargement de l\'image');
+              } else {
+                return const CircularProgressIndicator();
+              }
+            },
           ),
           Positioned.fill(
             child: Align(
@@ -53,22 +66,22 @@ class DealItemSlide extends StatelessWidget {
                     ),
                   ),
                   Row(
-                      children: <Widget>[
-                        const Icon(
-                          Icons.star,
-                          color: AppColors.yellow,
-                          size: 20,
+                    children: <Widget>[
+                      const Icon(
+                        Icons.star,
+                        color: AppColors.yellow,
+                        size: 20,
+                      ),
+                      Text(
+                        deal.rating.toString(),
+                        style: const TextStyle(
+                          color: Colors.white,
+                          fontSize: 15.0,
+                          fontWeight: FontWeight.bold,
                         ),
-                        Text(
-                          deal.rating.toString(),
-                          style: const TextStyle(
-                            color: Colors.white,
-                            fontSize: 15.0,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                      ],
-                    ),
+                      ),
+                    ],
+                  ),
                 ],
               ),
             ),

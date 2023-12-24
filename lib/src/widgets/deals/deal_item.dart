@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'dart:io';
 import '../../../stud_advice.dart';
 import '../../models/stud_advice/deals.dart';
 
@@ -19,9 +20,21 @@ class DealItem extends StatelessWidget {
       child: Stack(
         children: [
           Positioned.fill(
-            child: Image.asset(
-              "assets/images/common/adidas.png",
-              fit: BoxFit.fill,
+            child: FutureBuilder<String?>(
+              future: fileController.downloadFile(deal.imageId),
+              builder: (context, snapshot) {
+                if (snapshot.connectionState == ConnectionState.done &&
+                    snapshot.data != null) {
+                  return Image.file(
+                    File(snapshot.data!),
+                    fit: BoxFit.fill,
+                  );
+                } else if (snapshot.hasError) {
+                  return const Text('Erreur de chargement de l\'image');
+                } else {
+                  return const CircularProgressIndicator();
+                }
+              },
             ),
           ),
           Positioned(
