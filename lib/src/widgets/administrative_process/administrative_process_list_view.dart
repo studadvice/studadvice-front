@@ -21,6 +21,7 @@ class AdministrativeProcessListView extends StatelessWidget {
     return GetBuilder<SearchAdministrativeProcessController>(
       init: SearchAdministrativeProcessController(),
       builder: (controller) {
+        controller.categoryId = categoryId;
         return RefreshIndicator(
           onRefresh: () => Future.sync(
             () => controller.pagingController.refresh(),
@@ -32,7 +33,7 @@ class AdministrativeProcessListView extends StatelessWidget {
               itemBuilder: (context, process, index) =>
                   AdministrativeProcessListTile(
                 name: process.name,
-                imageFileSrc: process.imageId,
+                imageId: process.imageId,
                 description: process.description,
                 administrativeProcessId: process.id,
                 showProgressBar: false,
