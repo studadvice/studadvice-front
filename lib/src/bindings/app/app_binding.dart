@@ -5,6 +5,7 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:get/get.dart';
 import 'package:stud_advice/src/controllers/common/dashboard_controller.dart';
 import 'package:stud_advice/src/controllers/controllers.dart';
+import 'package:stud_advice/src/controllers/deals/search_deals_controller.dart';
 import 'package:stud_advice/src/middlewares/common/auth_interceptor.dart';
 
 class AppDependenciesBinding extends Bindings {
@@ -31,5 +32,6 @@ class AppDependenciesBinding extends Bindings {
     Get.put(DashboardController(), permanent: true);
     Get.put(SettingsController(), permanent: true);
     Get.put(SearchCategoryController(), permanent: true);
+    Get.put(SearchDealsController(), permanent: true);
   }
 }
