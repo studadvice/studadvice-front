@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:stud_advice/stud_advice.dart';
 
 class RegisterUserInformationScreen extends StatefulWidget {
@@ -30,12 +31,20 @@ class _RegisterUserInformationScreenState
 
   // Model data.
   late UserData userData;
-  late Future<List<String>> universityData;
+  List<String> universityData = [];
 
   @override
   void initState() {
     super.initState();
-    universityData = _registerUserInformationController.fetchUniversityData();
+    final getLocalStorage = GetStorage();
+    var locale = Get.locale;
+    final fileLocale = '${locale?.languageCode}_${locale?.countryCode}';
+    final universities = getLocalStorage.read('universities_$fileLocale');
+
+    if (universities != null) {
+      universityData = universities.cast<String>();
+    }
+    universityData.insert(0, 'register.defaultUniversityChoice'.tr);
   }
 
   @override
@@ -74,19 +83,7 @@ class _RegisterUserInformationScreenState
         // Wrap in a ListView to avoid overflow when the keyboard is displayed.
         children: [
           SizedBox(height: MediaQuery.of(context).size.height * 0.1),
-          FutureBuilder<List<String>>(
-              future: universityData,
-              builder: (context, snapshot) {
-                if (snapshot.hasData) {
-                  return buildRegisterUserInformationForm(snapshot.data!);
-                } else {
-                  return const Center(
-                      child: CircularProgressIndicator(
-                    color: AppColors.secondaryColor,
-                    strokeWidth: 5,
-                  ));
-                }
-              })
+          buildRegisterUserInformationForm(universityData),
         ],
       ),
     );
@@ -229,9 +226,6 @@ class _RegisterUserInformationScreenState
 
   List<DropdownMenuItem<String>> buildUniversityDataItems(
       List<String> universityData) {
-    if (!universityData.contains('register.defaultUniversityChoice'.tr)) {
-      universityData.insert(0, 'register.defaultUniversityChoice'.tr);
-    }
     return universityData.map((element) {
       return DropdownMenuItem<String>(
         value: element,
