@@ -19,7 +19,7 @@ class DealsScreen extends StatelessWidget {
     return Scaffold(
       appBar: CustomAppBar(controller: searchDealsController),
       body: FutureBuilder<Deals>(
-        future: searchDealsController.getDealsBySearch(size: 5, number: 0),
+        future: searchDealsController.getDealsBySearch(size: 3, number: 0),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.done) {
             if (snapshot.hasData) {
@@ -74,30 +74,31 @@ class DealsScreen extends StatelessWidget {
                         ),
                       ],
                     ),
-                    // Second FutureBuilder for Recommended Deals
                     FutureBuilder<Deals>(
-                      future: searchDealsController.getRecommendedDeals(size: 5, number: 0),
+                      future: searchDealsController.getRecommendedDeals(size: 4, number: 0),
                       builder: (context, recommendedSnapshot) {
                         if (recommendedSnapshot.connectionState ==
                             ConnectionState.done) {
                           if (recommendedSnapshot.hasData) {
                             final recommendedDeals =
                             recommendedSnapshot.data!;
-                            return GridView.builder(
-                              shrinkWrap: true,
-                              physics: const NeverScrollableScrollPhysics(),
-                              gridDelegate:
-                              const SliverGridDelegateWithFixedCrossAxisCount(
-                                crossAxisCount: 2,
-                                crossAxisSpacing: 10,
-                                mainAxisSpacing: 10,
+                            return Expanded(
+                              child: GridView.builder(
+                                shrinkWrap: true,
+                                physics: const AlwaysScrollableScrollPhysics(),
+                                gridDelegate:
+                                const SliverGridDelegateWithFixedCrossAxisCount(
+                                  crossAxisCount: 2,
+                                  crossAxisSpacing: 10,
+                                  mainAxisSpacing: 10,
+                                ),
+                                itemCount: recommendedDeals.numberOfElements,
+                                itemBuilder: (context, index) {
+                                  return DealItem(
+                                    deal: recommendedDeals.content[index],
+                                  );
+                                },
                               ),
-                              itemCount: recommendedDeals.numberOfElements,
-                              itemBuilder: (context, index) {
-                                return DealItem(
-                                  deal: recommendedDeals.content[index],
-                                );
-                              },
                             );
                           } else {
                             return const Center(

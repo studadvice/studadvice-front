@@ -24,9 +24,15 @@ class DealItemSlide extends StatelessWidget {
             builder: (context, snapshot) {
               if (snapshot.connectionState == ConnectionState.done &&
                   snapshot.data != null) {
-                return Image.file(
-                  File(snapshot.data!),
-                  fit: BoxFit.fill,
+                return Positioned.fill(
+                  child: FractionallySizedBox(
+                    widthFactor: 1.0,
+                    heightFactor: 1.0,
+                    child: Image.file(
+                      File(snapshot.data!),
+                      fit: BoxFit.cover,
+                    ),
+                  ),
                 );
               } else if (snapshot.hasError) {
                 return const Text('Erreur de chargement de l\'image');
