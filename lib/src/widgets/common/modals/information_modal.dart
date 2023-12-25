@@ -15,70 +15,31 @@ class InformationModal extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Dialog(
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(20.0),
-      ),
-      elevation: 0,
+    return Scaffold(
       backgroundColor: Colors.transparent,
-      child: contentBox(context),
-    );
-  }
-
-  Widget contentBox(BuildContext context) {
-    return Stack(
-      children: <Widget>[
-        Container(
-          padding: const EdgeInsets.only(left: 20, top: 10, right: 20, bottom: 20),
-          margin: const EdgeInsets.only(top: 4),
-          decoration: BoxDecoration(
-            shape: BoxShape.rectangle,
-            color: Colors.white,
-            borderRadius: BorderRadius.circular(15),
-            boxShadow: [
-              const BoxShadow(color: AppColors.black26, offset: Offset(0, 10), blurRadius: 10),
-            ],
-          ),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-              const Row(
-                children: [
-                  Text(
-                    'Informations',
-                    style: TextStyle(fontSize: 22, fontWeight: FontWeight.w600),
-                  ),
-                  // close button
-                  Spacer(),
-                  Icon(Icons.close),
-                ],
-              ),
-              const Divider(),
-              Container(
-                margin: const EdgeInsets.only(top: 10),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    buildListTile(context, Icons.account_circle, accountInfo),
-                    buildListTile(context, Icons.home, domicileInfo),
-                    buildListTile(context, Icons.photo, photoIdInfo),
-                  ],
-                ),
-              ),
-              const SizedBox(height: 22),
-              Align(
-                alignment: Alignment.bottomRight,
-                child: TextButton(
-                    onPressed: () {
-                      Navigator.of(context).pop();
-                    },
-                    child: const Text('Close')),
-              ),
-            ],
+      body: Center(
+        child: SingleChildScrollView(
+          child: Container(
+            margin: const EdgeInsets.symmetric(horizontal: 15),
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(15),
+              boxShadow: [
+                const BoxShadow(
+                    color: Colors.black26, offset: Offset(0, 1), blurRadius: 2),
+              ],
+            ),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: <Widget>[
+                _buildHeaderContent(context, 'Prérequis'),
+                _buildBodyContent(context),
+                _buildFooterContent(context),
+              ],
+            ),
           ),
         ),
-      ],
+      ),
     );
   }
 
@@ -86,8 +47,97 @@ class InformationModal extends StatelessWidget {
     return ListTile(
       leading: Icon(icon),
       title: Text(text),
-      onTap: () {
-      },
+      onTap: () {},
+    );
+  }
+
+  Widget _buildHeaderContent(BuildContext context, String title) {
+    return Container(
+      decoration: BoxDecoration(
+        shape: BoxShape.rectangle,
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(15),
+        boxShadow: [
+          const BoxShadow(
+              color: AppColors.black26, offset: Offset(0, 0), blurRadius: 10),
+        ],
+      ),
+      child: Column(
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 5),
+                child: Text(
+                  title,
+                  style: const TextStyle(
+                      fontSize: 22, fontWeight: FontWeight.w600),
+                ),
+              ),
+              IconButton(
+                icon: const Icon(Icons.close),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+              ),
+            ],
+          ),
+          const Divider(),
+          buildListTile(context, Icons.info_outline_rounded, accountInfo),
+          buildListTile(context, Icons.info_outline_rounded, domicileInfo),
+          buildListTile(context, Icons.info_outline_rounded, photoIdInfo),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildBodyContent(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 20),
+      margin: const EdgeInsets.symmetric(vertical: 15),
+      decoration: BoxDecoration(
+        shape: BoxShape.rectangle,
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(15),
+        boxShadow: [
+          const BoxShadow(
+              color: AppColors.black26, offset: Offset(0, 0), blurRadius: 10),
+        ],
+      ),
+      child: const Column(
+        children: <Widget>[
+          SizedBox(height: 10),
+          Text(
+            'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+            style: TextStyle(fontSize: 16),
+            textAlign: TextAlign.center,
+          ),
+          SizedBox(height: 50),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildFooterContent(BuildContext context) {
+    return Container(
+      margin: const EdgeInsets.symmetric(vertical: 15),
+      child: const Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Row(
+            children: [
+              Icon(Icons.language, color: AppColors.black26),
+              SizedBox(width: 10),
+              Text(
+                'Registration website',
+                style: TextStyle(color: AppColors.black, fontSize: 18, fontWeight: FontWeight.w600, fontStyle: FontStyle.italic),
+              ),
+            ],
+          ),
+          Icon(Icons.arrow_forward_ios, color: AppColors.black),
+        ],
+      ),
     );
   }
 }

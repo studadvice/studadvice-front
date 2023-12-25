@@ -40,7 +40,7 @@ class SettingsScreen extends StatelessWidget {
 
   BottomSheetWidget buildLanguageSheet() {
     return BottomSheetWidget(
-      ratioPerItem: 200.0,
+      ratioPerItem: 100.0,
       items: [
         CustomDropdownSearch<CustomLocale>(
           labelText: 'settings.language'.tr,

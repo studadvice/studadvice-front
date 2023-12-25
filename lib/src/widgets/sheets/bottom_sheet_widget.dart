@@ -15,7 +15,7 @@ class BottomSheetWidget extends StatelessWidget {
       ),
       child: Container(
         height: (items.length * ratioPerItem).clamp(100.0, 500.0),
-        color: Theme.of(context).scaffoldBackgroundColor, 
+        color: Theme.of(context).scaffoldBackgroundColor,
         child: Column(
           children: [
             SizedBox(
@@ -33,18 +33,18 @@ class BottomSheetWidget extends StatelessWidget {
                 ),
               ),
             ),
-            Expanded(
-              child: Flex(
-                direction: Axis.vertical,
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: items,
-              ),
-            ),
-            const SizedBox(
-              height: 50.0,
-              width: double.infinity,
-            ),
+    //         Expanded(
+    //           child: Flex(
+    //             direction: Axis.vertical,
+    //             mainAxisAlignment: MainAxisAlignment.spaceBetween,
+    //             crossAxisAlignment: CrossAxisAlignment.center,
+    //             children: items,
+    //           ),
+    //         ),
+    //         const SizedBox(
+    //           height: 50.0,
+    //           width: double.infinity,
+    //         ),
           ],
         ),
       ),

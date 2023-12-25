@@ -10,6 +10,7 @@ class AppColors {
   static const dangerColor = Color(0xFFD62828);
   static const blueAccent = Colors.blueAccent;
   // till here
+  static const modalColor = Color(0xFF3881C1);
   static const white = Color(0xFFF5F5F5);
   static const black = Color(0xFF000000);
   static const blue = Colors.blue;

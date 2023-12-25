@@ -14,6 +14,8 @@ class StepsIndicator extends StatelessWidget {
         required this.steps,
   });
 
+  
+
   @override
   Widget build(BuildContext context) {
     final StepController controller = Get.find<StepController>();
