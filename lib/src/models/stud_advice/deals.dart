@@ -70,6 +70,7 @@ class DealContent {
   late String description;
   late String imageId;
   late int rating;
+  late String url;
   String? category;
   String? startDate;
   String? endDate;
@@ -82,6 +83,7 @@ class DealContent {
         required this.description,
         required this.imageId,
         required this.rating,
+        required this.url,
         this.category,
         this.startDate,
         this.endDate
@@ -93,6 +95,7 @@ class DealContent {
     description = json['description'];
     imageId = json['imageId'];
     rating = json['rating'];
+    url = json["url"];
     category = json["category"];
     startDate = json['startDate'];
     endDate = json["endDate"];
@@ -105,6 +108,7 @@ class DealContent {
     data['description'] = description;
     data['imageId'] = imageId;
     data['rating'] = rating;
+    data['url'] = url;
     data['category'] = category;
     data['startDate'] = startDate;
     data['endDate'] = endDate;
