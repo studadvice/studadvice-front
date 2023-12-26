@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:url_launcher/url_launcher.dart';
 import 'dart:io';
 import '../../../stud_advice.dart';
 import '../../models/stud_advice/deals.dart';
@@ -11,7 +12,9 @@ class DealDetailScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final deal = Get.arguments['deal'] as DealContent;
-    final size = MediaQuery.of(context).size;
+    final size = MediaQuery
+        .of(context)
+        .size;
 
     return Scaffold(
       body: SizedBox(
@@ -89,27 +92,64 @@ class DealDetailScreen extends StatelessWidget {
                       height: 4,
                     ),
                     Text(deal.description),
-                    const Spacer(),
+                    if (deal.startDate != null) ...[
+                      const SizedBox(
+                        height: 24,
+                      ),
+                      const Text(
+                        "Date de début",
+                        style: TextStyle(
+                          fontSize: 20.0,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      const SizedBox(
+                        height: 4,
+                      ),
+                      Text(deal.startDate!),
+                    ],
+                    if (deal.endDate != null) ...[
+                      const SizedBox(
+                        height: 24,
+                      ),
+                      const Text(
+                        "Date de fin",
+                        style: TextStyle(
+                          fontSize: 20.0,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      const SizedBox(
+                        height: 4,
+                      ),
+                      Text(deal.endDate!),
+                    ],
+                    const SizedBox(height: 16),
                     Align(
                       alignment: Alignment.bottomRight,
-                        child: ElevatedButton(
-                          style: ElevatedButton.styleFrom(
-                            backgroundColor: AppColors.primaryColor,
-                            foregroundColor: Colors.white,
-                            textStyle: const TextStyle(
-                              fontSize: 20.0,
-                                fontWeight: FontWeight.bold
-                            ),
-                            padding: const EdgeInsets.symmetric(vertical: 16.0, horizontal: 24.0),
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(10.0),
-                            ),
+                      child: ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: AppColors.primaryColor,
+                          foregroundColor: Colors.white,
+                          textStyle: const TextStyle(
+                            fontSize: 20.0,
+                            fontWeight: FontWeight.bold,
                           ),
-                          onPressed: () {
-                            Get.toNamed(deal.url);
-                          },
-                          child: const Text("Go"),
+                          padding: const EdgeInsets.symmetric(
+                              vertical: 16.0, horizontal: 24.0),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10.0),
+                          ),
                         ),
+                        onPressed: () async {
+                          if (await canLaunchUrl(Uri.parse(deal.url))) {
+                            await launchUrl(Uri.parse(deal.url));
+                          } else {
+                            throw 'Could not launch $deal.url';
+                          }
+                        },
+                        child: const Text("J'en profite"),
+                      ),
                     ),
                   ],
                 ),
