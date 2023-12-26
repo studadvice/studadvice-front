@@ -35,7 +35,7 @@ class DealItem extends StatelessWidget {
                       snapshot.data != null) {
                     return Image.file(
                       File(snapshot.data!),
-                      fit: BoxFit.fill,
+                      fit: BoxFit.cover,
                     );
                   } else if (snapshot.hasError) {
                     return const Text('Erreur de chargement de l\'image');
@@ -62,13 +62,23 @@ class DealItem extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(
-                      deal.title,
-                      style: const TextStyle(
-                        color: Colors.white,
-                        fontSize: 20.0,
-                        fontWeight: FontWeight.bold,
-                      ),
+                    Row(
+                      children: <Widget>[
+                        Text(
+                          deal.title,
+                          style: const TextStyle(
+                            color: Colors.white,
+                            fontSize: 20.0,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        if (deal.endDate != null)
+                          const Icon(
+                            Icons.timer,
+                            color: Colors.white,
+                            size: 20.0,
+                          ),
+                      ],
                     ),
                     Row(
                       children: <Widget>[
