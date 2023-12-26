@@ -1,83 +1,64 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
+import 'package:stud_advice/stud_advice.dart';
 
-import '../../controllers/categories/category_controller.dart';
-import '../../exceptions/empty_list_indicator.dart';
-import '../../exceptions/error_indicator.dart';
-import '../../models/stud_advice/category.dart';
-import 'category_item.dart';
 
-class CategoriesListView extends StatefulWidget {
-  const CategoriesListView({super.key});
+class CategoriesListView extends StatelessWidget {
+  const CategoriesListView({
+    super.key,
+  });
 
   @override
-  State<CategoriesListView> createState() => _CategoriesListViewState();
-}
-
-class _CategoriesListViewState extends State<CategoriesListView> {
-  final _pagingController = PagingController<int, CategoryContent>(
-    firstPageKey: 0,
-  );
-
-  late CategoryController _controller;
-
-  @override
-  void initState() {
-    super.initState();
-    _controller = Get.find<CategoryController>();
-    _pagingController.addPageRequestListener((pageKey) {
-      _fetchPage(pageKey);
-    });
-  }
-
-  Future<void> _fetchPage(int pageKey) async {
-    try {
-      final newPage = await _controller.getCategories(
-        number: pageKey,
-        size: 5,
-      );
-
-      final isLastPage = newPage.last;
-      final newItems = newPage.content;
-      if (isLastPage) {
-        _pagingController.appendLastPage(newItems);
-      } else {
-        final nextPageKey = pageKey + 1;
-        _pagingController.appendPage(newItems, nextPageKey);
-      }
-    } catch (error) {
-      _pagingController.error = error;
-    }
-  }
-
-  @override
-  void dispose() {
-    _pagingController.dispose();
-    super.dispose();
-  }
-
-  @override
-  Widget build(BuildContext context) => RefreshIndicator(
-        onRefresh: () => Future.sync(
-          () => _pagingController.refresh(),
-        ),
-        child: PagedListView.separated(
-          pagingController: _pagingController,
-          builderDelegate: PagedChildBuilderDelegate<CategoryContent>(
-            itemBuilder: (context, categoryItem, index) => CategoryItem(
-              category: categoryItem,
-            ),
-            firstPageErrorIndicatorBuilder: (context) => ErrorIndicator(
-              error: _pagingController.error,
-              onTryAgain: () => _pagingController.refresh(),
-            ),
-            noItemsFoundIndicatorBuilder: (context) => EmptyListIndicator(),
+  Widget build(BuildContext context) {
+    return GetBuilder<SearchCategoryController>(
+      init: SearchCategoryController(),
+      builder: (controller) {
+        return RefreshIndicator(
+          onRefresh: () => Future.sync(
+                () => controller.pagingController.refresh(),
           ),
-          padding: const EdgeInsets.all(16),
-          separatorBuilder: (context, index) => const SizedBox(
-            height: 16,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const Padding(
+                padding: EdgeInsets.only(left: 15.0),
+                child: Text(
+                  "Explore categories",
+                  style: TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
+              const SizedBox(
+                height: 20,
+              ),
+              Expanded(
+                child: PagedGridView(
+                  pagingController: controller.pagingController,
+                  builderDelegate: PagedChildBuilderDelegate<CategoryContent>(
+                    itemBuilder: (context, categoryItem, index) {
+                      return CategoryItem(category: categoryItem);
+                    },
+                    firstPageErrorIndicatorBuilder: (context) => ErrorIndicator(
+                      error: controller.pagingController.error,
+                      onTryAgain: () => controller.pagingController.refresh(),
+                    ),
+                    noItemsFoundIndicatorBuilder: (context) =>
+                        EmptyListIndicator(),
+                  ),
+                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 2,
+                    crossAxisSpacing: 16,
+                    mainAxisSpacing: 16,
+                  ),
+                ),
+              ),
+            ],
           ),
-        ),
-      );
+        );
+      },
+    );
+  }
 }

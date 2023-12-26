@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dio/dio.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
+// import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:get/get.dart';
 import 'package:stud_advice/src/controllers/controllers.dart';
 import 'package:stud_advice/src/middlewares/common/auth_interceptor.dart';
@@ -15,7 +15,7 @@ class AppDependenciesBinding extends Bindings {
   void dependencies() {
     Dio dio = Dio(
         BaseOptions(
-          baseUrl: dotenv.env["BACKEND_BASE_URL"] ?? "http://localhost:8080",
+          baseUrl: 'http://localhost:8080',
           connectTimeout: const Duration(seconds: 5),
           receiveTimeout: const Duration(seconds: 5),
         ));

@@ -64,7 +64,6 @@ class SearchCategoryController extends CustomSearchController {
         path,
         queryParameters: queryParameters,
       );
-
       if (response.statusCode == HttpStatus.ok) {
         return Categories.fromJson(response.data);
       } else {
@@ -80,6 +79,7 @@ class SearchCategoryController extends CustomSearchController {
     required int size,
     String? query,
   }) async {
+    print('getCategoriesBySearch');
     final queryParameters = {'page': number, 'size': size, 'searchText': query};
     return _getCategoriesBySearch('/categories/search', queryParameters);
   }

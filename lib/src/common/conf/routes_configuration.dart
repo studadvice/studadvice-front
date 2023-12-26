@@ -64,13 +64,13 @@ class RoutesConfiguration {
         middlewares: [I18nMiddleware()],
       ),
       GetPage(
-          name: ForgotPasswordScreen.navigatorId,
-          page: () => ForgotPasswordScreen(),
-          binding: ForgotPasswordBinding(),
-          middlewares: [I18nMiddleware()]),
-      GetPage(
         name: RoadMapScreen.navigatorId,
         page: () => RoadMapScreen(currentStep: 0,),
+        middlewares: [I18nMiddleware()],
+      ),
+      GetPage(
+        name: DashboardScreen.navigatorId,
+        page: () => DashboardScreen(),
         middlewares: [I18nMiddleware()],
       ),
     ];

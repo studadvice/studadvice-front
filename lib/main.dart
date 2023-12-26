@@ -1,13 +1,14 @@
 import 'package:country_picker/country_picker.dart';
+import 'package:dio/dio.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:get/get.dart';
 import 'package:get_it/get_it.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:stud_advice/firebase_options.dart';
+import 'package:stud_advice/src/controllers/common/dashboard_controller.dart';
 import 'package:stud_advice/stud_advice.dart';
 
 class StudAdviceApp extends StatelessWidget {
@@ -67,7 +68,8 @@ void main() async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
   await GetStorage.init(); // Important to initialize GetStorage
-  await dotenv.load();
+  //await dotenv.load(fileName: '../assets/.env');
+  Get.put(FileController(), permanent: true);
   await loadTerms().then((_) {
     runApp(const StudAdviceApp());
   });

@@ -38,11 +38,11 @@ dependencies:
   path_drawing:
   flutter_adaptive_buttons:
   sliding_up_panel:
-
   infinite_scroll_pagination: ^4.0.0
   percent_indicator: ^4.2.3
-  flutter_dotenv: ^5.1.0
+#  flutter_dotenv: ^5.1.0
   speech_to_text: ^6.5.1
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -70,18 +70,12 @@ flutter:
 
   assets:
     - assets/i18n/
-    - assets/i18n/login_screen/
-    - assets/i18n/settings_screen/
     - assets/i18n/home_page_screen/
-    - assets/i18n/init_time_screen/
-    - assets/i18n/legal_terms_screen/
-    - assets/i18n/forgot_password_screen/
-    - assets/i18n/register_options_screen/
     - assets/i18n/social_sign_in_controller/
-    - assets/i18n/register_with_email_screen/
-    - assets/i18n/register_user_information_screen/
     - assets/fonts/
     - assets/images/
     - assets/images/login/
     - assets/images/common/
     - assets/images/forgot_password/
+    - assets/legal_terms/
+    - assets/.env

@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:stud_advice/src/common/chore.dart';
 import 'package:stud_advice/src/controllers/common/dashboard_controller.dart';
-import 'package:stud_advice/src/screens/deals/deals_screen.dart';
 import 'package:stud_advice/src/screens/screens.dart';
 
 class DashboardScreen extends StatelessWidget {

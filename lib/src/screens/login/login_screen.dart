@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:stud_advice/stud_advice.dart';
 
-import '../dashboard/dashboard_screen.dart';
 
 class LoginScreen extends StatelessWidget {
   static const String navigatorId = '/login_screen';

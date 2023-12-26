@@ -2,7 +2,7 @@ import 'dart:io';
 
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
+// import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:get/get.dart';
 import 'package:path_provider/path_provider.dart';
 
@@ -10,8 +10,8 @@ class FileController extends GetxController {
   final Dio _dio = Get.find();
 
   Future<String?> downloadFile(String fileId) async {
-    String baseUrl =
-        dotenv.env['BACKEND_BASE_URL'] ?? 'http://localhost:8080.com';
+    String baseUrl = 'http://localhost:8080';
+        // dotenv.env['BACKEND_BASE_URL'] ?? 'http://localhost:8080.com';
     try {
       final response = await _dio.get(
         '$baseUrl/download/$fileId',

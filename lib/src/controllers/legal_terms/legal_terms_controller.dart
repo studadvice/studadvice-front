@@ -19,8 +19,8 @@ class LegalTermsController extends GetxController {
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  buildTermsAndConditionsButton(),
-                  buildTermsAndConditionsRow(),
+                  buildTermsAndConditionsButton(''),
+                  buildTermsAndConditionsRow(''),
                 ],
               ),
             ),
@@ -30,7 +30,7 @@ class LegalTermsController extends GetxController {
     }
   }
 
-  Widget buildTermsAndConditionsButton() {
+  Widget buildTermsAndConditionsButton(String tr) {
     return GestureDetector(
       onTap: () {
         Get.to(() => LegalTermsScreen());
@@ -47,7 +47,7 @@ class LegalTermsController extends GetxController {
     );
   }
 
-  Widget buildTermsAndConditionsRow() {
+  Widget buildTermsAndConditionsRow(String tr) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
@@ -73,7 +73,7 @@ class LegalTermsController extends GetxController {
     );
   }
 
-  SnackbarController getSnackbarController() {
+  SnackbarController getSnackbarController(String tr, String tr2) {
     return Get.snackbar(
       i18n.text('termsAndConditions'),
       i18n.text('acceptTermsAndConditionsError'),

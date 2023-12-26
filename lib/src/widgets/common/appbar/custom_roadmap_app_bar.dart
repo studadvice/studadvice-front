@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:stud_advice/src/common/chore.dart';
+import 'package:stud_advice/src/controllers/administrative_processes/search_administrative_processes_controller.dart';
 
-class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
+class CustomRoadmapAppBar extends StatelessWidget implements PreferredSizeWidget {
   final String title;
   final VoidCallback onBackPress;
   final VoidCallback onInfoPress;
 
-  const CustomAppBar({
+  const CustomRoadmapAppBar({
     super.key,
     required this.title,
     required this.onBackPress,
@@ -41,5 +42,5 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   }
 
   @override
-  Size get preferredSize => Size.fromHeight(kToolbarHeight);
+  Size get preferredSize => const Size.fromHeight(kToolbarHeight);
 }

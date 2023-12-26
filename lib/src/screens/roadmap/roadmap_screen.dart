@@ -19,7 +19,7 @@ class RoadMapScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomAppBar(
+      appBar: CustomRoadmapAppBar(
       title: _i18n.text('roadmap'),
       onBackPress: () => Get.back(),
       onInfoPress: togglePanel,
