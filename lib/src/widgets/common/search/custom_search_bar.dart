@@ -5,11 +5,13 @@ import 'package:stud_advice/stud_advice.dart';
 
 class CustomSearchBar extends StatelessWidget {
   final CustomSearchController controller;
+  final String hintText;
   final stt.SpeechToText _speech = stt.SpeechToText();
 
   CustomSearchBar({
     super.key,
     required this.controller,
+    required this.hintText
   });
 
   void _startListening() async {
@@ -38,7 +40,7 @@ class CustomSearchBar extends StatelessWidget {
         controller.update();
       },
       controller: controller.textEditingController,
-      hintText: 'Search an administrative process',
+      hintText: hintText,
       backgroundColor: Colors.transparent,
       borderColor: Colors.black,
       focusedBorderColor: AppColors.secondaryColor,

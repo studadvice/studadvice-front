@@ -5,10 +5,12 @@ import '../search/custom_search_bar.dart';
 
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   final CustomSearchController controller;
+  final String hintText;
 
   CustomAppBar({
     super.key,
     required this.controller,
+    required this.hintText
   });
 
   @override
@@ -44,7 +46,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
             ),
             Align(
               alignment: Alignment.center,
-              child: CustomSearchBar(controller: controller),
+              child: CustomSearchBar(controller: controller, hintText: hintText),
             ),
           ],
         ),
