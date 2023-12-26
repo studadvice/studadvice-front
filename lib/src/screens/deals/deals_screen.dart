@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import 'package:get/get.dart';
-import 'package:stud_advice/src/screens/deals/total_deals_screen.dart';
+import 'package:stud_advice/src/screens/deals/deals_total_screen.dart';
 import 'package:stud_advice/src/widgets/deals/deal_item.dart';
 import '../../../stud_advice.dart';
 import '../../controllers/deals/search_deals_controller.dart';
@@ -17,7 +17,7 @@ class DealsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomAppBar(controller: searchDealsController),
+      appBar: CustomAppBar(controller: searchDealsController, hintText: 'Search deals'),
       body: FutureBuilder<Deals>(
         future: searchDealsController.getDealsBySearch(size: 3, number: 0),
         builder: (context, snapshot) {
@@ -64,7 +64,7 @@ class DealsScreen extends StatelessWidget {
                         ),
                         GestureDetector(
                           onTap: () {
-                            Get.to(() => TotalDealsScreen());
+                            Get.to(() => DealsTotalScreen());
                           },
                           child: const Icon(
                             Icons.more_horiz,

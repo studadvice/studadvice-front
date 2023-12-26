@@ -1,5 +1,8 @@
 import 'package:get/get.dart';
+import 'package:stud_advice/src/bindings/dashboard/dashboard_binding.dart';
+import 'package:stud_advice/src/bindings/deals/deals_binding.dart';
 import 'package:stud_advice/src/screens/deals/deal_detail_screen.dart';
+import 'package:stud_advice/src/screens/deals/deals_screen.dart';
 import 'package:stud_advice/stud_advice.dart';
 import '../../bindings/administrative_process/administrative_process_binding.dart';
 import '../../bindings/settings/settings_binding.dart';
@@ -65,10 +68,17 @@ class RoutesConfiguration {
       GetPage(
         name: DashboardScreen.navigatorId,
         page: () => DashboardScreen(),
+        binding: DashboardBinding(),
       ),
       GetPage(
         name: DealDetailScreen.navigatorId,
         page: () => DealDetailScreen(),
+        binding: DealsBinding(),
+      ),
+      GetPage(
+        name: DealsScreen.navigatorId,
+        page: () => DealsScreen(),
+        binding: DealsBinding(),
       )
     ];
   }
