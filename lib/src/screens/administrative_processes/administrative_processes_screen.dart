@@ -25,7 +25,7 @@ class AdministrativesProcessesScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: AppColors.white,
       // TODO add a navigation rail to see the favorites for the current category
-      appBar: CustomAppBar(controller: searchAdministrativeProcessController,hintText: "Search an administrative process"),
+      appBar: CustomAppBar(controller: searchAdministrativeProcessController,hintText: 'search'.tr),
       body: ClipRRect(
         borderRadius: const BorderRadius.only(
           topLeft: Radius.circular(20.0),

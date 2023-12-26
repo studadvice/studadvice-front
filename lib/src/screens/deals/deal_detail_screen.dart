@@ -82,9 +82,9 @@ class DealDetailScreen extends StatelessWidget {
                     const SizedBox(
                       height: 24,
                     ),
-                    const Text(
-                      "Description",
-                      style: TextStyle(
+                    Text(
+                      'deals.description'.tr,
+                      style: const TextStyle(
                         fontSize: 20.0,
                         fontWeight: FontWeight.bold,
                       ),
@@ -97,9 +97,9 @@ class DealDetailScreen extends StatelessWidget {
                       const SizedBox(
                         height: 24,
                       ),
-                      const Text(
-                        "Date de début",
-                        style: TextStyle(
+                      Text(
+                        'deals.start'.tr,
+                        style: const TextStyle(
                           fontSize: 20.0,
                           fontWeight: FontWeight.bold,
                         ),
@@ -113,9 +113,9 @@ class DealDetailScreen extends StatelessWidget {
                       const SizedBox(
                         height: 24,
                       ),
-                      const Text(
-                        "Date de fin",
-                        style: TextStyle(
+                      Text(
+                        'deals.end'.tr,
+                        style: const TextStyle(
                           fontSize: 20.0,
                           fontWeight: FontWeight.bold,
                         ),
@@ -149,7 +149,7 @@ class DealDetailScreen extends StatelessWidget {
                             throw 'Could not launch $deal.url';
                           }
                         },
-                        child: const Text("J'en profite"),
+                        child: Text('deals.url'.tr),
                       ),
                     ),
                   ],

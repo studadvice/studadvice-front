@@ -184,5 +184,18 @@ class En {
         "register_user_information_controller.error": "Connection error",
         "register_user_information_controller.registerWithEmailFailed":
             "An error occurred during registration",
-      };
+
+        // Categories
+        'search':"Search here",
+        'categories.explore':"Explore categories",
+
+        // Deals
+        'deals.recommendation': "Our favorites !",
+        'deals.empty': "No deals found !",
+        'deals.explore': "Explore deals",
+        'deals.description': "Description",
+        'deals.start': "Start date",
+        'deals.end': "End date",
+        'deals.url': "Go"
+  };
 }

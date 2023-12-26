@@ -55,9 +55,9 @@ class DealsScreen extends StatelessWidget {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        const Text(
-                          "Recommended",
-                          style: TextStyle(
+                        Text(
+                          'deals.recommendation'.tr,
+                          style: const TextStyle(
                             fontSize: 18.0,
                             fontWeight: FontWeight.bold,
                           ),
@@ -101,8 +101,8 @@ class DealsScreen extends StatelessWidget {
                               ),
                             );
                           } else {
-                            return const Center(
-                              child: Text('No recommended deals found.'),
+                            return Center(
+                              child: Text('deals.empty'.tr),
                             );
                           }
                         } else {
@@ -116,8 +116,8 @@ class DealsScreen extends StatelessWidget {
                 ),
               );
             } else {
-              return const Center(
-                child: Text('No deals found.'),
+              return Center(
+                child: Text('deals.empty'.tr),
               );
             }
           } else {

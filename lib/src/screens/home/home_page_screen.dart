@@ -12,7 +12,7 @@ class HomePageScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomAppBar(controller: categoryController, hintText: 'Search an administrative process'),
+      appBar: CustomAppBar(controller: categoryController, hintText: 'search'.tr),
       body: const Center(
         child: Padding(
           padding: EdgeInsets.all(10),

@@ -61,7 +61,7 @@ class CustomSearchBar extends StatelessWidget {
           ),
         ),
         floatingLabelBehavior: FloatingLabelBehavior.never,
-        labelText: "Search an administrative process",
+        labelText: hintText,
         labelStyle: const TextStyle(color: Colors.grey),
         filled: true,
         fillColor: Colors.white,

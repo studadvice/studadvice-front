@@ -186,5 +186,20 @@ class Fr {
         "register_user_information_controller.error": "Erreur de connexion",
         "register_user_information_controller.registerWithEmailFailed":
             "Une erreur s'est produite lors de l'inscription",
-      };
+
+
+        // Categories
+        'search':"Recherchez ici",
+        'categories.explore': "Explorez les catégories",
+
+        // Deals
+        'deals.recommendation': "Nos coups de coeur !",
+        'deals.empty': "Pas de bons plans !",
+        'deals.explore': "Explorez les bons plans",
+        'deals.description': "Description",
+        'deals.start': "Date de début",
+        'deals.url': "Go"
+
+
+  };
 }

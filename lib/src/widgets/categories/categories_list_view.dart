@@ -22,11 +22,11 @@ class CategoriesListView extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Padding(
-                padding: EdgeInsets.only(left: 15.0),
+              Padding(
+                padding: const EdgeInsets.only(left: 15.0),
                 child: Text(
-                  "Explore categories",
-                  style: TextStyle(
+                  'categories.explore'.tr,
+                  style: const TextStyle(
                     fontSize: 20,
                     fontWeight: FontWeight.bold,
                   ),
