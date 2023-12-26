@@ -72,13 +72,24 @@ class DealItemSlide extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(
-                      deal.title,
-                      style: const TextStyle(
-                        color: Colors.white,
-                        fontSize: 20.0,
-                        fontWeight: FontWeight.bold,
-                      ),
+                    Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: <Widget>[
+                          Text(
+                            deal.title,
+                            style: const TextStyle(
+                              color: Colors.white,
+                              fontSize: 20.0,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          if (deal.endDate != null)
+                            const Icon(
+                              Icons.timer,
+                              color: Colors.white,
+                              size: 20.0,
+                            ),
+                        ],
                     ),
                     Row(
                       children: <Widget>[
