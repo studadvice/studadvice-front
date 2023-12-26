@@ -1,0 +1,10 @@
+flutter_native_splash:
+  color: "#1A0A06"
+  background_image: "assets/images/common/raven_image.png"
+
+  image: "assets/images/common/raven_image.png"
+
+  android_12:
+    image: assets/images/common/raven_image.png
+
+  web: false
