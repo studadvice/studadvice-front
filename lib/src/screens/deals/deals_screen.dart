@@ -6,7 +6,6 @@ import 'package:stud_advice/src/widgets/deals/deal_item.dart';
 import '../../../stud_advice.dart';
 import '../../controllers/deals/search_deals_controller.dart';
 import '../../models/stud_advice/deals.dart';
-import '../../widgets/common/app_bar/custom_app_bar.dart';
 import '../../widgets/deals/deal_item_slide.dart';
 
 class DealsScreen extends StatelessWidget {
@@ -17,7 +16,8 @@ class DealsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomAppBar(controller: searchDealsController, hintText: 'Search deals'),
+      appBar: AppBar(
+      ),
       body: FutureBuilder<Deals>(
         future: searchDealsController.getDealsBySearch(size: 3, number: 0),
         builder: (context, snapshot) {
@@ -67,7 +67,7 @@ class DealsScreen extends StatelessWidget {
                             Get.to(() => DealsTotalScreen());
                           },
                           child: const Icon(
-                            Icons.more_horiz,
+                            Icons.add,
                             color: AppColors.black,
                             size: 35,
                           ),

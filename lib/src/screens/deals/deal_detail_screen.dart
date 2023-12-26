@@ -45,9 +45,10 @@ class DealDetailScreen extends StatelessWidget {
               top: size.height * 0.55 - 20,
               child: Container(
                 padding: const EdgeInsets.all(24),
-                decoration: const BoxDecoration(
+                decoration: BoxDecoration(
+                  border: Border.all(color: Colors.black),
                   color: Colors.white,
-                  borderRadius: BorderRadius.only(
+                  borderRadius: const BorderRadius.only(
                     topLeft: Radius.circular(40),
                     topRight: Radius.circular(40),
                   ),

@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:stud_advice/src/widgets/administrative_process/administrative_process_list_view.dart';
-import 'package:stud_advice/src/widgets/common/app_bar/custom_app_bar.dart';
-
 import '../../../stud_advice.dart';
+import '../../widgets/common/app_bar/custom_app_bar.dart';
 
 class AdministrativesProcessesScreen extends StatelessWidget {
   static const String navigatorId = '/administratives_processes_screen';

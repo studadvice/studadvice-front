@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:stud_advice/src/controllers/deals/search_deals_controller.dart';
-import 'package:stud_advice/src/widgets/common/app_bar/custom_app_bar.dart';
+import '../../widgets/common/app_bar/custom_app_bar.dart';
 import '../../widgets/deals/deals_list_view.dart';
 
 class DealsTotalScreen extends StatelessWidget {
