@@ -3,27 +3,27 @@ import 'package:stud_advice/src/controllers/search/custom_search_controller.dart
 
 import '../search/custom_search_bar.dart';
 
-class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
+class CustomSearchAppBar extends StatelessWidget implements PreferredSizeWidget {
   final CustomSearchController controller;
   final String hintText;
 
-  CustomAppBar({
+  CustomSearchAppBar({
     super.key,
     required this.controller,
-    required this.hintText
+    required this.hintText,
   });
 
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      toolbarHeight: 150,
-      elevation: 0,
-      backgroundColor: Colors.transparent,
-      iconTheme: const IconThemeData(color: Colors.grey, size: 28),
+      title: const Text(
+        "Stud'Advice",
+        style: TextStyle(
+          fontWeight: FontWeight.bold,
+          color: Colors.white
+        ),
+      ),
       flexibleSpace: Container(
-        padding: const EdgeInsets.only(top: 50, left: 20, right: 20),
-        height: 190,
-        width: double.infinity,
         decoration: const BoxDecoration(
           borderRadius: BorderRadius.only(
             bottomLeft: Radius.circular(20),
@@ -40,20 +40,18 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
           ),
         ),
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.end,
           children: [
-            const SizedBox(
-              height: 40,
-            ),
-            Align(
-              alignment: Alignment.center,
-              child: CustomSearchBar(controller: controller, hintText: hintText),
-            ),
+            Padding(
+                padding: const EdgeInsets.all(10),
+                child: CustomSearchBar(controller: controller, hintText: hintText),
+            )
           ],
         ),
-      ),
+      )
     );
   }
 
   @override
-  Size get preferredSize => const Size.fromHeight(150);
+  Size get preferredSize => const Size.fromHeight(110);
 }

@@ -3,10 +3,12 @@ import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import 'package:get/get.dart';
 import 'package:stud_advice/src/exceptions/no_result_indicator.dart';
 import 'package:stud_advice/src/screens/deals/deals_total_screen.dart';
+import 'package:stud_advice/src/widgets/common/app_bar/custom_app_bar.dart';
 import 'package:stud_advice/src/widgets/deals/deal_item.dart';
 import '../../../stud_advice.dart';
 import '../../controllers/deals/search_deals_controller.dart';
 import '../../models/stud_advice/deals.dart';
+import '../../widgets/common/app_bar/custom_search_app_bar.dart';
 import '../../widgets/deals/deal_item_slide.dart';
 
 class DealsScreen extends StatelessWidget {
@@ -17,8 +19,7 @@ class DealsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-      ),
+      appBar: CustomSearchAppBar(controller: searchDealsController, hintText: 'search'.tr),
       body: FutureBuilder<Deals>(
         future: searchDealsController.getDealsBySearch(size: 3, number: 0),
         builder: (context, snapshot) {

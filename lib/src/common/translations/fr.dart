@@ -211,6 +211,7 @@ class Fr {
         'deals.explore': "Explorez les bons plans",
         'deals.description': "Description",
         'deals.start': "Date de début",
+        'deals.end': "Date de fin",
         'deals.url': "Go"
 
 

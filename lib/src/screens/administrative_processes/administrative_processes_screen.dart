@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:stud_advice/src/widgets/administrative_process/administrative_process_list_view.dart';
 import '../../../stud_advice.dart';
-import '../../widgets/common/app_bar/custom_app_bar.dart';
+import '../../widgets/common/app_bar/custom_search_app_bar.dart';
 
 class AdministrativesProcessesScreen extends StatelessWidget {
   static const String navigatorId = '/administratives_processes_screen';
@@ -25,7 +25,7 @@ class AdministrativesProcessesScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: AppColors.white,
       // TODO add a navigation rail to see the favorites for the current category
-      appBar: CustomAppBar(controller: searchAdministrativeProcessController,hintText: 'search'.tr),
+      appBar: CustomSearchAppBar(controller: searchAdministrativeProcessController,hintText: 'search'.tr),
       body: ClipRRect(
         borderRadius: const BorderRadius.only(
           topLeft: Radius.circular(20.0),
