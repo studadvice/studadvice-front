@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import 'package:get/get.dart';
+import 'package:stud_advice/src/exceptions/no_result_indicator.dart';
 import 'package:stud_advice/src/screens/deals/deals_total_screen.dart';
 import 'package:stud_advice/src/widgets/deals/deal_item.dart';
 import '../../../stud_advice.dart';
@@ -22,7 +23,7 @@ class DealsScreen extends StatelessWidget {
         future: searchDealsController.getDealsBySearch(size: 3, number: 0),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.done) {
-            if (snapshot.hasData) {
+            if (snapshot.hasData && snapshot.data!.content.isNotEmpty) {
               final deals = snapshot.data!;
               return Padding(
                 padding: const EdgeInsets.all(10),
@@ -101,9 +102,7 @@ class DealsScreen extends StatelessWidget {
                               ),
                             );
                           } else {
-                            return Center(
-                              child: Text('deals.empty'.tr),
-                            );
+                            return NoResultIndicator();
                           }
                         } else {
                           return const Center(
@@ -116,11 +115,12 @@ class DealsScreen extends StatelessWidget {
                 ),
               );
             } else {
-              return Center(
-                child: Text('deals.empty'.tr),
-              );
+              return NoResultIndicator();
             }
-          } else {
+          } else if (snapshot.hasError) {
+            return Text('image_error'.tr);
+          }
+          else {
             return const Center(
               child: CircularProgressIndicator(),
             );

@@ -34,7 +34,7 @@ class DealDetailScreen extends StatelessWidget {
                       fit: BoxFit.cover,
                     );
                   } else if (snapshot.hasError) {
-                    return const Text('Erreur de chargement de l\'image');
+                    return Text('image_error'.tr);
                   } else {
                     return const CircularProgressIndicator();
                   }

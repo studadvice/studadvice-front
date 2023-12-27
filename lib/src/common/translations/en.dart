@@ -185,8 +185,21 @@ class En {
         "register_user_information_controller.registerWithEmailFailed":
             "An error occurred during registration",
 
+        // General
+        'search': "Start your research",
+        'empty_result_message': "No results found. Try adjusting your filters.",
+        'empty_result_title': "Oops, too specific!",
+        'no_connection_indicator_message': "Check your internet connection and give it another go.",
+        'no_connection_indicator_title': "Connection Lost",
+        'general_error_title': "Something went wrong",
+        'general_error_message': "An unexpected error occurred. Please try again later.",
+        'image_error': "Image loading error. Please refresh.",
+        'try_again': "Give it another shot!",
+        'no_result_message': "Nothing here for now. Check back later.",
+        'no_result_title': "No Results Yet",
+
+
         // Categories
-        'search':"Search here",
         'categories.explore':"Explore categories",
 
         // Deals
