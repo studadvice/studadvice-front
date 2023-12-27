@@ -1,11 +1,12 @@
 import 'package:get/get.dart';
 import 'package:stud_advice/stud_advice.dart';
+
 import '../../bindings/administrative_process/administrative_process_binding.dart';
 import '../../bindings/settings/settings_binding.dart';
 import '../../screens/dashboard/dashboard_screen.dart';
 
 class RoutesConfiguration {
-  static const String initialRoute = InitTimeScreen.navigatorId;
+  static const String initialRoute = WelcomeScreen.navigatorId;
 
   List<GetPage> configureRoutes() {
     return [
@@ -52,9 +53,9 @@ class RoutesConfiguration {
         binding: SettingsBinding(),
       ),
       GetPage(
-          name: ForgotPasswordScreen.navigatorId,
-          page: () => ForgotPasswordScreen(),
-          binding: ForgotPasswordBinding(),
+        name: ForgotPasswordScreen.navigatorId,
+        page: () => ForgotPasswordScreen(),
+        binding: ForgotPasswordBinding(),
       ),
       GetPage(
         name: AdministrativesProcessesScreen.navigatorId,
