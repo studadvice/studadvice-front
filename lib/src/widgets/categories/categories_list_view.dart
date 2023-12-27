@@ -25,7 +25,7 @@ class CategoriesListView extends StatelessWidget {
               const Padding(
                 padding: EdgeInsets.only(left: 15.0),
                 child: Text(
-                  "Explore categories",
+                  "Explorez les catégories",
                   style: TextStyle(
                     fontSize: 20,
                     fontWeight: FontWeight.bold,

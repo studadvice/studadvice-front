@@ -1,17 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
+import 'package:stud_advice/src/models/stud_advice/administrative_processes.dart';
 import 'package:stud_advice/src/widgets/administrative_process/administrative_process_tile.dart';
 import 'package:stud_advice/stud_advice.dart';
 
-import '../../models/stud_advice/administrative_processes.dart';
-
 class AdministrativeProcessListView extends StatelessWidget {
   final String categoryId;
+  final String categoryName;
   final String categoryColor;
 
   const AdministrativeProcessListView({
     super.key,
+    required this.categoryName,
     required this.categoryId,
     required this.categoryColor,
   });
@@ -22,31 +23,61 @@ class AdministrativeProcessListView extends StatelessWidget {
       init: AdministrativeProcessController(),
       builder: (controller) {
         controller.categoryId = categoryId;
-        return RefreshIndicator(
-          onRefresh: () => Future.sync(
-            () => controller.pagingController.refresh(),
-          ),
-          child: PagedListView.separated(
-            pagingController: controller.pagingController,
-            builderDelegate:
-                PagedChildBuilderDelegate<AdministrativeProcessContent>(
-              itemBuilder: (context, process, index) =>
-                  AdministrativeProcessListTile(
-                name: process.name,
-                imageId: process.imageId,
-                description: process.description,
-                administrativeProcessId: process.id,
-                showProgressBar: false,
-              ),
-              firstPageErrorIndicatorBuilder: (context) => ErrorIndicator(
-                error: controller.pagingController.error,
-                onTryAgain: () => controller.pagingController.refresh(),
-              ),
-              noItemsFoundIndicatorBuilder: (context) => EmptyListIndicator(),
+        Color backgroundColor =
+            Color(int.parse(categoryColor, radix: 16) + 0xFF000000);
+
+        return Scaffold(
+          appBar: AppBar(
+            title: Text(
+              categoryName,
             ),
-            padding: const EdgeInsets.all(16),
-            separatorBuilder: (context, index) => const SizedBox(
-              height: 16,
+            titleTextStyle: const TextStyle(
+              color: AppColors.black,
+              fontSize: AppFontSizes.large20,
+              fontWeight: FontWeight.bold,
+            ),
+            toolbarHeight: 50,
+            elevation: 0,
+            backgroundColor: Colors.transparent,
+            automaticallyImplyLeading: false,
+            leading: IconButton(
+              icon: const Icon(Icons.list_sharp),
+              onPressed: () {},
+            ),
+            actions: [
+              IconButton(
+                icon: const Icon(Icons.favorite_rounded),
+                onPressed: () {},
+              ),
+            ],
+          ),
+          body: RefreshIndicator(
+            onRefresh: () => Future.sync(
+              () => controller.pagingController.refresh(),
+            ),
+            child: PagedListView.separated(
+              pagingController: controller.pagingController,
+              builderDelegate:
+                  PagedChildBuilderDelegate<AdministrativeProcessContent>(
+                itemBuilder: (context, process, index) =>
+                    AdministrativeProcessListTile(
+                  name: process.name,
+                  imageId: process.imageId,
+                  description: process.description,
+                  administrativeProcessId: process.id,
+                  backgroundColor: backgroundColor,
+                  showProgressBar: false,
+                ),
+                firstPageErrorIndicatorBuilder: (context) => ErrorIndicator(
+                  error: controller.pagingController.error,
+                  onTryAgain: () => controller.pagingController.refresh(),
+                ),
+                noItemsFoundIndicatorBuilder: (context) => EmptyListIndicator(),
+              ),
+              padding: const EdgeInsets.all(16),
+              separatorBuilder: (context, index) => const SizedBox(
+                height: 16,
+              ),
             ),
           ),
         );

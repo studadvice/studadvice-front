@@ -16,6 +16,10 @@ class AdministrativesProcessesScreen extends StatelessWidget {
     return args['categoryId'] ?? '';
   }
 
+  String _getCategoryName() {
+    return args['categoryName'] ?? '';
+  }
+
   String _getCategoryColor() {
     return args['categoryColor'] ?? '';
   }
@@ -45,6 +49,7 @@ class AdministrativesProcessesScreen extends StatelessWidget {
           padding: const EdgeInsets.all(5.0),
           child: AdministrativeProcessListView(
             categoryId: _getCategoryId(),
+            categoryName: _getCategoryName(),
             categoryColor: _getCategoryColor(),
           ),
         ),
