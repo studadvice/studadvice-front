@@ -7,8 +7,8 @@ import '../../models/stud_advice/categories.dart';
 
 class CategoriesListView extends StatelessWidget {
   const CategoriesListView({
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +17,7 @@ class CategoriesListView extends StatelessWidget {
       builder: (controller) {
         return RefreshIndicator(
           onRefresh: () => Future.sync(
-                () => controller.pagingController.refresh(),
+            () => controller.pagingController.refresh(),
           ),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,

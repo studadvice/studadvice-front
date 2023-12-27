@@ -101,7 +101,6 @@ class AdministrativeProcessController extends CustomSearchController {
           userId, administrativeProcessId);
       _favoritesAdministrativeProcessesId.add(administrativeProcessId);
     }
-    update();
   }
 
   Future<void> _initFavorites() async {

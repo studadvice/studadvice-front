@@ -16,7 +16,11 @@ class DashboardScreen extends StatelessWidget {
       return Scaffold(
         body: IndexedStack(
           index: dashboardController.tabIndex,
-          children: [DealsScreen(), HomePageScreen(), SettingsScreen()],
+          children: [
+            DealsScreen(),
+            HomePageScreen(),
+            SettingsScreen(),
+          ],
         ),
         bottomNavigationBar: BottomNavigationBar(
             type: BottomNavigationBarType.fixed,
