@@ -28,28 +28,19 @@ class AdministrativeProcessListView extends StatelessWidget {
 
         return Scaffold(
           appBar: AppBar(
+            forceMaterialTransparency: true,
             title: Text(
               categoryName,
             ),
+            centerTitle: true,
             titleTextStyle: const TextStyle(
               color: AppColors.black,
               fontSize: AppFontSizes.large20,
               fontWeight: FontWeight.bold,
             ),
             toolbarHeight: 50,
-            elevation: 0,
-            backgroundColor: Colors.transparent,
+            backgroundColor: AppColors.white,
             automaticallyImplyLeading: false,
-            leading: IconButton(
-              icon: const Icon(Icons.list_sharp),
-              onPressed: () {},
-            ),
-            actions: [
-              IconButton(
-                icon: const Icon(Icons.favorite_rounded),
-                onPressed: () {},
-              ),
-            ],
           ),
           body: RefreshIndicator(
             onRefresh: () => Future.sync(
