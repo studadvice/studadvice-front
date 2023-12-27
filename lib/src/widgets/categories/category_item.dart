@@ -94,8 +94,8 @@ class CategoryItem extends StatelessWidget {
                     if (snapshot.connectionState == ConnectionState.done &&
                         snapshot.data != null) {
                       return Container(
-                        width: 60,
-                        height: 60,
+                        width: 50,
+                        height: 50,
                         decoration: BoxDecoration(
                           image: DecorationImage(
                             image: FileImage(File(snapshot.data!)),
