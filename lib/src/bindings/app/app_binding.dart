@@ -14,12 +14,11 @@ class AppDependenciesBinding extends Bindings {
 
   @override
   void dependencies() {
-    Dio dio = Dio(
-        BaseOptions(
-          baseUrl: dotenv.env["BACKEND_BASE_URL"] ?? "http://localhost:8080",
-          connectTimeout: const Duration(seconds: 5),
-          receiveTimeout: const Duration(seconds: 5),
-        ));
+    Dio dio = Dio(BaseOptions(
+      baseUrl: dotenv.env["BACKEND_BASE_URL"] ?? "http://localhost:8080",
+      connectTimeout: const Duration(seconds: 5),
+      receiveTimeout: const Duration(seconds: 5),
+    ));
     dio.interceptors.add(AuthInterceptor());
 
     Get.put(dio, permanent: true);

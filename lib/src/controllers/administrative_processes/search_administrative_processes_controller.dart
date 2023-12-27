@@ -30,11 +30,10 @@ class SearchAdministrativeProcessController extends CustomSearchController {
   Future<void> fetchPage(int pageKey) async {
     try {
       final newPage = await getAdministrativeProcesses(
-        number: pageKey,
-        size: 5,
-        query: textEditingController.text,
-        categoryId: categoryId
-      );
+          number: pageKey,
+          size: 5,
+          query: textEditingController.text,
+          categoryId: categoryId);
 
       final isLastPage = newPage.last;
       final newItems = newPage.content;
@@ -49,18 +48,17 @@ class SearchAdministrativeProcessController extends CustomSearchController {
     }
   }
 
-  Future<AdministrativeProcesses> getAdministrativeProcesses({
-    required int number,
-    required int size,
-    String? query,
-    String? categoryId
-  }) async {
+  Future<AdministrativeProcesses> getAdministrativeProcesses(
+      {required int number,
+      required int size,
+      String? query,
+      String? categoryId}) async {
     final queryParameters = {
       'page': number,
       'size': size,
       'searchText': query,
-      'categoryId':categoryId
-    }; // TODO: add the category id
+      'categoryId': categoryId
+    };
     return _getAdministrativeProcesses(
         '/administrative-process/search', queryParameters);
   }

@@ -1,7 +1,8 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:stud_advice/stud_advice.dart';
-import 'dart:io';
 
 class AdministrativeProcessListTile extends StatelessWidget {
   final String name;
@@ -51,49 +52,48 @@ class AdministrativeProcessListTile extends StatelessWidget {
           leading: ClipRRect(
             borderRadius: BorderRadius.circular(15.0),
             child: Container(
-              padding: const EdgeInsets.all(5.0),
-              decoration: const BoxDecoration(
-                boxShadow: [
-                  BoxShadow(
-                    color: AppColors.white,
-                    offset: Offset(2, 2), // Bottom-right shadow
-                    blurRadius: 4.0,
-                  ),
-                  BoxShadow(
-                    color: AppColors.white,
-                    offset: Offset(-2, 2), // Bottom-left shadow
-                    blurRadius: 4.0,
-                  ),
-                  BoxShadow(
-                    color: AppColors.black26,
-                    offset: Offset(2, -2), // Top-right shadow
-                    blurRadius: 4.0,
-                  ),
-                  BoxShadow(
-                    color: AppColors.white,
-                    offset: Offset(-2, -2), // Top-left shadow
-                    blurRadius: 4.0,
-                  ),
-                ],
-              ),
-              child:  FutureBuilder<String?>(
-                future: fileController.downloadFile(imageId),
-                builder: (context, snapshot) {
-                  if (snapshot.connectionState == ConnectionState.done &&
-                      snapshot.data != null) {
-                    return Image.file(
+                padding: const EdgeInsets.all(5.0),
+                decoration: const BoxDecoration(
+                  boxShadow: [
+                    BoxShadow(
+                      color: AppColors.white,
+                      offset: Offset(2, 2), // Bottom-right shadow
+                      blurRadius: 4.0,
+                    ),
+                    BoxShadow(
+                      color: AppColors.white,
+                      offset: Offset(-2, 2), // Bottom-left shadow
+                      blurRadius: 4.0,
+                    ),
+                    BoxShadow(
+                      color: AppColors.black26,
+                      offset: Offset(2, -2), // Top-right shadow
+                      blurRadius: 4.0,
+                    ),
+                    BoxShadow(
+                      color: AppColors.white,
+                      offset: Offset(-2, -2), // Top-left shadow
+                      blurRadius: 4.0,
+                    ),
+                  ],
+                ),
+                child: FutureBuilder<String?>(
+                  future: fileController.downloadFile(imageId),
+                  builder: (context, snapshot) {
+                    if (snapshot.connectionState == ConnectionState.done &&
+                        snapshot.data != null) {
+                      return Image.file(
                         File(snapshot.data!),
                         width: 50,
                         height: 50,
-                    );
-                  } else if (snapshot.hasError) {
-                    return const Text('Erreur de chargement de l\'image');
-                  } else {
-                    return const CircularProgressIndicator();
-                  }
-                },
-              )
-            ),
+                      );
+                    } else if (snapshot.hasError) {
+                      return const Text('Erreur de chargement de l\'image');
+                    } else {
+                      return const Icon(Icons.image);
+                    }
+                  },
+                )),
           ),
           title: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
