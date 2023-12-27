@@ -18,8 +18,8 @@ class AdministrativeProcessListView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GetBuilder<SearchAdministrativeProcessController>(
-      init: SearchAdministrativeProcessController(),
+    return GetBuilder<AdministrativeProcessController>(
+      init: AdministrativeProcessController(),
       builder: (controller) {
         controller.categoryId = categoryId;
         return RefreshIndicator(
@@ -37,8 +37,6 @@ class AdministrativeProcessListView extends StatelessWidget {
                 description: process.description,
                 administrativeProcessId: process.id,
                 showProgressBar: false,
-                isFavorite:
-                    false, // TODO set this to true when the user when the progress bar is needed. //fixed this to false temporally because not handled now
               ),
               firstPageErrorIndicatorBuilder: (context) => ErrorIndicator(
                 error: controller.pagingController.error,

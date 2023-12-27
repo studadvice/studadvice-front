@@ -10,26 +10,25 @@ class AdministrativeProcessListTile extends StatelessWidget {
   final String administrativeProcessId;
   final String description;
   final bool showProgressBar;
-  final bool isFavorite;
 
-  final SearchAdministrativeProcessController _controller =
-      Get.find<SearchAdministrativeProcessController>();
+  final AdministrativeProcessController _administrativeProcessController =
+      Get.find<AdministrativeProcessController>();
   final FileController fileController = Get.find();
 
-  AdministrativeProcessListTile(
-      {Key? key,
-      required this.imageId,
-      required this.name,
-      required this.description,
-      required this.showProgressBar,
-      required this.administrativeProcessId,
-      required this.isFavorite});
+  AdministrativeProcessListTile({
+    Key? key,
+    required this.administrativeProcessId,
+    required this.imageId,
+    required this.name,
+    required this.description,
+    required this.showProgressBar,
+  });
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        // TODO : add navigation to the administrative process screen
+        // TODO : add navigation to the road map screen
       },
       child: Container(
         margin: const EdgeInsets.symmetric(vertical: 1.0, horizontal: 8.0),
@@ -132,10 +131,8 @@ class AdministrativeProcessListTile extends StatelessWidget {
           trailing: Obx(() {
             return GestureDetector(
               onTap: () {
-                _controller.toggleFavoriteState(administrativeProcessId);
-                debugPrint('Favorite button tapped');
-                debugPrint(
-                    "isFavorite: ${_controller.isFavorite(administrativeProcessId)}");
+                _administrativeProcessController
+                    .toggleFavoriteState(administrativeProcessId);
               },
               child: Container(
                 padding: const EdgeInsets.all(5.0),
@@ -145,7 +142,8 @@ class AdministrativeProcessListTile extends StatelessWidget {
                 ),
                 child: Icon(
                   Icons.favorite,
-                  color: _controller.isFavorite(administrativeProcessId)
+                  color: _administrativeProcessController
+                          .isProcessFavorite(administrativeProcessId)
                       ? AppColors.red
                       : AppColors.black,
                   size: 20.0,

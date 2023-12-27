@@ -4,19 +4,26 @@ import 'package:dio/dio.dart';
 import 'package:get/get.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 import 'package:stud_advice/src/controllers/search/custom_search_controller.dart';
+import 'package:stud_advice/stud_advice.dart';
 
 import '../../models/stud_advice/administrative_processes.dart';
 
-class SearchAdministrativeProcessController extends CustomSearchController {
+class AdministrativeProcessController extends CustomSearchController {
   final RxList<AdministrativeProcessContent> administrativeProcesses =
       <AdministrativeProcessContent>[].obs;
+  final RxList<String> _favoritesAdministrativeProcessesId = <String>[].obs;
+
+  UserStorageController userStorageController = Get.find();
+  final Dio _dio = Get.find();
+
   late String categoryId;
+
+  List<String> get favoriteAdministrativeProcesses =>
+      _favoritesAdministrativeProcessesId;
 
   final pagingController = PagingController<int, AdministrativeProcessContent>(
     firstPageKey: 0,
   );
-
-  final Dio _dio = Get.find();
 
   @override
   void onInit() {
@@ -24,6 +31,7 @@ class SearchAdministrativeProcessController extends CustomSearchController {
     pagingController.addPageRequestListener((pageKey) {
       fetchPage(pageKey);
     });
+    _initFavorites();
   }
 
   @override
@@ -81,22 +89,32 @@ class SearchAdministrativeProcessController extends CustomSearchController {
     }
   }
 
-  void toggleFavoriteState(String administrativeProcessId) {
-    final tileIndex = administrativeProcesses
-        .indexWhere((process) => process.id == administrativeProcessId);
+  Future<void> toggleFavoriteState(String administrativeProcessId) async {
+    String userId = userStorageController.getCurrentUserId();
 
-    if (tileIndex != -1) {
-      administrativeProcesses[tileIndex].isFavorite =
-          !administrativeProcesses[tileIndex].isFavorite!;
-      update();
+    if (isProcessFavorite(administrativeProcessId)) {
+      await userStorageController.removeAdministrativeProcessFromFavorites(
+          userId, administrativeProcessId);
+      _favoritesAdministrativeProcessesId.remove(administrativeProcessId);
+    } else {
+      await userStorageController.addAdministrativeProcessToFavorites(
+          userId, administrativeProcessId);
+      _favoritesAdministrativeProcessesId.add(administrativeProcessId);
     }
+    update();
   }
 
-  bool isFavorite(String administrativeProcessId) {
-    final tileIndex = administrativeProcesses
-        .indexWhere((process) => process.id == administrativeProcessId);
+  Future<void> _initFavorites() async {
+    String userId = userStorageController.getCurrentUserId();
 
-    return tileIndex != -1 && administrativeProcesses[tileIndex].isFavorite!;
+    List<String> favoriteIds = await userStorageController.getFavorites(userId);
+
+    _favoritesAdministrativeProcessesId.addAll(favoriteIds);
+  }
+
+  bool isProcessFavorite(String administrativeProcessId) {
+    return _favoritesAdministrativeProcessesId
+        .any((processId_) => processId_ == administrativeProcessId);
   }
 
   @override

@@ -9,9 +9,8 @@ class AdministrativesProcessesScreen extends StatelessWidget {
 
   final Map<String, dynamic> args = Get.arguments;
 
-  final SearchAdministrativeProcessController
-      searchAdministrativeProcessController =
-      Get.find<SearchAdministrativeProcessController>();
+  final AdministrativeProcessController administrativeProcessController =
+      Get.find<AdministrativeProcessController>();
 
   String _getCategoryId() {
     return args['categoryId'] ?? '';
@@ -26,7 +25,7 @@ class AdministrativesProcessesScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: AppColors.white,
       // TODO add a navigation rail to see the favorites for the current category
-      appBar: CustomAppBar(controller: searchAdministrativeProcessController),
+      appBar: CustomAppBar(controller: administrativeProcessController),
       body: ClipRRect(
         borderRadius: const BorderRadius.only(
           topLeft: Radius.circular(20.0),
