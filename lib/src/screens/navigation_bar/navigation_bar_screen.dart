@@ -18,7 +18,6 @@ class NavigationBarScreen extends StatelessWidget {
           children: [
             DealsScreen(),
             HomePageScreen(),
-            FavoriteAdministrativesProcessesScreen(),
             SettingsScreen(),
           ],
         ),
@@ -33,9 +32,6 @@ class NavigationBarScreen extends StatelessWidget {
             items: [
               _bottomNavigationBarItem(icon: Icons.local_offer, label: 'deals'),
               _bottomNavigationBarItem(icon: Icons.home, label: 'home'),
-              _bottomNavigationBarItem(
-                  icon: Icons.favorite,
-                  label: 'favorites administratives processes'),
               _bottomNavigationBarItem(icon: Icons.settings, label: 'settings')
             ]),
       );

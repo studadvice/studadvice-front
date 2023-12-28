@@ -17,7 +17,7 @@ class FavoriteAdministrativeProcessListView extends StatelessWidget {
           appBar: AppBar(
             forceMaterialTransparency: true,
             title: Text(
-              'favorite_administrative_process'.tr,
+              'favorite_administrative_processes.title'.tr,
               style: const TextStyle(
                 color: AppColors.black,
                 fontSize: AppFontSizes.large20,

@@ -14,18 +14,6 @@ class CategoriesListView extends StatelessWidget {
       init: SearchCategoryController(),
       builder: (controller) {
         return Scaffold(
-          appBar: AppBar(
-            forceMaterialTransparency: true,
-            leading: IconButton(
-              icon: const Icon(Icons.favorite),
-              onPressed: () => Get.toNamed(
-                FavoriteAdministrativesProcessesScreen.navigatorId,
-              ),
-            ),
-            toolbarHeight: 40,
-            backgroundColor: AppColors.white,
-            automaticallyImplyLeading: false,
-          ),
           body: RefreshIndicator(
             onRefresh: () => Future.sync(
               () => controller.pagingController.refresh(),
@@ -33,15 +21,23 @@ class CategoriesListView extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Padding(
-                  padding: EdgeInsets.only(left: 15.0),
-                  child: Text(
-                    "Explorez les catégories",
-                    style: TextStyle(
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold,
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    const Text(
+                      "Explorez les catégories",
+                      style: TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
-                  ),
+                    IconButton(
+                      icon: const Icon(Icons.favorite),
+                      onPressed: () => Get.toNamed(
+                        FavoriteAdministrativesProcessesScreen.navigatorId,
+                      ),
+                    ),
+                  ],
                 ),
                 const SizedBox(
                   height: 20,

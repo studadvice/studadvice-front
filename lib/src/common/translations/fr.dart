@@ -190,5 +190,9 @@ class Fr {
         // ----------------
 
         // Administrative processes
+
+        // ----------------
+        // Favorite administrative processes
+        "favorite_administrative_processes.title": "Mes démarches favorites",
       };
 }

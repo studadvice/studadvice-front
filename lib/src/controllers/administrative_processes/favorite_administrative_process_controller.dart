@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:dio/dio.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 import 'package:stud_advice/src/controllers/search/custom_search_controller.dart';
@@ -23,30 +24,64 @@ class FavoriteAdministrativeProcessController extends CustomSearchController {
   void onInit() {
     super.onInit();
     _initFavorites();
+
     pagingController.addPageRequestListener((pageKey) {
-      fetchFavoritesPage(pageKey);
+      fetchPage(pageKey);
     });
   }
 
-  @override
-  Future<void> fetchFavoritesPage(int pageKey) async {
+  Future<AdministrativeProcesses> fetchAllPages(int pageKey, int pageSize,
+      TextEditingController textEditingController) async {
     try {
-      final newPage = await getAdministrativeProcesses(
-          number: pageKey, size: 5, query: textEditingController.text);
+      AdministrativeProcesses newPage = await getAdministrativeProcesses(
+          number: pageKey, size: pageSize, query: textEditingController.text);
 
-      final isLastPage = newPage.last;
+      int totalElements = newPage.totalElements;
+      int totalPages = newPage.totalPages;
+      debugPrint('totalElements: $totalElements');
+      debugPrint('totalPages: $totalPages');
+
+      List<AdministrativeProcessContent> allContent = newPage.content;
+
+      // Vérifier si d'autres pages sont disponibles
+      if (pageKey < totalPages) {
+        AdministrativeProcesses nextPageResult =
+            await fetchAllPages(pageKey + 1, pageSize, textEditingController);
+        allContent.addAll(nextPageResult.content);
+      }
+
+      return AdministrativeProcesses(
+        content: allContent,
+        pageable: newPage.pageable,
+        totalElements: newPage.totalElements,
+        totalPages: newPage.totalPages,
+        last: newPage.last,
+        size: newPage.size,
+        number: newPage.number,
+        sort: newPage.sort,
+        numberOfElements: newPage.numberOfElements,
+        first: newPage.first,
+        empty: newPage.empty,
+      );
+    } catch (error) {
+      debugPrint('Error fetching pages: $error');
+      rethrow;
+    }
+  }
+
+  @override
+  Future<void> fetchPage(int pageKey) async {
+    try {
+      await _initFavorites();
+      final AdministrativeProcesses newPage =
+          await fetchAllPages(pageKey, 100, textEditingController);
+
       final newItems = newPage.content;
 
-      final favoriteAdministrativeProcesses =
+      var favoriteAdministrativeProcesses =
           newItems.where((process) => isProcessFavorite(process.id)).toList();
 
-      if (isLastPage) {
-        pagingController.appendLastPage(favoriteAdministrativeProcesses);
-      } else {
-        final nextPageKey = pageKey + 1;
-        pagingController.appendPage(
-            favoriteAdministrativeProcesses, nextPageKey);
-      }
+      pagingController.appendLastPage(favoriteAdministrativeProcesses);
     } catch (error) {
       pagingController.error = error;
     }
@@ -100,13 +135,19 @@ class FavoriteAdministrativeProcessController extends CustomSearchController {
     String userId = userStorageController.getCurrentUserId();
 
     List<String> favoriteIds = await userStorageController.getFavorites(userId);
+    _favoritesAdministrativeProcessesId.clear();
 
     _favoritesAdministrativeProcessesId.addAll(favoriteIds);
+
+    debugPrint(
+        '_favoritesAdministrativeProcessesId: $_favoritesAdministrativeProcessesId');
   }
 
   bool isProcessFavorite(String administrativeProcessId) {
-    return _favoritesAdministrativeProcessesId
+    var res = _favoritesAdministrativeProcessesId
         .any((processId_) => processId_ == administrativeProcessId);
+    debugPrint('isProcessFavorite: $res, $administrativeProcessId');
+    return res;
   }
 
   @override

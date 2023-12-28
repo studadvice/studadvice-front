@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:dio/dio.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 import 'package:stud_advice/src/controllers/search/custom_search_controller.dart';
@@ -25,15 +26,15 @@ class AdministrativeProcessController extends CustomSearchController {
   void onInit() {
     super.onInit();
     pagingController.addPageRequestListener((pageKey) {
-      fetchFavoritesPage(pageKey);
+      fetchPage(pageKey);
     });
     _initFavorites();
   }
 
   @override
-  Future<void> fetchFavoritesPage(int pageKey) async {
+  Future<void> fetchPage(int pageKey) async {
     try {
-      final newPage = await getAdministrativeProcesses(
+      final AdministrativeProcesses newPage = await getAdministrativeProcesses(
           number: pageKey,
           size: 5,
           query: textEditingController.text,
@@ -41,6 +42,8 @@ class AdministrativeProcessController extends CustomSearchController {
 
       final isLastPage = newPage.last;
       final newItems = newPage.content;
+
+      debugPrint('newItems: $newItems');
       if (isLastPage) {
         pagingController.appendLastPage(newItems);
       } else {

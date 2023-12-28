@@ -29,7 +29,6 @@ class AppDependenciesBinding extends Bindings {
     Get.put(ThemeController(), permanent: true);
     Get.put(NavBarController(), permanent: true);
     Get.put(SettingsController(), permanent: true);
-    Get.put(FavoriteAdministrativeProcessController(), permanent: true);
     Get.put(SearchCategoryController(), permanent: true);
   }
 }

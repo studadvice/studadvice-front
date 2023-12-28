@@ -184,5 +184,8 @@ class En {
         "register_user_information_controller.error": "Connection error",
         "register_user_information_controller.registerWithEmailFailed":
             "An error occurred during registration",
+
+        // Favorite administrative processes
+        "favorite_administrative_processes.title": "My favorites processes",
       };
 }

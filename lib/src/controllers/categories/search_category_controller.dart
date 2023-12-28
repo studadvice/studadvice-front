@@ -17,12 +17,12 @@ class SearchCategoryController extends CustomSearchController {
   void onInit() {
     super.onInit();
     pagingController.addPageRequestListener((pageKey) {
-      fetchFavoritesPage(pageKey);
+      fetchPage(pageKey);
     });
   }
 
   @override
-  Future<void> fetchFavoritesPage(int pageKey) async {
+  Future<void> fetchPage(int pageKey) async {
     try {
       final newPage = await getCategoriesBySearch(
         number: pageKey,
