@@ -76,7 +76,7 @@ class DealsListView extends StatelessWidget {
                                   child: const Icon(
                                     Icons.add,
                                     color: AppColors.black,
-                                    size: 35,
+                                    size: 30,
                                   ),
                                 ),
                               ],
