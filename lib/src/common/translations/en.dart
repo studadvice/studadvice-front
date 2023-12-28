@@ -186,7 +186,6 @@ class En {
             "An error occurred during registration",
 
         // General
-        'search': "Start your research",
         'empty_result_message': "No results found. Try adjusting your filters.",
         'empty_result_title': "Oops, too specific!",
         'no_connection_indicator_message': "Check your internet connection and give it another go.",
@@ -201,6 +200,7 @@ class En {
 
         // Categories
         'categories.explore':"Explore categories",
+        'categories.search': "Search administrative processes",
 
         // Deals
         'deals.recommendation': "Our favorites !",
@@ -209,6 +209,8 @@ class En {
         'deals.description': "Description",
         'deals.start': "Start date",
         'deals.end': "End date",
-        'deals.url': "Go"
-  };
+        'deals.url': "Go",
+        'deals.search': "Search deals",
+
+};
 }

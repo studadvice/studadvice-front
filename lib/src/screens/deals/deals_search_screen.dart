@@ -12,7 +12,7 @@ class DealsSearchScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomSearchAppBar(controller: searchDealsController,hintText: 'search'.tr),
+      appBar: CustomSearchAppBar(controller: searchDealsController,hintText: 'deals.search'.tr),
       body: Center(
         child: Padding(
           padding: const EdgeInsets.all(10),

@@ -13,7 +13,7 @@ class HomePageScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: CustomSearchAppBar(controller: categoryController, hintText: 'search'.tr),
+        appBar: CustomSearchAppBar(controller: categoryController, hintText: 'categories.search'.tr),
         body: const Padding(
           padding: EdgeInsets.all(10),
           child: CategoriesListView(),

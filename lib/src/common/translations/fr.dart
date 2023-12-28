@@ -202,8 +202,10 @@ class Fr {
 
 
 
-  // Categories
+         // Categories
         'categories.explore': "Explorez les catégories",
+        'categories.search': "Recherchez des démarches administratives",
+
 
         // Deals
         'deals.recommendation': "Nos coups de coeur !",
@@ -212,8 +214,8 @@ class Fr {
         'deals.description': "Description",
         'deals.start': "Date de début",
         'deals.end': "Date de fin",
-        'deals.url': "Go"
+        'deals.url': "Go",
+        'deals.search': "Recherchez des bons plans",
 
-
-  };
+};
 }
