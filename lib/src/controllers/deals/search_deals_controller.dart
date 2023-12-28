@@ -22,6 +22,7 @@ class SearchDealsController extends CustomSearchController {
 
   @override
   Future<void> fetchPage(int pageKey) async {
+    print("fetch");
     try {
       final newPage = await getDealsBySearch(
         number: pageKey,

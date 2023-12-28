@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:stud_advice/src/controllers/deals/search_deals_controller.dart';
-import 'package:stud_advice/src/widgets/deals/deals_search_list_view.dart';
+import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
+import '../../controllers/deals/deals_controller.dart';
 import '../../models/stud_advice/deals.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import 'package:stud_advice/src/exceptions/no_result_indicator.dart';
@@ -9,10 +9,11 @@ import 'package:stud_advice/src/screens/deals/deals_search_screen.dart';
 import 'package:stud_advice/src/widgets/deals/deal_item.dart';
 import '../../../stud_advice.dart';
 import '../../widgets/deals/deal_item_slide.dart';
+import 'deals_search_list_view.dart';
 
 class DealsListView extends StatelessWidget {
   final PageController _controller = PageController();
-  final SearchDealsController searchDealsController = Get.find();
+  final DealsController dealsController = Get.find();
 
   DealsListView({
     super.key,
@@ -20,12 +21,12 @@ class DealsListView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-      return GetX<SearchDealsController>(
+      return GetX<DealsController>(
         builder: (controller) {
           if (controller.searchQuery.isEmpty) {
             return Scaffold(
               body: FutureBuilder<Deals>(
-                future: searchDealsController.getDealsBySearch(size: 3, number: 0),
+                future: dealsController.getDealsBySearch(size: 3, number: 0),
                 builder: (context, snapshot) {
                   if (snapshot.connectionState == ConnectionState.done) {
                     if (snapshot.hasData && snapshot.data!.content.isNotEmpty) {
@@ -81,7 +82,7 @@ class DealsListView extends StatelessWidget {
                               ],
                             ),
                             FutureBuilder<Deals>(
-                              future: searchDealsController.getRecommendedDeals(size: 4, number: 0),
+                              future: dealsController.getRecommendedDeals(size: 4, number: 0),
                               builder: (context, recommendedSnapshot) {
                                 if (recommendedSnapshot.connectionState ==
                                     ConnectionState.done) {
@@ -134,7 +135,50 @@ class DealsListView extends StatelessWidget {
               ),
             );
           }
-          return const DealsSearchListView();
+          return RefreshIndicator(
+            onRefresh: () => Future.sync(
+                  () => controller.pagingController.refresh(),
+            ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(left: 15.0),
+                  child: Text(
+                    "deals.explore".tr,
+                    style: const TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ),
+                const SizedBox(
+                  height: 20,
+                ),
+                Expanded(
+                  child: PagedGridView(
+                    pagingController: controller.pagingController,
+                    builderDelegate: PagedChildBuilderDelegate<DealContent>(
+                      itemBuilder: (context, dealItem, index) {
+                        return DealItem(deal: dealItem,);
+                      },
+                      firstPageErrorIndicatorBuilder: (context) => ErrorIndicator(
+                        error: controller.pagingController.error,
+                        onTryAgain: () => controller.pagingController.refresh(),
+                      ),
+                      noItemsFoundIndicatorBuilder: (context) =>
+                          EmptyListIndicator(),
+                    ),
+                    gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 2,
+                      crossAxisSpacing: 10,
+                      mainAxisSpacing: 10,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          );
       },
    );
   }

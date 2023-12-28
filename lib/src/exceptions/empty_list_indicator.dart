@@ -5,7 +5,7 @@ import 'exception_indicator.dart';
 class EmptyListIndicator extends StatelessWidget {
   @override
   Widget build(BuildContext context) => ExceptionIndicator(
-        title: 'Too much filtering',
+        title: 'empty_result_title'.tr,
         message: 'empty_result_message'.tr,
         assetName: "assets/images/common/raven_image.png",
       );
