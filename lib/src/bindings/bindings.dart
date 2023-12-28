@@ -1,6 +1,7 @@
 library bindings;
 
 export 'administrative_process/administrative_process_binding.dart';
+export 'administrative_process/favorite_administrative_process_binding.dart';
 export 'app/app_binding.dart';
 export 'category/category_binding.dart';
 export 'forgot_password/forgot_password_binding.dart';

@@ -2,7 +2,7 @@ import 'package:get/get.dart';
 import 'package:stud_advice/stud_advice.dart';
 
 class RoutesConfiguration {
-  static const String initialRoute = WelcomeScreen.navigatorId;
+  static const String initialRoute = InitTimeScreen.navigatorId;
 
   List<GetPage> configureRoutes() {
     return [
@@ -59,9 +59,14 @@ class RoutesConfiguration {
         binding: AdministrativeProcessBinding(),
       ),
       GetPage(
-        name: DashboardScreen.navigatorId,
-        page: () => DashboardScreen(),
-      )
+        name: NavigationBarScreen.navigatorId,
+        page: () => NavigationBarScreen(),
+      ),
+      GetPage(
+        name: FavoriteAdministrativesProcessesScreen.navigatorId,
+        page: () => FavoriteAdministrativesProcessesScreen(),
+        binding: FavoriteAdministrativeProcessBinding(),
+      ),
     ];
   }
 }

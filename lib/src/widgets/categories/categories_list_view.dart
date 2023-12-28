@@ -13,48 +13,64 @@ class CategoriesListView extends StatelessWidget {
     return GetBuilder<SearchCategoryController>(
       init: SearchCategoryController(),
       builder: (controller) {
-        return RefreshIndicator(
-          onRefresh: () => Future.sync(
-            () => controller.pagingController.refresh(),
+        return Scaffold(
+          appBar: AppBar(
+            forceMaterialTransparency: true,
+            leading: IconButton(
+              icon: const Icon(Icons.favorite),
+              onPressed: () => Get.toNamed(
+                FavoriteAdministrativesProcessesScreen.navigatorId,
+              ),
+            ),
+            toolbarHeight: 40,
+            backgroundColor: AppColors.white,
+            automaticallyImplyLeading: false,
           ),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const Padding(
-                padding: EdgeInsets.only(left: 15.0),
-                child: Text(
-                  "Explorez les catégories",
-                  style: TextStyle(
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-              ),
-              const SizedBox(
-                height: 20,
-              ),
-              Expanded(
-                child: PagedGridView(
-                  pagingController: controller.pagingController,
-                  builderDelegate: PagedChildBuilderDelegate<CategoryContent>(
-                    itemBuilder: (context, categoryItem, index) {
-                      return CategoryItem(category: categoryItem);
-                    },
-                    firstPageErrorIndicatorBuilder: (context) => ErrorIndicator(
-                      error: controller.pagingController.error,
-                      onTryAgain: () => controller.pagingController.refresh(),
+          body: RefreshIndicator(
+            onRefresh: () => Future.sync(
+              () => controller.pagingController.refresh(),
+            ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const Padding(
+                  padding: EdgeInsets.only(left: 15.0),
+                  child: Text(
+                    "Explorez les catégories",
+                    style: TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
                     ),
-                    noItemsFoundIndicatorBuilder: (context) =>
-                        EmptyListIndicator(),
-                  ),
-                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 2,
-                    crossAxisSpacing: 16,
-                    mainAxisSpacing: 16,
                   ),
                 ),
-              ),
-            ],
+                const SizedBox(
+                  height: 20,
+                ),
+                Expanded(
+                  child: PagedGridView(
+                    pagingController: controller.pagingController,
+                    builderDelegate: PagedChildBuilderDelegate<CategoryContent>(
+                      itemBuilder: (context, categoryItem, index) {
+                        return CategoryItem(category: categoryItem);
+                      },
+                      firstPageErrorIndicatorBuilder: (context) =>
+                          ErrorIndicator(
+                        error: controller.pagingController.error,
+                        onTryAgain: () => controller.pagingController.refresh(),
+                      ),
+                      noItemsFoundIndicatorBuilder: (context) =>
+                          EmptyListIndicator(),
+                    ),
+                    gridDelegate:
+                        const SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 2,
+                      crossAxisSpacing: 16,
+                      mainAxisSpacing: 16,
+                    ),
+                  ),
+                ),
+              ],
+            ),
           ),
         );
       },

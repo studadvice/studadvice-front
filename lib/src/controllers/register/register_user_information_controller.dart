@@ -82,7 +82,7 @@ class RegisterUserInformationController extends GetxController {
 
       if (registerSuccess) {
         LoadingSpinner.stop();
-        Get.offAllNamed(DashboardScreen.navigatorId, arguments: userData);
+        Get.offAllNamed(NavigationBarScreen.navigatorId, arguments: userData);
       }
     } catch (e) {
       LoadingSpinner.stop();

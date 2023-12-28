@@ -1,11 +1,10 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:flutter/scheduler.dart';
 import 'package:get/get.dart';
 import 'package:stud_advice/stud_advice.dart';
 
-class AdministrativeProcessListTile extends StatelessWidget {
+class FavoriteAdministrativeProcessListTile extends StatelessWidget {
   final String name;
   final String imageId;
   final String administrativeProcessId;
@@ -13,12 +12,13 @@ class AdministrativeProcessListTile extends StatelessWidget {
   final bool showProgressBar;
   final Color backgroundColor;
 
-  final AdministrativeProcessController _administrativeProcessController =
-      Get.find<AdministrativeProcessController>();
+  final FavoriteAdministrativeProcessController
+      _favoriteAdministrativeProcessController =
+      Get.find<FavoriteAdministrativeProcessController>();
   final FileController fileController = Get.find();
   final RxBool isAnimated = true.obs;
 
-  AdministrativeProcessListTile({
+  FavoriteAdministrativeProcessListTile({
     Key? key,
     required this.administrativeProcessId,
     required this.imageId,
@@ -67,32 +67,32 @@ class AdministrativeProcessListTile extends StatelessWidget {
               ),
               child: ListTile(
                 contentPadding: const EdgeInsets.all(8.0),
-                leading: Container(
-                    padding: const EdgeInsets.all(5.0),
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10.0),
-                      border: Border.all(color: AppColors.grey),
-                    ),
-                    child: FutureBuilder<String?>(
-                      future: fileController.downloadFile(imageId),
-                      builder: (context, snapshot) {
-                        if (snapshot.connectionState == ConnectionState.done &&
-                            snapshot.data != null) {
-                          return Image.file(
-                            File(snapshot.data!),
-                            width: 50,
-                            height: 50,
-                          );
-                        } else if (snapshot.hasError) {
-                          return const Icon(
-                            Icons.error_outline_sharp,
-                            size: 50.0,
-                          );
-                        } else {
-                          return const Icon(Icons.image);
-                        }
-                      },
-                    )),
+                leading: ClipRRect(
+                  borderRadius: BorderRadius.circular(15.0),
+                  child: Container(
+                      padding: const EdgeInsets.all(5.0),
+                      child: FutureBuilder<String?>(
+                        future: fileController.downloadFile(imageId),
+                        builder: (context, snapshot) {
+                          if (snapshot.connectionState ==
+                                  ConnectionState.done &&
+                              snapshot.data != null) {
+                            return Image.file(
+                              File(snapshot.data!),
+                              width: 50,
+                              height: 50,
+                            );
+                          } else if (snapshot.hasError) {
+                            return const Icon(
+                              Icons.error_outline_sharp,
+                              size: 50.0,
+                            );
+                          } else {
+                            return const Icon(Icons.image);
+                          }
+                        },
+                      )),
+                ),
                 title: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -131,7 +131,7 @@ class AdministrativeProcessListTile extends StatelessWidget {
                 trailing: Obx(() {
                   return GestureDetector(
                     onTap: () {
-                      _administrativeProcessController
+                      _favoriteAdministrativeProcessController
                           .toggleFavoriteState(administrativeProcessId);
                     },
                     child: Container(
@@ -142,7 +142,7 @@ class AdministrativeProcessListTile extends StatelessWidget {
                       ),
                       child: Icon(
                         Icons.favorite,
-                        color: _administrativeProcessController
+                        color: _favoriteAdministrativeProcessController
                                 .isProcessFavorite(administrativeProcessId)
                             ? AppColors.red
                             : AppColors.black,
@@ -157,12 +157,5 @@ class AdministrativeProcessListTile extends StatelessWidget {
         ),
       ),
     );
-  }
-}
-
-class TestVSync extends TickerProvider {
-  @override
-  Ticker createTicker(TickerCallback onTick) {
-    return Ticker(onTick);
   }
 }

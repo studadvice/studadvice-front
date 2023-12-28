@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:stud_advice/src/widgets/administrative_process/administrative_process_list_view.dart';
-import 'package:stud_advice/src/widgets/common/app_bar/custom_app_bar.dart';
 import 'package:stud_advice/stud_advice.dart';
 
 class AdministrativesProcessesScreen extends StatelessWidget {
@@ -28,7 +27,6 @@ class AdministrativesProcessesScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.white,
-      // TODO add a navigation rail to see the favorites for the current category
       appBar: CustomAppBar(controller: administrativeProcessController),
       body: ClipRRect(
         borderRadius: const BorderRadius.only(

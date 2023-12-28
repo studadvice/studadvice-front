@@ -154,7 +154,7 @@ class LoginScreen extends StatelessWidget {
           borderColor: AppColors.black26,
           onTap: () async {
             if (await _socialSignInController.loginWithGoogleAccount()) {
-              Get.offAllNamed(DashboardScreen.navigatorId);
+              Get.offAllNamed(NavigationBarScreen.navigatorId);
             }
           },
           borderRadius: 16,
@@ -169,7 +169,7 @@ class LoginScreen extends StatelessWidget {
           iconColor: AppColors.blueAccent,
           onTap: () async {
             if (await _socialSignInController.loginWithFacebookAccount()) {
-              Get.offAllNamed(DashboardScreen.navigatorId);
+              Get.offAllNamed(NavigationBarScreen.navigatorId);
             }
           },
           borderRadius: 16,
@@ -185,7 +185,7 @@ class LoginScreen extends StatelessWidget {
             borderColor: AppColors.black26,
             onTap: () async {
               if (await _socialSignInController.loginWithAppleAccount()) {
-                Get.offAllNamed(DashboardScreen.navigatorId);
+                Get.offAllNamed(NavigationBarScreen.navigatorId);
               }
             },
             borderRadius: 16,

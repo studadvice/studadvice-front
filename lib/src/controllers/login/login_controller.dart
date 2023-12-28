@@ -42,7 +42,7 @@ class LoginController extends GetxController {
         // Here we use the Get.offAll() method to remove all the previous screens
         // from the stack.
         // So the user can't go back to the login screen.
-        Get.offAllNamed(DashboardScreen.navigatorId);
+        Get.offAllNamed(NavigationBarScreen.navigatorId);
       }
     } on FirebaseAuthException catch (e) {
       LoadingSpinner.stop();
