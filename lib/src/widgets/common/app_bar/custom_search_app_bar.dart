@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:stud_advice/src/common/chore.dart';
 import 'package:stud_advice/src/controllers/search/custom_search_controller.dart';
 
 import '../search/custom_search_bar.dart';
@@ -23,21 +24,16 @@ class CustomSearchAppBar extends StatelessWidget implements PreferredSizeWidget 
           color: Colors.white
         ),
       ),
+        iconTheme: const IconThemeData(
+          color: Colors.white,
+        ),
       flexibleSpace: Container(
         decoration: const BoxDecoration(
           borderRadius: BorderRadius.only(
             bottomLeft: Radius.circular(20),
             bottomRight: Radius.circular(20),
           ),
-          gradient: LinearGradient(
-            begin: Alignment.topLeft,
-            end: Alignment.bottomRight,
-            stops: [0.1, 0.5],
-            colors: [
-              Color(0xff886ff2),
-              Color(0xff6849ef),
-            ],
-          ),
+          color: AppColors.primaryColor
         ),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.end,
