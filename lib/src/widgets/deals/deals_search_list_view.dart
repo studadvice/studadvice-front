@@ -6,15 +6,14 @@ import 'package:stud_advice/src/models/stud_advice/deals.dart';
 import 'package:stud_advice/src/widgets/deals/deal_item.dart';
 import 'package:stud_advice/stud_advice.dart';
 
-class DealsListView extends StatelessWidget {
-  const DealsListView({
+class DealsSearchListView extends StatelessWidget {
+  const DealsSearchListView({
     super.key,
   });
 
   @override
   Widget build(BuildContext context) {
     return GetBuilder<SearchDealsController>(
-      init: SearchDealsController(),
       builder: (controller) {
         return RefreshIndicator(
           onRefresh: () => Future.sync(
