@@ -1,9 +1,6 @@
 import 'package:get/get.dart';
-import 'package:stud_advice/src/bindings/dashboard/dashboard_binding.dart';
 import 'package:stud_advice/src/bindings/deals/deals_binding.dart';
 import 'package:stud_advice/src/screens/deals/deal_detail_screen.dart';
-import 'package:stud_advice/src/screens/deals/deals_screen.dart';
-import 'package:stud_advice/src/screens/deals/deals_screen.dart';
 import 'package:stud_advice/src/screens/deals/deals_search_screen.dart';
 import 'package:stud_advice/stud_advice.dart';
 
@@ -63,10 +60,6 @@ class RoutesConfiguration {
         binding: AdministrativeProcessBinding(),
       ),
       GetPage(
-        name: DashboardScreen.navigatorId,
-        page: () => DashboardScreen(),
-      ),
-      GetPage(
         name: DealsSearchScreen.navigatorId,
         page: () => DealsSearchScreen(),
         binding : DealsBinding(),
@@ -74,9 +67,6 @@ class RoutesConfiguration {
       GetPage(
         name: DealDetailScreen.navigatorId,
         page: () => DealDetailScreen(),
-      ),
-        name: NavigationBarScreen.navigatorId,
-        page: () => NavigationBarScreen(),
       ),
       GetPage(
         name: FavoriteAdministrativesProcessesScreen.navigatorId,
