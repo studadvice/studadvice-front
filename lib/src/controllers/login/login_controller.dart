@@ -4,8 +4,6 @@ import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:stud_advice/stud_advice.dart';
 
-import '../../screens/dashboard/dashboard_screen.dart';
-
 class LoginController extends GetxController {
   final AuthenticationController _authenticationController = Get.find();
 

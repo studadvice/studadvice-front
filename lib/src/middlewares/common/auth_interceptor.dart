@@ -1,7 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-
-import '../../../stud_advice.dart';
+import 'package:stud_advice/stud_advice.dart';
 
 class AuthInterceptor extends Interceptor {
   var firebaseAuthInstance = AppDependenciesBinding.firebaseAuthInstance;
@@ -17,7 +16,8 @@ class AuthInterceptor extends Interceptor {
   }
 
   @override
-  Future onRequest(RequestOptions options, RequestInterceptorHandler handler) async {
+  Future onRequest(
+      RequestOptions options, RequestInterceptorHandler handler) async {
     final String? token = await getIdToken();
 
     if (token != null) {

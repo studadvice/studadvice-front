@@ -4,5 +4,5 @@ import 'package:get/get.dart';
 abstract class CustomSearchController extends GetxController {
   final TextEditingController textEditingController = TextEditingController();
 
-  Future<void> fetchPage(int pageKey);
+  Future<void> fetchFavoritesPage(int pageKey);
 }

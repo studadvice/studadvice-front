@@ -6,11 +6,7 @@ import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 import 'package:stud_advice/src/controllers/search/custom_search_controller.dart';
 import 'package:stud_advice/stud_advice.dart';
 
-import '../../models/stud_advice/administrative_processes.dart';
-
 class AdministrativeProcessController extends CustomSearchController {
-  final RxList<AdministrativeProcessContent> administrativeProcesses =
-      <AdministrativeProcessContent>[].obs;
   final RxList<String> _favoritesAdministrativeProcessesId = <String>[].obs;
 
   UserStorageController userStorageController = Get.find();
@@ -29,13 +25,13 @@ class AdministrativeProcessController extends CustomSearchController {
   void onInit() {
     super.onInit();
     pagingController.addPageRequestListener((pageKey) {
-      fetchPage(pageKey);
+      fetchFavoritesPage(pageKey);
     });
     _initFavorites();
   }
 
   @override
-  Future<void> fetchPage(int pageKey) async {
+  Future<void> fetchFavoritesPage(int pageKey) async {
     try {
       final newPage = await getAdministrativeProcesses(
           number: pageKey,

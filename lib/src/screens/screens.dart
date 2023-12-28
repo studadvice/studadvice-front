@@ -6,6 +6,7 @@ export 'home/home_page_screen.dart';
 export 'init_time/init_time_screen.dart';
 export 'legal_terms/legal_terms_screen.dart';
 export 'login/login_screen.dart';
+export 'navigation_bar/navigation_bar_screen.dart';
 export 'register/register_options_screen.dart';
 export 'register/register_user_information_screen.dart';
 export 'register/register_with_email_screen.dart';

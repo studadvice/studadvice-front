@@ -3,9 +3,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:percent_indicator/percent_indicator.dart';
-
-import '../../../stud_advice.dart';
-import '../../models/stud_advice/categories.dart';
+import 'package:stud_advice/stud_advice.dart';
 
 class CategoryItem extends StatelessWidget {
   CategoryItem({

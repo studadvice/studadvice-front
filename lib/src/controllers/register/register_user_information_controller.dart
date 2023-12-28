@@ -8,8 +8,6 @@ import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:stud_advice/stud_advice.dart';
 
-import '../../screens/dashboard/dashboard_screen.dart';
-
 class RegisterUserInformationController extends GetxController {
   final Dio _dio = Get.find();
   final UserStorageController _userStorageController = Get.find();
