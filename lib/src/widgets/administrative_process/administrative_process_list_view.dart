@@ -19,7 +19,6 @@ class AdministrativeProcessListView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetBuilder<SearchAdministrativeProcessController>(
-      init: SearchAdministrativeProcessController(),
       builder: (controller) {
         controller.categoryId = categoryId;
         return RefreshIndicator(

@@ -23,7 +23,7 @@ class CustomSearchBar extends StatelessWidget {
     if (available) {
       _speech.listen(
         onResult: (val) {
-          controller.textEditingController.text = val.recognizedWords;
+          controller.searchQuery.value = val.recognizedWords;
           controller.update();
           _speech.stop();
         },
@@ -33,11 +33,12 @@ class CustomSearchBar extends StatelessWidget {
     }
   }
 
+
   @override
   Widget build(BuildContext context) {
     return ClassicTextField(
       onChanged: (value) {
-        controller.update();
+        controller.change();
       },
       controller: controller.textEditingController,
       hintText: hintText,

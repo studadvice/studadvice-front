@@ -32,7 +32,7 @@ class SearchAdministrativeProcessController extends CustomSearchController {
       final newPage = await getAdministrativeProcesses(
         number: pageKey,
         size: 5,
-        query: textEditingController.text,
+        query: searchQuery.value,
         categoryId: categoryId
       );
 

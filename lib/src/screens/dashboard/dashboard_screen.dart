@@ -5,6 +5,8 @@ import 'package:stud_advice/src/controllers/common/dashboard_controller.dart';
 import 'package:stud_advice/src/screens/deals/deals_screen.dart';
 import 'package:stud_advice/src/screens/screens.dart';
 
+import '../deals/deals_screen.dart';
+
 class DashboardScreen extends StatelessWidget {
   static const navigatorId = '/dashboard_screen';
   final DashboardController dashboardController =

@@ -4,6 +4,8 @@ import 'package:stud_advice/src/controllers/controllers.dart';
 class SettingsBinding implements Bindings {
   @override
   void dependencies() {
-    Get.put<SettingsController>(SettingsController());
+    Get.lazyPut<SettingsController>(
+          () => SettingsController(),
+    );
   }
 }

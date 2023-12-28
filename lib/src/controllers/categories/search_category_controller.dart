@@ -26,7 +26,7 @@ class SearchCategoryController extends CustomSearchController {
       final newPage = await getCategoriesBySearch(
         number: pageKey,
         size: 5,
-        query: textEditingController.text,
+        query: searchQuery.value,
       );
 
       final isLastPage = newPage.last;

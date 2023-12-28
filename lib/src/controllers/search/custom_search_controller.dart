@@ -1,8 +1,15 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 
-abstract class CustomSearchController extends GetxController {
+class CustomSearchController extends GetxController {
+  final Rx<String> searchQuery = "".obs;
   final TextEditingController textEditingController = TextEditingController();
 
-  Future<void> fetchPage(int pageKey);
+  void change() {
+    searchQuery.value = textEditingController.text;
+    update();
+  }
+
+  Future<void> fetchPage(int pageKey) async {
+  }
 }

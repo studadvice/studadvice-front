@@ -13,7 +13,6 @@ class CategoriesListView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetBuilder<SearchCategoryController>(
-      init: SearchCategoryController(),
       builder: (controller) {
         return RefreshIndicator(
           onRefresh: () => Future.sync(
