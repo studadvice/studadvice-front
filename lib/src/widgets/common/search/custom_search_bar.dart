@@ -38,7 +38,7 @@ class CustomSearchBar extends StatelessWidget {
         controller.update();
       },
       controller: controller.textEditingController,
-      hintText: 'Search an administrative process',
+      hintText: 'Rechercher une démarche administrative',
       backgroundColor: Colors.transparent,
       borderColor: Colors.black,
       focusedBorderColor: AppColors.secondaryColor,
@@ -59,7 +59,7 @@ class CustomSearchBar extends StatelessWidget {
           ),
         ),
         floatingLabelBehavior: FloatingLabelBehavior.never,
-        labelText: "Search an administrative process",
+        labelText: 'Rechercher une démarche administrative',
         labelStyle: const TextStyle(color: Colors.grey),
         filled: true,
         fillColor: Colors.white,

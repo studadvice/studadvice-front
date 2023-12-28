@@ -186,5 +186,13 @@ class Fr {
         "register_user_information_controller.error": "Erreur de connexion",
         "register_user_information_controller.registerWithEmailFailed":
             "Une erreur s'est produite lors de l'inscription",
+
+        // ----------------
+
+        // Administrative processes
+
+        // ----------------
+        // Favorite administrative processes
+        "favorite_administrative_processes.title": "Mes démarches favorites",
       };
 }

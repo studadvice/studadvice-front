@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:stud_advice/src/controllers/search/custom_search_controller.dart';
-
-import '../search/custom_search_bar.dart';
+import 'package:stud_advice/stud_advice.dart';
 
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   final CustomSearchController controller;

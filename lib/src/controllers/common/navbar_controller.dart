@@ -1,8 +1,8 @@
 import 'package:get/get.dart';
 
-class DashboardController extends GetxController{
+class NavBarController extends GetxController {
   var tabIndex = 1;
-  void changeTabIndex(int index){
+  void changeTabIndex(int index) {
     tabIndex = index;
     update();
   }
