@@ -25,12 +25,10 @@ class WelcomeScreen extends StatelessWidget {
               strokeWidth: 5,
             ),
           );
-        } else {
+        } else if (snapshot.hasData) {
           // The user is logged in.
-          if (snapshot.hasData) {
-            return HomePageScreen();
-          }
-
+          return NavigationBarScreen();
+        } else {
           // The user is NOT logged in.
           return InitTimeScreen();
         }

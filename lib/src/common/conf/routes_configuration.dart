@@ -2,7 +2,7 @@ import 'package:get/get.dart';
 import 'package:stud_advice/stud_advice.dart';
 
 class RoutesConfiguration {
-  static const String initialRoute = InitTimeScreen.navigatorId;
+  static const String initialRoute = WelcomeScreen.navigatorId;
 
   List<GetPage> configureRoutes() {
     return [
