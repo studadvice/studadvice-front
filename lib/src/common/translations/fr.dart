@@ -218,4 +218,13 @@ class Fr {
         'deals.search': "Recherchez des bons plans",
 
 };
+
+        // ----------------
+
+        // Administrative processes
+
+        // ----------------
+        // Favorite administrative processes
+        "favorite_administrative_processes.title": "Mes démarches favorites",
+      };
 }

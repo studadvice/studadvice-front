@@ -213,4 +213,8 @@ class En {
         'deals.search': "Search deals",
 
 };
+
+        // Favorite administrative processes
+        "favorite_administrative_processes.title": "My favorites processes",
+      };
 }
