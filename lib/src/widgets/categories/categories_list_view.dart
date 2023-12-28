@@ -21,15 +21,23 @@ class CategoriesListView extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Padding(
-                padding: const EdgeInsets.only(left: 15.0),
-                child: Text(
-                  'categories.explore'.tr,
-                  style: const TextStyle(
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  const Text(
+                    "Explorez les catégories",
+                    style: TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
-                ),
+                  IconButton(
+                    icon: const Icon(Icons.favorite),
+                    onPressed: () => Get.toNamed(
+                      FavoriteAdministrativesProcessesScreen.navigatorId,
+                    ),
+                  ),
+                ],
               ),
               const SizedBox(
                 height: 20,
