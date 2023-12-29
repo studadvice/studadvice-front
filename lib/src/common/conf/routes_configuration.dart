@@ -1,13 +1,11 @@
 import 'package:get/get.dart';
-import 'package:stud_advice/src/bindings/settings/support_binding.dart';
-import 'package:stud_advice/src/screens/settings/support_screen.dart';
+import 'package:stud_advice/src/bindings/deals/deals_binding.dart';
+import 'package:stud_advice/src/screens/deals/deal_detail_screen.dart';
+import 'package:stud_advice/src/screens/deals/deals_search_screen.dart';
 import 'package:stud_advice/stud_advice.dart';
-import '../../bindings/administrative_process/administrative_process_binding.dart';
-import '../../bindings/settings/settings_binding.dart';
-import '../../screens/dashboard/dashboard_screen.dart';
 
 class RoutesConfiguration {
-  static const String initialRoute = SettingsScreen.navigatorId;
+  static const String initialRoute = WelcomeScreen.navigatorId;
 
   List<GetPage> configureRoutes() {
     return [
@@ -22,7 +20,6 @@ class RoutesConfiguration {
       GetPage(
         name: HomePageScreen.navigatorId,
         page: () => HomePageScreen(),
-        binding: CategoryBinding(),
       ),
       GetPage(
         name: LoginScreen.navigatorId,
@@ -51,12 +48,11 @@ class RoutesConfiguration {
       GetPage(
         name: SettingsScreen.navigatorId,
         page: () => SettingsScreen(),
-        binding: SettingsBinding(),
       ),
       GetPage(
-          name: ForgotPasswordScreen.navigatorId,
-          page: () => ForgotPasswordScreen(),
-          binding: ForgotPasswordBinding(),
+        name: ForgotPasswordScreen.navigatorId,
+        page: () => ForgotPasswordScreen(),
+        binding: ForgotPasswordBinding(),
       ),
       GetPage(
         name: AdministrativesProcessesScreen.navigatorId,
@@ -64,6 +60,22 @@ class RoutesConfiguration {
         binding: AdministrativeProcessBinding(),
       ),
       GetPage(
+        name: DealsSearchScreen.navigatorId,
+        page: () => DealsSearchScreen(),
+        binding: DealsBinding(),
+      ),
+      GetPage(
+        name: DealDetailScreen.navigatorId,
+        page: () => DealDetailScreen(),
+      ),
+      GetPage(
+          name: NavigationBarScreen.navigatorId,
+          page: () => NavigationBarScreen()),
+      GetPage(
+        name: FavoriteAdministrativesProcessesScreen.navigatorId,
+        page: () => FavoriteAdministrativesProcessesScreen(),
+        binding: FavoriteAdministrativeProcessBinding(),
+      ),
         name: DashboardScreen.navigatorId,
         page: () => DashboardScreen(),
       ),

@@ -94,7 +94,6 @@ class SettingsScreen extends StatelessWidget {
           //selectedItem: i18n.getCurrentLocale,
           onChanged: (fontSize) {
             // TODO : checker l'async
-            debugPrint('accessibility changed');
             return null;
           },
           validator: (locale) {
@@ -242,9 +241,7 @@ class SettingsScreen extends StatelessWidget {
         ),
         title: 'settings.account'.tr,
         subtitle: "Tap to change your data",
-        onTap: () {
-          debugPrint("Account :OK");
-        },
+        onTap: () {},
       ),
     );
   }

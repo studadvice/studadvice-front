@@ -97,11 +97,21 @@ class AdministrativeProcessContent {
     name = json['name'];
     description = json['description'];
     imageId = json['imageId'];
-    educations = json['educations'].cast<String>();
-    minAge = json['minAge'];
-    maxAge = json['maxAge'];
-    nationalities = json['nationalities'].cast<String>();
-    universities = json['universities'].cast<String>();
+    if (educations != null) {
+      educations = json['educations'].cast<String>();
+    }
+    if (minAge != null) {
+      minAge = json['minAge'];
+    }
+    if (maxAge != null) {
+      maxAge = json['maxAge'];
+    }
+    if (nationalities != null) {
+      nationalities = json['nationalities'].cast<String>();
+    }
+    if (universities != null) {
+      universities = json['universities'].cast<String>();
+    }
     if (json['steps'] != null) {
       steps = <Step>[];
       json['steps'].forEach((v) {

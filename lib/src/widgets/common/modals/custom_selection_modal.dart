@@ -2,10 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:stud_advice/stud_advice.dart';
 
-
 class CustomSelectionModal extends StatelessWidget {
   final List<String> itemsList;
-  final String defaultChoice;
   final String hintText;
   final String labelText;
   final Function(String) onItemSelected;
@@ -16,7 +14,6 @@ class CustomSelectionModal extends StatelessWidget {
 
   CustomSelectionModal({
     required this.itemsList,
-    required this.defaultChoice,
     required this.onItemSelected,
     required this.hintText,
     required this.labelText,

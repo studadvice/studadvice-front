@@ -5,13 +5,25 @@ import 'package:get/get.dart';
 import 'package:stud_advice/stud_advice.dart';
 
 class UserStorageController extends GetxController {
+  var _firebaseAuthInstance = AppDependenciesBinding.firebaseAuthInstance;
+  var _firebaseFirestoreInstance =
+      AppDependenciesBinding.firebaseFirestoreInstance;
+
+  String getCurrentUserId() {
+    User? user = FirebaseAuth.instance.currentUser;
+    if (user != null) {
+      return user.uid;
+    } else {
+      return "";
+    }
+  }
+
   Future<bool> saveUserData(UserData userData) async {
-    var firebaseAuthInstance = AppDependenciesBinding.firebaseAuthInstance;
     var firebaseFirestoreInstance =
         AppDependenciesBinding.firebaseFirestoreInstance;
 
     // Get the current authenticated user
-    User? user = firebaseAuthInstance.currentUser;
+    User? user = _firebaseAuthInstance.currentUser;
 
     if (user != null) {
       CollectionReference users = firebaseFirestoreInstance.collection('users');
@@ -36,6 +48,60 @@ class UserStorageController extends GetxController {
           style: const TextStyle(color: AppColors.white),
         ),
       );
+      return false;
+    }
+  }
+
+  Future<List<String>> getFavorites(String userId) async {
+    try {
+      CollectionReference users =
+          _firebaseFirestoreInstance.collection('users');
+
+      DocumentSnapshot userSnapshot = await users.doc(userId).get();
+
+      if (userSnapshot.exists) {
+        List<dynamic>? favorites = userSnapshot.get('favoriteProcesses');
+
+        return favorites?.cast<String>() ?? [];
+      } else {
+        return [];
+      }
+    } catch (error) {
+      return [];
+    }
+  }
+
+  Future<bool> addAdministrativeProcessToFavorites(
+      String userId, String administrativeProcessId) async {
+    try {
+      CollectionReference users =
+          _firebaseFirestoreInstance.collection('users');
+
+      await users.doc(userId).update({
+        'favoriteProcesses': FieldValue.arrayUnion([administrativeProcessId]),
+      });
+
+      return true;
+    } catch (error) {
+      debugPrint("Error adding to favorites: $error");
+      return false;
+    }
+  }
+
+  Future<bool> removeAdministrativeProcessFromFavorites(
+      String userId, String administrativeProcessId) async {
+    try {
+      CollectionReference users =
+          _firebaseFirestoreInstance.collection('users');
+
+      DocumentReference userDocument = users.doc(userId);
+
+      await userDocument.update({
+        'favoriteProcesses': FieldValue.arrayRemove([administrativeProcessId]),
+      });
+
+      return true;
+    } catch (error) {
       return false;
     }
   }

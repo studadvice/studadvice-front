@@ -1,18 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
+import 'package:stud_advice/src/controllers/deals/search_deals_controller.dart';
+import 'package:stud_advice/src/models/stud_advice/deals.dart';
+import 'package:stud_advice/src/widgets/deals/deal_item.dart';
 import 'package:stud_advice/stud_advice.dart';
 
-import '../../models/stud_advice/categories.dart';
-
-class CategoriesListView extends StatelessWidget {
-  const CategoriesListView({
+class DealsSearchListView extends StatelessWidget {
+  const DealsSearchListView({
     super.key,
   });
 
   @override
   Widget build(BuildContext context) {
-    return GetBuilder<SearchCategoryController>(
+    return GetBuilder<SearchDealsController>(
       builder: (controller) {
         return RefreshIndicator(
           onRefresh: () => Future.sync(
@@ -21,23 +22,15 @@ class CategoriesListView extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  const Text(
-                    "Explorez les catégories",
-                    style: TextStyle(
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold,
-                    ),
+                Padding(
+                padding: const EdgeInsets.only(left: 15.0),
+                child: Text(
+                  "deals.explore".tr,
+                  style: const TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
                   ),
-                  IconButton(
-                    icon: const Icon(Icons.favorite),
-                    onPressed: () => Get.toNamed(
-                      FavoriteAdministrativesProcessesScreen.navigatorId,
-                    ),
-                  ),
-                ],
+                ),
               ),
               const SizedBox(
                 height: 20,
@@ -45,9 +38,9 @@ class CategoriesListView extends StatelessWidget {
               Expanded(
                 child: PagedGridView(
                   pagingController: controller.pagingController,
-                  builderDelegate: PagedChildBuilderDelegate<CategoryContent>(
-                    itemBuilder: (context, categoryItem, index) {
-                      return CategoryItem(category: categoryItem);
+                  builderDelegate: PagedChildBuilderDelegate<DealContent>(
+                    itemBuilder: (context, dealItem, index) {
+                      return DealItem(deal: dealItem,);
                     },
                     firstPageErrorIndicatorBuilder: (context) => ErrorIndicator(
                       error: controller.pagingController.error,
@@ -58,8 +51,8 @@ class CategoriesListView extends StatelessWidget {
                   ),
                   gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                     crossAxisCount: 2,
-                    crossAxisSpacing: 16,
-                    mainAxisSpacing: 16,
+                    crossAxisSpacing: 10,
+                    mainAxisSpacing: 10,
                   ),
                 ),
               ),
