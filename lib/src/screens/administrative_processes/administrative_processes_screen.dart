@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:stud_advice/src/widgets/administrative_process/administrative_process_list_view.dart';
 import 'package:stud_advice/stud_advice.dart';
+import '../../widgets/common/app_bar/custom_search_app_bar.dart';
 
 class AdministrativesProcessesScreen extends StatelessWidget {
   static const String navigatorId = '/administratives_processes_screen';
@@ -27,7 +27,7 @@ class AdministrativesProcessesScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.white,
-      appBar: CustomAppBar(controller: administrativeProcessController),
+      appBar: CustomSearchAppBar(controller: administrativeProcessController, hintText: 'categories.search'.tr),
       body: ClipRRect(
         borderRadius: const BorderRadius.only(
           topLeft: Radius.circular(20.0),

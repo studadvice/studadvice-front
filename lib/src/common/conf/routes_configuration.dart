@@ -1,4 +1,7 @@
 import 'package:get/get.dart';
+import 'package:stud_advice/src/bindings/deals/deals_binding.dart';
+import 'package:stud_advice/src/screens/deals/deal_detail_screen.dart';
+import 'package:stud_advice/src/screens/deals/deals_search_screen.dart';
 import 'package:stud_advice/stud_advice.dart';
 
 class RoutesConfiguration {
@@ -17,7 +20,6 @@ class RoutesConfiguration {
       GetPage(
         name: HomePageScreen.navigatorId,
         page: () => HomePageScreen(),
-        binding: CategoryBinding(),
       ),
       GetPage(
         name: LoginScreen.navigatorId,
@@ -46,7 +48,6 @@ class RoutesConfiguration {
       GetPage(
         name: SettingsScreen.navigatorId,
         page: () => SettingsScreen(),
-        binding: SettingsBinding(),
       ),
       GetPage(
         name: ForgotPasswordScreen.navigatorId,
@@ -59,8 +60,13 @@ class RoutesConfiguration {
         binding: AdministrativeProcessBinding(),
       ),
       GetPage(
-        name: NavigationBarScreen.navigatorId,
-        page: () => NavigationBarScreen(),
+        name: DealsSearchScreen.navigatorId,
+        page: () => DealsSearchScreen(),
+        binding : DealsBinding(),
+      ),
+      GetPage(
+        name: DealDetailScreen.navigatorId,
+        page: () => DealDetailScreen(),
       ),
       GetPage(
         name: FavoriteAdministrativesProcessesScreen.navigatorId,

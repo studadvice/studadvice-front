@@ -187,12 +187,38 @@ class Fr {
         "register_user_information_controller.registerWithEmailFailed":
             "Une erreur s'est produite lors de l'inscription",
 
-        // ----------------
+        // General
+        'search': "Commencez votre recherche",
+        'empty_result_message': "Aucun résultat trouvé. Essayez d'ajuster vos filtres.",
+        'empty_result_title': "Oups, trop spécifique !",
+        'no_connection_indicator_message': "Vérifiez votre connexion Internet et réessayez.",
+        'no_connection_indicator_title': "Connexion perdue",
+        'general_error_title': "Quelque chose s'est mal passé",
+        'general_error_message': "Une erreur inattendue s'est produite. Veuillez réessayer plus tard.",
+        'image_error': "Erreur de chargement de l'image. Veuillez actualiser.",
+        'try_again': "Essayez à nouveau !",
+        'no_result_message': "Rien ici pour le moment. Revenez plus tard.",
+        'no_result_title': "Pas encore de résultats",
+
+
+
+         // Categories
+        'categories.explore': "Explorez les catégories",
+        'categories.search': "Recherchez des démarches administratives",
+
+
+        // Deals
+        'deals.recommendation': "Nos coups de coeur !",
+        'deals.empty': "Pas de bons plans !",
+        'deals.explore': "Explorez les bons plans",
+        'deals.description': "Description",
+        'deals.start': "Date de début",
+        'deals.end': "Date de fin",
+        'deals.url': "Go",
+        'deals.search': "Recherchez des bons plans",
 
         // Administrative processes
-
-        // ----------------
-        // Favorite administrative processes
         "favorite_administrative_processes.title": "Mes démarches favorites",
-      };
+
+};
 }

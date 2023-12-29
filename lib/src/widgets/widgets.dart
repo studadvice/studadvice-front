@@ -6,7 +6,6 @@ export 'administrative_process/favorite_administrative_process_list_view.dart';
 export 'administrative_process/favorite_administrative_process_tile.dart';
 export 'categories/categories_list_view.dart';
 export 'categories/category_item.dart';
-export 'common/app_bar/custom_app_bar.dart';
 export 'common/buttons/custom_button.dart';
 export 'common/buttons/login_social_button.dart';
 export 'common/buttons/social_button.dart';

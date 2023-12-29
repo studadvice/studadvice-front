@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:stud_advice/src/common/chore.dart';
 
 class ExceptionIndicator extends StatelessWidget {
@@ -51,9 +52,9 @@ class ExceptionIndicator extends StatelessWidget {
                       Icons.refresh,
                       color: Colors.white,
                     ),
-                    label: const Text(
-                      'Try Again',
-                      style: TextStyle(
+                    label: Text(
+                      'try_again'.tr,
+                      style: const TextStyle(
                         fontSize: 16,
                         color: Colors.white,
                       ),
