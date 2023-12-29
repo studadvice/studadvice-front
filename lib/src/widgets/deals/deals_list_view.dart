@@ -3,13 +3,7 @@ import 'package:get/get.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import 'package:stud_advice/src/exceptions/no_result_indicator.dart';
-import 'package:stud_advice/src/screens/deals/deals_search_screen.dart';
-import 'package:stud_advice/src/widgets/deals/deal_item.dart';
-
-import '../../../stud_advice.dart';
-import '../../controllers/deals/deals_controller.dart';
-import '../../models/stud_advice/deals.dart';
-import '../../widgets/deals/deal_item_slide.dart';
+import 'package:stud_advice/stud_advice.dart';
 
 class DealsListView extends StatelessWidget {
   final PageController _controller = PageController();

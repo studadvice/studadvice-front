@@ -2,10 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
-import '../../../stud_advice.dart';
-import '../../models/stud_advice/deals.dart';
-import '../../screens/deals/deal_detail_screen.dart';
+import 'package:stud_advice/stud_advice.dart';
 
 class DealItemSlide extends StatelessWidget {
   final DealContent deal;

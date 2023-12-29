@@ -3,8 +3,6 @@ import 'package:get/get.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 import 'package:stud_advice/stud_advice.dart';
 
-import '../../models/stud_advice/categories.dart';
-
 class CategoriesListView extends StatelessWidget {
   const CategoriesListView({
     super.key,
@@ -16,7 +14,7 @@ class CategoriesListView extends StatelessWidget {
       builder: (controller) {
         return RefreshIndicator(
           onRefresh: () => Future.sync(
-                () => controller.pagingController.refresh(),
+            () => controller.pagingController.refresh(),
           ),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,

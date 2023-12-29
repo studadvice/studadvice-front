@@ -9,8 +9,6 @@ import 'package:stud_advice/src/controllers/deals/search_deals_controller.dart';
 import 'package:stud_advice/src/controllers/search/custom_search_controller.dart';
 import 'package:stud_advice/src/middlewares/common/auth_interceptor.dart';
 
-import '../../controllers/deals/deals_controller.dart';
-
 class AppDependenciesBinding extends Bindings {
   static final FirebaseAuth firebaseAuthInstance = FirebaseAuth.instance;
   static final FirebaseFirestore firebaseFirestoreInstance =
