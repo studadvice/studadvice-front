@@ -1,9 +1,10 @@
-import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import '../../../stud_advice.dart';
-import '../../models/stud_advice/deals.dart';
 import 'dart:io';
 
+import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+
+import '../../../stud_advice.dart';
+import '../../models/stud_advice/deals.dart';
 import '../../screens/deals/deal_detail_screen.dart';
 
 class DealItemSlide extends StatelessWidget {
@@ -39,12 +40,12 @@ class DealItemSlide extends StatelessWidget {
                       heightFactor: 1.0,
                       child: Image.file(
                         File(snapshot.data!),
-                        fit: BoxFit.cover,
+                        height: MediaQuery.of(context).size.height / 2.5,
                       ),
                     ),
                   );
                 } else if (snapshot.hasError) {
-                  return const Text('Erreur de chargement de l\'image');
+                  return const Center(child: Icon(Icons.image));
                 } else {
                   return const CircularProgressIndicator();
                 }
@@ -73,23 +74,23 @@ class DealItemSlide extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: <Widget>[
-                          Text(
-                            deal.title,
-                            style: const TextStyle(
-                              color: Colors.white,
-                              fontSize: 20.0,
-                              fontWeight: FontWeight.bold,
-                            ),
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: <Widget>[
+                        Text(
+                          deal.title,
+                          style: const TextStyle(
+                            color: Colors.white,
+                            fontSize: 20.0,
+                            fontWeight: FontWeight.bold,
                           ),
-                          if (deal.endDate != null)
-                            const Icon(
-                              Icons.timer,
-                              color: Colors.white,
-                              size: 20.0,
-                            ),
-                        ],
+                        ),
+                        if (deal.endDate != null)
+                          const Icon(
+                            Icons.timer,
+                            color: Colors.white,
+                            size: 20.0,
+                          ),
+                      ],
                     ),
                     Row(
                       children: <Widget>[
