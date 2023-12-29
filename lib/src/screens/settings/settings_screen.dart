@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:stud_advice/src/screens/support/support_screen.dart';
+import 'package:stud_advice/src/screens/settings/support_screen.dart';
 import 'package:stud_advice/stud_advice.dart';
 
 class SettingsScreen extends StatelessWidget {

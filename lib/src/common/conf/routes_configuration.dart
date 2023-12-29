@@ -1,6 +1,6 @@
 import 'package:get/get.dart';
 import 'package:stud_advice/src/bindings/settings/support_binding.dart';
-import 'package:stud_advice/src/screens/support/support_screen.dart';
+import 'package:stud_advice/src/screens/settings/support_screen.dart';
 import 'package:stud_advice/stud_advice.dart';
 import '../../bindings/administrative_process/administrative_process_binding.dart';
 import '../../bindings/settings/settings_binding.dart';

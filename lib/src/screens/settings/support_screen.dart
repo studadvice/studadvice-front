@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../../stud_advice.dart';
-import '../../controllers/support/support_controller.dart';
+import '../../controllers/settings/support_controller.dart';
 
 class SupportScreen extends StatelessWidget {
   static const String navigatorId = '/support_screen';
