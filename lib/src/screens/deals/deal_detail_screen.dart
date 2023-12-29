@@ -1,7 +1,9 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:url_launcher/url_launcher.dart';
-import 'dart:io';
+
 import '../../../stud_advice.dart';
 import '../../models/stud_advice/deals.dart';
 
@@ -12,11 +14,30 @@ class DealDetailScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final deal = Get.arguments['deal'] as DealContent;
-    final size = MediaQuery
-        .of(context)
-        .size;
+    final size = MediaQuery.of(context).size;
 
     return Scaffold(
+      appBar: AppBar(
+        forceMaterialTransparency: true,
+        title: Text(
+          deal.title,
+          style: const TextStyle(
+            color: AppColors.black,
+            fontSize: 20.0,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+        centerTitle: true,
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back),
+          color: Colors.black,
+          onPressed: () => Get.back(),
+        ),
+        backgroundColor: AppColors.primaryColor,
+        iconTheme: const IconThemeData(
+          color: Colors.white,
+        ),
+      ),
       body: SizedBox(
         width: double.infinity,
         height: double.infinity,
@@ -31,12 +52,16 @@ class DealDetailScreen extends StatelessWidget {
                       snapshot.data != null) {
                     return Image.file(
                       File(snapshot.data!),
-                      fit: BoxFit.cover,
+                      height: size.height * 0.55,
                     );
                   } else if (snapshot.hasError) {
-                    return Text('image_error'.tr);
+                    return const Center(child: Icon(Icons.image));
                   } else {
-                    return const CircularProgressIndicator();
+                    return const Center(
+                      child: CircularProgressIndicator(
+                        color: AppColors.primaryColor,
+                      ),
+                    );
                   }
                 },
               ),
@@ -47,7 +72,7 @@ class DealDetailScreen extends StatelessWidget {
                 padding: const EdgeInsets.all(24),
                 decoration: BoxDecoration(
                   border: Border.all(color: Colors.black),
-                  color: Colors.white,
+                  color: AppColors.white,
                   borderRadius: const BorderRadius.only(
                     topLeft: Radius.circular(40),
                     topRight: Radius.circular(40),
