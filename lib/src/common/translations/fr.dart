@@ -186,5 +186,16 @@ class Fr {
         "register_user_information_controller.error": "Erreur de connexion",
         "register_user_information_controller.registerWithEmailFailed":
             "Une erreur s'est produite lors de l'inscription",
-      };
+
+
+        // Support
+        "support.title":"Support",
+        "support.success_title":"Succès",
+        "support.success_message":"Votre demande a été envoyée avec succès.",
+        "support.failure_title":"Erreur",
+        "support.failure_message_generic":"Erreur lors de l\'envoi de la demande",
+        "support.failure_message_empty":"Veuillez remplir tous les champs.",
+        "support.failure_message_length": "Le sujet et le corps doivent contenir au moins 5 et 10 caractères, respectivement.",
+
+  };
 }

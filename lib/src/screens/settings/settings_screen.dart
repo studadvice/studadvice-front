@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:stud_advice/src/screens/support/support_screen.dart';
 import 'package:stud_advice/stud_advice.dart';
 
 class SettingsScreen extends StatelessWidget {
@@ -143,7 +144,9 @@ class SettingsScreen extends StatelessWidget {
     return SettingsGroup(
       items: [
         SettingsItem(
-          onTap: () {},
+          onTap: () {
+            Get.toNamed(SupportScreen.navigatorId);
+          },
           icons: Icons.flag,
           iconStyle: IconStyle(
             iconsColor: AppColors.white,

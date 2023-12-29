@@ -1,11 +1,13 @@
 import 'package:get/get.dart';
+import 'package:stud_advice/src/bindings/settings/support_binding.dart';
+import 'package:stud_advice/src/screens/support/support_screen.dart';
 import 'package:stud_advice/stud_advice.dart';
 import '../../bindings/administrative_process/administrative_process_binding.dart';
 import '../../bindings/settings/settings_binding.dart';
 import '../../screens/dashboard/dashboard_screen.dart';
 
 class RoutesConfiguration {
-  static const String initialRoute = InitTimeScreen.navigatorId;
+  static const String initialRoute = SettingsScreen.navigatorId;
 
   List<GetPage> configureRoutes() {
     return [
@@ -64,6 +66,11 @@ class RoutesConfiguration {
       GetPage(
         name: DashboardScreen.navigatorId,
         page: () => DashboardScreen(),
+      ),
+      GetPage(
+        name: SupportScreen.navigatorId,
+        page: () => SupportScreen(),
+        binding: SupportBinding()
       )
     ];
   }

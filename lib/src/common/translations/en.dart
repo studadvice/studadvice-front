@@ -184,5 +184,15 @@ class En {
         "register_user_information_controller.error": "Connection error",
         "register_user_information_controller.registerWithEmailFailed":
             "An error occurred during registration",
-      };
+
+        // Support
+        "support.title": "Support",
+        "support.success_title": "Success",
+        "support.success_message": "Your request has been successfully submitted.",
+        "support.failure_title": "Error",
+        "support.failure_message_generic": "Error while submitting the request",
+        "support.failure_message_empty": "Please fill out all the fields.",
+        "support.failure_message_length": "Subject and body must be at least 5 and 10 characters long, respectively.",
+
+  };
 }
