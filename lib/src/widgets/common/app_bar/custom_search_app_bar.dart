@@ -36,21 +36,39 @@ class CustomSearchAppBar extends StatelessWidget
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               if (Get.currentRoute ==
-                  AdministrativesProcessesScreen.navigatorId)
+                      AdministrativesProcessesScreen.navigatorId ||
+                  Get.currentRoute ==
+                      FavoriteAdministrativesProcessesScreen.navigatorId)
                 IconButton(
                   icon: const Icon(Icons.arrow_back),
                   color: AppColors.white,
                   onPressed: () => Get.back(),
                 ),
-              Expanded(
-                child: Padding(
-                  padding: const EdgeInsets.only(right: 20),
-                  child: CustomSearchBar(
-                    controller: controller,
-                    hintText: hintText,
+              if (Get.currentRoute ==
+                      AdministrativesProcessesScreen.navigatorId ||
+                  Get.currentRoute ==
+                      FavoriteAdministrativesProcessesScreen.navigatorId)
+                Expanded(
+                  child: Padding(
+                    padding: const EdgeInsets.only(right: 25),
+                    child: CustomSearchBar(
+                      controller: controller,
+                      hintText: hintText,
+                    ),
                   ),
                 ),
-              ),
+              if (!(Get.currentRoute ==
+                      AdministrativesProcessesScreen.navigatorId ||
+                  Get.currentRoute ==
+                      FavoriteAdministrativesProcessesScreen.navigatorId))
+                Expanded(
+                  child: Center(
+                    child: CustomSearchBar(
+                      controller: controller,
+                      hintText: hintText,
+                    ),
+                  ),
+                ),
             ],
           ),
         ),
