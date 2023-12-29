@@ -23,7 +23,7 @@ class FavoriteAdministrativeProcessController extends CustomSearchController {
   @override
   void onInit() {
     super.onInit();
-    _initFavorites();
+    _fetchFavorites();
 
     pagingController.addPageRequestListener((pageKey) {
       fetchPage(pageKey);
@@ -69,7 +69,6 @@ class FavoriteAdministrativeProcessController extends CustomSearchController {
   @override
   Future<void> fetchPage(int pageKey) async {
     try {
-      await _initFavorites();
       final AdministrativeProcesses newPage =
           await fetchAllPages(pageKey, 100, textEditingController);
 
@@ -115,6 +114,7 @@ class FavoriteAdministrativeProcessController extends CustomSearchController {
 
   Future<void> toggleFavoriteState(String administrativeProcessId) async {
     String userId = userStorageController.getCurrentUserId();
+    _fetchFavorites();
 
     if (isProcessFavorite(administrativeProcessId)) {
       await userStorageController.removeAdministrativeProcessFromFavorites(
@@ -128,22 +128,19 @@ class FavoriteAdministrativeProcessController extends CustomSearchController {
     update();
   }
 
-  Future<void> _initFavorites() async {
+  Future<void> _fetchFavorites() async {
     String userId = userStorageController.getCurrentUserId();
 
     List<String> favoriteIds = await userStorageController.getFavorites(userId);
+
     _favoritesAdministrativeProcessesId.clear();
 
     _favoritesAdministrativeProcessesId.addAll(favoriteIds);
-
-    debugPrint(
-        '_favoritesAdministrativeProcessesId: $_favoritesAdministrativeProcessesId');
   }
 
   bool isProcessFavorite(String administrativeProcessId) {
     var res = _favoritesAdministrativeProcessesId
         .any((processId_) => processId_ == administrativeProcessId);
-    debugPrint('isProcessFavorite: $res, $administrativeProcessId');
     return res;
   }
 
