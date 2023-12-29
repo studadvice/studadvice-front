@@ -197,8 +197,6 @@ class Fr {
         "support.failure_message_empty":"Veuillez remplir tous les champs.",
         "support.failure_message_length": "Le sujet et le corps doivent contenir au moins 5 et 10 caractères, respectivement.",
 
-  };
-
         // General
         'search': "Commencez votre recherche",
         'empty_result_message': "Aucun résultat trouvé. Essayez d'ajuster vos filtres.",
@@ -214,7 +212,7 @@ class Fr {
 
 
 
-         // Categories
+        // Categories
         'categories.explore': "Explorez les catégories",
         'categories.search': "Recherchez des démarches administratives",
 
@@ -231,6 +229,5 @@ class Fr {
 
         // Administrative processes
         "favorite_administrative_processes.title": "Mes démarches favorites",
-
 };
 }

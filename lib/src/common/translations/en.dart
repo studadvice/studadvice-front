@@ -194,8 +194,6 @@ class En {
         "support.failure_message_empty": "Please fill out all the fields.",
         "support.failure_message_length": "Subject and body must be at least 5 and 10 characters long, respectively.",
 
-  };
-
         // General
         'empty_result_message': "No results found. Try adjusting your filters.",
         'empty_result_title': "Oops, too specific!",
@@ -226,5 +224,5 @@ class En {
         // Administrative processes
         "favorite_administrative_processes.title": "My favorites processes",
 
-};
+  };
 }

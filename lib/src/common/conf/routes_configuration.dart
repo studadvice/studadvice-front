@@ -1,7 +1,9 @@
 import 'package:get/get.dart';
 import 'package:stud_advice/src/bindings/deals/deals_binding.dart';
+import 'package:stud_advice/src/bindings/settings/support_binding.dart';
 import 'package:stud_advice/src/screens/deals/deal_detail_screen.dart';
 import 'package:stud_advice/src/screens/deals/deals_search_screen.dart';
+import 'package:stud_advice/src/screens/settings/support_screen.dart';
 import 'package:stud_advice/stud_advice.dart';
 
 class RoutesConfiguration {
@@ -70,14 +72,12 @@ class RoutesConfiguration {
       ),
       GetPage(
           name: NavigationBarScreen.navigatorId,
-          page: () => NavigationBarScreen()),
+          page: () => NavigationBarScreen()
+      ),
       GetPage(
         name: FavoriteAdministrativesProcessesScreen.navigatorId,
         page: () => FavoriteAdministrativesProcessesScreen(),
         binding: FavoriteAdministrativeProcessBinding(),
-      ),
-        name: DashboardScreen.navigatorId,
-        page: () => DashboardScreen(),
       ),
       GetPage(
         name: SupportScreen.navigatorId,

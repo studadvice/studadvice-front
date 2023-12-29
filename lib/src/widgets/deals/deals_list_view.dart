@@ -9,7 +9,6 @@ import 'package:stud_advice/src/screens/deals/deals_search_screen.dart';
 import 'package:stud_advice/src/widgets/deals/deal_item.dart';
 import '../../../stud_advice.dart';
 import '../../widgets/deals/deal_item_slide.dart';
-import 'deals_search_list_view.dart';
 
 class DealsListView extends StatelessWidget {
   final PageController _controller = PageController();
