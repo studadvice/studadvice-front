@@ -4,7 +4,8 @@ import 'package:stud_advice/src/controllers/search/custom_search_controller.dart
 
 import '../search/custom_search_bar.dart';
 
-class CustomSearchAppBar extends StatelessWidget implements PreferredSizeWidget {
+class CustomSearchAppBar extends StatelessWidget
+    implements PreferredSizeWidget {
   final CustomSearchController controller;
   final String hintText;
 
@@ -17,35 +18,27 @@ class CustomSearchAppBar extends StatelessWidget implements PreferredSizeWidget 
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      title: const Text(
-        "Stud'Advice",
-        style: TextStyle(
-          fontWeight: FontWeight.bold,
-          color: Colors.white
-        ),
-      ),
         iconTheme: const IconThemeData(
           color: Colors.white,
         ),
-      flexibleSpace: Container(
-        decoration: const BoxDecoration(
-          borderRadius: BorderRadius.only(
-            bottomLeft: Radius.circular(20),
-            bottomRight: Radius.circular(20),
-          ),
-          color: AppColors.primaryColor
-        ),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.end,
-          children: [
-            Padding(
+        flexibleSpace: Container(
+          decoration: const BoxDecoration(
+              borderRadius: BorderRadius.only(
+                bottomLeft: Radius.circular(20),
+                bottomRight: Radius.circular(20),
+              ),
+              color: AppColors.primaryColor),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              Padding(
                 padding: const EdgeInsets.all(10),
-                child: CustomSearchBar(controller: controller, hintText: hintText),
-            )
-          ],
-        ),
-      )
-    );
+                child:
+                    CustomSearchBar(controller: controller, hintText: hintText),
+              )
+            ],
+          ),
+        ));
   }
 
   @override
