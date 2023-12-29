@@ -67,7 +67,6 @@ class UserStorageController extends GetxController {
         return [];
       }
     } catch (error) {
-      debugPrint("Error getting favorites: $error");
       return [];
     }
   }
@@ -103,7 +102,6 @@ class UserStorageController extends GetxController {
 
       return true;
     } catch (error) {
-      debugPrint("Error removing from favorites: $error");
       return false;
     }
   }

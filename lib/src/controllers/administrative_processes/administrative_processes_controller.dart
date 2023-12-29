@@ -1,7 +1,6 @@
 import 'dart:io';
 
 import 'package:dio/dio.dart';
-import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 import 'package:stud_advice/src/controllers/search/custom_search_controller.dart';
@@ -43,7 +42,6 @@ class AdministrativeProcessController extends CustomSearchController {
       final isLastPage = newPage.last;
       final newItems = newPage.content;
 
-      debugPrint('newItems: $newItems');
       if (isLastPage) {
         pagingController.appendLastPage(newItems);
       } else {

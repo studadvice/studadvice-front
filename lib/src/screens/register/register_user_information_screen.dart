@@ -30,7 +30,6 @@ class _RegisterUserInformationScreenState
   final TextEditingController _postalCodeController = TextEditingController();
 
   // Model data.
-  late UserData userData;
   List<String> universityData = [];
 
   @override
@@ -44,7 +43,9 @@ class _RegisterUserInformationScreenState
     if (universities != null) {
       universityData = universities.cast<String>();
     }
-    universityData.insert(0, 'register.defaultUniversityChoice'.tr);
+    if (!universityData.contains('register.defaultUniversityChoice'.tr)) {
+      universityData.insert(0, 'register.defaultUniversityChoice'.tr);
+    }
   }
 
   @override
@@ -243,16 +244,12 @@ class _RegisterUserInformationScreenState
   }
 
   Widget buildUniversityTextField(List<String> universityData) {
-    if (!universityData.contains('register.defaultUniversityChoice'.tr)) {
-      universityData.insert(0, 'register.defaultUniversityChoice'.tr);
-    }
     return CustomSelectionModal(
       labelText: 'register.universityLabel'.tr,
       hintText: 'register.universityHint'.tr,
       itemsList: universityData,
       height: MediaQuery.of(context).size.height * 0.8,
       controller: _universityController,
-      defaultChoice: 'register.defaultUniversityChoice'.tr,
       onItemSelected: (String selectedItem) {
         _universityController.text = selectedItem;
       },

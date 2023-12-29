@@ -62,12 +62,15 @@ class RoutesConfiguration {
       GetPage(
         name: DealsSearchScreen.navigatorId,
         page: () => DealsSearchScreen(),
-        binding : DealsBinding(),
+        binding: DealsBinding(),
       ),
       GetPage(
         name: DealDetailScreen.navigatorId,
         page: () => DealDetailScreen(),
       ),
+      GetPage(
+          name: NavigationBarScreen.navigatorId,
+          page: () => NavigationBarScreen()),
       GetPage(
         name: FavoriteAdministrativesProcessesScreen.navigatorId,
         page: () => FavoriteAdministrativesProcessesScreen(),

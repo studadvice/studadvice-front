@@ -36,10 +36,7 @@ class FavoriteAdministrativeProcessController extends CustomSearchController {
       AdministrativeProcesses newPage = await getAdministrativeProcesses(
           number: pageKey, size: pageSize, query: textEditingController.text);
 
-      int totalElements = newPage.totalElements;
       int totalPages = newPage.totalPages;
-      debugPrint('totalElements: $totalElements');
-      debugPrint('totalPages: $totalPages');
 
       List<AdministrativeProcessContent> allContent = newPage.content;
 

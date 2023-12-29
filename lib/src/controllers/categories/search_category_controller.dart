@@ -1,7 +1,6 @@
 import 'dart:io';
 
 import 'package:dio/dio.dart';
-import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 import 'package:stud_advice/src/controllers/search/custom_search_controller.dart';
@@ -44,7 +43,6 @@ class SearchCategoryController extends CustomSearchController {
       }
     } catch (error) {
       pagingController.error = error;
-      debugPrint("error: $error");
     }
   }
 
