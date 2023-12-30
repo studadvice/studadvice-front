@@ -67,8 +67,9 @@ class DealsListView extends StatelessWidget {
                                 ),
                                 GestureDetector(
                                   onTap: () {
-                                    Get.to(() => DealsSearchScreen());
-                                  },
+                                    Get.toNamed(
+                                      DealsSearchScreen.navigatorId,
+                                    );                                  },
                                   child: const Icon(
                                     Icons.add,
                                     color: AppColors.black,

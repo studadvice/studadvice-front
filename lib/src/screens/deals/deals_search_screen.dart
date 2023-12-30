@@ -4,7 +4,7 @@ import 'package:stud_advice/src/controllers/deals/search_deals_controller.dart';
 import 'package:stud_advice/stud_advice.dart';
 
 class DealsSearchScreen extends StatelessWidget {
-  static const navigatorId = '/total_deals_screen';
+  static const navigatorId = '/deals_search_screen';
   final SearchDealsController searchDealsController =
       Get.find<SearchDealsController>();
 
