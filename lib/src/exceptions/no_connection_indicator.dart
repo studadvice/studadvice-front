@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:get/get.dart';
 
 import 'exception_indicator.dart';
 
@@ -12,8 +13,8 @@ class NoConnectionIndicator extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => ExceptionIndicator(
-        title: 'No connection',
-        message: 'Please check internet connection and try again.',
+        title: 'no_connection_indicator_title'.tr,
+        message: 'no_connection_indicator_message'.tr,
         assetName: 'assets/images/common/raven_image.png',
         onTryAgain: onTryAgain,
       );

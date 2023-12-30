@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:stud_advice/src/screens/settings/support_screen.dart';
 import 'package:stud_advice/stud_advice.dart';
 
 class SettingsScreen extends StatelessWidget {
@@ -93,7 +94,6 @@ class SettingsScreen extends StatelessWidget {
           //selectedItem: i18n.getCurrentLocale,
           onChanged: (fontSize) {
             // TODO : checker l'async
-            debugPrint('accessibility changed');
             return null;
           },
           validator: (locale) {
@@ -143,7 +143,9 @@ class SettingsScreen extends StatelessWidget {
     return SettingsGroup(
       items: [
         SettingsItem(
-          onTap: () {},
+          onTap: () {
+            Get.toNamed(SupportScreen.navigatorId);
+          },
           icons: Icons.flag,
           iconStyle: IconStyle(
             iconsColor: AppColors.white,
@@ -239,9 +241,7 @@ class SettingsScreen extends StatelessWidget {
         ),
         title: 'settings.account'.tr,
         subtitle: "Tap to change your data",
-        onTap: () {
-          debugPrint("Account :OK");
-        },
+        onTap: () {},
       ),
     );
   }

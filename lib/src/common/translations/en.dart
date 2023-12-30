@@ -184,5 +184,48 @@ class En {
         "register_user_information_controller.error": "Connection error",
         "register_user_information_controller.registerWithEmailFailed":
             "An error occurred during registration",
-      };
+
+        // Support
+        "support.title": "Support",
+        "support.success_title": "Success",
+        "support.success_message": "Your request has been successfully submitted.",
+        "support.failure_title": "Error",
+        "support.failure_message_generic": "Error while submitting the request",
+        "support.failure_message_empty": "Please fill out all the fields.",
+        "support.failure_message_length": "Subject and body must be at least 5 and 10 characters long, respectively.",
+        "support.subject":"Subject",
+        "support.body":"Body",
+        "support.attach":"Attach file",
+
+        // General
+        'empty_result_message': "No results found. Try adjusting your filters.",
+        'empty_result_title': "Oops, too specific!",
+        'no_connection_indicator_message': "Check your internet connection and give it another go.",
+        'no_connection_indicator_title': "Connection Lost",
+        'general_error_title': "Something went wrong",
+        'general_error_message': "An unexpected error occurred. Please try again later.",
+        'image_error': "Image loading error. Please refresh.",
+        'try_again': "Give it another shot!",
+        'no_result_message': "Nothing here for now. Check back later.",
+        'no_result_title': "No Results Yet",
+
+
+        // Categories
+        'categories.explore':"Explore categories",
+        'categories.search': "Search administrative processes",
+
+        // Deals
+        'deals.recommendation': "Our favorites !",
+        'deals.empty': "No deals found !",
+        'deals.explore': "Explore deals",
+        'deals.description': "Description",
+        'deals.start': "Start date",
+        'deals.end': "End date",
+        'deals.url': "Go",
+        'deals.search': "Search deals",
+
+        // Administrative processes
+        "favorite_administrative_processes.title": "My favorites processes",
+
+  };
 }

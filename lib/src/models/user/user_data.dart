@@ -6,6 +6,7 @@ class UserData {
   String formation;
   String country;
   String? pseudo;
+  List<String>? favoriteAdministrativeProcesses = [];
   bool hasAcceptedTermsAndConditions;
 
   UserData({

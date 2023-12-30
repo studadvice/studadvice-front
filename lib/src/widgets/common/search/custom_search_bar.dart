@@ -5,11 +5,13 @@ import 'package:stud_advice/stud_advice.dart';
 
 class CustomSearchBar extends StatelessWidget {
   final CustomSearchController controller;
+  final String hintText;
   final stt.SpeechToText _speech = stt.SpeechToText();
 
   CustomSearchBar({
     super.key,
     required this.controller,
+    required this.hintText
   });
 
   void _startListening() async {
@@ -31,14 +33,15 @@ class CustomSearchBar extends StatelessWidget {
     }
   }
 
+
   @override
   Widget build(BuildContext context) {
     return ClassicTextField(
       onChanged: (value) {
-        controller.update();
+        controller.change();
       },
       controller: controller.textEditingController,
-      hintText: 'Search an administrative process',
+      hintText: hintText,
       backgroundColor: Colors.transparent,
       borderColor: Colors.black,
       focusedBorderColor: AppColors.secondaryColor,
@@ -59,7 +62,7 @@ class CustomSearchBar extends StatelessWidget {
           ),
         ),
         floatingLabelBehavior: FloatingLabelBehavior.never,
-        labelText: "Search an administrative process",
+        labelText: hintText,
         labelStyle: const TextStyle(color: Colors.grey),
         filled: true,
         fillColor: Colors.white,

@@ -33,7 +33,7 @@ class Styles {
     primaryColor: AppColors.primaryColor,
     secondaryHeaderColor: AppColors.secondaryColor,
     // #F0F0F0
-    scaffoldBackgroundColor: const Color(0xFFF0F0F0),
+    //scaffoldBackgroundColor: const Color(0xFFF0F0F0),
     buttonTheme: const ButtonThemeData(
       buttonColor: Colors.blue,
       disabledColor: Colors.grey,

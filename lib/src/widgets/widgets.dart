@@ -1,6 +1,12 @@
 library widgets;
 
-
+export 'administrative_process/administrative_process_list_view.dart';
+export 'administrative_process/administrative_process_tile.dart';
+export 'administrative_process/favorite_administrative_process_list_view.dart';
+export 'administrative_process/favorite_administrative_process_tile.dart';
+export 'categories/categories_list_view.dart';
+export 'categories/category_item.dart';
+export 'common/app_bar/custom_search_app_bar.dart';
 export 'common/buttons/custom_button.dart';
 export 'common/buttons/login_social_button.dart';
 export 'common/buttons/social_button.dart';
@@ -11,9 +17,14 @@ export 'common/loading/loading_spinner.dart';
 export 'common/modals/custom_selection_modal.dart';
 export 'common/pickers/country_picker_field.dart';
 export 'common/pickers/date_picker_field.dart';
+export 'common/search/custom_search_bar.dart';
 export 'common/textFields/auto_complete_text_field.dart';
 export 'common/textFields/classic_text_field.dart';
 export 'common/textFields/password_text_field.dart';
+export 'deals/deal_item.dart';
+export 'deals/deal_item_slide.dart';
+export 'deals/deals_list_view.dart';
+export 'deals/deals_search_list_view.dart';
 export 'register/register_social_button.dart';
 export 'register/register_with_email_button.dart';
 export 'settings/settings_big_user_card.dart';
@@ -22,5 +33,3 @@ export 'settings/settings_icon_style.dart';
 export 'settings/settings_item.dart';
 export 'settings/settings_user_card.dart';
 export 'sheets/bottom_sheet_widget.dart';
-export 'categories/categories_list_view.dart';
-export 'categories/category_item.dart';

@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:get/get.dart';
 
 import 'exception_indicator.dart';
 
@@ -12,9 +13,8 @@ class GenericErrorIndicator extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => ExceptionIndicator(
-        title: 'Something went wrong',
-        message: 'The application has encountered an unknown error.\n'
-            'Please try again later.',
+        title: 'general_error_title'.tr,
+        message: 'general_error_message'.tr,
         assetName: 'assets/images/common/raven_image.png',
         onTryAgain: onTryAgain,
       );
