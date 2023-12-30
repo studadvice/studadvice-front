@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:stud_advice/src/common/chore.dart';
+import 'package:get/get.dart';
 import 'package:stud_advice/src/controllers/search/custom_search_controller.dart';
+import 'package:stud_advice/stud_advice.dart';
 
-import '../search/custom_search_bar.dart';
-
-class CustomSearchAppBar extends StatelessWidget implements PreferredSizeWidget {
+class CustomSearchAppBar extends StatelessWidget
+    implements PreferredSizeWidget {
   final CustomSearchController controller;
   final String hintText;
 
@@ -17,34 +17,62 @@ class CustomSearchAppBar extends StatelessWidget implements PreferredSizeWidget 
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      title: const Text(
-        "Stud'Advice",
-        style: TextStyle(
-          fontWeight: FontWeight.bold,
-          color: Colors.white
-        ),
+      iconTheme: const IconThemeData(
+        color: Colors.white,
       ),
-        iconTheme: const IconThemeData(
-          color: Colors.white,
-        ),
+      automaticallyImplyLeading: false,
       flexibleSpace: Container(
+        height: MediaQuery.of(context).size.height / 6,
         decoration: const BoxDecoration(
           borderRadius: BorderRadius.only(
             bottomLeft: Radius.circular(20),
             bottomRight: Radius.circular(20),
           ),
-          color: AppColors.primaryColor
+          color: AppColors.primaryColor,
         ),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.end,
-          children: [
-            Padding(
-                padding: const EdgeInsets.all(10),
-                child: CustomSearchBar(controller: controller, hintText: hintText),
-            )
-          ],
+        child: Padding(
+          padding: const EdgeInsets.only(top: 50),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              if (Get.currentRoute ==
+                      AdministrativesProcessesScreen.navigatorId ||
+                  Get.currentRoute ==
+                      FavoriteAdministrativesProcessesScreen.navigatorId)
+                IconButton(
+                  icon: const Icon(Icons.arrow_back),
+                  color: AppColors.white,
+                  onPressed: () => Get.back(),
+                ),
+              if (Get.currentRoute ==
+                      AdministrativesProcessesScreen.navigatorId ||
+                  Get.currentRoute ==
+                      FavoriteAdministrativesProcessesScreen.navigatorId)
+                Expanded(
+                  child: Padding(
+                    padding: const EdgeInsets.only(right: 25),
+                    child: CustomSearchBar(
+                      controller: controller,
+                      hintText: hintText,
+                    ),
+                  ),
+                ),
+              if (!(Get.currentRoute ==
+                      AdministrativesProcessesScreen.navigatorId ||
+                  Get.currentRoute ==
+                      FavoriteAdministrativesProcessesScreen.navigatorId))
+                Expanded(
+                  child: Center(
+                    child: CustomSearchBar(
+                      controller: controller,
+                      hintText: hintText,
+                    ),
+                  ),
+                ),
+            ],
+          ),
         ),
-      )
+      ),
     );
   }
 

@@ -1,9 +1,8 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'dart:io';
-import '../../../stud_advice.dart';
-import '../../models/stud_advice/deals.dart';
-import '../../screens/deals/deal_detail_screen.dart';
+import 'package:stud_advice/stud_advice.dart';
 
 class DealItem extends StatelessWidget {
   final DealContent deal;
@@ -35,12 +34,12 @@ class DealItem extends StatelessWidget {
                       snapshot.data != null) {
                     return Image.file(
                       File(snapshot.data!),
-                      fit: BoxFit.cover,
+                      height: MediaQuery.of(context).size.height / 2.5,
                     );
                   } else if (snapshot.hasError) {
-                    return const Text('Erreur de chargement de l\'image');
+                    return const Center(child: Icon(Icons.image));
                   } else {
-                    return const CircularProgressIndicator();
+                    return const Center(child: CircularProgressIndicator());
                   }
                 },
               ),
@@ -63,13 +62,16 @@ class DealItem extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Row(
-                      children: <Widget>[
-                        Text(
-                          deal.title,
-                          style: const TextStyle(
-                            color: Colors.white,
-                            fontSize: 20.0,
-                            fontWeight: FontWeight.bold,
+                      children: [
+                        Expanded(
+                          child: Text(
+                            deal.title,
+                            style: const TextStyle(
+                              color: Colors.white,
+                              overflow: TextOverflow.ellipsis,
+                              fontSize: AppFontSizes.large16,
+                              fontWeight: FontWeight.bold,
+                            ),
                           ),
                         ),
                         if (deal.endDate != null)
@@ -81,7 +83,7 @@ class DealItem extends StatelessWidget {
                       ],
                     ),
                     Row(
-                      children: <Widget>[
+                      children: [
                         const Icon(
                           Icons.star,
                           color: AppColors.yellow,
@@ -91,7 +93,7 @@ class DealItem extends StatelessWidget {
                           deal.rating.toString(),
                           style: const TextStyle(
                             color: Colors.white,
-                            fontSize: 15.0,
+                            fontSize: AppFontSizes.small,
                             fontWeight: FontWeight.bold,
                           ),
                         ),

@@ -14,7 +14,16 @@ class UserStorageController extends GetxController {
     if (user != null) {
       return user.uid;
     } else {
-      return "";
+      throw Exception("User not connected");
+    }
+  }
+
+  User getCurrentUser() {
+    User? user = _firebaseAuthInstance.currentUser;
+    if (user != null) {
+      return user;
+    } else {
+      throw Exception("User not connected");
     }
   }
 
@@ -71,11 +80,32 @@ class UserStorageController extends GetxController {
     }
   }
 
+  Future<bool> isUserPresent(String userId) async {
+    try {
+      DocumentSnapshot userSnapshot = await _firebaseFirestoreInstance
+          .collection('users')
+          .doc(userId)
+          .get();
+
+      return userSnapshot.exists;
+    } catch (e) {
+      debugPrint("Error while checking if user is present: $e");
+      return false;
+    }
+  }
+
   Future<bool> addAdministrativeProcessToFavorites(
       String userId, String administrativeProcessId) async {
     try {
       CollectionReference users =
           _firebaseFirestoreInstance.collection('users');
+
+      // The case where the user do not exist in the database.
+      if (!await isUserPresent(userId)) {
+        await users.doc(userId).set({
+          'favoriteProcesses': FieldValue.arrayUnion([administrativeProcessId]),
+        });
+      }
 
       await users.doc(userId).update({
         'favoriteProcesses': FieldValue.arrayUnion([administrativeProcessId]),

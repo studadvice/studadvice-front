@@ -9,6 +9,7 @@ export 'common/i18n_controller.dart';
 export 'common/modal/custom_selection_modal_controller.dart';
 export 'common/theme_controller.dart';
 export 'connectivity/connectivity_controller.dart';
+export 'deals/deals_controller.dart';
 export 'file/file_controller.dart';
 export 'forgot_password/forgot_password_controller.dart';
 export 'legal_terms/legal_terms_controller.dart';

@@ -2,6 +2,9 @@ library screens;
 
 export 'administrative_processes/administrative_processes_screen.dart';
 export 'administrative_processes/favorite_administrative_processes_screen.dart';
+export 'deals/deal_detail_screen.dart';
+export 'deals/deals_screen.dart';
+export 'deals/deals_search_screen.dart';
 export 'forgot_password/forgot_password_screen.dart';
 export 'home/home_page_screen.dart';
 export 'init_time/init_time_screen.dart';

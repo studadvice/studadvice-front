@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:stud_advice/stud_advice.dart';
 
-import '../../widgets/common/app_bar/custom_search_app_bar.dart';
-
 class FavoriteAdministrativesProcessesScreen extends StatelessWidget {
   static const String navigatorId =
       '/favorites_administratives_processes_screen';
@@ -16,7 +14,9 @@ class FavoriteAdministrativesProcessesScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.white,
-      appBar: CustomSearchAppBar(controller: favoriteAdministrativeProcessController,hintText: 'categories.search'.tr),
+      appBar: CustomSearchAppBar(
+          controller: favoriteAdministrativeProcessController,
+          hintText: 'categories.search'.tr),
       body: ClipRRect(
         borderRadius: const BorderRadius.only(
           topLeft: Radius.circular(20.0),
