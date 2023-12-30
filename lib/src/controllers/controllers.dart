@@ -5,8 +5,9 @@ export 'administrative_processes/favorite_administrative_process_controller.dart
 export 'authentication/authentication_controller.dart';
 export 'authentication/social_sign_in_controller.dart';
 export 'categories/search_category_controller.dart';
+export 'common/custom_selection_modal_controller.dart';
+export 'common/deepl_translator_controller.dart';
 export 'common/i18n_controller.dart';
-export 'common/modal/custom_selection_modal_controller.dart';
 export 'common/theme_controller.dart';
 export 'connectivity/connectivity_controller.dart';
 export 'deals/deals_controller.dart';

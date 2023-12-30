@@ -7,10 +7,7 @@ import 'package:stud_advice/src/controllers/common/navbar_controller.dart';
 import 'package:stud_advice/src/controllers/controllers.dart';
 import 'package:stud_advice/src/controllers/deals/search_deals_controller.dart';
 import 'package:stud_advice/src/controllers/search/custom_search_controller.dart';
-import 'package:stud_advice/src/controllers/settings/change_password_controller.dart';
 import 'package:stud_advice/src/middlewares/common/auth_interceptor.dart';
-
-import '../../controllers/faq/search_faq_controller.dart';
 
 class AppDependenciesBinding extends Bindings {
   static final FirebaseAuth firebaseAuthInstance = FirebaseAuth.instance;
@@ -39,5 +36,8 @@ class AppDependenciesBinding extends Bindings {
     Get.put(CustomSearchController(), permanent: true);
     Get.put(SearchDealsController(), permanent: true);
     Get.put(SearchFaqController(), permanent: true);
+
+    // Makes the text translation available everywhere
+    Get.put(DeeplTranslatorController(), permanent: true);
   }
 }
