@@ -36,84 +36,87 @@ class SupportScreen extends StatelessWidget {
           )
         ],
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Column(
-          mainAxisSize: MainAxisSize.max,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: <Widget>[
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: TextField(
-                onChanged: (value) => supportController.subject.value = value,
-                decoration: InputDecoration(
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(10.0),
-                  ),
-                  labelText: 'support.subject'.tr,
-                ),
-              ),
-            ),
-            Expanded(
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: TextField(
-                  onChanged: (value) => supportController.body.value = value,
-                  maxLines: null,
-                  expands: true,
-                  textAlignVertical: TextAlignVertical.top,
-                  decoration: InputDecoration(
-                    labelText: 'support.body'.tr,
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(10.0),
+      body: GetX<SupportController>(
+        builder: (controller) {
+          return Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Column(
+              mainAxisSize: MainAxisSize.max,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: <Widget>[
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: TextField(
+                    onChanged: (value) => controller.subject.value = value,
+                    decoration: InputDecoration(
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(10.0),
+                      ),
+                      labelText: 'support.subject'.tr,
                     ),
                   ),
                 ),
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: ElevatedButton(
-                onPressed: _openFilePicker,
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: AppColors.primaryColor,
-                ),
-                child: Text(
-                  'support.attach'.tr,
-                  style: const TextStyle(color: Colors.white),
-                ),
-              ),
-            ),
-            Expanded(
-              child: Obx(() => ListView.builder(
-                itemCount: supportController.attachments.length,
-                itemBuilder: (context, index) {
-                  final attachment = supportController.attachments[index];
-                  return Row(
-                    children: <Widget>[
-                      Expanded(
-                        child: Text(
-                          attachment.filename.value,
-                          softWrap: false,
-                          overflow: TextOverflow.fade,
+                Expanded(
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: TextField(
+                      onChanged: (value) => controller.body.value = value,
+                      maxLines: null,
+                      expands: true,
+                      textAlignVertical: TextAlignVertical.top,
+                      decoration: InputDecoration(
+                        labelText: 'support.body'.tr,
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(10.0),
                         ),
                       ),
-                      IconButton(
-                        icon: const Icon(Icons.remove_circle),
-                        onPressed: () =>
-                            supportController.removeAttachment(index),
-                      )
-                    ],
-                  );
-                },
-              )),
+                    ),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: ElevatedButton(
+                    onPressed: _openFilePicker,
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: AppColors.primaryColor,
+                    ),
+                    child: Text(
+                      'support.attach'.tr,
+                      style: const TextStyle(color: Colors.white),
+                    ),
+                  ),
+                ),
+                Expanded(
+                  child: ListView.builder(
+                    itemCount: controller.attachments.length,
+                    itemBuilder: (context, index) {
+                      final attachment = controller.attachments[index];
+                      return Row(
+                        children: <Widget>[
+                          Expanded(
+                            child: Text(
+                              attachment.filename.value,
+                              softWrap: false,
+                              overflow: TextOverflow.fade,
+                            ),
+                          ),
+                          IconButton(
+                            icon: const Icon(Icons.remove_circle),
+                            onPressed: () =>
+                                controller.removeAttachment(index),
+                          )
+                        ],
+                      );
+                    },
+                  ),
+                ),
+              ],
             ),
-          ],
-        ),
+          );
+        },
       ),
     );
   }
-
 
   Future<void> _openFilePicker() async {
     try {
@@ -130,5 +133,4 @@ class SupportScreen extends StatelessWidget {
       debugPrint('Error picking a file: $e');
     }
   }
-
 }
