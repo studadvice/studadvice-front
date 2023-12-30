@@ -25,6 +25,7 @@ class SupportController extends GetxController {
         'message': {
           'subject': subject.value,
           'html': body.value,
+          'attachments': attachments
         }
       };
 
@@ -37,5 +38,13 @@ class SupportController extends GetxController {
     } catch (error) {
       Get.snackbar('support.failure_title'.tr, 'support.failure_message_generic'.tr);
     }
+  }
+
+  void addAttachment(String path) {
+    attachments.add(path);
+  }
+
+  void removeAttachment(int index) {
+    attachments.removeAt(index);
   }
 }
