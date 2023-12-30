@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 import 'package:stud_advice/src/controllers/deals/search_deals_controller.dart';
-import 'package:stud_advice/src/models/stud_advice/deals.dart';
-import 'package:stud_advice/src/widgets/deals/deal_item.dart';
 import 'package:stud_advice/stud_advice.dart';
 
 class DealsSearchListView extends StatelessWidget {

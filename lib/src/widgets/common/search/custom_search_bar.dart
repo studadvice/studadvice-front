@@ -23,7 +23,7 @@ class CustomSearchBar extends StatelessWidget {
     if (available) {
       _speech.listen(
         onResult: (val) {
-          controller.searchQuery.value = val.recognizedWords;
+          controller.textEditingController.text = val.recognizedWords;
           controller.update();
           _speech.stop();
         },

@@ -50,7 +50,7 @@ class SupportScreen extends StatelessWidget {
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(10.0),
                   ),
-                  labelText: 'Subject',
+                  labelText: 'support.subject'.tr,
                 ),
               ),
             ),
@@ -63,7 +63,7 @@ class SupportScreen extends StatelessWidget {
                   expands: true,
                   textAlignVertical: TextAlignVertical.top,
                   decoration: InputDecoration(
-                    labelText: 'Body',
+                    labelText: 'support.body'.tr,
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(10.0),
                     ),
@@ -73,38 +73,40 @@ class SupportScreen extends StatelessWidget {
             ),
             Padding(
               padding: const EdgeInsets.all(8.0),
-              child: Column(
-                children: [
-                  for (var i = 0; i < supportController.attachments.length; i++)
-                    Row(
-                      children: <Widget>[
-                        Expanded(
-                          child: Text(
-                            supportController.attachments[i],
-                            softWrap: false,
-                            overflow: TextOverflow.fade,
-                          ),
-                        ),
-                        IconButton(
-                          icon: const Icon(Icons.remove_circle),
-                          onPressed: () =>
-                              supportController.removeAttachment(i),
-                        )
-                      ],
-                    ),
-                  ElevatedButton(
-                    onPressed: _openFilePicker,
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: AppColors.primaryColor,
-                    ),
-                    child: const Text(
-                      'Attach File',
-                      style: TextStyle(color: Colors.white),
-                    ),
-                  )
-                  ,
-                ],
+              child: ElevatedButton(
+                onPressed: _openFilePicker,
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: AppColors.primaryColor,
+                ),
+                child: Text(
+                  'support.attach'.tr,
+                  style: const TextStyle(color: Colors.white),
+                ),
               ),
+            ),
+            Expanded(
+              child: Obx(() => ListView.builder(
+                itemCount: supportController.attachments.length,
+                itemBuilder: (context, index) {
+                  final attachment = supportController.attachments[index];
+                  return Row(
+                    children: <Widget>[
+                      Expanded(
+                        child: Text(
+                          attachment.filename.value,
+                          softWrap: false,
+                          overflow: TextOverflow.fade,
+                        ),
+                      ),
+                      IconButton(
+                        icon: const Icon(Icons.remove_circle),
+                        onPressed: () =>
+                            supportController.removeAttachment(index),
+                      )
+                    ],
+                  );
+                },
+              )),
             ),
           ],
         ),
@@ -112,13 +114,15 @@ class SupportScreen extends StatelessWidget {
     );
   }
 
+
   Future<void> _openFilePicker() async {
     try {
       FilePickerResult? result = await FilePicker.platform.pickFiles();
 
       if (result != null) {
+        String filename = result.files.single.name ?? '';
         String filePath = result.files.single.path ?? '';
-        supportController.addAttachment(filePath);
+        supportController.addAttachment(filename, filePath);
       } else {
         debugPrint('User canceled file picking');
       }

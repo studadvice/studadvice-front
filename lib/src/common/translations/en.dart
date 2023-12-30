@@ -193,6 +193,9 @@ class En {
         "support.failure_message_generic": "Error while submitting the request",
         "support.failure_message_empty": "Please fill out all the fields.",
         "support.failure_message_length": "Subject and body must be at least 5 and 10 characters long, respectively.",
+        "support.subject":"Subject",
+        "support.body":"Body",
+        "support.attach":"Attach file",
 
         // General
         'empty_result_message': "No results found. Try adjusting your filters.",

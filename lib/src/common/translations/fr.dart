@@ -196,7 +196,9 @@ class Fr {
         "support.failure_message_generic":"Erreur lors de l\'envoi de la demande",
         "support.failure_message_empty":"Veuillez remplir tous les champs.",
         "support.failure_message_length": "Le sujet et le corps doivent contenir au moins 5 et 10 caractères, respectivement.",
-
+        "support.subject":"Sujet",
+        "support.body":"Corps",
+        "support.attach":"Joindre un fichier",
         // General
         'search': "Commencez votre recherche",
         'empty_result_message': "Aucun résultat trouvé. Essayez d'ajuster vos filtres.",
