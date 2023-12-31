@@ -1,8 +1,7 @@
 import 'package:get/get.dart';
 import 'package:stud_advice/src/bindings/deals/deals_binding.dart';
 import 'package:stud_advice/src/bindings/settings/support_binding.dart';
-import 'package:stud_advice/src/screens/deals/deal_detail_screen.dart';
-import 'package:stud_advice/src/screens/deals/deals_search_screen.dart';
+import 'package:stud_advice/src/screens/faq/faq_screen.dart';
 import 'package:stud_advice/src/screens/settings/support_screen.dart';
 import 'package:stud_advice/stud_advice.dart';
 
@@ -83,6 +82,10 @@ class RoutesConfiguration {
         name: SupportScreen.navigatorId,
         page: () => SupportScreen(),
         binding: SupportBinding()
+      ),
+      GetPage(
+          name: FaqScreen.navigatorId,
+          page: () => FaqScreen()
       )
     ];
   }

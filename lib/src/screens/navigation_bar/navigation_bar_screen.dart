@@ -2,8 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:stud_advice/src/common/chore.dart';
 import 'package:stud_advice/src/controllers/common/navbar_controller.dart';
-import 'package:stud_advice/src/screens/deals/deals_screen.dart';
 import 'package:stud_advice/src/screens/screens.dart';
+
+import '../faq/faq_screen.dart';
 
 class NavigationBarScreen extends StatelessWidget {
   static const navigatorId = '/navigation_bar_screen';
@@ -16,6 +17,7 @@ class NavigationBarScreen extends StatelessWidget {
         body: IndexedStack(
           index: navbarController.tabIndex,
           children: [
+            FaqScreen(),
             DealsScreen(),
             HomePageScreen(),
             SettingsScreen(),
@@ -30,6 +32,7 @@ class NavigationBarScreen extends StatelessWidget {
             unselectedItemColor: Colors.black,
             selectedItemColor: AppColors.primaryColor,
             items: [
+              _bottomNavigationBarItem(icon: Icons.question_answer, label: 'faq'),
               _bottomNavigationBarItem(icon: Icons.local_offer, label: 'deals'),
               _bottomNavigationBarItem(icon: Icons.home, label: 'home'),
               _bottomNavigationBarItem(icon: Icons.settings, label: 'settings')
