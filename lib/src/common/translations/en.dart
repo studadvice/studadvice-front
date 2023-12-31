@@ -227,5 +227,9 @@ class En {
         // Administrative processes
         "favorite_administrative_processes.title": "My favorites processes",
 
+        // FAQ
+        "faq.title": "FAQ",
+        "faq.search": "Enter you key words",
+        "faq.explore": "How can we help you ?"
   };
 }

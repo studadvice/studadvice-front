@@ -231,8 +231,13 @@ class Fr {
 
         // Administrative processes
         "favorite_administrative_processes.title": "Mes démarches favorites",
-        
+
+        // FAQ
+        "faq.title": "FAQ",
+        "faq.search": "Entrez vos mots clés",
+        "faq.explore": "Comment pouvons-nous vous aider ?",
+    
         // Information modal
         "information_modal.title": "Préréquis",
-};
+  };
 }

@@ -22,9 +22,9 @@ class CategoriesListView extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  const Text(
-                    "Explorez les catégories",
-                    style: TextStyle(
+                  Text(
+                    "categories.explore".tr,
+                    style: const TextStyle(
                       fontSize: 20,
                       fontWeight: FontWeight.bold,
                     ),
