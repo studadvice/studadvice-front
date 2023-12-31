@@ -253,6 +253,11 @@ class Fr {
         "faq.title": "FAQ",
         "faq.search": "Entrez vos mots clés",
         "faq.explore": "Comment pouvons-nous vous aider ?",
+    
+        // FAQ
+        "faq.title": "FAQ",
+        "faq.search": "Entrez vos mots clés",
+        "faq.explore": "Comment pouvons-nous vous aider ?",
 
         // Information modal
                 "information_modal.title": "Préréquis",
@@ -271,5 +276,5 @@ class Fr {
         "roadmap.required": "Prérequis",
         "roadmap.description": "Description",
         "roadmap.required_empty": "Pas de prérequis"
-      };
+  };
 }
