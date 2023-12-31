@@ -115,6 +115,10 @@ class RoutesConfiguration {
         binding: RegisterUserInformationBinding(),
       ),
       GetPage(
+          name: FaqScreen.navigatorId,
+          page: () => FaqScreen()
+      ),
+      GetPage(
         name: RoadMapScreen.navigatorId,
         page: () => RoadMapScreen(),
         binding: StepBinding(),
