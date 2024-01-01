@@ -103,25 +103,32 @@ class CalendarController extends GetxController {
     for (final event in events) {
       final startDate = DateTime.tryParse(event.startDate ?? '');
       final endDate = DateTime.tryParse(event.endDate ?? '');
+
       if (startDate != null) {
-        event.eventName = "Début de la démarche administrative : ${event.name}" ;
+        AdministrativeProcessContent administrativeProcessContentCopy = AdministrativeProcessContent(id: (event.id), name: event.name, description: event.description, imageId: event.imageId);
+        administrativeProcessContentCopy.eventName= "Début de la démarche administrative : ${event.name}";
+
         if (linkedHashMap.containsKey(startDate)) {
-          linkedHashMap[startDate]!.add(event);
+          linkedHashMap[startDate]!.add(administrativeProcessContentCopy);
         } else {
-          linkedHashMap[startDate] = [event];
+          linkedHashMap[startDate] = [administrativeProcessContentCopy];
         }
       }
 
       if (endDate != null) {
-        event.eventName = "Fin de la démarche administrative : ${event.name}" ;
+        AdministrativeProcessContent administrativeProcessContentCopy = AdministrativeProcessContent(id: (event.id), name: event.name, description: event.description, imageId: event.imageId);
+        administrativeProcessContentCopy.eventName= "Fin de la démarche administrative : ${event.name}";
+
         if (linkedHashMap.containsKey(endDate)) {
-          linkedHashMap[endDate]!.add(event);
+          linkedHashMap[endDate]!.add(administrativeProcessContentCopy);
         } else {
-          linkedHashMap[endDate] = [event];
+          linkedHashMap[endDate] = [administrativeProcessContentCopy];
         }
       }
     }
+
     return linkedHashMap;
   }
+
 
 }
