@@ -1,9 +1,13 @@
 import 'package:get/get.dart';
 import 'package:stud_advice/src/bindings/deals/deals_binding.dart';
 import 'package:stud_advice/src/bindings/settings/support_binding.dart';
+import 'package:stud_advice/src/controllers/categories/calendar_controller.dart';
+import 'package:stud_advice/src/screens/home/calendar.dart';
 import 'package:stud_advice/src/screens/faq/faq_screen.dart';
 import 'package:stud_advice/src/screens/settings/support_screen.dart';
 import 'package:stud_advice/stud_advice.dart';
+
+import '../../bindings/category/calendar_binding.dart';
 
 class RoutesConfiguration {
   static const String initialRoute = WelcomeScreen.navigatorId;
@@ -79,14 +83,19 @@ class RoutesConfiguration {
         binding: FavoriteAdministrativeProcessBinding(),
       ),
       GetPage(
-        name: SupportScreen.navigatorId,
-        page: () => SupportScreen(),
-        binding: SupportBinding()
+          name: SupportScreen.navigatorId,
+          page: () => SupportScreen(),
+          binding: SupportBinding()
       ),
       GetPage(
           name: FaqScreen.navigatorId,
           page: () => FaqScreen()
-      )
+      ),
+      GetPage(
+        name: CalendarScreen.navigatorId,
+        page: () => CalendarScreen(),
+        binding: CalendarBinding(),
+      ),
     ];
   }
 }

@@ -1,4 +1,3 @@
-import 'package:stud_advice/src/models/stud_advice/pageable.dart';
 import 'package:stud_advice/stud_advice.dart';
 
 class AdministrativeProcesses {
@@ -16,16 +15,16 @@ class AdministrativeProcesses {
 
   AdministrativeProcesses(
       {required this.content,
-      required this.pageable,
-      required this.totalElements,
-      required this.totalPages,
-      required this.last,
-      required this.size,
-      required this.number,
-      required this.sort,
-      required this.numberOfElements,
-      required this.first,
-      required this.empty});
+        required this.pageable,
+        required this.totalElements,
+        required this.totalPages,
+        required this.last,
+        required this.size,
+        required this.number,
+        required this.sort,
+        required this.numberOfElements,
+        required this.first,
+        required this.empty});
 
   AdministrativeProcesses.fromJson(Map<String, dynamic> json) {
     if (json['content'] != null) {
@@ -78,40 +77,41 @@ class AdministrativeProcessContent {
   List<Step>? steps;
   String? imageFileSrc;
   bool? isFavorite;
+  String? startDate;
+  String? endDate;
+  String? eventName;
 
   AdministrativeProcessContent(
-      {required this.id,
-      required this.name,
-      required this.description,
-      required this.imageId,
-      this.isFavorite,
-      this.educations,
-      this.minAge,
-      this.maxAge,
-      this.nationalities,
-      this.universities,
-      this.steps});
+      {
+        required this.id,
+        required this.name,
+        required this.description,
+        required this.imageId,
+        this.isFavorite,
+        this.educations,
+        this.minAge,
+        this.maxAge,
+        this.nationalities,
+        this.universities,
+        this.steps,
+        this.startDate,
+        this.endDate,
+        this.eventName,
+      });
 
   AdministrativeProcessContent.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     name = json['name'];
     description = json['description'];
     imageId = json['imageId'];
-    if (educations != null) {
-      educations = json['educations'].cast<String>();
-    }
-    if (minAge != null) {
-      minAge = json['minAge'];
-    }
-    if (maxAge != null) {
-      maxAge = json['maxAge'];
-    }
-    if (nationalities != null) {
-      nationalities = json['nationalities'].cast<String>();
-    }
-    if (universities != null) {
-      universities = json['universities'].cast<String>();
-    }
+    educations = json['educations'].cast<String>();
+    minAge = json['minAge'];
+    maxAge = json['maxAge'];
+    nationalities = json['nationalities'].cast<String>();
+    universities = json['universities'].cast<String>();
+    startDate = json['startDate'];
+    endDate = json['endDate'];
+
     if (json['steps'] != null) {
       steps = <Step>[];
       json['steps'].forEach((v) {
@@ -131,6 +131,8 @@ class AdministrativeProcessContent {
     data['maxAge'] = maxAge;
     data['nationalities'] = nationalities;
     data['universities'] = universities;
+    data['startDate'] = startDate;
+    data['endDate'] = endDate;
     if (steps != null) {
       data['steps'] = steps!.map((v) => v.toJson()).toList();
     }

@@ -10,7 +10,7 @@ class SearchCategoryController extends CustomSearchController {
   final Dio _dio = Get.find();
 
   final PagingController<int, CategoryContent> pagingController =
-      PagingController(firstPageKey: 0);
+  PagingController(firstPageKey: 0);
 
   @override
   void onInit() {
@@ -43,6 +43,7 @@ class SearchCategoryController extends CustomSearchController {
       }
     } catch (error) {
       pagingController.error = error;
+      print(error);
     }
   }
 

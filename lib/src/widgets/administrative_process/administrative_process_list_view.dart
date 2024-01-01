@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
-import 'package:stud_advice/src/models/stud_advice/administrative_processes.dart';
-import 'package:stud_advice/src/widgets/administrative_process/administrative_process_tile.dart';
 import 'package:stud_advice/stud_advice.dart';
 
 class AdministrativeProcessListView extends StatelessWidget {
