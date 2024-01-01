@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
+import 'package:stud_advice/src/bindings/category/calendar_binding.dart';
+import 'package:stud_advice/src/screens/home/calendar.dart';
 import 'package:stud_advice/stud_advice.dart';
 
 class CategoriesListView extends StatelessWidget {
@@ -14,7 +16,7 @@ class CategoriesListView extends StatelessWidget {
       builder: (controller) {
         return RefreshIndicator(
           onRefresh: () => Future.sync(
-            () => controller.pagingController.refresh(),
+                () => controller.pagingController.refresh(),
           ),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -29,12 +31,22 @@ class CategoriesListView extends StatelessWidget {
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-                  IconButton(
-                    icon: const Icon(Icons.favorite),
-                    onPressed: () => Get.toNamed(
-                      FavoriteAdministrativesProcessesScreen.navigatorId,
-                    ),
-                  ),
+                  Row(
+                      children : [
+                        IconButton(
+                          icon: const Icon(Icons.calendar_month),
+                          onPressed: () => Get.toNamed(
+                            CalendarScreen.navigatorId,
+                          ),
+                        ),
+                        IconButton(
+                          icon: const Icon(Icons.favorite),
+                          onPressed: () => Get.toNamed(
+                            FavoriteAdministrativesProcessesScreen.navigatorId,
+                          ),
+                        )
+                      ]
+                  )
                 ],
               ),
               const SizedBox(
