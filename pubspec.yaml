@@ -46,6 +46,8 @@ dependencies:
   flutter_adaptive_buttons:
   sliding_up_panel:
   shimmer: ^3.0.0
+  table_calendar: ^3.0.9
+
 
 dev_dependencies:
   flutter_test:
