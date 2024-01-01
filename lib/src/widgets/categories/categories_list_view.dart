@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
+import 'package:stud_advice/src/bindings/category/calendar_binding.dart';
 import 'package:stud_advice/src/screens/home/calendar.dart';
 import 'package:stud_advice/stud_advice.dart';
 
