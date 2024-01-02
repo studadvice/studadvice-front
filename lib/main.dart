@@ -8,6 +8,7 @@ import 'package:get/get.dart';
 import 'package:get_it/get_it.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:stud_advice/firebase_options.dart';
+import 'package:stud_advice/src/utils/notification_service.dart';
 import 'package:stud_advice/stud_advice.dart';
 
 class StudAdviceApp extends StatelessWidget {
@@ -101,7 +102,8 @@ void main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-  await GetStorage.init(); // Important to initialize GetStorage
+  await NotificationService().initNotification();
+  await GetStorage.init();
   await dotenv.load();
   await loadTerms();
   await loadUniversities().then((_) {

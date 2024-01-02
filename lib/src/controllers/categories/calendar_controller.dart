@@ -2,10 +2,12 @@ import 'dart:collection';
 import 'dart:io';
 
 import 'package:dio/dio.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:stud_advice/src/models/models.dart';
 import 'package:table_calendar/table_calendar.dart';
 import 'package:get/get.dart';
-import "calendar_utils.dart";
+import '../../utils/calendar_utils.dart';
+import '../../utils/notification_service.dart';
 
 class CalendarController extends GetxController {
   final Dio _dio = Get.find();
@@ -22,6 +24,11 @@ class CalendarController extends GetxController {
     equals: isSameDay,
     hashCode: getHashCode,
   ).obs;
+
+  //final RxBool isNotificationEnabled = true.obs;
+
+  final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
+  FlutterLocalNotificationsPlugin();
 
   @override
   void onInit() {
@@ -40,6 +47,7 @@ class CalendarController extends GetxController {
             response.data);
         administrativeProcessesEvents.value =
             createLinkedHashMap(administrativeProcessList.content);
+            //scheduleNotifications(selectedEvents); // à décommenter une fois que je sais que les notifications simple avec le bouton marchent, comme ça après ça se fait automatiquement à la bonne date
       } else {
         throw Exception('Failed to load administrative processes');
       }
@@ -130,5 +138,29 @@ class CalendarController extends GetxController {
     return linkedHashMap;
   }
 
+  void scheduleNotifications(List<AdministrativeProcessContent> events) {
+    for (final event in events) {
+      if (event.startDate != null) {
+        final startDate = DateTime.tryParse(event.startDate!);
+        if (startDate != null) {
+          NotificationService().scheduleNotification(
+              title: 'Scheduled Notification',
+              body: 'test',
+              scheduledNotificationDateTime: startDate);
+        }
+      }
+      if (event.endDate != null) {
+        final endDate = DateTime.tryParse(event.endDate!);
+        final oneWeekBefore = endDate?.subtract(const Duration(days: 7));
+
+        if (oneWeekBefore != null) {
+          NotificationService().scheduleNotification(
+              title: 'Scheduled Notification',
+              body: 'test',
+              scheduledNotificationDateTime: oneWeekBefore);
+        }
+      }
+    }
+  }
 
 }

@@ -2,9 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:stud_advice/src/models/models.dart';
 import 'package:table_calendar/table_calendar.dart';
-import 'package:stud_advice/src/controllers/categories/calendar_utils.dart';
+import 'package:stud_advice/src/utils/calendar_utils.dart';
 import '../../../stud_advice.dart';
 import '../../controllers/categories/calendar_controller.dart';
+import '../../utils/notification_service.dart';
 
 class CalendarScreen extends StatelessWidget {
   static const String navigatorId = '/calendar';
@@ -24,6 +25,13 @@ class CalendarScreen extends StatelessWidget {
         } else {
           return Column(
             children: [
+              ElevatedButton(
+                child: const Text('Show notifications'),
+                onPressed: () {
+                  NotificationService()
+                      .showNotification(title: 'Sample title', body: 'It works!');
+                },
+              ),
               TableCalendar<AdministrativeProcessContent>(
                 firstDay: kFirstDay,
                 lastDay: kLastDay,
