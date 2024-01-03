@@ -80,7 +80,7 @@ class ChangePasswordForm extends StatelessWidget {
           const SizedBox(height: 32.0),
           Container(
             width: double.infinity,
-            padding: const EdgeInsets.all(8.0),
+            padding: const EdgeInsets.symmetric(horizontal: 25.0),
             child: ElevatedButton(
               onPressed: () {
                 changePasswordController.changePassword();
