@@ -76,6 +76,7 @@ class SearchCategoryController extends CustomSearchController {
         queryParameters: queryParameters,
       );
       if (response.statusCode == HttpStatus.ok) {
+        print(response);
         return Categories.fromJson(response.data);
       } else {
         throw Exception('Failed to load categories');

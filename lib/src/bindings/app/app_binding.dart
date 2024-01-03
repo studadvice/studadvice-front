@@ -7,6 +7,7 @@ import 'package:stud_advice/src/controllers/common/navbar_controller.dart';
 import 'package:stud_advice/src/controllers/controllers.dart';
 import 'package:stud_advice/src/controllers/deals/search_deals_controller.dart';
 import 'package:stud_advice/src/controllers/search/custom_search_controller.dart';
+import 'package:stud_advice/src/controllers/settings/change_password_controller.dart';
 import 'package:stud_advice/src/middlewares/common/auth_interceptor.dart';
 
 import '../../controllers/faq/search_faq_controller.dart';
