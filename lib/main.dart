@@ -10,6 +10,7 @@ import 'package:get_storage/get_storage.dart';
 import 'package:stud_advice/firebase_options.dart';
 import 'package:stud_advice/src/utils/notification_service.dart';
 import 'package:stud_advice/stud_advice.dart';
+import 'package:timezone/data/latest.dart' as tz;
 
 class StudAdviceApp extends StatelessWidget {
   const StudAdviceApp({super.key});
@@ -103,6 +104,7 @@ void main() async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
   await NotificationService().initNotification();
+  tz.initializeTimeZones();
   await GetStorage.init();
   await dotenv.load();
   await loadTerms();
