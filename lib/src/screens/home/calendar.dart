@@ -12,6 +12,7 @@ class CalendarScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    print(calendarController.administrativeProcessesEvents); //TODO need to use this to rebuild in change, change the logic
     return Scaffold(
       appBar: AppBar(
         title: Text('categories.calendar'.tr),
