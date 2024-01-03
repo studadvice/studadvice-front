@@ -3,6 +3,8 @@ import 'package:get/get.dart';
 import 'package:stud_advice/src/screens/settings/support_screen.dart';
 import 'package:stud_advice/stud_advice.dart';
 
+import 'change_password_screen.dart';
+
 class SettingsScreen extends StatelessWidget {
   static const String navigatorId = '/settings_screen';
   final ThemeController themeController = Get.find();
@@ -176,19 +178,6 @@ class SettingsScreen extends StatelessWidget {
       items: [
         SettingsItem(
           onTap: () {
-            showAccessibilitySettings();
-          },
-          icons: Icons.accessible,
-          iconStyle: IconStyle(
-            iconsColor: AppColors.white,
-            withBackground: true,
-            backgroundColor: Theme.of(context).primaryColor,
-          ),
-          title: 'settings.accessibility'.tr,
-          // subtitle: "Ma",
-        ),
-        SettingsItem(
-          onTap: () {
             showLanguageSettings();
           },
           icons: Icons.translate,
@@ -201,7 +190,9 @@ class SettingsScreen extends StatelessWidget {
           // subtitle: "Ma",
         ),
         SettingsItem(
-          onTap: () {},
+          onTap: () {
+            Get.toNamed(ChangePasswordScreen.navigatorId);
+          },
           icons: Icons.password,
           iconStyle: IconStyle(),
           title: 'settings.changePassword'.tr,

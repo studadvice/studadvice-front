@@ -200,6 +200,14 @@ class Fr {
                 "support.subject": "Sujet",
                 "support.body": "Corps",
                 "support.attach": "Joindre un fichier",
+
+                // change password
+                "setting.change_password.title":"Changer le mot de passe",
+                "setting.change_password.old_password":"Ancien mot de passe",
+                "setting.change_password.new_password":"Nouveau mot de passe",
+                "setting.change_password.confirm_password":"Confirmer le mot de passe",
+                "setting.change_password.change_password":"Changer le mot de passe",
+
                 // General
                 'search': "Commencez votre recherche",
                 'empty_result_message': "Aucun résultat trouvé. Essayez d'ajuster vos filtres.",

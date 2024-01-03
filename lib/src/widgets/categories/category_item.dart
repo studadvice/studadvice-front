@@ -16,14 +16,15 @@ class CategoryItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Color cardColor = Color(int.parse(category.color, radix: 16) + 0xFF000000);
+    Color cardColor = Color(int.parse(category.color.substring(1), radix: 16) + 0xFF000000);
+
     return GestureDetector(
       onTap: () {
         Get.toNamed(
           AdministrativesProcessesScreen.navigatorId,
           arguments: {
             'categoryId': category.id,
-            'categoryColor': category.color,
+            'categoryColor': cardColor,
             "categoryName": category.name,
           },
         );

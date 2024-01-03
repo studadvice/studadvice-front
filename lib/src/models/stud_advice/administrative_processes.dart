@@ -104,11 +104,17 @@ class AdministrativeProcessContent {
     name = json['name'];
     description = json['description'];
     imageId = json['imageId'];
-    educations = json['educations'].cast<String>();
+    if (educations != null) {
+      educations = json['educations'].cast<String>();
+    }
     minAge = json['minAge'];
     maxAge = json['maxAge'];
-    nationalities = json['nationalities'].cast<String>();
-    universities = json['universities'].cast<String>();
+    if (nationalities != null) {
+      nationalities = json['nationalities'].cast<String>();
+    }
+    if (universities != null) {
+      universities = json['universities'].cast<String>();
+    }
     startDate = json['startDate'];
     endDate = json['endDate'];
 

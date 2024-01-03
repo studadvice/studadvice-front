@@ -18,7 +18,7 @@ class AdministrativesProcessesScreen extends StatelessWidget {
     return args['categoryName'] ?? '';
   }
 
-  String _getCategoryColor() {
+  Color _getCategoryColor() {
     return args['categoryColor'] ?? '';
   }
 
