@@ -18,6 +18,26 @@ class UserStorageController extends GetxController {
     }
   }
 
+  Future<String> getPseudo(String userId) async {
+    try {
+      CollectionReference users = _firebaseFirestoreInstance.collection('users');
+
+      DocumentSnapshot userSnapshot = await users.doc(userId).get();
+
+      if (userSnapshot.exists) {
+        String pseudo = userSnapshot.get('pseudo');
+        return pseudo;
+      } else {
+        throw Exception("User pseudo not found");
+      }
+    } catch (error) {
+      debugPrint("Error getting pseudo: $error");
+      throw Exception("Error getting pseudo");
+    }
+  }
+
+
+
   User getCurrentUser() {
     User? user = _firebaseAuthInstance.currentUser;
     if (user != null) {
