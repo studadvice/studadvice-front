@@ -14,9 +14,6 @@ class ChangePasswordController extends GetxController {
       String oldPassword = oldPasswordController.text;
       String newPassword = newPasswordController.text;
       String confirmPassword = confirmPasswordController.text;
-      print(oldPassword);
-      print(newPassword);
-      print(confirmPassword);
       if (newPassword != confirmPassword) {
         Get.snackbar('Error', 'New password and confirm password do not match');
         return;
