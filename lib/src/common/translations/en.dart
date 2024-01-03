@@ -231,6 +231,14 @@ class En {
             // FAQ
             "faq.title": "FAQ",
             "faq.search": "Enter you key words",
-            "faq.explore": "How can we help you ?"
+            "faq.explore": "How can we help you ?",
+
+            // notification
+            "notification.title": "It’s time for a new administrative process !",
+
+            //calendar
+            "calendar.startName" : "Start of the administrative process",
+            "calendar.endName" : "End of the administrative process"
+
       };
 }

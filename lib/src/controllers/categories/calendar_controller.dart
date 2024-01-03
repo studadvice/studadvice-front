@@ -11,21 +11,26 @@ import '../../utils/notification_service.dart';
 
 class CalendarController extends GetxController {
   final Dio _dio = Get.find();
-  final Rx<DateTime> focusedDay = DateTime.now().obs;
+  final Rx<DateTime> focusedDay = DateTime
+      .now()
+      .obs;
   final Rx<DateTime?> selectedDay = Rx<DateTime?>(null);
   final Rx<DateTime?> rangeStart = Rx<DateTime?>(null);
   final Rx<DateTime?> rangeEnd = Rx<DateTime?>(null);
   final Rx<CalendarFormat> calendarFormat = CalendarFormat.month.obs;
   final Rx<RangeSelectionMode> rangeSelectionMode =
       RangeSelectionMode.toggledOff.obs;
-  final RxList<AdministrativeProcessContent> selectedEvents = <AdministrativeProcessContent>[].obs;
+  final RxList<AdministrativeProcessContent> selectedEvents = <
+      AdministrativeProcessContent>[].obs;
 
-  Rx<LinkedHashMap<DateTime, List<AdministrativeProcessContent>>> administrativeProcessesEvents = LinkedHashMap<DateTime, List<AdministrativeProcessContent>>(
+  Rx<LinkedHashMap<DateTime,
+      List<
+          AdministrativeProcessContent>>> administrativeProcessesEvents = LinkedHashMap<
+      DateTime,
+      List<AdministrativeProcessContent>>(
     equals: isSameDay,
     hashCode: getHashCode,
   ).obs;
-
-  //final RxBool isNotificationEnabled = true.obs;
 
   final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
   FlutterLocalNotificationsPlugin();
@@ -47,7 +52,7 @@ class CalendarController extends GetxController {
             response.data);
         administrativeProcessesEvents.value =
             createLinkedHashMap(administrativeProcessList.content);
-            //scheduleNotifications(selectedEvents); // à décommenter une fois que je sais que les notifications simple avec le bouton marchent, comme ça après ça se fait automatiquement à la bonne date
+        scheduleNotifications(administrativeProcessesEvents.value);
       } else {
         throw Exception('Failed to load administrative processes');
       }
@@ -88,7 +93,8 @@ class CalendarController extends GetxController {
     }
   }
 
-  List<AdministrativeProcessContent> _getEventsForRange(DateTime start, DateTime end) {
+  List<AdministrativeProcessContent> _getEventsForRange(DateTime start,
+      DateTime end) {
     final days = daysInRange(start, end);
 
     return [
@@ -102,19 +108,30 @@ class CalendarController extends GetxController {
     }
   }
 
-  LinkedHashMap<DateTime, List<AdministrativeProcessContent>> createLinkedHashMap(List<AdministrativeProcessContent> events) {
+  LinkedHashMap<DateTime, List<AdministrativeProcessContent>> createLinkedHashMap(
+      List<AdministrativeProcessContent> events,
+      ) {
     final linkedHashMap = LinkedHashMap<DateTime, List<AdministrativeProcessContent>>(
       equals: isSameDay,
       hashCode: getHashCode,
     );
 
+    final DateTime now = DateTime.now();
+
     for (final event in events) {
       final startDate = DateTime.tryParse(event.startDate ?? '');
       final endDate = DateTime.tryParse(event.endDate ?? '');
 
-      if (startDate != null) {
-        AdministrativeProcessContent administrativeProcessContentCopy = AdministrativeProcessContent(id: (event.id), name: event.name, description: event.description, imageId: event.imageId);
-        administrativeProcessContentCopy.eventName= "Début de la démarche administrative : ${event.name}";
+      if (startDate != null && startDate.isAfter(now)) {
+        AdministrativeProcessContent administrativeProcessContentCopy =
+        AdministrativeProcessContent(
+          id: event.id,
+          name: event.name,
+          description: event.description,
+          imageId: event.imageId,
+        );
+        administrativeProcessContentCopy.eventName =
+        "${"calendar.startName".tr}: ${event.name}";
 
         if (linkedHashMap.containsKey(startDate)) {
           linkedHashMap[startDate]!.add(administrativeProcessContentCopy);
@@ -123,9 +140,16 @@ class CalendarController extends GetxController {
         }
       }
 
-      if (endDate != null) {
-        AdministrativeProcessContent administrativeProcessContentCopy = AdministrativeProcessContent(id: (event.id), name: event.name, description: event.description, imageId: event.imageId);
-        administrativeProcessContentCopy.eventName= "Fin de la démarche administrative : ${event.name}";
+      if (endDate != null && endDate.isAfter(now)) {
+        AdministrativeProcessContent administrativeProcessContentCopy =
+        AdministrativeProcessContent(
+          id: event.id,
+          name: event.name,
+          description: event.description,
+          imageId: event.imageId,
+        );
+        administrativeProcessContentCopy.eventName =
+        "${"calendar.endName".tr}: ${event.name}";
 
         if (linkedHashMap.containsKey(endDate)) {
           linkedHashMap[endDate]!.add(administrativeProcessContentCopy);
@@ -138,29 +162,23 @@ class CalendarController extends GetxController {
     return linkedHashMap;
   }
 
-  void scheduleNotifications(List<AdministrativeProcessContent> events) {
-    for (final event in events) {
-      if (event.startDate != null) {
-        final startDate = DateTime.tryParse(event.startDate!);
-        if (startDate != null) {
-          NotificationService().scheduleNotification(
-              title: 'Scheduled Notification',
-              body: 'test',
-              scheduledNotificationDateTime: startDate);
-        }
-      }
-      if (event.endDate != null) {
-        final endDate = DateTime.tryParse(event.endDate!);
-        final oneWeekBefore = endDate?.subtract(const Duration(days: 7));
 
-        if (oneWeekBefore != null) {
+  Future<void> cancelAllNotifications() async {
+    await flutterLocalNotificationsPlugin.cancelAll();
+  }
+
+  void scheduleNotifications(
+      LinkedHashMap<DateTime, List<AdministrativeProcessContent>> events) {
+    cancelAllNotifications();
+    for (final entry in events.entries) {
+      final DateTime date = entry.key;
+      final List<AdministrativeProcessContent> eventList = entry.value;
+      for (final event in eventList) {
           NotificationService().scheduleNotification(
-              title: 'Scheduled Notification',
-              body: 'test',
-              scheduledNotificationDateTime: oneWeekBefore);
-        }
+              title: 'notification.title'.tr,
+              body: event.eventName,
+              scheduledNotificationDateTime: date);
       }
     }
   }
-
 }
