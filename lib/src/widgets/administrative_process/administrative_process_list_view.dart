@@ -6,7 +6,7 @@ import 'package:stud_advice/stud_advice.dart';
 class AdministrativeProcessListView extends StatelessWidget {
   final String categoryId;
   final String categoryName;
-  final String categoryColor;
+  final Color categoryColor;
 
   const AdministrativeProcessListView({
     super.key,
@@ -21,8 +21,8 @@ class AdministrativeProcessListView extends StatelessWidget {
       init: AdministrativeProcessController(),
       builder: (controller) {
         controller.categoryId = categoryId;
-        String hexColor = categoryColor.replaceFirst('#', '');
-        Color backgroundColor = Color(int.parse(hexColor, radix: 16) + 0xFF000000);
+        Color backgroundColor =
+            categoryColor;
 
         return Scaffold(
           appBar: AppBar(

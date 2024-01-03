@@ -28,7 +28,6 @@ class SearchCategoryController extends CustomSearchController {
         size: 5,
         query: searchQuery.value,
       );
-
       final isLastPage = newPage.last;
       final newItems = newPage.content;
       if (newItems.isNotEmpty) {
@@ -65,8 +64,8 @@ class SearchCategoryController extends CustomSearchController {
         path,
         queryParameters: queryParameters,
       );
-
       if (response.statusCode == HttpStatus.ok) {
+        print(response);
         return Categories.fromJson(response.data);
       } else {
         throw Exception('Failed to load categories');

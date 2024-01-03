@@ -197,6 +197,13 @@ class En {
             "support.body":"Body",
             "support.attach":"Attach file",
 
+            // change password
+            "setting.change_password.title":"Change password",
+            "setting.change_password.old_password":"Old password",
+            "setting.change_password.new_password":"New password",
+            "setting.change_password.confirm_password":"Confirm password",
+            "setting.change_password.change_password":"Change password",
+
             // General
             'empty_result_message': "No results found. Try adjusting your filters.",
             'empty_result_title': "Oops, too specific!",
