@@ -45,53 +45,38 @@ class ChangePasswordForm extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Container(
-            padding: const EdgeInsets.all(8.0),
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(10.0),
-              border: Border.all(color: Colors.grey),
+          PasswordTextField(
+                // Password should be at least 8 characters long and contain at least one uppercase letter, one number and one special character.
+                  validator: (value) => FormValidator.validatePassword(value),
+                  hintText: 'register.passwordHint'.tr,
+                  labelText: 'setting.change_password.old_password'.tr,
+                  controller:  changePasswordController.oldPasswordController,
+                  backgroundColor: AppColors.white,
+                  focusedBorderColor: AppColors.secondaryColor,
+                  borderColor: AppColors.secondaryColor
             ),
-            child: TextFormField(
-              controller: changePasswordController.oldPasswordController,
-              obscureText: true,
-              decoration: InputDecoration(
-                labelText: 'setting.change_password.old_password'.tr,
-                border: InputBorder.none,
-              ),
-            ),
-          ),
           const SizedBox(height: 16.0),
-          Container(
-            padding: const EdgeInsets.all(8.0),
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(10.0),
-              border: Border.all(color: Colors.grey),
-            ),
-            child: TextFormField(
-              controller: changePasswordController.newPasswordController,
-              obscureText: true,
-              decoration: InputDecoration(
+           PasswordTextField(
+              // Password should be at least 8 characters long and contain at least one uppercase letter, one number and one special character.
+                validator: (value) => FormValidator.validatePassword(value),
+                hintText: 'register.passwordHint'.tr,
                 labelText: 'setting.change_password.new_password'.tr,
-                border: InputBorder.none,
-              ),
+                controller:  changePasswordController.newPasswordController,
+                backgroundColor: AppColors.white,
+                focusedBorderColor: AppColors.secondaryColor,
+                borderColor: AppColors.secondaryColor
             ),
-          ),
           const SizedBox(height: 16.0),
-          Container(
-            padding: const EdgeInsets.all(8.0),
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(10.0),
-              border: Border.all(color: Colors.grey),
-            ),
-            child: TextFormField(
-              controller: changePasswordController.confirmPasswordController,
-              obscureText: true,
-              decoration: InputDecoration(
-                labelText: 'setting.change_password.new_password'.tr,
-                border: InputBorder.none,
+          PasswordTextField(
+                // Password should be at least 8 characters long and contain at least one uppercase letter, one number and one special character.
+                  validator: (value) => FormValidator.validatePassword(value),
+                  hintText: 'register.passwordHint'.tr,
+                  labelText: 'setting.change_password.confirm_password'.tr,
+                  controller: changePasswordController.confirmPasswordController,
+                  backgroundColor: AppColors.white,
+                  focusedBorderColor: AppColors.secondaryColor,
+                  borderColor: AppColors.secondaryColor
               ),
-            ),
-          ),
           const SizedBox(height: 32.0),
           Container(
             width: double.infinity,

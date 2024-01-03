@@ -208,6 +208,9 @@ class Fr {
                 "setting.change_password.confirm_password":"Confirmer le mot de passe",
                 "setting.change_password.change_password":"Changer le mot de passe",
 
+                // change data
+                "setting.change_data.done":"Enregistrer",
+
                 // General
                 'search': "Commencez votre recherche",
                 'empty_result_message': "Aucun résultat trouvé. Essayez d'ajuster vos filtres.",

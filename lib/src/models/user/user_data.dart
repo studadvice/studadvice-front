@@ -5,12 +5,12 @@ class UserData {
   String university;
   String formation;
   String country;
-  String? pseudo;
+  String pseudo;
   List<String>? favoriteAdministrativeProcesses = [];
   bool hasAcceptedTermsAndConditions;
 
   UserData({
-    this.pseudo,
+    required this.pseudo,
     required this.city,
     required this.postalCode,
     required this.birthDate,
@@ -41,6 +41,7 @@ class UserData {
       'university': university,
       'formation': formation,
       'country': country,
+      'pseudo': pseudo,
       'hasAcceptedTermsAndConditions': hasAcceptedTermsAndConditions,
     };
   }

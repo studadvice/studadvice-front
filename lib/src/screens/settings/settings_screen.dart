@@ -1,31 +1,48 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:stud_advice/src/screens/settings/support_screen.dart';
 import 'package:stud_advice/stud_advice.dart';
 
 import 'change_password_screen.dart';
+import 'change_user_data_screen.dart';
 
 class SettingsScreen extends StatelessWidget {
   static const String navigatorId = '/settings_screen';
   final ThemeController themeController = Get.find();
   final I18n _i18n = Get.find();
   final SettingsController settingsController = Get.find();
+  final UserStorageController userStorageController = Get.find();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: Padding(
-      padding: const EdgeInsets.all(10),
-      child: ListView(
-        children: [
-          buildUserCard(context),
-          buildOptionsGroup(context),
-          buildInfoGroup(),
-          buildLogoutGroup(),
-        ],
+      body: Padding(
+        padding: const EdgeInsets.all(10),
+        child: ListView(
+          children: [
+            FutureBuilder<BigUserCard>(
+              future: buildUserCard(context),
+              builder: (context, snapshot) {
+                if (snapshot.connectionState == ConnectionState.done) {
+                  if (snapshot.hasError) {
+                    return Container();
+                  }
+                  return snapshot.data ?? Container();
+                } else {
+                  return const CircularProgressIndicator(); // Placeholder loading indicator
+                }
+              },
+            ),
+            buildOptionsGroup(context),
+            buildInfoGroup(),
+            buildLogoutGroup(),
+          ],
+        ),
       ),
-    ));
+    );
   }
+
 
   void showLanguageSettings() {
     Get.bottomSheet(
@@ -218,11 +235,12 @@ class SettingsScreen extends StatelessWidget {
     );
   }
 
-  BigUserCard buildUserCard(BuildContext context) {
+  Future<BigUserCard> buildUserCard(BuildContext context) async {
+    String userId = userStorageController.getCurrentUserId();
+    String pseudo = await userStorageController.getPseudo(userId);
     return BigUserCard(
-      userName: "User",
-      userProfilePic: const AssetImage(
-          "assets/images/common/raven_image.png"), // TODO : change this
+      userName: pseudo,
+      userProfilePic: const AssetImage("assets/images/common/raven_image.png"),
       cardActionWidget: SettingsItem(
         icons: Icons.edit,
         iconStyle: IconStyle(
@@ -232,8 +250,11 @@ class SettingsScreen extends StatelessWidget {
         ),
         title: 'settings.account'.tr,
         subtitle: "Tap to change your data",
-        onTap: () {},
+        onTap: () {
+          Get.toNamed(ChangeUserDataScreen.navigatorId);
+        },
       ),
     );
   }
+
 }

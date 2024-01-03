@@ -204,6 +204,9 @@ class En {
             "setting.change_password.confirm_password":"Confirm password",
             "setting.change_password.change_password":"Change password",
 
+            // change data
+            "setting.change_data.done":"Save",
+
             // General
             'empty_result_message': "No results found. Try adjusting your filters.",
             'empty_result_title': "Oops, too specific!",

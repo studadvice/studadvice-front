@@ -29,8 +29,7 @@ class BigUserCard extends StatelessWidget {
       margin: const EdgeInsets.only(bottom: 20),
       decoration: BoxDecoration(
         color: backgroundColor ?? Theme.of(context).cardColor,
-        borderRadius:
-            BorderRadius.circular(double.parse(cardRadius!.toString())),
+        borderRadius: BorderRadius.circular(double.parse(cardRadius!.toString())),
       ),
       child: Stack(
         children: [
@@ -58,17 +57,15 @@ class BigUserCard extends StatelessWidget {
               children: [
                 Row(
                   crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-                    // User profile
-                    Expanded(
+                    ClipOval(
                       child: CircleAvatar(
                         radius: mediaQueryHeight / 18,
                         backgroundImage: userProfilePic,
                       ),
                     ),
-                    Expanded(
-                      child: Column(
+                    const SizedBox(width: 10),
+                    Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
@@ -80,12 +77,8 @@ class BigUserCard extends StatelessWidget {
                               color: Theme.of(context).textTheme.titleLarge!.color,
                             ),
                           ),
-                          if (userMoreInfo != null) ...[
-                            userMoreInfo!,
-                          ],
                         ],
                       ),
-                    ),
                   ],
                 ),
                 Container(
