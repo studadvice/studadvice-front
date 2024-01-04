@@ -1,20 +1,25 @@
 import 'package:stud_advice/stud_advice.dart';
+import 'package:flutter/material.dart';
 
-class Step {
+class StepItem {
   late int stepNumber;
   late String name;
   late String description;
+  Color? color;
+  bool? isCompleted;
   String? imageId;
   List<RequiredDocument>? requiredDocuments;
 
-  Step(
+  StepItem(
       {required this.stepNumber,
       required this.name,
       required this.description,
+      this.color,
+      this.isCompleted,
       this.imageId,
       this.requiredDocuments});
 
-  Step.fromJson(Map<String, dynamic> json) {
+  StepItem.fromJson(Map<String, dynamic> json) {
     stepNumber = json['stepNumber'];
     name = json['name'];
     description = json['description'];

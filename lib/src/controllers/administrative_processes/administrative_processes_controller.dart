@@ -65,7 +65,7 @@ class AdministrativeProcessController extends CustomSearchController {
       'categoryId': categoryId
     };
     return _getAdministrativeProcesses(
-        '/administrative-process/search', queryParameters);
+        '/administrative-process', queryParameters);
   }
 
   Future<AdministrativeProcesses> _getAdministrativeProcesses(
@@ -75,7 +75,7 @@ class AdministrativeProcessController extends CustomSearchController {
         path,
         queryParameters: queryParameters,
       );
-
+      print("response.statusCode ${response.statusCode} ${response.data}");
       if (response.statusCode == HttpStatus.ok) {
         return AdministrativeProcesses.fromJson(response.data);
       } else {

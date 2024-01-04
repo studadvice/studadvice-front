@@ -75,7 +75,7 @@ class AdministrativeProcessContent {
   int? maxAge;
   List<String>? nationalities;
   List<String>? universities;
-  List<Step>? steps;
+  List<StepItem>? steps;
   String? imageFileSrc;
   bool? isFavorite;
 
@@ -113,9 +113,9 @@ class AdministrativeProcessContent {
       universities = json['universities'].cast<String>();
     }
     if (json['steps'] != null) {
-      steps = <Step>[];
+      steps = <StepItem>[];
       json['steps'].forEach((v) {
-        steps!.add(Step.fromJson(v));
+        steps!.add(StepItem.fromJson(v));
       });
     }
   }

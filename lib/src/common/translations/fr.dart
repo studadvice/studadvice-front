@@ -231,5 +231,8 @@ class Fr {
 
         // Administrative processes
         "favorite_administrative_processes.title": "Mes démarches favorites",
+        
+        // Information modal
+        "information_modal.title": "Préréquis",
 };
 }

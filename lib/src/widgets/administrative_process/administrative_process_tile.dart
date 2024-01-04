@@ -12,6 +12,7 @@ class AdministrativeProcessListTile extends StatelessWidget {
   final String description;
   final bool showProgressBar;
   final Color backgroundColor;
+  final List<StepItem> steps;
 
   final AdministrativeProcessController _administrativeProcessController =
       Get.find<AdministrativeProcessController>();
@@ -24,6 +25,7 @@ class AdministrativeProcessListTile extends StatelessWidget {
     required this.imageId,
     required this.name,
     required this.description,
+    required this.steps,
     required this.showProgressBar,
     this.backgroundColor = AppColors.white,
   });
@@ -33,6 +35,14 @@ class AdministrativeProcessListTile extends StatelessWidget {
     return GestureDetector(
       onTap: () {
         // TODO : add navigation to the road map screen
+        Get.toNamed(
+          RoadMapScreen.navigatorId,
+          arguments: {
+            'administrativeProcessId': administrativeProcessId,
+            'administrativeProcessName': name,
+            'steps': steps,
+          },
+        );
       },
       child: Padding(
         padding: const EdgeInsets.all(2.0),

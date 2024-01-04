@@ -18,3 +18,6 @@ export 'register/register_user_information_controller.dart';
 export 'register/register_with_email_controller.dart';
 export 'settings/settings_controller.dart';
 export 'storage/user_storage_controller.dart';
+export 'roadmap/roadmap_controller.dart';
+export 'roadmap/step_controller.dart';
+export 'search/custom_search_controller.dart';

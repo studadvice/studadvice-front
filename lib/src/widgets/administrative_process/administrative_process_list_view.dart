@@ -23,8 +23,8 @@ class AdministrativeProcessListView extends StatelessWidget {
       init: AdministrativeProcessController(),
       builder: (controller) {
         controller.categoryId = categoryId;
-        Color backgroundColor =
-            Color(int.parse(categoryColor, radix: 16) + 0xFF000000);
+        String hexColor = categoryColor.replaceFirst('#', '');
+        Color backgroundColor = Color(int.parse(hexColor, radix: 16) + 0xFF000000);
 
         return Scaffold(
           appBar: AppBar(
@@ -50,15 +50,17 @@ class AdministrativeProcessListView extends StatelessWidget {
               pagingController: controller.pagingController,
               builderDelegate:
                   PagedChildBuilderDelegate<AdministrativeProcessContent>(
-                itemBuilder: (context, process, index) =>
-                    AdministrativeProcessListTile(
-                  name: process.name,
-                  imageId: process.imageId,
-                  description: process.description,
-                  administrativeProcessId: process.id,
-                  backgroundColor: backgroundColor,
-                  showProgressBar: false,
-                ),
+                itemBuilder: (context, process, index) {
+                  return AdministrativeProcessListTile(
+                    name: process.name,
+                    imageId: process.imageId,
+                    description: process.description,
+                    administrativeProcessId: process.id,
+                    steps: process.steps!,
+                    backgroundColor: backgroundColor,
+                    showProgressBar: false,
+                  );
+                },
                 firstPageErrorIndicatorBuilder: (context) => ErrorIndicator(
                   error: controller.pagingController.error,
                   onTryAgain: () => controller.pagingController.refresh(),

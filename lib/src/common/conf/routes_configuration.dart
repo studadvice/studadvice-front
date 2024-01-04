@@ -83,6 +83,13 @@ class RoutesConfiguration {
         name: SupportScreen.navigatorId,
         page: () => SupportScreen(),
         binding: SupportBinding()
+      ),
+      GetPage(
+        name: RoadMapScreen.navigatorId,
+        page: () => RoadMapScreen(
+          currentStep: 0,
+          admnistrativeProcessName: '',
+        ),
       )
     ];
   }
