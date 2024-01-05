@@ -11,18 +11,6 @@ class CalendarScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    void _showInfoTooltip() {
-      final tooltip = Tooltip(
-        message:
-        "calendar.description".tr,
-        child: const Icon(Icons.info),
-      );
-
-      final overlay = OverlayEntry(builder: (context) => tooltip);
-      Overlay.of(context).insert(overlay);
-      Future.delayed(const Duration(seconds: 3), () => overlay.remove());
-    }
-
     print(calendarController.administrativeProcessesEvents); //TODO need to use this to rebuild in change, change the logic
     return Scaffold(
       appBar: AppBar(
