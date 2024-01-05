@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:stud_advice/src/common/chore.dart';
 
-import 'package:flutter/material.dart';
-import 'package:stud_advice/stud_advice.dart';
-
 class StepNumberPainter extends CustomPainter {
   final int stepNumber;
   final Color color;
@@ -11,7 +8,6 @@ class StepNumberPainter extends CustomPainter {
   final bool isActivated;
   final double borderWidth;
   final Color textBorderColor;
-  final Color borderColor;
 
   StepNumberPainter({
     required this.stepNumber,
@@ -20,20 +16,20 @@ class StepNumberPainter extends CustomPainter {
     this.isActivated = false,
     this.borderWidth = 5.0,
     this.textBorderColor = Colors.black,
-    this.borderColor = const Color(0xFF219EBC),
   });
 
   @override
   void paint(Canvas canvas, Size size) {
-    Color fillColor = color;
+    Color fillColor = isActivated ? color : AppColors.grey.withOpacity(0.5);
+    Color borderColor = AppColors.grey;
 
-    final Paint borderPaint = Paint()
+    final borderPaint = Paint()
       ..color = borderColor
       ..strokeWidth = borderWidth
       ..style = PaintingStyle.stroke;
 
     final fillPaint = Paint()
-      ..color = isActivated ? color.withOpacity(0.7) : color
+      ..color = fillColor
       ..style = PaintingStyle.fill;
 
     final textStyle = TextStyle(
@@ -57,17 +53,11 @@ class StepNumberPainter extends CustomPainter {
       (diameter - textPainter.width) / 2,
       (diameter - textPainter.height) / 2,
     );
-    canvas.drawCircle(Offset(diameter / 2, diameter / 2), diameter / 2, fillPaint);
-    if (!isActivated) {
-      Paint shadowPaint = Paint()
-        ..color = AppColors.white.withOpacity(0.7)
-        ..strokeWidth = borderWidth
-        ..style = PaintingStyle.fill;
 
-      canvas.drawCircle(Offset(diameter / 2, diameter / 2), diameter / 2, shadowPaint);
-    }else {
-      canvas.drawCircle(Offset(diameter / 2, diameter / 2), diameter / 2 - borderWidth / 2, borderPaint);
-    }
+    canvas.drawCircle(Offset(diameter / 2, diameter / 2), diameter / 2, fillPaint);
+
+    canvas.drawCircle(Offset(diameter / 2, diameter / 2), diameter / 2 - borderWidth / 2, borderPaint);
+
     textPainter.paint(canvas, textOffset);
   }
 
@@ -79,7 +69,6 @@ class StepNumberPainter extends CustomPainter {
         diameter != oldPainter.diameter ||
         isActivated != oldPainter.isActivated ||
         borderWidth != oldPainter.borderWidth ||
-        textBorderColor != oldPainter.textBorderColor ||
-        borderColor != oldPainter.borderColor;
+        textBorderColor != oldPainter.textBorderColor;
   }
 }
