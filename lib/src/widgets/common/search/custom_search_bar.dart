@@ -48,7 +48,7 @@ class CustomSearchBar extends StatelessWidget {
       inputDecoration: InputDecoration(
         prefixIcon: const Icon(
           Icons.search,
-          color: Colors.grey,
+          color: AppColors.primaryColor,
           size: 26,
         ),
         suffixIcon: GestureDetector(
@@ -57,7 +57,7 @@ class CustomSearchBar extends StatelessWidget {
           },
           child: const Icon(
             Icons.mic,
-            color: Colors.blue,
+            color: AppColors.primaryColor,
             size: 26,
           ),
         ),

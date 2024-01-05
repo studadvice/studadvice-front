@@ -36,9 +36,9 @@ class DatePickerField extends StatelessWidget {
         builder: (BuildContext context, Widget? child) {
           return Theme(
             data: ThemeData.light().copyWith(
-              primaryColor: AppColors.blue,
-              hintColor: AppColors.blue,
-              colorScheme: const ColorScheme.light(primary: AppColors.blue),
+              primaryColor: AppColors.primaryColor,
+              hintColor: AppColors.primaryColor,
+              colorScheme: const ColorScheme.light(primary: AppColors.primaryColor),
               buttonTheme:
                   const ButtonThemeData(textTheme: ButtonTextTheme.primary),
             ),

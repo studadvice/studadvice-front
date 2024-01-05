@@ -4,7 +4,7 @@ class AppColors {
   // TODO : remove this block
   static const primaryColor = Color(0xFF219EBC);
   static const primaryColorAccent = Color(0xFF219EBC);
-  static const secondaryColor = Color(0xFFFC8500);
+  static const secondaryColor = Color(0xFF219EBC);
   static const accentColor = Color(0xFFFFB703);
   static const accentColorAccent = Color(0xFFFB8500);
   static const dangerColor = Color(0xFFD62828);

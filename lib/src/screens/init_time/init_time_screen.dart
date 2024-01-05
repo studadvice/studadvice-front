@@ -49,7 +49,7 @@ class InitTimeScreen extends StatelessWidget {
       child: CustomButton(
           text: text,
           textColor: textColor,
-          backgroundColor: AppColors.blue,
+          backgroundColor: AppColors.primaryColor,
           onPressed: onPressed),
     );
   }

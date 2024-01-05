@@ -104,7 +104,7 @@ class RegisterWithEmailScreen extends StatelessWidget {
     return CustomButton(
         text: 'register.connectionButton'.tr,
         textColor: AppColors.white,
-        backgroundColor: AppColors.blue,
+        backgroundColor: AppColors.primaryColor,
         onPressed: () async {
           if (!_legalTermsController.agreeWithTermsAndConditions.value) {
             _legalTermsController.getSnackbarController(

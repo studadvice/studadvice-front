@@ -124,7 +124,7 @@ class AdministrativeProcessListTile extends StatelessWidget {
                           value: 0.5,
                           backgroundColor: AppColors.grey,
                           valueColor:
-                              AlwaysStoppedAnimation<Color>(AppColors.blue),
+                              AlwaysStoppedAnimation<Color>(AppColors.primaryColor),
                         ),
                       )
                     : null,

@@ -182,7 +182,7 @@ class SettingsScreen extends StatelessWidget {
           iconStyle: IconStyle(
             iconsColor: AppColors.white,
             withBackground: true,
-            backgroundColor: AppColors.blue,
+            backgroundColor: AppColors.primaryColor,
           ),
           title: 'settings.terms'.tr,
         ),

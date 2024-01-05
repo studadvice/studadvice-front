@@ -284,7 +284,7 @@ class _ChangeUserDataScreenState
     return CustomButton(
         text: 'setting.change_data.done'.tr,
         textColor: AppColors.white,
-        backgroundColor: AppColors.blue,
+        backgroundColor: AppColors.primaryColor,
         onPressed: () {
           if (_formKey.currentState!.validate()) {
             UserData userData = buildUserData();

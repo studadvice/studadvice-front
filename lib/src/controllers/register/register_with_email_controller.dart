@@ -31,7 +31,7 @@ class RegisterWithEmailController extends GetxController {
         Get.snackbar(
           "register_with_email_controller.alreadyHaveAnAccountError".tr,
           "register_with_email_controller.alreadyHaveAnAccount".tr,
-          backgroundColor: AppColors.blue,
+          backgroundColor: AppColors.primaryColor,
           snackPosition: SnackPosition.BOTTOM,
           colorText: AppColors.white,
         );
