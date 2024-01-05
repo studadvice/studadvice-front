@@ -11,14 +11,75 @@ class CalendarScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    void _showInfoTooltip() {
+      final tooltip = Tooltip(
+        message:
+        "calendar.description".tr,
+        child: const Icon(Icons.info),
+      );
+
+      final overlay = OverlayEntry(builder: (context) => tooltip);
+      Overlay.of(context).insert(overlay);
+      Future.delayed(const Duration(seconds: 3), () => overlay.remove());
+    }
+
     print(calendarController.administrativeProcessesEvents); //TODO need to use this to rebuild in change, change the logic
     return Scaffold(
       appBar: AppBar(
-        title: Text('categories.calendar'.tr),
+        title: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Text('categories.calendar'.tr),
+            IconButton(
+              icon: const Icon(Icons.info_outline),
+              onPressed: () {
+                showDialog(
+                  context: context,
+                  builder: (BuildContext context) {
+                    return Column(
+                      children: [
+                        Stack(
+                          children: [
+                            Container(
+                              padding: const EdgeInsets.all(16.0),
+                              decoration: BoxDecoration(
+                                color: Colors.white,
+                                borderRadius: BorderRadius.circular(12.0),
+                              ),
+                              child: Text(
+                                "calendar.description".tr,
+                                style: const TextStyle(
+                                  fontSize: 18.0,
+                                  color: Colors.black,
+                                  fontWeight: FontWeight.normal,
+                                  decoration: TextDecoration.none,
+                                ),
+                              ),
+                            ),
+                            Positioned(
+                              top: 2.0,
+                              right: 8.0,
+                              child: IconButton(
+                                icon: const Icon(Icons.close),
+                                onPressed: () {
+                                  Navigator.of(context).pop();
+                                },
+                              ),
+                            ),
+                          ],
+                        ),
+                      ],
+                    );
+                  },
+                );
+              },
+            ),
+          ],
+        ),
       ),
       body: Obx(() {
         return Column(
-            children: [
+          children: [
               TableCalendar<AdministrativeProcessContent>(
                 firstDay: kFirstDay,
                 lastDay: kLastDay,
