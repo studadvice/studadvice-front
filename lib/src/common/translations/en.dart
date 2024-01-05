@@ -208,8 +208,8 @@ class En {
             "setting.change_data.done":"Save",
 
             // General
-            'empty_result_message': "No results found. Try adjusting your filters.",
-            'empty_result_title': "Oops, too specific!",
+            'empty_result_message': "No results found. Try later.",
+            'empty_result_title': "Oops, no result!",
             'no_connection_indicator_message': "Check your internet connection and give it another go.",
             'no_connection_indicator_title': "Connection Lost",
             'general_error_title': "Something went wrong",
