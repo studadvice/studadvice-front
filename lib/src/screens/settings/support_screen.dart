@@ -52,8 +52,15 @@ class SupportScreen extends StatelessWidget {
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(10.0),
                       ),
+                      focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(10.0),
+                        borderSide: const BorderSide(
+                          color: AppColors.primaryColor,
+                        ),
+                      ),
                       labelText: 'support.subject'.tr,
                     ),
+                    cursorColor: AppColors.primaryColor,
                   ),
                 ),
                 Expanded(
@@ -69,7 +76,14 @@ class SupportScreen extends StatelessWidget {
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(10.0),
                         ),
+                      focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(10.0),
+                        borderSide: const BorderSide(
+                          color: AppColors.primaryColor,
+                        ),
                       ),
+                      ),
+                      cursorColor: AppColors.primaryColor,
                     ),
                   ),
                 ),
