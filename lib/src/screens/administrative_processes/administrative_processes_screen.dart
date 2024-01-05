@@ -29,30 +29,11 @@ class AdministrativesProcessesScreen extends StatelessWidget {
       appBar: CustomSearchAppBar(
           controller: administrativeProcessController,
           hintText: 'categories.search'.tr),
-      body: ClipRRect(
-        borderRadius: const BorderRadius.only(
-          topLeft: Radius.circular(20.0),
-          topRight: Radius.circular(20.0),
-        ),
-        child: Container(
-          decoration: const BoxDecoration(
-            color: AppColors.grey50,
-            boxShadow: [
-              BoxShadow(
-                color: AppColors.black26,
-                offset: Offset(0, -2),
-                blurRadius: 4.0,
-              ),
-            ],
-          ),
-          padding: const EdgeInsets.all(5.0),
-          child: AdministrativeProcessListView(
+      body: AdministrativeProcessListView(
             categoryId: _getCategoryId(),
             categoryName: _getCategoryName(),
             categoryColor: _getCategoryColor(),
-          ),
-        ),
-      ),
+          )
     );
   }
 }
