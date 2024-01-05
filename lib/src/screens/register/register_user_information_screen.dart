@@ -284,7 +284,7 @@ class _RegisterUserInformationScreenState
     return CustomButton(
         text: 'register.nextButton'.tr,
         textColor: AppColors.white,
-        backgroundColor: AppColors.blue,
+        backgroundColor: AppColors.primaryColor,
         onPressed: () {
           if (_formKey.currentState!.validate()) {
             UserData userData = buildUserData();

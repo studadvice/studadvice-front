@@ -56,8 +56,8 @@ class ForgotPasswordScreen extends StatelessWidget {
                   validator: (value) => FormValidator.validateEmail(value),
                   autofillHints: [AutofillHints.email],
                   backgroundColor: AppColors.white,
-                  focusedBorderColor: AppColors.blue,
-                  borderColor: AppColors.blue,
+                  focusedBorderColor: AppColors.primaryColor,
+                  borderColor: AppColors.primaryColor,
                 ),
                 const SizedBox(height: 20),
                 Padding(
@@ -74,7 +74,7 @@ class ForgotPasswordScreen extends StatelessWidget {
                         }
                       },
                       textColor: AppColors.white,
-                      backgroundColor: AppColors.blue),
+                      backgroundColor: AppColors.primaryColor),
                 ),
               ],
             ),

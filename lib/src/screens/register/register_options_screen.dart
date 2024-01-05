@@ -134,7 +134,7 @@ class RegisterOptionsScreen extends StatelessWidget {
                       Get.toNamed(RegisterWithEmailScreen.navigatorId);
                     },
                     textColor: AppColors.white,
-                    backgroundColor: AppColors.blue,
+                    backgroundColor: AppColors.primaryColor,
                     borderColor: AppColors.primaryColorAccent,
                   ),
                 ],

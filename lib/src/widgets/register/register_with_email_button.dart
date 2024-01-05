@@ -11,8 +11,8 @@ class RegisterWithEmailButton extends StatelessWidget {
   RegisterWithEmailButton(
       {required this.onPressed,
       this.backgroundColor = AppColors.white,
-      this.textColor = AppColors.blue,
-      this.borderColor = AppColors.blue,
+      this.textColor = AppColors.primaryColor,
+      this.borderColor = AppColors.primaryColor,
       required this.text});
 
   @override

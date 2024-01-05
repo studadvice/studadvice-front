@@ -9,7 +9,7 @@ class Styles {
     brightness: Brightness.dark,
     primaryColor: AppColors.primaryColor,
     secondaryHeaderColor: AppColors.secondaryColor,
-    scaffoldBackgroundColor: const Color(0xFF303030),
+    //scaffoldBackgroundColor: const Color(0xFF303030),
     inputDecorationTheme: const InputDecorationTheme(
       hintStyle: TextStyle(color: Colors.white),
       labelStyle: TextStyle(color: Colors.white),

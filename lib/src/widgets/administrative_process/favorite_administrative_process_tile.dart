@@ -108,7 +108,7 @@ class FavoriteAdministrativeProcessListTile extends StatelessWidget {
                     child: LinearProgressIndicator(
                       value: 0.5,
                       backgroundColor: AppColors.grey,
-                      valueColor: AlwaysStoppedAnimation<Color>(AppColors.blue),
+                      valueColor: AlwaysStoppedAnimation<Color>(AppColors.primaryColor),
                     ),
                   )
                 : null,

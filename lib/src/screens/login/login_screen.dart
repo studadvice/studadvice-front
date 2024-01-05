@@ -131,7 +131,7 @@ class LoginScreen extends StatelessWidget {
     return CustomButton(
         text: 'global.login'.tr,
         textColor: AppColors.white,
-        backgroundColor: AppColors.blue,
+        backgroundColor: AppColors.primaryColor,
         onPressed: () {
           if (!_formKey.currentState!.validate()) {
             return;
@@ -166,7 +166,7 @@ class LoginScreen extends StatelessWidget {
           imagePath: 'assets/images/login/facebook.png',
           tileBackgroundColor: AppColors.white,
           borderColor: AppColors.black26,
-          iconColor: AppColors.blueAccent,
+          iconColor: AppColors.primaryColor,
           onTap: () async {
             if (await _socialSignInController.loginWithFacebookAccount()) {
               Get.offAllNamed(NavigationBarScreen.navigatorId);

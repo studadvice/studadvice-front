@@ -26,7 +26,7 @@ class ForgotPasswordController extends GetxController {
         Get.snackbar(
           successTitle,
           successMessage,
-          backgroundColor: AppColors.blue,
+          backgroundColor: AppColors.primaryColor,
           snackPosition: SnackPosition.BOTTOM,
           colorText: Colors.white,
         );
