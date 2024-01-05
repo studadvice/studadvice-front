@@ -44,7 +44,7 @@ class AdministrativeProcessListView extends StatelessWidget {
             onRefresh: () => Future.sync(
               () => controller.pagingController.refresh(),
             ),
-            color: AppColors.primaryColor,
+            color: AppColors.secondaryColor,
             child: PagedListView.separated(
               pagingController: controller.pagingController,
               builderDelegate:

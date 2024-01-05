@@ -58,7 +58,7 @@ class RegisterWithEmailScreen extends StatelessWidget {
       style: const TextStyle(
         fontSize: AppFontSizes.extraLarge,
         fontWeight: FontWeight.bold,
-        color: AppColors.secondaryColor,
+        color: AppColors.primaryColor,
       ),
     );
   }
@@ -70,9 +70,9 @@ class RegisterWithEmailScreen extends StatelessWidget {
       labelText: 'register.emailLabel'.tr,
       controller: _emailController,
       backgroundColor: AppColors.white,
-      focusedBorderColor: AppColors.secondaryColor,
+      focusedBorderColor: AppColors.primaryColor,
       keyboardType: TextInputType.emailAddress,
-      borderColor: AppColors.secondaryColor,
+      borderColor: AppColors.primaryColor,
     );
   }
 
@@ -84,8 +84,8 @@ class RegisterWithEmailScreen extends StatelessWidget {
         labelText: 'register.passwordLabel'.tr,
         controller: _passwordController,
         backgroundColor: AppColors.white,
-        focusedBorderColor: AppColors.secondaryColor,
-        borderColor: AppColors.secondaryColor);
+        focusedBorderColor: AppColors.primaryColor,
+        borderColor: AppColors.primaryColor);
   }
 
   Widget buildConfirmPasswordTextField() {
@@ -96,8 +96,8 @@ class RegisterWithEmailScreen extends StatelessWidget {
         labelText: 'register.confirmPasswordLabel'.tr,
         controller: _confirmPasswordController,
         backgroundColor: AppColors.white,
-        focusedBorderColor: AppColors.secondaryColor,
-        borderColor: AppColors.secondaryColor);
+        focusedBorderColor: AppColors.primaryColor,
+        borderColor: AppColors.primaryColor);
   }
 
   Widget buildConnectionButton() {

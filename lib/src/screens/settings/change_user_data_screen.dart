@@ -126,8 +126,8 @@ class _ChangeUserDataScreenState
       labelText: 'register.pseudoLabel'.tr,
       controller: pseudoController,
       backgroundColor: AppColors.white,
-      focusedBorderColor: AppColors.secondaryColor,
-      borderColor: AppColors.secondaryColor,
+      focusedBorderColor: AppColors.primaryColor,
+      borderColor: AppColors.primaryColor,
       validator: (value) {
         if (value == null || value.isEmpty) {
           return 'register.pseudoError'.tr;
@@ -143,8 +143,8 @@ class _ChangeUserDataScreenState
       labelText: 'register.cityLabel'.tr,
       hintText: 'register.cityHint'.tr,
       backgroundColor: AppColors.white,
-      borderColor: AppColors.secondaryColor,
-      focusedBorderColor: AppColors.secondaryColor,
+      borderColor: AppColors.primaryColor,
+      focusedBorderColor: AppColors.primaryColor,
       suggestionsCallback: (pattern) async {
         return await _registerUserInformationController
             .fetchCitiesFromAPI(pattern);
@@ -164,8 +164,8 @@ class _ChangeUserDataScreenState
       child: CustomAsyncDropdownSearch(
         labelText: 'register.postalCodeLabel'.tr,
         backgroundColor: AppColors.white,
-        borderColor: AppColors.secondaryColor,
-        focusedBorderColor: AppColors.secondaryColor,
+        borderColor: AppColors.primaryColor,
+        focusedBorderColor: AppColors.primaryColor,
         asyncItems: (String filter) => _registerUserInformationController
             .fetchPostalCodesFromApi(_cityController.text),
         validator: (value) {
@@ -206,16 +206,16 @@ class _ChangeUserDataScreenState
         controller: _countryController,
         hintText: 'register.countryHint'.tr,
         labelText: 'register.countryLabel'.tr,
-        focusedBorderColor: AppColors.secondaryColor,
-        borderColor: AppColors.secondaryColor);
+        focusedBorderColor: AppColors.primaryColor,
+        borderColor: AppColors.primaryColor);
   }
 
   Widget buildBirthDateTextField() {
     return DatePickerField(
       hintText: 'register.birthDateHint'.tr,
       controller: _birthDateController,
-      focusedBorderColor: AppColors.secondaryColor,
-      borderColor: AppColors.secondaryColor,
+      focusedBorderColor: AppColors.primaryColor,
+      borderColor: AppColors.primaryColor,
       validator: (value) {
         if (value == null || value.isEmpty) {
           return 'register.birthDateError'.tr;
@@ -269,8 +269,8 @@ class _ChangeUserDataScreenState
       labelText: 'register.formationLabel'.tr,
       controller: _formationController,
       backgroundColor: AppColors.white,
-      focusedBorderColor: AppColors.secondaryColor,
-      borderColor: AppColors.secondaryColor,
+      focusedBorderColor: AppColors.primaryColor,
+      borderColor: AppColors.primaryColor,
       validator: (value) {
         if (value == null || value.isEmpty) {
           return 'register.formationError'.tr;

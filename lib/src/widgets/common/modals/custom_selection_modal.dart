@@ -33,8 +33,8 @@ class CustomSelectionModal extends StatelessWidget {
       labelText: labelText,
       controller: controller,
       backgroundColor: AppColors.white,
-      focusedBorderColor: AppColors.secondaryColor,
-      borderColor: AppColors.secondaryColor,
+      focusedBorderColor: AppColors.primaryColor,
+      borderColor: AppColors.primaryColor,
       keyboardType: TextInputType.none,
       suffixIcon: const Icon(Icons.arrow_drop_down),
       validator: validator,
@@ -55,8 +55,8 @@ class CustomSelectionModal extends StatelessWidget {
                       controller:
                           customSelectionModalController.searchController,
                       backgroundColor: AppColors.white,
-                      focusedBorderColor: AppColors.secondaryColor,
-                      borderColor: AppColors.secondaryColor,
+                      focusedBorderColor: AppColors.primaryColor,
+                      borderColor: AppColors.primaryColor,
                       onChanged: (value) {
                         customSelectionModalController.filterItems(value);
                       },

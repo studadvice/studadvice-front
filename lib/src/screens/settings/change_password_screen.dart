@@ -52,8 +52,8 @@ class ChangePasswordForm extends StatelessWidget {
                   labelText: 'setting.change_password.old_password'.tr,
                   controller:  changePasswordController.oldPasswordController,
                   backgroundColor: AppColors.white,
-                  focusedBorderColor: AppColors.secondaryColor,
-                  borderColor: AppColors.secondaryColor
+                  focusedBorderColor: AppColors.primaryColor,
+                  borderColor: AppColors.primaryColor
             ),
           const SizedBox(height: 16.0),
            PasswordTextField(
@@ -63,8 +63,8 @@ class ChangePasswordForm extends StatelessWidget {
                 labelText: 'setting.change_password.new_password'.tr,
                 controller:  changePasswordController.newPasswordController,
                 backgroundColor: AppColors.white,
-                focusedBorderColor: AppColors.secondaryColor,
-                borderColor: AppColors.secondaryColor
+                focusedBorderColor: AppColors.primaryColor,
+                borderColor: AppColors.primaryColor
             ),
           const SizedBox(height: 16.0),
           PasswordTextField(
@@ -74,8 +74,8 @@ class ChangePasswordForm extends StatelessWidget {
                   labelText: 'setting.change_password.confirm_password'.tr,
                   controller: changePasswordController.confirmPasswordController,
                   backgroundColor: AppColors.white,
-                  focusedBorderColor: AppColors.secondaryColor,
-                  borderColor: AppColors.secondaryColor
+                  focusedBorderColor: AppColors.primaryColor,
+                  borderColor: AppColors.primaryColor
               ),
           const SizedBox(height: 32.0),
           Container(

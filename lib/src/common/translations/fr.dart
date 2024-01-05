@@ -127,7 +127,7 @@ class Fr {
                 "register_with_email_controller.registerWithEmailFailed":
                 "Une erreur s'est produite lors de l'inscription",
                 "register_with_email_controller.alreadyHaveAnAccount":
-                "Un compte existe déjà avec cette adresse email \n Veuillez continuer votre inscription",
+                "Un compte existe déjà avec cette adresse email",
                 // ----------------
 
                 // DatePickerField
@@ -239,6 +239,7 @@ class Fr {
                 'deals.end': "Date de fin",
                 'deals.url': "Go",
                 'deals.search': "Recherchez des bons plans",
+                'deals.see_more': "Voir tout",
 
                 // Administrative processes
                 "favorite_administrative_processes.title": "Mes démarches favorites",

@@ -48,7 +48,7 @@ class DealsListView extends StatelessWidget {
                               controller: _controller,
                               count: deals.content.length,
                               effect: const ExpandingDotsEffect(
-                                activeDotColor: AppColors.primaryColor,
+                                activeDotColor: AppColors.secondaryColor,
                                 dotColor: AppColors.grey,
                                 dotHeight: 10,
                                 dotWidth: 10,
@@ -69,12 +69,16 @@ class DealsListView extends StatelessWidget {
                                   onTap: () {
                                     Get.toNamed(
                                       DealsSearchScreen.navigatorId,
-                                    );                                  },
-                                  child: const Icon(
-                                    Icons.add,
-                                    color: AppColors.black,
-                                    size: 30,
-                                  ),
+                                    );
+                                    },
+                                    child: Text(
+                                      'deals.see_more'.tr,
+                                      style: const TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 15,
+                                          color: AppColors.secondaryColor,
+                                      ),
+                                    ),
                                 ),
                               ],
                             ),
@@ -110,7 +114,13 @@ class DealsListView extends StatelessWidget {
                                   }
                                 } else {
                                   return const Center(
-                                    child: CircularProgressIndicator(),
+                                    child: SizedBox(
+                                      width: 24,
+                                      height: 24,
+                                      child: CircularProgressIndicator(
+                                        color: AppColors.secondaryColor,
+                                      ),
+                                    ),
                                   );
                                 }
                               },
@@ -125,7 +135,13 @@ class DealsListView extends StatelessWidget {
                     return const Icon(Icons.image);
                   } else {
                     return const Center(
-                      child: CircularProgressIndicator(),
+                      child: SizedBox(
+                        width: 24,
+                        height: 24,
+                        child: CircularProgressIndicator(
+                          color: AppColors.secondaryColor,
+                        ),
+                      ),
                     );
                   }
                 },

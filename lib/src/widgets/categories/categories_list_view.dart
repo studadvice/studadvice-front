@@ -17,6 +17,7 @@ class CategoriesListView extends StatelessWidget {
           onRefresh: () => Future.sync(
                 () => controller.pagingController.refresh(),
           ),
+          color: AppColors.secondaryColor,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -34,12 +35,14 @@ class CategoriesListView extends StatelessWidget {
                       children : [
                         IconButton(
                           icon: const Icon(Icons.calendar_month),
+                          color: AppColors.secondaryColor,
                           onPressed: () => Get.toNamed(
                             CalendarScreen.navigatorId,
                           ),
                         ),
                         IconButton(
                           icon: const Icon(Icons.favorite),
+                          color: AppColors.secondaryColor,
                           onPressed: () => Get.toNamed(
                             FavoriteAdministrativesProcessesScreen.navigatorId,
                           ),
