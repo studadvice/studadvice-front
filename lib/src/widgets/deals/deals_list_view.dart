@@ -137,6 +137,7 @@ class DealsListView extends StatelessWidget {
           onRefresh: () => Future.sync(
                 () => controller.pagingController.refresh(),
           ),
+          color: AppColors.primaryColor,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [

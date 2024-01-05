@@ -38,6 +38,7 @@ class FavoriteAdministrativeProcessListView extends StatelessWidget {
             onRefresh: () => Future.sync(
               () => controller.pagingController.refresh(),
             ),
+            color: AppColors.primaryColor,
             child: PagedListView.separated(
               pagingController: controller.pagingController,
               builderDelegate:

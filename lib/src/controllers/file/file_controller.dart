@@ -13,7 +13,6 @@ class FileController extends GetxController {
       final response = await _dio.get(
         '/download/$fileId',
       );
-
       if (response.statusCode == HttpStatus.ok) {
         CustomFile customFile =  CustomFile.fromJson(response.data);
         Directory appDocDir = await getApplicationDocumentsDirectory();
