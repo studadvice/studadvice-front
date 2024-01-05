@@ -106,7 +106,7 @@ class DealsListView extends StatelessWidget {
                                       },
                                     );
                                   } else {
-                                    return NoResultIndicator();
+                                    return EmptyListIndicator();
                                   }
                                 } else {
                                   return const Center(
@@ -119,7 +119,7 @@ class DealsListView extends StatelessWidget {
                         ),
                       );
                     } else {
-                      return NoResultIndicator();
+                      return EmptyListIndicator();
                     }
                   } else if (snapshot.hasError) {
                     return const Icon(Icons.image);

@@ -213,8 +213,8 @@ class Fr {
 
                 // General
                 'search': "Commencez votre recherche",
-                'empty_result_message': "Aucun résultat trouvé. Essayez d'ajuster vos filtres.",
-                'empty_result_title': "Oups, trop spécifique !",
+                'empty_result_message': "Aucun résultat trouvé. Essayez plus tard.",
+                'empty_result_title': "Oups, aucun résultat !",
                 'no_connection_indicator_message': "Vérifiez votre connexion Internet et réessayez.",
                 'no_connection_indicator_title': "Connexion perdue",
                 'general_error_title': "Quelque chose s'est mal passé",
