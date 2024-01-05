@@ -20,9 +20,12 @@ class WelcomeScreen extends StatelessWidget {
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return const Center(
-            child: CircularProgressIndicator(
-              color: AppColors.secondaryColor,
-              strokeWidth: 5,
+            child: SizedBox(
+              width: 24,
+              height: 24,
+              child: CircularProgressIndicator(
+                color: AppColors.secondaryColor,
+              ),
             ),
           );
         } else if (snapshot.hasData) {

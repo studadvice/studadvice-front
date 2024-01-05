@@ -65,8 +65,8 @@ class LoginScreen extends StatelessWidget {
         autofillHints: [AutofillHints.email],
         keyboardType: TextInputType.emailAddress,
         backgroundColor: AppColors.white,
-        focusedBorderColor: AppColors.secondaryColor,
-        borderColor: AppColors.secondaryColor);
+        focusedBorderColor: AppColors.primaryColor,
+        borderColor: AppColors.primaryColor);
   }
 
   Widget buildPasswordTextField() {
@@ -81,8 +81,8 @@ class LoginScreen extends StatelessWidget {
         labelText: 'global.password'.tr,
         controller: _loginController.passwordController,
         backgroundColor: AppColors.white,
-        focusedBorderColor: AppColors.secondaryColor,
-        borderColor: AppColors.secondaryColor);
+        focusedBorderColor: AppColors.primaryColor,
+        borderColor: AppColors.primaryColor);
   }
 
   Widget buildWelcomeBackText() {
@@ -91,7 +91,7 @@ class LoginScreen extends StatelessWidget {
       style: const TextStyle(
         fontSize: AppFontSizes.large25,
         fontWeight: FontWeight.bold,
-        color: AppColors.secondaryColor,
+        color: AppColors.primaryColor,
       ),
     );
   }

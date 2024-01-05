@@ -56,8 +56,12 @@ class DealDetailScreen extends StatelessWidget {
                     return const Center(child: Icon(Icons.image));
                   } else {
                     return const Center(
-                      child: CircularProgressIndicator(
-                        color: AppColors.primaryColor,
+                      child: SizedBox(
+                        width: 24,
+                        height: 24,
+                        child: CircularProgressIndicator(
+                          color: AppColors.secondaryColor,
+                        ),
                       ),
                     );
                   }

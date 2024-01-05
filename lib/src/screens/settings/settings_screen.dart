@@ -26,11 +26,19 @@ class SettingsScreen extends StatelessWidget {
               builder: (context, snapshot) {
                 if (snapshot.connectionState == ConnectionState.done) {
                   if (snapshot.hasError) {
-                    return Container();
+                    return Container(); // Handle error case
                   }
                   return snapshot.data ?? Container();
                 } else {
-                  return const CircularProgressIndicator(); // Placeholder loading indicator
+                  return const Center(
+                    child: SizedBox(
+                      width: 24,
+                      height: 24,
+                      child: CircularProgressIndicator(
+                        color: AppColors.secondaryColor,
+                      ),
+                    ),
+                  );
                 }
               },
             ),
@@ -65,8 +73,8 @@ class SettingsScreen extends StatelessWidget {
         CustomDropdownSearch<CustomLocale>(
           labelText: 'settings.language'.tr,
           backgroundColor: AppColors.white,
-          borderColor: AppColors.secondaryColor,
-          focusedBorderColor: AppColors.secondaryColor,
+          borderColor: AppColors.primaryColor,
+          focusedBorderColor: AppColors.primaryColor,
           items: supportedLocales,
           selectedItem: _i18n.getCurrentLocale,
           onChanged: (locale) {
@@ -103,8 +111,8 @@ class SettingsScreen extends StatelessWidget {
         CustomDropdownSearch<String>(
           labelText: 'settings.textSize'.tr,
           backgroundColor: AppColors.white,
-          borderColor: AppColors.secondaryColor,
-          focusedBorderColor: AppColors.secondaryColor,
+          borderColor: AppColors.primaryColor,
+          focusedBorderColor: AppColors.primaryColor,
           items: [
             'settings.small'.tr,
             'settings.medium'.tr,

@@ -39,7 +39,15 @@ class DealItem extends StatelessWidget {
                   } else if (snapshot.hasError) {
                     return const Center(child: Icon(Icons.image));
                   } else {
-                    return const Center(child: CircularProgressIndicator());
+                    return const Center(
+                      child: SizedBox(
+                        width: 24,
+                        height: 24,
+                        child: CircularProgressIndicator(
+                          color: AppColors.secondaryColor,
+                        ),
+                      ),
+                    );
                   }
                 },
               ),

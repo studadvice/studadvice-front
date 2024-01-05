@@ -17,7 +17,7 @@ class DealsSearchListView extends StatelessWidget {
           onRefresh: () => Future.sync(
                 () => controller.pagingController.refresh(),
           ),
-          color: AppColors.primaryColor,
+          color: AppColors.secondaryColor,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [

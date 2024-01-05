@@ -37,10 +37,10 @@ class RegisterWithEmailController extends GetxController {
         );
         // We do not need to save the email and the password because it is already saved by firebase during the sign up process.
         // We just need to save the fact that the user has accepted the terms and conditions.
-        Get.toNamed(RegisterUserInformationScreen.navigatorId, arguments: {
-          'hasAcceptedTermsAndConditions':
-              formData['hasAcceptedTermsAndConditions']
-        });
+        // Get.toNamed(RegisterUserInformationScreen.navigatorId, arguments: {
+        //   'hasAcceptedTermsAndConditions':
+        //       formData['hasAcceptedTermsAndConditions']
+        // });
       } else {
         Get.snackbar(
           "register_with_email_controller.error".tr,

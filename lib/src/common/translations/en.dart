@@ -124,7 +124,7 @@ class En {
             "register_with_email_controller.registerWithEmailFailed":
             "An error occurred during registration",
             "register_with_email_controller.alreadyHaveAnAccount":
-            "An account already exists with this email address \n Please continue your registration",
+            "An account already exists with this email address",
 
             // ----------------
 
@@ -234,6 +234,7 @@ class En {
             'deals.end': "End date",
             'deals.url': "Go",
             'deals.search': "Search deals",
+            'deals.see_more': "See more",
 
             // Administrative processes
             "favorite_administrative_processes.title": "My favorites processes",

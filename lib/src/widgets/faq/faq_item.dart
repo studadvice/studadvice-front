@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:stud_advice/src/common/chore.dart';
 import '../../models/stud_advice/faq.dart';
 
 class FaqItem extends StatelessWidget {
@@ -14,6 +15,8 @@ class FaqItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return Card(
       child: ExpansionTile(
+        iconColor: AppColors.secondaryColor,
+        collapsedIconColor: AppColors.secondaryColor,
         controlAffinity: ListTileControlAffinity.leading,
         childrenPadding:
         const EdgeInsets.symmetric(vertical: 10, horizontal: 20),

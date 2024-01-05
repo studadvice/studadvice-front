@@ -68,7 +68,7 @@ class LegalTermsController extends GetxController {
           style: const TextStyle(
             fontSize: AppFontSizes.medium,
             fontWeight: FontWeight.bold,
-            color: AppColors.secondaryColor,
+            color: AppColors.primaryColor,
           ),
         ),
       ],
