@@ -253,6 +253,13 @@ class Fr {
 
                 // calendar
                 "calendar.startName": "Début de la démarche administrative",
-                "calendar.endName": "Fin de la démarche administrative"
+                "calendar.endName": "Fin de la démarche administrative",
+
+                // roadmap
+                "roadmap.title": "Roadmap",
+                "roadmap.required":"Prérequis",
+                "roadmap.description":"Description",
+                "roadmap.required_empty":"Pas de prérequis"
+
           };
 }

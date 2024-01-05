@@ -248,7 +248,13 @@ class En {
 
             //calendar
             "calendar.startName" : "Start of the administrative process",
-            "calendar.endName" : "End of the administrative process"
+            "calendar.endName" : "End of the administrative process",
+
+            // roadmap
+            "roadmap.title": "Roadmap",
+            "roadmap.required":"Prerequisites",
+            "roadmap.description":"Description",
+            "roadmap.required_empty":"No prerequisites"
 
       };
 }

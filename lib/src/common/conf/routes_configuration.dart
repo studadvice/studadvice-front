@@ -1,10 +1,12 @@
 import 'package:get/get.dart';
 import 'package:stud_advice/src/bindings/deals/deals_binding.dart';
+import 'package:stud_advice/src/bindings/roadmap/roadmap_binding.dart';
 import 'package:stud_advice/src/bindings/settings/change_password_binding.dart';
 import 'package:stud_advice/src/bindings/settings/support_binding.dart';
 import 'package:stud_advice/src/controllers/categories/calendar_controller.dart';
 import 'package:stud_advice/src/screens/home/calendar.dart';
 import 'package:stud_advice/src/screens/faq/faq_screen.dart';
+import 'package:stud_advice/src/screens/roadmap/roadmap_screen.dart';
 import 'package:stud_advice/src/screens/settings/change_password_screen.dart';
 import 'package:stud_advice/src/screens/settings/change_user_data_screen.dart';
 import 'package:stud_advice/src/screens/settings/support_screen.dart';
@@ -108,6 +110,11 @@ class RoutesConfiguration {
         name: ChangeUserDataScreen.navigatorId,
         page: () => const ChangeUserDataScreen(),
         binding: RegisterUserInformationBinding(),
+      ),
+      GetPage(
+        name: RoadMapScreen.navigatorId,
+        page: () => RoadMapScreen(),
+        binding: RoadmapBinding(),
       ),
     ];
   }

@@ -1,20 +1,24 @@
 import 'package:stud_advice/stud_advice.dart';
 
-class Step {
+class StepProcess {
   late int stepNumber;
   late String name;
   late String description;
   String? imageId;
+  late bool isCompleted;
   List<RequiredDocument>? requiredDocuments;
 
-  Step(
-      {required this.stepNumber,
-      required this.name,
-      required this.description,
-      this.imageId,
-      this.requiredDocuments});
+  StepProcess(
+      {
+        required this.stepNumber,
+        required this.name,
+        required this.description,
+        this.imageId,
+        this.requiredDocuments,
+        required this.isCompleted
+      });
 
-  Step.fromJson(Map<String, dynamic> json) {
+  StepProcess.fromJson(Map<String, dynamic> json) {
     stepNumber = json['stepNumber'];
     name = json['name'];
     description = json['description'];
@@ -25,6 +29,7 @@ class Step {
         requiredDocuments!.add(RequiredDocument.fromJson(v));
       });
     }
+    isCompleted = false;
   }
 
   Map<String, dynamic> toJson() {

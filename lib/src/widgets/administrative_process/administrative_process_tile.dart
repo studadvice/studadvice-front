@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:get/get.dart';
+import 'package:stud_advice/src/screens/roadmap/roadmap_screen.dart';
 import 'package:stud_advice/stud_advice.dart';
 
 class AdministrativeProcessListTile extends StatelessWidget {
@@ -32,7 +33,12 @@ class AdministrativeProcessListTile extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        // TODO : add navigation to the road map screen
+        Get.toNamed(
+          RoadMapScreen.navigatorId,
+            arguments: {
+              'administrativeProcessId': administrativeProcessId,
+            }
+        );
       },
       child: Padding(
         padding: const EdgeInsets.all(2.0),
