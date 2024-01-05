@@ -250,6 +250,7 @@ class En {
             //calendar
             "calendar.startName" : "Start of the administrative process",
             "calendar.endName" : "End of the administrative process",
+            "calendar.description" : "Avoid any forgetfulness in your administrative procedures with our ultimate calendar! Don't let any crucial date slip through your fingers, whether it's the grand day of commencement or the epic moment of conclusion. And the cherry on top? You can receive notifications to make sure you don't miss anything. Activate them, and no more excuses for skipping your administrative tasks! Organization is the key to administrative success!",
 
             // roadmap
             "roadmap.title": "Roadmap",
