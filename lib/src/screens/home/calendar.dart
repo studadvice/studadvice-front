@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:stud_advice/src/models/models.dart';
 import 'package:table_calendar/table_calendar.dart';
 import 'package:stud_advice/src/utils/calendar_utils.dart';
 import '../../../stud_advice.dart';
@@ -18,12 +17,7 @@ class CalendarScreen extends StatelessWidget {
         title: Text('categories.calendar'.tr),
       ),
       body: Obx(() {
-        if (calendarController.administrativeProcessesEvents.value.isEmpty) {
-          return const Center(
-            child: CircularProgressIndicator(),
-          );
-        } else {
-          return Column(
+        return Column(
             children: [
               TableCalendar<AdministrativeProcessContent>(
                 firstDay: kFirstDay,
@@ -40,6 +34,22 @@ class CalendarScreen extends StatelessWidget {
                 startingDayOfWeek: StartingDayOfWeek.monday,
                 calendarStyle: const CalendarStyle(
                   outsideDaysVisible: false,
+                  todayDecoration: BoxDecoration(
+                    color: AppColors.grey,
+                    shape: BoxShape.circle,
+                  ),
+                  selectedDecoration: BoxDecoration(
+                  color: AppColors.primaryColor,
+                  shape: BoxShape.circle,
+                  )
+                ),
+                headerStyle: const HeaderStyle(
+                    formatButtonVisible: true,
+                    formatButtonShowsNext: false,
+                    formatButtonTextStyle: TextStyle(
+                      color: AppColors.primaryColor,
+                      fontSize: 13.0,
+                    ),
                 ),
                 onDaySelected: calendarController.onDaySelected,
                 onRangeSelected: calendarController.onRangeSelected,
@@ -76,7 +86,7 @@ class CalendarScreen extends StatelessWidget {
             ],
           );
         }
-      }),
+      ),
     );
   }
 }
