@@ -12,7 +12,7 @@ class SearchCategoryController extends CustomSearchController {
   final DeeplTranslatorController _deeplTranslatorController = Get.find();
 
   final PagingController<int, CategoryContent> pagingController =
-  PagingController(firstPageKey: 0);
+      PagingController(firstPageKey: 0);
 
   @override
   void onInit() {
