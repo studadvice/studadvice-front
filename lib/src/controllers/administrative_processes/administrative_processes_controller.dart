@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:dio/dio.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 import 'package:stud_advice/src/controllers/search/custom_search_controller.dart';
@@ -11,6 +12,7 @@ class AdministrativeProcessController extends CustomSearchController {
 
   UserStorageController userStorageController = Get.find();
   final Dio _dio = Get.find();
+  final DeeplTranslatorController _deeplTranslatorController = Get.find();
 
   late String categoryId;
 
@@ -41,6 +43,18 @@ class AdministrativeProcessController extends CustomSearchController {
 
       final isLastPage = newPage.last;
       final newItems = newPage.content;
+
+      // Translate the text if the locale is not French
+      if (Get.locale?.languageCode != 'fr') {
+        debugPrint('Translating ${newItems.length} items');
+
+        for (var item in newItems) {
+          debugPrint('Translating ${item.name}');
+          item.name = await _deeplTranslatorController.translateText(item.name);
+          item.description =
+              await _deeplTranslatorController.translateText(item.description);
+        }
+      }
 
       if (isLastPage) {
         pagingController.appendLastPage(newItems);
