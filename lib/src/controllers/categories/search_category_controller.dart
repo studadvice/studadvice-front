@@ -1,16 +1,18 @@
 import 'dart:io';
 
 import 'package:dio/dio.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 import 'package:stud_advice/src/controllers/search/custom_search_controller.dart';
-import 'package:stud_advice/src/models/stud_advice/categories.dart';
+import 'package:stud_advice/stud_advice.dart';
 
 class SearchCategoryController extends CustomSearchController {
   final Dio _dio = Get.find();
+  final DeeplTranslatorController _deeplTranslatorController = Get.find();
 
   final PagingController<int, CategoryContent> pagingController =
-  PagingController(firstPageKey: 0);
+      PagingController(firstPageKey: 0);
 
   @override
   void onInit() {
@@ -30,6 +32,15 @@ class SearchCategoryController extends CustomSearchController {
       );
       final isLastPage = newPage.last;
       final newItems = newPage.content;
+
+      // Translate the text if the locale is not French
+      if (Get.locale?.languageCode != 'fr') {
+        for (var item in newItems) {
+          item.name = await _deeplTranslatorController.translateText(item.name);
+          item.description =
+              await _deeplTranslatorController.translateText(item.description);
+        }
+      }
       if (newItems.isNotEmpty) {
         if (isLastPage) {
           pagingController.appendLastPage(newItems);
@@ -42,7 +53,7 @@ class SearchCategoryController extends CustomSearchController {
       }
     } catch (error) {
       pagingController.error = error;
-      print(error);
+      debugPrint(error.toString());
     }
   }
 
