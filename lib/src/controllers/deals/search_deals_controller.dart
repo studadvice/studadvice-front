@@ -22,7 +22,6 @@ class SearchDealsController extends CustomSearchController {
 
   @override
   Future<void> fetchPage(int pageKey) async {
-    print("fetch");
     try {
       final newPage = await getDealsBySearch(
         number: pageKey,
@@ -32,16 +31,14 @@ class SearchDealsController extends CustomSearchController {
 
       final isLastPage = newPage.last;
       final newItems = newPage.content;
-      if (newItems.isNotEmpty) {
-        if (isLastPage) {
-          pagingController.appendLastPage(newItems);
-        } else {
-          final nextPageKey = pageKey + 1;
-          pagingController.appendPage(newItems, nextPageKey);
-        }
+
+      if (isLastPage) {
+        pagingController.appendLastPage(newItems);
       } else {
-        pagingController.appendLastPage([]);
+        final nextPageKey = pageKey + 1;
+        pagingController.appendPage(newItems, nextPageKey);
       }
+
     } catch (error) {
       pagingController.error = error;
     }

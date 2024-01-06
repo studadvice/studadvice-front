@@ -22,8 +22,10 @@ class DealItemSlide extends StatelessWidget {
           arguments: {'deal': deal},
         );
       },
-      child: ClipRRect(
-        borderRadius: BorderRadius.circular(10.0),
+      child: Container(
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(10.0),
+        ),
         child: Stack(
           children: [
             FutureBuilder<String?>(
@@ -35,9 +37,14 @@ class DealItemSlide extends StatelessWidget {
                     child: FractionallySizedBox(
                       widthFactor: 1.0,
                       heightFactor: 1.0,
-                      child: Image.file(
-                        File(snapshot.data!),
-                        height: MediaQuery.of(context).size.height / 2.5,
+                      child: Container(
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(10.0),
+                          image: DecorationImage(
+                            image: FileImage(File(snapshot.data!)),
+                            fit: BoxFit.cover,
+                          ),
+                        ),
                       ),
                     ),
                   );
