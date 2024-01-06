@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:stud_advice/src/screens/roadmap/roadmap_screen.dart';
 import 'package:stud_advice/stud_advice.dart';
 
 class FavoriteAdministrativeProcessListTile extends StatelessWidget {
@@ -31,7 +32,9 @@ class FavoriteAdministrativeProcessListTile extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        // TODO : add navigation to the road map screen
+        Get.toNamed(RoadMapScreen.navigatorId, arguments: {
+          'administrativeProcessId': administrativeProcessId,
+        });
       },
       child: Padding(
         padding: const EdgeInsets.all(2.0),
@@ -108,7 +111,8 @@ class FavoriteAdministrativeProcessListTile extends StatelessWidget {
                     child: LinearProgressIndicator(
                       value: 0.5,
                       backgroundColor: AppColors.grey,
-                      valueColor: AlwaysStoppedAnimation<Color>(AppColors.primaryColor),
+                      valueColor:
+                          AlwaysStoppedAnimation<Color>(AppColors.primaryColor),
                     ),
                   )
                 : null,
