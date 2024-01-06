@@ -89,3 +89,4 @@ flutter:
     - assets/universities/fr_FR.txt
     - assets/universities/en_US.txt
     - .env
+    - assets/universities/
