@@ -169,7 +169,7 @@ class AdministrativeProcessListTile extends StatelessWidget {
                       );
                     }),
                   ),
-                  if (type!.isNotEmpty)
+                  if (type.isNotEmpty)
                     Align(
                       alignment: Alignment.bottomRight,
                       child: Container(
