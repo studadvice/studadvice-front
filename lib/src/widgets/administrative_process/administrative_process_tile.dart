@@ -14,6 +14,7 @@ class AdministrativeProcessListTile extends StatelessWidget {
   final Color backgroundColor;
   final List<StepItem> steps;
   final String type;
+  final String type;
 
   final AdministrativeProcessController _administrativeProcessController =
   Get.find<AdministrativeProcessController>();
