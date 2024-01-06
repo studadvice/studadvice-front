@@ -4,15 +4,16 @@ import 'package:dio/dio.dart';
 import 'package:get/get.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 import 'package:stud_advice/src/controllers/search/custom_search_controller.dart';
-import 'package:stud_advice/src/models/stud_advice/categories.dart';
+import 'package:stud_advice/stud_advice.dart';
 
 import '../../models/stud_advice/faq.dart';
 
 class SearchFaqController extends CustomSearchController {
   final Dio _dio = Get.find();
+  final DeeplTranslatorController _deeplTranslatorController = Get.find();
 
   final PagingController<int, FaqContent> pagingController =
-  PagingController(firstPageKey: 0);
+      PagingController(firstPageKey: 0);
 
   @override
   void onInit() {
@@ -33,6 +34,17 @@ class SearchFaqController extends CustomSearchController {
 
       final isLastPage = newPage.last;
       final newItems = newPage.content;
+
+      // Translate the text if the locale is not French
+      if (Get.locale?.languageCode != 'fr') {
+        for (var item in newItems) {
+          item.question =
+              await _deeplTranslatorController.translateText(item.question);
+          item.response =
+              await _deeplTranslatorController.translateText(item.response);
+        }
+      }
+
       if (newItems.isNotEmpty) {
         if (isLastPage) {
           pagingController.appendLastPage(newItems);

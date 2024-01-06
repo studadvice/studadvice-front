@@ -48,6 +48,8 @@ dependencies:
   path_drawing:
   flutter_adaptive_buttons:
   sliding_up_panel:
+  deepl_dart: ^1.3.0
+  path_provider: ^2.1.1
 
 dev_dependencies:
   flutter_test:
@@ -87,3 +89,4 @@ flutter:
     - assets/universities/fr_FR.txt
     - assets/universities/en_US.txt
     - .env
+    - assets/universities/

@@ -3,9 +3,8 @@ import 'package:stud_advice/src/bindings/deals/deals_binding.dart';
 import 'package:stud_advice/src/bindings/roadmap/roadmap_binding.dart';
 import 'package:stud_advice/src/bindings/settings/change_password_binding.dart';
 import 'package:stud_advice/src/bindings/settings/support_binding.dart';
-import 'package:stud_advice/src/controllers/categories/calendar_controller.dart';
-import 'package:stud_advice/src/screens/home/calendar.dart';
 import 'package:stud_advice/src/screens/faq/faq_screen.dart';
+import 'package:stud_advice/src/screens/home/calendar.dart';
 import 'package:stud_advice/src/screens/roadmap/roadmap_screen.dart';
 import 'package:stud_advice/src/screens/settings/change_password_screen.dart';
 import 'package:stud_advice/src/screens/settings/change_user_data_screen.dart';
@@ -80,8 +79,7 @@ class RoutesConfiguration {
       ),
       GetPage(
           name: NavigationBarScreen.navigatorId,
-          page: () => NavigationBarScreen()
-      ),
+          page: () => NavigationBarScreen()),
       GetPage(
         name: FavoriteAdministrativesProcessesScreen.navigatorId,
         page: () => FavoriteAdministrativesProcessesScreen(),
@@ -90,12 +88,8 @@ class RoutesConfiguration {
       GetPage(
           name: SupportScreen.navigatorId,
           page: () => SupportScreen(),
-          binding: SupportBinding()
-      ),
-      GetPage(
-          name: FaqScreen.navigatorId,
-          page: () => FaqScreen()
-      ),
+          binding: SupportBinding()),
+      GetPage(name: FaqScreen.navigatorId, page: () => FaqScreen()),
       GetPage(
         name: CalendarScreen.navigatorId,
         page: () => CalendarScreen(),

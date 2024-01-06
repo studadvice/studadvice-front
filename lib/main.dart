@@ -27,6 +27,8 @@ class StudAdviceApp extends StatelessWidget {
     final RoutesConfiguration routesConfiguration =
         Get.put(RoutesConfiguration());
 
+    Get.put(DeeplTranslatorController());
+
     // return GetMaterialApp.router(
     return GetMaterialApp(
       title: "Stud'Advice",

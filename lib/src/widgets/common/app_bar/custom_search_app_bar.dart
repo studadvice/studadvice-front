@@ -16,7 +16,7 @@ class CustomSearchAppBar extends StatelessWidget
 
   @override
   Widget build(BuildContext context) {
-    print(Get.currentRoute);
+    debugPrint(Get.currentRoute);
     return AppBar(
       iconTheme: const IconThemeData(
         color: Colors.white,
@@ -40,9 +40,7 @@ class CustomSearchAppBar extends StatelessWidget
                       AdministrativesProcessesScreen.navigatorId ||
                   Get.currentRoute ==
                       FavoriteAdministrativesProcessesScreen.navigatorId ||
-                  Get.currentRoute ==
-                      DealsSearchScreen.navigatorId
-                )
+                  Get.currentRoute == DealsSearchScreen.navigatorId)
                 IconButton(
                   icon: const Icon(Icons.arrow_back),
                   color: AppColors.white,

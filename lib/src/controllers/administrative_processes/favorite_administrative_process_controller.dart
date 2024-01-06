@@ -9,6 +9,7 @@ import 'package:stud_advice/stud_advice.dart';
 
 class FavoriteAdministrativeProcessController extends CustomSearchController {
   final RxList<String> _favoritesAdministrativeProcessesId = <String>[].obs;
+  final DeeplTranslatorController _deeplTranslatorController = Get.find();
 
   UserStorageController userStorageController = Get.find();
   final Dio _dio = Get.find();
@@ -39,6 +40,15 @@ class FavoriteAdministrativeProcessController extends CustomSearchController {
       int totalPages = newPage.totalPages;
 
       List<AdministrativeProcessContent> allContent = newPage.content;
+
+      // Translate the text if the locale is not French
+      if (Get.locale?.languageCode != 'fr') {
+        for (var item in allContent) {
+          item.name = await _deeplTranslatorController.translateText(item.name);
+          item.description =
+              await _deeplTranslatorController.translateText(item.description);
+        }
+      }
 
       // Vérifier si d'autres pages sont disponibles
       if (pageKey < totalPages) {
