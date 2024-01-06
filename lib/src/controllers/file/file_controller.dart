@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'dart:io';
+
 import 'package:dio/dio.dart';
 import 'package:get/get.dart';
 import 'package:path_provider/path_provider.dart';
@@ -14,15 +15,14 @@ class FileController extends GetxController {
         '/download/$fileId',
       );
       if (response.statusCode == HttpStatus.ok) {
-        CustomFile customFile =  CustomFile.fromJson(response.data);
+        CustomFile customFile = CustomFile.fromJson(response.data);
         Directory appDocDir = await getApplicationDocumentsDirectory();
         String filePath = '${appDocDir.path}/${customFile.filename}';
         File file = File(filePath);
         List<int> bytes = base64Decode(customFile.fileContent!);
         await file.writeAsBytes(bytes);
         return filePath;
-      }
-      else {
+      } else {
         throw Exception('Failed to load categories');
       }
     } catch (error) {
