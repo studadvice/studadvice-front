@@ -57,8 +57,9 @@ class AdministrativeProcessListView extends StatelessWidget {
                     administrativeProcessId: process.id,
                     steps: process.steps!,
                     backgroundColor: backgroundColor,
-                    showProgressBar: false,
-                  );
+                    type: process.type ?? "",
+                  showProgressBar: false,
+                );
                 },
                 firstPageErrorIndicatorBuilder: (context) => ErrorIndicator(
                   error: controller.pagingController.error,
