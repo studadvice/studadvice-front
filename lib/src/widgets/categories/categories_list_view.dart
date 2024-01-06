@@ -35,14 +35,14 @@ class CategoriesListView extends StatelessWidget {
                       children : [
                         IconButton(
                           icon: const Icon(Icons.calendar_month),
-                          color: AppColors.secondaryColor,
+                          color: AppColors.primaryColor,
                           onPressed: () => Get.toNamed(
                             CalendarScreen.navigatorId,
                           ),
                         ),
                         IconButton(
                           icon: const Icon(Icons.favorite),
-                          color: AppColors.secondaryColor,
+                          color: AppColors.primaryColor,
                           onPressed: () => Get.toNamed(
                             FavoriteAdministrativesProcessesScreen.navigatorId,
                           ),

@@ -80,6 +80,7 @@ class AdministrativeProcessContent {
   String? startDate;
   String? endDate;
   String? eventName;
+  String? type;
 
   AdministrativeProcessContent(
       {
@@ -97,9 +98,11 @@ class AdministrativeProcessContent {
         this.startDate,
         this.endDate,
         this.eventName,
+        this.type,
       });
 
   AdministrativeProcessContent.fromJson(Map<String, dynamic> json) {
+    print(json);
     id = json['id'];
     name = json['name'];
     description = json['description'];
@@ -117,7 +120,7 @@ class AdministrativeProcessContent {
     }
     startDate = json['startDate'];
     endDate = json['endDate'];
-
+    type = json['type'];
     if (json['steps'] != null) {
       steps = <StepProcess>[];
       json['steps'].forEach((v) {
@@ -139,6 +142,7 @@ class AdministrativeProcessContent {
     data['universities'] = universities;
     data['startDate'] = startDate;
     data['endDate'] = endDate;
+    data['type'] = type;
     if (steps != null) {
       data['steps'] = steps!.map((v) => v.toJson()).toList();
     }
