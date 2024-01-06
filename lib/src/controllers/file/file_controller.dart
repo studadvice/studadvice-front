@@ -11,7 +11,7 @@ class FileController extends GetxController {
   Future<String?> downloadFile(String fileId) async {
     try {
       final response = await _dio.get(
-        '/download/$fileId',
+        '/image/download/$fileId',
       );
       if (response.statusCode == HttpStatus.ok) {
         CustomFile customFile =  CustomFile.fromJson(response.data);
@@ -26,6 +26,7 @@ class FileController extends GetxController {
         throw Exception('Failed to load categories');
       }
     } catch (error) {
+      print(error);
       rethrow;
     }
   }

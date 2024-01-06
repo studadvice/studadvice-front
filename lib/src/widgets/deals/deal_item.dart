@@ -22,8 +22,10 @@ class DealItem extends StatelessWidget {
           arguments: {'deal': deal},
         );
       },
-      child: ClipRRect(
-        borderRadius: BorderRadius.circular(10.0),
+      child: Container(
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(10.0),
+        ),
         child: Stack(
           children: [
             Positioned.fill(
@@ -32,11 +34,16 @@ class DealItem extends StatelessWidget {
                 builder: (context, snapshot) {
                   if (snapshot.connectionState == ConnectionState.done &&
                       snapshot.data != null) {
-                    return Image.file(
-                      File(snapshot.data!),
-                      height: MediaQuery.of(context).size.height / 2.5,
+                    return Container(
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(10.0),
+                          image: DecorationImage(
+                            image: FileImage(File(snapshot.data!)),
+                            fit: BoxFit.cover,
+                          ),
+                        )
                     );
-                  } else if (snapshot.hasError) {
+                        } else if (snapshot.hasError) {
                     return const Center(child: Icon(Icons.image));
                   } else {
                     return const Center(

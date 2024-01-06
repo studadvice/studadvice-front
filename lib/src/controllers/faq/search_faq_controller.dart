@@ -44,6 +44,7 @@ class SearchFaqController extends CustomSearchController {
         pagingController.appendLastPage([]);
       }
     } catch (error) {
+      print(error);
       pagingController.error = error;
     }
   }

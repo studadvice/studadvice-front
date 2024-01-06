@@ -82,6 +82,9 @@ class DealsListView extends StatelessWidget {
                                 ),
                               ],
                             ),
+                            const SizedBox(
+                              height: 20,
+                            ),
                             FutureBuilder<Deals>(
                               future: dealsController.getRecommendedDeals(
                                   size: 4, number: 0),
@@ -93,8 +96,6 @@ class DealsListView extends StatelessWidget {
                                     recommendedSnapshot.data!;
                                     return GridView.builder(
                                       shrinkWrap: true,
-                                      physics:
-                                      const AlwaysScrollableScrollPhysics(),
                                       gridDelegate:
                                       const SliverGridDelegateWithFixedCrossAxisCount(
                                         crossAxisCount: 2,

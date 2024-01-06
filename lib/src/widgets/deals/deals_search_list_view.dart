@@ -12,6 +12,7 @@ class DealsSearchListView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetBuilder<SearchDealsController>(
+      init: SearchDealsController(),
       builder: (controller) {
         return RefreshIndicator(
           onRefresh: () => Future.sync(

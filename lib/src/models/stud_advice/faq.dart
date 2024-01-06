@@ -68,13 +68,13 @@ class FaqContent {
   late String id;
   late String question;
   late String response;
-  late String imageId;
+  String? imageId;
 
   FaqContent(
       {required this.id,
         required this.question,
         required this.response,
-        required this.imageId,
+        this.imageId,
       });
 
   FaqContent.fromJson(Map<String, dynamic> json) {
