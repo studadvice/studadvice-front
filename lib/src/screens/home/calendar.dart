@@ -14,56 +14,56 @@ class CalendarScreen extends StatelessWidget {
     print(calendarController.administrativeProcessesEvents); //TODO need to use this to rebuild in change, change the logic
     return Scaffold(
       appBar: AppBar(
-        title: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
+        title: //Row(
+          //mainAxisAlignment: MainAxisAlignment.center,
+          //children: [
             Text('categories.calendar'.tr),
-            IconButton(
-              icon: const Icon(Icons.info_outline),
-              onPressed: () {
-                showDialog(
-                  context: context,
-                  builder: (BuildContext context) {
-                    return Column(
-                      children: [
-                        Stack(
-                          children: [
-                            Container(
-                              padding: const EdgeInsets.all(16.0),
-                              decoration: BoxDecoration(
-                                color: Colors.white,
-                                borderRadius: BorderRadius.circular(12.0),
-                              ),
-                              child: Text(
-                                "calendar.description".tr,
-                                style: const TextStyle(
-                                  fontSize: 18.0,
-                                  color: Colors.black,
-                                  fontWeight: FontWeight.normal,
-                                  decoration: TextDecoration.none,
-                                ),
-                              ),
-                            ),
-                            Positioned(
-                              top: 2.0,
-                              right: 8.0,
-                              child: IconButton(
-                                icon: const Icon(Icons.close),
-                                onPressed: () {
-                                  Navigator.of(context).pop();
-                                },
-                              ),
-                            ),
-                          ],
-                        ),
-                      ],
-                    );
-                  },
-                );
-              },
-            ),
-          ],
-        ),
+            // IconButton(
+            //   icon: const Icon(Icons.info_outline),
+            //   onPressed: () {
+            //     showDialog(
+            //       context: context,
+            //       builder: (BuildContext context) {
+            //         return Column(
+            //           children: [
+            //             Stack(
+            //               children: [
+            //                 Container(
+            //                   padding: const EdgeInsets.all(16.0),
+            //                   decoration: BoxDecoration(
+            //                     color: Colors.white,
+            //                     borderRadius: BorderRadius.circular(12.0),
+            //                   ),
+            //                   child: Text(
+            //                     "calendar.description".tr,
+            //                     style: const TextStyle(
+            //                       fontSize: 18.0,
+            //                       color: Colors.black,
+            //                       fontWeight: FontWeight.normal,
+            //                       decoration: TextDecoration.none,
+            //                     ),
+            //                   ),
+            //                 ),
+            //                 Positioned(
+            //                   top: 2.0,
+            //                   right: 8.0,
+            //                   child: IconButton(
+            //                     icon: const Icon(Icons.close),
+            //                     onPressed: () {
+            //                       Navigator.of(context).pop();
+            //                     },
+            //                   ),
+            //                 ),
+            //               ],
+            //             ),
+            //           ],
+            //         );
+            //       },
+            //     );
+            //   },
+            // ),
+          //],
+        //),
       ),
       body: Obx(() {
         return Column(

@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:stud_advice/stud_advice.dart';
 
+import '../../screens/roadmap/roadmap_screen.dart';
+
 class FavoriteAdministrativeProcessListTile extends StatelessWidget {
   final String name;
   final String imageId;
@@ -11,6 +13,7 @@ class FavoriteAdministrativeProcessListTile extends StatelessWidget {
   final String description;
   final bool showProgressBar;
   final Color backgroundColor;
+  final String type;
 
   final FavoriteAdministrativeProcessController
       _favoriteAdministrativeProcessController =
@@ -25,13 +28,19 @@ class FavoriteAdministrativeProcessListTile extends StatelessWidget {
     required this.description,
     required this.showProgressBar,
     this.backgroundColor = AppColors.white,
+    required this.type,
   });
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        // TODO : add navigation to the road map screen
+        Get.toNamed(
+          RoadMapScreen.navigatorId,
+          arguments: {
+            'administrativeProcessId': administrativeProcessId,
+          },
+        );
       },
       child: Padding(
         padding: const EdgeInsets.all(2.0),
@@ -51,7 +60,9 @@ class FavoriteAdministrativeProcessListTile extends StatelessWidget {
               ),
             ],
           ),
-          child: ListTile(
+          child: Column(
+              children: [
+                ListTile(
             contentPadding: const EdgeInsets.all(8.0),
             leading: ClipRRect(
               borderRadius: BorderRadius.circular(15.0),
@@ -131,6 +142,27 @@ class FavoriteAdministrativeProcessListTile extends StatelessWidget {
               ),
             ),
           ),
+          if (type.isNotEmpty)
+            Align(
+            alignment: Alignment.bottomRight,
+            child: Container(
+              margin: const EdgeInsets.all(8.0),
+              padding: const EdgeInsets.all(8.0),
+              decoration: BoxDecoration(
+                color: AppColors.secondaryColor,
+                borderRadius: BorderRadius.circular(10.0),
+              ),
+              child: Text(
+                type!,
+                style: const TextStyle(
+                  color: Colors.white,
+                  fontSize: 12.0,
+                ),
+              ),
+            ),
+          )
+          ]
+          )
         ),
       ),
     );
