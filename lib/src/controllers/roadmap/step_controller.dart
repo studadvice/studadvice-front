@@ -9,6 +9,8 @@ class StepController extends GetxController {
   final ScrollController scrollController = ScrollController();
   final _dio = Get.find<Dio>();
   RxList<StepProcess> steps = <StepProcess>[].obs;
+  final DeeplTranslatorController _deeplTranslatorController =
+      Get.find<DeeplTranslatorController>();
 
   Future<AdministrativeProcessContent> _getAdministrativeProcessById(
       String path) async {
@@ -17,7 +19,16 @@ class StepController extends GetxController {
         path,
       );
       if (response.statusCode == HttpStatus.ok) {
-        return AdministrativeProcessContent.fromJson(response.data);
+        var process = AdministrativeProcessContent.fromJson(response.data);
+        if (process.steps != null) {
+          for (var step in process.steps!) {
+            step.name =
+                await _deeplTranslatorController.translateText(step.name);
+            step.description = await _deeplTranslatorController
+                .translateText(step.description);
+          }
+        }
+        return process;
       } else {
         throw Exception('Failed to load administrative process');
       }
@@ -38,7 +49,7 @@ class StepController extends GetxController {
     scrollController.addListener(_scrollListener);
   }
 
-  void _scrollListener() {
+  Future<void> _scrollListener() async {
     double scrollPosition = scrollController.offset;
     int newStep = (scrollPosition / 100).round();
 
