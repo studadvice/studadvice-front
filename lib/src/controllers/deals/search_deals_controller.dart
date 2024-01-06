@@ -4,13 +4,14 @@ import 'package:dio/dio.dart';
 import 'package:get/get.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 import 'package:stud_advice/src/controllers/search/custom_search_controller.dart';
-import 'package:stud_advice/src/models/stud_advice/deals.dart';
+import 'package:stud_advice/stud_advice.dart';
 
 class SearchDealsController extends CustomSearchController {
   final Dio _dio = Get.find();
+  final DeeplTranslatorController _deeplTranslatorController = Get.find();
 
   final PagingController<int, DealContent> pagingController =
-  PagingController(firstPageKey: 0);
+      PagingController(firstPageKey: 0);
 
   @override
   void onInit() {
@@ -22,7 +23,6 @@ class SearchDealsController extends CustomSearchController {
 
   @override
   Future<void> fetchPage(int pageKey) async {
-    print("fetch");
     try {
       final newPage = await getDealsBySearch(
         number: pageKey,
@@ -32,6 +32,21 @@ class SearchDealsController extends CustomSearchController {
 
       final isLastPage = newPage.last;
       final newItems = newPage.content;
+
+      // Translate the text if the locale is not French
+      if (Get.locale?.languageCode != 'fr') {
+        for (var item in newItems) {
+          item.title =
+              await _deeplTranslatorController.translateText(item.title);
+          item.description =
+              await _deeplTranslatorController.translateText(item.description);
+          if (item.category != null) {
+            item.category =
+                await _deeplTranslatorController.translateText(item.category!);
+          }
+        }
+      }
+
       if (newItems.isNotEmpty) {
         if (isLastPage) {
           pagingController.appendLastPage(newItems);
@@ -58,8 +73,8 @@ class SearchDealsController extends CustomSearchController {
     pagingController.refresh();
   }
 
-  Future<Deals> _getDealsBySearch(String path,
-      Map<String, dynamic> queryParameters) async {
+  Future<Deals> _getDealsBySearch(
+      String path, Map<String, dynamic> queryParameters) async {
     try {
       final response = await _dio.get(
         path,
@@ -75,8 +90,8 @@ class SearchDealsController extends CustomSearchController {
     }
   }
 
-  Future<Deals> _getRecommendedDeals(String path,
-      Map<String, dynamic> queryParameters) async {
+  Future<Deals> _getRecommendedDeals(
+      String path, Map<String, dynamic> queryParameters) async {
     try {
       final response = await _dio.get(
         path,

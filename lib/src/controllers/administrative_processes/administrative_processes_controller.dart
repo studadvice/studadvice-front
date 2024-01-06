@@ -1,7 +1,6 @@
 import 'dart:io';
 
 import 'package:dio/dio.dart';
-import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 import 'package:stud_advice/src/controllers/search/custom_search_controller.dart';
@@ -46,10 +45,7 @@ class AdministrativeProcessController extends CustomSearchController {
 
       // Translate the text if the locale is not French
       if (Get.locale?.languageCode != 'fr') {
-        debugPrint('Translating ${newItems.length} items');
-
         for (var item in newItems) {
-          debugPrint('Translating ${item.name}');
           item.name = await _deeplTranslatorController.translateText(item.name);
           item.description =
               await _deeplTranslatorController.translateText(item.description);
