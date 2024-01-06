@@ -102,6 +102,7 @@ class AdministrativeProcessContent {
       });
 
   AdministrativeProcessContent.fromJson(Map<String, dynamic> json) {
+    print(json);
     id = json['id'];
     name = json['name'];
     description = json['description'];
