@@ -1,11 +1,11 @@
+import 'dart:io';
+
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:stud_advice/stud_advice.dart';
-import 'dart:io';
 
 class StepController extends GetxController {
-
   final ScrollController scrollController = ScrollController();
   final _dio = Get.find<Dio>();
   RxList<StepProcess> steps = <StepProcess>[].obs;
@@ -42,7 +42,9 @@ class StepController extends GetxController {
     double scrollPosition = scrollController.offset;
     int newStep = (scrollPosition / 100).round();
 
-    if (currentStep.value != newStep && newStep < steps.length && newStep >= 0) {
+    if (currentStep.value != newStep &&
+        newStep < steps.length &&
+        newStep >= 0) {
       currentStep.value = newStep;
     }
   }

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:stud_advice/src/widgets/common/paints/step_number/step_number_painter.dart';
-import 'package:stud_advice/stud_advice.dart';
 
 class StepNumberWidget extends StatelessWidget {
   final int stepNumber;
@@ -23,7 +22,10 @@ class StepNumberWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     double borderWidth = isActivated ? 2.0 : 1.0;
-    Color displayColor = isActivated ? color : Colors.grey.withOpacity(0.5); // Use semi-transparency for non-activated steps
+    Color displayColor = isActivated
+        ? color
+        : Colors.grey
+            .withOpacity(0.5); // Use semi-transparency for non-activated steps
 
     return GestureDetector(
       onTap: onPressed,
