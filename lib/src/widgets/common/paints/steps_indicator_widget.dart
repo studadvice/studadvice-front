@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:stud_advice/src/widgets/common/paints/step_number/step_number_widget.dart';
+
 import '../../../../stud_advice.dart';
 import '../modals/information_modal.dart';
 import 'curved_dottedline/curved_dottedline_paint.dart';
@@ -7,16 +8,13 @@ import 'curved_dottedline/curved_dottedline_paint.dart';
 class StepsIndicator extends StatelessWidget {
   final int currentStep;
   final List<StepProcess> steps;
-  static double DIAMETER = 75.0;
-
+  static double diameter = 75.0;
 
   StepsIndicator({
-        super.key,
-        required this.currentStep,
-        required this.steps,
+    super.key,
+    required this.currentStep,
+    required this.steps,
   });
-
-  
 
   @override
   Widget build(BuildContext context) {
@@ -31,13 +29,15 @@ class StepsIndicator extends StatelessWidget {
           return LayoutBuilder(
             builder: (BuildContext context, BoxConstraints constraints) {
               double screenWidth = constraints.maxWidth;
-              double stepWidgetDiameter = DIAMETER;
+              double stepWidgetDiameter = diameter;
               double curveWidth = screenWidth - stepWidgetDiameter;
 
               return Column(
                 children: [
                   Row(
-                    mainAxisAlignment: isLeftAligned ? MainAxisAlignment.start : MainAxisAlignment.end,
+                    mainAxisAlignment: isLeftAligned
+                        ? MainAxisAlignment.start
+                        : MainAxisAlignment.end,
                     children: [
                       StepNumberWidget(
                         stepNumber: stepNumber,
@@ -47,9 +47,7 @@ class StepsIndicator extends StatelessWidget {
                           showDialog(
                             context: context,
                             builder: (BuildContext context) {
-                              return InformationModal(
-                                stepProcess : step
-                              );
+                              return InformationModal(stepProcess: step);
                             },
                           );
                         },
@@ -59,7 +57,7 @@ class StepsIndicator extends StatelessWidget {
                   ),
                   if (index < steps.length - 1)
                     CustomPaint(
-                      size: Size(curveWidth, curveWidth/2.6),
+                      size: Size(curveWidth, curveWidth / 2.6),
                       painter: CurvedDottedLinePainter(
                         color: Colors.grey,
                         strokeWidth: 2.0,
