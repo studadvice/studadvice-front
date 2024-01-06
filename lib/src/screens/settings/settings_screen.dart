@@ -51,7 +51,6 @@ class SettingsScreen extends StatelessWidget {
     );
   }
 
-
   void showLanguageSettings() {
     Get.bottomSheet(
       buildLanguageSheet(),
@@ -243,6 +242,14 @@ class SettingsScreen extends StatelessWidget {
     );
   }
 
+  Future<String> getCurrentUserPseudo() async {
+    User? user = FirebaseAuth.instance.currentUser;
+    if (user != null) {
+      return await userStorageController.getPseudo(user.uid);
+    }
+    return "settings.unknownPseudo".tr;
+  }
+
   Future<BigUserCard> buildUserCard(BuildContext context) async {
     String userId = userStorageController.getCurrentUserId();
     String pseudo = await userStorageController.getPseudo(userId);
@@ -264,5 +271,4 @@ class SettingsScreen extends StatelessWidget {
       ),
     );
   }
-
 }
