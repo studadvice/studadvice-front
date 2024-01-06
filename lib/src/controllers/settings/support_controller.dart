@@ -1,17 +1,19 @@
 import 'dart:convert';
 import 'dart:io';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:get/get.dart';
+
 import '../../../stud_advice.dart';
-import '../../models/firebase/Attachment.dart';
+import '../../models/firebase/attachment.dart';
 
 class SupportController extends GetxController {
   final RxString subject = ''.obs;
   final RxString body = ''.obs;
   final RxList<Attachment> attachments = <Attachment>[].obs;
-  var firebaseFirestoreInstance = AppDependenciesBinding
-      .firebaseFirestoreInstance;
+  var firebaseFirestoreInstance =
+      AppDependenciesBinding.firebaseFirestoreInstance;
 
   Future<void> sendSupportRequest() async {
     try {
@@ -67,7 +69,6 @@ class SupportController extends GetxController {
           'support.failure_title'.tr, 'support.failure_message_generic'.tr);
     }
   }
-
 
   void addAttachment(String filename, String path) {
     attachments.add(Attachment(
