@@ -7,9 +7,6 @@ import '../../controllers/settings/change_password_controller.dart';
 class ChangePasswordScreen extends StatelessWidget {
   static const String navigatorId = '/change_password_screen';
 
-  final ChangePasswordController changePasswordController =
-  Get.find<ChangePasswordController>();
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -36,7 +33,7 @@ class ChangePasswordScreen extends StatelessWidget {
 
 class ChangePasswordForm extends StatelessWidget {
   final ChangePasswordController changePasswordController =
-  Get.find<ChangePasswordController>();
+      Get.find<ChangePasswordController>();
 
   @override
   Widget build(BuildContext context) {
@@ -46,37 +43,34 @@ class ChangePasswordForm extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           PasswordTextField(
-                // Password should be at least 8 characters long and contain at least one uppercase letter, one number and one special character.
-                  validator: (value) => FormValidator.validatePassword(value),
-                  hintText: 'register.passwordHint'.tr,
-                  labelText: 'setting.change_password.old_password'.tr,
-                  controller:  changePasswordController.oldPasswordController,
-                  backgroundColor: AppColors.white,
-                  focusedBorderColor: AppColors.primaryColor,
-                  borderColor: AppColors.primaryColor
-            ),
-          const SizedBox(height: 16.0),
-           PasswordTextField(
               // Password should be at least 8 characters long and contain at least one uppercase letter, one number and one special character.
-                validator: (value) => FormValidator.validatePassword(value),
-                hintText: 'register.passwordHint'.tr,
-                labelText: 'setting.change_password.new_password'.tr,
-                controller:  changePasswordController.newPasswordController,
-                backgroundColor: AppColors.white,
-                focusedBorderColor: AppColors.primaryColor,
-                borderColor: AppColors.primaryColor
-            ),
+              validator: (value) => FormValidator.validatePassword(value),
+              hintText: 'register.passwordHint'.tr,
+              labelText: 'setting.change_password.old_password'.tr,
+              controller: changePasswordController.oldPasswordController,
+              backgroundColor: AppColors.white,
+              focusedBorderColor: AppColors.primaryColor,
+              borderColor: AppColors.primaryColor),
           const SizedBox(height: 16.0),
           PasswordTextField(
-                // Password should be at least 8 characters long and contain at least one uppercase letter, one number and one special character.
-                  validator: (value) => FormValidator.validatePassword(value),
-                  hintText: 'register.passwordHint'.tr,
-                  labelText: 'setting.change_password.confirm_password'.tr,
-                  controller: changePasswordController.confirmPasswordController,
-                  backgroundColor: AppColors.white,
-                  focusedBorderColor: AppColors.primaryColor,
-                  borderColor: AppColors.primaryColor
-              ),
+              // Password should be at least 8 characters long and contain at least one uppercase letter, one number and one special character.
+              validator: (value) => FormValidator.validatePassword(value),
+              hintText: 'register.passwordHint'.tr,
+              labelText: 'setting.change_password.new_password'.tr,
+              controller: changePasswordController.newPasswordController,
+              backgroundColor: AppColors.white,
+              focusedBorderColor: AppColors.primaryColor,
+              borderColor: AppColors.primaryColor),
+          const SizedBox(height: 16.0),
+          PasswordTextField(
+              // Password should be at least 8 characters long and contain at least one uppercase letter, one number and one special character.
+              validator: (value) => FormValidator.validatePassword(value),
+              hintText: 'register.passwordHint'.tr,
+              labelText: 'setting.change_password.confirm_password'.tr,
+              controller: changePasswordController.confirmPasswordController,
+              backgroundColor: AppColors.white,
+              focusedBorderColor: AppColors.primaryColor,
+              borderColor: AppColors.primaryColor),
           const SizedBox(height: 32.0),
           Container(
             width: double.infinity,
@@ -99,4 +93,3 @@ class ChangePasswordForm extends StatelessWidget {
     );
   }
 }
-
