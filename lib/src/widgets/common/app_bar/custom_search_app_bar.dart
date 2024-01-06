@@ -16,7 +16,6 @@ class CustomSearchAppBar extends StatelessWidget
 
   @override
   Widget build(BuildContext context) {
-    debugPrint(Get.currentRoute);
     return AppBar(
       iconTheme: const IconThemeData(
         color: Colors.white,
