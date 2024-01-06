@@ -194,7 +194,7 @@ class Fr {
         "support.success_message": "Votre demande a été envoyée avec succès.",
         "support.failure_title": "Erreur",
         "support.failure_message_generic":
-            "Erreur lors de l\'envoi de la demande",
+            "Erreur lors de l'envoi de la demande",
         "support.failure_message_empty": "Veuillez remplir tous les champs.",
         "support.failure_message_length":
             "Le sujet et le corps doivent contenir au moins 5 et 10 caractères, respectivement.",
@@ -231,6 +231,7 @@ class Fr {
         'categories.explore': "Explorez les catégories",
         'categories.search': "Recherchez des démarches administratives",
         'categories.calendar': "Calendrier",
+        'categories.process': "Démarches",
 
         // Deals
         'deals.recommendation': "Nos coups de coeur !",
@@ -261,7 +262,7 @@ class Fr {
             "Évite tout oubli dans tes démarches administratives grâce à notre calendrier ultime ! Ne laisse plus aucune date cruciale te filer entre les doigts, que ce soit le grand jour du commencement ou le moment épique de la conclusion. Et la cerise sur le gâteau ? Tu peux recevoir des notifications pour être sûr de ne rien manquer. Active-les, et fini les excuses pour zapper tes démarches ! L'organisation, c'est la clé du succès administratif !",
 
         // roadmap
-        "roadmap.title": "Roadmap",
+        "roadmap.title": "Ta roadmap pour cette démarche",
         "roadmap.required": "Prérequis",
         "roadmap.description": "Description",
         "roadmap.required_empty": "Pas de prérequis"

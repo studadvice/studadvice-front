@@ -82,18 +82,18 @@ class SupportScreen extends StatelessWidget {
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(10.0),
                         ),
-                      focusedBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(10.0),
-                        borderSide: const BorderSide(
-                          color: AppColors.primaryColor,
+                        focusedBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(10.0),
+                          borderSide: const BorderSide(
+                            color: AppColors.primaryColor,
+                          ),
                         ),
-                      ),
-                      enabledBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(10.0),
-                        borderSide: const BorderSide(
-                          color: AppColors.primaryColor,
+                        enabledBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(10.0),
+                          borderSide: const BorderSide(
+                            color: AppColors.primaryColor,
+                          ),
                         ),
-                      ),
                       ),
                       cursorColor: AppColors.primaryColor,
                     ),
@@ -128,8 +128,7 @@ class SupportScreen extends StatelessWidget {
                           ),
                           IconButton(
                             icon: const Icon(Icons.remove_circle),
-                            onPressed: () =>
-                                controller.removeAttachment(index),
+                            onPressed: () => controller.removeAttachment(index),
                           )
                         ],
                       );

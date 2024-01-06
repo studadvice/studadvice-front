@@ -229,6 +229,7 @@ class En {
         'categories.explore': "Explore categories",
         'categories.search': "Search administrative processes",
         'categories.calendar': "Calendar",
+        'categories.process': "Processes",
 
         // Deals
         'deals.recommendation': "Our favorites !",
@@ -259,7 +260,7 @@ class En {
             "Avoid any forgetfulness in your administrative procedures with our ultimate calendar! Don't let any crucial date slip through your fingers, whether it's the grand day of commencement or the epic moment of conclusion. And the cherry on top? You can receive notifications to make sure you don't miss anything. Activate them, and no more excuses for skipping your administrative tasks! Organization is the key to administrative success!",
 
         // roadmap
-        "roadmap.title": "Roadmap",
+        "roadmap.title": "Your process roadmap",
         "roadmap.required": "Prerequisites",
         "roadmap.description": "Description",
         "roadmap.required_empty": "No prerequisites"

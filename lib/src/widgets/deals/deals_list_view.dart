@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
-import 'package:stud_advice/src/exceptions/no_result_indicator.dart';
 import 'package:stud_advice/stud_advice.dart';
 
 class DealsListView extends StatelessWidget {
@@ -70,15 +69,15 @@ class DealsListView extends StatelessWidget {
                                     Get.toNamed(
                                       DealsSearchScreen.navigatorId,
                                     );
-                                    },
-                                    child: Text(
-                                      'deals.see_more'.tr,
-                                      style: const TextStyle(
-                                          fontWeight: FontWeight.bold,
-                                          fontSize: 15,
-                                          color: AppColors.secondaryColor,
-                                      ),
+                                  },
+                                  child: Text(
+                                    'deals.see_more'.tr,
+                                    style: const TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 15,
+                                      color: AppColors.secondaryColor,
                                     ),
+                                  ),
                                 ),
                               ],
                             ),
@@ -90,19 +89,19 @@ class DealsListView extends StatelessWidget {
                                     ConnectionState.done) {
                                   if (recommendedSnapshot.hasData) {
                                     final recommendedDeals =
-                                    recommendedSnapshot.data!;
+                                        recommendedSnapshot.data!;
                                     return GridView.builder(
                                       shrinkWrap: true,
                                       physics:
-                                      const AlwaysScrollableScrollPhysics(),
+                                          const AlwaysScrollableScrollPhysics(),
                                       gridDelegate:
-                                      const SliverGridDelegateWithFixedCrossAxisCount(
+                                          const SliverGridDelegateWithFixedCrossAxisCount(
                                         crossAxisCount: 2,
                                         crossAxisSpacing: 10,
                                         mainAxisSpacing: 10,
                                       ),
                                       itemCount:
-                                      recommendedDeals.numberOfElements,
+                                          recommendedDeals.numberOfElements,
                                       itemBuilder: (context, index) {
                                         return DealItem(
                                           deal: recommendedDeals.content[index],
@@ -151,7 +150,7 @@ class DealsListView extends StatelessWidget {
         }
         return RefreshIndicator(
           onRefresh: () => Future.sync(
-                () => controller.pagingController.refresh(),
+            () => controller.pagingController.refresh(),
           ),
           color: AppColors.primaryColor,
           child: Column(

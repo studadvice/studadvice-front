@@ -16,7 +16,8 @@ class CategoryItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Color cardColor = Color(int.parse(category.color.substring(1), radix: 16) + 0xFF000000);
+    Color cardColor =
+        Color(int.parse(category.color.substring(1), radix: 16) + 0xFF000000);
 
     return GestureDetector(
       onTap: () {
@@ -56,13 +57,13 @@ class CategoryItem extends StatelessWidget {
           ),
           Padding(
               padding: const EdgeInsets.only(left: 8.0),
-              child:
-                  Text("${category.administrativeProcesses!.length} démarches",
-                      style: const TextStyle(
-                        color: Colors.white,
-                        fontSize: 16,
-                        fontWeight: FontWeight.bold,
-                      ))),
+              child: Text(
+                  '${category.administrativeProcesses!.length} ${'categories.process'.tr}',
+                  style: const TextStyle(
+                    color: Colors.white,
+                    fontSize: 16,
+                    fontWeight: FontWeight.bold,
+                  ))),
           const SizedBox(
             height: 20,
           ),
