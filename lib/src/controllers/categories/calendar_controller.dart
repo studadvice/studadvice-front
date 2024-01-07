@@ -41,8 +41,10 @@ class CalendarController extends GetxController {
 
   Future<void> getAdministrativeProcesses() async {
     try {
+      final queryParameters = {'page': 0, 'size': 1000};
       final response = await _dio.get(
         "/administrative-process",
+        queryParameters: queryParameters,
       );
 
       if (response.statusCode == HttpStatus.ok) {
@@ -116,19 +118,16 @@ class CalendarController extends GetxController {
       hashCode: getHashCode,
     );
 
-    final DateTime now = DateTime.now();
-
     for (final event in events) {
       if (Get.locale?.languageCode != 'fr') {
         event.name = await _deeplTranslatorController.translateText(event.name);
         event.description =
             await _deeplTranslatorController.translateText(event.description);
       }
-
       final startDate = DateTime.tryParse(event.startDate ?? '');
       final endDate = DateTime.tryParse(event.endDate ?? '');
 
-      if (startDate != null && startDate.isAfter(now)) {
+      if (startDate != null) {
         AdministrativeProcessContent administrativeProcessContentCopy =
             AdministrativeProcessContent(
           id: event.id,
@@ -146,7 +145,7 @@ class CalendarController extends GetxController {
         }
       }
 
-      if (endDate != null && endDate.isAfter(now)) {
+      if (endDate != null) {
         AdministrativeProcessContent administrativeProcessContentCopy =
             AdministrativeProcessContent(
           id: event.id,
@@ -176,21 +175,24 @@ class CalendarController extends GetxController {
       LinkedHashMap<DateTime, List<AdministrativeProcessContent>>
           events) async {
     cancelAllNotifications();
+    final DateTime now = DateTime.now();
     for (final entry in events.entries) {
       final DateTime date = entry.key;
-      final List<AdministrativeProcessContent> eventList = entry.value;
-      for (final event in eventList) {
-        if (Get.locale?.languageCode != 'fr') {
-          event.name =
-              await _deeplTranslatorController.translateText(event.name);
-          event.description =
-              await _deeplTranslatorController.translateText(event.description);
-        }
+      if (date.isAfter(now)) {
+        final List<AdministrativeProcessContent> eventList = entry.value;
+        for (final event in eventList) {
+          if (Get.locale?.languageCode != 'fr') {
+            event.name =
+            await _deeplTranslatorController.translateText(event.name);
+            event.description =
+            await _deeplTranslatorController.translateText(event.description);
+          }
 
-        NotificationService().scheduleNotification(
-            title: 'notification.title'.tr,
-            body: event.eventName,
-            scheduledNotificationDateTime: date);
+          NotificationService().scheduleNotification(
+              title: 'notification.title'.tr,
+              body: event.eventName,
+              scheduledNotificationDateTime: date);
+        }
       }
     }
   }
