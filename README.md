@@ -39,12 +39,12 @@ BACKEND_BASE_URL="http://localhost:8080"
 
 SUPPORT_MAIL="studadvice.contact@gmail.com"
 
-La première variable indique l'URL du backend de Stud'Advice.  À ce jour, il est nécessaire de démarrer le backend en suivant les étapes décrites ici : (https://github.com/studadvice/studadvice-back) et d'utiliser l'URL : http://localhost:8080.
+La première variable indique l'URL du backend de Stud'Advice. À ce jour, il est nécessaire de démarrer le backend en suivant les étapes décrites ici : (https://github.com/studadvice/studadvice-back) et d'utiliser l'URL : http://localhost:8080.
 Une fois le déploiement terminé, on aura plus besoin de lancer la backend en parallèle et il faudra utiliser directement l'URL suivante : http://studadvice.com/api
 
 ### Éxécution du projet
 
-Une fois les prérequis installés, veuillez exécuter les commandes suivantes à la racine du projet:
+Une fois les prérequis installés, veuillez exécuter les commandes suivantes à la racine du projet :
 
 ```
 flutter pub get; flutter run
