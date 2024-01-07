@@ -244,6 +244,7 @@ class Fr {
         'deals.url': "Go",
         'deals.search': "Recherchez des bons plans",
         'deals.see_more': "Voir tout",
+        'deals.evaluate': "Évalue cette offre",
 
         // Administrative processes
         "favorite_administrative_processes.title": "Mes démarches favorites",
