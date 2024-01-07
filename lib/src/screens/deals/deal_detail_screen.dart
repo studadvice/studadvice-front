@@ -170,8 +170,13 @@ class DealDetailScreen extends StatelessWidget {
                           ),
                         ),
                         onPressed: () async {
-                          if (await canLaunchUrl(Uri.parse(deal.url))) {
-                            await launchUrl(Uri.parse(deal.url));
+                          Uri uri = Uri.parse(deal.url);
+                          bool isLaunchPossible = await canLaunchUrl(uri);
+                          debugPrint('uri: $uri');
+                          debugPrint('isLaunchPossible: $isLaunchPossible');
+                          if (isLaunchPossible) {
+                            await launchUrl(Uri.parse(deal.url),
+                                mode: LaunchMode.inAppWebView);
                           } else {
                             throw 'Could not launch $deal.url';
                           }
