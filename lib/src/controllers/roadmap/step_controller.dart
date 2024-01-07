@@ -1,38 +1,19 @@
-import 'dart:io';
-
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:stud_advice/stud_advice.dart';
+import 'package:stud_advice/src/controllers/search/custom_search_controller.dart';
 
-class StepController extends GetxController {
+class StepController extends CustomSearchController {
+
   final ScrollController scrollController = ScrollController();
   final _dio = Get.find<Dio>();
-  RxList<StepProcess> steps = <StepProcess>[].obs;
-
-  Future<AdministrativeProcessContent> _getAdministrativeProcessById(
-      String path) async {
-    try {
-      final response = await _dio.get(
-        path,
-      );
-      if (response.statusCode == HttpStatus.ok) {
-        return AdministrativeProcessContent.fromJson(response.data);
-      } else {
-        throw Exception('Failed to load administrative process');
-      }
-    } catch (error) {
-      rethrow;
-    }
-  }
-
-  Future<AdministrativeProcessContent> getAdministrativeProcessById({
-    required String id,
-  }) async {
-    return _getAdministrativeProcessById('/administrative-process/$id');
-  }
+  List<StepItem> steps = [];
+  String processDescription = "";
+  String processTitle = "";
 
   var currentStep = 0.obs;
+  UserStorageController userStorageController = Get.find();
 
   StepController() {
     scrollController.addListener(_scrollListener);
@@ -42,9 +23,7 @@ class StepController extends GetxController {
     double scrollPosition = scrollController.offset;
     int newStep = (scrollPosition / 100).round();
 
-    if (currentStep.value != newStep &&
-        newStep < steps.length &&
-        newStep >= 0) {
+    if (currentStep.value != newStep && newStep < steps.length && newStep >= 0) {
       currentStep.value = newStep;
     }
   }
@@ -55,8 +34,73 @@ class StepController extends GetxController {
     super.onClose();
   }
 
-  void completeStep(int value) {
-    steps[value].isCompleted = true;
+  String getProcessDescription() {
+    return processDescription ?? "Pour obtenir un titre de séjour, vous devez vous rendre à la préfecture de votre lieu de résidence.";
+  }
+
+  String getProcessTitle() {
+    return processTitle ?? "Obtenir un titre de séjour";
+  }
+
+  void setProcessDescription(String description) {
+    processDescription = description;
     update();
   }
+
+  void setProcessTitle(String title) {
+    processTitle = title;
+    update();
+  }
+
+  void setSteps(List<StepItem> steps) {
+    this.steps = steps;
+    update();
+  }
+
+  Future<void> completeStep(int stepIndex, String administrativeProcessId) async {
+    
+    if (!steps[stepIndex].isCompleted!) {
+      steps[stepIndex].isCompleted = true;
+      print("step $stepIndex completed");
+      currentStep.value = stepIndex;
+      update();
+
+      await _saveStepProgressToFirebase(stepIndex, administrativeProcessId);
+    }
+  }
+
+  Future<void> _saveStepProgressToFirebase(int stepIndex, String administrativeProcessId) async {
+    try {
+      String userId = userStorageController.getCurrentUserId();
+      await userStorageController.addStepProgressionToUser(userId, administrativeProcessId, stepIndex);
+    } catch (error) {
+      print("Error while saving step progression to firebase: $error");
+    }
+  }
+
+  Future<void> setAndAddMetadataToStep(List<StepItem> steps, String administrativeProcessId) async {
+    List<Color> colors = [Color(0xFF8ECAE6), Color(0xFF219EBC), Color(0xFF023047), Color(0xFFFFB703)];
+    List<Color> borderColors = [Color(0xFF8ECAE6), Color(0xFF8ECAE6), Color(0xFF219EBC), Color(0xFFFB8500)];
+    String userId = userStorageController.getCurrentUserId();
+  
+    int? stepIndex = await userStorageController.getStepIndex(userId, administrativeProcessId);
+    print("stepIndex $stepIndex administrativeProcessId $administrativeProcessId");
+    if (stepIndex == null) {
+      stepIndex = 0;
+    }
+    for (int i = 0; i < steps.length; i++) {
+      steps[i].color = colors[i % colors.length];
+      steps[i].borderColor = borderColors[i % borderColors.length];
+      if (i <= stepIndex!)
+        steps[i].isCompleted = true;
+      else
+        steps[i].isCompleted = false;
+    }
+  }
+
+  Future<void> resetStepProgression(String administrativeProcessId) async {
+    String userId = userStorageController.getCurrentUserId();
+    await userStorageController.resetStepProgression(userId, administrativeProcessId);
+  }
+  
 }
