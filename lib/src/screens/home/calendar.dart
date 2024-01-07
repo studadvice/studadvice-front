@@ -4,6 +4,7 @@ import 'package:table_calendar/table_calendar.dart';
 import 'package:stud_advice/src/utils/calendar_utils.dart';
 import '../../../stud_advice.dart';
 import '../../controllers/categories/calendar_controller.dart';
+import '../roadmap/roadmap_screen.dart';
 
 class CalendarScreen extends StatelessWidget {
   static const String navigatorId = '/calendar';
@@ -14,59 +15,12 @@ class CalendarScreen extends StatelessWidget {
     print(calendarController.administrativeProcessesEvents); //TODO need to use this to rebuild in change, change the logic
     return Scaffold(
       appBar: AppBar(
-        title: //Row(
-          //mainAxisAlignment: MainAxisAlignment.center,
-          //children: [
+        title:
             Text('categories.calendar'.tr),
-            // IconButton(
-            //   icon: const Icon(Icons.info_outline),
-            //   onPressed: () {
-            //     showDialog(
-            //       context: context,
-            //       builder: (BuildContext context) {
-            //         return Column(
-            //           children: [
-            //             Stack(
-            //               children: [
-            //                 Container(
-            //                   padding: const EdgeInsets.all(16.0),
-            //                   decoration: BoxDecoration(
-            //                     color: Colors.white,
-            //                     borderRadius: BorderRadius.circular(12.0),
-            //                   ),
-            //                   child: Text(
-            //                     "calendar.description".tr,
-            //                     style: const TextStyle(
-            //                       fontSize: 18.0,
-            //                       color: Colors.black,
-            //                       fontWeight: FontWeight.normal,
-            //                       decoration: TextDecoration.none,
-            //                     ),
-            //                   ),
-            //                 ),
-            //                 Positioned(
-            //                   top: 2.0,
-            //                   right: 8.0,
-            //                   child: IconButton(
-            //                     icon: const Icon(Icons.close),
-            //                     onPressed: () {
-            //                       Navigator.of(context).pop();
-            //                     },
-            //                   ),
-            //                 ),
-            //               ],
-            //             ),
-            //           ],
-            //         );
-            //       },
-            //     );
-            //   },
-            // ),
-          //],
-        //),
       ),
       body: Obx(() {
         return Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
               TableCalendar<AdministrativeProcessContent>(
                 firstDay: kFirstDay,
@@ -82,6 +36,10 @@ class CalendarScreen extends StatelessWidget {
                 eventLoader: calendarController.getEventsForDay,
                 startingDayOfWeek: StartingDayOfWeek.monday,
                 calendarStyle: const CalendarStyle(
+                  markerDecoration: BoxDecoration(
+                    color: AppColors.secondaryColor,
+                    shape: BoxShape.circle,
+                  ),
                   outsideDaysVisible: false,
                   todayDecoration: BoxDecoration(
                     color: AppColors.grey,
@@ -99,6 +57,14 @@ class CalendarScreen extends StatelessWidget {
                       color: AppColors.primaryColor,
                       fontSize: 13.0,
                     ),
+                    leftChevronIcon : Icon(
+                        Icons.chevron_left,
+                        color: AppColors.primaryColor,
+                    ),
+                    rightChevronIcon : Icon(
+                        Icons.chevron_right,
+                        color: AppColors.primaryColor,
+                    ),
                 ),
                 onDaySelected: calendarController.onDaySelected,
                 onRangeSelected: calendarController.onRangeSelected,
@@ -106,36 +72,109 @@ class CalendarScreen extends StatelessWidget {
                 onPageChanged: (focusedDay) {
                   calendarController.focusedDay.value = focusedDay;
                 },
+                  calendarBuilders: CalendarBuilders(
+                    singleMarkerBuilder: (context, date, events) {
+                      if (calendarController.getEventsForDay(date).isNotEmpty) {
+                        return Align(
+                          alignment: Alignment.bottomRight,
+                          child: Container(
+                            padding: const EdgeInsets.all(5),
+                            decoration: const BoxDecoration(
+                              color: AppColors.red,
+                              shape: BoxShape.circle,
+                            ),
+                            child: Column(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                Text(
+                                  '${calendarController.getEventsForDay(date).length}', // Display the number of events
+                                  style: const TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 10,
+                                  ),
+                                ),
+                                // Add additional content if needed
+                              ],
+                            ),
+                          ),
+                        );
+                      } else {
+                        return const SizedBox.shrink();
+                      }
+                    },
+                  ),
+
               ),
-              const SizedBox(height: 8.0),
-              Expanded(
-                child: ListView.builder(
-                  itemCount: calendarController.selectedEvents.length,
-                  itemBuilder: (context, index) {
-                    final event = calendarController.selectedEvents[index];
-                    return Container(
-                      margin: const EdgeInsets.symmetric(
-                        horizontal: 12.0,
-                        vertical: 4.0,
-                      ),
-                      decoration: BoxDecoration(
-                        border: Border.all(),
-                        borderRadius: BorderRadius.circular(12.0),
-                      ),
-                      child: ListTile(
-                        onTap: () {
-                          // Redirect to the roadmap of the process;
-                        },
-                        title: Text(event.eventName ?? ""),
-                      ),
-                    );
-                  },
+            const SizedBox(height: 10.0),
+            Column(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(left: 16.0),
+                  child: Text(
+                    "calendar.events_title".tr,
+                    style: const TextStyle(
+                      fontSize: 20.0,
+                    ),
+                  ),
                 ),
+              ],
+            ),
+            const SizedBox(height: 10.0),
+            Expanded(
+              child: calendarController.selectedEvents.isEmpty
+                    ?
+                Container(
+                  margin: const EdgeInsets.symmetric(
+                    horizontal: 12.0,
+                    vertical: 4.0,
+                  ),
+                  decoration: BoxDecoration(
+                    color: AppColors.customGrey,
+                    border: Border.all(color: Colors.transparent),
+                    borderRadius: BorderRadius.circular(18.0),
+                  ),
+                  child:Padding(
+                    padding: const EdgeInsets.only(left: 16.0),
+                    child : Text(
+                      "calendar.events_empty".tr,
+                      style: const TextStyle(
+                        fontSize: 18.0,
+                      )
+                    )
+                  )
+                )
+                  : ListView.builder(
+                itemCount: calendarController.selectedEvents.length,
+                itemBuilder: (context, index) {
+                  final event = calendarController.selectedEvents[index];
+                  return Container(
+                    margin: const EdgeInsets.symmetric(
+                      horizontal: 12.0,
+                      vertical: 4.0,
+                    ),
+                    decoration: BoxDecoration(
+                      color: AppColors.customGrey,
+                      border: Border.all(color: Colors.transparent),
+                      borderRadius: BorderRadius.circular(18.0),
+                    ),
+                    child: ListTile(
+                      onTap: () {
+                        Get.toNamed(
+                          RoadMapScreen.navigatorId,
+                          arguments: {
+                            'administrativeProcessId': event.id,
+                          },
+                        );
+                      },
+                      title: Text(event.eventName ?? ""),
+                    ),
+                  );
+                },
               ),
-            ],
-          );
-        }
-      ),
+            ),
+          ],
+        );
+      }),
     );
   }
 }

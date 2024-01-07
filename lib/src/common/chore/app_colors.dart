@@ -24,4 +24,5 @@ class AppColors {
   static const Color blue100 = Color(0xFF90C8FF);
   static final Color roadmapBackgroundColorLight = Colors.grey[200]!;
   static final Color roadmapBackgroundColorDark = const Color(0xFF303030);
+  static const Color customGrey = Color(0xFFF7F2FA);
 }
