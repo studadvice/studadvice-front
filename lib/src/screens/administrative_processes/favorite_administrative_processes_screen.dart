@@ -12,12 +12,14 @@ class FavoriteAdministrativesProcessesScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: AppColors.white,
-      appBar: CustomSearchAppBar(
-          controller: favoriteAdministrativeProcessController,
-          hintText: 'categories.search'.tr),
-      body: const FavoriteAdministrativeProcessListView()
+    return GestureDetector(
+      onTap: () => FocusScope.of(context).unfocus(),
+      child: Scaffold(
+          backgroundColor: AppColors.white,
+          appBar: CustomSearchAppBar(
+              controller: favoriteAdministrativeProcessController,
+              hintText: 'categories.search'.tr),
+          body: const FavoriteAdministrativeProcessListView()),
     );
   }
 }

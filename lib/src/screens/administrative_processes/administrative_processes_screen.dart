@@ -24,16 +24,18 @@ class AdministrativesProcessesScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: AppColors.white,
-      appBar: CustomSearchAppBar(
-          controller: administrativeProcessController,
-          hintText: 'categories.search'.tr),
-      body: AdministrativeProcessListView(
+    return GestureDetector(
+      onTap: () => FocusScope.of(context).unfocus(),
+      child: Scaffold(
+          backgroundColor: AppColors.white,
+          appBar: CustomSearchAppBar(
+              controller: administrativeProcessController,
+              hintText: 'categories.search'.tr),
+          body: AdministrativeProcessListView(
             categoryId: _getCategoryId(),
             categoryName: _getCategoryName(),
             categoryColor: _getCategoryColor(),
-          )
+          )),
     );
   }
 }

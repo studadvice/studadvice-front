@@ -286,6 +286,7 @@ class _RegisterUserInformationScreenState
         textColor: AppColors.white,
         backgroundColor: AppColors.primaryColor,
         onPressed: () {
+          FocusScope.of(context).unfocus();
           if (_formKey.currentState!.validate()) {
             UserData userData = buildUserData();
             _registerUserInformationController.saveUserInformation(userData);

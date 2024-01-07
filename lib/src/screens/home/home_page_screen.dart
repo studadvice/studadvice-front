@@ -9,12 +9,15 @@ class HomePageScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        appBar: CustomSearchAppBar(
-            controller: categoryController, hintText: 'categories.search'.tr),
-        body: const Padding(
-          padding: EdgeInsets.all(10),
-          child: CategoriesListView(),
-        ));
+    return GestureDetector(
+      onTap: () => FocusScope.of(context).unfocus(),
+      child: Scaffold(
+          appBar: CustomSearchAppBar(
+              controller: categoryController, hintText: 'categories.search'.tr),
+          body: const Padding(
+            padding: EdgeInsets.all(10),
+            child: CategoriesListView(),
+          )),
+    );
   }
 }

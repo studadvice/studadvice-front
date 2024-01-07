@@ -8,11 +8,8 @@ class CustomSearchBar extends StatelessWidget {
   final String hintText;
   final stt.SpeechToText _speech = stt.SpeechToText();
 
-  CustomSearchBar({
-    super.key,
-    required this.controller,
-    required this.hintText
-  });
+  CustomSearchBar(
+      {super.key, required this.controller, required this.hintText});
 
   void _startListening() async {
     bool available = await _speech.initialize(
@@ -32,7 +29,6 @@ class CustomSearchBar extends StatelessWidget {
       debugPrint("The user has denied the use of speech recognition.");
     }
   }
-
 
   @override
   Widget build(BuildContext context) {

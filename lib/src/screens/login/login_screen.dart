@@ -36,7 +36,7 @@ class LoginScreen extends StatelessWidget {
                 const SizedBox(height: 10),
                 buildRememberMeAndForgotPasswordRow(),
                 const SizedBox(height: 10),
-                buildLoginButton(),
+                buildLoginButton(context),
                 const SizedBox(height: 10),
                 DividerWithText(text: 'login.orContinueWith'.tr),
                 const SizedBox(height: 10),
@@ -127,12 +127,13 @@ class LoginScreen extends StatelessWidget {
     );
   }
 
-  Widget buildLoginButton() {
+  Widget buildLoginButton(BuildContext context) {
     return CustomButton(
         text: 'global.login'.tr,
         textColor: AppColors.white,
         backgroundColor: AppColors.primaryColor,
         onPressed: () {
+          FocusScope.of(context).unfocus();
           if (!_formKey.currentState!.validate()) {
             return;
           }
