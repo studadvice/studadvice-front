@@ -1,5 +1,3 @@
-Sure, here's a corrected version:
-
 ```markdown
 # TODO (agree on the elements to include in this file)
 
@@ -111,6 +109,3 @@ Then
 ```bash
 dart run flutter_native_splash:create --path:flutter_native_splash.yaml
 ```
-```
-
-I corrected grammar, punctuation, and formatting. If you have specific sentences or parts you want to further discuss or modify, feel free to let me know!

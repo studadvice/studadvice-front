@@ -1,10 +1,14 @@
 flutter_native_splash:
-  color: "#1A0A06"
-  background_image: "assets/images/common/raven_image.png"
-
-  image: "assets/images/common/raven_image.png"
+  #color: "#219EBC"
+  background_image: assets/images/common/splash.png
 
   android_12:
-    image: assets/images/common/raven_image.png
+    background_image: assets/images/common/splash.png
+    #color: "#219EBC"
 
-  web: false
+#android: false
+#ios: false
+#web: false
+
+#android_screen_orientation: sensorLandscape
+#fullscreen: true

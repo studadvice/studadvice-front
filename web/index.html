@@ -1,6 +1,4 @@
-<!DOCTYPE html>
-<html>
-<head>
+<!DOCTYPE html><html><head>
     <!--
       If you are serving your web app in a path other than the root, change the
       href value below to reflect the base path you are serving from.
@@ -19,8 +17,7 @@
     <meta charset="UTF-8">
     <meta content="IE=Edge" http-equiv="X-UA-Compatible">
     <meta name="description" content="Frontend for Stud'Advice application">
-    <meta name="google-signin-client_id"
-          content="398344471697-thl4e97l8sskrd0vrghlkfp7ntvoo2ni.apps.googleusercontent.com">
+    <meta name="google-signin-client_id" content="398344471697-thl4e97l8sskrd0vrghlkfp7ntvoo2ni.apps.googleusercontent.com">
 
     <!-- iOS meta tags & icons -->
     <meta name="apple-mobile-web-app-capable" content="yes">
@@ -43,8 +40,105 @@
 
 
     <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport">
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  <style id="splash-screen-style">
+    html {
+      height: 100%
+    }
+
+    body {
+      margin: 0;
+      min-height: 100%;
+      background-color: #ffffff;
+      background-image: url("splash/img/light-background.png");
+      background-size: 100% 100%;
+    }
+
+    .center {
+      margin: 0;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      -ms-transform: translate(-50%, -50%);
+      transform: translate(-50%, -50%);
+    }
+
+    .contain {
+      display:block;
+      width:100%; height:100%;
+      object-fit: contain;
+    }
+
+    .stretch {
+      display:block;
+      width:100%; height:100%;
+    }
+
+    .cover {
+      display:block;
+      width:100%; height:100%;
+      object-fit: cover;
+    }
+
+    .bottom {
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      -ms-transform: translate(-50%, 0);
+      transform: translate(-50%, 0);
+    }
+
+    .bottomLeft {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+    }
+
+    .bottomRight {
+      position: absolute;
+      bottom: 0;
+      right: 0;
+    }
+  </style>
+  <script id="splash-screen-script">
+    function removeSplashFromWeb() {
+      document.getElementById("splash")?.remove();
+      document.getElementById("splash-branding")?.remove();
+      document.body.style.background = "transparent";
+    }
+  </script>
 </head>
 <body>
+  
+  
+  
+  
+  
+  
+  
+  
+  
 <script type="module">
     // Import the functions you need from the SDKs you need
     import {initializeApp} from "https://www.gstatic.com/firebasejs/10.6.0/firebase-app.js";
@@ -85,5 +179,5 @@
 </script>
 
 
-</body>
-</html>
+
+</body></html>

@@ -42,6 +42,7 @@ class Fr {
         "settings.terms": "Termes & conditions",
         "settings.accessibility": "Accessibilité",
         "settings.unknownPseudo": "Pseudo inconnu",
+        "settings.changeData": "Cliquer ici pour changer vos données",
         // ----------------
 
         // Home
