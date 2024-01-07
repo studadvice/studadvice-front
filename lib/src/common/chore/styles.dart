@@ -6,9 +6,10 @@ class Styles {
     useMaterial3: true,
     fontFamily: 'Lato',
     hintColor: Colors.red,
+    canvasColor: AppColors.customBlack, // TODO temporally using this varriable
     brightness: Brightness.dark,
     primaryColor: AppColors.primaryColor,
-    secondaryHeaderColor: AppColors.secondaryColor,
+    secondaryHeaderColor: AppColors.customBlack,
     //scaffoldBackgroundColor: const Color(0xFF303030),
     inputDecorationTheme: const InputDecorationTheme(
       hintStyle: TextStyle(color: Colors.white),
@@ -25,15 +26,14 @@ class Styles {
     fontFamily: 'Lato',
     hintColor: Colors.pink,
     brightness: Brightness.light,
+    canvasColor: AppColors.white,
     inputDecorationTheme: const InputDecorationTheme(
       hintStyle: TextStyle(color: Colors.black),
       labelStyle: TextStyle(color: Colors.black),
       // TODO add the color of the input cursor
     ),
     primaryColor: AppColors.primaryColor,
-    secondaryHeaderColor: AppColors.secondaryColor,
-    // #F0F0F0
-    //scaffoldBackgroundColor: const Color(0xFFF0F0F0),
+    secondaryHeaderColor: AppColors.primaryColor,
     buttonTheme: const ButtonThemeData(
       buttonColor: Colors.blue,
       disabledColor: Colors.grey,

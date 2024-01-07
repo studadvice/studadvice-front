@@ -67,7 +67,7 @@ class CustomSearchBar extends StatelessWidget {
         labelText: hintText,
         labelStyle: const TextStyle(color: Colors.grey),
         filled: true,
-        fillColor: Colors.white,
+        fillColor: Theme.of(context).canvasColor,
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(90),
           borderSide: const BorderSide(color: AppColors.primaryColor),
