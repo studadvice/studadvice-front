@@ -32,7 +32,8 @@ class NavigationBarScreen extends StatelessWidget {
             unselectedItemColor: Colors.black,
             selectedItemColor: AppColors.primaryColor,
             items: [
-              _bottomNavigationBarItem(icon: Icons.question_answer, label: 'faq'),
+              _bottomNavigationBarItem(
+                  icon: Icons.question_mark_outlined, label: 'faq'),
               _bottomNavigationBarItem(icon: Icons.local_offer, label: 'deals'),
               _bottomNavigationBarItem(icon: Icons.home, label: 'home'),
               _bottomNavigationBarItem(icon: Icons.settings, label: 'settings')

@@ -264,7 +264,7 @@ class SettingsScreen extends StatelessWidget {
           backgroundColor: Theme.of(context).primaryColor,
         ),
         title: 'settings.account'.tr,
-        subtitle: "Tap to change your data",
+        subtitle: "settings.changeData".tr,
         onTap: () {
           Get.toNamed(ChangeUserDataScreen.navigatorId);
         },
