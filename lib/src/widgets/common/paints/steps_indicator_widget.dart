@@ -5,85 +5,111 @@ import 'package:get/get.dart';
 class StepsIndicator extends StatelessWidget {
   final int currentStep;
   final List<StepItem> steps;
-  static double DIAMETER = 75.0;
-
+  static double DIAMETER = 90.0;
+  final String administrativeProcessId;
 
   StepsIndicator({
         super.key,
         required this.currentStep,
         required this.steps,
+        required this.administrativeProcessId,
   });
 
   @override
   Widget build(BuildContext context) {
     final StepController controller = Get.find<StepController>();
+    Color roadmapBackgroundColor = Theme.of(context).brightness == Brightness.dark
+        ? AppColors.roadmapBackgroundColorDark
+        : AppColors.roadmapBackgroundColorLight;
 
-    return Scaffold(
-      body: ListView.builder(
-        itemCount: steps.length,
-        itemBuilder: (context, index) {
-          int stepNumber = index + 1;
-          bool isLeftAligned = stepNumber % 2 != 0;
-          StepItem step = steps[index];
+    return Container(
+      child: Scaffold(
+        backgroundColor: roadmapBackgroundColor,
+        body: GetBuilder<StepController>(
+          builder: (controller) {
+            return ListView.builder(
+              itemCount: controller.steps.length,
+              padding: EdgeInsets.only(bottom: 250),
+              itemBuilder: (context, index) {
+                int stepNumber = index + 1;
+                bool isLeftAligned = stepNumber % 2 != 0;
+                StepItem step = controller.steps[index];
 
-          return LayoutBuilder(
-            builder: (BuildContext context, BoxConstraints constraints) {
-              double screenWidth = constraints.maxWidth;
-              double stepWidgetDiameter = DIAMETER;
-              double curveWidth = screenWidth - stepWidgetDiameter;
+                return LayoutBuilder(
+                  builder: (BuildContext context, BoxConstraints constraints) {
+                    double screenWidth = constraints.maxWidth;
+                    double stepWidgetDiameter = DIAMETER;
+                    double curveWidth = screenWidth - stepWidgetDiameter - 20;
 
-              return Column(
-                children: [
-                  Row(
-                    mainAxisAlignment: isLeftAligned ? MainAxisAlignment.start : MainAxisAlignment.end,
-                    children: [
-                      StepNumberWidget(
-                        stepNumber: stepNumber,
-                        diameter: stepWidgetDiameter,
-                        color: step.color ?? Colors.blue,
-                        onPressed: () {
-                          showDialog(
-                            context: context,
-                            builder: (BuildContext context) {
-                              return InformationModal(
-                                accountInfo: 'Votre compte ants.gouv.fr',
-                                domicileInfo: 'Votre justificatif de domicile',
-                                photoIdInfo: 'Votre photo ID',
-                                bodyContent: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. '
-                                    'Sed non risus. Suspendisse lectus tortor, dignissim sit amet, '
-                                    'adipiscing nec, ultricies sed, dolor. Cras elementum ultrices diam. '
-                                    'Maecenas ligula massa, varius a, semper congue, euismod non, mi. '
-                                    'Proin porttitor, orci nec nonummy molestie, enim est eleifend mi, '
-                                    'non fermentum diam nisl sit amet erat.'
-                                    'Duis semper. Duis arcu massa, scelerisque vitae, consequat in, '
-                                    'pretium a, enim. Pellentesque congue. Ut in risus volutpat libero '
-                                    'pharetra tempor. Cras vestibulum bibendum augue. Praesent egestas '
-                                    'leo in pede. Praesent blandit odio eu enim. Pellentesque sed dui ut '
-                                    'dui porta imperdiet. Integer venenatis ac nunc ut egestas. '
-                                    'Aliquam erat volutpat. Sed at lorem in nunc porta tristique.',
-                              );
-                            },
-                          );
-                        },
-                        isActivated: step.isCompleted ?? false,
-                      ),
-                    ],
-                  ),
-                  if (index < steps.length - 1)
-                    CustomPaint(
-                      size: Size(curveWidth, curveWidth/2.6),
-                      painter: CurvedDottedLinePainter(
-                        color: Colors.grey,
-                        strokeWidth: 2.0,
-                        isLeft: !isLeftAligned,
-                      ),
-                    ),
-                ],
-              );
-            },
-          );
-        },
+                    return Column(
+                      children: [
+                        Row(
+                          mainAxisAlignment: isLeftAligned ? MainAxisAlignment.start : MainAxisAlignment.end,
+                          children: [
+                            if (isLeftAligned) SizedBox(width: 10),
+                            StepNumberWidget(
+                              isLeftAligned: isLeftAligned,
+                              stepNumber: stepNumber,
+                              diameter: stepWidgetDiameter,
+                              color: step.color ?? Colors.blue,
+                              borderColor: step.borderColor ?? Colors.blue,
+                              child: ConstrainedBox(
+                                constraints: BoxConstraints(
+                                  maxWidth: screenWidth - stepWidgetDiameter - 40,
+                                ),
+                                child: Text(
+                                  step.name ?? '',
+                                  style: TextStyle(
+                                    fontSize: 16,
+                                  ),
+                                  overflow: TextOverflow.ellipsis,
+                                ),
+                              ),
+                              onPressed: () => {
+                                if (index < controller.steps.length - 1) controller.completeStep(index + 1, administrativeProcessId),
+                                _onPopupOpened(index, step, context),
+                              },
+                              isActivated: step.isCompleted!,
+                            ),
+                            if (!isLeftAligned) SizedBox(width: 10),
+                          ],
+                        ),
+                        if (index < steps.length - 1)
+                          CustomPaint(
+                            size: Size(curveWidth, curveWidth / 4),
+                            painter: CurvedDottedLinePainter(
+                              color: Colors.grey,
+                              strokeWidth: 2.0,
+                              isLeft: !isLeftAligned,
+                            ),
+                          ),
+                      ],
+                    );
+                  },
+                );
+              },
+            );
+          },
+        ),
       ),
     );
   }
+
+  void _onPopupOpened(int stepIndex, StepItem step, BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return InformationModal(
+          firstDescription: step.requiredDocuments != null && step.requiredDocuments!.length > 0 ? '${step.requiredDocuments![0].description}' : 'Pas de description',
+          secondDescription: step.requiredDocuments != null && step.requiredDocuments!.length > 1 ? '${step.requiredDocuments![1].description}' : 'Pas de description',
+          additionalDescription: step.requiredDocuments != null && step.requiredDocuments!.length > 2 ? '${step.requiredDocuments![2].description}' : 'Pas de description',
+          firstInfo: step.requiredDocuments != null && step.requiredDocuments!.length > 0 ? '${step.requiredDocuments![0].name}' : 'Pas de document requis',
+          secondInfo: step.requiredDocuments != null && step.requiredDocuments!.length > 1 ? '${step.requiredDocuments![1].name}' : 'Pas de document requis',
+          additionalInfo: step.requiredDocuments != null && step.requiredDocuments!.length > 2 ? '${step.requiredDocuments![2].name}' : 'Pas de document requis',
+          bodyContent: step.description ?? '',
+        );
+      },
+    );
+  }
+
 }

@@ -4,7 +4,7 @@ import 'package:stud_advice/src/common/chore.dart';
 import 'package:flutter/material.dart';
 import 'package:stud_advice/stud_advice.dart';
 
-class StepNumberPainter extends CustomPainter {
+class ShimmerStepNumberPainter extends CustomPainter {
   final int stepNumber;
   final Color color;
   final double diameter;
@@ -13,7 +13,7 @@ class StepNumberPainter extends CustomPainter {
   final Color textBorderColor;
   final Color borderColor;
 
-  StepNumberPainter({
+  ShimmerStepNumberPainter({
     required this.stepNumber,
     required this.color,
     required this.diameter,
@@ -33,7 +33,7 @@ class StepNumberPainter extends CustomPainter {
       ..style = PaintingStyle.stroke;
 
     final fillPaint = Paint()
-      ..color = isActivated ? color.withOpacity(0.7) : color
+      ..color = isActivated ? fillColor : AppColors.white
       ..style = PaintingStyle.fill;
 
     final textStyle = TextStyle(
@@ -42,10 +42,10 @@ class StepNumberPainter extends CustomPainter {
       foreground: Paint()
         ..style = PaintingStyle.stroke
         ..strokeWidth = 2
-        ..color = isActivated ? textBorderColor : AppColors.white,
+        ..color = AppColors.white,
     );
 
-    final textSpan = TextSpan(text: stepNumber.toString(), style: textStyle);
+    final textSpan = TextSpan(text: '', style: textStyle);
     final textPainter = TextPainter(
       text: textSpan,
       textDirection: TextDirection.ltr,
@@ -73,7 +73,7 @@ class StepNumberPainter extends CustomPainter {
 
   @override
   bool shouldRepaint(covariant CustomPainter oldDelegate) {
-    final oldPainter = oldDelegate as StepNumberPainter;
+    final oldPainter = oldDelegate as ShimmerStepNumberPainter;
     return stepNumber != oldPainter.stepNumber ||
         color != oldPainter.color ||
         diameter != oldPainter.diameter ||

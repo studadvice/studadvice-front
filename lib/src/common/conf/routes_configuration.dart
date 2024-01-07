@@ -90,6 +90,7 @@ class RoutesConfiguration {
           currentStep: 0,
           admnistrativeProcessName: '',
         ),
+        binding: StepBinding(),
       )
     ];
   }

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:stud_advice/stud_advice.dart';
 
-class StepDetailCardWidget extends StatelessWidget {
+class ShimmerStepDetailCardWidget extends StatelessWidget {
   final String title;
   final String description;
   final VoidCallback? onCompletePressed;
@@ -9,7 +9,7 @@ class StepDetailCardWidget extends StatelessWidget {
   final Color? cardColor;
   final double? cardRadius;
 
-  StepDetailCardWidget({
+  ShimmerStepDetailCardWidget({
     super.key,
     required this.title,
     required this.description,
@@ -47,16 +47,6 @@ class StepDetailCardWidget extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 20.0),
-          // reinit the process
-          if (onCompletePressed != null)
-            CustomButton(
-              text: 'Recommençer',
-              onPressed: onCompletePressed!,
-              textColor: AppColors.white,
-              backgroundColor: AppColors.primaryColorAccent,
-              horizontalPadding: 30,
-              verticalPadding: 8,
-            ),
         ],
       ),
     );

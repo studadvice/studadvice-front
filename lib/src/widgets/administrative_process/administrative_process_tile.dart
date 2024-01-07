@@ -34,12 +34,12 @@ class AdministrativeProcessListTile extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        // TODO : add navigation to the road map screen
         Get.toNamed(
           RoadMapScreen.navigatorId,
           arguments: {
             'administrativeProcessId': administrativeProcessId,
             'administrativeProcessName': name,
+            'administrativeProcessDescription': description,
             'steps': steps,
           },
         );

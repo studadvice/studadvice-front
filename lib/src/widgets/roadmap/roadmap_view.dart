@@ -1,12 +1,14 @@
 import 'package:stud_advice/stud_advice.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'dart:ui';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
 
 class RoadMapView extends StatelessWidget {
   final String administrativeProcessId;
   final String administrativeProcessName;
-  StepController stepController = Get.put(StepController());
+  final String administrativeProcessDescription;
+  StepController stepController = Get.find();
   PanelController panelController = PanelController();
 
   
@@ -14,6 +16,7 @@ class RoadMapView extends StatelessWidget {
       super.key,
       required this.administrativeProcessId,
       required this.administrativeProcessName,
+      required this.administrativeProcessDescription,
   });
 
   String capitalize(String text) {
@@ -26,39 +29,53 @@ class RoadMapView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-      
-      return Scaffold(
-        appBar: buildAppBar(administrativeProcessName, togglePanel),
-        body: Stack(
-          children: [
-            CustomSlidingUpPanel(
-              panelController: panelController,
-              bodyContent: GestureDetector(
-                onTap: () {
-                  panelController.close();
-                },
-                child: Container(
-                  margin: const EdgeInsets.all(10),
-                  child: StepsIndicator(
-                    currentStep: stepController.currentStep.value,
-                    steps: stepController.steps,
-                  ),
+    Color roadmapBackgroundColor = Theme.of(context).brightness == Brightness.dark
+        ? AppColors.roadmapBackgroundColorDark
+        : AppColors.roadmapBackgroundColorLight;
+
+    stepController.setProcessTitle(capitalize(administrativeProcessName));
+    stepController.setProcessDescription(administrativeProcessDescription);
+    return Scaffold(
+      backgroundColor: roadmapBackgroundColor,
+      appBar: _buildAppBar(togglePanel),
+      body: Stack(
+        children: [
+          CustomSlidingUpPanel(
+            panelController: panelController,
+            bodyContent: GestureDetector(
+              onTap: () {
+                panelController.close();
+              },
+              child: Container(
+                padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+                child: StepsIndicator(
+                  currentStep: stepController.currentStep.value,
+                  steps: stepController.steps,
+                  administrativeProcessId: administrativeProcessId,
                 ),
               ),
-              title: stepController.getProcessTitle(),
-              slidingWidget: StepDetailCardWidget(
+            ),
+            title: stepController.getProcessTitle(),
+            slidingWidget: BackdropFilter(
+              filter: ImageFilter.blur(sigmaX: 290, sigmaY: 290),
+              child: StepDetailCardWidget(
                 title: stepController.getProcessTitle(),
                 description: stepController.getProcessDescription(),
                 onNextPressed: () {},
-                onCompletePressed: () {},
+                onCompletePressed: () async {
+                  await stepController.resetStepProgression(administrativeProcessId);
+                  await stepController.setAndAddMetadataToStep(stepController.steps, administrativeProcessId);
+                  stepController.update();
+                },
               ),
             ),
-          ],
-        ),
-      );
-    }
+          ),
+        ],
+      ),
+    );
+  }
 
-    void togglePanel() {
+  void togglePanel() {
       if (panelController.isPanelOpen) {
         panelController.close();
       } else {
@@ -66,25 +83,23 @@ class RoadMapView extends StatelessWidget {
       }
     }
 
-    PreferredSizeWidget buildAppBar(String title, VoidCallback onInfoPress) {
-      return AppBar(
-        title: Text(
-          title,
-          style: const TextStyle(
-            fontSize: 22.0,
-            fontWeight: FontWeight.bold,
-            color: AppColors.black,
-          ),
+  PreferredSizeWidget _buildAppBar(VoidCallback onInfoPress) {
+    return AppBar(
+      leading: IconButton(
+        icon: const Icon(Icons.arrow_back),
+        onPressed: () {
+          Navigator.of(Get.context!).pop();
+        },
+      ),
+      actions: [
+        IconButton(
+          icon: const Icon(Icons.info_outline),
+          onPressed: onInfoPress,
         ),
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.info_outline, color: AppColors.black),
-            onPressed: onInfoPress,
-          ),
-        ],
-        backgroundColor: AppColors.white,
-        elevation: 4,
-        automaticallyImplyLeading: false,
-      );
+      ],
+      backgroundColor: Theme.of(Get.context!).scaffoldBackgroundColor,
+      elevation: 0,
+      automaticallyImplyLeading: false,
+    );
   }
 }

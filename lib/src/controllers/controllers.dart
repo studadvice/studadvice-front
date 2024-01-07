@@ -21,3 +21,4 @@ export 'storage/user_storage_controller.dart';
 export 'roadmap/roadmap_controller.dart';
 export 'roadmap/step_controller.dart';
 export 'search/custom_search_controller.dart';
+export 'modal/information_modal_controller.dart';

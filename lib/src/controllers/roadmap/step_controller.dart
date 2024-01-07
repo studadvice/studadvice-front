@@ -8,59 +8,12 @@ class StepController extends CustomSearchController {
 
   final ScrollController scrollController = ScrollController();
   final _dio = Get.find<Dio>();
-  List<StepItem> steps = [
-    StepItem(
-        stepNumber: 1,
-        name: 'Titre de séjour',
-        isCompleted: true,
-        color: Colors.green,
-        description: "Pour obtenir un titre de séjour, vous devez vous rendre à la préfecture de votre lieu de résidence."
-    ),
-    StepItem(
-        stepNumber: 2,
-        name: 'Ouverture d’un compte bancaire',
-        isCompleted: true,
-        color: Colors.lightBlue,
-        description: "Pour ouvrir un compte bancaire, vous devez vous rendre à la banque de votre choix."
-    ),
-    StepItem(
-        stepNumber: 3,
-        name: 'Sécurité sociale',
-        isCompleted: true,
-        color: Colors.blue,
-        description: "Pour obtenir un numéro de sécurité sociale, vous devez vous rendre à la CPAM de votre lieu de résidence."
-    ),
-    StepItem(
-        stepNumber: 4,
-        name: 'CAF',
-        isCompleted: true,
-        color: Colors.orange,
-        description: "Pour beneficier des aides de la CAF, vous devez vous rendre à la CAF de votre lieu de résidence."
-    ),
-    StepItem(
-        stepNumber: 5,
-        name: 'Assurance logement',
-        isCompleted: false,
-        color: Colors.green,
-        description: "Pour obtenir une assurance logement, vous devez vous rendre à l’assurance de votre choix."
-    ),
-    StepItem(
-        stepNumber: 6,
-        name: 'Inscription à la fac',
-        isCompleted: false,
-        color: Colors.lightBlue,
-        description: "Pour vous inscrire à la fac, vous devez vous rendre à la fac de votre choix."
-    ),
-    StepItem(
-        stepNumber: 7,
-        name: 'Inscription à la bibliothèque',
-        isCompleted: false,
-        color: Colors.orange,
-        description: "Pour vous inscrire à la bibliothèque, vous devez vous rendre à la bibliothèque de votre choix."
-    ),
-  ];
+  List<StepItem> steps = [];
+  String processDescription = "";
+  String processTitle = "";
 
   var currentStep = 0.obs;
+  UserStorageController userStorageController = Get.find();
 
   StepController() {
     scrollController.addListener(_scrollListener);
@@ -81,21 +34,73 @@ class StepController extends CustomSearchController {
     super.onClose();
   }
 
-  void completeStep(int value) {
-    steps[value].isCompleted = true;
-    update();
-  }
-
   String getProcessDescription() {
-    return "Pour obtenir un titre de séjour, vous devez vous rendre à la préfecture de votre lieu de résidence.";
+    return processDescription ?? "Pour obtenir un titre de séjour, vous devez vous rendre à la préfecture de votre lieu de résidence.";
   }
 
   String getProcessTitle() {
-    return "Titre de séjour";
+    return processTitle ?? "Obtenir un titre de séjour";
+  }
+
+  void setProcessDescription(String description) {
+    processDescription = description;
+    update();
+  }
+
+  void setProcessTitle(String title) {
+    processTitle = title;
+    update();
   }
 
   void setSteps(List<StepItem> steps) {
     this.steps = steps;
     update();
   }
+
+  Future<void> completeStep(int stepIndex, String administrativeProcessId) async {
+    
+    if (!steps[stepIndex].isCompleted!) {
+      steps[stepIndex].isCompleted = true;
+      print("step $stepIndex completed");
+      currentStep.value = stepIndex;
+      update();
+
+      await _saveStepProgressToFirebase(stepIndex, administrativeProcessId);
+    }
+  }
+
+  Future<void> _saveStepProgressToFirebase(int stepIndex, String administrativeProcessId) async {
+    try {
+      String userId = userStorageController.getCurrentUserId();
+      await userStorageController.addStepProgressionToUser(userId, administrativeProcessId, stepIndex);
+    } catch (error) {
+      print("Error while saving step progression to firebase: $error");
+    }
+  }
+
+  Future<void> setAndAddMetadataToStep(List<StepItem> steps, String administrativeProcessId) async {
+    List<Color> colors = [Color(0xFF8ECAE6), Color(0xFF219EBC), Color(0xFF023047), Color(0xFFFFB703)];
+    List<Color> borderColors = [Color(0xFF8ECAE6), Color(0xFF8ECAE6), Color(0xFF219EBC), Color(0xFFFB8500)];
+    String userId = userStorageController.getCurrentUserId();
+  
+    int? stepIndex = await userStorageController.getStepIndex(userId, administrativeProcessId);
+    print("stepIndex $stepIndex administrativeProcessId $administrativeProcessId");
+    if (stepIndex == null) {
+      stepIndex = 0;
+    }
+    for (int i = 0; i < steps.length; i++) {
+      steps[i].color = colors[i % colors.length];
+      steps[i].borderColor = borderColors[i % borderColors.length];
+      if (i <= stepIndex!)
+        steps[i].isCompleted = true;
+      else
+        steps[i].isCompleted = false;
+    }
+  }
+
+  Future<void> resetStepProgression(String administrativeProcessId) async {
+    String userId = userStorageController.getCurrentUserId();
+    await userStorageController.resetStepProgression(userId, administrativeProcessId);
+  }
+  
 }

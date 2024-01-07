@@ -65,7 +65,7 @@ class AdministrativeProcessController extends CustomSearchController {
       'categoryId': categoryId
     };
     return _getAdministrativeProcesses(
-        '/administrative-process', queryParameters);
+        '/administrative-process/search', queryParameters);
   }
 
   Future<AdministrativeProcesses> _getAdministrativeProcesses(

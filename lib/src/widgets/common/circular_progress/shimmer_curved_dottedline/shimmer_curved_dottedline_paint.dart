@@ -3,13 +3,13 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:path_drawing/path_drawing.dart';
 
-class CurvedDottedLinePainter extends CustomPainter {
+class ShimmerCurvedDottedLinePainter extends CustomPainter {
   final bool isLeft;
   final Color color;
   final double strokeWidth;
 
 
-  CurvedDottedLinePainter({
+  ShimmerCurvedDottedLinePainter({
     required this.isLeft,
     required this.color,
     this.strokeWidth = 2.0,

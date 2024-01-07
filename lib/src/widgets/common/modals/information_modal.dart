@@ -1,18 +1,28 @@
 import 'package:flutter/material.dart';
+import 'dart:ui';
+import 'package:get/get.dart';
 import 'package:stud_advice/stud_advice.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class InformationModal extends StatelessWidget {
-  final String accountInfo;
-  final String domicileInfo;
-  final String photoIdInfo;
+  final String secondInfo;
+  final String firstInfo;
+  final String additionalInfo;
   final String bodyContent;
+  final String firstDescription;
+  final String secondDescription;
+  final String additionalDescription;
+  InformationModalController get modalController => Get.find<InformationModalController>();
 
   const InformationModal({
     super.key,
-    required this.accountInfo,
-    required this.domicileInfo,
-    required this.photoIdInfo,
+    required this.secondInfo,
+    required this.firstInfo,
+    required this.additionalInfo,
     required this.bodyContent,
+    required this.firstDescription,
+    required this.secondDescription,
+    required this.additionalDescription,
   });
 
   @override
@@ -20,24 +30,13 @@ class InformationModal extends StatelessWidget {
     return Scaffold(
       backgroundColor: AppColors.transparent,
       body: Center(
-        child: SingleChildScrollView(
+        child: BackdropFilter(
+          filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
           child: Container(
-            margin: const EdgeInsets.symmetric(horizontal: 15),
-            decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.circular(15),
-              boxShadow: [
-                const BoxShadow(
-                    color: Colors.black26, offset: Offset(0, 1), blurRadius: 2),
-              ],
-            ),
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: <Widget>[
-                _buildHeaderContent(context, 'Prérequis'),
-                _buildBodyContent(context),
-                _buildFooterContent(context),
-              ],
+            child: SingleChildScrollView(
+              child: Obx(() => modalController.showAlternateContent.value
+                  ? _buildAlternateContent(context)
+                  : _buildOriginalContent(context)),
             ),
           ),
         ),
@@ -45,19 +44,107 @@ class InformationModal extends StatelessWidget {
     );
   }
 
-  ListTile buildListTile(BuildContext context, IconData icon, String text) {
+  Widget _buildOriginalContent(BuildContext context) {
+    return Container(
+      margin: const EdgeInsets.symmetric(horizontal: 15),
+      decoration: _commonDecoration(),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: <Widget>[
+          _buildHeaderContent(context, 'Prérequis'),
+          _buildBodyContent(context),
+          _buildFooterContent(context),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildAlternateContent(BuildContext context) {
+    return Container(
+      margin: const EdgeInsets.symmetric(horizontal: 15),
+      decoration: _commonDecoration(),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: <Widget>[
+          _buildAlternateHeaderContent(context),
+          _buildAlternateBodyContent(context, modalController.getAlternateContent()),
+        ],
+      ),
+    );
+  }
+
+  BoxDecoration _commonDecoration() {
+    return BoxDecoration(
+      color: AppColors.blue50.withOpacity(0.80),
+      borderRadius: BorderRadius.circular(15),
+      boxShadow: [
+        const BoxShadow(
+            color: Colors.black26, offset: Offset(0, 1), blurRadius: 2
+        ),
+      ],
+    );
+  }
+
+  ListTile buildListTile(BuildContext context, IconData icon, String text, String description) {
     return ListTile(
-      leading: Icon(icon),
-      title: Text(text),
-      onTap: () {},
+      leading: GestureDetector(
+        onTap: () {
+          modalController.toggleContent();
+          modalController.setAlternateContent(description);
+        },
+        child: Icon(icon, color: AppColors.white, size: 30),
+      ),
+      title: Text(
+        text,
+        style: const TextStyle(fontSize: 16, color: AppColors.white),
+      ),
+    );
+  }
+
+  Widget _buildAlternateHeaderContent(BuildContext context) {
+    return Container(
+      child: Row(
+        children: [
+          IconButton(
+            icon: const Icon(Icons.arrow_back, color: AppColors.white, size: 30),
+            onPressed: () {
+              modalController.toggleContent();
+            },
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildAlternateBodyContent(BuildContext context, String description) {
+    return Container(
+      child: SizedBox(
+        height: context.height * 0.55,
+        width: double.infinity,
+        child: SingleChildScrollView(
+          child: Column(
+            children: <Widget>[
+              SizedBox(height: 10),
+              Text(
+                description,
+                style: TextStyle(fontSize: 16,
+                    color: AppColors.white),
+                textAlign: TextAlign.center,
+              ),
+              SizedBox(height: 50),
+            ],
+          ),
+        ),
+      ),
     );
   }
 
   Widget _buildHeaderContent(BuildContext context, String title) {
     return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 20),
       decoration: BoxDecoration(
         shape: BoxShape.rectangle,
-        color: Colors.white,
+        color: AppColors.blue100.withOpacity(0.13),
         borderRadius: BorderRadius.circular(15),
         boxShadow: [
           const BoxShadow(
@@ -74,21 +161,26 @@ class InformationModal extends StatelessWidget {
                 child: Text(
                   title,
                   style: const TextStyle(
-                      fontSize: 22, fontWeight: FontWeight.w600),
+                      fontSize: 22, fontWeight: FontWeight.w600,
+                      color: AppColors.white),
                 ),
               ),
               IconButton(
-                icon: const Icon(Icons.close),
+                icon: const Icon(Icons.close,
+                    color: AppColors.white, size: 30),
                 onPressed: () {
                   Navigator.of(context).pop();
                 },
               ),
             ],
           ),
-          const Divider(),
-          buildListTile(context, Icons.info_outline_rounded, accountInfo),
-          buildListTile(context, Icons.info_outline_rounded, domicileInfo),
-          buildListTile(context, Icons.info_outline_rounded, photoIdInfo),
+          const Divider(
+            color: AppColors.white,
+            thickness: 2,
+          ),
+          buildListTile(context, Icons.info_outline_rounded, secondInfo, secondDescription),
+          buildListTile(context, Icons.info_outline_rounded, firstInfo, firstDescription),
+          buildListTile(context, Icons.info_outline_rounded, additionalInfo, additionalDescription),
         ],
       ),
     );
@@ -100,7 +192,7 @@ class InformationModal extends StatelessWidget {
       margin: const EdgeInsets.symmetric(vertical: 15),
       decoration: BoxDecoration(
         shape: BoxShape.rectangle,
-        color: Colors.white,
+        color: AppColors.blue100.withOpacity(0.13),
         borderRadius: BorderRadius.circular(15),
         boxShadow: [
           const BoxShadow(
@@ -108,14 +200,16 @@ class InformationModal extends StatelessWidget {
         ],
       ),
       child: SizedBox(
-        height: 250,
+        height: context.height * 0.3,
+        width: double.infinity,
         child: SingleChildScrollView(
           child: Column(
             children: <Widget>[
               SizedBox(height: 10),
               Text(
                 bodyContent,
-                style: TextStyle(fontSize: 16),
+                style: TextStyle(fontSize: 16,
+                    color: AppColors.white),
                 textAlign: TextAlign.center,
               ),
               SizedBox(height: 50),
@@ -127,24 +221,39 @@ class InformationModal extends StatelessWidget {
   }
 
   Widget _buildFooterContent(BuildContext context) {
-    return Container(
-      margin: const EdgeInsets.symmetric(vertical: 25),
-      child: const Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Row(
-            children: [
-              Icon(Icons.language, color: AppColors.black26),
-              SizedBox(width: 10),
-              Text(
-                'Registration website',
-                style: TextStyle(color: AppColors.black, fontSize: 18, fontWeight: FontWeight.w600, fontStyle: FontStyle.italic),
-              ),
-            ],
-          ),
-          Icon(Icons.arrow_forward_ios, color: AppColors.black),
-        ],
+    return GestureDetector(
+      onTap: () {
+        _launchInBrowser(Uri.parse('https://www.google.com'));
+      },
+      child: Container(
+        margin: const EdgeInsets.symmetric(vertical: 10),
+        padding: const EdgeInsets.symmetric(horizontal: 15),
+        child: const Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Row(
+              children: [
+                Icon(Icons.public_outlined, color: AppColors.white),
+                SizedBox(width: 8),
+                Text(
+                  "Site d'inscription",
+                  style: TextStyle(color: AppColors.white, fontSize: 16, fontStyle: FontStyle.italic),
+                ),
+              ],
+            ),
+            Icon(Icons.arrow_forward_ios, color: AppColors.white),
+          ],
+        ),
       ),
     );
+  }
+
+  Future<void> _launchInBrowser(Uri url) async {
+    if (!await launchUrl(
+      url,
+      mode: LaunchMode.externalApplication,
+    )) {
+      throw Exception('Could not launch $url');
+    }
   }
 }

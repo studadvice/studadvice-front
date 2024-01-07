@@ -20,4 +20,8 @@ class AppColors {
   static const grey = Colors.grey;
   static const Color grey50 = Color(0xffeeeeee);
   static const transparent = Colors.transparent;
+  static const Color blue50 = Color(0xFF023047);
+  static const Color blue100 = Color(0xFF90C8FF);
+  static final Color roadmapBackgroundColorLight = Colors.grey[200]!;
+  static final Color roadmapBackgroundColorDark = const Color(0xFF303030);
 }

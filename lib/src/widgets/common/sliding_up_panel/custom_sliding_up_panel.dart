@@ -21,17 +21,19 @@ class CustomSlidingUpPanel extends StatelessWidget {
   Widget build(BuildContext context) {
     return SlidingUpPanel(
       minHeight: 0.0,
-      maxHeight: MediaQuery.of(context).size.height * 0.3,
+      maxHeight: MediaQuery.of(context).size.height * 0.5,
       controller: panelController,
       parallaxEnabled: true,
       parallaxOffset: .2,
       renderPanelSheet: false,
       panel: _floatingPanel(context),
       collapsed: _floatingCollapsed(),
-      body: bodyContent,
+      borderRadius: const BorderRadius.all(Radius.circular(24.0)),
+      body: Container(
+        child: bodyContent,
+      ),
     );
   }
-
 
   Widget _floatingCollapsed(){
     return Container(
@@ -43,27 +45,35 @@ class CustomSlidingUpPanel extends StatelessWidget {
       child: Center(
         child: Text(
           title,
-          style: const TextStyle(color: AppColors.black26),
         ),
       ),
     );
   }
 
   Widget _floatingPanel(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-          color: Theme.of(context).scaffoldBackgroundColor,
-          borderRadius: const BorderRadius.all(Radius.circular(24.0)),
+    Color roadmapBackgroundColor = Theme.of(context).brightness == Brightness.dark
+        ? AppColors.roadmapBackgroundColorDark
+        : AppColors.roadmapBackgroundColorLight;
+    return ClipRRect(
+      borderRadius: const BorderRadius.only(
+          topLeft: Radius.circular(24.0),
+          topRight: Radius.circular(24.0)
+      ),
+      child: Container(
+        decoration: BoxDecoration(
+          color: roadmapBackgroundColor.withOpacity(0.95),
           boxShadow: [
             const BoxShadow(
-              blurRadius: 2.0,
-              color: Colors.grey,
+              blurRadius: 10.0,
+              color: AppColors.black26,
             ),
-          ]
-      ),
-      child: Center(
-        child: Center(child: slidingWidget),
+          ],
+        ),
+        child: Center(
+          child: slidingWidget,
+        ),
       ),
     );
   }
+
 }

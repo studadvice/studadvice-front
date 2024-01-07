@@ -45,6 +45,7 @@ dependencies:
   path_drawing:
   flutter_adaptive_buttons:
   sliding_up_panel:
+  shimmer: ^3.0.0
 
 dev_dependencies:
   flutter_test:

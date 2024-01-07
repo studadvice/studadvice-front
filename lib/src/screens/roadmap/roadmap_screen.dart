@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
 import 'package:stud_advice/stud_advice.dart';
+import 'package:shimmer/shimmer.dart';
 
 class RoadMapScreen extends StatelessWidget {
   static const navigatorId = '/roadmap';
@@ -10,8 +11,8 @@ class RoadMapScreen extends StatelessWidget {
   
   final String admnistrativeProcessName;
 
-  final RoadMapController roadMapController = Get.put(RoadMapController());
-  StepController stepController = Get.put(StepController());
+  final RoadMapController roadMapController = Get.find<RoadMapController>();
+  final StepController stepController = Get.find<StepController>();
   
 
   RoadMapScreen({
@@ -26,31 +27,26 @@ class RoadMapScreen extends StatelessWidget {
     final Map<String, dynamic> args = Get.arguments;
     final String administrativeProcessId = args['administrativeProcessId'] ?? '';
     final String administrativeProcessName = args['administrativeProcessName'] ?? '';
+    final String administrativeProcessDescription = args['administrativeProcessDescription'] ?? '';
     final List<StepItem> steps = args['steps'] ?? [];
     // set the steps
     stepController.setSteps(steps);
-    // add metadata to the steps
-    setAndAddMetadataToStep(steps);
-    return Scaffold(
-      appBar: CustomSearchAppBar(
-          controller: roadMapController,
-          hintText: 'step.search'.tr),
-      body: RoadMapView(
-        administrativeProcessId: administrativeProcessId,
-        administrativeProcessName: administrativeProcessName,
-      ),
+
+    return FutureBuilder(
+      future: stepController.setAndAddMetadataToStep(steps, administrativeProcessId),
+      builder: (BuildContext context, AsyncSnapshot<void> snapshot) {
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          return Center(child: RoadMapShimmer());
+        } else if (snapshot.hasError) {
+          return Text('Error: ${snapshot.error}');
+        } else {
+          return RoadMapView(
+            administrativeProcessId: administrativeProcessId,
+            administrativeProcessName: administrativeProcessName,
+            administrativeProcessDescription: administrativeProcessDescription,
+          );
+        }
+      },
     );
   }
-  
-  void setAndAddMetadataToStep(List<StepItem> steps) {
-    List<Color> colors = [Colors.green, Colors.lightBlue, Colors.blue, Colors.orange];
-
-    for (int i = 0; i < steps.length; i++) {
-      steps[i].color = colors[i % colors.length];
-      steps[i].isCompleted = true;
-    }
-  }
-  
-  
-  
 }

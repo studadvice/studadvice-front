@@ -6,6 +6,7 @@ class StepItem {
   late String name;
   late String description;
   Color? color;
+  Color? borderColor;
   bool? isCompleted;
   String? imageId;
   List<RequiredDocument>? requiredDocuments;
@@ -14,6 +15,7 @@ class StepItem {
       {required this.stepNumber,
       required this.name,
       required this.description,
+      this.borderColor,
       this.color,
       this.isCompleted,
       this.imageId,
