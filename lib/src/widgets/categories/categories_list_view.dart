@@ -15,7 +15,7 @@ class CategoriesListView extends StatelessWidget {
       builder: (controller) {
         return RefreshIndicator(
           onRefresh: () => Future.sync(
-                () => controller.pagingController.refresh(),
+            () => controller.pagingController.refresh(),
           ),
           color: AppColors.secondaryColor,
           child: Column(
@@ -31,24 +31,22 @@ class CategoriesListView extends StatelessWidget {
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-                  Row(
-                      children : [
-                        IconButton(
-                          icon: const Icon(Icons.calendar_month),
-                          color: AppColors.primaryColor,
-                          onPressed: () => Get.toNamed(
-                            CalendarScreen.navigatorId,
-                          ),
-                        ),
-                        IconButton(
-                          icon: const Icon(Icons.favorite),
-                          color: AppColors.primaryColor,
-                          onPressed: () => Get.toNamed(
-                            FavoriteAdministrativesProcessesScreen.navigatorId,
-                          ),
-                        )
-                      ]
-                  )
+                  Row(children: [
+                    IconButton(
+                      icon: const Icon(Icons.calendar_month),
+                      color: AppColors.primaryColor,
+                      onPressed: () => Get.toNamed(
+                        CalendarScreen.navigatorId,
+                      ),
+                    ),
+                    IconButton(
+                      icon: const Icon(Icons.favorite),
+                      color: AppColors.primaryColor,
+                      onPressed: () => Get.toNamed(
+                        FavoriteAdministrativesProcessesScreen.navigatorId,
+                      ),
+                    )
+                  ])
                 ],
               ),
               const SizedBox(
