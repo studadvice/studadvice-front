@@ -41,7 +41,7 @@ class AdministrativeProcessListTile extends StatelessWidget {
           RoadMapScreen.navigatorId,
           arguments: {
             'administrativeProcessId': administrativeProcessId,
-          'administrativeProcessName': name,
+            'administrativeProcessName': name,
             'administrativeProcessDescription': description,
             'steps': steps,
           },

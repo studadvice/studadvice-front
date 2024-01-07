@@ -6,7 +6,6 @@ class StepDetailCardWidget extends StatelessWidget {
   final String description;
   final VoidCallback? onCompletePressed;
   final VoidCallback? onNextPressed;
-  final String actionText;
   final Color? cardColor;
   final double? cardRadius;
 
@@ -14,7 +13,6 @@ class StepDetailCardWidget extends StatelessWidget {
     super.key,
     required this.title,
     required this.description,
-    this.actionText = 'Action',
     this.cardColor,
     this.cardRadius,
     this.onCompletePressed,
@@ -24,29 +22,42 @@ class StepDetailCardWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            buildDragHandler(),
-            Text(
-              title,
-              style: const TextStyle(
-                fontSize: 22.0,
-                fontWeight: FontWeight.bold,
-                color: AppColors.black,
+      padding: const EdgeInsets.all(16.0),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          buildDragHandler(),
+          Text(
+            title,
+            style: const TextStyle(
+              fontSize: 22.0,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          const SizedBox(height: 18.0),
+          Expanded(
+            child: SingleChildScrollView( 
+              child: Text(
+                description,
+                style: const TextStyle(
+                  fontSize: 16.0,
+                ),
               ),
             ),
-            const SizedBox(height: 18.0),
-            Text(
-              description,
-              style: const TextStyle(
-                fontSize: 16.0,
-                color: AppColors.black,
-              ),
+          ),
+          const SizedBox(height: 20.0),
+          // reinit the process
+          if (onCompletePressed != null)
+            CustomButton(
+              text: 'Recommençer',
+              onPressed: onCompletePressed!,
+              textColor: AppColors.white,
+              backgroundColor: AppColors.primaryColorAccent,
+              horizontalPadding: 30,
+              verticalPadding: 8,
             ),
-            const Spacer()],
-
+        ],
       ),
     );
   }

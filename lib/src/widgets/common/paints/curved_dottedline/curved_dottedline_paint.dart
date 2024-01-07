@@ -53,13 +53,13 @@ class CurvedDottedLinePainter extends CustomPainter {
   }
 
   _buildCurvePathIfIsRight(Path path, Size size) {
-      path.moveTo(-size.width/20, size.height/20);
-      path.cubicTo(
-        - size.width/20 + 50, 120 + size.height/20,
-        size.width - 50, size.height - 120,
-        size.width, size.height,
-      );
-      return path;
+    path.moveTo(-size.width/20, size.height/20);
+    path.cubicTo(
+      - size.width/20 + 120, 170 + size.height/20,
+      size.width - 120, size.height - 170,
+      size.width, size.height,
+    );
+    return path;
   }
 
   @override
