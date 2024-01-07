@@ -8,7 +8,7 @@ class Styles {
     hintColor: Colors.red,
     brightness: Brightness.dark,
     primaryColor: AppColors.primaryColor,
-    secondaryHeaderColor: AppColors.primaryColor,
+    secondaryHeaderColor: AppColors.secondaryColor,
     //scaffoldBackgroundColor: const Color(0xFF303030),
     inputDecorationTheme: const InputDecorationTheme(
       hintStyle: TextStyle(color: Colors.white),
@@ -31,7 +31,7 @@ class Styles {
       // TODO add the color of the input cursor
     ),
     primaryColor: AppColors.primaryColor,
-    secondaryHeaderColor: AppColors.primaryColor,
+    secondaryHeaderColor: AppColors.secondaryColor,
     // #F0F0F0
     //scaffoldBackgroundColor: const Color(0xFFF0F0F0),
     buttonTheme: const ButtonThemeData(

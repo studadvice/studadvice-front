@@ -241,6 +241,7 @@ class En {
         'deals.url': "Go",
         'deals.search': "Search deals",
         'deals.see_more': "See more",
+        'deals.evaluate': "Rate this offer",
 
         // Administrative processes
         "favorite_administrative_processes.title": "My favorites processes",

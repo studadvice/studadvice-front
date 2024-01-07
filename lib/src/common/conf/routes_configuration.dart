@@ -3,6 +3,7 @@ import 'package:stud_advice/src/bindings/deals/deals_binding.dart';
 import 'package:stud_advice/src/bindings/roadmap/roadmap_binding.dart';
 import 'package:stud_advice/src/bindings/settings/change_password_binding.dart';
 import 'package:stud_advice/src/bindings/settings/support_binding.dart';
+import 'package:stud_advice/src/controllers/deals/deal_detail_controller.dart';
 import 'package:stud_advice/src/screens/faq/faq_screen.dart';
 import 'package:stud_advice/src/screens/home/calendar.dart';
 import 'package:stud_advice/src/screens/roadmap/roadmap_screen.dart';
@@ -76,6 +77,7 @@ class RoutesConfiguration {
       GetPage(
         name: DealDetailScreen.navigatorId,
         page: () => DealDetailScreen(),
+        binding: DealsBinding()
       ),
       GetPage(
           name: NavigationBarScreen.navigatorId,
