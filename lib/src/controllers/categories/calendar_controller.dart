@@ -41,7 +41,7 @@ class CalendarController extends GetxController {
 
   Future<void> getAdministrativeProcesses() async {
     try {
-      final queryParameters = {'page': 0, 'size': 1000};
+      final queryParameters = {'page': 0, 'size': 1000}; // TODO improve back method
       final response = await _dio.get(
         "/administrative-process",
         queryParameters: queryParameters,
