@@ -10,13 +10,16 @@ class DealsSearchScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: CustomSearchAppBar(
-          controller: searchDealsController, hintText: 'deals.search'.tr),
-      body: const Center(
-        child: Padding(
-          padding: EdgeInsets.all(10),
-          child: DealsSearchListView(),
+    return GestureDetector(
+      onTap: () => FocusScope.of(context).unfocus(),
+      child: Scaffold(
+        appBar: CustomSearchAppBar(
+            controller: searchDealsController, hintText: 'deals.search'.tr),
+        body: const Center(
+          child: Padding(
+            padding: EdgeInsets.all(10),
+            child: DealsSearchListView(),
+          ),
         ),
       ),
     );

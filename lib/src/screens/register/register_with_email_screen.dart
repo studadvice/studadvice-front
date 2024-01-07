@@ -46,7 +46,7 @@ class RegisterWithEmailScreen extends StatelessWidget {
               _legalTermsController.buildTermsAndConditionsRow(
                   'register.acceptingTermsAndConditions'.tr),
               const SizedBox(height: 5),
-              buildConnectionButton(),
+              buildConnectionButton(context),
             ],
           ),
         )),
@@ -100,12 +100,13 @@ class RegisterWithEmailScreen extends StatelessWidget {
         borderColor: AppColors.primaryColor);
   }
 
-  Widget buildConnectionButton() {
+  Widget buildConnectionButton(BuildContext context) {
     return CustomButton(
         text: 'register.connectionButton'.tr,
         textColor: AppColors.white,
         backgroundColor: AppColors.primaryColor,
         onPressed: () async {
+          FocusScope.of(context).unfocus();
           if (!_legalTermsController.agreeWithTermsAndConditions.value) {
             _legalTermsController.getSnackbarController(
                 'register.acceptTermsAndConditionsError'.tr,
