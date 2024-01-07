@@ -67,7 +67,7 @@ class AdministrativeProcessListTile extends StatelessWidget {
                 maxWidth: MediaQuery.of(context).size.width - 16.0,
               ),
               decoration: BoxDecoration(
-                color: AppColors.white,
+                color: Theme.of(context).canvasColor,
                 borderRadius: BorderRadius.circular(15.0),
                 boxShadow: const [
                   BoxShadow(

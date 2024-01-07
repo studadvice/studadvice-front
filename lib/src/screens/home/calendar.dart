@@ -120,7 +120,7 @@ class CalendarScreen extends StatelessWidget {
               ],
             ),
             const SizedBox(height: 10.0),
-            Expanded(
+            Container(
               child: calendarController.selectedEvents.isEmpty
                     ?
                 Container(
@@ -129,11 +129,11 @@ class CalendarScreen extends StatelessWidget {
                     vertical: 4.0,
                   ),
                   decoration: BoxDecoration(
-                    color: AppColors.customGrey,
+                    color: Theme.of(context).cardColor,
                     border: Border.all(color: Colors.transparent),
                     borderRadius: BorderRadius.circular(18.0),
                   ),
-                  child:Padding(
+                  child: Padding(
                     padding: const EdgeInsets.only(left: 16.0),
                     child : Text(
                       "calendar.events_empty".tr,
@@ -143,7 +143,8 @@ class CalendarScreen extends StatelessWidget {
                     )
                   )
                 )
-                  : ListView.builder(
+                  : Expanded(
+                child : ListView.builder(
                 itemCount: calendarController.selectedEvents.length,
                 itemBuilder: (context, index) {
                   final event = calendarController.selectedEvents[index];
@@ -171,6 +172,7 @@ class CalendarScreen extends StatelessWidget {
                   );
                 },
               ),
+            )
             ),
           ],
         );

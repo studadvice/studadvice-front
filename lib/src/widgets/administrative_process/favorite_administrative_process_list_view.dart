@@ -19,14 +19,12 @@ class FavoriteAdministrativeProcessListView extends StatelessWidget {
             title: Text(
               'favorite_administrative_processes.title'.tr,
               style: const TextStyle(
-                color: AppColors.black,
                 fontSize: AppFontSizes.large20,
                 fontWeight: FontWeight.bold,
               ),
             ),
             centerTitle: true,
             titleTextStyle: const TextStyle(
-              color: AppColors.black,
               fontSize: AppFontSizes.large20,
               fontWeight: FontWeight.bold,
             ),

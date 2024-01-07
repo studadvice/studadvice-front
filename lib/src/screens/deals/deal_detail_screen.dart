@@ -23,7 +23,6 @@ class DealDetailScreen extends StatelessWidget {
         title: Text(
           deal.title,
           style: const TextStyle(
-            color: AppColors.black,
             fontSize: 20.0,
             fontWeight: FontWeight.bold,
           ),
@@ -31,7 +30,6 @@ class DealDetailScreen extends StatelessWidget {
         centerTitle: true,
         leading: IconButton(
           icon: const Icon(Icons.arrow_back),
-          color: Colors.black,
           onPressed: () => Get.back(),
         ),
         backgroundColor: AppColors.primaryColor,
@@ -77,7 +75,7 @@ class DealDetailScreen extends StatelessWidget {
                 padding: const EdgeInsets.all(24),
                 decoration: BoxDecoration(
                   border: Border.all(color: Colors.black),
-                  color: AppColors.white,
+                  color: Theme.of(context).canvasColor,
                   borderRadius: const BorderRadius.only(
                     topLeft: Radius.circular(40),
                     topRight: Radius.circular(40),
@@ -102,7 +100,6 @@ class DealDetailScreen extends StatelessWidget {
                         Text(
                           deal.rating.toString(),
                           style: const TextStyle(
-                            color: Colors.black,
                             fontSize: 15.0,
                             fontWeight: FontWeight.bold,
                           ),

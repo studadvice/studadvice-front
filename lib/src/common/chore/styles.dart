@@ -7,10 +7,10 @@ class Styles {
     fontFamily: 'Lato',
     hintColor: Colors.red,
     canvasColor: AppColors.customBlack, // TODO temporally using this varriable
+    cardColor: AppColors.customBlack,
     brightness: Brightness.dark,
     primaryColor: AppColors.primaryColor,
     secondaryHeaderColor: AppColors.customBlack,
-    //scaffoldBackgroundColor: const Color(0xFF303030),
     inputDecorationTheme: const InputDecorationTheme(
       hintStyle: TextStyle(color: Colors.white),
       labelStyle: TextStyle(color: Colors.white),
@@ -22,6 +22,7 @@ class Styles {
   );
 
   static ThemeData lightTheme = ThemeData(
+    cardColor: AppColors.customGrey,
     useMaterial3: true,
     fontFamily: 'Lato',
     hintColor: Colors.pink,
