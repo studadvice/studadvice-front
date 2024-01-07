@@ -95,6 +95,7 @@ class DealsListView extends StatelessWidget {
                                     final recommendedDeals =
                                     recommendedSnapshot.data!;
                                     return GridView.builder(
+                                      physics: const NeverScrollableScrollPhysics(),
                                       shrinkWrap: true,
                                       gridDelegate:
                                       const SliverGridDelegateWithFixedCrossAxisCount(

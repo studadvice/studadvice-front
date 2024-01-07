@@ -23,12 +23,12 @@ class CustomSearchAppBar extends StatelessWidget
       automaticallyImplyLeading: false,
       flexibleSpace: Container(
         height: MediaQuery.of(context).size.height / 6,
-        decoration: const BoxDecoration(
-          borderRadius: BorderRadius.only(
+        decoration: BoxDecoration(
+          borderRadius: const BorderRadius.only(
             bottomLeft: Radius.circular(20),
             bottomRight: Radius.circular(20),
           ),
-          color: AppColors.primaryColor,
+          color: Theme.of(context).secondaryHeaderColor,
         ),
         child: Padding(
           padding: const EdgeInsets.only(top: 50),

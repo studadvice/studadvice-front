@@ -242,6 +242,7 @@ class En {
         'deals.url': "Go",
         'deals.search': "Search deals",
         'deals.see_more': "See more",
+        'deals.evaluate': "Rate this offer",
 
         // Administrative processes
         "favorite_administrative_processes.title": "My favorites processes",
@@ -259,7 +260,8 @@ class En {
         "calendar.endName": "End of the administrative process",
         "calendar.description":
             "Avoid any forgetfulness in your administrative procedures with our ultimate calendar! Don't let any crucial date slip through your fingers, whether it's the grand day of commencement or the epic moment of conclusion. And the cherry on top? You can receive notifications to make sure you don't miss anything. Activate them, and no more excuses for skipping your administrative tasks! Organization is the key to administrative success!",
-
+        "calendar.events_title":"Your events",
+        "calendar.events_empty": "You currently have no administrative procedures to undertake. You're all set! 😌 Don't forget to stay informed by enabling notifications to be notified in case of new procedures.",
         // roadmap
         "roadmap.title": "Your process roadmap",
         "roadmap.required": "Prerequisites",

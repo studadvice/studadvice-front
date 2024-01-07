@@ -244,6 +244,7 @@ class Fr {
         'deals.url': "Go",
         'deals.search': "Recherchez des bons plans",
         'deals.see_more': "Voir tout",
+        'deals.evaluate': "Évalue cette offre",
 
         // Administrative processes
         "favorite_administrative_processes.title": "Mes démarches favorites",
@@ -261,7 +262,8 @@ class Fr {
         "calendar.endName": "Fin de la démarche administrative",
         "calendar.description":
             "Évite tout oubli dans tes démarches administratives grâce à notre calendrier ultime ! Ne laisse plus aucune date cruciale te filer entre les doigts, que ce soit le grand jour du commencement ou le moment épique de la conclusion. Et la cerise sur le gâteau ? Tu peux recevoir des notifications pour être sûr de ne rien manquer. Active-les, et fini les excuses pour zapper tes démarches ! L'organisation, c'est la clé du succès administratif !",
-
+        "calendar.events_title":"Tes évènements",
+        "calendar.events_empty":"Vous n'avez actuellement aucune démarche administrative à faire. Vous êtes tranquille ! 😌 N'oubliez pas de vous tenir au courant en activant les notifications pour être informé(e) en cas de nouvelles démarches.",
         // roadmap
         "roadmap.title": "Ta roadmap pour cette démarche",
         "roadmap.required": "Prérequis",

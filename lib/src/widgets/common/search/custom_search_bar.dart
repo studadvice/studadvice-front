@@ -36,16 +36,18 @@ class CustomSearchBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ClassicTextField(
+    return
+      ClassicTextField(
       onChanged: (value) {
         controller.change();
       },
       controller: controller.textEditingController,
       hintText: hintText,
       backgroundColor: Colors.transparent,
-      borderColor: Colors.black,
+      borderColor: AppColors.primaryColor,
       focusedBorderColor: AppColors.primaryColor,
       inputDecoration: InputDecoration(
+        focusColor: AppColors.primaryColor,
         prefixIcon: const Icon(
           Icons.search,
           color: AppColors.primaryColor,
@@ -65,11 +67,16 @@ class CustomSearchBar extends StatelessWidget {
         labelText: hintText,
         labelStyle: const TextStyle(color: Colors.grey),
         filled: true,
-        fillColor: Colors.white,
-        border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(40),
+        fillColor: Theme.of(context).canvasColor,
+        enabledBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(90),
+          borderSide: const BorderSide(color: AppColors.primaryColor),
         ),
         isDense: true,
+        focusedBorder: OutlineInputBorder(
+          borderSide: const BorderSide(color: AppColors.primaryColor),
+          borderRadius: BorderRadius.circular(40),
+        ),
       ),
     );
   }
