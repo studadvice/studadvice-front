@@ -112,6 +112,11 @@ class RoutesConfiguration {
         page: () => const ChangeUserDataScreen(),
         binding: RegisterUserInformationBinding(),
       ),
+      GetPage(
+        name: RoadMapScreen.navigatorId,
+        page: () => RoadMapScreen(),
+        binding: StepBinding(),
+      ),
     ];
   }
 }
