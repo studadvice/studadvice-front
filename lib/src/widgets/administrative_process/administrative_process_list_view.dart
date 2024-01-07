@@ -32,7 +32,6 @@ class AdministrativeProcessListView extends StatelessWidget {
             ),
             centerTitle: true,
             titleTextStyle: const TextStyle(
-              color: AppColors.black,
               fontSize: AppFontSizes.large20,
               fontWeight: FontWeight.bold,
             ),
