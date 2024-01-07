@@ -42,6 +42,7 @@ class En {
         "settings.changePassword": "Change Password",
         "settings.terms": "Terms & conditions",
         "settings.accessibility": "Accessibility",
+        "settings.changeData": "Tap to change your data",
         // ----------------
 
         // Home
