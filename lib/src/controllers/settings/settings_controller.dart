@@ -6,6 +6,6 @@ class SettingsController extends GetxController {
 
   Future<void> logout() async {
     await _authenticationController.logout();
-    Get.toNamed(WelcomeScreen.navigatorId);
+    Get.offAllNamed(WelcomeScreen.navigatorId);
   }
 }
