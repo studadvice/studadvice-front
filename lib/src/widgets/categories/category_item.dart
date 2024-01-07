@@ -19,7 +19,9 @@ class CategoryItem extends StatelessWidget {
     Color cardColor =
         Color(int.parse(category.color.substring(1), radix: 16) + 0xFF000000);
 
-    return GestureDetector(
+    return LayoutBuilder(
+        builder: (context, constraints) =>
+        GestureDetector(
       onTap: () {
         Get.toNamed(
           AdministrativesProcessesScreen.navigatorId,
@@ -93,8 +95,8 @@ class CategoryItem extends StatelessWidget {
                       if (snapshot.connectionState == ConnectionState.done &&
                           snapshot.data != null) {
                         return Container(
-                          width: 50,
-                          height: 50,
+                          width: constraints.maxWidth /4,
+                          height: constraints.maxHeight /4,
                           decoration: BoxDecoration(
                             image: DecorationImage(
                               image: FileImage(File(snapshot.data!)),
@@ -122,6 +124,7 @@ class CategoryItem extends StatelessWidget {
           )
         ]),
       ),
+    )
     );
   }
 }
