@@ -14,6 +14,7 @@ class FavoriteAdministrativeProcessListTile extends StatelessWidget {
   final bool showProgressBar;
   final Color backgroundColor;
   final String type;
+  final List<StepItem> steps;
 
   final FavoriteAdministrativeProcessController
       _favoriteAdministrativeProcessController =
@@ -27,6 +28,7 @@ class FavoriteAdministrativeProcessListTile extends StatelessWidget {
     required this.name,
     required this.description,
     required this.showProgressBar,
+    required this.steps,
     this.backgroundColor = AppColors.white,
     required this.type,
   });
@@ -39,6 +41,9 @@ class FavoriteAdministrativeProcessListTile extends StatelessWidget {
           RoadMapScreen.navigatorId,
           arguments: {
             'administrativeProcessId': administrativeProcessId,
+            'administrativeProcessName': name,
+            'administrativeProcessDescription': description,
+            'steps': steps,
           },
         );
       },

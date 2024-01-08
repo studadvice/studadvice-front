@@ -14,6 +14,7 @@ class En {
         "global.password": "Password",
         "global.login": "Login",
         "global.register": "Register",
+        "global.reset": "Reset",
         // ----------------
 
         // User storage controller
@@ -266,6 +267,9 @@ class En {
         "roadmap.title": "Your process roadmap",
         "roadmap.required": "Prerequisites",
         "roadmap.description": "Description",
-        "roadmap.required_empty": "No prerequisites"
+        "roadmap.required_empty": "No prerequisites",
+
+        // modal roadmap
+        "modal.site": "Registration site",
       };
 }

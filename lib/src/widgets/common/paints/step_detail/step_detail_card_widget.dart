@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:stud_advice/stud_advice.dart';
+import 'package:get/get.dart';
 
 class StepDetailCardWidget extends StatelessWidget {
   final String title;
   final String description;
   final VoidCallback? onCompletePressed;
   final VoidCallback? onNextPressed;
-  final String actionText;
   final Color? cardColor;
   final double? cardRadius;
 
@@ -14,7 +14,6 @@ class StepDetailCardWidget extends StatelessWidget {
     super.key,
     required this.title,
     required this.description,
-    this.actionText = 'Action',
     this.cardColor,
     this.cardRadius,
     this.onCompletePressed,
@@ -23,10 +22,25 @@ class StepDetailCardWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
+    Color modalBackground = Theme.of(context).brightness == Brightness.dark
+        ? Color(0xff1a1a1c).withOpacity(0.5)
+        : Color(0xffe5e5e5).withOpacity(0.9);
+    return Container(
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(15.0),
+        boxShadow: [
+          BoxShadow(
+            color: modalBackground,
+            spreadRadius: 8,
+            blurRadius: 8,
+          ),
+        ],
+      ),
+      child: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisSize: MainAxisSize.min,
           children: [
             buildDragHandler(),
             Text(
@@ -34,32 +48,45 @@ class StepDetailCardWidget extends StatelessWidget {
               style: const TextStyle(
                 fontSize: 22.0,
                 fontWeight: FontWeight.bold,
-                color: AppColors.black,
               ),
             ),
             const SizedBox(height: 18.0),
-            Text(
-              description,
-              style: const TextStyle(
-                fontSize: 16.0,
-                color: AppColors.black,
+            Expanded(
+              child: SingleChildScrollView(
+                child: Text(
+                  description,
+                  style: const TextStyle(
+                    fontSize: 16.0,
+                  ),
+                ),
               ),
             ),
-            const Spacer()],
-
+            const SizedBox(height: 20.0),
+            // reinit the process
+            if (onCompletePressed != null)
+              CustomButton(
+                text: 'global.reset'.tr,
+                onPressed: onCompletePressed!,
+                textColor: AppColors.white,
+                backgroundColor: AppColors.primaryColorAccent,
+                horizontalPadding: 30,
+                verticalPadding: 8,
+              ),
+          ],
+        ),
       ),
     );
   }
 
   Widget buildDragHandler() {
-    return Container(
-      height: 5.0,
-      width: 40.0,
-      margin: const EdgeInsets.only(bottom: 15.0),
-      decoration: const BoxDecoration(
-        color: AppColors.black26,
-        borderRadius: BorderRadius.all(Radius.circular(12.0)),
-      ),
-    );
-  }
+  return Container(
+    height: 5.0,
+    width: 40.0,
+    margin: const EdgeInsets.only(bottom: 15.0),
+    decoration: BoxDecoration(
+      color: AppColors.black26,
+      borderRadius: BorderRadius.all(Radius.circular(12.0)),
+    ),
+  );
+}
 }

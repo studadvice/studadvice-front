@@ -4,7 +4,7 @@ import 'package:stud_advice/src/common/chore.dart';
 import 'package:flutter/material.dart';
 import 'package:stud_advice/stud_advice.dart';
 
-class StepNumberPainter extends CustomPainter {
+class ShimmerStepNumberPainter extends CustomPainter {
   final int stepNumber;
   final Color color;
   final double diameter;
@@ -12,10 +12,8 @@ class StepNumberPainter extends CustomPainter {
   final double borderWidth;
   final Color textBorderColor;
   final Color borderColor;
-  final double shadowBlurRadius;
-  final Color shadowColor;
 
-  StepNumberPainter({
+  ShimmerStepNumberPainter({
     required this.stepNumber,
     required this.color,
     required this.diameter,
@@ -23,8 +21,6 @@ class StepNumberPainter extends CustomPainter {
     this.borderWidth = 5.0,
     this.textBorderColor = Colors.black,
     this.borderColor = const Color(0xFF219EBC),
-    this.shadowBlurRadius = 20.0,
-    this.shadowColor = Colors.black,
   });
 
   @override
@@ -37,14 +33,8 @@ class StepNumberPainter extends CustomPainter {
       ..style = PaintingStyle.stroke;
 
     final fillPaint = Paint()
-      ..color = isActivated ? color.withOpacity(0.7) : color
+      ..color = isActivated ? fillColor : AppColors.white
       ..style = PaintingStyle.fill;
-
-    final shadowPaint = Paint()
-      ..color = shadowColor.withOpacity(0.7)
-      ..style = PaintingStyle.fill;
-
-    final shadowOffset = Offset(2.0, 2.0);
 
     final textStyle = TextStyle(
       fontSize: diameter * 0.5,
@@ -52,17 +42,10 @@ class StepNumberPainter extends CustomPainter {
       foreground: Paint()
         ..style = PaintingStyle.stroke
         ..strokeWidth = 2
-        ..color = isActivated ? textBorderColor : AppColors.white,
+        ..color = AppColors.white,
     );
 
-    canvas.drawShadow(
-      Path()..addOval(Rect.fromCircle(center: Offset(diameter / 2, diameter / 2), radius: diameter / 2)),
-      shadowPaint.color,
-      shadowBlurRadius,
-      true,
-    );
-
-    final textSpan = TextSpan(text: stepNumber.toString(), style: textStyle);
+    final textSpan = TextSpan(text: '', style: textStyle);
     final textPainter = TextPainter(
       text: textSpan,
       textDirection: TextDirection.ltr,
@@ -90,7 +73,7 @@ class StepNumberPainter extends CustomPainter {
 
   @override
   bool shouldRepaint(covariant CustomPainter oldDelegate) {
-    final oldPainter = oldDelegate as StepNumberPainter;
+    final oldPainter = oldDelegate as ShimmerStepNumberPainter;
     return stepNumber != oldPainter.stepNumber ||
         color != oldPainter.color ||
         diameter != oldPainter.diameter ||

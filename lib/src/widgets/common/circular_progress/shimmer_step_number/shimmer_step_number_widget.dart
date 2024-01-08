@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:stud_advice/stud_advice.dart';
 
-class StepNumberWidget extends StatelessWidget {
+class ShimmerStepNumberWidget extends StatelessWidget {
   final int stepNumber;
   final double diameter;
   final Color color;
@@ -11,7 +11,7 @@ class StepNumberWidget extends StatelessWidget {
   final VoidCallback? onPressed;
   final bool isLeftAligned;
 
-  const StepNumberWidget({
+  const ShimmerStepNumberWidget({
     super.key,
     required this.stepNumber,
     required this.diameter,
@@ -28,20 +28,20 @@ class StepNumberWidget extends StatelessWidget {
     double borderWidth = isActivated ? 2.0 : 1.0;
     Color displayColor = color;
 
-    Widget stepNumberWidget = GestureDetector(
-      onTap: isActivated ? onPressed : null,
+    Widget shimmerStepNumberWidget = GestureDetector(
+      onTap: null,
       child: SizedBox(
         width: diameter,
         height: diameter,
         child: Center(
           child: CustomPaint(
-            painter: StepNumberPainter(
+            painter: ShimmerStepNumberPainter(
               borderColor: borderColor,
               stepNumber: stepNumber,
               color: displayColor,
               diameter: diameter,
               borderWidth: borderWidth,
-              isActivated: isActivated,
+              isActivated: false,
             ),
             size: Size(diameter, diameter),
           ),
@@ -54,13 +54,13 @@ class StepNumberWidget extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         children: [
           if (isLeftAligned) ...[
-            stepNumberWidget,
+            shimmerStepNumberWidget,
             const SizedBox(width: 16),
             Expanded(child: child!),
           ] else ...[
             Expanded(child: child!),
             const SizedBox(width: 16),
-            stepNumberWidget,
+            shimmerStepNumberWidget,
           ],
         ],
       ),

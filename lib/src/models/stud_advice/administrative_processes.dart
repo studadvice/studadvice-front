@@ -74,7 +74,7 @@ class AdministrativeProcessContent {
   int? maxAge;
   List<String>? nationalities;
   List<String>? universities;
-  List<StepProcess>? steps;
+  List<StepItem>? steps;
   String? imageFileSrc;
   bool? isFavorite;
   String? startDate;
@@ -102,6 +102,7 @@ class AdministrativeProcessContent {
       });
 
   AdministrativeProcessContent.fromJson(Map<String, dynamic> json) {
+    print(json);
     id = json['id'];
     name = json['name'];
     description = json['description'];
@@ -121,9 +122,9 @@ class AdministrativeProcessContent {
     endDate = json['endDate'];
     type = json['type'];
     if (json['steps'] != null) {
-      steps = <StepProcess>[];
+      steps = <StepItem>[];
       json['steps'].forEach((v) {
-        steps!.add(StepProcess.fromJson(v));
+        steps!.add(StepItem.fromJson(v));
       });
     }
   }

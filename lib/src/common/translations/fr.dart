@@ -14,6 +14,7 @@ class Fr {
         "global.password": "Mot de passe",
         "global.login": "Connexion",
         "global.register": "S'inscrire",
+        "global.reset": "Réinitialiser",
         // ----------------
 
         // User storage controller
@@ -253,10 +254,17 @@ class Fr {
         "faq.title": "FAQ",
         "faq.search": "Entrez vos mots clés",
         "faq.explore": "Comment pouvons-nous vous aider ?",
+    
+        // FAQ
+        "faq.title": "FAQ",
+        "faq.search": "Entrez vos mots clés",
+        "faq.explore": "Comment pouvons-nous vous aider ?",
 
-        // notification
+        // Information modal
+                "information_modal.title": "Préréquis",
+                // notification
         "notification.title": "C'est l'heure d'une nouvelle démarche !",
-
+  
         // calendar
         "calendar.startName": "Début de la démarche administrative",
         "calendar.endName": "Fin de la démarche administrative",
@@ -266,8 +274,11 @@ class Fr {
         "calendar.events_empty":"Aucune démarche administrative n'a commencé aujourd'hui. Vous êtes tranquille ! 😌 N'oubliez pas de consulter les autres jours et de vous tenir au courant en activant les notifications pour être informé(e) en cas de nouvelles démarches.",
         // roadmap
         "roadmap.title": "Ta roadmap pour cette démarche",
-        "roadmap.required": "Prérequis",
         "roadmap.description": "Description",
-        "roadmap.required_empty": "Pas de prérequis"
-      };
+        "roadmap.required_empty": "Pas de prérequis",
+        // roadmap information modal
+        "roadmap.required": "Prérequis",
+        "modal.site": "Site d'inscription",
+
+  };
 }

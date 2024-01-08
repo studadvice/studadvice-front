@@ -13,6 +13,7 @@ class AdministrativeProcessListTile extends StatelessWidget {
   final String description;
   final bool showProgressBar;
   final Color backgroundColor;
+  final List<StepItem> steps;
   final String type;
 
   final AdministrativeProcessController _administrativeProcessController =
@@ -26,6 +27,7 @@ class AdministrativeProcessListTile extends StatelessWidget {
     required this.imageId,
     required this.name,
     required this.description,
+    required this.steps,
     required this.showProgressBar,
     this.backgroundColor = AppColors.white,
     required this.type,
@@ -39,6 +41,9 @@ class AdministrativeProcessListTile extends StatelessWidget {
           RoadMapScreen.navigatorId,
           arguments: {
             'administrativeProcessId': administrativeProcessId,
+            'administrativeProcessName': name,
+            'administrativeProcessDescription': description,
+            'steps': steps,
           },
         );
       },

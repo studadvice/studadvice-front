@@ -1,6 +1,5 @@
 import 'package:get/get.dart';
 import 'package:stud_advice/src/bindings/deals/deals_binding.dart';
-import 'package:stud_advice/src/bindings/roadmap/roadmap_binding.dart';
 import 'package:stud_advice/src/bindings/settings/change_password_binding.dart';
 import 'package:stud_advice/src/bindings/settings/support_binding.dart';
 import 'package:stud_advice/src/controllers/deals/deal_detail_controller.dart';
@@ -93,6 +92,14 @@ class RoutesConfiguration {
           binding: SupportBinding()),
       GetPage(name: FaqScreen.navigatorId, page: () => FaqScreen()),
       GetPage(
+        name: RoadMapScreen.navigatorId,
+        page: () => RoadMapScreen(
+          currentStep: 0,
+          admnistrativeProcessName: '',
+        ),
+        binding: StepBinding(),
+      ),
+      GetPage(
         name: CalendarScreen.navigatorId,
         page: () => CalendarScreen(),
         binding: CalendarBinding(),
@@ -108,9 +115,16 @@ class RoutesConfiguration {
         binding: RegisterUserInformationBinding(),
       ),
       GetPage(
+          name: FaqScreen.navigatorId,
+          page: () => FaqScreen()
+      ),
+      GetPage(
         name: RoadMapScreen.navigatorId,
-        page: () => RoadMapScreen(),
-        binding: RoadmapBinding(),
+        page: () => RoadMapScreen(
+          currentStep: 0,
+          admnistrativeProcessName: '',
+        ),
+        binding: StepBinding(),
       ),
     ];
   }

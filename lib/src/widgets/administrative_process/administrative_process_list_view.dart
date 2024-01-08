@@ -48,16 +48,18 @@ class AdministrativeProcessListView extends StatelessWidget {
               pagingController: controller.pagingController,
               builderDelegate:
                   PagedChildBuilderDelegate<AdministrativeProcessContent>(
-                itemBuilder: (context, process, index) =>
-                    AdministrativeProcessListTile(
-                  name: process.name,
-                  imageId: process.imageId,
-                  description: process.description,
-                  administrativeProcessId: process.id,
+                itemBuilder: (context, process, index) {
+                  return AdministrativeProcessListTile(
+                    name: process.name,
+                    imageId: process.imageId,
+                    description: process.description,
+                    administrativeProcessId: process.id,
+                    steps: process.steps!,
                   backgroundColor: backgroundColor,
                   type: process.type ?? "",
                   showProgressBar: false,
-                ),
+                );
+                },
                 firstPageErrorIndicatorBuilder: (context) => ErrorIndicator(
                   error: controller.pagingController.error,
                   onTryAgain: () => controller.pagingController.refresh(),
