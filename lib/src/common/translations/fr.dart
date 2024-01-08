@@ -235,7 +235,7 @@ class Fr {
         'categories.process': "Démarches",
 
         // Deals
-        'deals.recommendation': "Nos coups de coeur !",
+        'deals.recommendation': "Vos coups de cœur !",
         'deals.empty': "Pas de bons plans !",
         'deals.explore': "Explorez les bons plans",
         'deals.description': "Description",
@@ -265,7 +265,7 @@ class Fr {
         "calendar.description":
             "Évite tout oubli dans tes démarches administratives grâce à notre calendrier ultime ! Ne laisse plus aucune date cruciale te filer entre les doigts, que ce soit le grand jour du commencement ou le moment épique de la conclusion. Et la cerise sur le gâteau ? Tu peux recevoir des notifications pour être sûr de ne rien manquer. Active-les, et fini les excuses pour zapper tes démarches ! L'organisation, c'est la clé du succès administratif !",
         "calendar.events_title":"Tes évènements",
-        "calendar.events_empty":"Vous n'avez actuellement aucune démarche administrative à faire. Vous êtes tranquille ! 😌 N'oubliez pas de vous tenir au courant en activant les notifications pour être informé(e) en cas de nouvelles démarches.",
+        "calendar.events_empty":"Aucune démarche administrative n'a commencé aujourd'hui. Vous êtes tranquille ! 😌 N'oubliez pas de consulter les autres jours et de vous tenir au courant en activant les notifications pour être informé(e) en cas de nouvelles démarches.",
         // roadmap
         "roadmap.title": "Ta roadmap pour cette démarche",
         "roadmap.required": "Prérequis",

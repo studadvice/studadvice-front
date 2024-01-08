@@ -24,10 +24,6 @@ class FavoriteAdministrativeProcessListView extends StatelessWidget {
               ),
             ),
             centerTitle: true,
-            titleTextStyle: const TextStyle(
-              fontSize: AppFontSizes.large20,
-              fontWeight: FontWeight.bold,
-            ),
             toolbarHeight: 50,
             backgroundColor: AppColors.white,
             automaticallyImplyLeading: false,
