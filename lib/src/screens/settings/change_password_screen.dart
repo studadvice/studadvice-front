@@ -77,6 +77,7 @@ class ChangePasswordForm extends StatelessWidget {
             padding: const EdgeInsets.symmetric(horizontal: 25.0),
             child: ElevatedButton(
               onPressed: () {
+                FocusScope.of(context).unfocus();
                 changePasswordController.changePassword();
               },
               style: ElevatedButton.styleFrom(
