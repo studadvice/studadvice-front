@@ -53,25 +53,25 @@ class StepsIndicator extends StatelessWidget {
                               diameter: stepWidgetDiameter,
                               color: step.color ?? Colors.blue,
                               borderColor: step.borderColor ?? Colors.blue,
+                              onPressed: () => {
+                                if (index < controller.steps.length - 1) controller.completeStep(index + 1, administrativeProcessId),
+                                _onPopupOpened(index, step, context),
+                              },
+                              isActivated: step.isCompleted!,
                               child: ConstrainedBox(
                                 constraints: BoxConstraints(
                                   maxWidth: screenWidth - stepWidgetDiameter - 40,
                                 ),
                                 child: Text(
                                   step.name ?? '',
-                                  style: TextStyle(
+                                  style: const TextStyle(
                                     fontSize: 16,
                                   ),
                                   overflow: TextOverflow.ellipsis,
                                 ),
                               ),
-                              onPressed: () => {
-                                if (index < controller.steps.length - 1) controller.completeStep(index + 1, administrativeProcessId),
-                                _onPopupOpened(index, step, context),
-                              },
-                              isActivated: step.isCompleted!,
                             ),
-                            if (!isLeftAligned) SizedBox(width: 10),
+                            if (!isLeftAligned) const SizedBox(width: 10),
                           ],
                         ),
                         if (index < steps.length - 1)
@@ -100,6 +100,7 @@ class StepsIndicator extends StatelessWidget {
       context: context,
       builder: (BuildContext context) {
         return InformationModal(
+          // TODO fix this, step c'est une liste faut pas récupérer comme ça à la main et afficher à chaque fois, faire une boucle ... puis on aura pas tjrs 3 required documents
           firstDescription: step.requiredDocuments != null && step.requiredDocuments!.length > 0 ? '${step.requiredDocuments![0].description}' : 'Pas de description',
           secondDescription: step.requiredDocuments != null && step.requiredDocuments!.length > 1 ? '${step.requiredDocuments![1].description}' : 'Pas de description',
           additionalDescription: step.requiredDocuments != null && step.requiredDocuments!.length > 2 ? '${step.requiredDocuments![2].description}' : 'Pas de description',

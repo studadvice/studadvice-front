@@ -32,12 +32,10 @@ class InformationModal extends StatelessWidget {
       body: Center(
         child: BackdropFilter(
           filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
-          child: Container(
-            child: SingleChildScrollView(
-              child: Obx(() => modalController.showAlternateContent.value
-                  ? _buildAlternateContent(context)
-                  : _buildOriginalContent(context)),
-            ),
+          child: SingleChildScrollView(
+            child: Obx(() => modalController.showAlternateContent.value
+                ? _buildAlternateContent(context)
+                : _buildOriginalContent(context)),
           ),
         ),
       ),
@@ -53,7 +51,7 @@ class InformationModal extends StatelessWidget {
         children: <Widget>[
           _buildHeaderContent(context, 'roadmap.required'.tr),
           _buildBodyContent(context),
-          _buildFooterContent(context),
+          //_buildFooterContent(context),
         ],
       ),
     );
@@ -102,38 +100,34 @@ class InformationModal extends StatelessWidget {
   }
 
   Widget _buildAlternateHeaderContent(BuildContext context) {
-    return Container(
-      child: Row(
-        children: [
-          IconButton(
-            icon: const Icon(Icons.arrow_back, color: AppColors.white, size: 30),
-            onPressed: () {
-              modalController.toggleContent();
-            },
-          ),
-        ],
-      ),
+    return Row(
+      children: [
+        IconButton(
+          icon: const Icon(Icons.arrow_back, color: AppColors.white, size: 30),
+          onPressed: () {
+            modalController.toggleContent();
+          },
+        ),
+      ],
     );
   }
 
   Widget _buildAlternateBodyContent(BuildContext context, String description) {
-    return Container(
-      child: SizedBox(
-        height: context.height * 0.55,
-        width: double.infinity,
-        child: SingleChildScrollView(
-          child: Column(
-            children: <Widget>[
-              SizedBox(height: 10),
-              Text(
-                description,
-                style: TextStyle(fontSize: 16,
-                    color: AppColors.white),
-                textAlign: TextAlign.center,
-              ),
-              SizedBox(height: 50),
-            ],
-          ),
+    return SizedBox(
+      height: context.height * 0.55,
+      width: double.infinity,
+      child: SingleChildScrollView(
+        child: Column(
+          children: <Widget>[
+            const SizedBox(height: 10),
+            Text(
+              description,
+              style: const TextStyle(fontSize: 16,
+                  color: AppColors.white),
+              textAlign: TextAlign.center,
+            ),
+            const SizedBox(height: 50),
+          ],
         ),
       ),
     );
@@ -205,48 +199,48 @@ class InformationModal extends StatelessWidget {
         child: SingleChildScrollView(
           child: Column(
             children: <Widget>[
-              SizedBox(height: 10),
+              const SizedBox(height: 10),
               Text(
                 bodyContent,
-                style: TextStyle(fontSize: 16,
+                style: const TextStyle(fontSize: 16,
                     color: AppColors.white),
                 textAlign: TextAlign.center,
               ),
-              SizedBox(height: 50),
+              const SizedBox(height: 50),
             ],
           ),
         ),
       ),
     );
   }
-
-  Widget _buildFooterContent(BuildContext context) {
-    return GestureDetector(
-      onTap: () {
-        _launchInBrowser(Uri.parse('https://www.google.com'));
-      },
-      child: Container(
-        margin: const EdgeInsets.symmetric(vertical: 10),
-        padding: const EdgeInsets.symmetric(horizontal: 15),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Row(
-              children: [
-                Icon(Icons.public_outlined, color: AppColors.white),
-                SizedBox(width: 8),
-                Text(
-                  'modal.site'.tr,
-                  style: TextStyle(color: AppColors.white, fontSize: 16, fontStyle: FontStyle.italic),
-                ),
-              ],
-            ),
-            Icon(Icons.arrow_forward_ios, color: AppColors.white),
-          ],
-        ),
-      ),
-    );
-  }
+  //
+  // Widget _buildFooterContent(BuildContext context) {
+  //   return GestureDetector(
+  //     onTap: () {
+  //       _launchInBrowser(Uri.parse('https://www.google.com'));
+  //     },
+  //     child: Container(
+  //       margin: const EdgeInsets.symmetric(vertical: 10),
+  //       padding: const EdgeInsets.symmetric(horizontal: 15),
+  //       child: Row(
+  //         mainAxisAlignment: MainAxisAlignment.spaceBetween,
+  //         children: [
+  //           Row(
+  //             children: [
+  //               Icon(Icons.public_outlined, color: AppColors.white),
+  //               SizedBox(width: 8),
+  //               Text(
+  //                 'modal.site'.tr,
+  //                 style: TextStyle(color: AppColors.white, fontSize: 16, fontStyle: FontStyle.italic),
+  //               ),
+  //             ],
+  //           ),
+  //           Icon(Icons.arrow_forward_ios, color: AppColors.white),
+  //         ],
+  //       ),
+  //     ),
+  //   );
+  // }
 
   Future<void> _launchInBrowser(Uri url) async {
     if (!await launchUrl(
