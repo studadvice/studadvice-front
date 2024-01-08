@@ -194,7 +194,6 @@ class UserStorageController extends GetxController {
 
       if (userSnapshot.exists) {
         Map<String, dynamic> data = userSnapshot.data() as Map<String, dynamic>;
-        print("data $data");
         List<dynamic> progress = data['progress'] ?? [];
         for (var item in progress) {
           if (item['administrativeProcessId'] == administrativeProcessId) {

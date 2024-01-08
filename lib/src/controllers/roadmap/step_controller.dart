@@ -61,7 +61,6 @@ class StepController extends CustomSearchController {
     
     if (!steps[stepIndex].isCompleted!) {
       steps[stepIndex].isCompleted = true;
-      print("step $stepIndex completed");
       currentStep.value = stepIndex;
       update();
 
@@ -84,7 +83,6 @@ class StepController extends CustomSearchController {
     String userId = userStorageController.getCurrentUserId();
   
     int? stepIndex = await userStorageController.getStepIndex(userId, administrativeProcessId);
-    print("stepIndex $stepIndex administrativeProcessId $administrativeProcessId");
     if (stepIndex == null) {
       stepIndex = 0;
     }
