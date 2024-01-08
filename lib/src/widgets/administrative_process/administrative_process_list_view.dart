@@ -29,12 +29,12 @@ class AdministrativeProcessListView extends StatelessWidget {
             forceMaterialTransparency: true,
             title: Text(
               categoryName,
+              style: const TextStyle(
+                fontSize: 20,
+                fontWeight: FontWeight.bold,
+              )
             ),
             centerTitle: true,
-            titleTextStyle: const TextStyle(
-              fontSize: AppFontSizes.large20,
-              fontWeight: FontWeight.bold,
-            ),
             toolbarHeight: 50,
             backgroundColor: AppColors.white,
             automaticallyImplyLeading: false,

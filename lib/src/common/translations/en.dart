@@ -233,7 +233,7 @@ class En {
         'categories.process': "Processes",
 
         // Deals
-        'deals.recommendation': "Our favorites !",
+        'deals.recommendation': "Your favorites !",
         'deals.empty': "No deals found !",
         'deals.explore': "Explore deals",
         'deals.description': "Description",
@@ -261,7 +261,7 @@ class En {
         "calendar.description":
             "Avoid any forgetfulness in your administrative procedures with our ultimate calendar! Don't let any crucial date slip through your fingers, whether it's the grand day of commencement or the epic moment of conclusion. And the cherry on top? You can receive notifications to make sure you don't miss anything. Activate them, and no more excuses for skipping your administrative tasks! Organization is the key to administrative success!",
         "calendar.events_title":"Your events",
-        "calendar.events_empty": "You currently have no administrative procedures to undertake. You're all set! 😌 Don't forget to stay informed by enabling notifications to be notified in case of new procedures.",
+        "calendar.events_empty": "You have no administrative procedures to undertake today. You're all set! 😌 Don't forget to check on other days and stay informed by enabling notifications to be notified in case of new procedures",
         // roadmap
         "roadmap.title": "Your process roadmap",
         "roadmap.required": "Prerequisites",

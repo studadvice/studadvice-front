@@ -33,9 +33,6 @@ class DealDetailScreen extends StatelessWidget {
           onPressed: () => Get.back(),
         ),
         backgroundColor: AppColors.primaryColor,
-        iconTheme: const IconThemeData(
-          color: Colors.white,
-        ),
       ),
       body: SizedBox(
         width: double.infinity,
@@ -95,7 +92,7 @@ class DealDetailScreen extends StatelessWidget {
                         const Icon(
                           Icons.star,
                           color: AppColors.yellow,
-                          size: 20,
+                          size: 25,
                         ),
                         Text(
                           deal.rating.toString(),
@@ -180,7 +177,7 @@ class DealDetailScreen extends StatelessWidget {
                           child: Icon(
                             Icons.star,
                             color: index < userRating ? AppColors.yellow : Colors.grey,
-                            size: 20,
+                            size: 30,
                           ),
                         ))
                           );
