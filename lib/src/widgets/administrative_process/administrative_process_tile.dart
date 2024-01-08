@@ -37,15 +37,19 @@ class AdministrativeProcessListTile extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        Get.toNamed(
-          RoadMapScreen.navigatorId,
-          arguments: {
-            'administrativeProcessId': administrativeProcessId,
-            'administrativeProcessName': name,
-            'administrativeProcessDescription': description,
-            'steps': steps,
-          },
-        );
+        if (steps.isNotEmpty) {
+          Get.toNamed(
+            RoadMapScreen.navigatorId,
+            arguments: {
+              'administrativeProcessId': administrativeProcessId,
+              'administrativeProcessName': name,
+              'administrativeProcessDescription': description,
+              'steps': steps,
+            },
+          );
+        } else {
+          print("No steps");
+        }
       },
       child: Padding(
         padding: const EdgeInsets.all(2.0),
@@ -181,7 +185,7 @@ class AdministrativeProcessListTile extends StatelessWidget {
                           borderRadius: BorderRadius.circular(10.0),
                         ),
                         child: Text(
-                          type!,
+                          type,
                           style: const TextStyle(
                             color: Colors.white,
                             fontSize: 12.0,

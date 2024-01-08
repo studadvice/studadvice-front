@@ -279,6 +279,6 @@ class Fr {
         // roadmap information modal
         "roadmap.required": "Prérequis",
         "modal.site": "Site d'inscription",
-
+        "roadmap.empty": "Pas encode d'étapes disponibles. Reviens bientôt !"
   };
 }

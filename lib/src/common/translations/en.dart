@@ -271,5 +271,7 @@ class En {
 
         // modal roadmap
         "modal.site": "Registration site",
-      };
+
+        "roadmap.empty": "No steps available yet. Come back soon!"
+  };
 }

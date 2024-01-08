@@ -66,6 +66,7 @@ class DealsController extends CustomSearchController {
         queryParameters: queryParameters,
       );
       if (response.statusCode == HttpStatus.ok) {
+        print(response);
         return Deals.fromJson(response.data);
       } else {
         throw Exception('Failed to load categories');
