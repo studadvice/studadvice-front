@@ -16,3 +16,4 @@ export 'register/register_user_information_screen.dart';
 export 'register/register_with_email_screen.dart';
 export 'settings/settings_screen.dart';
 export 'welcome/welcome_screen.dart';
+export 'roadmap/roadmap_screen.dart';
