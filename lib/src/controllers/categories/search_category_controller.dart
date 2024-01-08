@@ -14,8 +14,6 @@ class SearchCategoryController extends CustomSearchController {
   final PagingController<int, CategoryContent> pagingController =
       PagingController(firstPageKey: 0);
 
-  final Set<String> loadedItems = {};
-
   @override
   void onInit() {
     super.onInit();
@@ -35,27 +33,20 @@ class SearchCategoryController extends CustomSearchController {
       final isLastPage = newPage.last;
       final newItems = newPage.content;
 
-      final uniqueNewItems =
-          newItems.where((item) => !loadedItems.contains(item.id)).toList();
-
-      for (var item in uniqueNewItems) {
-        loadedItems.add(item.id);
-      }
-
       // Translate the text if the locale is not French
       if (Get.locale?.languageCode != 'fr') {
-        for (var item in uniqueNewItems) {
+        for (var item in newItems) {
           item.name = await _deeplTranslatorController.translateText(item.name);
           item.description =
               await _deeplTranslatorController.translateText(item.description);
         }
       }
-      if (uniqueNewItems.isNotEmpty) {
+      if (newItems.isNotEmpty) {
         if (isLastPage) {
-          pagingController.appendLastPage(uniqueNewItems);
+          pagingController.appendLastPage(newItems);
         } else {
           final nextPageKey = pageKey + 1;
-          pagingController.appendPage(uniqueNewItems, nextPageKey);
+          pagingController.appendPage(newItems, nextPageKey);
         }
       } else {
         pagingController.appendLastPage([]);
