@@ -120,7 +120,10 @@ class RoutesConfiguration {
       ),
       GetPage(
         name: RoadMapScreen.navigatorId,
-        page: () => RoadMapScreen(),
+        page: () => RoadMapScreen(
+          currentStep: 0,
+          admnistrativeProcessName: '',
+        ),
         binding: StepBinding(),
       ),
     ];

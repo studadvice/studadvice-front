@@ -85,7 +85,6 @@ class AdministrativeProcessController extends CustomSearchController {
         path,
         queryParameters: queryParameters,
       );
-      print("response.statusCode ${response.statusCode} ${response.data}");
       if (response.statusCode == HttpStatus.ok) {
         return AdministrativeProcesses.fromJson(response.data);
       } else {

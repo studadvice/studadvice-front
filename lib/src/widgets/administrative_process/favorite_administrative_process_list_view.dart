@@ -45,6 +45,7 @@ class FavoriteAdministrativeProcessListView extends StatelessWidget {
                       administrativeProcessId: process.id,
                       type: process.type ?? "",
                       showProgressBar: false,
+                      steps: process.steps!,
                 ),
                 firstPageErrorIndicatorBuilder: (context) => ErrorIndicator(
                   error: controller.pagingController.error,

@@ -56,9 +56,7 @@ class RoadMapView extends StatelessWidget {
               ),
             ),
             title: stepController.getProcessTitle(),
-            slidingWidget: BackdropFilter(
-              filter: ImageFilter.blur(sigmaX: 290, sigmaY: 290),
-              child: StepDetailCardWidget(
+            slidingWidget: StepDetailCardWidget(
                 title: stepController.getProcessTitle(),
                 description: stepController.getProcessDescription(),
                 onNextPressed: () {},
@@ -69,7 +67,6 @@ class RoadMapView extends StatelessWidget {
                 },
               ),
             ),
-          ),
         ],
       ),
     );

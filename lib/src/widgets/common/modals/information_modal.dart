@@ -51,7 +51,7 @@ class InformationModal extends StatelessWidget {
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: <Widget>[
-          _buildHeaderContent(context, 'Prérequis'),
+          _buildHeaderContent(context, 'roadmap.required'.tr),
           _buildBodyContent(context),
           _buildFooterContent(context),
         ],
@@ -228,7 +228,7 @@ class InformationModal extends StatelessWidget {
       child: Container(
         margin: const EdgeInsets.symmetric(vertical: 10),
         padding: const EdgeInsets.symmetric(horizontal: 15),
-        child: const Row(
+        child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Row(
@@ -236,7 +236,7 @@ class InformationModal extends StatelessWidget {
                 Icon(Icons.public_outlined, color: AppColors.white),
                 SizedBox(width: 8),
                 Text(
-                  "Site d'inscription",
+                  'modal.site'.tr,
                   style: TextStyle(color: AppColors.white, fontSize: 16, fontStyle: FontStyle.italic),
                 ),
               ],

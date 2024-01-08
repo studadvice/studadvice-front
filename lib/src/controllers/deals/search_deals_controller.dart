@@ -56,6 +56,7 @@ class SearchDealsController extends CustomSearchController {
         }
       } else {
         pagingController.appendLastPage([]);
+      }
 
       if (isLastPage) {
         pagingController.appendLastPage(newItems);
