@@ -58,13 +58,6 @@ class SearchDealsController extends CustomSearchController {
         pagingController.appendLastPage([]);
       }
 
-      if (isLastPage) {
-        pagingController.appendLastPage(newItems);
-      } else {
-        final nextPageKey = pageKey + 1;
-        pagingController.appendPage(newItems, nextPageKey);
-      }
-
     } catch (error) {
       pagingController.error = error;
     }
@@ -120,6 +113,8 @@ class SearchDealsController extends CustomSearchController {
     required int size,
     String? query,
   }) async {
+    print(number);
+    print(size);
     final queryParameters = {'page': number, 'size': size, 'searchText': query};
     return _getDealsBySearch('/deals/search', queryParameters);
   }
