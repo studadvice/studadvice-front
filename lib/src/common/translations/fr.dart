@@ -275,7 +275,7 @@ class Fr {
         // roadmap
         "roadmap.title": "Ta roadmap pour cette démarche",
         "roadmap.description": "Description",
-        "roadmap.required_empty": "Pas de prérequis",
+        "roadmap.required_empty": "Bonne nouvelle, pas de prérequis pour cette étape !",
         // roadmap information modal
         "roadmap.required": "Prérequis",
         "modal.site": "Site d'inscription",

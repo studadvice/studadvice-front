@@ -5,24 +5,14 @@ import 'package:stud_advice/stud_advice.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class InformationModal extends StatelessWidget {
-  final String secondInfo;
-  final String firstInfo;
-  final String additionalInfo;
-  final String bodyContent;
-  final String firstDescription;
-  final String secondDescription;
-  final String additionalDescription;
+  final List<RequiredDocument>? requiredDocuments;
+  final String stepDescription;
   InformationModalController get modalController => Get.find<InformationModalController>();
 
   const InformationModal({
     super.key,
-    required this.secondInfo,
-    required this.firstInfo,
-    required this.additionalInfo,
-    required this.bodyContent,
-    required this.firstDescription,
-    required this.secondDescription,
-    required this.additionalDescription,
+       this.requiredDocuments,
+       required this.stepDescription
   });
 
   @override
@@ -99,6 +89,16 @@ class InformationModal extends StatelessWidget {
     );
   }
 
+
+  ListTile buildEmptyListTile(String text) {
+    print("here");
+    return ListTile(
+      title: Text(
+        text,
+        style: const TextStyle(fontSize: 16, color: AppColors.white),
+      ));
+  }
+
   Widget _buildAlternateHeaderContent(BuildContext context) {
     return Row(
       children: [
@@ -142,7 +142,10 @@ class InformationModal extends StatelessWidget {
         borderRadius: BorderRadius.circular(15),
         boxShadow: [
           const BoxShadow(
-              color: AppColors.black26, offset: Offset(0, 0), blurRadius: 10),
+            color: AppColors.black26,
+            offset: Offset(0, 0),
+            blurRadius: 10,
+          ),
         ],
       ),
       child: Column(
@@ -155,13 +158,18 @@ class InformationModal extends StatelessWidget {
                 child: Text(
                   title,
                   style: const TextStyle(
-                      fontSize: 22, fontWeight: FontWeight.w600,
-                      color: AppColors.white),
+                    fontSize: 22,
+                    fontWeight: FontWeight.w600,
+                    color: AppColors.white,
+                  ),
                 ),
               ),
               IconButton(
-                icon: const Icon(Icons.close,
-                    color: AppColors.white, size: 30),
+                icon: const Icon(
+                  Icons.close,
+                  color: AppColors.white,
+                  size: 30,
+                ),
                 onPressed: () {
                   Navigator.of(context).pop();
                 },
@@ -172,13 +180,22 @@ class InformationModal extends StatelessWidget {
             color: AppColors.white,
             thickness: 2,
           ),
-          buildListTile(context, Icons.info_outline_rounded, secondInfo, secondDescription),
-          buildListTile(context, Icons.info_outline_rounded, firstInfo, firstDescription),
-          buildListTile(context, Icons.info_outline_rounded, additionalInfo, additionalDescription),
+          if (requiredDocuments!.isNotEmpty)
+            for (var doc in requiredDocuments!)
+              buildListTile(
+                context,
+                Icons.info_outline_rounded,
+                doc.name,
+                doc.description,
+              )
+          else
+            buildEmptyListTile("roadmap.required_empty".tr)
         ],
       ),
     );
   }
+
+
 
   Widget _buildBodyContent(BuildContext context) {
     return Container(
@@ -201,7 +218,7 @@ class InformationModal extends StatelessWidget {
             children: <Widget>[
               const SizedBox(height: 10),
               Text(
-                bodyContent,
+                stepDescription,
                 style: const TextStyle(fontSize: 16,
                     color: AppColors.white),
                 textAlign: TextAlign.center,

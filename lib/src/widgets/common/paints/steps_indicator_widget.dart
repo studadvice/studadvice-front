@@ -17,10 +17,6 @@ class StepsIndicator extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Color roadmapBackgroundColor = Theme.of(context).brightness == Brightness.dark
-        ? AppColors.roadmapBackgroundColorDark
-        : AppColors.roadmapBackgroundColorLight;
-
     return Scaffold(
       backgroundColor: Theme.of(context).canvasColor,
       body: GetBuilder<StepController>(
@@ -97,14 +93,8 @@ class StepsIndicator extends StatelessWidget {
       context: context,
       builder: (BuildContext context) {
         return InformationModal(
-          // TODO fix this, step c'est une liste faut pas récupérer comme ça à la main et afficher à chaque fois, faire une boucle ... puis on aura pas tjrs 3 required documents
-          firstDescription: step.requiredDocuments != null && step.requiredDocuments!.length > 0 ? '${step.requiredDocuments![0].description}' : 'Pas de description',
-          secondDescription: step.requiredDocuments != null && step.requiredDocuments!.length > 1 ? '${step.requiredDocuments![1].description}' : 'Pas de description',
-          additionalDescription: step.requiredDocuments != null && step.requiredDocuments!.length > 2 ? '${step.requiredDocuments![2].description}' : 'Pas de description',
-          firstInfo: step.requiredDocuments != null && step.requiredDocuments!.length > 0 ? '${step.requiredDocuments![0].name}' : 'Pas de document requis',
-          secondInfo: step.requiredDocuments != null && step.requiredDocuments!.length > 1 ? '${step.requiredDocuments![1].name}' : 'Pas de document requis',
-          additionalInfo: step.requiredDocuments != null && step.requiredDocuments!.length > 2 ? '${step.requiredDocuments![2].name}' : 'Pas de document requis',
-          bodyContent: step.description ?? '',
+          requiredDocuments: step.requiredDocuments,
+          stepDescription : step.description
         );
       },
     );
