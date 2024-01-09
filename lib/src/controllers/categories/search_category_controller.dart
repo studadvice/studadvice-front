@@ -97,10 +97,9 @@ class SearchCategoryController extends CustomSearchController {
     return _getCategoriesBySearch('/categories/search', queryParameters);
   }
 
-  Future<double> getProgressValue(String categoryId) async {
+  Future<double> getProgressValue(CategoryContent categoryContent) async {
     try {
       String userId = userStorageController.getCurrentUserId();
-
       var userDocument = await _firebaseFirestoreInstance
           .collection("users")
           .doc(userId)
@@ -112,20 +111,30 @@ class SearchCategoryController extends CustomSearchController {
         if (userData != null && userData.containsKey("progress")) {
           var progressList = userData["progress"] as List<dynamic>;
 
-          var progressEntry = progressList.firstWhere(
+          var matchingEntries = progressList.where(
                 (entry) =>
             entry is Map &&
                 entry.containsKey("categoryId") &&
-                entry["categoryId"] == categoryId,
-            orElse: () => null,
+                entry["categoryId"] == categoryContent.id,
           );
 
-          if (progressEntry != null &&
-              progressEntry.containsKey("stepIndex") &&
-              progressEntry.containsKey("totalStepsNumber")) {
-            int stepIndex = (progressEntry["stepIndex"]) ?? 0.0;
-            int totalStepsNumber = (progressEntry["totalStepsNumber"]) ?? 1.0;
-            return totalStepsNumber != 0.0 ? (stepIndex / totalStepsNumber) : 0.0;
+          if (matchingEntries.isNotEmpty) {
+            double totalProgress = matchingEntries.fold(
+              0.0,
+                  (acc, entry) {
+                if (entry.containsKey("stepIndex") &&
+                    entry.containsKey("totalStepsNumber")) {
+                  int stepIndex = (entry["stepIndex"]) ?? 0;
+                  int totalStepsNumber = (entry["totalStepsNumber"]) ?? 1;
+                  return acc + (totalStepsNumber != 0 ? (stepIndex / totalStepsNumber) : 0);
+                }
+                return acc;
+              },
+            );
+
+            return matchingEntries.isNotEmpty
+                ? totalProgress / categoryContent.administrativeProcesses!.length
+                : 0.0;
           }
         }
       }
@@ -135,4 +144,5 @@ class SearchCategoryController extends CustomSearchController {
 
     return 0.0;
   }
+
 }

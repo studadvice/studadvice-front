@@ -78,7 +78,7 @@ class CategoryItem extends StatelessWidget {
                   child: Row(
                     children: [
                       FutureBuilder<double>(
-                        future: searchCategoryController.getProgressValue(categoryId),
+                        future: searchCategoryController.getProgressValue(category),
                         builder: (context, snapshot) {
                           if (snapshot.connectionState == ConnectionState.done) {
                             double progress = snapshot.data ?? 0.0;
@@ -92,7 +92,8 @@ class CategoryItem extends StatelessWidget {
                               percent: progress,
                               progressColor: Colors.white,
                               center: Text(
-                                "${(progress * 100).toInt()}%",                                style: const TextStyle(color: Colors.white),
+                                "${(progress * 100).toInt()}%",
+                                style: const TextStyle(color: Colors.white),
                               ),
                             );
                           } else {
