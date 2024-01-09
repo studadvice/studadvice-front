@@ -6,7 +6,6 @@ import 'package:get/get.dart';
 import 'package:stud_advice/src/controllers/common/navbar_controller.dart';
 import 'package:stud_advice/src/controllers/controllers.dart';
 import 'package:stud_advice/src/controllers/deals/search_deals_controller.dart';
-import 'package:stud_advice/src/controllers/search/custom_search_controller.dart';
 import 'package:stud_advice/src/middlewares/common/auth_interceptor.dart';
 
 import '../../controllers/common/custom_search_bar_controller.dart';
@@ -42,5 +41,19 @@ class AppDependenciesBinding extends Bindings {
     Get.put(CustomSearchBarController(), permanent: true);
     // Makes the text translation available everywhere
     Get.put(DeeplTranslatorController(), permanent: true);
+  }
+
+  static void resetData() {
+    DealsController dealsController = Get.find();
+    dealsController.pagingController.refresh();
+
+    SearchDealsController searchDealsController = Get.find();
+    searchDealsController.pagingController.refresh();
+
+    SearchFaqController searchFaqController = Get.find();
+    searchFaqController.pagingController.refresh();
+
+    SearchCategoryController searchCategoryController = Get.find();
+    searchCategoryController.pagingController.refresh();
   }
 }

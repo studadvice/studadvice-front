@@ -79,6 +79,8 @@ class SettingsScreen extends StatelessWidget {
           onChanged: (locale) {
             // TODO : checker l'async
             _i18n.changeLocale(locale ?? _i18n.getCurrentLocale);
+            AppDependenciesBinding.resetData();
+            Get.offAllNamed(NavigationBarScreen.navigatorId);
             return null;
           },
           validator: (locale) {
