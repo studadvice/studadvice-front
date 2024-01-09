@@ -56,20 +56,20 @@ class StepController extends CustomSearchController {
     update();
   }
 
-  Future<void> completeStep(int stepIndex, String administrativeProcessId) async {
+  Future<void> completeStep(int stepIndex, String administrativeProcessId,String categoryId) async {
     if (!steps[stepIndex].isCompleted!) {
       steps[stepIndex].isCompleted = true;
       currentStep.value = stepIndex;
       update();
 
-      await _saveStepProgressToFirebase(stepIndex, administrativeProcessId);
+      await _saveStepProgressToFirebase(stepIndex, administrativeProcessId,categoryId);
     }
   }
 
-  Future<void> _saveStepProgressToFirebase(int stepIndex, String administrativeProcessId) async {
+  Future<void> _saveStepProgressToFirebase(int stepIndex, String administrativeProcessId, String categoryId) async {
     try {
       String userId = userStorageController.getCurrentUserId();
-      await userStorageController.addStepProgressionToUser(userId, administrativeProcessId, stepIndex, steps.length);
+      await userStorageController.addStepProgressionToUser(userId, administrativeProcessId, stepIndex, steps.length,categoryId);
     } catch (error) {
       print("Error while saving step progression to firebase: $error");
     }
@@ -93,9 +93,9 @@ class StepController extends CustomSearchController {
     }
   }
 
-  Future<void> resetStepProgression(String administrativeProcessId) async {
+  Future<void> resetStepProgression(String administrativeProcessId, String categoryId) async {
     String userId = userStorageController.getCurrentUserId();
-    await userStorageController.resetStepProgression(userId, administrativeProcessId, steps.length);
+    await userStorageController.resetStepProgression(userId, administrativeProcessId, steps.length,categoryId);
   }
   
 }

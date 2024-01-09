@@ -7,12 +7,14 @@ class StepsIndicator extends StatelessWidget {
   final List<StepItem> steps;
   static double DIAMETER = 90.0;
   final String administrativeProcessId;
+  final String categoryId;
 
   StepsIndicator({
         super.key,
         required this.currentStep,
         required this.steps,
         required this.administrativeProcessId,
+        required this.categoryId
   });
 
   @override
@@ -48,7 +50,7 @@ class StepsIndicator extends StatelessWidget {
                             color: step.color ?? Colors.blue,
                             borderColor: step.borderColor ?? Colors.blue,
                             onPressed: () => {
-                              if (index < controller.steps.length - 1) controller.completeStep(index + 1, administrativeProcessId),
+                              if (index < controller.steps.length - 1) controller.completeStep(index + 1, administrativeProcessId,categoryId),
                               _onPopupOpened(index, step, context),
                             },
                             isActivated: step.isCompleted!,

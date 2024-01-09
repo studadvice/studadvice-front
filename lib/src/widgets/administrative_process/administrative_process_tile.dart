@@ -15,6 +15,7 @@ class AdministrativeProcessListTile extends StatelessWidget {
   final Color backgroundColor;
   final List<StepItem> steps;
   final String type;
+  final String categoryId;
 
   final AdministrativeProcessController _administrativeProcessController =
   Get.find<AdministrativeProcessController>();
@@ -23,6 +24,7 @@ class AdministrativeProcessListTile extends StatelessWidget {
 
   AdministrativeProcessListTile({
     Key? key,
+    required this.categoryId,
     required this.administrativeProcessId,
     required this.imageId,
     required this.name,
@@ -45,6 +47,7 @@ class AdministrativeProcessListTile extends StatelessWidget {
               'administrativeProcessName': name,
               'administrativeProcessDescription': description,
               'steps': steps,
+              'categoryId': categoryId
             },
           );
         } else {

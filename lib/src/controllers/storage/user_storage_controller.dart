@@ -138,7 +138,7 @@ class UserStorageController extends GetxController {
     }
   }
   
-  Future<bool> addStepProgressionToUser(String userId, String administrativeProcessId, int stepIndex, int totalStepsNumber) async {
+  Future<bool> addStepProgressionToUser(String userId, String administrativeProcessId, int stepIndex, int totalStepsNumber, String categoryId) async {
     try {
       CollectionReference users = _firebaseFirestoreInstance.collection('users');
 
@@ -150,6 +150,7 @@ class UserStorageController extends GetxController {
               'totalStepsNumber' : totalStepsNumber,
               'administrativeProcessId': administrativeProcessId,
               'stepIndex': stepIndex,
+              'categoryId': categoryId,
             },
           ],
         });
@@ -172,6 +173,7 @@ class UserStorageController extends GetxController {
             'totalStepsNumber' : totalStepsNumber,
             'administrativeProcessId': administrativeProcessId,
             'stepIndex': stepIndex,
+            'categoryId': categoryId,
           });
         }
 
@@ -228,7 +230,7 @@ class UserStorageController extends GetxController {
     }
   }
 
-  Future<bool> resetStepProgression(String userId, String administrativeProcessId, int totalStepsNumber) async {
+  Future<bool> resetStepProgression(String userId, String administrativeProcessId, int totalStepsNumber, String categoryId) async {
     try {
       CollectionReference users = _firebaseFirestoreInstance.collection('users');
 
@@ -240,6 +242,7 @@ class UserStorageController extends GetxController {
               'totalStepsNumber' : totalStepsNumber,
               'administrativeProcessId': administrativeProcessId,
               'stepIndex': 0,
+              'categoryId': categoryId,
             },
           ],
         });
@@ -262,6 +265,7 @@ class UserStorageController extends GetxController {
             'totalStepsNumber' : totalStepsNumber,
             'administrativeProcessId': administrativeProcessId,
             'stepIndex': 0,
+            'categoryId': categoryId,
           });
         }
 

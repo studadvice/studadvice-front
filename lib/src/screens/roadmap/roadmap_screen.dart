@@ -9,7 +9,6 @@ class RoadMapScreen extends StatelessWidget {
   final String admnistrativeProcessName;
   final RoadMapController roadMapController = Get.find<RoadMapController>();
   final StepController stepController = Get.find<StepController>();
-  
 
   RoadMapScreen({
     super.key,
@@ -24,6 +23,7 @@ class RoadMapScreen extends StatelessWidget {
     final String administrativeProcessName = args['administrativeProcessName'] ?? '';
     final String administrativeProcessDescription = args['administrativeProcessDescription'] ?? '';
     final List<StepItem> steps = args['steps'] ?? [];
+    final String categoryId = args['categoryId'];
     // set the steps
     stepController.setSteps(steps);
 
@@ -55,6 +55,7 @@ class RoadMapScreen extends StatelessWidget {
                             currentStep: stepController.currentStep.value,
                             steps: stepController.steps,
                             administrativeProcessId: administrativeProcessId,
+                            categoryId : categoryId
                           ),
                         ),
                       ),
@@ -64,7 +65,7 @@ class RoadMapScreen extends StatelessWidget {
                         description: stepController.getProcessDescription(),
                         onNextPressed: () {},
                         onCompletePressed: () async {
-                          await stepController.resetStepProgression(administrativeProcessId);
+                          await stepController.resetStepProgression(administrativeProcessId,categoryId);
                           await stepController.setAndAddMetadataToStep(stepController.steps, administrativeProcessId);
                           stepController.update();
                         },
