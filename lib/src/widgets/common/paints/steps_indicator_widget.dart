@@ -50,7 +50,7 @@ class StepsIndicator extends StatelessWidget {
                             color: step.color ?? Colors.blue,
                             borderColor: step.borderColor ?? Colors.blue,
                             onPressed: () => {
-                              if (index < controller.steps.length - 1) controller.completeStep(index + 1, administrativeProcessId,categoryId),
+                              if (index <= controller.steps.length-1) controller.completeStep(index+1, administrativeProcessId,categoryId),
                               _onPopupOpened(index, step, context),
                             },
                             isActivated: step.isCompleted!,

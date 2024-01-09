@@ -92,8 +92,7 @@ class CategoryItem extends StatelessWidget {
                               percent: progress,
                               progressColor: Colors.white,
                               center: Text(
-                                "${progress*100}%",
-                                style: const TextStyle(color: Colors.white),
+                                "${(progress * 100).toInt()}%",                                style: const TextStyle(color: Colors.white),
                               ),
                             );
                           } else {

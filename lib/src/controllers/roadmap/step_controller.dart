@@ -57,12 +57,21 @@ class StepController extends CustomSearchController {
   }
 
   Future<void> completeStep(int stepIndex, String administrativeProcessId,String categoryId) async {
-    if (!steps[stepIndex].isCompleted!) {
-      steps[stepIndex].isCompleted = true;
+    print(stepIndex);
+    if (stepIndex == steps.length){
       currentStep.value = stepIndex;
-      update();
+      await _saveStepProgressToFirebase(
+          stepIndex, administrativeProcessId, categoryId);
+    }
+    else {
+      if (!steps[stepIndex].isCompleted!) {
+        steps[stepIndex].isCompleted = true;
+        currentStep.value = stepIndex;
+        update();
 
-      await _saveStepProgressToFirebase(stepIndex, administrativeProcessId,categoryId);
+        await _saveStepProgressToFirebase(
+            stepIndex, administrativeProcessId, categoryId);
+      }
     }
   }
 
