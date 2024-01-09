@@ -1,3 +1,4 @@
+import 'package:stud_advice/src/models/stud_advice/resource.dart';
 import 'package:stud_advice/stud_advice.dart';
 import 'package:flutter/material.dart';
 
@@ -9,6 +10,7 @@ class StepItem {
   Color? borderColor;
   bool? isCompleted;
   String? imageId;
+  List<Resource>? resources;
   List<RequiredDocument>? requiredDocuments;
 
   StepItem(
@@ -32,6 +34,12 @@ class StepItem {
         requiredDocuments!.add(RequiredDocument.fromJson(v));
       });
     }
+    if (json['resources'] != null) {
+      resources = <Resource>[];
+      json['resources'].forEach((v) {
+        resources!.add(Resource.fromJson(v));
+      });
+    }
     isCompleted = false;
   }
 
@@ -44,6 +52,10 @@ class StepItem {
     if (requiredDocuments != null) {
       data['requiredDocuments'] =
           requiredDocuments!.map((v) => v.toJson()).toList();
+    }
+    if (resources != null) {
+      data['resources'] =
+          resources!.map((v) => v.toJson()).toList();
     }
     return data;
   }

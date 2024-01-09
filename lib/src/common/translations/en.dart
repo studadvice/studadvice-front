@@ -267,9 +267,11 @@ class En {
         "roadmap.title": "Your process roadmap",
         "roadmap.required": "Prerequisites",
         "roadmap.description": "Description",
-        "roadmap.required_empty": "No prerequisites",
+        "roadmap.required_empty": "Good news, no prerequisites for this step !",
 
         // modal roadmap
         "modal.site": "Registration site",
-      };
+
+        "roadmap.empty": "No steps available yet. Come back soon!"
+  };
 }

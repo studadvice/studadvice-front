@@ -4,25 +4,18 @@ import 'package:get/get.dart';
 import 'package:stud_advice/stud_advice.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+import '../../../models/stud_advice/resource.dart';
+
 class InformationModal extends StatelessWidget {
-  final String secondInfo;
-  final String firstInfo;
-  final String additionalInfo;
-  final String bodyContent;
-  final String firstDescription;
-  final String secondDescription;
-  final String additionalDescription;
+  final List<RequiredDocument>? requiredDocuments;
+  final List<Resource>? resources;
+  final String stepDescription;
   InformationModalController get modalController => Get.find<InformationModalController>();
 
   const InformationModal({
     super.key,
-    required this.secondInfo,
-    required this.firstInfo,
-    required this.additionalInfo,
-    required this.bodyContent,
-    required this.firstDescription,
-    required this.secondDescription,
-    required this.additionalDescription,
+       this.requiredDocuments,
+       required this.stepDescription, this.resources
   });
 
   @override
@@ -32,12 +25,10 @@ class InformationModal extends StatelessWidget {
       body: Center(
         child: BackdropFilter(
           filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
-          child: Container(
-            child: SingleChildScrollView(
-              child: Obx(() => modalController.showAlternateContent.value
-                  ? _buildAlternateContent(context)
-                  : _buildOriginalContent(context)),
-            ),
+          child: SingleChildScrollView(
+            child: Obx(() => modalController.showAlternateContent.value
+                ? _buildAlternateContent(context)
+                : _buildOriginalContent(context)),
           ),
         ),
       ),
@@ -101,39 +92,44 @@ class InformationModal extends StatelessWidget {
     );
   }
 
+
+  ListTile buildEmptyListTile(String text) {
+    return ListTile(
+      title: Text(
+        text,
+        style: const TextStyle(fontSize: 16, color: AppColors.white),
+      ));
+  }
+
   Widget _buildAlternateHeaderContent(BuildContext context) {
-    return Container(
-      child: Row(
-        children: [
-          IconButton(
-            icon: const Icon(Icons.arrow_back, color: AppColors.white, size: 30),
-            onPressed: () {
-              modalController.toggleContent();
-            },
-          ),
-        ],
-      ),
+    return Row(
+      children: [
+        IconButton(
+          icon: const Icon(Icons.arrow_back, color: AppColors.white, size: 30),
+          onPressed: () {
+            modalController.toggleContent();
+          },
+        ),
+      ],
     );
   }
 
   Widget _buildAlternateBodyContent(BuildContext context, String description) {
-    return Container(
-      child: SizedBox(
-        height: context.height * 0.55,
-        width: double.infinity,
-        child: SingleChildScrollView(
-          child: Column(
-            children: <Widget>[
-              SizedBox(height: 10),
-              Text(
-                description,
-                style: TextStyle(fontSize: 16,
-                    color: AppColors.white),
-                textAlign: TextAlign.center,
-              ),
-              SizedBox(height: 50),
-            ],
-          ),
+    return SizedBox(
+      height: context.height * 0.55,
+      width: double.infinity,
+      child: SingleChildScrollView(
+        child: Column(
+          children: <Widget>[
+            const SizedBox(height: 10),
+            Text(
+              description,
+              style: const TextStyle(fontSize: 16,
+                  color: AppColors.white),
+              textAlign: TextAlign.center,
+            ),
+            const SizedBox(height: 50),
+          ],
         ),
       ),
     );
@@ -148,7 +144,10 @@ class InformationModal extends StatelessWidget {
         borderRadius: BorderRadius.circular(15),
         boxShadow: [
           const BoxShadow(
-              color: AppColors.black26, offset: Offset(0, 0), blurRadius: 10),
+            color: AppColors.black26,
+            offset: Offset(0, 0),
+            blurRadius: 10,
+          ),
         ],
       ),
       child: Column(
@@ -161,13 +160,18 @@ class InformationModal extends StatelessWidget {
                 child: Text(
                   title,
                   style: const TextStyle(
-                      fontSize: 22, fontWeight: FontWeight.w600,
-                      color: AppColors.white),
+                    fontSize: 22,
+                    fontWeight: FontWeight.w600,
+                    color: AppColors.white,
+                  ),
                 ),
               ),
               IconButton(
-                icon: const Icon(Icons.close,
-                    color: AppColors.white, size: 30),
+                icon: const Icon(
+                  Icons.close,
+                  color: AppColors.white,
+                  size: 30,
+                ),
                 onPressed: () {
                   Navigator.of(context).pop();
                 },
@@ -178,13 +182,22 @@ class InformationModal extends StatelessWidget {
             color: AppColors.white,
             thickness: 2,
           ),
-          buildListTile(context, Icons.info_outline_rounded, secondInfo, secondDescription),
-          buildListTile(context, Icons.info_outline_rounded, firstInfo, firstDescription),
-          buildListTile(context, Icons.info_outline_rounded, additionalInfo, additionalDescription),
+          if (requiredDocuments != null && requiredDocuments!.isNotEmpty)
+            for (var doc in requiredDocuments!)
+              buildListTile(
+                context,
+                Icons.info_outline_rounded,
+                doc.name,
+                doc.description,
+              )
+          else
+            buildEmptyListTile("roadmap.required_empty".tr)
         ],
       ),
     );
   }
+
+
 
   Widget _buildBodyContent(BuildContext context) {
     return Container(
@@ -205,44 +218,16 @@ class InformationModal extends StatelessWidget {
         child: SingleChildScrollView(
           child: Column(
             children: <Widget>[
-              SizedBox(height: 10),
+              const SizedBox(height: 10),
               Text(
-                bodyContent,
-                style: TextStyle(fontSize: 16,
+                stepDescription,
+                style: const TextStyle(fontSize: 16,
                     color: AppColors.white),
                 textAlign: TextAlign.center,
               ),
-              SizedBox(height: 50),
+              const SizedBox(height: 50),
             ],
           ),
-        ),
-      ),
-    );
-  }
-
-  Widget _buildFooterContent(BuildContext context) {
-    return GestureDetector(
-      onTap: () {
-        _launchInBrowser(Uri.parse('https://www.google.com'));
-      },
-      child: Container(
-        margin: const EdgeInsets.symmetric(vertical: 10),
-        padding: const EdgeInsets.symmetric(horizontal: 15),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Row(
-              children: [
-                Icon(Icons.public_outlined, color: AppColors.white),
-                SizedBox(width: 8),
-                Text(
-                  'modal.site'.tr,
-                  style: TextStyle(color: AppColors.white, fontSize: 16, fontStyle: FontStyle.italic),
-                ),
-              ],
-            ),
-            Icon(Icons.arrow_forward_ios, color: AppColors.white),
-          ],
         ),
       ),
     );
@@ -256,4 +241,47 @@ class InformationModal extends StatelessWidget {
       throw Exception('Could not launch $url');
     }
   }
+
+
+  Widget _buildFooterContent(BuildContext context) {
+    return Column(
+      children: [
+        for (Resource resource in resources ?? [])
+          if (resource.url != null)
+            _buildResourceFooter(context, resource),
+      ],
+    );
+  }
+
+
+  Widget _buildResourceFooter(BuildContext context, Resource resource) {
+    return GestureDetector(
+      onTap: () {
+        _launchInBrowser(Uri.parse(resource.url!));
+      },
+      child: Container(
+        margin: const EdgeInsets.symmetric(vertical: 10),
+        padding: const EdgeInsets.symmetric(horizontal: 15),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Row(
+              children: [
+                const Icon(Icons.public_outlined, color: AppColors.white),
+                const SizedBox(width: 8),
+                Text(
+                  resource.name,
+                  style: const TextStyle(color: AppColors.white, fontSize: 16, fontStyle: FontStyle.italic),
+                ),
+              ],
+            ),
+            const Icon(Icons.arrow_forward_ios, color: AppColors.white),
+          ],
+        ),
+      ),
+    );
+  }
+
+
+
 }

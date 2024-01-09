@@ -58,13 +58,6 @@ class SearchDealsController extends CustomSearchController {
         pagingController.appendLastPage([]);
       }
 
-      if (isLastPage) {
-        pagingController.appendLastPage(newItems);
-      } else {
-        final nextPageKey = pageKey + 1;
-        pagingController.appendPage(newItems, nextPageKey);
-      }
-
     } catch (error) {
       pagingController.error = error;
     }

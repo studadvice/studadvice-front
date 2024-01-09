@@ -138,7 +138,7 @@ class UserStorageController extends GetxController {
     }
   }
   
-  Future<bool> addStepProgressionToUser(String userId, String administrativeProcessId, int stepIndex) async {
+  Future<bool> addStepProgressionToUser(String userId, String administrativeProcessId, int stepIndex, int totalStepsNumber, String categoryId) async {
     try {
       CollectionReference users = _firebaseFirestoreInstance.collection('users');
 
@@ -147,8 +147,10 @@ class UserStorageController extends GetxController {
         await users.doc(userId).set({
           'progress': [
             {
+              'totalStepsNumber' : totalStepsNumber,
               'administrativeProcessId': administrativeProcessId,
               'stepIndex': stepIndex,
+              'categoryId': categoryId,
             },
           ],
         });
@@ -168,8 +170,10 @@ class UserStorageController extends GetxController {
 
         if (!found) {
           progress.add({
+            'totalStepsNumber' : totalStepsNumber,
             'administrativeProcessId': administrativeProcessId,
             'stepIndex': stepIndex,
+            'categoryId': categoryId,
           });
         }
 
@@ -226,7 +230,7 @@ class UserStorageController extends GetxController {
     }
   }
 
-  Future<bool> resetStepProgression(String userId, String administrativeProcessId) async {
+  Future<bool> resetStepProgression(String userId, String administrativeProcessId, int totalStepsNumber, String categoryId) async {
     try {
       CollectionReference users = _firebaseFirestoreInstance.collection('users');
 
@@ -235,8 +239,10 @@ class UserStorageController extends GetxController {
         await users.doc(userId).set({
           'progress': [
             {
+              'totalStepsNumber' : totalStepsNumber,
               'administrativeProcessId': administrativeProcessId,
               'stepIndex': 0,
+              'categoryId': categoryId,
             },
           ],
         });
@@ -256,8 +262,10 @@ class UserStorageController extends GetxController {
 
         if (!found) {
           progress.add({
+            'totalStepsNumber' : totalStepsNumber,
             'administrativeProcessId': administrativeProcessId,
             'stepIndex': 0,
+            'categoryId': categoryId,
           });
         }
 

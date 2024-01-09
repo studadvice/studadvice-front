@@ -32,11 +32,10 @@ class ShimmerStepsIndicator extends StatelessWidget {
             builder: (controller) {
               return ListView.builder(
                 itemCount: itemCount,
-                padding: EdgeInsets.only(bottom: 250),
+                padding: const EdgeInsets.only(bottom: 250),
                 itemBuilder: (context, index) {
                   int stepNumber = index + 1;
                   bool isLeftAligned = stepNumber % 2 != 0;
-                  StepItem step = controller.steps[index];
                   return LayoutBuilder(
                     builder: (BuildContext context, BoxConstraints constraints) {
                       double screenWidth = constraints.maxWidth;
@@ -57,16 +56,16 @@ class ShimmerStepsIndicator extends StatelessWidget {
                                   diameter: stepWidgetDiameter,
                                   color: Colors.white,
                                   borderColor: Colors.white,
+                                  onPressed: () => {},
+                                  isActivated: false,
                                   child: ConstrainedBox(
                                     constraints: BoxConstraints(
                                       maxWidth: screenWidth - stepWidgetDiameter - 40,
                                     ),
                                     child: whiteBlock(400, 20),
                                   ),
-                                  onPressed: () => {},
-                                  isActivated: false,
                                 ),
-                                if (!isLeftAligned) SizedBox(width: 10),
+                                if (!isLeftAligned) const SizedBox(width: 10),
                               ],
                             ),
                           ),
@@ -95,7 +94,7 @@ class ShimmerStepsIndicator extends StatelessWidget {
     return Container(
       width: width,
       height: height,
-      margin: EdgeInsets.symmetric(vertical: 3, horizontal: 5),
+      margin: const EdgeInsets.symmetric(vertical: 3, horizontal: 5),
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(10),

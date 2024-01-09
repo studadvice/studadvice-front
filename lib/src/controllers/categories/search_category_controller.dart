@@ -10,7 +10,9 @@ import 'package:stud_advice/stud_advice.dart';
 class SearchCategoryController extends CustomSearchController {
   final Dio _dio = Get.find();
   final DeeplTranslatorController _deeplTranslatorController = Get.find();
-
+  UserStorageController userStorageController = Get.find();
+  var _firebaseFirestoreInstance =
+      AppDependenciesBinding.firebaseFirestoreInstance;
   final PagingController<int, CategoryContent> pagingController =
       PagingController(firstPageKey: 0);
 
@@ -51,6 +53,7 @@ class SearchCategoryController extends CustomSearchController {
       } else {
         pagingController.appendLastPage([]);
       }
+
     } catch (error) {
       pagingController.error = error;
       debugPrint(error.toString());
@@ -92,5 +95,44 @@ class SearchCategoryController extends CustomSearchController {
   }) async {
     final queryParameters = {'page': number, 'size': size, 'searchText': query};
     return _getCategoriesBySearch('/categories/search', queryParameters);
+  }
+
+  Future<double> getProgressValue(String categoryId) async {
+    try {
+      String userId = userStorageController.getCurrentUserId();
+
+      var userDocument = await _firebaseFirestoreInstance
+          .collection("users")
+          .doc(userId)
+          .get();
+
+      if (userDocument.exists) {
+        var userData = userDocument.data();
+
+        if (userData != null && userData.containsKey("progress")) {
+          var progressList = userData["progress"] as List<dynamic>;
+
+          var progressEntry = progressList.firstWhere(
+                (entry) =>
+            entry is Map &&
+                entry.containsKey("categoryId") &&
+                entry["categoryId"] == categoryId,
+            orElse: () => null,
+          );
+
+          if (progressEntry != null &&
+              progressEntry.containsKey("stepIndex") &&
+              progressEntry.containsKey("totalStepsNumber")) {
+            int stepIndex = (progressEntry["stepIndex"]) ?? 0.0;
+            int totalStepsNumber = (progressEntry["totalStepsNumber"]) ?? 1.0;
+            return totalStepsNumber != 0.0 ? (stepIndex / totalStepsNumber) : 0.0;
+          }
+        }
+      }
+    } catch (e) {
+      print("Error getting progress value: $e");
+    }
+
+    return 0.0;
   }
 }

@@ -50,6 +50,7 @@ class AdministrativeProcessListView extends StatelessWidget {
                   PagedChildBuilderDelegate<AdministrativeProcessContent>(
                 itemBuilder: (context, process, index) {
                   return AdministrativeProcessListTile(
+                    categoryId : categoryId,
                     name: process.name,
                     imageId: process.imageId,
                     description: process.description,

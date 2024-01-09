@@ -15,6 +15,7 @@ class AdministrativeProcessListTile extends StatelessWidget {
   final Color backgroundColor;
   final List<StepItem> steps;
   final String type;
+  final String categoryId;
 
   final AdministrativeProcessController _administrativeProcessController =
   Get.find<AdministrativeProcessController>();
@@ -23,6 +24,7 @@ class AdministrativeProcessListTile extends StatelessWidget {
 
   AdministrativeProcessListTile({
     Key? key,
+    required this.categoryId,
     required this.administrativeProcessId,
     required this.imageId,
     required this.name,
@@ -37,15 +39,20 @@ class AdministrativeProcessListTile extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        Get.toNamed(
-          RoadMapScreen.navigatorId,
-          arguments: {
-            'administrativeProcessId': administrativeProcessId,
-            'administrativeProcessName': name,
-            'administrativeProcessDescription': description,
-            'steps': steps,
-          },
-        );
+        if (steps.isNotEmpty) {
+          Get.toNamed(
+            RoadMapScreen.navigatorId,
+            arguments: {
+              'administrativeProcessId': administrativeProcessId,
+              'administrativeProcessName': name,
+              'administrativeProcessDescription': description,
+              'steps': steps,
+              'categoryId': categoryId
+            },
+          );
+        } else {
+          print("No steps");
+        }
       },
       child: Padding(
         padding: const EdgeInsets.all(2.0),
@@ -134,18 +141,31 @@ class AdministrativeProcessListTile extends StatelessWidget {
                         ),
                       ],
                     ),
-                    subtitle: showProgressBar
-                        ? const Padding(
-                      padding: EdgeInsets.only(top: 10.0),
-                      child: LinearProgressIndicator(
-                        value: 0.5,
-                        backgroundColor: AppColors.grey,
-                        valueColor: AlwaysStoppedAnimation<Color>(
-                          AppColors.primaryColor,
-                        ),
+                    subtitle: Padding(
+                      padding: const EdgeInsets.only(top: 10.0),
+                      child: FutureBuilder<double>(
+                        future: _administrativeProcessController.getProgressValue(administrativeProcessId),
+                        builder: (context, snapshot) {
+                          if (snapshot.connectionState == ConnectionState.done) {
+                            return LinearProgressIndicator(
+                              value: snapshot.data,
+                              backgroundColor: AppColors.grey,
+                              valueColor: const AlwaysStoppedAnimation<Color>(
+                                AppColors.primaryColor,
+                              ),
+                            );
+                          } else {
+                            return const LinearProgressIndicator(
+                              value: 0.0,
+                              backgroundColor: AppColors.grey,
+                              valueColor: AlwaysStoppedAnimation<Color>(
+                                AppColors.primaryColor,
+                              ),
+                            );
+                          }
+                        },
                       ),
-                    )
-                        : null,
+                    ),
                     trailing: Obx(() {
                       return GestureDetector(
                         onTap: () {
@@ -181,7 +201,7 @@ class AdministrativeProcessListTile extends StatelessWidget {
                           borderRadius: BorderRadius.circular(10.0),
                         ),
                         child: Text(
-                          type!,
+                          type,
                           style: const TextStyle(
                             color: Colors.white,
                             fontSize: 12.0,
