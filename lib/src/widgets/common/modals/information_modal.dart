@@ -4,15 +4,18 @@ import 'package:get/get.dart';
 import 'package:stud_advice/stud_advice.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+import '../../../models/stud_advice/resource.dart';
+
 class InformationModal extends StatelessWidget {
   final List<RequiredDocument>? requiredDocuments;
+  final List<Resource>? resources;
   final String stepDescription;
   InformationModalController get modalController => Get.find<InformationModalController>();
 
   const InformationModal({
     super.key,
        this.requiredDocuments,
-       required this.stepDescription
+       required this.stepDescription, this.resources
   });
 
   @override
@@ -41,7 +44,7 @@ class InformationModal extends StatelessWidget {
         children: <Widget>[
           _buildHeaderContent(context, 'roadmap.required'.tr),
           _buildBodyContent(context),
-          //_buildFooterContent(context),
+          _buildFooterContent(context),
         ],
       ),
     );
@@ -91,7 +94,6 @@ class InformationModal extends StatelessWidget {
 
 
   ListTile buildEmptyListTile(String text) {
-    print("here");
     return ListTile(
       title: Text(
         text,
@@ -180,7 +182,7 @@ class InformationModal extends StatelessWidget {
             color: AppColors.white,
             thickness: 2,
           ),
-          if (requiredDocuments!.isNotEmpty)
+          if (requiredDocuments != null && requiredDocuments!.isNotEmpty)
             for (var doc in requiredDocuments!)
               buildListTile(
                 context,
@@ -230,34 +232,6 @@ class InformationModal extends StatelessWidget {
       ),
     );
   }
-  //
-  // Widget _buildFooterContent(BuildContext context) {
-  //   return GestureDetector(
-  //     onTap: () {
-  //       _launchInBrowser(Uri.parse('https://www.google.com'));
-  //     },
-  //     child: Container(
-  //       margin: const EdgeInsets.symmetric(vertical: 10),
-  //       padding: const EdgeInsets.symmetric(horizontal: 15),
-  //       child: Row(
-  //         mainAxisAlignment: MainAxisAlignment.spaceBetween,
-  //         children: [
-  //           Row(
-  //             children: [
-  //               Icon(Icons.public_outlined, color: AppColors.white),
-  //               SizedBox(width: 8),
-  //               Text(
-  //                 'modal.site'.tr,
-  //                 style: TextStyle(color: AppColors.white, fontSize: 16, fontStyle: FontStyle.italic),
-  //               ),
-  //             ],
-  //           ),
-  //           Icon(Icons.arrow_forward_ios, color: AppColors.white),
-  //         ],
-  //       ),
-  //     ),
-  //   );
-  // }
 
   Future<void> _launchInBrowser(Uri url) async {
     if (!await launchUrl(
@@ -267,4 +241,47 @@ class InformationModal extends StatelessWidget {
       throw Exception('Could not launch $url');
     }
   }
+
+
+  Widget _buildFooterContent(BuildContext context) {
+    return Column(
+      children: [
+        for (Resource resource in resources ?? [])
+          if (resource.url != null)
+            _buildResourceFooter(context, resource),
+      ],
+    );
+  }
+
+
+  Widget _buildResourceFooter(BuildContext context, Resource resource) {
+    return GestureDetector(
+      onTap: () {
+        _launchInBrowser(Uri.parse(resource.url!));
+      },
+      child: Container(
+        margin: const EdgeInsets.symmetric(vertical: 10),
+        padding: const EdgeInsets.symmetric(horizontal: 15),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Row(
+              children: [
+                const Icon(Icons.public_outlined, color: AppColors.white),
+                const SizedBox(width: 8),
+                Text(
+                  resource.name,
+                  style: const TextStyle(color: AppColors.white, fontSize: 16, fontStyle: FontStyle.italic),
+                ),
+              ],
+            ),
+            const Icon(Icons.arrow_forward_ios, color: AppColors.white),
+          ],
+        ),
+      ),
+    );
+  }
+
+
+
 }

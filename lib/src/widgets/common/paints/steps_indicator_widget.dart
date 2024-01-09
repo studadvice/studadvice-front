@@ -94,7 +94,7 @@ class StepsIndicator extends StatelessWidget {
       builder: (BuildContext context) {
         return InformationModal(
           requiredDocuments: step.requiredDocuments,
-          stepDescription : step.description
+          stepDescription : step.description, resources: step.resources
         );
       },
     );
