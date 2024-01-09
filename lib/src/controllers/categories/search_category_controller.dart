@@ -51,6 +51,7 @@ class SearchCategoryController extends CustomSearchController {
       } else {
         pagingController.appendLastPage([]);
       }
+
     } catch (error) {
       pagingController.error = error;
       debugPrint(error.toString());

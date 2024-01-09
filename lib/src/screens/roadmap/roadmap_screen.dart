@@ -5,7 +5,6 @@ import 'package:stud_advice/stud_advice.dart';
 
 class RoadMapScreen extends StatelessWidget {
   static const navigatorId = '/roadmap';
-  final int currentStep;
   final PanelController panelController = PanelController();
   final String admnistrativeProcessName;
   final RoadMapController roadMapController = Get.find<RoadMapController>();
@@ -14,7 +13,6 @@ class RoadMapScreen extends StatelessWidget {
 
   RoadMapScreen({
     super.key,
-    required this.currentStep,
     required this.admnistrativeProcessName,
   });
 

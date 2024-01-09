@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dio/dio.dart';
 import 'package:get/get.dart';
 import '../../../stud_advice.dart';
@@ -7,13 +8,15 @@ class DealDetailController extends GetxController {
   var _firebaseFirestoreInstance = AppDependenciesBinding.firebaseFirestoreInstance;
   final Dio _dio = Get.find();
   var userRatings = <String, int>{}.obs;
+  UserStorageController userStorageController = Get.find();
+  late String _userId;
 
   @override
   void onInit() {
     super.onInit();
+    _userId = userStorageController.getCurrentUserId();
     initUserRatings();
   }
-
 
   Future<DealContent> _rateDeal(
       String path, Map<String, dynamic> queryParameters) async {
@@ -37,23 +40,30 @@ class DealDetailController extends GetxController {
     required int rating,
     String? query,
   }) async {
-    final queryParameters = {'rating': rating};
+    final queryParameters = {
+      'rating': rating,
+      'userId': _userId,
+    };
     return _rateDeal('/deals/$dealId/rate', queryParameters);
   }
 
   Future<void> initUserRatings() async {
     try {
-      var userRatingsCollection = await _firebaseFirestoreInstance.collection("user_ratings").get();
+      var userRatingsDoc = await _firebaseFirestoreInstance
+          .collection("users")
+          .doc(_userId)
+          .get();
 
-      for (var ratingDoc in userRatingsCollection.docs) {
-        var dealId = ratingDoc.id;
-        userRatings[dealId] = ratingDoc["rating"];
+      if (userRatingsDoc.exists) {
+        var ratingsMap = userRatingsDoc.data()?["ratings"] as Map<String, dynamic>? ?? {};
+        userRatings.value = Map<String, int>.from(ratingsMap);
+      } else {
+        print("User document not found or does not exist");
       }
     } catch (e) {
       print("Error initializing user ratings: $e");
     }
   }
-
 
   Future<void> setUserRating(String dealId, int rating) async {
     bool hasAlreadyRated = await isRated(dealId);
@@ -65,22 +75,23 @@ class DealDetailController extends GetxController {
 
   Future<bool> isRated(String dealId) async {
     try {
-      var doc = await _firebaseFirestoreInstance
-          .collection("user_ratings")
-          .doc(dealId)
+      var userRatingsDoc = await _firebaseFirestoreInstance
+          .collection("users")
+          .doc(_userId)
           .get();
 
-      return doc.exists;
+      var ratingsMap = userRatingsDoc["ratings"] as Map<String, dynamic>? ?? {};
+      return ratingsMap.containsKey(dealId);
     } catch (e) {
-      print("Error checking if deal is rated: $e");
       return false;
     }
   }
 
   void saveRating(String dealId, int rating) {
-    _firebaseFirestoreInstance.collection("user_ratings").doc(dealId).set({
-      "dealId": dealId,
-      "rating": rating,
-    });
+    _firebaseFirestoreInstance.collection("users").doc(_userId).set({
+      "ratings": {
+        dealId: rating,
+      },
+    }, SetOptions(merge: true));
   }
 }

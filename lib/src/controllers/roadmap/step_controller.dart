@@ -7,7 +7,6 @@ import 'package:stud_advice/src/controllers/search/custom_search_controller.dart
 class StepController extends CustomSearchController {
 
   final ScrollController scrollController = ScrollController();
-  final _dio = Get.find<Dio>();
   List<StepItem> steps = [];
   String processDescription = "";
   String processTitle = "";
@@ -35,11 +34,11 @@ class StepController extends CustomSearchController {
   }
 
   String getProcessDescription() {
-    return processDescription ?? "Pour obtenir un titre de séjour, vous devez vous rendre à la préfecture de votre lieu de résidence.";
+    return processDescription;
   }
 
   String getProcessTitle() {
-    return processTitle ?? "Obtenir un titre de séjour";
+    return processTitle;
   }
 
   void setProcessDescription(String description) {
@@ -78,21 +77,20 @@ class StepController extends CustomSearchController {
   }
 
   Future<void> setAndAddMetadataToStep(List<StepItem> steps, String administrativeProcessId) async {
-    List<Color> colors = [Color(0xFF8ECAE6), Color(0xFF219EBC), Color(0xFF023047), Color(0xFFFFB703)];
-    List<Color> borderColors = [Color(0xFF8ECAE6), Color(0xFF8ECAE6), Color(0xFF219EBC), Color(0xFFFB8500)];
+    List<Color> colors = [const Color(0xFF8ECAE6), const Color(0xFF219EBC), const Color(0xFF023047), const Color(0xFFFFB703)];
+    List<Color> borderColors = [const Color(0xFF8ECAE6), const Color(0xFF8ECAE6), const Color(0xFF219EBC),const Color(0xFFFB8500)];
     String userId = userStorageController.getCurrentUserId();
   
     int? stepIndex = await userStorageController.getStepIndex(userId, administrativeProcessId);
-    if (stepIndex == null) {
-      stepIndex = 0;
-    }
+    stepIndex ??= 0;
     for (int i = 0; i < steps.length; i++) {
       steps[i].color = colors[i % colors.length];
       steps[i].borderColor = borderColors[i % borderColors.length];
-      if (i <= stepIndex!)
+      if (i <= stepIndex) {
         steps[i].isCompleted = true;
-      else
+      } else {
         steps[i].isCompleted = false;
+      }
     }
   }
 
