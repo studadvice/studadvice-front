@@ -12,73 +12,45 @@ class SupportScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          'support.title'.tr,
-          style: const TextStyle(
-            fontSize: AppFontSizes.large18,
-            fontWeight: FontWeight.bold,
+    return GestureDetector(
+      onTap: () => FocusScope.of(context).unfocus(),
+      child: Scaffold(
+        appBar: AppBar(
+          title: Text(
+            'support.title'.tr,
+            style: const TextStyle(
+              fontSize: AppFontSizes.large18,
+              fontWeight: FontWeight.bold,
+            ),
           ),
+          centerTitle: true,
+          leading: IconButton(
+            icon: const Icon(Icons.arrow_back),
+            onPressed: () {
+              Navigator.pop(context);
+            },
+          ),
+          actions: <Widget>[
+            IconButton(
+              onPressed: supportController.sendSupportRequest,
+              icon: const Icon(Icons.send),
+              color: AppColors.primaryColor,
+            )
+          ],
         ),
-        centerTitle: true,
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back),
-          onPressed: () {
-            Navigator.pop(context);
-          },
-        ),
-        actions: <Widget>[
-          IconButton(
-            onPressed: supportController.sendSupportRequest,
-            icon: const Icon(Icons.send),
-            color: AppColors.primaryColor,
-          )
-        ],
-      ),
-      body: GetX<SupportController>(
-        builder: (controller) {
-          return Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Column(
-              mainAxisSize: MainAxisSize.max,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: <Widget>[
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: TextField(
-                    onChanged: (value) => controller.subject.value = value,
-                    decoration: InputDecoration(
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(10.0),
-                      ),
-                      focusedBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(10.0),
-                        borderSide: const BorderSide(
-                          color: AppColors.primaryColor,
-                        ),
-                      ),
-                      enabledBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(10.0),
-                        borderSide: const BorderSide(
-                          color: AppColors.primaryColor,
-                        ),
-                      ),
-                      labelText: 'support.subject'.tr,
-                    ),
-                    cursorColor: AppColors.primaryColor,
-                  ),
-                ),
-                Expanded(
-                  child: Padding(
+        body: GetX<SupportController>(
+          builder: (controller) {
+            return Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Column(
+                mainAxisSize: MainAxisSize.max,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: <Widget>[
+                  Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: TextField(
-                      onChanged: (value) => controller.body.value = value,
-                      maxLines: null,
-                      expands: true,
-                      textAlignVertical: TextAlignVertical.top,
+                      onChanged: (value) => controller.subject.value = value,
                       decoration: InputDecoration(
-                        labelText: 'support.body'.tr,
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(10.0),
                         ),
@@ -94,51 +66,83 @@ class SupportScreen extends StatelessWidget {
                             color: AppColors.primaryColor,
                           ),
                         ),
+                        labelText: 'support.subject'.tr,
                       ),
                       cursorColor: AppColors.primaryColor,
                     ),
                   ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: ElevatedButton(
-                    onPressed: _openFilePicker,
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: AppColors.primaryColor,
-                    ),
-                    child: Text(
-                      'support.attach'.tr,
-                      style: const TextStyle(color: Colors.white),
-                    ),
-                  ),
-                ),
-                Expanded(
-                  child: ListView.builder(
-                    itemCount: controller.attachments.length,
-                    itemBuilder: (context, index) {
-                      final attachment = controller.attachments[index];
-                      return Row(
-                        children: <Widget>[
-                          Expanded(
-                            child: Text(
-                              attachment.filename.value,
-                              softWrap: false,
-                              overflow: TextOverflow.fade,
+                  Expanded(
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: TextField(
+                        onChanged: (value) => controller.body.value = value,
+                        maxLines: null,
+                        expands: true,
+                        textAlignVertical: TextAlignVertical.top,
+                        decoration: InputDecoration(
+                          labelText: 'support.body'.tr,
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(10.0),
+                          ),
+                          focusedBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(10.0),
+                            borderSide: const BorderSide(
+                              color: AppColors.primaryColor,
                             ),
                           ),
-                          IconButton(
-                            icon: const Icon(Icons.remove_circle),
-                            onPressed: () => controller.removeAttachment(index),
-                          )
-                        ],
-                      );
-                    },
+                          enabledBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(10.0),
+                            borderSide: const BorderSide(
+                              color: AppColors.primaryColor,
+                            ),
+                          ),
+                        ),
+                        cursorColor: AppColors.primaryColor,
+                      ),
+                    ),
                   ),
-                ),
-              ],
-            ),
-          );
-        },
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: ElevatedButton(
+                      onPressed: _openFilePicker,
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: AppColors.primaryColor,
+                      ),
+                      child: Text(
+                        'support.attach'.tr,
+                        style: const TextStyle(color: Colors.white),
+                      ),
+                    ),
+                  ),
+                  Expanded(
+                    child: ListView.builder(
+                      itemCount: controller.attachments.length,
+                      itemBuilder: (context, index) {
+                        final attachment = controller.attachments[index];
+                        return Row(
+                          children: <Widget>[
+                            Expanded(
+                              child: Text(
+                                attachment.filename.value,
+                                softWrap: false,
+                                overflow: TextOverflow.fade,
+                              ),
+                            ),
+                            IconButton(
+                              icon: const Icon(Icons.remove_circle),
+                              onPressed: () =>
+                                  controller.removeAttachment(index),
+                            )
+                          ],
+                        );
+                      },
+                    ),
+                  ),
+                ],
+              ),
+            );
+          },
+        ),
       ),
     );
   }

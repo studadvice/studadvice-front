@@ -5,9 +5,12 @@ import 'package:get/get.dart';
 import 'package:stud_advice/stud_advice.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+import '../../controllers/deals/deal_detail_controller.dart';
+
 class DealDetailScreen extends StatelessWidget {
   static const navigatorId = '/deal_detail_screen';
   final FileController fileController = Get.find();
+  final DealDetailController dealDetailController = Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +23,6 @@ class DealDetailScreen extends StatelessWidget {
         title: Text(
           deal.title,
           style: const TextStyle(
-            color: AppColors.black,
             fontSize: 20.0,
             fontWeight: FontWeight.bold,
           ),
@@ -28,13 +30,9 @@ class DealDetailScreen extends StatelessWidget {
         centerTitle: true,
         leading: IconButton(
           icon: const Icon(Icons.arrow_back),
-          color: Colors.black,
           onPressed: () => Get.back(),
         ),
         backgroundColor: AppColors.primaryColor,
-        iconTheme: const IconThemeData(
-          color: Colors.white,
-        ),
       ),
       body: SizedBox(
         width: double.infinity,
@@ -74,7 +72,7 @@ class DealDetailScreen extends StatelessWidget {
                 padding: const EdgeInsets.all(24),
                 decoration: BoxDecoration(
                   border: Border.all(color: Colors.black),
-                  color: AppColors.white,
+                  color: Theme.of(context).canvasColor,
                   borderRadius: const BorderRadius.only(
                     topLeft: Radius.circular(40),
                     topRight: Radius.circular(40),
@@ -94,12 +92,11 @@ class DealDetailScreen extends StatelessWidget {
                         const Icon(
                           Icons.star,
                           color: AppColors.yellow,
-                          size: 20,
+                          size: 25,
                         ),
                         Text(
                           deal.rating.toString(),
                           style: const TextStyle(
-                            color: Colors.black,
                             fontSize: 15.0,
                             fontWeight: FontWeight.bold,
                           ),
@@ -152,6 +149,40 @@ class DealDetailScreen extends StatelessWidget {
                       ),
                       Text(deal.endDate!),
                     ],
+                    // rating
+                    const SizedBox(
+                      height: 24,
+                    ),
+                    Text(
+                      'deals.evaluate'.tr,
+                      style: const TextStyle(
+                        fontSize: 20.0,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 4,
+                    ),
+                      GetX<DealDetailController>(
+                          builder: (dealDetailController) {
+                          int userRating = dealDetailController.userRatings[deal.id] ?? 0;
+                          return Row(
+                          children: List.generate(5, (index) => GestureDetector(
+                          onTap: () {
+                            if (userRating == 0) {
+                              dealDetailController.setUserRating(deal.id, index + 1);
+                              dealDetailController.rateDeal(dealId: deal.id, rating: index + 1);
+                            }
+                          },
+                          child: Icon(
+                            Icons.star,
+                            color: index < userRating ? AppColors.yellow : Colors.grey,
+                            size: 30,
+                          ),
+                        ))
+                          );
+                      },
+                    ),
                     const SizedBox(height: 16),
                     Align(
                       alignment: Alignment.bottomRight,
@@ -170,8 +201,13 @@ class DealDetailScreen extends StatelessWidget {
                           ),
                         ),
                         onPressed: () async {
-                          if (await canLaunchUrl(Uri.parse(deal.url))) {
-                            await launchUrl(Uri.parse(deal.url));
+                          Uri uri = Uri.parse(deal.url);
+                          bool isLaunchPossible = await canLaunchUrl(uri);
+                          debugPrint('uri: $uri');
+                          debugPrint('isLaunchPossible: $isLaunchPossible');
+                          if (isLaunchPossible) {
+                            await launchUrl(Uri.parse(deal.url),
+                                mode: LaunchMode.inAppWebView);
                           } else {
                             throw 'Could not launch $deal.url';
                           }
@@ -189,3 +225,4 @@ class DealDetailScreen extends StatelessWidget {
     );
   }
 }
+

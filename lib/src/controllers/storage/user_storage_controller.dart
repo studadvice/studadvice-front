@@ -137,6 +137,80 @@ class UserStorageController extends GetxController {
       return false;
     }
   }
+  
+  Future<bool> addStepProgressionToUser(String userId, String administrativeProcessId, int stepIndex, int totalStepsNumber, String categoryId) async {
+    try {
+      CollectionReference users = _firebaseFirestoreInstance.collection('users');
+
+      // The case where the user do not exist in the database.
+      if (!await isUserPresent(userId)) {
+        await users.doc(userId).set({
+          'progress': [
+            {
+              'totalStepsNumber' : totalStepsNumber,
+              'administrativeProcessId': administrativeProcessId,
+              'stepIndex': stepIndex,
+              'categoryId': categoryId,
+            },
+          ],
+        });
+      } else {
+        DocumentSnapshot userSnapshot = await users.doc(userId).get();
+        Map<String, dynamic> data = userSnapshot.data() as Map<String, dynamic>;
+        List<dynamic> progress = data['progress'] ?? [];
+
+        bool found = false;
+        for (var item in progress) {
+          if (item['administrativeProcessId'] == administrativeProcessId) {
+            item['stepIndex'] = stepIndex;
+            found = true;
+            break;
+          }
+        }
+
+        if (!found) {
+          progress.add({
+            'totalStepsNumber' : totalStepsNumber,
+            'administrativeProcessId': administrativeProcessId,
+            'stepIndex': stepIndex,
+            'categoryId': categoryId,
+          });
+        }
+
+        await users.doc(userId).update({
+          'progress': progress,
+        });
+      }
+
+      return true;
+    } catch (error) {
+      debugPrint("Error adding progression: $error");
+      return false;
+    }
+  }
+  
+  Future<int?> getStepIndex(String userId, String administrativeProcessId) async {
+    try {
+      DocumentSnapshot userSnapshot = await _firebaseFirestoreInstance
+          .collection('users')
+          .doc(userId)
+          .get();
+
+      if (userSnapshot.exists) {
+        Map<String, dynamic> data = userSnapshot.data() as Map<String, dynamic>;
+        List<dynamic> progress = data['progress'] ?? [];
+        for (var item in progress) {
+          if (item['administrativeProcessId'] == administrativeProcessId) {
+            return item['stepIndex'] as int?;
+          }
+        }
+      }
+      return null;
+    } catch (e) {
+      debugPrint("Error while getting step index: $e");
+      return null;
+    }
+  }
 
   Future<bool> removeAdministrativeProcessFromFavorites(
       String userId, String administrativeProcessId) async {
@@ -152,6 +226,57 @@ class UserStorageController extends GetxController {
 
       return true;
     } catch (error) {
+      return false;
+    }
+  }
+
+  Future<bool> resetStepProgression(String userId, String administrativeProcessId, int totalStepsNumber, String categoryId) async {
+    try {
+      CollectionReference users = _firebaseFirestoreInstance.collection('users');
+
+      // The case where the user do not exist in the database.
+      if (!await isUserPresent(userId)) {
+        await users.doc(userId).set({
+          'progress': [
+            {
+              'totalStepsNumber' : totalStepsNumber,
+              'administrativeProcessId': administrativeProcessId,
+              'stepIndex': 0,
+              'categoryId': categoryId,
+            },
+          ],
+        });
+      } else {
+        DocumentSnapshot userSnapshot = await users.doc(userId).get();
+        Map<String, dynamic> data = userSnapshot.data() as Map<String, dynamic>;
+        List<dynamic> progress = data['progress'] ?? [];
+
+        bool found = false;
+        for (var item in progress) {
+          if (item['administrativeProcessId'] == administrativeProcessId) {
+            item['stepIndex'] = 0;
+            found = true;
+            break;
+          }
+        }
+
+        if (!found) {
+          progress.add({
+            'totalStepsNumber' : totalStepsNumber,
+            'administrativeProcessId': administrativeProcessId,
+            'stepIndex': 0,
+            'categoryId': categoryId,
+          });
+        }
+
+        await users.doc(userId).update({
+          'progress': progress,
+        });
+      }
+
+      return true;
+    } catch (error) {
+      debugPrint("Error adding progression: $error");
       return false;
     }
   }

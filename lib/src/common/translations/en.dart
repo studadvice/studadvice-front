@@ -14,6 +14,7 @@ class En {
         "global.password": "Password",
         "global.login": "Login",
         "global.register": "Register",
+        "global.reset": "Reset",
         // ----------------
 
         // User storage controller
@@ -42,6 +43,7 @@ class En {
         "settings.changePassword": "Change Password",
         "settings.terms": "Terms & conditions",
         "settings.accessibility": "Accessibility",
+        "settings.changeData": "Tap to change your data",
         // ----------------
 
         // Home
@@ -232,7 +234,7 @@ class En {
         'categories.process': "Processes",
 
         // Deals
-        'deals.recommendation': "Our favorites !",
+        'deals.recommendation': "Your favorites !",
         'deals.empty': "No deals found !",
         'deals.explore': "Explore deals",
         'deals.description': "Description",
@@ -241,6 +243,7 @@ class En {
         'deals.url': "Go",
         'deals.search': "Search deals",
         'deals.see_more': "See more",
+        'deals.evaluate': "Rate this offer",
 
         // Administrative processes
         "favorite_administrative_processes.title": "My favorites processes",
@@ -258,11 +261,17 @@ class En {
         "calendar.endName": "End of the administrative process",
         "calendar.description":
             "Avoid any forgetfulness in your administrative procedures with our ultimate calendar! Don't let any crucial date slip through your fingers, whether it's the grand day of commencement or the epic moment of conclusion. And the cherry on top? You can receive notifications to make sure you don't miss anything. Activate them, and no more excuses for skipping your administrative tasks! Organization is the key to administrative success!",
-
+        "calendar.events_title":"Your events",
+        "calendar.events_empty": "You have no administrative procedures to undertake today. You're all set! 😌 Don't forget to check on other days and stay informed by enabling notifications to be notified in case of new procedures",
         // roadmap
         "roadmap.title": "Your process roadmap",
         "roadmap.required": "Prerequisites",
         "roadmap.description": "Description",
-        "roadmap.required_empty": "No prerequisites"
-      };
+        "roadmap.required_empty": "Good news, no prerequisites for this step !",
+
+        // modal roadmap
+        "modal.site": "Registration site",
+
+        "roadmap.empty": "No steps available yet. Come back soon!"
+  };
 }

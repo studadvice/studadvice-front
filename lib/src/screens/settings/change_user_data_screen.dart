@@ -9,14 +9,12 @@ class ChangeUserDataScreen extends StatefulWidget {
   const ChangeUserDataScreen({super.key});
 
   @override
-  State<ChangeUserDataScreen> createState() =>
-      _ChangeUserDataScreenState();
+  State<ChangeUserDataScreen> createState() => _ChangeUserDataScreenState();
 }
 
-class _ChangeUserDataScreenState
-    extends State<ChangeUserDataScreen> {
+class _ChangeUserDataScreenState extends State<ChangeUserDataScreen> {
   final RegisterUserInformationController _registerUserInformationController =
-  Get.find();
+      Get.find();
 
   // Controllers for the text fields.
   final TextEditingController pseudoController = TextEditingController(
@@ -286,6 +284,7 @@ class _ChangeUserDataScreenState
         textColor: AppColors.white,
         backgroundColor: AppColors.primaryColor,
         onPressed: () {
+          FocusScope.of(context).unfocus();
           if (_formKey.currentState!.validate()) {
             UserData userData = buildUserData();
             _registerUserInformationController.saveUserInformation(userData);
@@ -310,7 +309,8 @@ class _ChangeUserDataScreenState
       formation: formation,
       country: country,
       postalCode: postalCode,
-      hasAcceptedTermsAndConditions: true, // HINT If the user has not accepted the terms and conditions, the default value is false.
+      hasAcceptedTermsAndConditions:
+          true, // HINT If the user has not accepted the terms and conditions, the default value is false.
     );
   }
 }

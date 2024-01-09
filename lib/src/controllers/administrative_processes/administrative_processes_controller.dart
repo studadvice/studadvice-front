@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:io';
 
 import 'package:dio/dio.dart';
@@ -8,17 +9,17 @@ import 'package:stud_advice/stud_advice.dart';
 
 class AdministrativeProcessController extends CustomSearchController {
   final RxList<String> _favoritesAdministrativeProcessesId = <String>[].obs;
-
+  var _firebaseFirestoreInstance =
+      AppDependenciesBinding.firebaseFirestoreInstance;
   UserStorageController userStorageController = Get.find();
   final Dio _dio = Get.find();
   final DeeplTranslatorController _deeplTranslatorController = Get.find();
-
   late String categoryId;
-
   List<String> get favoriteAdministrativeProcesses =>
       _favoritesAdministrativeProcessesId;
 
-  final pagingController = PagingController<int, AdministrativeProcessContent>(
+  final pagingController =
+  PagingController<int, AdministrativeProcessContent>(
     firstPageKey: 0,
   );
 
@@ -46,9 +47,10 @@ class AdministrativeProcessController extends CustomSearchController {
       // Translate the text if the locale is not French
       if (Get.locale?.languageCode != 'fr') {
         for (var item in newItems) {
-          item.name = await _deeplTranslatorController.translateText(item.name);
-          item.description =
-              await _deeplTranslatorController.translateText(item.description);
+          item.name =
+          await _deeplTranslatorController.translateText(item.name);
+          item.description = await _deeplTranslatorController
+              .translateText(item.description);
         }
       }
 
@@ -65,9 +67,9 @@ class AdministrativeProcessController extends CustomSearchController {
 
   Future<AdministrativeProcesses> getAdministrativeProcesses(
       {required int number,
-      required int size,
-      String? query,
-      String? categoryId}) async {
+        required int size,
+        String? query,
+        String? categoryId}) async {
     final queryParameters = {
       'page': number,
       'size': size,
@@ -85,7 +87,6 @@ class AdministrativeProcessController extends CustomSearchController {
         path,
         queryParameters: queryParameters,
       );
-
       if (response.statusCode == HttpStatus.ok) {
         return AdministrativeProcesses.fromJson(response.data);
       } else {
@@ -113,7 +114,8 @@ class AdministrativeProcessController extends CustomSearchController {
   Future<void> _initFavorites() async {
     String userId = userStorageController.getCurrentUserId();
 
-    List<String> favoriteIds = await userStorageController.getFavorites(userId);
+    List<String> favoriteIds =
+    await userStorageController.getFavorites(userId);
 
     _favoritesAdministrativeProcessesId.addAll(favoriteIds);
   }
@@ -133,4 +135,44 @@ class AdministrativeProcessController extends CustomSearchController {
   void refresh() {
     pagingController.refresh();
   }
+
+  Future<double> getProgressValue(String administrativeId) async {
+    try {
+      String userId = userStorageController.getCurrentUserId();
+
+      var userDocument = await _firebaseFirestoreInstance
+          .collection("users")
+          .doc(userId)
+          .get();
+
+      if (userDocument.exists) {
+        var userData = userDocument.data();
+
+        if (userData != null && userData.containsKey("progress")) {
+          var progressList = userData["progress"] as List<dynamic>;
+
+          var progressEntry = progressList.firstWhere(
+                (entry) =>
+            entry is Map &&
+                entry.containsKey("administrativeProcessId") &&
+                entry["administrativeProcessId"] == administrativeId,
+            orElse: () => null,
+          );
+
+          if (progressEntry != null &&
+              progressEntry.containsKey("stepIndex") &&
+              progressEntry.containsKey("totalStepsNumber")) {
+            int stepIndex = (progressEntry["stepIndex"]) ?? 0.0;
+            int totalStepsNumber = (progressEntry["totalStepsNumber"]) ?? 1.0;
+            return totalStepsNumber != 0.0 ? (stepIndex / totalStepsNumber) : 0.0;
+          }
+        }
+      }
+    } catch (e) {
+      print("Error getting progress value: $e");
+    }
+
+    return 0.0;
+  }
+
 }

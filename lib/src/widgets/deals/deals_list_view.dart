@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
-import 'package:stud_advice/src/exceptions/no_result_indicator.dart';
 import 'package:stud_advice/stud_advice.dart';
 
 class DealsListView extends StatelessWidget {
@@ -16,6 +15,7 @@ class DealsListView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetX<DealsController>(
+      init: DealsController(),
       builder: (controller) {
         if (controller.searchQuery.isEmpty) {
           return Scaffold(
@@ -95,6 +95,7 @@ class DealsListView extends StatelessWidget {
                                     final recommendedDeals =
                                     recommendedSnapshot.data!;
                                     return GridView.builder(
+                                      physics: const NeverScrollableScrollPhysics(),
                                       shrinkWrap: true,
                                       gridDelegate:
                                       const SliverGridDelegateWithFixedCrossAxisCount(

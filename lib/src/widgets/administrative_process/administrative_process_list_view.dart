@@ -29,13 +29,12 @@ class AdministrativeProcessListView extends StatelessWidget {
             forceMaterialTransparency: true,
             title: Text(
               categoryName,
+              style: const TextStyle(
+                fontSize: 20,
+                fontWeight: FontWeight.bold,
+              )
             ),
             centerTitle: true,
-            titleTextStyle: const TextStyle(
-              color: AppColors.black,
-              fontSize: AppFontSizes.large20,
-              fontWeight: FontWeight.bold,
-            ),
             toolbarHeight: 50,
             backgroundColor: AppColors.white,
             automaticallyImplyLeading: false,
@@ -49,16 +48,19 @@ class AdministrativeProcessListView extends StatelessWidget {
               pagingController: controller.pagingController,
               builderDelegate:
                   PagedChildBuilderDelegate<AdministrativeProcessContent>(
-                itemBuilder: (context, process, index) =>
-                    AdministrativeProcessListTile(
-                  name: process.name,
-                  imageId: process.imageId,
-                  description: process.description,
-                  administrativeProcessId: process.id,
+                itemBuilder: (context, process, index) {
+                  return AdministrativeProcessListTile(
+                    categoryId : categoryId,
+                    name: process.name,
+                    imageId: process.imageId,
+                    description: process.description,
+                    administrativeProcessId: process.id,
+                    steps: process.steps!,
                   backgroundColor: backgroundColor,
                   type: process.type ?? "",
                   showProgressBar: false,
-                ),
+                );
+                },
                 firstPageErrorIndicatorBuilder: (context) => ErrorIndicator(
                   error: controller.pagingController.error,
                   onTryAgain: () => controller.pagingController.refresh(),

@@ -10,7 +10,9 @@ import 'package:stud_advice/stud_advice.dart';
 class SearchCategoryController extends CustomSearchController {
   final Dio _dio = Get.find();
   final DeeplTranslatorController _deeplTranslatorController = Get.find();
-
+  UserStorageController userStorageController = Get.find();
+  var _firebaseFirestoreInstance =
+      AppDependenciesBinding.firebaseFirestoreInstance;
   final PagingController<int, CategoryContent> pagingController =
       PagingController(firstPageKey: 0);
 
@@ -51,6 +53,7 @@ class SearchCategoryController extends CustomSearchController {
       } else {
         pagingController.appendLastPage([]);
       }
+
     } catch (error) {
       pagingController.error = error;
       debugPrint(error.toString());
@@ -93,4 +96,53 @@ class SearchCategoryController extends CustomSearchController {
     final queryParameters = {'page': number, 'size': size, 'searchText': query};
     return _getCategoriesBySearch('/categories/search', queryParameters);
   }
+
+  Future<double> getProgressValue(CategoryContent categoryContent) async {
+    try {
+      String userId = userStorageController.getCurrentUserId();
+      var userDocument = await _firebaseFirestoreInstance
+          .collection("users")
+          .doc(userId)
+          .get();
+
+      if (userDocument.exists) {
+        var userData = userDocument.data();
+
+        if (userData != null && userData.containsKey("progress")) {
+          var progressList = userData["progress"] as List<dynamic>;
+
+          var matchingEntries = progressList.where(
+                (entry) =>
+            entry is Map &&
+                entry.containsKey("categoryId") &&
+                entry["categoryId"] == categoryContent.id,
+          );
+
+          if (matchingEntries.isNotEmpty) {
+            double totalProgress = matchingEntries.fold(
+              0.0,
+                  (acc, entry) {
+                if (entry.containsKey("stepIndex") &&
+                    entry.containsKey("totalStepsNumber")) {
+                  int stepIndex = (entry["stepIndex"]) ?? 0;
+                  int totalStepsNumber = (entry["totalStepsNumber"]) ?? 1;
+                  return acc + (totalStepsNumber != 0 ? (stepIndex / totalStepsNumber) : 0);
+                }
+                return acc;
+              },
+            );
+
+            return matchingEntries.isNotEmpty
+                ? totalProgress / categoryContent.administrativeProcesses!.length
+                : 0.0;
+          }
+        }
+      }
+    } catch (e) {
+      print("Error getting progress value: $e");
+    }
+
+    return 0.0;
+  }
+
 }
