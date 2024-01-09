@@ -3,7 +3,6 @@ import 'dart:io';
 import 'package:dio/dio.dart';
 import 'package:get/get.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
-import 'package:stud_advice/src/controllers/search/custom_search_controller.dart';
 import 'package:stud_advice/stud_advice.dart';
 
 class SearchDealsController extends CustomSearchController {
@@ -57,7 +56,6 @@ class SearchDealsController extends CustomSearchController {
       } else {
         pagingController.appendLastPage([]);
       }
-
     } catch (error) {
       pagingController.error = error;
     }

@@ -1,11 +1,15 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:dio/dio.dart';
-import 'package:get/get.dart';
-import '../../../stud_advice.dart';
 import 'dart:io';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:dio/dio.dart';
+import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+
+import '../../../stud_advice.dart';
+
 class DealDetailController extends GetxController {
-  var _firebaseFirestoreInstance = AppDependenciesBinding.firebaseFirestoreInstance;
+  var _firebaseFirestoreInstance =
+      AppDependenciesBinding.firebaseFirestoreInstance;
   final Dio _dio = Get.find();
   var userRatings = <String, int>{}.obs;
   UserStorageController userStorageController = Get.find();
@@ -55,13 +59,14 @@ class DealDetailController extends GetxController {
           .get();
 
       if (userRatingsDoc.exists) {
-        var ratingsMap = userRatingsDoc.data()?["ratings"] as Map<String, dynamic>? ?? {};
+        var ratingsMap =
+            userRatingsDoc.data()?["ratings"] as Map<String, dynamic>? ?? {};
         userRatings.value = Map<String, int>.from(ratingsMap);
       } else {
         print("User document not found or does not exist");
       }
     } catch (e) {
-      print("Error initializing user ratings: $e");
+      debugPrint("Error initializing user ratings: $e");
     }
   }
 
@@ -83,6 +88,7 @@ class DealDetailController extends GetxController {
       var ratingsMap = userRatingsDoc["ratings"] as Map<String, dynamic>? ?? {};
       return ratingsMap.containsKey(dealId);
     } catch (e) {
+      debugPrint("Error checking if deal is rated: $e");
       return false;
     }
   }
