@@ -119,7 +119,24 @@ class DealsController extends CustomSearchController {
         queryParameters: queryParameters,
       );
       if (response.statusCode == HttpStatus.ok) {
-        return Deals.fromJson(response.data);
+        var deals = Deals.fromJson(response.data);
+        // Translate the text if the locale is not French
+        if (Get.locale?.languageCode != 'fr') {
+          for (var item in deals.content) {
+            item.title =
+                await _deeplTranslatorController.translateText(item.title);
+            debugPrint('Translated title: ${item.title}');
+            item.description = await _deeplTranslatorController
+                .translateText(item.description);
+            debugPrint('Translated description: ${item.description}');
+            if (item.category != null) {
+              item.category = await _deeplTranslatorController
+                  .translateText(item.category!);
+              debugPrint('Translated category: ${item.category}');
+            }
+          }
+        }
+        return deals;
       } else {
         throw Exception('Failed to load categories');
       }
