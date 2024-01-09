@@ -138,7 +138,7 @@ class UserStorageController extends GetxController {
     }
   }
   
-  Future<bool> addStepProgressionToUser(String userId, String administrativeProcessId, int stepIndex) async {
+  Future<bool> addStepProgressionToUser(String userId, String administrativeProcessId, int stepIndex, int totalStepsNumber) async {
     try {
       CollectionReference users = _firebaseFirestoreInstance.collection('users');
 
@@ -147,6 +147,7 @@ class UserStorageController extends GetxController {
         await users.doc(userId).set({
           'progress': [
             {
+              'totalStepsNumber' : totalStepsNumber,
               'administrativeProcessId': administrativeProcessId,
               'stepIndex': stepIndex,
             },
@@ -168,6 +169,7 @@ class UserStorageController extends GetxController {
 
         if (!found) {
           progress.add({
+            'totalStepsNumber' : totalStepsNumber,
             'administrativeProcessId': administrativeProcessId,
             'stepIndex': stepIndex,
           });
@@ -226,7 +228,7 @@ class UserStorageController extends GetxController {
     }
   }
 
-  Future<bool> resetStepProgression(String userId, String administrativeProcessId) async {
+  Future<bool> resetStepProgression(String userId, String administrativeProcessId, int totalStepsNumber) async {
     try {
       CollectionReference users = _firebaseFirestoreInstance.collection('users');
 
@@ -235,6 +237,7 @@ class UserStorageController extends GetxController {
         await users.doc(userId).set({
           'progress': [
             {
+              'totalStepsNumber' : totalStepsNumber,
               'administrativeProcessId': administrativeProcessId,
               'stepIndex': 0,
             },
@@ -256,6 +259,7 @@ class UserStorageController extends GetxController {
 
         if (!found) {
           progress.add({
+            'totalStepsNumber' : totalStepsNumber,
             'administrativeProcessId': administrativeProcessId,
             'stepIndex': 0,
           });

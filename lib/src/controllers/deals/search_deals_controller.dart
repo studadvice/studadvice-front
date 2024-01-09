@@ -113,8 +113,6 @@ class SearchDealsController extends CustomSearchController {
     required int size,
     String? query,
   }) async {
-    print(number);
-    print(size);
     final queryParameters = {'page': number, 'size': size, 'searchText': query};
     return _getDealsBySearch('/deals/search', queryParameters);
   }
