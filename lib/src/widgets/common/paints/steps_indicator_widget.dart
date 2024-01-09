@@ -17,80 +17,77 @@ class StepsIndicator extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final StepController controller = Get.find<StepController>();
     Color roadmapBackgroundColor = Theme.of(context).brightness == Brightness.dark
         ? AppColors.roadmapBackgroundColorDark
         : AppColors.roadmapBackgroundColorLight;
 
-    return Container(
-      child: Scaffold(
-        backgroundColor: roadmapBackgroundColor,
-        body: GetBuilder<StepController>(
-          builder: (controller) {
-            return ListView.builder(
-              itemCount: controller.steps.length,
-              padding: EdgeInsets.only(bottom: 250),
-              itemBuilder: (context, index) {
-                int stepNumber = index + 1;
-                bool isLeftAligned = stepNumber % 2 != 0;
-                StepItem step = controller.steps[index];
+    return Scaffold(
+      backgroundColor: Theme.of(context).canvasColor,
+      body: GetBuilder<StepController>(
+        builder: (controller) {
+          return ListView.builder(
+            itemCount: controller.steps.length,
+            padding: const EdgeInsets.only(bottom: 250),
+            itemBuilder: (context, index) {
+              int stepNumber = index + 1;
+              bool isLeftAligned = stepNumber % 2 != 0;
+              StepItem step = controller.steps[index];
 
-                return LayoutBuilder(
-                  builder: (BuildContext context, BoxConstraints constraints) {
-                    double screenWidth = constraints.maxWidth;
-                    double stepWidgetDiameter = DIAMETER;
-                    double curveWidth = screenWidth - stepWidgetDiameter - 20;
+              return LayoutBuilder(
+                builder: (BuildContext context, BoxConstraints constraints) {
+                  double screenWidth = constraints.maxWidth;
+                  double stepWidgetDiameter = DIAMETER;
+                  double curveWidth = screenWidth - stepWidgetDiameter - 20;
 
-                    return Column(
-                      children: [
-                        Row(
-                          mainAxisAlignment: isLeftAligned ? MainAxisAlignment.start : MainAxisAlignment.end,
-                          children: [
-                            if (isLeftAligned) SizedBox(width: 10),
-                            StepNumberWidget(
-                              isLeftAligned: isLeftAligned,
-                              stepNumber: stepNumber,
-                              diameter: stepWidgetDiameter,
-                              color: step.color ?? Colors.blue,
-                              borderColor: step.borderColor ?? Colors.blue,
-                              onPressed: () => {
-                                if (index < controller.steps.length - 1) controller.completeStep(index + 1, administrativeProcessId),
-                                _onPopupOpened(index, step, context),
-                              },
-                              isActivated: step.isCompleted!,
-                              child: ConstrainedBox(
-                                constraints: BoxConstraints(
-                                  maxWidth: screenWidth - stepWidgetDiameter - 40,
+                  return Column(
+                    children: [
+                      Row(
+                        mainAxisAlignment: isLeftAligned ? MainAxisAlignment.start : MainAxisAlignment.end,
+                        children: [
+                          if (isLeftAligned) const SizedBox(width: 10),
+                          StepNumberWidget(
+                            isLeftAligned: isLeftAligned,
+                            stepNumber: stepNumber,
+                            diameter: stepWidgetDiameter,
+                            color: step.color ?? Colors.blue,
+                            borderColor: step.borderColor ?? Colors.blue,
+                            onPressed: () => {
+                              if (index < controller.steps.length - 1) controller.completeStep(index + 1, administrativeProcessId),
+                              _onPopupOpened(index, step, context),
+                            },
+                            isActivated: step.isCompleted!,
+                            child: ConstrainedBox(
+                              constraints: BoxConstraints(
+                                maxWidth: screenWidth - stepWidgetDiameter - 40,
+                              ),
+                              child: Text(
+                                step.name ?? '',
+                                style: const TextStyle(
+                                  fontSize: 16,
                                 ),
-                                child: Text(
-                                  step.name ?? '',
-                                  style: const TextStyle(
-                                    fontSize: 16,
-                                  ),
-                                  overflow: TextOverflow.ellipsis,
-                                ),
+                                overflow: TextOverflow.ellipsis,
                               ),
                             ),
-                            if (!isLeftAligned) const SizedBox(width: 10),
-                          ],
-                        ),
-                        if (index < steps.length - 1)
-                          CustomPaint(
-                            size: Size(curveWidth, curveWidth / 4),
-                            painter: CurvedDottedLinePainter(
-                              color: Colors.grey,
-                              strokeWidth: 2.0,
-                              isLeft: !isLeftAligned,
-                            ),
                           ),
-                      ],
-                    );
-                  },
-                );
-              },
-            );
-          },
-        ),
+                          if (!isLeftAligned) const SizedBox(width: 10),
+                        ],
+                      ),
+                      if (index < steps.length - 1)
+                        CustomPaint(
+                          size: Size(curveWidth, curveWidth / 4),
+                          painter: CurvedDottedLinePainter(
+                            color: Colors.grey,
+                            strokeWidth: 2.0,
+                            isLeft: !isLeftAligned,
+                          ),
+                        ),
+                    ],
+                  );
+                },
+              );
+            },
+          );
+        },
       ),
     );
   }
