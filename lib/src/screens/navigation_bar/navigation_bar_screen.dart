@@ -58,7 +58,7 @@ class NavigationBarScreen extends StatelessWidget {
           'notification.fillUserData'.tr, 'notification.fillUserDataMessage'.tr,
           snackPosition: SnackPosition.TOP,
           backgroundColor: AppColors.white,
-          duration: const Duration(seconds: 1),
+          duration: const Duration(seconds: 8),
           mainButton: TextButton(
             onPressed: () {
               Get.toNamed(ChangeUserDataScreen.navigatorId);
