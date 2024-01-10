@@ -29,7 +29,7 @@ class UserStorageController extends GetxController {
         String pseudo = userSnapshot.get('pseudo');
         return pseudo;
       } else {
-        throw Exception("User pseudo not found");
+        return "settings.unknownPseudo".tr;
       }
     } catch (error) {
       debugPrint("Error getting pseudo: $error");
