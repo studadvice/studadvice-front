@@ -17,19 +17,11 @@ class StudAdviceApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // final ConnectivityController connectivityController =
-    //     Get.put(ConnectivityController());
-    //
-    // Connectivity().onConnectivityChanged.listen((ConnectivityResult result) {
-    //   connectivityController.checkConnectivity(result);
-    // });
-
     final RoutesConfiguration routesConfiguration =
         Get.put(RoutesConfiguration());
 
     Get.put(DeeplTranslatorController());
 
-    // return GetMaterialApp.router(
     return GetMaterialApp(
       title: "Stud'Advice",
       theme: Styles.lightTheme,
@@ -110,6 +102,9 @@ void main() async {
   await GetStorage.init();
   await dotenv.load();
   await loadTerms();
+
+  Get.put(ConnectionController());
+
   await loadUniversities().then((_) {
     runApp(const StudAdviceApp());
   });

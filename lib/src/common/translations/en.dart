@@ -165,6 +165,7 @@ class En {
         // ----------------
 
         // Connectivity
+        "connectivity.status": "Internet connection status",
         "connectivity.noInternetText": "No internet connection",
         "connectivity.checkConnectionText":
             "Please check your internet connection.",

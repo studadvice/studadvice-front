@@ -166,6 +166,7 @@ class Fr {
         // ----------------
 
         // Connectivity
+        "connectivity.status": "Statut internet",
         "connectivity.noInternetText": "Pas de connexion internet",
         "connectivity.checkConnectionText":
             "Veuillez vérifier votre connexion internet.",
