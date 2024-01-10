@@ -282,6 +282,11 @@ class Fr {
         // roadmap information modal
         "roadmap.required": "Prérequis",
         "modal.site": "Site d'inscription",
-        "roadmap.empty": "Pas encode d'étapes disponibles. Reviens bientôt !"
+        "roadmap.empty": "Pas encode d'étapes disponibles. Reviens bientôt !",
+
+        // steps
+        "no_steps_modal.title": "Aucune étape nécessaire",
+        "no_steps_modal.description":
+            "Il n'y a pas d'étapes nécessaires à réaliser pour le moment.",
       };
 }

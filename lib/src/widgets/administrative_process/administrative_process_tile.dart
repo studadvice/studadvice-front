@@ -10,7 +10,6 @@ class AdministrativeProcessListTile extends StatelessWidget {
   final String imageId;
   final String administrativeProcessId;
   final String description;
-  final bool showProgressBar;
   final Color backgroundColor;
   final List<StepItem> steps;
   final String type;
@@ -29,13 +28,13 @@ class AdministrativeProcessListTile extends StatelessWidget {
     required this.name,
     required this.description,
     required this.steps,
-    required this.showProgressBar,
     this.backgroundColor = AppColors.white,
     required this.type,
   });
 
   @override
   Widget build(BuildContext context) {
+    var showProgressBar = steps.isNotEmpty;
     return GestureDetector(
       onTap: () {
         if (steps.isNotEmpty) {
@@ -51,6 +50,13 @@ class AdministrativeProcessListTile extends StatelessWidget {
           );
         } else {
           debugPrint("No steps");
+          showDialog(
+              context: context,
+              builder: (BuildContext context) {
+                return NoStepsModal(
+                  administrativeProcessDescription: description,
+                );
+              });
         }
       },
       child: Padding(
@@ -140,33 +146,36 @@ class AdministrativeProcessListTile extends StatelessWidget {
                         ),
                       ],
                     ),
-                    subtitle: Padding(
-                      padding: const EdgeInsets.only(top: 10.0),
-                      child: FutureBuilder<double>(
-                        future: _administrativeProcessController
-                            .getProgressValue(administrativeProcessId),
-                        builder: (context, snapshot) {
-                          if (snapshot.connectionState ==
-                              ConnectionState.done) {
-                            return LinearProgressIndicator(
-                              value: snapshot.data,
-                              backgroundColor: AppColors.grey,
-                              valueColor: const AlwaysStoppedAnimation<Color>(
-                                AppColors.primaryColor,
-                              ),
-                            );
-                          } else {
-                            return const LinearProgressIndicator(
-                              value: 0.0,
-                              backgroundColor: AppColors.grey,
-                              valueColor: AlwaysStoppedAnimation<Color>(
-                                AppColors.primaryColor,
-                              ),
-                            );
-                          }
-                        },
-                      ),
-                    ),
+                    subtitle: showProgressBar
+                        ? Padding(
+                            padding: const EdgeInsets.only(top: 10.0),
+                            child: FutureBuilder<double>(
+                              future: _administrativeProcessController
+                                  .getProgressValue(administrativeProcessId),
+                              builder: (context, snapshot) {
+                                if (snapshot.connectionState ==
+                                    ConnectionState.done) {
+                                  return LinearProgressIndicator(
+                                    value: snapshot.data,
+                                    backgroundColor: AppColors.grey,
+                                    valueColor:
+                                        const AlwaysStoppedAnimation<Color>(
+                                      AppColors.primaryColor,
+                                    ),
+                                  );
+                                } else {
+                                  return const LinearProgressIndicator(
+                                    value: 0.0,
+                                    backgroundColor: AppColors.grey,
+                                    valueColor: AlwaysStoppedAnimation<Color>(
+                                      AppColors.primaryColor,
+                                    ),
+                                  );
+                                }
+                              },
+                            ),
+                          )
+                        : null,
                     trailing: Obx(() {
                       return GestureDetector(
                         onTap: () {
