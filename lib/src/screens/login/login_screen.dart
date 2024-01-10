@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:stud_advice/src/controllers/common/navbar_controller.dart';
 import 'package:stud_advice/stud_advice.dart';
 
 class LoginScreen extends StatelessWidget {
@@ -9,7 +8,6 @@ class LoginScreen extends StatelessWidget {
   final LoginController _loginController = Get.find();
   final SocialSignInController _socialSignInController = Get.find();
   final LegalTermsController _termsAndConditionsController = Get.find();
-  final NavBarController navbarController = Get.find<NavBarController>();
 
   final _formKey = GlobalKey<FormState>();
 
@@ -189,7 +187,6 @@ class LoginScreen extends StatelessWidget {
             onTap: () async {
               if (await _socialSignInController.loginWithAppleAccount()) {
                 Get.offAllNamed(NavigationBarScreen.navigatorId);
-                navbarController.resetTabIndex();
               }
             },
             borderRadius: 16,

@@ -9,6 +9,5 @@ class NavBarController extends GetxController {
 
   void resetTabIndex() {
     tabIndex = 2;
-    update();
   }
 }

@@ -53,6 +53,7 @@ class NavigationBarScreen extends StatelessWidget {
     String userId = userStorageController.getCurrentUserId();
 
     if (!await userStorageController.hasFilledUserData(userId)) {
+      debugPrint('notification from navigation_bar_screen.dart');
       Get.snackbar(
           'notification.fillUserData'.tr, 'notification.fillUserDataMessage'.tr,
           snackPosition: SnackPosition.TOP,
