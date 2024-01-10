@@ -68,6 +68,8 @@ class StepController extends CustomSearchController {
         currentStep.value = stepIndex;
         update();
 
+        AppDependenciesBinding.resetData();
+
         await _saveStepProgressToFirebase(
             stepIndex, administrativeProcessId, categoryId);
       }

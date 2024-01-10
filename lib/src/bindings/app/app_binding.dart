@@ -55,5 +55,9 @@ class AppDependenciesBinding extends Bindings {
 
     SearchCategoryController searchCategoryController = Get.find();
     searchCategoryController.pagingController.refresh();
+
+    AdministrativeProcessController administrativeProcessController =
+        Get.find();
+    administrativeProcessController.pagingController.refresh();
   }
 }
