@@ -303,12 +303,17 @@ class UserStorageController extends GetxController {
         Map<String, dynamic> userData =
             userSnapshot.data() as Map<String, dynamic>;
 
-        return userData['pseudo'] != null &&
-            userData['email'] != null &&
-            userData['birthData'] &&
+        var res = userData['pseudo'] != null &&
+            userData['dateOfBirth'] != null &&
+            userData['hasAcceptedTermsAndConditions'] &&
             userData['city'] != null &&
             userData['country'] != null &&
-            userData['postalCode'] != null;
+            userData['postalCode'] != null &&
+            userData['university'] != null &&
+            userData['formation'] != null;
+
+        debugPrint('hasFilledUserData: $res');
+        return res;
       }
 
       return false;
