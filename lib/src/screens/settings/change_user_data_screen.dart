@@ -310,7 +310,7 @@ class _ChangeUserDataScreenState extends State<ChangeUserDataScreen> {
       country: country,
       postalCode: postalCode,
       hasAcceptedTermsAndConditions:
-          true, // HINT If the user has not accepted the terms and conditions, the default value is false.
+          true, // The user by login with a social account has already accepted the terms and conditions.
     );
   }
 }

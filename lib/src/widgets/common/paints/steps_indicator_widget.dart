@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:stud_advice/stud_advice.dart';
 import 'package:get/get.dart';
+import 'package:stud_advice/stud_advice.dart';
 
 class StepsIndicator extends StatelessWidget {
   final int currentStep;
@@ -9,13 +9,12 @@ class StepsIndicator extends StatelessWidget {
   final String administrativeProcessId;
   final String categoryId;
 
-  StepsIndicator({
-        super.key,
-        required this.currentStep,
-        required this.steps,
-        required this.administrativeProcessId,
-        required this.categoryId
-  });
+  StepsIndicator(
+      {super.key,
+      required this.currentStep,
+      required this.steps,
+      required this.administrativeProcessId,
+      required this.categoryId});
 
   @override
   Widget build(BuildContext context) {
@@ -40,7 +39,9 @@ class StepsIndicator extends StatelessWidget {
                   return Column(
                     children: [
                       Row(
-                        mainAxisAlignment: isLeftAligned ? MainAxisAlignment.start : MainAxisAlignment.end,
+                        mainAxisAlignment: isLeftAligned
+                            ? MainAxisAlignment.start
+                            : MainAxisAlignment.end,
                         children: [
                           if (isLeftAligned) const SizedBox(width: 10),
                           StepNumberWidget(
@@ -50,7 +51,9 @@ class StepsIndicator extends StatelessWidget {
                             color: step.color ?? Colors.blue,
                             borderColor: step.borderColor ?? Colors.blue,
                             onPressed: () => {
-                              if (index <= controller.steps.length-1) controller.completeStep(index+1, administrativeProcessId,categoryId),
+                              if (index <= controller.steps.length - 1)
+                                controller.completeStep(index + 1,
+                                    administrativeProcessId, categoryId),
                               _onPopupOpened(index, step, context),
                             },
                             isActivated: step.isCompleted!,
@@ -95,11 +98,10 @@ class StepsIndicator extends StatelessWidget {
       context: context,
       builder: (BuildContext context) {
         return InformationModal(
-          requiredDocuments: step.requiredDocuments,
-          stepDescription : step.description, resources: step.resources
-        );
+            requiredDocuments: step.requiredDocuments,
+            stepDescription: step.description,
+            resources: step.resources);
       },
     );
   }
-
 }

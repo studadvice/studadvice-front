@@ -163,24 +163,31 @@ class DealDetailScreen extends StatelessWidget {
                     const SizedBox(
                       height: 4,
                     ),
-                      GetX<DealDetailController>(
-                          builder: (dealDetailController) {
-                          int userRating = dealDetailController.userRatings[deal.id] ?? 0;
-                          return Row(
-                          children: List.generate(5, (index) => GestureDetector(
-                          onTap: () {
-                            if (userRating == 0) {
-                              dealDetailController.setUserRating(deal.id, index + 1);
-                              dealDetailController.rateDeal(dealId: deal.id, rating: index + 1);
-                            }
-                          },
-                          child: Icon(
-                            Icons.star,
-                            color: index < userRating ? AppColors.yellow : Colors.grey,
-                            size: 30,
-                          ),
-                        ))
-                          );
+                    GetX<DealDetailController>(
+                      builder: (dealDetailController) {
+                        int userRating =
+                            dealDetailController.userRatings[deal.id] ?? 0;
+                        return Row(
+                            children: List.generate(
+                                5,
+                                (index) => GestureDetector(
+                                      onTap: () {
+                                        if (userRating == 0) {
+                                          dealDetailController.setUserRating(
+                                              deal.id, index + 1);
+                                          dealDetailController.rateDeal(
+                                              dealId: deal.id,
+                                              rating: index + 1);
+                                        }
+                                      },
+                                      child: Icon(
+                                        Icons.star,
+                                        color: index < userRating
+                                            ? AppColors.yellow
+                                            : Colors.grey,
+                                        size: 30,
+                                      ),
+                                    )));
                       },
                     ),
                     const SizedBox(height: 16),
@@ -203,8 +210,6 @@ class DealDetailScreen extends StatelessWidget {
                         onPressed: () async {
                           Uri uri = Uri.parse(deal.url);
                           bool isLaunchPossible = await canLaunchUrl(uri);
-                          debugPrint('uri: $uri');
-                          debugPrint('isLaunchPossible: $isLaunchPossible');
                           if (isLaunchPossible) {
                             await launchUrl(Uri.parse(deal.url),
                                 mode: LaunchMode.inAppWebView);
@@ -225,4 +230,3 @@ class DealDetailScreen extends StatelessWidget {
     );
   }
 }
-

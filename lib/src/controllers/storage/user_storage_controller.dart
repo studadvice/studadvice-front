@@ -20,7 +20,8 @@ class UserStorageController extends GetxController {
 
   Future<String> getPseudo(String userId) async {
     try {
-      CollectionReference users = _firebaseFirestoreInstance.collection('users');
+      CollectionReference users =
+          _firebaseFirestoreInstance.collection('users');
 
       DocumentSnapshot userSnapshot = await users.doc(userId).get();
 
@@ -35,8 +36,6 @@ class UserStorageController extends GetxController {
       throw Exception("Error getting pseudo");
     }
   }
-
-
 
   User getCurrentUser() {
     User? user = _firebaseAuthInstance.currentUser;
@@ -137,17 +136,23 @@ class UserStorageController extends GetxController {
       return false;
     }
   }
-  
-  Future<bool> addStepProgressionToUser(String userId, String administrativeProcessId, int stepIndex, int totalStepsNumber, String categoryId) async {
+
+  Future<bool> addStepProgressionToUser(
+      String userId,
+      String administrativeProcessId,
+      int stepIndex,
+      int totalStepsNumber,
+      String categoryId) async {
     try {
-      CollectionReference users = _firebaseFirestoreInstance.collection('users');
+      CollectionReference users =
+          _firebaseFirestoreInstance.collection('users');
 
       // The case where the user do not exist in the database.
       if (!await isUserPresent(userId)) {
         await users.doc(userId).set({
           'progress': [
             {
-              'totalStepsNumber' : totalStepsNumber,
+              'totalStepsNumber': totalStepsNumber,
               'administrativeProcessId': administrativeProcessId,
               'stepIndex': stepIndex,
               'categoryId': categoryId,
@@ -170,7 +175,7 @@ class UserStorageController extends GetxController {
 
         if (!found) {
           progress.add({
-            'totalStepsNumber' : totalStepsNumber,
+            'totalStepsNumber': totalStepsNumber,
             'administrativeProcessId': administrativeProcessId,
             'stepIndex': stepIndex,
             'categoryId': categoryId,
@@ -188,8 +193,9 @@ class UserStorageController extends GetxController {
       return false;
     }
   }
-  
-  Future<int?> getStepIndex(String userId, String administrativeProcessId) async {
+
+  Future<int?> getStepIndex(
+      String userId, String administrativeProcessId) async {
     try {
       DocumentSnapshot userSnapshot = await _firebaseFirestoreInstance
           .collection('users')
@@ -230,16 +236,21 @@ class UserStorageController extends GetxController {
     }
   }
 
-  Future<bool> resetStepProgression(String userId, String administrativeProcessId, int totalStepsNumber, String categoryId) async {
+  Future<bool> resetStepProgression(
+      String userId,
+      String administrativeProcessId,
+      int totalStepsNumber,
+      String categoryId) async {
     try {
-      CollectionReference users = _firebaseFirestoreInstance.collection('users');
+      CollectionReference users =
+          _firebaseFirestoreInstance.collection('users');
 
       // The case where the user do not exist in the database.
       if (!await isUserPresent(userId)) {
         await users.doc(userId).set({
           'progress': [
             {
-              'totalStepsNumber' : totalStepsNumber,
+              'totalStepsNumber': totalStepsNumber,
               'administrativeProcessId': administrativeProcessId,
               'stepIndex': 0,
               'categoryId': categoryId,
@@ -262,7 +273,7 @@ class UserStorageController extends GetxController {
 
         if (!found) {
           progress.add({
-            'totalStepsNumber' : totalStepsNumber,
+            'totalStepsNumber': totalStepsNumber,
             'administrativeProcessId': administrativeProcessId,
             'stepIndex': 0,
             'categoryId': categoryId,
@@ -277,6 +288,37 @@ class UserStorageController extends GetxController {
       return true;
     } catch (error) {
       debugPrint("Error adding progression: $error");
+      return false;
+    }
+  }
+
+  Future<bool> hasFilledUserData(String userId) async {
+    try {
+      DocumentSnapshot userSnapshot = await _firebaseFirestoreInstance
+          .collection('users')
+          .doc(userId)
+          .get();
+
+      if (userSnapshot.exists) {
+        Map<String, dynamic> userData =
+            userSnapshot.data() as Map<String, dynamic>;
+
+        var res = userData['pseudo'] != null &&
+            userData['dateOfBirth'] != null &&
+            userData['hasAcceptedTermsAndConditions'] &&
+            userData['city'] != null &&
+            userData['country'] != null &&
+            userData['postalCode'] != null &&
+            userData['university'] != null &&
+            userData['formation'] != null;
+
+        debugPrint('hasFilledUserData: $res');
+        return res;
+      }
+
+      return false;
+    } catch (error) {
+      debugPrint("Error checking if user has filled UserData: $error");
       return false;
     }
   }

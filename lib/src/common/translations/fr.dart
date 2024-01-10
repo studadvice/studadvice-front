@@ -166,6 +166,7 @@ class Fr {
         // ----------------
 
         // Connectivity
+        "connectivity.status": "Statut internet",
         "connectivity.noInternetText": "Pas de connexion internet",
         "connectivity.checkConnectionText":
             "Veuillez vérifier votre connexion internet.",
@@ -254,31 +255,33 @@ class Fr {
         "faq.title": "FAQ",
         "faq.search": "Entrez vos mots clés",
         "faq.explore": "Comment pouvons-nous vous aider ?",
-    
-        // FAQ
-        "faq.title": "FAQ",
-        "faq.search": "Entrez vos mots clés",
-        "faq.explore": "Comment pouvons-nous vous aider ?",
 
         // Information modal
-                "information_modal.title": "Préréquis",
-                // notification
-        "notification.title": "C'est l'heure d'une nouvelle démarche !",
-  
+        "information_modal.title": "Préréquis",
+        // notification
+        "notification.calendar.title":
+            "C'est l'heure d'une nouvelle démarche !",
+        "notification.fillUserData": "Remplissez votre profil",
+        "notification.fillUserDataMessage":
+            "Préparez-vous à vivre une expérience unique et sur mesure avec Stud'Advice. Remplissez votre profil dès aujourd'hui !",
+        "notification.fillUserDataButton": "--> Go",
+
         // calendar
         "calendar.startName": "Début de la démarche administrative",
         "calendar.endName": "Fin de la démarche administrative",
         "calendar.description":
             "Évite tout oubli dans tes démarches administratives grâce à notre calendrier ultime ! Ne laisse plus aucune date cruciale te filer entre les doigts, que ce soit le grand jour du commencement ou le moment épique de la conclusion. Et la cerise sur le gâteau ? Tu peux recevoir des notifications pour être sûr de ne rien manquer. Active-les, et fini les excuses pour zapper tes démarches ! L'organisation, c'est la clé du succès administratif !",
-        "calendar.events_title":"Tes évènements",
-        "calendar.events_empty":"Aucune démarche administrative n'a commencé aujourd'hui. Vous êtes tranquille ! 😌 N'oubliez pas de consulter les autres jours et de vous tenir au courant en activant les notifications pour être informé(e) en cas de nouvelles démarches.",
+        "calendar.events_title": "Tes évènements",
+        "calendar.events_empty":
+            "Aucune démarche administrative n'a commencé aujourd'hui. Vous êtes tranquille ! 😌 N'oubliez pas de consulter les autres jours et de vous tenir au courant en activant les notifications pour être informé(e) en cas de nouvelles démarches.",
         // roadmap
         "roadmap.title": "Ta roadmap pour cette démarche",
         "roadmap.description": "Description",
-        "roadmap.required_empty": "Bonne nouvelle, pas de prérequis pour cette étape !",
+        "roadmap.required_empty":
+            "Bonne nouvelle, pas de prérequis pour cette étape !",
         // roadmap information modal
         "roadmap.required": "Prérequis",
         "modal.site": "Site d'inscription",
         "roadmap.empty": "Pas encode d'étapes disponibles. Reviens bientôt !"
-  };
+      };
 }

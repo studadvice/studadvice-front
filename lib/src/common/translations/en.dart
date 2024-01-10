@@ -165,6 +165,7 @@ class En {
         // ----------------
 
         // Connectivity
+        "connectivity.status": "Internet connection status",
         "connectivity.noInternetText": "No internet connection",
         "connectivity.checkConnectionText":
             "Please check your internet connection.",
@@ -254,15 +255,21 @@ class En {
         "faq.explore": "How can we help you ?",
 
         // notification
-        "notification.title": "It’s time for a new administrative process !",
+        "notification.calendar.title":
+            "It’s time for a new administrative process !",
+        "notification.fillUserData": "Please fill your profile!",
+        "notification.fillUserDataMessage":
+            "Get ready for a unique and tailored experience with Stud'Advice. Fill out your profile today!",
+        "notification.fillUserDataButton": "--> Go",
 
         //calendar
         "calendar.startName": "Start of the administrative process",
         "calendar.endName": "End of the administrative process",
         "calendar.description":
             "Avoid any forgetfulness in your administrative procedures with our ultimate calendar! Don't let any crucial date slip through your fingers, whether it's the grand day of commencement or the epic moment of conclusion. And the cherry on top? You can receive notifications to make sure you don't miss anything. Activate them, and no more excuses for skipping your administrative tasks! Organization is the key to administrative success!",
-        "calendar.events_title":"Your events",
-        "calendar.events_empty": "You have no administrative procedures to undertake today. You're all set! 😌 Don't forget to check on other days and stay informed by enabling notifications to be notified in case of new procedures",
+        "calendar.events_title": "Your events",
+        "calendar.events_empty":
+            "You have no administrative procedures to undertake today. You're all set! 😌 Don't forget to check on other days and stay informed by enabling notifications to be notified in case of new procedures",
         // roadmap
         "roadmap.title": "Your process roadmap",
         "roadmap.required": "Prerequisites",
@@ -273,5 +280,5 @@ class En {
         "modal.site": "Registration site",
 
         "roadmap.empty": "No steps available yet. Come back soon!"
-  };
+      };
 }

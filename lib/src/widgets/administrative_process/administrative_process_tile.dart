@@ -3,7 +3,6 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:get/get.dart';
-import 'package:stud_advice/src/screens/roadmap/roadmap_screen.dart';
 import 'package:stud_advice/stud_advice.dart';
 
 class AdministrativeProcessListTile extends StatelessWidget {
@@ -18,7 +17,7 @@ class AdministrativeProcessListTile extends StatelessWidget {
   final String categoryId;
 
   final AdministrativeProcessController _administrativeProcessController =
-  Get.find<AdministrativeProcessController>();
+      Get.find<AdministrativeProcessController>();
   final FileController fileController = Get.find();
   final RxBool isAnimated = true.obs;
 
@@ -51,13 +50,13 @@ class AdministrativeProcessListTile extends StatelessWidget {
             },
           );
         } else {
-          print("No steps");
+          debugPrint("No steps");
         }
       },
       child: Padding(
         padding: const EdgeInsets.all(2.0),
         child: Obx(
-              () => SlideTransition(
+          () => SlideTransition(
             position: Tween<Offset>(
               begin: isAnimated.isTrue ? const Offset(-1, 0) : Offset.zero,
               end: Offset.zero,
@@ -70,7 +69,7 @@ class AdministrativeProcessListTile extends StatelessWidget {
             )),
             child: Container(
               margin:
-              const EdgeInsets.symmetric(vertical: 1.0, horizontal: 8.0),
+                  const EdgeInsets.symmetric(vertical: 1.0, horizontal: 8.0),
               constraints: BoxConstraints(
                 maxWidth: MediaQuery.of(context).size.width - 16.0,
               ),
@@ -99,7 +98,7 @@ class AdministrativeProcessListTile extends StatelessWidget {
                         future: fileController.downloadFile(imageId),
                         builder: (context, snapshot) {
                           if (snapshot.connectionState ==
-                              ConnectionState.done &&
+                                  ConnectionState.done &&
                               snapshot.data != null) {
                             return Image.file(
                               File(snapshot.data!),
@@ -144,9 +143,11 @@ class AdministrativeProcessListTile extends StatelessWidget {
                     subtitle: Padding(
                       padding: const EdgeInsets.only(top: 10.0),
                       child: FutureBuilder<double>(
-                        future: _administrativeProcessController.getProgressValue(administrativeProcessId),
+                        future: _administrativeProcessController
+                            .getProgressValue(administrativeProcessId),
                         builder: (context, snapshot) {
-                          if (snapshot.connectionState == ConnectionState.done) {
+                          if (snapshot.connectionState ==
+                              ConnectionState.done) {
                             return LinearProgressIndicator(
                               value: snapshot.data,
                               backgroundColor: AppColors.grey,
@@ -181,7 +182,7 @@ class AdministrativeProcessListTile extends StatelessWidget {
                           child: Icon(
                             Icons.favorite,
                             color: _administrativeProcessController
-                                .isProcessFavorite(administrativeProcessId)
+                                    .isProcessFavorite(administrativeProcessId)
                                 ? AppColors.red
                                 : AppColors.black,
                             size: 20.0,

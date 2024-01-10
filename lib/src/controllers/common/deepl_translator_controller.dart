@@ -18,12 +18,10 @@ class DeeplTranslatorController {
     }
 
     String targetLang = '${locale.languageCode}-GB';
-    debugPrint('Translating $text to $targetLang');
     try {
       TextResult result =
           await _deeplTranslatorService.translateTextSingular(text, targetLang);
 
-      debugPrint('Translated text: ${result.text}');
       return result.text;
     } catch (e) {
       debugPrint('Error while translating text: $e');
