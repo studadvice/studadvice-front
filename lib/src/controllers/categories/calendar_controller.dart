@@ -41,7 +41,10 @@ class CalendarController extends GetxController {
 
   Future<void> getAdministrativeProcesses() async {
     try {
-      final queryParameters = {'page': 0, 'size': 1000}; // TODO improve back method
+      final queryParameters = {
+        'page': 0,
+        'size': 1000
+      }; // TODO improve back method
       final response = await _dio.get(
         "/administrative-process",
         queryParameters: queryParameters,
@@ -183,13 +186,13 @@ class CalendarController extends GetxController {
         for (final event in eventList) {
           if (Get.locale?.languageCode != 'fr') {
             event.name =
-            await _deeplTranslatorController.translateText(event.name);
-            event.description =
-            await _deeplTranslatorController.translateText(event.description);
+                await _deeplTranslatorController.translateText(event.name);
+            event.description = await _deeplTranslatorController
+                .translateText(event.description);
           }
 
           NotificationService().scheduleNotification(
-              title: 'notification.title'.tr,
+              title: 'notification.calendar.title'.tr,
               body: event.eventName,
               scheduledNotificationDateTime: date);
         }
