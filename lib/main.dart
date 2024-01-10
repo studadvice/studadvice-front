@@ -97,6 +97,9 @@ void main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+  SystemChrome.setPreferredOrientations([
+    DeviceOrientation.portraitUp,
+  ]);
   await NotificationService().initNotification();
   tz.initializeTimeZones();
   await GetStorage.init();
