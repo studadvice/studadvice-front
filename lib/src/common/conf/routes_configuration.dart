@@ -91,7 +91,7 @@ class RoutesConfiguration {
       GetPage(
         name: RoadMapScreen.navigatorId,
         page: () => RoadMapScreen(
-          admnistrativeProcessName: '',
+          administrativeProcessName: '',
         ),
         binding: StepBinding(),
       ),
@@ -114,7 +114,7 @@ class RoutesConfiguration {
       GetPage(
         name: RoadMapScreen.navigatorId,
         page: () => RoadMapScreen(
-          admnistrativeProcessName: '',
+          administrativeProcessName: '',
         ),
         binding: StepBinding(),
       ),

@@ -1,10 +1,9 @@
-import 'package:flutter/material.dart';
-import 'package:stud_advice/stud_advice.dart';
-import 'package:shimmer/shimmer.dart';
-import 'package:get/get.dart';
 import 'dart:core';
-import 'dart:ui';
+
+import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
+import 'package:stud_advice/stud_advice.dart';
 
 class RoadMapShimmer extends StatelessWidget {
   String administrativeProcessId;
@@ -12,7 +11,6 @@ class RoadMapShimmer extends StatelessWidget {
   String administrativeProcessDescription;
   StepController stepController = Get.find();
   PanelController panelController = PanelController();
-
 
   RoadMapShimmer({
     super.key,
@@ -34,32 +32,33 @@ class RoadMapShimmer extends StatelessWidget {
     stepController.setProcessTitle(capitalize(administrativeProcessName));
     stepController.setProcessDescription(administrativeProcessDescription);
     return Scaffold(
-          backgroundColor: AppColors.grey[200],
-          appBar: _buildAppBar(togglePanel),
-          body: Stack(
-            children: [
-              CustomSlidingUpPanel(
-                panelController: panelController,
-                bodyContent: GestureDetector(
-                  child: Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
-                    child: ShimmerStepsIndicator(
-                      currentStep: stepController.currentStep.value,
-                      steps: stepController.steps,
-                      administrativeProcessId: administrativeProcessId,
-                    ),
-                  ),
-                ),
-                title: stepController.getProcessTitle(),
-                slidingWidget: ShimmerStepDetailCardWidget(
-                  title: stepController.getProcessTitle(),
-                  description: stepController.getProcessDescription(),
-                  onNextPressed: () {},
-                  onCompletePressed: () {},
+      backgroundColor: AppColors.grey[200],
+      appBar: _buildAppBar(togglePanel),
+      body: Stack(
+        children: [
+          CustomSlidingUpPanel(
+            panelController: panelController,
+            bodyContent: GestureDetector(
+              child: Container(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+                child: ShimmerStepsIndicator(
+                  currentStep: stepController.currentStep.value,
+                  steps: stepController.steps,
+                  administrativeProcessId: administrativeProcessId,
                 ),
               ),
-            ],
+            ),
+            title: stepController.getProcessTitle(),
+            slidingWidget: ShimmerStepDetailCardWidget(
+              title: stepController.getProcessTitle(),
+              description: stepController.getProcessDescription(),
+              onNextPressed: () {},
+              onCompletePressed: () {},
+            ),
           ),
+        ],
+      ),
     );
   }
 

@@ -1,6 +1,4 @@
 ```markdown
-# TODO (agree on the elements to include in this file)
-
 ## PROPOSALS (possibly improve, since we're starting)
 
 * Use getX for state management.

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:stud_advice/src/controllers/search/custom_search_controller.dart';
 import 'package:stud_advice/stud_advice.dart';
 
 class CustomSearchAppBar extends StatelessWidget
@@ -43,7 +42,9 @@ class CustomSearchAppBar extends StatelessWidget
                 IconButton(
                   icon: const Icon(Icons.arrow_back),
                   color: AppColors.white,
-                  onPressed: () => Get.back(),
+                  onPressed: () {
+                    Navigator.of(Get.context!).pop();
+                  },
                 ),
               if (Get.currentRoute ==
                       AdministrativesProcessesScreen.navigatorId ||

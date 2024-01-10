@@ -278,7 +278,11 @@ class En {
 
         // modal roadmap
         "modal.site": "Registration site",
+        "roadmap.empty": "No steps available yet. Come back soon!",
 
-        "roadmap.empty": "No steps available yet. Come back soon!"
+        // steps
+        "no_steps_modal.title": "No steps needed",
+        "no_steps_modal.description":
+            "You don't need to do anything for this step.",
       };
 }
