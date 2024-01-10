@@ -22,8 +22,6 @@ class StudAdviceApp extends StatelessWidget {
 
     Get.put(DeeplTranslatorController());
 
-    Get.put(ConnectionController(), permanent: true);
-
     return GetMaterialApp(
       title: "Stud'Advice",
       theme: Styles.lightTheme,
@@ -104,7 +102,7 @@ void main() async {
   await GetStorage.init();
   await dotenv.load();
   await loadTerms();
-
+  Get.put(ConnectionController());
   await loadUniversities().then((_) {
     runApp(const StudAdviceApp());
   });
