@@ -39,13 +39,14 @@ class FavoriteAdministrativeProcessListView extends StatelessWidget {
                   PagedChildBuilderDelegate<AdministrativeProcessContent>(
                 itemBuilder: (context, process, index) =>
                     FavoriteAdministrativeProcessListTile(
-                      name: process.name,
-                      imageId: process.imageId,
-                      description: process.description,
-                      administrativeProcessId: process.id,
-                      type: process.type ?? "",
-                      showProgressBar: false,
-                      steps: process.steps!,
+                  name: process.name,
+                  imageId: process.imageId,
+                  categoryId: process.categoryId ?? "",
+                  description: process.description,
+                  administrativeProcessId: process.id,
+                  type: process.type ?? "",
+                  showProgressBar: false,
+                  steps: process.steps!,
                 ),
                 firstPageErrorIndicatorBuilder: (context) => ErrorIndicator(
                   error: controller.pagingController.error,

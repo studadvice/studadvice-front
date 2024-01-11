@@ -4,22 +4,20 @@ import 'dart:io';
 import 'package:dio/dio.dart';
 import 'package:get/get.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
-import 'package:stud_advice/src/controllers/search/custom_search_controller.dart';
 import 'package:stud_advice/stud_advice.dart';
 
 class AdministrativeProcessController extends CustomSearchController {
-  final RxList<String> _favoritesAdministrativeProcessesId = <String>[].obs;
+  final RxList<dynamic> _favoritesAdministrativeProcessesId = <dynamic>[].obs;
   var _firebaseFirestoreInstance =
       AppDependenciesBinding.firebaseFirestoreInstance;
   UserStorageController userStorageController = Get.find();
   final Dio _dio = Get.find();
   final DeeplTranslatorController _deeplTranslatorController = Get.find();
   late String categoryId;
-  List<String> get favoriteAdministrativeProcesses =>
+  List<dynamic> get favoriteAdministrativeProcesses =>
       _favoritesAdministrativeProcessesId;
 
-  final pagingController =
-  PagingController<int, AdministrativeProcessContent>(
+  final pagingController = PagingController<int, AdministrativeProcessContent>(
     firstPageKey: 0,
   );
 
@@ -47,10 +45,9 @@ class AdministrativeProcessController extends CustomSearchController {
       // Translate the text if the locale is not French
       if (Get.locale?.languageCode != 'fr') {
         for (var item in newItems) {
-          item.name =
-          await _deeplTranslatorController.translateText(item.name);
-          item.description = await _deeplTranslatorController
-              .translateText(item.description);
+          item.name = await _deeplTranslatorController.translateText(item.name);
+          item.description =
+              await _deeplTranslatorController.translateText(item.description);
         }
       }
 
@@ -67,9 +64,9 @@ class AdministrativeProcessController extends CustomSearchController {
 
   Future<AdministrativeProcesses> getAdministrativeProcesses(
       {required int number,
-        required int size,
-        String? query,
-        String? categoryId}) async {
+      required int size,
+      String? query,
+      String? categoryId}) async {
     final queryParameters = {
       'page': number,
       'size': size,
@@ -97,16 +94,17 @@ class AdministrativeProcessController extends CustomSearchController {
     }
   }
 
-  Future<void> toggleFavoriteState(String administrativeProcessId) async {
+  Future<void> toggleFavoriteState(
+      String administrativeProcessId, String categoryId) async {
     String userId = userStorageController.getCurrentUserId();
 
     if (isProcessFavorite(administrativeProcessId)) {
       await userStorageController.removeAdministrativeProcessFromFavorites(
-          userId, administrativeProcessId);
+          userId, administrativeProcessId, categoryId);
       _favoritesAdministrativeProcessesId.remove(administrativeProcessId);
     } else {
       await userStorageController.addAdministrativeProcessToFavorites(
-          userId, administrativeProcessId);
+          userId, administrativeProcessId, categoryId);
       _favoritesAdministrativeProcessesId.add(administrativeProcessId);
     }
   }
@@ -114,8 +112,8 @@ class AdministrativeProcessController extends CustomSearchController {
   Future<void> _initFavorites() async {
     String userId = userStorageController.getCurrentUserId();
 
-    List<String> favoriteIds =
-    await userStorageController.getFavorites(userId);
+    List<dynamic> favoriteIds =
+        await userStorageController.getFavorites(userId);
 
     _favoritesAdministrativeProcessesId.addAll(favoriteIds);
   }
@@ -152,8 +150,8 @@ class AdministrativeProcessController extends CustomSearchController {
           var progressList = userData["progress"] as List<dynamic>;
 
           var progressEntry = progressList.firstWhere(
-                (entry) =>
-            entry is Map &&
+            (entry) =>
+                entry is Map &&
                 entry.containsKey("administrativeProcessId") &&
                 entry["administrativeProcessId"] == administrativeId,
             orElse: () => null,
@@ -164,7 +162,9 @@ class AdministrativeProcessController extends CustomSearchController {
               progressEntry.containsKey("totalStepsNumber")) {
             int stepIndex = (progressEntry["stepIndex"]) ?? 0.0;
             int totalStepsNumber = (progressEntry["totalStepsNumber"]) ?? 1.0;
-            return totalStepsNumber != 0.0 ? (stepIndex / totalStepsNumber) : 0.0;
+            return totalStepsNumber != 0.0
+                ? (stepIndex / totalStepsNumber)
+                : 0.0;
           }
         }
       }
@@ -174,5 +174,4 @@ class AdministrativeProcessController extends CustomSearchController {
 
     return 0.0;
   }
-
 }

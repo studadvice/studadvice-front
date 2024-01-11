@@ -15,16 +15,16 @@ class AdministrativeProcesses {
 
   AdministrativeProcesses(
       {required this.content,
-        required this.pageable,
-        required this.totalElements,
-        required this.totalPages,
-        required this.last,
-        required this.size,
-        required this.number,
-        required this.sort,
-        required this.numberOfElements,
-        required this.first,
-        required this.empty});
+      required this.pageable,
+      required this.totalElements,
+      required this.totalPages,
+      required this.last,
+      required this.size,
+      required this.number,
+      required this.sort,
+      required this.numberOfElements,
+      required this.first,
+      required this.empty});
 
   AdministrativeProcesses.fromJson(Map<String, dynamic> json) {
     if (json['content'] != null) {
@@ -81,25 +81,26 @@ class AdministrativeProcessContent {
   String? endDate;
   String? eventName;
   String? type;
+  String? categoryId;
 
-  AdministrativeProcessContent(
-      {
-        required this.id,
-        required this.name,
-        required this.description,
-        required this.imageId,
-        this.isFavorite,
-        this.educations,
-        this.minAge,
-        this.maxAge,
-        this.nationalities,
-        this.universities,
-        this.steps,
-        this.startDate,
-        this.endDate,
-        this.eventName,
-        this.type,
-      });
+  AdministrativeProcessContent({
+    required this.id,
+    required this.name,
+    required this.description,
+    required this.imageId,
+    this.isFavorite,
+    this.educations,
+    this.minAge,
+    this.maxAge,
+    this.nationalities,
+    this.universities,
+    this.steps,
+    this.startDate,
+    this.endDate,
+    this.eventName,
+    this.type,
+    this.categoryId,
+  });
 
   AdministrativeProcessContent.fromJson(Map<String, dynamic> json) {
     id = json['id'];

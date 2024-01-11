@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -80,7 +82,7 @@ class UserStorageController extends GetxController {
     }
   }
 
-  Future<List<String>> getFavorites(String userId) async {
+  Future<List<dynamic>> getFavorites(String userId) async {
     try {
       CollectionReference users =
           _firebaseFirestoreInstance.collection('users');
@@ -90,12 +92,35 @@ class UserStorageController extends GetxController {
       if (userSnapshot.exists) {
         List<dynamic>? favorites = userSnapshot.get('favoriteProcesses');
 
-        return favorites?.cast<String>() ?? [];
+        return favorites?.cast<dynamic>() ?? [];
       } else {
         return [];
       }
     } catch (error) {
       return [];
+    }
+  }
+
+  Future<String> getFavoriteCategoryId(
+      String userId, String administrativeProcessId) async {
+    try {
+      CollectionReference users =
+          _firebaseFirestoreInstance.collection('users');
+
+      DocumentSnapshot userSnapshot = await users.doc(userId).get();
+
+      if (userSnapshot.exists) {
+        List<dynamic>? favorites = userSnapshot.get('favoriteProcesses');
+
+        for (var item in favorites ?? []) {
+          if (item['administrativeProcessId'] == administrativeProcessId) {
+            return item['categoryId'];
+          }
+        }
+      }
+      return "";
+    } catch (error) {
+      return "";
     }
   }
 
@@ -114,7 +139,7 @@ class UserStorageController extends GetxController {
   }
 
   Future<bool> addAdministrativeProcessToFavorites(
-      String userId, String administrativeProcessId) async {
+      String userId, String administrativeProcessId, String categoryId) async {
     try {
       CollectionReference users =
           _firebaseFirestoreInstance.collection('users');
@@ -122,12 +147,22 @@ class UserStorageController extends GetxController {
       // The case where the user do not exist in the database.
       if (!await isUserPresent(userId)) {
         await users.doc(userId).set({
-          'favoriteProcesses': FieldValue.arrayUnion([administrativeProcessId]),
+          'favoriteProcesses': FieldValue.arrayUnion([
+            {
+              'administrativeProcessId': administrativeProcessId,
+              'categoryId': categoryId
+            }
+          ]),
         });
       }
 
       await users.doc(userId).update({
-        'favoriteProcesses': FieldValue.arrayUnion([administrativeProcessId]),
+        'favoriteProcesses': FieldValue.arrayUnion([
+          {
+            'administrativeProcessId': administrativeProcessId,
+            'categoryId': categoryId
+          }
+        ]),
       });
 
       return true;
@@ -219,7 +254,7 @@ class UserStorageController extends GetxController {
   }
 
   Future<bool> removeAdministrativeProcessFromFavorites(
-      String userId, String administrativeProcessId) async {
+      String userId, String administrativeProcessId, String categoryId) async {
     try {
       CollectionReference users =
           _firebaseFirestoreInstance.collection('users');
@@ -227,7 +262,12 @@ class UserStorageController extends GetxController {
       DocumentReference userDocument = users.doc(userId);
 
       await userDocument.update({
-        'favoriteProcesses': FieldValue.arrayRemove([administrativeProcessId]),
+        'favoriteProcesses': FieldValue.arrayRemove([
+          {
+            'administrativeProcessId': administrativeProcessId,
+            'categoryId': categoryId
+          }
+        ]),
       });
 
       return true;

@@ -179,8 +179,8 @@ class AdministrativeProcessListTile extends StatelessWidget {
                     trailing: Obx(() {
                       return GestureDetector(
                         onTap: () {
-                          _administrativeProcessController
-                              .toggleFavoriteState(administrativeProcessId);
+                          _administrativeProcessController.toggleFavoriteState(
+                              administrativeProcessId, categoryId);
                         },
                         child: Container(
                           padding: const EdgeInsets.all(5.0),
