@@ -16,8 +16,8 @@ jobs:
       - name: Install Dependencies
         run: flutter pub get
 
-      - name: Build debug version for Android
-        run: flutter build apk --debug
+      - name: Build the appbundle
+        run: flutter build appbundle
 
   analyze:
     runs-on: ubuntu-latest
