@@ -1,11 +1,8 @@
-import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:stud_advice/stud_advice.dart';
-import 'package:stud_advice/src/controllers/search/custom_search_controller.dart';
 
 class StepController extends CustomSearchController {
-
   final ScrollController scrollController = ScrollController();
   List<StepItem> steps = [];
   String processDescription = "";
@@ -22,7 +19,9 @@ class StepController extends CustomSearchController {
     double scrollPosition = scrollController.offset;
     int newStep = (scrollPosition / 100).round();
 
-    if (currentStep.value != newStep && newStep < steps.length && newStep >= 0) {
+    if (currentStep.value != newStep &&
+        newStep < steps.length &&
+        newStep >= 0) {
       currentStep.value = newStep;
     }
   }
@@ -56,18 +55,21 @@ class StepController extends CustomSearchController {
     update();
   }
 
-  Future<void> completeStep(int stepIndex, String administrativeProcessId,String categoryId) async {
+  Future<void> completeStep(
+      int stepIndex, String administrativeProcessId, String categoryId) async {
     print(stepIndex);
-    if (stepIndex == steps.length){
+    if (stepIndex == steps.length) {
       currentStep.value = stepIndex;
+      AppDependenciesBinding.resetData();
       await _saveStepProgressToFirebase(
           stepIndex, administrativeProcessId, categoryId);
-    }
-    else {
+    } else {
       if (!steps[stepIndex].isCompleted!) {
         steps[stepIndex].isCompleted = true;
         currentStep.value = stepIndex;
         update();
+
+        AppDependenciesBinding.resetData();
 
         await _saveStepProgressToFirebase(
             stepIndex, administrativeProcessId, categoryId);
@@ -75,21 +77,35 @@ class StepController extends CustomSearchController {
     }
   }
 
-  Future<void> _saveStepProgressToFirebase(int stepIndex, String administrativeProcessId, String categoryId) async {
+  Future<void> _saveStepProgressToFirebase(
+      int stepIndex, String administrativeProcessId, String categoryId) async {
     try {
       String userId = userStorageController.getCurrentUserId();
-      await userStorageController.addStepProgressionToUser(userId, administrativeProcessId, stepIndex, steps.length,categoryId);
+      await userStorageController.addStepProgressionToUser(
+          userId, administrativeProcessId, stepIndex, steps.length, categoryId);
     } catch (error) {
       print("Error while saving step progression to firebase: $error");
     }
   }
 
-  Future<void> setAndAddMetadataToStep(List<StepItem> steps, String administrativeProcessId) async {
-    List<Color> colors = [const Color(0xFF8ECAE6), const Color(0xFF219EBC), const Color(0xFF023047), const Color(0xFFFFB703)];
-    List<Color> borderColors = [const Color(0xFF8ECAE6), const Color(0xFF8ECAE6), const Color(0xFF219EBC),const Color(0xFFFB8500)];
+  Future<void> setAndAddMetadataToStep(
+      List<StepItem> steps, String administrativeProcessId) async {
+    List<Color> colors = [
+      const Color(0xFF8ECAE6),
+      const Color(0xFF219EBC),
+      const Color(0xFF023047),
+      const Color(0xFFFFB703)
+    ];
+    List<Color> borderColors = [
+      const Color(0xFF8ECAE6),
+      const Color(0xFF8ECAE6),
+      const Color(0xFF219EBC),
+      const Color(0xFFFB8500)
+    ];
     String userId = userStorageController.getCurrentUserId();
-  
-    int? stepIndex = await userStorageController.getStepIndex(userId, administrativeProcessId);
+
+    int? stepIndex = await userStorageController.getStepIndex(
+        userId, administrativeProcessId);
     stepIndex ??= 0;
     for (int i = 0; i < steps.length; i++) {
       steps[i].color = colors[i % colors.length];
@@ -102,9 +118,10 @@ class StepController extends CustomSearchController {
     }
   }
 
-  Future<void> resetStepProgression(String administrativeProcessId, String categoryId) async {
+  Future<void> resetStepProgression(
+      String administrativeProcessId, String categoryId) async {
     String userId = userStorageController.getCurrentUserId();
-    await userStorageController.resetStepProgression(userId, administrativeProcessId, steps.length,categoryId);
+    await userStorageController.resetStepProgression(
+        userId, administrativeProcessId, steps.length, categoryId);
   }
-  
 }

@@ -1,5 +1,6 @@
 import 'package:country_picker/country_picker.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class CountryPickerField extends StatelessWidget {
   final TextEditingController controller;
@@ -36,7 +37,7 @@ class CountryPickerField extends StatelessWidget {
         },
         validator: (value) {
           if (value == null || value.isEmpty) {
-            return "country_picker.title";
+            return "country_picker.title".tr;
           }
           return null;
         },

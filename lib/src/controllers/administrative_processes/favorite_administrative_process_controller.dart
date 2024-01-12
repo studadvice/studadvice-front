@@ -4,18 +4,17 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
-import 'package:stud_advice/src/controllers/search/custom_search_controller.dart';
 import 'package:stud_advice/stud_advice.dart';
 
 class FavoriteAdministrativeProcessController extends CustomSearchController {
-  final RxList<String> _favoritesAdministrativeProcessesId = <String>[].obs;
+  final RxList<dynamic> _favoritesAdministrativeProcesses = <dynamic>[].obs;
   final DeeplTranslatorController _deeplTranslatorController = Get.find();
 
   UserStorageController userStorageController = Get.find();
   final Dio _dio = Get.find();
 
-  List<String> get favoriteAdministrativeProcessesId =>
-      _favoritesAdministrativeProcessesId;
+  List<dynamic> get favoriteAdministrativeProcessesId =>
+      _favoritesAdministrativeProcesses;
 
   final pagingController = PagingController<int, AdministrativeProcessContent>(
     firstPageKey: 0,
@@ -84,8 +83,15 @@ class FavoriteAdministrativeProcessController extends CustomSearchController {
 
       final newItems = newPage.content;
 
+      // TODO AJOUTER Le category ID
       var favoriteAdministrativeProcesses =
           newItems.where((process) => isProcessFavorite(process.id)).toList();
+
+      var userId = userStorageController.getCurrentUserId();
+      for (var process in favoriteAdministrativeProcesses) {
+        process.categoryId = await userStorageController.getFavoriteCategoryId(
+            userId, process.id);
+      }
 
       pagingController.appendLastPage(favoriteAdministrativeProcesses);
     } catch (error) {
@@ -122,18 +128,19 @@ class FavoriteAdministrativeProcessController extends CustomSearchController {
     }
   }
 
-  Future<void> toggleFavoriteState(String administrativeProcessId) async {
+  Future<void> toggleFavoriteState(
+      String administrativeProcessId, String categoryId) async {
     String userId = userStorageController.getCurrentUserId();
     _fetchFavorites();
 
     if (isProcessFavorite(administrativeProcessId)) {
       await userStorageController.removeAdministrativeProcessFromFavorites(
-          userId, administrativeProcessId);
-      _favoritesAdministrativeProcessesId.remove(administrativeProcessId);
+          userId, administrativeProcessId, categoryId);
+      _favoritesAdministrativeProcesses.remove(administrativeProcessId);
     } else {
       await userStorageController.addAdministrativeProcessToFavorites(
-          userId, administrativeProcessId);
-      _favoritesAdministrativeProcessesId.add(administrativeProcessId);
+          userId, administrativeProcessId, categoryId);
+      _favoritesAdministrativeProcesses.add(administrativeProcessId);
     }
     update();
   }
@@ -141,15 +148,16 @@ class FavoriteAdministrativeProcessController extends CustomSearchController {
   Future<void> _fetchFavorites() async {
     String userId = userStorageController.getCurrentUserId();
 
-    List<String> favoriteIds = await userStorageController.getFavorites(userId);
+    List<dynamic> favoriteProcesses =
+        await userStorageController.getFavorites(userId);
 
-    _favoritesAdministrativeProcessesId.clear();
+    _favoritesAdministrativeProcesses.clear();
 
-    _favoritesAdministrativeProcessesId.addAll(favoriteIds);
+    _favoritesAdministrativeProcesses.addAll(favoriteProcesses);
   }
 
   bool isProcessFavorite(String administrativeProcessId) {
-    var res = _favoritesAdministrativeProcessesId
+    var res = _favoritesAdministrativeProcesses
         .any((processId_) => processId_ == administrativeProcessId);
     return res;
   }

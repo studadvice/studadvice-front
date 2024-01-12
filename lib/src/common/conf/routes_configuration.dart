@@ -2,10 +2,8 @@ import 'package:get/get.dart';
 import 'package:stud_advice/src/bindings/deals/deals_binding.dart';
 import 'package:stud_advice/src/bindings/settings/change_password_binding.dart';
 import 'package:stud_advice/src/bindings/settings/support_binding.dart';
-import 'package:stud_advice/src/controllers/deals/deal_detail_controller.dart';
 import 'package:stud_advice/src/screens/faq/faq_screen.dart';
 import 'package:stud_advice/src/screens/home/calendar.dart';
-import 'package:stud_advice/src/screens/roadmap/roadmap_screen.dart';
 import 'package:stud_advice/src/screens/settings/change_password_screen.dart';
 import 'package:stud_advice/src/screens/settings/change_user_data_screen.dart';
 import 'package:stud_advice/src/screens/settings/support_screen.dart';
@@ -24,7 +22,7 @@ class RoutesConfiguration {
       ),
       GetPage(
         name: WelcomeScreen.navigatorId,
-        page: () => const WelcomeScreen(),
+        page: () => WelcomeScreen(),
       ),
       GetPage(
         name: HomePageScreen.navigatorId,
@@ -74,10 +72,9 @@ class RoutesConfiguration {
         binding: DealsBinding(),
       ),
       GetPage(
-        name: DealDetailScreen.navigatorId,
-        page: () => DealDetailScreen(),
-        binding: DealsBinding()
-      ),
+          name: DealDetailScreen.navigatorId,
+          page: () => DealDetailScreen(),
+          binding: DealsBinding()),
       GetPage(
           name: NavigationBarScreen.navigatorId,
           page: () => NavigationBarScreen()),
@@ -94,7 +91,7 @@ class RoutesConfiguration {
       GetPage(
         name: RoadMapScreen.navigatorId,
         page: () => RoadMapScreen(
-          admnistrativeProcessName: '',
+          administrativeProcessName: '',
         ),
         binding: StepBinding(),
       ),
@@ -113,14 +110,11 @@ class RoutesConfiguration {
         page: () => const ChangeUserDataScreen(),
         binding: RegisterUserInformationBinding(),
       ),
-      GetPage(
-          name: FaqScreen.navigatorId,
-          page: () => FaqScreen()
-      ),
+      GetPage(name: FaqScreen.navigatorId, page: () => FaqScreen()),
       GetPage(
         name: RoadMapScreen.navigatorId,
         page: () => RoadMapScreen(
-          admnistrativeProcessName: '',
+          administrativeProcessName: '',
         ),
         binding: StepBinding(),
       ),

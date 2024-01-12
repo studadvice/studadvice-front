@@ -3,7 +3,6 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:get/get.dart';
-import 'package:stud_advice/src/screens/roadmap/roadmap_screen.dart';
 import 'package:stud_advice/stud_advice.dart';
 
 class AdministrativeProcessListTile extends StatelessWidget {
@@ -11,14 +10,13 @@ class AdministrativeProcessListTile extends StatelessWidget {
   final String imageId;
   final String administrativeProcessId;
   final String description;
-  final bool showProgressBar;
   final Color backgroundColor;
   final List<StepItem> steps;
   final String type;
   final String categoryId;
 
   final AdministrativeProcessController _administrativeProcessController =
-  Get.find<AdministrativeProcessController>();
+      Get.find<AdministrativeProcessController>();
   final FileController fileController = Get.find();
   final RxBool isAnimated = true.obs;
 
@@ -30,13 +28,13 @@ class AdministrativeProcessListTile extends StatelessWidget {
     required this.name,
     required this.description,
     required this.steps,
-    required this.showProgressBar,
     this.backgroundColor = AppColors.white,
     required this.type,
   });
 
   @override
   Widget build(BuildContext context) {
+    var showProgressBar = steps.isNotEmpty;
     return GestureDetector(
       onTap: () {
         if (steps.isNotEmpty) {
@@ -51,13 +49,20 @@ class AdministrativeProcessListTile extends StatelessWidget {
             },
           );
         } else {
-          print("No steps");
+          debugPrint("No steps");
+          showDialog(
+              context: context,
+              builder: (BuildContext context) {
+                return NoStepsModal(
+                  administrativeProcessDescription: description,
+                );
+              });
         }
       },
       child: Padding(
         padding: const EdgeInsets.all(2.0),
         child: Obx(
-              () => SlideTransition(
+          () => SlideTransition(
             position: Tween<Offset>(
               begin: isAnimated.isTrue ? const Offset(-1, 0) : Offset.zero,
               end: Offset.zero,
@@ -70,7 +75,7 @@ class AdministrativeProcessListTile extends StatelessWidget {
             )),
             child: Container(
               margin:
-              const EdgeInsets.symmetric(vertical: 1.0, horizontal: 8.0),
+                  const EdgeInsets.symmetric(vertical: 1.0, horizontal: 8.0),
               constraints: BoxConstraints(
                 maxWidth: MediaQuery.of(context).size.width - 16.0,
               ),
@@ -99,7 +104,7 @@ class AdministrativeProcessListTile extends StatelessWidget {
                         future: fileController.downloadFile(imageId),
                         builder: (context, snapshot) {
                           if (snapshot.connectionState ==
-                              ConnectionState.done &&
+                                  ConnectionState.done &&
                               snapshot.data != null) {
                             return Image.file(
                               File(snapshot.data!),
@@ -141,36 +146,41 @@ class AdministrativeProcessListTile extends StatelessWidget {
                         ),
                       ],
                     ),
-                    subtitle: Padding(
-                      padding: const EdgeInsets.only(top: 10.0),
-                      child: FutureBuilder<double>(
-                        future: _administrativeProcessController.getProgressValue(administrativeProcessId),
-                        builder: (context, snapshot) {
-                          if (snapshot.connectionState == ConnectionState.done) {
-                            return LinearProgressIndicator(
-                              value: snapshot.data,
-                              backgroundColor: AppColors.grey,
-                              valueColor: const AlwaysStoppedAnimation<Color>(
-                                AppColors.primaryColor,
-                              ),
-                            );
-                          } else {
-                            return const LinearProgressIndicator(
-                              value: 0.0,
-                              backgroundColor: AppColors.grey,
-                              valueColor: AlwaysStoppedAnimation<Color>(
-                                AppColors.primaryColor,
-                              ),
-                            );
-                          }
-                        },
-                      ),
-                    ),
+                    subtitle: showProgressBar
+                        ? Padding(
+                            padding: const EdgeInsets.only(top: 10.0),
+                            child: FutureBuilder<double>(
+                              future: _administrativeProcessController
+                                  .getProgressValue(administrativeProcessId),
+                              builder: (context, snapshot) {
+                                if (snapshot.connectionState ==
+                                    ConnectionState.done) {
+                                  return LinearProgressIndicator(
+                                    value: snapshot.data,
+                                    backgroundColor: AppColors.grey,
+                                    valueColor:
+                                        const AlwaysStoppedAnimation<Color>(
+                                      AppColors.primaryColor,
+                                    ),
+                                  );
+                                } else {
+                                  return const LinearProgressIndicator(
+                                    value: 0.0,
+                                    backgroundColor: AppColors.grey,
+                                    valueColor: AlwaysStoppedAnimation<Color>(
+                                      AppColors.primaryColor,
+                                    ),
+                                  );
+                                }
+                              },
+                            ),
+                          )
+                        : null,
                     trailing: Obx(() {
                       return GestureDetector(
                         onTap: () {
-                          _administrativeProcessController
-                              .toggleFavoriteState(administrativeProcessId);
+                          _administrativeProcessController.toggleFavoriteState(
+                              administrativeProcessId, categoryId);
                         },
                         child: Container(
                           padding: const EdgeInsets.all(5.0),
@@ -181,7 +191,7 @@ class AdministrativeProcessListTile extends StatelessWidget {
                           child: Icon(
                             Icons.favorite,
                             color: _administrativeProcessController
-                                .isProcessFavorite(administrativeProcessId)
+                                    .isProcessFavorite(administrativeProcessId)
                                 ? AppColors.red
                                 : AppColors.black,
                             size: 20.0,

@@ -1,16 +1,17 @@
 import 'dart:io';
 
 import 'package:dio/dio.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
-import 'package:stud_advice/src/controllers/search/custom_search_controller.dart';
-import 'package:stud_advice/src/models/stud_advice/deals.dart';
+import 'package:stud_advice/stud_advice.dart';
 
 class DealsController extends CustomSearchController {
   final Dio _dio = Get.find();
 
   final PagingController<int, DealContent> pagingController =
-  PagingController(firstPageKey: 0);
+      PagingController(firstPageKey: 0);
+  final DeeplTranslatorController _deeplTranslatorController = Get.find();
 
   @override
   void onInit() {
@@ -31,6 +32,24 @@ class DealsController extends CustomSearchController {
 
       final isLastPage = newPage.last;
       final newItems = newPage.content;
+
+      // Translate the text if the locale is not French
+      if (Get.locale?.languageCode != 'fr') {
+        for (var item in newItems) {
+          item.title =
+              await _deeplTranslatorController.translateText(item.title);
+          debugPrint('Translated title: ${item.title}');
+          item.description =
+              await _deeplTranslatorController.translateText(item.description);
+          debugPrint('Translated description: ${item.description}');
+          if (item.category != null) {
+            item.category =
+                await _deeplTranslatorController.translateText(item.category!);
+            debugPrint('Translated category: ${item.category}');
+          }
+        }
+      }
+
       if (newItems.isNotEmpty) {
         if (isLastPage) {
           pagingController.appendLastPage(newItems);
@@ -42,7 +61,7 @@ class DealsController extends CustomSearchController {
         pagingController.appendLastPage([]);
       }
     } catch (error) {
-      print(error);
+      debugPrint(error.toString());
       pagingController.error = error;
     }
   }
@@ -58,15 +77,32 @@ class DealsController extends CustomSearchController {
     pagingController.refresh();
   }
 
-  Future<Deals> _getDealsBySearch(String path,
-      Map<String, dynamic> queryParameters) async {
+  Future<Deals> _getDealsBySearch(
+      String path, Map<String, dynamic> queryParameters) async {
     try {
       final response = await _dio.get(
         path,
         queryParameters: queryParameters,
       );
       if (response.statusCode == HttpStatus.ok) {
-        return Deals.fromJson(response.data);
+        var deals = Deals.fromJson(response.data);
+        // Translate the text if the locale is not French
+        if (Get.locale?.languageCode != 'fr') {
+          for (var item in deals.content) {
+            item.title =
+                await _deeplTranslatorController.translateText(item.title);
+            debugPrint('Translated title: ${item.title}');
+            item.description = await _deeplTranslatorController
+                .translateText(item.description);
+            debugPrint('Translated description: ${item.description}');
+            if (item.category != null) {
+              item.category = await _deeplTranslatorController
+                  .translateText(item.category!);
+              debugPrint('Translated category: ${item.category}');
+            }
+          }
+        }
+        return deals;
       } else {
         throw Exception('Failed to load categories');
       }
@@ -75,15 +111,32 @@ class DealsController extends CustomSearchController {
     }
   }
 
-  Future<Deals> _getRecommendedDeals(String path,
-      Map<String, dynamic> queryParameters) async {
+  Future<Deals> _getRecommendedDeals(
+      String path, Map<String, dynamic> queryParameters) async {
     try {
       final response = await _dio.get(
         path,
         queryParameters: queryParameters,
       );
       if (response.statusCode == HttpStatus.ok) {
-        return Deals.fromJson(response.data);
+        var deals = Deals.fromJson(response.data);
+        // Translate the text if the locale is not French
+        if (Get.locale?.languageCode != 'fr') {
+          for (var item in deals.content) {
+            item.title =
+                await _deeplTranslatorController.translateText(item.title);
+            debugPrint('Translated title: ${item.title}');
+            item.description = await _deeplTranslatorController
+                .translateText(item.description);
+            debugPrint('Translated description: ${item.description}');
+            if (item.category != null) {
+              item.category = await _deeplTranslatorController
+                  .translateText(item.category!);
+              debugPrint('Translated category: ${item.category}');
+            }
+          }
+        }
+        return deals;
       } else {
         throw Exception('Failed to load categories');
       }

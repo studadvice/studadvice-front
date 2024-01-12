@@ -13,7 +13,8 @@ class CategoryItem extends StatelessWidget {
 
   final CategoryContent category;
   final FileController fileController = Get.find();
-  final SearchCategoryController searchCategoryController = Get.find<SearchCategoryController>();
+  final SearchCategoryController searchCategoryController =
+      Get.find<SearchCategoryController>();
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +28,9 @@ class CategoryItem extends StatelessWidget {
               AdministrativesProcessesScreen.navigatorId,
               arguments: {
                 'categoryId': categoryId,
-                'categoryColor': Color(int.parse(category.color.substring(1), radix: 16) + 0xFF000000),
+                'categoryColor': Color(
+                    int.parse(category.color.substring(1), radix: 16) +
+                        0xFF000000),
                 "categoryName": category.name,
               },
             );
@@ -35,7 +38,8 @@ class CategoryItem extends StatelessWidget {
           child: Container(
             padding: const EdgeInsets.all(10),
             decoration: BoxDecoration(
-              color: Color(int.parse(category.color.substring(1), radix: 16) + 0xFF000000),
+              color: Color(int.parse(category.color.substring(1), radix: 16) +
+                  0xFF000000),
               borderRadius: BorderRadius.circular(20),
               boxShadow: [
                 BoxShadow(
@@ -78,9 +82,11 @@ class CategoryItem extends StatelessWidget {
                   child: Row(
                     children: [
                       FutureBuilder<double>(
-                        future: searchCategoryController.getProgressValue(category),
+                        future:
+                            searchCategoryController.getProgressValue(category),
                         builder: (context, snapshot) {
-                          if (snapshot.connectionState == ConnectionState.done) {
+                          if (snapshot.connectionState ==
+                              ConnectionState.done) {
                             double progress = snapshot.data ?? 0.0;
 
                             return CircularPercentIndicator(
@@ -107,7 +113,8 @@ class CategoryItem extends StatelessWidget {
                         child: FutureBuilder<String?>(
                           future: fileController.downloadFile(category.imageId),
                           builder: (context, snapshot) {
-                            if (snapshot.connectionState == ConnectionState.done &&
+                            if (snapshot.connectionState ==
+                                    ConnectionState.done &&
                                 snapshot.data != null) {
                               return Container(
                                 width: constraints.maxWidth / 4,
@@ -126,7 +133,6 @@ class CategoryItem extends StatelessWidget {
                             } else if (snapshot.hasError) {
                               return const Icon(
                                 Icons.error_outline_sharp,
-                                size: 50.0,
                               );
                             } else {
                               return const Icon(Icons.image);

@@ -21,19 +21,16 @@ class AdministrativeProcessListView extends StatelessWidget {
       init: AdministrativeProcessController(),
       builder: (controller) {
         controller.categoryId = categoryId;
-        Color backgroundColor =
-            categoryColor;
+        Color backgroundColor = categoryColor;
 
         return Scaffold(
           appBar: AppBar(
             forceMaterialTransparency: true,
-            title: Text(
-              categoryName,
-              style: const TextStyle(
-                fontSize: 20,
-                fontWeight: FontWeight.bold,
-              )
-            ),
+            title: Text(categoryName,
+                style: const TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                )),
             centerTitle: true,
             toolbarHeight: 50,
             backgroundColor: AppColors.white,
@@ -50,16 +47,15 @@ class AdministrativeProcessListView extends StatelessWidget {
                   PagedChildBuilderDelegate<AdministrativeProcessContent>(
                 itemBuilder: (context, process, index) {
                   return AdministrativeProcessListTile(
-                    categoryId : categoryId,
+                    categoryId: categoryId,
                     name: process.name,
                     imageId: process.imageId,
                     description: process.description,
                     administrativeProcessId: process.id,
                     steps: process.steps!,
-                  backgroundColor: backgroundColor,
-                  type: process.type ?? "",
-                  showProgressBar: false,
-                );
+                    backgroundColor: backgroundColor,
+                    type: process.type ?? "",
+                  );
                 },
                 firstPageErrorIndicatorBuilder: (context) => ErrorIndicator(
                   error: controller.pagingController.error,

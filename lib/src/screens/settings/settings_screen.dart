@@ -77,8 +77,9 @@ class SettingsScreen extends StatelessWidget {
           items: supportedLocales,
           selectedItem: _i18n.getCurrentLocale,
           onChanged: (locale) {
-            // TODO : checker l'async
             _i18n.changeLocale(locale ?? _i18n.getCurrentLocale);
+            AppDependenciesBinding.resetData();
+            Get.offAllNamed(NavigationBarScreen.navigatorId);
             return null;
           },
           validator: (locale) {
@@ -119,7 +120,6 @@ class SettingsScreen extends StatelessWidget {
           ],
           //selectedItem: i18n.getCurrentLocale,
           onChanged: (fontSize) {
-            // TODO : checker l'async
             return null;
           },
           validator: (locale) {

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:stud_advice/stud_advice.dart';
 import 'package:get/get.dart';
+import 'package:stud_advice/stud_advice.dart';
 
 class StepDetailCardWidget extends StatelessWidget {
   final String title;
@@ -23,8 +23,8 @@ class StepDetailCardWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Color modalBackground = Theme.of(context).brightness == Brightness.dark
-        ? Color(0xff1a1a1c).withOpacity(0.5)
-        : Color(0xffe5e5e5).withOpacity(0.9);
+        ? const Color(0xff1a1a1c).withOpacity(0.5)
+        : const Color(0xffe5e5e5).withOpacity(0.9);
     return Container(
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(15.0),
@@ -62,7 +62,7 @@ class StepDetailCardWidget extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 20.0),
-            // reinit the process
+            // reset the process
             if (onCompletePressed != null)
               CustomButton(
                 text: 'global.reset'.tr,
@@ -79,14 +79,14 @@ class StepDetailCardWidget extends StatelessWidget {
   }
 
   Widget buildDragHandler() {
-  return Container(
-    height: 5.0,
-    width: 40.0,
-    margin: const EdgeInsets.only(bottom: 15.0),
-    decoration: BoxDecoration(
-      color: AppColors.black26,
-      borderRadius: BorderRadius.all(Radius.circular(12.0)),
-    ),
-  );
-}
+    return Container(
+      height: 5.0,
+      width: 40.0,
+      margin: const EdgeInsets.only(bottom: 15.0),
+      decoration: const BoxDecoration(
+        color: AppColors.black26,
+        borderRadius: BorderRadius.all(Radius.circular(12.0)),
+      ),
+    );
+  }
 }
