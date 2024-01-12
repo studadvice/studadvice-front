@@ -57,7 +57,6 @@ class StepController extends CustomSearchController {
 
   Future<void> completeStep(
       int stepIndex, String administrativeProcessId, String categoryId) async {
-    print(stepIndex);
     if (stepIndex == steps.length) {
       currentStep.value = stepIndex;
       AppDependenciesBinding.resetData();
@@ -84,7 +83,7 @@ class StepController extends CustomSearchController {
       await userStorageController.addStepProgressionToUser(
           userId, administrativeProcessId, stepIndex, steps.length, categoryId);
     } catch (error) {
-      print("Error while saving step progression to firebase: $error");
+      debugPrint("Error while saving step progression to firebase: $error");
     }
   }
 

@@ -4,7 +4,6 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
-import 'package:stud_advice/src/controllers/search/custom_search_controller.dart';
 import 'package:stud_advice/stud_advice.dart';
 
 class SearchCategoryController extends CustomSearchController {
@@ -53,7 +52,6 @@ class SearchCategoryController extends CustomSearchController {
       } else {
         pagingController.appendLastPage([]);
       }
-
     } catch (error) {
       pagingController.error = error;
       debugPrint(error.toString());
@@ -112,8 +110,8 @@ class SearchCategoryController extends CustomSearchController {
           var progressList = userData["progress"] as List<dynamic>;
 
           var matchingEntries = progressList.where(
-                (entry) =>
-            entry is Map &&
+            (entry) =>
+                entry is Map &&
                 entry.containsKey("categoryId") &&
                 entry["categoryId"] == categoryContent.id,
           );
@@ -121,28 +119,31 @@ class SearchCategoryController extends CustomSearchController {
           if (matchingEntries.isNotEmpty) {
             double totalProgress = matchingEntries.fold(
               0.0,
-                  (acc, entry) {
+              (acc, entry) {
                 if (entry.containsKey("stepIndex") &&
                     entry.containsKey("totalStepsNumber")) {
                   int stepIndex = (entry["stepIndex"]) ?? 0;
                   int totalStepsNumber = (entry["totalStepsNumber"]) ?? 1;
-                  return acc + (totalStepsNumber != 0 ? (stepIndex / totalStepsNumber) : 0);
+                  return acc +
+                      (totalStepsNumber != 0
+                          ? (stepIndex / totalStepsNumber)
+                          : 0);
                 }
                 return acc;
               },
             );
 
             return matchingEntries.isNotEmpty
-                ? totalProgress / categoryContent.administrativeProcesses!.length
+                ? totalProgress /
+                    categoryContent.administrativeProcesses!.length
                 : 0.0;
           }
         }
       }
     } catch (e) {
-      print("Error getting progress value: $e");
+      debugPrint("Error getting progress value: $e");
     }
 
     return 0.0;
   }
-
 }

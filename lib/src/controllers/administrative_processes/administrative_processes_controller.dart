@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:io';
 
 import 'package:dio/dio.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 import 'package:stud_advice/stud_advice.dart';
@@ -169,7 +170,7 @@ class AdministrativeProcessController extends CustomSearchController {
         }
       }
     } catch (e) {
-      print("Error getting progress value: $e");
+      debugPrint("Error getting progress value: $e");
     }
 
     return 0.0;

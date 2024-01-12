@@ -63,7 +63,7 @@ class DealDetailController extends GetxController {
             userRatingsDoc.data()?["ratings"] as Map<String, dynamic>? ?? {};
         userRatings.value = Map<String, int>.from(ratingsMap);
       } else {
-        print("User document not found or does not exist");
+        debugPrint("User document not found or does not exist");
       }
     } catch (e) {
       debugPrint("Error initializing user ratings: $e");

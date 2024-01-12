@@ -12,8 +12,8 @@ class CalendarScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print(calendarController
-        .administrativeProcessesEvents); //TODO need to use this to rebuild in change, change the logic
+    debugPrint(calendarController.administrativeProcessesEvents
+        .string); //TODO need to use this to rebuild in change, change the logic
     var customLocale = Get.locale ?? const Locale('fr', 'FR');
     var locale = customLocale.languageCode == 'fr' ? 'fr_FR' : 'en_US';
 
