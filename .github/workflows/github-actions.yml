@@ -2,28 +2,8 @@ name: Frontend for Stud'Advice application
 run-name: ${{ github.actor }} is working with GitHub Actions 🚀
 on: [push]
 jobs:
-  build:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout Repository
-        uses: actions/checkout@v2
-
-      - name: Setup Flutter
-        uses: subosito/flutter-action@v2
-        with:
-          flutter-version: '3.16.0'
-
-      - name: Install Dependencies
-        run: flutter pub get
-
-      - name: Build the appbundle
-        run: flutter build appbundle
-
   analyze:
     runs-on: ubuntu-latest
-
-    needs: build
-
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v2
@@ -38,3 +18,20 @@ jobs:
 
       - name: Analyze
         run: flutter analyze
+
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+
+      - name: Setup Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.16.0'
+
+      - name: Install Dependencies
+        run: flutter pub get
+
+      - name: Build the apk
+        run: flutter build apk --split-per-abi
