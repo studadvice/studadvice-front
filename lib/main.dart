@@ -8,7 +8,6 @@ import 'package:get/get.dart';
 import 'package:get_it/get_it.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:stud_advice/firebase_options.dart';
-import 'package:stud_advice/src/utils/notification_service.dart';
 import 'package:stud_advice/stud_advice.dart';
 import 'package:timezone/data/latest.dart' as tz;
 
@@ -105,7 +104,7 @@ void main() async {
   await GetStorage.init();
   await dotenv.load();
   await loadTerms();
-  Get.put(ConnectionController());
+  // Get.put(ConnectionController(), permanent: true);
   await loadUniversities().then((_) {
     runApp(const StudAdviceApp());
   });
