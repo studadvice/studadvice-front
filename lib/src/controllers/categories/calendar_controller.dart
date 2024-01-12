@@ -7,9 +7,6 @@ import 'package:get/get.dart';
 import 'package:stud_advice/stud_advice.dart';
 import 'package:table_calendar/table_calendar.dart';
 
-import '../../utils/calendar_utils.dart';
-import '../../utils/notification_service.dart';
-
 class CalendarController extends GetxController {
   final Dio _dio = Get.find();
   final DeeplTranslatorController _deeplTranslatorController = Get.find();

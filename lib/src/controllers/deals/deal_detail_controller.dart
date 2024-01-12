@@ -4,8 +4,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
-import '../../../stud_advice.dart';
+import 'package:stud_advice/stud_advice.dart';
 
 class DealDetailController extends GetxController {
   var _firebaseFirestoreInstance =

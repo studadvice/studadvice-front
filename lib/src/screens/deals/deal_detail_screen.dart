@@ -2,10 +2,9 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:stud_advice/src/controllers/deals/deal_detail_controller.dart';
 import 'package:stud_advice/stud_advice.dart';
 import 'package:url_launcher/url_launcher.dart';
-
-import '../../controllers/deals/deal_detail_controller.dart';
 
 class DealDetailScreen extends StatelessWidget {
   static const navigatorId = '/deal_detail_screen';

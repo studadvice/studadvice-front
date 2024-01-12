@@ -40,6 +40,8 @@ export 'deals/deal_item.dart';
 export 'deals/deal_item_slide.dart';
 export 'deals/deals_list_view.dart';
 export 'deals/deals_search_list_view.dart';
+export 'faq/faq_item.dart';
+export 'faq/faq_list_view.dart';
 export 'register/register_social_button.dart';
 export 'register/register_with_email_button.dart';
 export 'settings/settings_big_user_card.dart';

@@ -1,6 +1,5 @@
 import 'package:get/get.dart';
-
-import '../../controllers/settings/change_password_controller.dart';
+import 'package:stud_advice/stud_advice.dart';
 
 class ChangePasswordBinding implements Bindings {
   @override

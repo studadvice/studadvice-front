@@ -1,10 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:stud_advice/src/controllers/common/navbar_controller.dart';
-import 'package:stud_advice/src/screens/settings/change_user_data_screen.dart';
 import 'package:stud_advice/stud_advice.dart';
-
-import '../faq/faq_screen.dart';
 
 class NavigationBarScreen extends StatelessWidget {
   static const navigatorId = '/navigation_bar_screen';

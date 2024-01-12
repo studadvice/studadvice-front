@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:stud_advice/src/utils/calendar_utils.dart';
+import 'package:stud_advice/stud_advice.dart';
 import 'package:table_calendar/table_calendar.dart';
-
-import '../../../stud_advice.dart';
-import '../../controllers/categories/calendar_controller.dart';
 
 class CalendarScreen extends StatelessWidget {
   static const String navigatorId = '/calendar';

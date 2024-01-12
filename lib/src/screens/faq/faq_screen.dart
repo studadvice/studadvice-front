@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
-import '../../../stud_advice.dart';
-import '../../controllers/faq/search_faq_controller.dart';
-import '../../widgets/faq/faq_list_view.dart';
+import 'package:stud_advice/stud_advice.dart';
 
 class FaqScreen extends StatelessWidget {
   static const navigatorId = '/faq_screen';

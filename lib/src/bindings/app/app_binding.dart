@@ -3,13 +3,9 @@ import 'package:dio/dio.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:get/get.dart';
-import 'package:stud_advice/src/controllers/common/navbar_controller.dart';
 import 'package:stud_advice/src/controllers/controllers.dart';
 import 'package:stud_advice/src/controllers/deals/search_deals_controller.dart';
 import 'package:stud_advice/src/middlewares/common/auth_interceptor.dart';
-
-import '../../controllers/common/custom_search_bar_controller.dart';
-import '../../controllers/faq/search_faq_controller.dart';
 
 class AppDependenciesBinding extends Bindings {
   static final FirebaseAuth firebaseAuthInstance = FirebaseAuth.instance;
