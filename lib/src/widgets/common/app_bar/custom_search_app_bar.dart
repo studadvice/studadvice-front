@@ -43,7 +43,7 @@ class CustomSearchAppBar extends StatelessWidget
                   icon: const Icon(Icons.arrow_back),
                   color: AppColors.white,
                   onPressed: () {
-                    Navigator.of(Get.context!).pop();
+                    Navigator.pop(context);
                   },
                 ),
               if (Get.currentRoute ==
