@@ -4,9 +4,7 @@ import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:get/get.dart';
-
-import '../../../stud_advice.dart';
-import '../../models/firebase/attachment.dart';
+import 'package:stud_advice/stud_advice.dart';
 
 class SupportController extends GetxController {
   final RxString subject = ''.obs;

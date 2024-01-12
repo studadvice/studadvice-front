@@ -74,7 +74,7 @@ class _ChangeUserDataScreenState extends State<ChangeUserDataScreen> {
         leading: IconButton(
           icon: const Icon(Icons.arrow_back),
           onPressed: () {
-            Get.back();
+            Navigator.pop(context);
           },
         ),
       ),

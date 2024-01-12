@@ -4,8 +4,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
-import '../../../stud_advice.dart';
+import 'package:stud_advice/stud_advice.dart';
 
 class DealDetailController extends GetxController {
   var _firebaseFirestoreInstance =
@@ -63,7 +62,7 @@ class DealDetailController extends GetxController {
             userRatingsDoc.data()?["ratings"] as Map<String, dynamic>? ?? {};
         userRatings.value = Map<String, int>.from(ratingsMap);
       } else {
-        print("User document not found or does not exist");
+        debugPrint("User document not found or does not exist");
       }
     } catch (e) {
       debugPrint("Error initializing user ratings: $e");

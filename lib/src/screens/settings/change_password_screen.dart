@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
-import '../../../stud_advice.dart';
-import '../../controllers/settings/change_password_controller.dart';
+import 'package:stud_advice/stud_advice.dart';
 
 class ChangePasswordScreen extends StatelessWidget {
   static const String navigatorId = '/change_password_screen';

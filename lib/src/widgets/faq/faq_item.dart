@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:stud_advice/src/common/chore.dart';
-import '../../models/stud_advice/faq.dart';
+import 'package:stud_advice/src/models/stud_advice/faq.dart';
 
 class FaqItem extends StatelessWidget {
   FaqItem({
@@ -10,7 +10,6 @@ class FaqItem extends StatelessWidget {
 
   final FaqContent faqItem;
 
-
   @override
   Widget build(BuildContext context) {
     return Card(
@@ -19,16 +18,14 @@ class FaqItem extends StatelessWidget {
         collapsedIconColor: AppColors.secondaryColor,
         controlAffinity: ListTileControlAffinity.leading,
         childrenPadding:
-        const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+            const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
         expandedCrossAxisAlignment: CrossAxisAlignment.end,
         title: Text(faqItem.question),
         // Expanded Contents
         children: [
-          ListTile(
-              title: Text(faqItem.response)),
+          ListTile(title: Text(faqItem.response)),
         ],
       ),
     );
   }
 }
-

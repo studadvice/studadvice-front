@@ -1,9 +1,7 @@
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
-import '../../../stud_advice.dart';
-import '../../controllers/settings/support_controller.dart';
+import 'package:stud_advice/stud_advice.dart';
 
 class SupportScreen extends StatelessWidget {
   static const String navigatorId = '/support_screen';

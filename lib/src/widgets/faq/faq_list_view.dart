@@ -3,10 +3,6 @@ import 'package:get/get.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 import 'package:stud_advice/stud_advice.dart';
 
-import '../../controllers/faq/search_faq_controller.dart';
-import '../../models/stud_advice/faq.dart';
-import 'faq_item.dart';
-
 class FaqListView extends StatelessWidget {
   const FaqListView({
     super.key,
@@ -18,7 +14,7 @@ class FaqListView extends StatelessWidget {
       builder: (controller) {
         return RefreshIndicator(
           onRefresh: () => Future.sync(
-                () => controller.pagingController.refresh(),
+            () => controller.pagingController.refresh(),
           ),
           color: AppColors.secondaryColor,
           child: Column(

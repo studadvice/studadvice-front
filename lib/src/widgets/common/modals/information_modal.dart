@@ -1,22 +1,22 @@
-import 'package:flutter/material.dart';
 import 'dart:ui';
+
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:stud_advice/stud_advice.dart';
 import 'package:url_launcher/url_launcher.dart';
-
-import '../../../models/stud_advice/resource.dart';
 
 class InformationModal extends StatelessWidget {
   final List<RequiredDocument>? requiredDocuments;
   final List<Resource>? resources;
   final String stepDescription;
-  InformationModalController get modalController => Get.find<InformationModalController>();
+  InformationModalController get modalController =>
+      Get.find<InformationModalController>();
 
-  const InformationModal({
-    super.key,
-       this.requiredDocuments,
-       required this.stepDescription, this.resources
-  });
+  const InformationModal(
+      {super.key,
+      this.requiredDocuments,
+      required this.stepDescription,
+      this.resources});
 
   @override
   Widget build(BuildContext context) {
@@ -58,7 +58,8 @@ class InformationModal extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         children: <Widget>[
           _buildAlternateHeaderContent(context),
-          _buildAlternateBodyContent(context, modalController.getAlternateContent()),
+          _buildAlternateBodyContent(
+              context, modalController.getAlternateContent()),
         ],
       ),
     );
@@ -70,13 +71,13 @@ class InformationModal extends StatelessWidget {
       borderRadius: BorderRadius.circular(15),
       boxShadow: [
         const BoxShadow(
-            color: Colors.black26, offset: Offset(0, 1), blurRadius: 2
-        ),
+            color: Colors.black26, offset: Offset(0, 1), blurRadius: 2),
       ],
     );
   }
 
-  ListTile buildListTile(BuildContext context, IconData icon, String text, String description) {
+  ListTile buildListTile(
+      BuildContext context, IconData icon, String text, String description) {
     return ListTile(
       leading: GestureDetector(
         onTap: () {
@@ -92,13 +93,12 @@ class InformationModal extends StatelessWidget {
     );
   }
 
-
   ListTile buildEmptyListTile(String text) {
     return ListTile(
-      title: Text(
-        text,
-        style: const TextStyle(fontSize: 16, color: AppColors.white),
-      ));
+        title: Text(
+      text,
+      style: const TextStyle(fontSize: 16, color: AppColors.white),
+    ));
   }
 
   Widget _buildAlternateHeaderContent(BuildContext context) {
@@ -124,8 +124,7 @@ class InformationModal extends StatelessWidget {
             const SizedBox(height: 10),
             Text(
               description,
-              style: const TextStyle(fontSize: 16,
-                  color: AppColors.white),
+              style: const TextStyle(fontSize: 16, color: AppColors.white),
               textAlign: TextAlign.center,
             ),
             const SizedBox(height: 50),
@@ -197,8 +196,6 @@ class InformationModal extends StatelessWidget {
     );
   }
 
-
-
   Widget _buildBodyContent(BuildContext context) {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -221,8 +218,7 @@ class InformationModal extends StatelessWidget {
               const SizedBox(height: 10),
               Text(
                 stepDescription,
-                style: const TextStyle(fontSize: 16,
-                    color: AppColors.white),
+                style: const TextStyle(fontSize: 16, color: AppColors.white),
                 textAlign: TextAlign.center,
               ),
               const SizedBox(height: 50),
@@ -242,17 +238,14 @@ class InformationModal extends StatelessWidget {
     }
   }
 
-
   Widget _buildFooterContent(BuildContext context) {
     return Column(
       children: [
         for (Resource resource in resources ?? [])
-          if (resource.url != null)
-            _buildResourceFooter(context, resource),
+          if (resource.url != null) _buildResourceFooter(context, resource),
       ],
     );
   }
-
 
   Widget _buildResourceFooter(BuildContext context, Resource resource) {
     return GestureDetector(
@@ -271,7 +264,10 @@ class InformationModal extends StatelessWidget {
                 const SizedBox(width: 8),
                 Text(
                   resource.name,
-                  style: const TextStyle(color: AppColors.white, fontSize: 16, fontStyle: FontStyle.italic),
+                  style: const TextStyle(
+                      color: AppColors.white,
+                      fontSize: 16,
+                      fontStyle: FontStyle.italic),
                 ),
               ],
             ),
@@ -281,7 +277,4 @@ class InformationModal extends StatelessWidget {
       ),
     );
   }
-
-
-
 }
