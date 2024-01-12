@@ -83,7 +83,6 @@ class FavoriteAdministrativeProcessController extends CustomSearchController {
 
       final newItems = newPage.content;
 
-      // TODO AJOUTER Le category ID
       var favoriteAdministrativeProcesses =
           newItems.where((process) => isProcessFavorite(process.id)).toList();
 
@@ -95,6 +94,7 @@ class FavoriteAdministrativeProcessController extends CustomSearchController {
 
       pagingController.appendLastPage(favoriteAdministrativeProcesses);
     } catch (error) {
+      debugPrint('Error fetching page: $error');
       pagingController.error = error;
     }
   }
@@ -157,8 +157,8 @@ class FavoriteAdministrativeProcessController extends CustomSearchController {
   }
 
   bool isProcessFavorite(String administrativeProcessId) {
-    var res = _favoritesAdministrativeProcesses
-        .any((processId_) => processId_ == administrativeProcessId);
+    var res = _favoritesAdministrativeProcesses.any((process) =>
+        process["administrativeProcessId"] == administrativeProcessId);
     return res;
   }
 
